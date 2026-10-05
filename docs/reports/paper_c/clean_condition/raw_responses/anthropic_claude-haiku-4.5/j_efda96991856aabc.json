@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_efda96991856aabc",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_445412523328930a_2794ee3003aac410.txt",
+  "prompt_version": "2794ee3003aac410",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165531-pA2A1zeV4eOmrEgm2udR",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 474,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003481,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00237,
+        "upstream_inference_cost": 0.003481,
+        "upstream_inference_prompt_cost": 0.001111
+      },
+      "is_byok": false,
+      "prompt_tokens": 1111,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1585
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature names and normalized weights but provides no guidance on how to modify inputs, interpret thresholds, or take corrective action; it is purely descriptive rather than prescriptive.\",\n    \"audit_usefulness\": \"All features are assigned identical weight (1.0000), which is implausible and suggests a failure of the anchors method to differentiate feature importance; this severely limits diagnostic value for detecting model bias or errors.\",\n    \"clarity\": \"The explanation is presented as a simple list of feature\u2013weight pairs with clear formatting, but the uniform weights and lack of interpretation make the underlying decision logic opaque to non-experts.\",\n    \"completeness\": \"The explanation lists many features but does not indicate their actual values for this instance, feature directions (positive/negative contribution), or relative importance; critical local context is missing.\",\n    \"concision\": \"The explanation is compact in token count but redundant in substance, as ten features all receive identical weight, suggesting either poor feature selection or method failure rather than genuine insight.\",\n    \"overall_quality\": \"The explanation fails to provide meaningful insight into the prediction; uniform weights across diverse features indicate a breakdown in the anchors method, rendering the output unreliable and of limited practical value.\",\n    \"semantic_plausibility\": \"Assigning identical importance to duration, checking account status, credit history, and residence time is implausible in credit risk assessment, where these factors typically have different predictive roles and magnitudes.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:56.252911+00:00"
+}

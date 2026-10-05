@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_b352dc7c29edc22c",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_b733923cda01c1ef",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_b352dc7c29edc22c_ab58081502e294fb.txt",
+  "prompt_version": "ab58081502e294fb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165349-Y3A7PbA3UFRlqwd89GeR",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 997,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 620,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00454725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00373875,
+        "upstream_inference_cost": 0.00454725,
+        "upstream_inference_prompt_cost": 0.0008085
+      },
+      "is_byok": false,
+      "prompt_tokens": 1078,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2075
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_b352dc7c29edc22c\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists static SHAP attribution values without counterfactual guidance or actionable steps to alter the prediction.\",\n    \"audit_usefulness\": \"It provides signed numerical contributions for top features, allowing auditors to inspect sensitive demographic drivers such as sex and country of origin.\",\n    \"clarity\": \"The raw one-hot encoded feature names and numeric SHAP values require technical machine learning familiarity to interpret properly.\",\n    \"completeness\": \"The explanation covers the top ten local drivers but omits the actual feature values (0 or 1) and the baseline expected value.\",\n    \"concision\": \"The text is concise and dense, presenting only the primary contributing features and their scores without redundant commentary.\",\n    \"overall_quality\": \"It serves as an acceptable baseline technical explanation for model auditors, though it lacks accessibility and recourse for non-expert users.\",\n    \"semantic_plausibility\": \"The listed features and their directions align reasonably well with standard census income model dynamics, though interpreting encoded absences can be confusing.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:57.067608+00:00"
+}

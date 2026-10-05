@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_3debbe632feba167",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_da3a6ad01450cc67",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_3debbe632feba167_03d5e3bf1687d7a7.txt",
+  "prompt_version": "03d5e3bf1687d7a7",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165480-hz2yCfv8eNI8Cv2FfI2G",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 476,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003469,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00238,
+        "upstream_inference_cost": 0.003469,
+        "upstream_inference_prompt_cost": 0.001089
+      },
+      "is_byok": false,
+      "prompt_tokens": 1089,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1565
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_3debbe632feba167\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken to change the prediction or improve outcomes. No counterfactual suggestions or recourse paths are offered.\",\n    \"audit_usefulness\": \"The explanation shows which features DICE identified as influential, but the dominance of zero-valued factors and lack of context about the actual instance values limits its utility for auditing model behavior or detecting bias.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical scores\u2014but lacks interpretation of what these scores mean or why native-country_Ireland has such high importance relative to others.\",\n    \"completeness\": \"The explanation covers many features from the adult dataset but provides no information about the actual instance values, the prediction confidence, or why the model made this specific prediction beyond raw feature importance.\",\n    \"concision\": \"The explanation is compact in presentation but includes many zero-valued features that add little informational value; a filtered list of only non-zero or high-impact features would be more efficient.\",\n    \"overall_quality\": \"The explanation is a bare feature importance listing that lacks interpretive context, actionability, and connection to the specific instance, making it minimally useful for understanding this particular prediction.\",\n    \"semantic_plausibility\": \"The high importance of native-country_Ireland for an adult income prediction is plausible given historical patterns in the dataset, but without instance context it is difficult to assess whether this makes sense for this specific case.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:05.025302+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7468633961295699",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a935cb05f9ff422c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_7468633961295699_1762a6b33cad7620.txt",
+  "prompt_version": "1762a6b33cad7620",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165488-9XtIyOpb7z7p5vi6u7im",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 515,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003671,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002575,
+        "upstream_inference_cost": 0.003671,
+        "upstream_inference_prompt_cost": 0.001096
+      },
+      "is_byok": false,
+      "prompt_tokens": 1096,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1611
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_7468633961295699\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature anchors but provides no guidance on how to interpret them, what actions to take, or how feature values could be modified to change the prediction. No recourse pathways are suggested.\",\n    \"audit_usefulness\": \"While the anchor weights (all 1.0) indicate feature importance for the prediction, the explanation lacks context about threshold values, decision boundaries, or comparative feature contributions that would support systematic model auditing.\",\n    \"clarity\": \"The format is a simple list of feature names with uniform weights, but lacks interpretation of what these anchors mean, why all weights are identical, or how they drive the prediction toward class 0. Non-experts would struggle to understand the significance.\",\n    \"completeness\": \"The explanation identifies ten features but omits critical information such as the actual feature values for this instance, the direction of influence, interaction effects, or why these specific features were selected as anchors over others.\",\n    \"concision\": \"The explanation is compact in token count but contains redundancy (multiple checking_status and purpose categories listed separately) and lacks density of insight; the uniform weights suggest possible over-simplification or incomplete anchor extraction.\",\n    \"overall_quality\": \"The explanation provides a bare list of anchors without sufficient interpretation, context, or actionable insight, making it difficult for users or auditors to understand the model's reasoning or act on the prediction.\",\n    \"semantic_plausibility\": \"The selected features (duration, credit_amount, age, checking_status, purpose) are plausible credit risk factors in the German credit domain, but the uniform anchor weights and lack of value context undermine confidence in the explanation's semantic coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:12.671017+00:00"
+}

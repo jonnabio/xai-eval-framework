@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_49b4fcf4bf2d7761",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_24a0dd352ab4c423",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_49b4fcf4bf2d7761_5e230797d4bef95d.txt",
+  "prompt_version": "5e230797d4bef95d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165407-zXmkeirIoD21AelTW9hH",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 480,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028725,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00216,
+        "upstream_inference_cost": 0.0028725,
+        "upstream_inference_prompt_cost": 0.0007125
+      },
+      "is_byok": false,
+      "prompt_tokens": 950,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1430
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_49b4fcf4bf2d7761\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide concrete recourse or next steps for the applicant. It only lists factors with weights, so a user cannot tell what to change to affect the prediction.\",\n    \"audit_usefulness\": \"It gives some local signal about which features mattered, but the binary 1.0000/0.0000 pattern is too coarse to inspect model behavior in depth. It is insufficient for diagnosing whether the forest relied on spurious or unfair patterns.\",\n    \"clarity\": \"The output is easy to read as a short ranked list of features, but the meaning of the anchor values is not explained. A non-expert would likely not understand why several features are all shown as 1.0000 or 0.0000.\",\n    \"completeness\": \"It identifies a few apparent top factors, but it does not explain how they combine to support the positive prediction or what direction each feature had. Important local decision context is missing, such as thresholds, feature values, and rule coverage.\",\n    \"concision\": \"The explanation is brief and avoids excess wording, which is good for brevity. However, the compactness comes at the cost of too little semantic content beyond a sparse feature list.\",\n    \"overall_quality\": \"This is a minimal local explanation that is somewhat readable but not very informative. It offers limited insight into the specific prediction and little support for review or action.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit decisions, especially checking status, age, and credit history. However, the anchor-style 1.0000/0.0000 presentation is not very interpretable as a natural explanation of this instance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:49.501767+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cad1d6dbc8b4e027",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_eca657783052bce1",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_cad1d6dbc8b4e027_ef9f9324348964c9.txt",
+  "prompt_version": "ef9f9324348964c9",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165556-o9z9RCuWEC01mYT6zjlb",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 518,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003699,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00259,
+        "upstream_inference_cost": 0.003699,
+        "upstream_inference_prompt_cost": 0.001109
+      },
+      "is_byok": false,
+      "prompt_tokens": 1109,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1627
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cad1d6dbc8b4e027\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation provides only feature weights with near-zero values and offers no guidance on what actions could be taken or how the prediction might be influenced. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"All reported feature contributions are effectively zero or negligible, which provides no meaningful insight into model behavior, potential biases, or decision logic. This severely limits an auditor's ability to investigate the model's reasoning.\",\n    \"clarity\": \"The explanation is clearly formatted as a list of feature-weight pairs, making it easy to parse structurally. However, the substantive content\u2014all near-zero weights\u2014is difficult to interpret meaningfully for a non-expert.\",\n    \"completeness\": \"The explanation fails to identify any meaningful drivers of the prediction, listing only features with zero or negligible contributions. This suggests either a model failure, LIME sampling issue, or that the true decision factors are not captured.\",\n    \"concision\": \"The explanation is compact in length but contains no useful information density; listing ten features all with zero weight is redundant and uninformative relative to the space used.\",\n    \"overall_quality\": \"This explanation is fundamentally uninformative, presenting only zero-valued weights without identifying any actual drivers of the prediction. It fails to support understanding, auditing, or action, indicating a likely failure in the explanation generation process.\",\n    \"semantic_plausibility\": \"An explanation where all features have zero contribution to a positive prediction is implausible and contradictory; some features must have influenced the model's decision to predict class 1. This suggests a technical failure rather than a valid local approximation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 3,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 1\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:59:21.667531+00:00"
+}

@@ -1,0 +1,623 @@
+%% GENERATED from paper_c_template.tex by scripts/build_paper_c.py. Do not edit.
+%% Paper C: can LLM judges score explanations reliably?
+%% Target: Tecnologia en Marcha, special issue on Artificial Intelligence (deadline
+%% 2026-10-15). See docs/reports/paper_c/README.md and PLAN.md.
+%%
+%% THIS IS THE SOURCE. paper_c.tex is GENERATED from it by scripts/build_paper_c.py, which
+%% replaces every placeholder between double angle brackets (alias, row key, column and
+%% format; syntax in the script's docstring) with a value read from a result file. Edit
+%% this file, never paper_c.tex.
+%%
+%% The journal takes Microsoft Word: letter, one column, Times 12 pt, 1.5 line spacing,
+%% 5-15 pages, IEEE references, English and Spanish titles, abstracts and keywords. This
+%% source is set to the same page so that the PDF predicts the Word length.
+%%
+%% Review is double-blind. The default build omits author identity; the full build is made
+%% by defining \fullversion before this file.
+%%
+%% Revised after the rigor review of 2026-10-04 (PLAN.md, section 15).
+%% NOT IN THIS DRAFT: the human-rated subset (PLAN.md section 6; ratings not received).
+\documentclass[12pt,letterpaper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+%% Code and data archive (full version only). Set both before submission.
+\newcommand{\papercrelease}{RELEASE-PENDING}
+\newcommand{\papercarchive}{ARCHIVE-PENDING}
+\usepackage{cite}
+\setlength{\emergencystretch}{3em}
+
+\newif\iffull
+\ifdefined\fullversion \fulltrue \else \fullfalse \fi
+
+\begin{document}
+
+\begin{center}
+{\large\bfseries Do LLM Judges Agree on the Quality of Explanations? A Two-Panel
+Reliability Study\par}
+\medskip
+{\large\bfseries {\textquestiondown}Coinciden los jueces LLM sobre la calidad de las
+explicaciones? Un estudio de fiabilidad con dos paneles\par}
+\medskip
+\iffull
+Jonathan Herrera-V\'asquez\par
+PhD candidate. Department of Computer Science, Universidad Americana de Europa
+(UNADE), Canc\'un, Quintana Roo, Mexico.\par
+jonnabio@gmail.com \quad ORCID: \url{https://orcid.org/0000-0002-7149-6635}
+\else
+\textit{Author information omitted for double-blind review.}
+\fi
+\end{center}
+
+\section*{Abstract}
+Large language models (LLMs) are used as judges of the quality of explanations because
+they cost less than human raters. That use assumes that different judges give the same
+explanation the same score. This study measures that agreement. Three LLM judges scored
+192 post-hoc explanations (SHAP, LIME, Anchors, DiCE; three tabular
+datasets) on seven dimensions with a 1--5 rubric, in two panels of different models. The
+second panel also varied the prompt, repeated every call three times and scored the cases
+again without the technical metrics
+(5,760 calls). Agreement was measured with the intraclass
+correlation ICC(1,1). Over all cases no dimension reached 0.75 in either panel (highest
+values 0.601 and 0.731). That
+coefficient overstates agreement on the explanations: up to
+67\% of the variance of the scores lay between explanation
+methods. Among the SHAP cases no dimension exceeded
+0.19, with or without the metrics; among the LIME cases five
+dimensions stayed above 0.6. The mean of the three judges was reliable for separating
+methods, not explanations. With the metrics in the prompt the overall score followed
+fidelity within every method, and one judge named a metric in
+80\% of its answers. Without them that judge
+scored higher, the correlation vanished for SHAP and DiCE, and agreement on audit
+usefulness fell from 0.66 to
+0.42. A single LLM judge of this class should
+not be used as a confirmatory measure. Studies using them should report
+agreement within method, the number of calls and what the prompt contained.
+
+\noindent\textbf{Keywords:} explainable artificial intelligence; LLM-as-a-judge;
+inter-rater reliability; explanation evaluation; intraclass correlation.
+
+\section*{Resumen}
+Los modelos de lenguaje de gran tama\~no (LLM) se usan como jueces de la calidad de las
+explicaciones por su menor costo. Ese uso supone que jueces
+distintos punt\'uan igual la misma explicaci\'on. Este estudio mide esa concordancia. Tres
+jueces LLM puntuaron 192 explicaciones post hoc (SHAP, LIME, Anchors,
+DiCE; tres conjuntos de datos tabulares) en siete dimensiones con una r\'ubrica de 1 a 5,
+en dos paneles. El segundo vari\'o el \emph{prompt}, repiti\'o
+cada llamada tres veces y puntu\'o los casos de nuevo sin las m\'etricas t\'ecnicas
+(5,760 llamadas). La concordancia se midi\'o con la correlaci\'on
+intraclase ICC(1,1). Con todos los casos, ninguna dimensi\'on alcanz\'o 0.75 en ning\'un
+panel (m\'aximos: 0.601 y 0.731). Pero hasta el
+67\% de la varianza estaba entre m\'etodos.
+En los casos de SHAP ninguna dimensi\'on super\'o 0.19, con o
+sin m\'etricas; en los de LIME, cinco dimensiones superaron 0.6. La media de los tres
+jueces fue fiable para separar m\'etodos, no explicaciones. Con las m\'etricas en el
+\emph{prompt}, la puntuaci\'on global sigui\'o la fidelidad en cada m\'etodo, y un juez
+nombr\'o una m\'etrica en el 80\% de sus
+respuestas. Sin ellas ese juez puntu\'o m\'as alto, la correlaci\'on desapareci\'o para
+SHAP y DiCE, y la concordancia en utilidad para auditor\'ia baj\'o de
+0.66 a
+0.42. Un solo juez LLM de esta clase no deber\'ia
+usarse como medida confirmatoria. Los estudios que los usen deber\'ian informar la
+concordancia por m\'etodo, el n\'umero de llamadas y el contenido del \emph{prompt}.
+
+\noindent\textbf{Palabras clave:} inteligencia artificial explicable; LLM como juez;
+fiabilidad entre evaluadores; evaluaci\'on de explicaciones; correlaci\'on intraclase.
+
+\section{Introduction}
+
+Post-hoc explainers such as SHAP \cite{lundberg2017unified}, LIME \cite{ribeiro2016why},
+Anchors \cite{ribeiro2018anchors} and DiCE \cite{mothilal2020dice} are evaluated mostly
+with technical proxy metrics: whether the features an explanation ranks first are those
+that move the prediction \cite{bhatt2020evaluating}, and whether similar inputs receive
+similar explanations \cite{alvarezmelis2018robustness}. These metrics are cheap and
+repeatable, but they do not say whether an explanation is clear, plausible or useful to
+the person who reads it \cite{doshivelez2017rigorous,jacovi2020faithfulness}. Studies with
+people measure that, at a cost that limits their size, and their results do not always
+agree with the proxies \cite{bucinca2020proxy,bansal2021whole}.
+
+Large language models (LLMs) used as judges promise a third source of evidence: scores of
+meaning at the scale of a proxy metric. In other fields LLM judges show position and
+verbosity biases and can agree with each other without being right
+\cite{zheng2023judging,gu2024llmjudge}, and their agreement with people depends on the
+task \cite{wu2025userperceptions,zhou2025medthink}. Reviews of the evaluation of
+explanations organise proxy metrics, benchmarks, expert judgments and user studies
+\cite{nauta2023anecdotal,mohseni2021survey,longo2024manifesto}; LLM judges are the newest
+source and the least validated. In a scoping corpus of 44 papers
+on the evaluation of post-hoc explanations assembled for this work, only
+4 concern LLM judges, one of them a survey.
+
+A judge can stand in for a human rater only if it is first reliable, that is, if another
+judge of the same kind gives the same explanation the same score. Reliability is the
+weaker requirement and comes before validity: a score that changes with the judge cannot
+be valid for a property of the explanation. This paper measures it. Three LLM judges
+scored 192 explanations on seven dimensions, in two panels of different
+models. Four questions are answered:
+
+\begin{enumerate}
+\item Do three LLM judges agree on the score of an explanation, on each dimension?
+\item Is their agreement about the explanation, or about the method that produced it?
+\item How much do the scores depend on the rubric wording, on repetition and on how they
+are aggregated?
+\item Do the scores follow the technical metrics of the explanation, and what remains
+when the judges are not shown them?
+\end{enumerate}
+
+\section{Materials and methods}
+
+\subsection{Cases}
+
+The cases are 192 single explanations, each of one prediction of a
+binary classifier, from 174 distinct instances. They
+were drawn from the stored runs of a public benchmark \cite{herrera2026framework}:
+96 from Adult \cite{becker1996adult},
+53 from German Credit \cite{hofmann1994statlog}
+and 43 from Breast Cancer Wisconsin
+\cite{wolberg1993breast}. They cover 4 model families
+(logistic regression, random forest, XGBoost and a multilayer perceptron) and four
+explainers: 76 Anchors,
+52 SHAP, 32 LIME and
+32 DiCE explanations. LIME and DiCE cases come from
+Adult only. Sampling was stratified by the outcome of the prediction
+(52 true positives, 47 true
+negatives, 46 false positives and
+47 false negatives).
+
+Each case is a record with the dataset, the model family, the explainer, the prediction,
+the outcome of the prediction (TP, TN, FP or FN), the explanation as text and the
+technical metrics computed for that explanation in the benchmark: fidelity, stability,
+sparsity, faithfulness gap and runtime. The benchmark renders every explanation with one
+template, a list of ten features with a weight. For SHAP and LIME the list holds the
+attributions the method produced, for example ``worst area: $-$0.1336; worst perimeter:
+$-$0.0935; \ldots''. For Anchors and DiCE it does not hold the explanation in its own
+form: an anchor rule appears as weights of one for the features of the rule and zero for
+the others, without thresholds (``education-num: 1.0000; capital-gain: 1.0000; age:
+0.0000; \ldots''), and a counterfactual appears as the size of the change of each
+feature, without direction, new value or new outcome (``age: 1.6182; fnlwgt: 0.0000;
+\ldots''). The median number of zero-weight items is
+7 of ten for Anchors and
+8 for DiCE. The
+84 SHAP and LIME cases are therefore the main analysis; the
+108 Anchors and DiCE cases are reported beside them as
+scores of that rendering.
+
+\subsection{Judges, rubric and conditions}
+
+A judge received the rubric and one case record, and returned an integer from 1 to 5 and
+a short rationale for each of seven dimensions: clarity, concision, actionability, audit
+usefulness, completeness, semantic plausibility and overall quality. The rubric gives a
+one-sentence definition of each dimension and anchors for the scores 1, 3 and 5.
+
+The first panel was GPT-4o mini (OpenAI), Claude 3 Haiku (Anthropic) and Gemini 1.5
+Flash (Google), with temperature 0. Its prompt templates and raw responses were not
+kept; its aggregate tables were, and they are the source of its values here. The study
+was therefore run again on the same cases with a second panel, GPT-5.4 mini, Claude Haiku
+4.5 and Gemini 3.8 Flash, also with temperature 0, with templates rebuilt from the
+recorded rubric. The second run is a second measurement, not a reproduction: besides the
+models, the two runs differ in the templates, in the output limit and in the cases with
+scores from the three judges (147 against all
+192), and the prompt condition and aggregation behind the tables of the
+first are not recorded.
+
+The second panel scored every case under four prompt conditions:
+
+\begin{itemize}
+\item \emph{Primary}: the rubric above; the true-label field of the record is empty.
+Three calls per case and judge.
+\item \emph{Label stated}: the same rubric; the true label is given. Three calls.
+\item \emph{Alternative rubric}: the same seven dimensions with every definition
+reworded, anchors at all five scale points and the dimensions in another order; the true
+label is given. Three calls.
+\item \emph{Clean}: the rubric of the primary condition word for word; the record has no
+technical metrics, no outcome of the prediction and no true label. One call.
+\end{itemize}
+
+The first three conditions have a defect that was found after they were run: the record
+contains the outcome of the prediction, which together with the prediction gives the true
+label, and it contains the technical metrics. In those conditions the judges therefore
+scored an explanation with its label and its metrics in view. The clean condition was
+added to remove both. Of the 5,760 calls,
+5,756 returned valid scores.
+
+\subsection{Statistical analysis}
+
+Agreement among the three judges was measured per dimension with the intraclass
+correlation ICC(1,1), the one-way random-effects coefficient for a single rater
+\cite{shrout1979intraclass}, with its exact 95\% confidence interval from the $F$
+distribution. A dimension is said to have good reliability when the coefficient is 0.75
+or more \cite{koo2016guideline}. Krippendorff's alpha for ordinal data
+\cite{krippendorff2004reliability} was computed as a check and differed from the ICC by at
+most 0.04 in the first panel and
+0.001 in the second; it is not tabulated. For the first
+panel the ICC uses the 147 cases with three scores.
+
+For the second panel the coefficient of the primary condition is given in three forms:
+with the three calls of a judge averaged per case, as in the first analysis of these data;
+for one call; and as ICC(1,$k$), the reliability of the mean of the three judges. Two-way
+coefficients, ICC(2,1) for absolute agreement and ICC(3,1) for consistency, are reported
+as a check of the model, and the share of pairs of judges with the same score as a
+description. To separate agreement on the explanation from agreement on the method, the
+share of the variance of the case-level mean score that lies between explainers was
+computed, and the ICC was computed inside each explainer.
+
+Three sensitivity views are reported for the second panel: the label-stated condition,
+the alternative rubric, and a pooled view in which the nine scores of a judge for a case
+are averaged. Test-retest agreement is the share of case-and-judge pairs with the same
+score in the three calls. The effect of a prompt change is the mean difference in score,
+paired by case.
+
+The relation between scores and technical metrics was analysed within each explainer with
+Spearman correlations between the overall-quality score, averaged over judges, and
+fidelity, stability, sparsity, faithfulness gap and runtime, with Holm's correction
+\cite{holm1979simple}. The share of responses whose rationales name a metric was counted
+per judge. All analyses other than the ICC of the primary condition were planned after
+the first three conditions had been run; each was written down with its date before it
+was computed, and the clean condition was specified before it was run.
+
+\section{Results}
+
+\subsection{Agreement over all cases}
+
+Table~\ref{tab:icc} gives the agreement per dimension over all cases. In the first panel
+the highest ICC was 0.601 (semantic plausibility); in the second
+it was 0.731 (completeness). No dimension reached 0.75 in
+either. In the second panel the upper confidence bounds of
+two dimensions, completeness and audit
+usefulness, were above 0.75. The order of the dimensions differed between the two runs:
+audit usefulness rose from 0.376 to
+0.699, and clarity and actionability fell to
+about zero. Given the differences between the runs listed above, this cannot be
+attributed to the judges alone.
+
+\begin{table}[t]
+\centering
+\caption{Agreement among three LLM judges per dimension, all cases. First panel:
+ICC(1,1) on 147 cases. Second panel, primary condition,
+192 cases: ICC(1,1) with three calls averaged and with one call,
+ICC(1,$k$) of the mean of the three judges, and share of pairs of judges with the same
+score (one call). Intervals are 95\%.}
+\label{tab:icc}
+\small
+\begin{tabular}{lccccc}
+\toprule
+ & First panel & \multicolumn{4}{c}{Second panel} \\
+Dimension & ICC(1,1) & ICC(1,1), three calls & One call & ICC(1,$k$) & Same score \\
+\midrule
+Completeness & 0.585 & 0.731 (0.674 to 0.782) & 0.675 & 0.862 & 72\% \\
+Semantic plausibility & 0.601 & 0.604 (0.530 to 0.673) & 0.557 & 0.790 & 49\% \\
+Overall quality & 0.431 & 0.660 (0.592 to 0.721) & 0.626 & 0.834 & 71\% \\
+Audit usefulness & 0.376 & 0.699 (0.637 to 0.755) & 0.656 & 0.851 & 62\% \\
+Concision & 0.453 & 0.373 (0.284 to 0.462) & 0.325 & 0.590 & 35\% \\
+Clarity & 0.321 & $-$0.019 ($-$0.094 to 0.067) & $-$0.002 & $-$0.005 & 39\% \\
+Actionability & 0.400 & $-$0.025 ($-$0.100 to 0.060) & $-$0.026 & $-$0.082 & 75\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The form of the estimate matters. With one call per judge, which is how a judge is
+normally used, the coefficients of the five dimensions with some agreement were lower
+(completeness 0.675). The mean of the three judges was more
+reliable: its ICC(1,$k$) was 0.75 or more on
+four dimensions. The two-way coefficients did not
+change the reading for absolute agreement (completeness
+0.733); for consistency, which ignores a constant
+difference between judges, completeness was
+0.750 and concision
+0.596.
+
+The scores used a narrow part of the scale. For overall quality,
+59\% of the scores were
+2, and two judges gave the same score in
+71\% of the cases and scores within one
+point in 99\%. For actionability
+86\% of the scores were 1, so the judges
+almost always agreed and the coefficient, which needs differences between cases, is near
+zero. For clarity one judge hardly varied its score (standard deviation
+0.38) and scored on average
+0.64 points below the other two.
+
+\subsection{Agreement on the explanation or on the method}
+
+Most of the variation that the judges agreed on was variation between explainers
+(Table~\ref{tab:within}). The share of the variance of the case-level mean score that
+lay between explainers was 67\% for
+completeness, 64\% for overall quality
+and 63\% for audit usefulness. Inside
+an explainer the picture changes (Figure~\ref{fig:icc}). Among the
+52 SHAP cases no dimension exceeded
+0.19, and the coefficient of overall quality was
+$-$0.19: the three judges did not agree on which
+SHAP explanation was better. Among the 32 LIME cases
+agreement stayed between 0.63 and
+0.75 on five dimensions. Taking SHAP and LIME
+together gave 0.73 for completeness, again
+because the judges separated the two methods. For Anchors and DiCE, as rendered, the
+highest coefficient was 0.46.
+
+\begin{table}[t]
+\centering
+\caption{Second panel, primary condition, three calls averaged: share of the variance of
+the case-level mean score that lies between explainers, and ICC(1,1) inside each
+explainer. Anchors and DiCE were shown to the judges as lists of feature weights (see
+text).}
+\label{tab:within}
+\small
+\begin{tabular}{lccccc}
+\toprule
+ & Between & \multicolumn{4}{c}{ICC(1,1) inside the explainer (cases)} \\
+Dimension & explainers & SHAP (52) & LIME (32) & Anchors (76) & DiCE (32) \\
+\midrule
+Completeness & 67\% & 0.06 & 0.71 & 0.17 & $-$0.04 \\
+Semantic plausibility & 43\% & 0.19 & 0.69 & 0.38 & 0.12 \\
+Overall quality & 64\% & $-$0.19 & 0.63 & 0.46 & 0.28 \\
+Audit usefulness & 63\% & 0.15 & 0.75 & 0.12 & 0.24 \\
+Concision & 65\% & $-$0.24 & 0.69 & $-$0.20 & $-$0.01 \\
+Clarity & 36\% & $-$0.23 & $-$0.12 & $-$0.09 & $-$0.09 \\
+Actionability & 7\% & $-$0.16 & 0.50 & 0.04 & $-$0.15 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\linewidth]{figures/fig1}
+\caption{ICC(1,1) among three LLM judges per dimension in the primary condition of the
+second panel, for all cases and for the cases of one explainer, with 95\% confidence
+intervals. The dashed line is the 0.75 threshold of good reliability.}
+\label{fig:icc}
+\end{figure}
+
+\subsection{Rubric wording, aggregation and repetition}
+
+Table~\ref{tab:views} gives the ICC of the second panel, over all cases, under the three
+sensitivity views. The alternative rubric moved agreement in both directions: concision
+rose from 0.360 to 0.650,
+clarity fell from 0.026 to
+$-$0.249, and completeness reached
+0.753. It moved the scores by up to
+0.50 points (median over judges and dimensions
+0.12). In the pooled view
+two dimensions exceeded 0.75, completeness
+(0.839) and audit usefulness
+(0.820): averaging nine scores removes the
+variation between repeated calls and raises the coefficient.
+
+\begin{table}[t]
+\centering
+\caption{ICC(1,1) of the second panel under three sensitivity views
+(192 cases). Pooled: the nine scores of a judge for a case (three
+conditions, three calls) are averaged before the coefficient is computed.}
+\label{tab:views}
+\small
+\begin{tabular}{lccc}
+\toprule
+Dimension & Label stated & Alternative rubric & Pooled \\
+\midrule
+Completeness & 0.744 & 0.753 & 0.839 \\
+Semantic plausibility & 0.594 & 0.566 & 0.664 \\
+Overall quality & 0.624 & 0.614 & 0.706 \\
+Audit usefulness & 0.730 & 0.668 & 0.820 \\
+Concision & 0.360 & 0.650 & 0.524 \\
+Clarity & 0.026 & $-$0.249 & $-$0.090 \\
+Actionability & $-$0.074 & 0.056 & 0.039 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Repeated calls with temperature 0 did not always return the same score. Over the seven
+dimensions, Claude Haiku 4.5 gave the same score in its three calls in
+93\% to 99\% of the
+cases, Gemini 3.8 Flash in 65\% to
+91\% and GPT-5.4 mini in
+33\% to 87\%.
+
+Stating the label changed the scores by 0.14 points at
+most. Since the primary condition already allowed the label to be derived, that
+comparison is not a test. A direct one is available: in the primary condition the mean
+overall-quality score was 2.32 for cases with a correct
+prediction and 2.29 for cases with a wrong one (Mann-Whitney
+$p =$ 0.695). The judges could know whether the model was right,
+and it did not move the score.
+
+\subsection{Scores and the technical metrics}
+
+With the metrics printed in the prompt, the overall-quality score followed them
+(Table~\ref{tab:metrics}). It rose with fidelity inside the four explainers (Spearman
+correlation from 0.35 to
+0.59), in all four after Holm's
+correction. Of the other 16 correlations two remained after the correction: stability for
+Anchors and sparsity for LIME, the latter on few distinct values.
+
+\begin{table}[t]
+\centering
+\caption{Spearman correlation between the overall-quality score (second panel, primary
+condition, mean of judges and calls) and the technical metrics printed in the prompt,
+within each explainer. An asterisk marks $p < 0.05$ after Holm's correction over the 20
+tests. Sparsity takes four distinct values among the LIME cases and two among the DiCE
+cases.}
+\label{tab:metrics}
+\small
+\begin{tabular}{lccccc}
+\toprule
+Explainer (cases) & Fidelity & Stability & Sparsity & Faithfulness gap & Runtime \\
+\midrule
+SHAP (52) & 0.49* & 0.26 & $-$0.05 & $-$0.10 & 0.14 \\
+LIME (32) & 0.59* & $-$0.03 & 0.73* & 0.17 & 0.21 \\
+Anchors (76) & 0.35* & 0.42* & $-$0.19 & 0.30 & $-$0.27 \\
+DiCE (32) & 0.58* & 0.18 & 0.31 & 0.31 & 0.31 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The rationales show the same thing directly, and show that the judges differed. A metric
+(fidelity, stability, sparsity or faithfulness) was named in the rationales of
+80\% of the responses of Claude Haiku 4.5,
+36\% of GPT-5.4 mini and
+13\% of Gemini 3.8 Flash.
+
+\subsection{The clean condition}
+
+In the clean condition the judges saw the explanation without its metrics, the outcome of
+the prediction or the label; all 576 calls returned valid scores.
+Table~\ref{tab:clean} compares it with one call of the primary condition. Three things
+changed and one did not.
+
+First, the judge that had named the metrics most often scored differently without them.
+The mean score of Claude Haiku 4.5 rose on every dimension, by
+0.30 points for overall quality and
+0.52 for audit usefulness; the mean
+overall-quality scores of the other two judges moved by
+0.01 and
+0.01.
+
+Second, the relation with fidelity was no longer general. With one call of the primary
+condition the correlation between the overall-quality score and fidelity was
+0.48 for SHAP, 0.56
+for DiCE, 0.48 for LIME and
+0.26 for Anchors. In the clean condition it was
+$-$0.05 for SHAP and 0.08 for
+DiCE, and 0.41 for LIME and
+0.26 for Anchors, neither of which remained after
+Holm's correction over the four tests. For SHAP and DiCE the score had followed the
+printed number; for LIME and Anchors something visible in the rendered explanation goes
+with fidelity.
+
+Third, agreement over all cases fell where the metrics had fed it most: audit usefulness
+from 0.66 to
+0.42, completeness from
+0.68 to 0.58
+and overall quality from 0.63 to
+0.57. Semantic plausibility and concision did not
+change.
+
+What did not change is the pattern inside the explainers. Among the SHAP cases no
+dimension exceeded 0.20 in the clean condition, and among
+the LIME cases agreement on completeness, semantic plausibility and overall quality
+stayed between 0.63 and
+0.69. The absence of agreement on SHAP
+explanations is therefore not produced by the metrics in the prompt, and the agreement on
+LIME explanations is not either.
+
+\begin{table}[t]
+\centering
+\caption{ICC(1,1) of the second panel with one call per judge, in the primary condition
+(metrics, outcome and derivable label in the prompt) and in the clean condition (none of
+them), for all cases and inside SHAP and LIME.}
+\label{tab:clean}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+ & \multicolumn{3}{c}{Primary, one call} & \multicolumn{3}{c}{Clean} \\
+Dimension & All & SHAP & LIME & All & SHAP & LIME \\
+\midrule
+Completeness & 0.68 & 0.12 & 0.61 & 0.58 & 0.01 & 0.63 \\
+Semantic plausibility & 0.56 & 0.18 & 0.68 & 0.56 & 0.20 & 0.69 \\
+Overall quality & 0.63 & $-$0.02 & 0.61 & 0.57 & $-$0.12 & 0.64 \\
+Audit usefulness & 0.66 & 0.22 & 0.68 & 0.42 & $-$0.13 & 0.66 \\
+Concision & 0.32 & $-$0.14 & 0.68 & 0.34 & $-$0.20 & 0.52 \\
+Clarity & 0.00 & $-$0.19 & $-$0.15 & $-$0.04 & $-$0.18 & $-$0.21 \\
+Actionability & $-$0.03 & $-$0.10 & 0.17 & $-$0.11 & 0.02 & $-$0.12 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion}
+
+The first question has a negative answer in both panels: over all cases no dimension
+reached good agreement. The second question changes what that answer means. A coefficient
+of about 0.7 over all cases suggests judges that are close to usable. Most of it was
+agreement that SHAP records deserve higher scores than Anchors or DiCE records. Inside
+SHAP, where a user would want a judge to tell a better explanation from a worse one,
+the agreement of three judges was near zero, with or without the metrics in the prompt. LIME is the
+exception, and it is not explained by the metrics; its cases come from one dataset, and
+why its explanations draw agreement is not established here. A study that reports one agreement coefficient over
+explanations of several methods is reporting, in large part, that its judges can tell the
+methods apart.
+
+The same decomposition limits what the mean of a panel offers. The mean of the three
+judges was reliable over all cases, so a panel can rank methods consistently. It was not
+shown to rank explanations of one method, and whether its ranking of methods is right is
+a question of validity that these data cannot answer.
+
+The third question has a practical answer. Rewording the rubric moved the ICC of
+concision by about 0.3 and that of clarity in the opposite direction. Averaging repeated
+calls and prompt variants before computing the coefficient raised two dimensions above
+the threshold, because the average hides the variation of a judge with itself, and that
+variation is not small: with temperature 0 one judge repeated its score almost always and
+another in fewer than half of the cases on some dimensions.
+
+The fourth question shows that what is put in the prompt becomes part of what is
+measured. One judge used the printed metrics heavily, said so in its rationales and
+scored higher without them; the other two hardly changed. For SHAP and DiCE the relation
+between score and fidelity existed only while fidelity was printed. A judge that is given
+technical metrics may return them in another form, and then its score adds no independent
+evidence about meaning.
+
+The study has limits. It measures agreement among LLM judges and has no human scores, so
+it says nothing about whether the judges are right. Both panels are small, low-cost
+models, and the conclusions are limited to that class. The templates and responses of
+the first panel were lost, so its condition and aggregation are unknown, the second run
+is not a reproduction, and the decomposition by explainer cannot be made for it. Anchors
+and DiCE were scored in a rendering that is not their own; their scores, the floor of
+actionability and part of the variance between explainers may come from it. The cases
+are unbalanced across explainers and datasets, and the groups inside an explainer are
+small. The clean condition has one call per judge. Except for the ICC of the primary
+condition, the analyses were planned after the first responses existed.
+
+\section{Conclusions}
+
+Three small LLM judges did not reach good agreement on any of seven dimensions of
+explanation quality, in two panels (highest ICC(1,1) 0.601 and
+0.731). What agreement there was concerned mainly the method:
+up to 67\% of the variance of the scores lay between
+explainers, and among SHAP explanations agreement was near zero on every dimension, with
+or without technical metrics in the prompt. The mean of three judges was reliable for
+comparing methods and unverified for comparing explanations. Scores changed with the
+rubric wording, with repetition and with the content of the prompt, where one judge
+largely restated the metrics it was shown. A single LLM judge of this class should not be
+used as a confirmatory measure of the quality of an explanation. Studies that use LLM
+judges should report agreement within each method, the number of calls per item, the
+aggregation rule and what the prompt contained. The comparison with human raters and the
+scoring of rules and counterfactuals in their own form are the next steps.
+
+\section*{Data availability}
+\iffull
+The three datasets are public
+\cite{becker1996adult,hofmann1994statlog,wolberg1993breast}. The case inventory, the
+rendered prompts, the raw and parsed responses of the second panel, the aggregate tables
+of the first panel and the analysis code are available at
+\url{https://github.com/jonnabio/xai-eval-framework} (release
+\texttt{\papercrelease}), archived at \papercarchive. Every reported value can be
+regenerated by following \texttt{docs/reports/paper\_c/README.md}.
+\else
+The three datasets are public
+\cite{becker1996adult,hofmann1994statlog,wolberg1993breast}. The case inventory, the
+rendered prompts, the raw and parsed responses of the second panel, the aggregate tables
+of the first panel and the analysis code are in a public repository and a versioned
+archive, with instructions to regenerate every reported value; their addresses are
+withheld for double-blind review.
+\fi
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+% Journal AI policy: state the tools, the purpose and how the results were verified;
+% placed after the references, as in the journal's published articles. The text below was
+% given by the author on 2026-10-04; it is not changed without the author's approval.
+\section*{Declaration on the Use of Artificial Intelligence (AI)}
+The author declares the use of the AI tool Claude (Anthropic), under the author's
+direction, to help producing figure code, edit the English text, and format the references.
+The research questions, analysis plan, design and interpretation are the author's. All contents were thoroughly reviewed by the
+author to ensure accuracy and coherence. The language models used as judges are the object
+of the study and are described in the methods.
+
+\end{document}

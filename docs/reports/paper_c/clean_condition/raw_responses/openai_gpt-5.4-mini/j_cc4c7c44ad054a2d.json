@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_45af74f0fdcedd43",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_cc4c7c44ad054a2d",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_45af74f0fdcedd43_c2c6712109f04f09.txt",
+  "prompt_version": "c2c6712109f04f09",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165337-PsaMgHcWQ0qUiGqcpoe0",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 511,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00301125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022995,
+        "upstream_inference_cost": 0.00301125,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1460
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_45af74f0fdcedd43\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists contributing features but does not translate them into concrete steps the applicant or reviewer could take. It offers no recourse guidance such as which attributes to improve or how the decision might change.\",\n    \"audit_usefulness\": \"This is useful for auditing because it reveals the main local SHAP contributors and their directions, enabling inspection of whether the random forest is relying on sensible variables. However, it lacks magnitudes in a broader context such as baseline values or comparison across cases, so investigation support is partial rather than complete.\",\n    \"clarity\": \"The output is concise and the feature names are understandable enough for a non-expert with some tabular context, with positive and negative contributions clearly marked. Still, SHAP signs and values may not be immediately intuitive to all readers without explanation of the scale.\",\n    \"completeness\": \"It covers the top local factors driving the prediction and gives their relative importance, which is enough to get a partial sense of the decision. But it omits the model's probability, a reference baseline, and the combined directionality needed for a full local decision account.\",\n    \"concision\": \"The explanation is compact and high-density, listing only the most relevant local factors with numeric attributions. It avoids unnecessary elaboration and makes efficient use of the short token budget.\",\n    \"overall_quality\": \"Overall, this is a solid local explanation for a tabular model because it identifies the main SHAP drivers clearly and succinctly. Its main weaknesses are limited actionability and incomplete decision context, but it remains useful for understanding the prediction.\",\n    \"semantic_plausibility\": \"The listed factors are highly plausible for German credit risk, such as checking status, duration, credit amount, property, and credit history. The mixture of positive and negative contributions is also consistent with a realistic local explanation for a random forest classifier.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:39.539018+00:00"
+}

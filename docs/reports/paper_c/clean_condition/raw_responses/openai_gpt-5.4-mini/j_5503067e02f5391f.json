@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_445412523328930a",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_5503067e02f5391f",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_445412523328930a_2794ee3003aac410.txt",
+  "prompt_version": "2794ee3003aac410",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165434-tsj1DxzsVbeVWHc6jhU2",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.0028485,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021375,
+        "upstream_inference_cost": 0.0028485,
+        "upstream_inference_prompt_cost": 0.000711
+      },
+      "is_byok": false,
+      "prompt_tokens": 948,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1423
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_445412523328930a\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the applicant. It only lists influential features without indicating how they could be changed or what threshold would matter.\",\n    \"audit_usefulness\": \"It gives a rough list of local factors, which is somewhat useful for inspection, but it lacks direction, rule conditions, and any indication of why these features support the prediction. The repeated 1.0000 values make it hard to assess the model behavior meaningfully.\",\n    \"clarity\": \"The wording is simple, but the output is just a feature list with unexplained scores, so a non-expert would not understand how these factors relate to the prediction. The duplicated checking-status and credit-history entries also reduce readability.\",\n    \"completeness\": \"The explanation mentions several potentially relevant variables, but it does not explain their direction, relative importance, or how they combine to support class 0. It is therefore only a partial local decision summary.\",\n    \"concision\": \"The output is short, but it is not efficient because it repeats categories and presents many identical values without adding interpretive value. A more compact explanation could convey more information in fewer words.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is somewhat plausible and somewhat informative, but it fails to explain the prediction in a usable way. The main limitation is that it lists anchors-like feature names without a clear rule or causal interpretation.\",\n    \"semantic_plausibility\": \"The listed German Credit features are appropriate for the dataset and are broadly plausible drivers of credit decisions. However, the all-ones formatting and repeated categories make the explanation look mechanically generated rather than semantically well grounded.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:16.086179+00:00"
+}

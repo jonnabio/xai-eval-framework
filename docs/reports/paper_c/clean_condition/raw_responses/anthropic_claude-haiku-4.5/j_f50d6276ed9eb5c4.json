@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_a0a8f165d668d9bc",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f50d6276ed9eb5c4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_a0a8f165d668d9bc_b9da670b4262c9a2.txt",
+  "prompt_version": "b9da670b4262c9a2",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165496-4yjwLJTDSMv4ayRZJ3Rc",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 471,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003452,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002355,
+        "upstream_inference_cost": 0.003452,
+        "upstream_inference_prompt_cost": 0.001097
+      },
+      "is_byok": false,
+      "prompt_tokens": 1097,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1568
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_a0a8f165d668d9bc\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features but provides no guidance on feature values, thresholds, or how to modify them for recourse; a clinician cannot act on normalized weights alone.\",\n    \"audit_usefulness\": \"The anchor weights reveal which features the model relies on, but the absence of feature values, decision thresholds, and anchor precision/coverage metrics severely limits auditor ability to investigate model logic or detect bias.\",\n    \"clarity\": \"The format is straightforward and uses standard terminology, but the meaning of normalized weights (1.0 vs 0.0) and their relationship to the prediction is not explained for non-experts.\",\n    \"completeness\": \"Only two features are identified as important with no information about their actual values in this instance, decision boundaries, or why other features received zero weight; critical local context is missing.\",\n    \"concision\": \"The explanation is compact but sacrifices essential information; listing ten features with zero weight adds bulk without insight and could be replaced with a summary statement.\",\n    \"overall_quality\": \"The explanation provides minimal actionable or auditable insight despite correct identification of top features; it lacks the depth and context needed for meaningful model inspection or clinical decision support.\",\n    \"semantic_plausibility\": \"In breast cancer diagnosis, worst radius and worst texture are plausible predictive features, but the complete absence of mean-based features and lack of clinical context makes it difficult to assess domain coherence.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:20.760700+00:00"
+}

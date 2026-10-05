@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_8fce321dd80c84b7",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_26c6ad24ea75f2c2",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_8fce321dd80c84b7_cb04f079250a2677.txt",
+  "prompt_version": "cb04f079250a2677",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165379-6Uikgr2fnpF6neW1ftu4",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 472,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002835,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002124,
+        "upstream_inference_cost": 0.002835,
+        "upstream_inference_prompt_cost": 0.000711
+      },
+      "is_byok": false,
+      "prompt_tokens": 948,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1420
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_8fce321dd80c84b7\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps. It lists feature values with no indication of how changing them could affect the prediction.\",\n    \"audit_usefulness\": \"It gives only a sparse feature list with binary-looking weights, which is not enough to inspect why the XGBoost model predicted class 1 or to investigate potential bias or errors. There is no rule structure, threshold, or directionality beyond the raw values.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of the numbers is not explained. A non-expert would not know whether 1.0000 means a strong positive contribution, a satisfied anchor condition, or something else.\",\n    \"completeness\": \"The explanation omits the prediction direction of each factor, the strength of support for the decision, and the actual anchor rule that justified the prediction. It therefore does not provide enough local decision context to understand this specific case.\",\n    \"concision\": \"It is very short and contains little redundancy, but the brevity comes at the expense of useful information. As a result it is compact but not maximally informative.\",\n    \"overall_quality\": \"Overall, this is a minimal and only partially interpretable anchor-style summary. It is readable, but it lacks the rule semantics and decision context needed for a strong explanation.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the German Credit domain, and duration, checking status, and foreign worker status are reasonable factors. However, the meaning of the 1.0000/0.0000 values is not made explicit, so the explanation is only moderately coherent.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:21.929877+00:00"
+}

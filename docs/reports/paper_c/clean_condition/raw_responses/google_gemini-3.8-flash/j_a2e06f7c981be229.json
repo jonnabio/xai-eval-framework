@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6af7798c2cb4bb08",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_a2e06f7c981be229",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_6af7798c2cb4bb08_44c46b869b780961.txt",
+  "prompt_version": "44c46b869b780961",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165411-GJZy1sh8ybdHhpupuzDX",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 945,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 556,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00435,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00354375,
+        "upstream_inference_cost": 0.00435,
+        "upstream_inference_prompt_cost": 0.00080625
+      },
+      "is_byok": false,
+      "prompt_tokens": 1075,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2020
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_6af7798c2cb4bb08\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists raw SHAP attribution values without counterfactual thresholds or actionable recommendations for the applicant.\",\n    \"audit_usefulness\": \"Auditors can clearly observe which features and sensitive attributes (e.g., sex/marital status, age) influenced the model, though the absence of original feature values slightly limits inspection.\",\n    \"clarity\": \"The text presents technical feature names paired with raw signed floats, which requires understanding of SHAP values and one-hot encoded variables.\",\n    \"completeness\": \"It provides the top 10 contributing features with exact weights, but lacks the base value and the instance's underlying feature values.\",\n    \"concision\": \"The presentation is compact and information-dense, containing no conversational filler or redundant text.\",\n    \"overall_quality\": \"It serves as an adequate technical summary of local feature importance, but falls short on lay accessibility and prescriptive recourse.\",\n    \"semantic_plausibility\": \"The direction of influence for factors like negative checking status, low savings, and loan duration aligns well with standard credit underwriting domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:58.999053+00:00"
+}

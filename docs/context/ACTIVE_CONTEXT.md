@@ -1,5 +1,207 @@
 # Active Context: XAI Evaluation Framework
 
+## Publication status - 2026-10-04
+
+| Paper | Venue | Status | Submission / publication record |
+|---|---|---|---|
+| **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
+| **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
+| **C** | *Tecnología en Marcha*, AI special issue (planned target) | Plan proposed; manuscript not yet drafted or submitted | Author target, not a journal submission |
+| **D** | *Tecnología en Marcha*, AI special issue | Submitted | Emailed 2026-10-03; acknowledgement pending in the latest record |
+| **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
+| **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
+
+**Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
+2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
+*Inteligencia Artificial* (IBERAMIA) on 2026-10-01 (date reported by the author) and
+desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the author
+decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
+CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
+taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session update - 2026-10-04 (Paper C: author's read, release 0.10.0)
+
+This entry is the latest; the Paper C handoff below keeps the detail.
+
+- **Author decisions:** the draft was read; the two added references are fine; the human
+  raters see the clean record (sheets rebuilt, none had been sent); built PDF and Word files
+  stay local; the AI declaration has the author's own text and is not changed without
+  approval; merge and release approved.
+- **Archive version 0.10.0** for the Paper C snapshot (`.zenodo.json`, `CITATION.cff`).
+- **Still open:** claim registry for `paper_c.tex`; a review by a session that did not write
+  the draft; the search on LLM-judge reliability (review F11); the note to the editor;
+  whether the human subset is in this submission (recommendation: no).
+
+## Session Handoff - 2026-10-04 (Paper C revised after the rigor review; clean condition run)
+
+This is the Paper C handoff of the revision. The two Paper C entries below keep the earlier detail.
+
+- **Completed**
+  - **Author decisions on the review:** SHAP and LIME are the main analysis; the clean
+    condition is approved; the within-explainer analysis is accepted as a dated addition; the
+    venue does not change (`docs/reports/paper_c/PLAN.md`, section 15).
+  - **Clean condition run:** 192 cases, 3 judges, one call, no metrics, outcome or label in
+    the prompt; 576 calls, all valid. A new cohort in its own directory,
+    `docs/reports/paper_c/clean_condition/` (prompts, raw responses, parsed scores), written
+    by `scripts/run_clean_condition.py`. Nothing under `experiments/` or `outputs/` changed.
+  - **New analyses** (`scripts/paper_c_reliability.py`, fixed in the plan before they ran):
+    agreement inside each explainer, one call, panel mean, two-way models, F-based intervals,
+    raw agreement, rationales naming a metric, correctness contrast, clean against primary.
+  - **Manuscript rewritten** around the review: title unchanged ("Do LLM Judges Agree on the
+    Quality of Explanations? A Two-Panel Reliability Study"); 5 tables, 1 figure, 25
+    references; abstract 246 and resumen 249 words. Response to each finding in
+    `docs/reports/paper_c/README.md`.
+- **Current State**
+  - **The draft is at 15 pages in Word, the journal's limit.** Any addition needs an equal cut.
+  - Results: over all cases no dimension reaches 0.75 (0.601 and 0.731); up to 67% of the
+    variance is between explainers; inside SHAP no dimension exceeds 0.19 (0.20 without
+    metrics), inside LIME five dimensions are between 0.63 and 0.75; without metrics the
+    fidelity relation vanishes for SHAP and DiCE, Claude Haiku 4.5 scores higher, and
+    agreement on audit usefulness falls from 0.66 to 0.42.
+  - Not reviewed again; the author has not read it. **Not in the claim registry** (unchanged).
+  - Verified: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`;
+    `verify_exp4_reconstruction.py` 18 pins. Lane lock released.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
+  2. Author: read `docs/reports/paper_c/submission/paper_c_blind.pdf`; decide whether the
+     raters see the clean record; send the rating sheets; adjudication; check the two
+     references marked NEW; a targeted search on LLM-judge reliability (review F11).
+  3. Registry work through `main`; a review by a session that did not write the draft;
+     Zenodo version; `\papercrelease` and `\papercarchive`.
+- **Blockers/Issues**
+  - Deadline 2026-10-15. The human subset, if it arrives, does not fit without cuts.
+  - Anchors and DiCE were judged as lists of feature weights; the paper says so and does not
+    repair it.
+  - The clean condition has one call per judge; the primary has three.
+- **Notes**
+  - The judge client reads `configs/secrets/api_keys.env`; the run used the project's key.
+  - Gemini 3.8 Flash was the slow judge (about 20 seconds per call); run the shards in
+    parallel: `--judge <id> --shard i/4`, then `--parse-only`.
+  - A look at partial clean data overstated the effect; only the full data are reported
+    (PLAN.md 15.4).
+  - `paper_c_reliability.py` must run before `paper_c_summary.py`: the figure reads its output.
+
+## Session Handoff - 2026-10-04 (Paper C: plan approved, prompt findings, first draft built)
+
+This is the latest Paper C handoff; it supersedes the one directly below, which keeps the
+detail of the lane setup.
+
+- **Completed**
+  - Pull request #20 merged (`paper-c` lane, ADR-0022 amendment, sync checks unwired from the
+    April prototype). Branch `paper/c-llm-judges` has taken `origin/main`.
+  - **Author decisions:** plan approved, adjusted as the work goes; English; 56-case human
+    sample; raters are not the corpus reviewer; single author; AI-use statement as Paper D;
+    no question to the editor for now (`docs/reports/paper_c/PLAN.md`, section 13).
+  - **Two findings about the EXP4 prompts** (PLAN.md, section 14):
+    - all 192 prompts of `hidden_label_primary` print the field `quadrant` (TP, FN, TN, FP),
+      which with the prediction gives the true label: no condition of cohort 2 withholds it;
+    - all 576 prompts print the technical metrics of the explanation.
+  - **Human subset prepared:** `human_subset/sample_cases.csv` (7 cases per dataset-by-explainer
+    cell, seed 20261004) and one self-contained rating sheet per rater, with instructions.
+    Not sent; sending is the author's step.
+  - **Post hoc analysis run as fixed in the plan:** within each explainer the overall-quality
+    score rises with the fidelity value shown in the prompt (Spearman 0.35 to 0.59, all four
+    significant after Holm over 20 tests); results in `docs/reports/paper_c/results/`.
+  - **First draft built:** `paper_c_template.tex` (source), generated `paper_c.tex`,
+    `scripts/build_paper_c.py` (render, PDF, Word, blind and full). Title, set by the
+    author: "Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability
+    Study"; it is not changed without the author's approval. 12 pages measured in Word, abstract 244 and resumen 248 words, 4 tables,
+    1 figure, 25 references. Identity scan of the blind files clean except the citation of
+    the RIMI article, as in Paper D.
+  - **Rigor review of the draft** (Scientific Advisor, same session, not independent):
+    `docs/review/scientific-rigor-review_paper_c_2026-10-04.md`. Grade: major revision, mean
+    3.1; 5 major and 7 minor findings. The study can stand alone, but not as drafted:
+    - F01: the pooled ICC mostly measures agreement on the explainer. Inside SHAP the ICC of
+      overall quality is -0.19 and of completeness 0.06; only LIME keeps 0.63 to 0.75;
+    - F02: Anchors and DiCE were shown to the judges as lists of feature weights, not as a
+      rule and a counterfactual (108 of 192 cases);
+    - F03: the primary estimate averages three replicates (one call: 0.675 for completeness)
+      and the panel mean, ICC(1,k), exceeds 0.75 on four dimensions;
+    - F04: the rationales cite the printed metrics in 80% (Claude), 40% (GPT) and 15%
+      (Gemini) of the responses.
+    The values of the review are probes, not results; they must be planned, dated and run in
+    the lane before they are printed.
+- **Current State**
+  - The draft is the fallback version: no human-rated subset, no counts on the audited corpus
+    axes. **It is not ready to submit** (review above) and the author has not read it.
+  - **The draft's numbers are not in `pub/claim_registry.toml`.** They are generated from
+    result files by the build. `paper_c.tex` is not under `[coverage]` or `[exclusivity]`, and
+    `verify_sync.py` does not check it. `pub/claims.toml` still holds the placeholder abstract.
+  - Verified: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`. Built files are in
+    `docs/reports/paper_c/submission/`, local only (`.gitignore` in the folder).
+  - The lane lock was released at the end of the session.
+- **Next Steps**
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
+  2. Author: read `docs/reports/paper_c/submission/paper_c_blind.pdf`; decide on the clean
+     prompt condition (PLAN.md 14.4); send the rating sheets; start adjudication with the
+     second reviewer; check the two references marked NEW.
+  3. Registry work (shared files, pull request to `main`): coverage, exclusivity, a `paper_c`
+     resolver in `claim_sources.py`, `verify_sync.py`, the real abstract in `pub/claims.toml`.
+  4. Human-subset analysis script, written before the ratings arrive (PLAN.md section 6).
+  5. Independent rigor review; Zenodo version; `\papercrelease` and `\papercarchive`.
+- **Blockers/Issues**
+  - Deadline 2026-10-15. Cut-offs: adjudication 2026-10-08, ratings 2026-10-10.
+  - The quadrant finding also concerns the thesis chapter 5 and the 32-page edition, which
+    call the condition label-hidden; the thesis lane must check its text.
+  - Local `main` is checked out in a second folder (`../xai-eval-framework-main-status`) with
+    a commit that `origin/main` does not have (`df9daf3bb`); it is not level with origin.
+  - `docs/reports/paper_d/README.md` and the status block at the top of this file carry
+    uncommitted edits made outside this session (journal account request). This session did
+    not commit them.
+- **Notes**
+  - `paper_c_posthoc.py` takes about ten minutes (bootstrap); run it in the background.
+  - A shell heredoc dropped LaTeX backslashes again; write patch scripts with the editor tool.
+  - `build_paper_c.py` follows `scripts/pubs/build_paper_d.py`; Word page count was measured
+    through Word's COM interface from PowerShell.
+
+## Session Handoff - 2026-10-04 (Paper C: own lane and folder, prototype removed, plan proposed)
+
+This handoff records the Paper C setup; the publication status summary above is current.
+
+- **Completed**
+  - **Author decisions:** Paper C is the LLM-judge reliability study with the taxonomy as
+    framing; it is worked in `docs/reports/paper_c/` only, under a new lane; the April survey
+    prototype is removed; the Paper C inputs are copied out of `docs/reports/paper_bc/`, which
+    is frozen; venue *Tecnología en Marcha*, special issue on AI (deadline **2026-10-15**, the
+    issue Paper D was sent to). Recorded as an amendment to ADR-0022.
+  - **Pull request #20** (`pubs/paper-c-lane`), CI green, **not merged**: lane `paper-c`
+    (`paper/c-*`, owns `docs/reports/paper_c/**`) in `lanes.toml` with two test lines; the
+    ADR amendment; `verify_sync.py` no longer checks a Paper C manuscript; the 24-study claim
+    and `[review_corpus.paper_c]` removed from the registry; the CI check of the old corpus
+    removed; a placeholder Paper C abstract in `pub/claims.toml`.
+  - **Branch `paper/c-llm-judges`** (cut from `pubs/paper-c-lane`): prototype removed (11
+    files); `paper_c_review_corpus.csv` (44 papers) and `corpus_audit/` copied in;
+    `README.md` and `PLAN.md` written.
+- **Current State**
+  - The plan is **proposed, not approved**. No manuscript and no new analysis exist.
+  - Verified: `verify_claims.py` 985 claims / 1297 sites; `verify_sync.py`;
+    `scan_shared_literals.py --strict` 0 unexplained; `verify_exp4_reconstruction.py` 18
+    pins; 9 lane tests.
+  - The main folder is on `paper/c-llm-judges`, pushed. The lane lock was released.
+- **Next Steps**
+  1. Author: merge pull request #20 (the assistant's merge was refused by the permission
+     check). Then `git fetch origin main:main` and `git merge main` on `paper/c-llm-judges`.
+  2. Start with `python scripts/pubs/check_lane.py claim --owner <session name>`.
+  3. Author: answer the seven decisions in `docs/reports/paper_c/PLAN.md`, section 13.
+  4. After approval: draw the 56-case sample and build the rating sheet (plan section 6);
+     start adjudication (section 5); build script and manuscript (section 8).
+  5. Unchanged: Papers B, D and E wait for their journals; the thesis sentence about the
+     earlier article; Task 3 / RCA-001 Phase 2; `git worktree prune`.
+- **Blockers/Issues**
+  - Eleven days to the deadline, with adjudication and human ratings depending on other
+    people; the plan sets cut-offs of 2026-10-08 and 2026-10-10 with fallbacks.
+  - The existing annotation viewer and guidelines were made for EXP1 (three dimensions, 20
+    Adult cases); the seven-dimension EXP4 rubric needs a new rating sheet.
+  - The journal limit is 15 Word pages at 12 pt and 1.5 spacing, about 5,000 words.
+  - Paper D is in the same special issue; the 32-page edition with the reliability tables is
+    public.
+- **Notes**
+  - `scripts/pubs/claim_sources.py` still maps `review_corpus_rows:paper_c` to
+    `docs/reports/paper_c/paper_c_review_corpus.csv`, which now holds the 44-paper corpus.
+  - The chapter manuscript (`07_diseno_empirico.md`) names `pub/fragments/paper_c_abstract_en.tex`
+    as an initial source; that fragment is now a placeholder.
+  - `python -m pytest` needs the project `.venv`; `pub/fragments/build_meta.env` changes on
+    every fragment build and is restored before committing.
 ## Session Handoff - 2026-10-04 (Paper B SUBMITTED to CLEI Electronic Journal, ID 1196)
 
 This is the latest handoff. It closes Next Steps 2 and 3 of the Paper B handoff directly

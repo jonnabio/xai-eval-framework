@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_06e7340405176025",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_0cab5b509c72b735",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_06e7340405176025_0a1195eb4d87e4cb.txt",
+  "prompt_version": "0a1195eb4d87e4cb",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165412-d9SDFHdEy7SjV1qI58j0",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 478,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00285375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002151,
+        "upstream_inference_cost": 0.00285375,
+        "upstream_inference_prompt_cost": 0.00070275
+      },
+      "is_byok": false,
+      "prompt_tokens": 937,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1415
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_06e7340405176025\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists feature contributions and does not translate them into any user-facing next steps, recourse options, or decision review guidance. A reader cannot infer what could be changed or checked to alter the prediction.\",\n    \"audit_usefulness\": \"It is useful for auditing because it exposes the top local SHAP attributions and their directions, which helps inspect which features drove the model output. However, it lacks baseline context, feature values, and any comparison to expected clinical patterns, limiting deeper investigation.\",\n    \"clarity\": \"The ranking of SHAP factors is straightforward and the signs are easy to read, but the output is terse and assumes the reader knows what SHAP values mean. Non-experts may not understand the magnitude or how to interpret positive versus negative contributions relative to class 0.\",\n    \"completeness\": \"The explanation covers the main local drivers, but it omits the actual feature values, the base value, and how these contributions combine to produce prediction 0. Without that context, the decision is only partially explained.\",\n    \"concision\": \"The response is compact and contains mostly signal rather than filler. It gives a succinct list of the top factors without unnecessary repetition.\",\n    \"overall_quality\": \"This is a reasonably good local explanation for a technical audience, but it is incomplete for full decision understanding and not actionable for a non-expert user. Its main strength is revealing which features mattered, while its main weakness is the lack of contextualization.\",\n    \"semantic_plausibility\": \"The listed breast cancer features and mixed positive/negative SHAP contributions are plausible for an XGBoost model on this dataset. The pattern is coherent and does not contradict domain expectations.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:54.772787+00:00"
+}

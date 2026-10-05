@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_79966d2bb70844bf",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_2757b26e3cf6535c",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_79966d2bb70844bf_632eefaa8387cb93.txt",
+  "prompt_version": "632eefaa8387cb93",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165429-3MIdeNyjFZLNBfm2xDuH",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 492,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003553,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00246,
+        "upstream_inference_cost": 0.003553,
+        "upstream_inference_prompt_cost": 0.001093
+      },
+      "is_byok": false,
+      "prompt_tokens": 1093,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1585
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_79966d2bb70844bf\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what changes would alter the prediction or how to achieve recourse. No specific, feasible actions are suggested for a user seeking to modify the outcome.\",\n    \"audit_usefulness\": \"The raw feature importance scores with numerical weights support basic model inspection, but lack context about feature values, direction of influence, or counterfactual changes that would be essential for thorough bias and error investigation.\",\n    \"clarity\": \"The format is a simple list of feature names with numerical scores, which is straightforward to parse but lacks narrative context explaining what these scores mean or how they relate to the prediction decision.\",\n    \"completeness\": \"The explanation identifies top drivers (education-num and native-country_England) but omits the actual feature values for the instance, the direction of influence, and the decision boundary context needed for full local understanding.\",\n    \"concision\": \"The explanation is compact in presentation but includes many zero-valued features that add little informational value; a more selective presentation of only non-zero or high-impact features would improve information density.\",\n    \"overall_quality\": \"While the explanation provides a basic ranking of feature importance, it lacks the narrative structure, contextual grounding, and actionable insights needed for effective explanation in a real-world setting.\",\n    \"semantic_plausibility\": \"The identified factors (education level and country of origin) are plausible predictors in the adult income dataset, but without instance-level feature values or direction of effect, semantic coherence cannot be fully assessed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 2,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:14.493414+00:00"
+}

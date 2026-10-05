@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_861c15c7ecab8f3b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_32a2e35f34e0b1f7",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_861c15c7ecab8f3b_9596714e5be5ff64.txt",
+  "prompt_version": "9596714e5be5ff64",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165418-dfP0ly2GUnSRHllXQcd1",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 524,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00306525,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002358,
+        "upstream_inference_cost": 0.00306525,
+        "upstream_inference_prompt_cost": 0.00070725
+      },
+      "is_byok": false,
+      "prompt_tokens": 943,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1467
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_861c15c7ecab8f3b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the prediction. It only lists features with weights, and most of the listed factors are zero, so a user cannot tell what to do.\",\n    \"audit_usefulness\": \"It offers limited audit value because it shows a small set of local feature attributions, but the dominance of zero-valued factors makes it hard to inspect the model's actual decision logic. It does not indicate how these factors compare across alternatives or whether the result is stable.\",\n    \"clarity\": \"The output is readable in a superficial sense, but the meaning of the values is not explained and the ranking is confusing because many features have 0.0000 importance. A non-expert would struggle to understand why 'native-country_Peru' is singled out and what the numbers represent.\",\n    \"completeness\": \"It only exposes two non-zero factors and gives no information about the main drivers of the positive prediction beyond those sparse attributions. Key local context such as how the feature values support class 1, or whether counterfactual changes could flip the outcome, is missing.\",\n    \"concision\": \"The explanation is short and not overly verbose, but much of its content is low-information because eight of the ten listed factors are zero. This makes it less efficient than it could be despite the compact length.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is compact and somewhat interpretable, but it lacks actionable guidance, omits important local decision context, and is not very useful for auditing. The heavy emphasis on zero-weight features also reduces practical value.\",\n    \"semantic_plausibility\": \"The content is plausible for a DICE explanation on the Adult dataset, especially because native-country indicators can appear in the feature set. However, the prominence of country features with no additional context is semantically thin and not very persuasive.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:01.280820+00:00"
+}

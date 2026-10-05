@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4e9045d4d8fa6e21",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7c5629e2a3986f26",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_4e9045d4d8fa6e21_fe006fa3e51d1629.txt",
+  "prompt_version": "fe006fa3e51d1629",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165455-65Enpx5RBxcyCygTcKU1",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 468,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003448,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00234,
+        "upstream_inference_cost": 0.003448,
+        "upstream_inference_prompt_cost": 0.001108
+      },
+      "is_byok": false,
+      "prompt_tokens": 1108,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1576
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_4e9045d4d8fa6e21\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies marital status as the dominant factor but provides no guidance on how to interpret this for decision-making or what recourse actions might be available to the individual.\",\n    \"audit_usefulness\": \"The normalized importance scores reveal that only one feature has non-zero weight (0.6), which is useful for detecting potential model simplification or data issues, but lacks depth for comprehensive bias investigation.\",\n    \"clarity\": \"The format is straightforward with feature names and numerical weights clearly presented, though the meaning of the 0.6 score and why other features have exactly 0.0 weight requires some technical understanding.\",\n    \"completeness\": \"The explanation shows only one meaningful driver and nine features with zero contribution, leaving uncertainty about whether other features were evaluated or whether the model genuinely relies almost entirely on marital status.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation is clear and concise, it lacks actionability and provides incomplete insight into the model's decision logic, particularly regarding why so many features contribute zero weight.\",\n    \"semantic_plausibility\": \"For income prediction in the adult dataset, marital status being a strong predictor is plausible, though the complete absence of contribution from age, education, and hours-per-week is somewhat surprising and warrants scrutiny.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:39.792812+00:00"
+}

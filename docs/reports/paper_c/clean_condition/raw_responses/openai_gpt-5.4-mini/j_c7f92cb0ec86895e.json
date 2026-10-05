@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0c57055995cafaca",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_c7f92cb0ec86895e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_0c57055995cafaca_ffa3a97f51443d26.txt",
+  "prompt_version": "ffa3a97f51443d26",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165327-vTmXA2gS9kJ87bHcaEwj",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 502,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002961,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002259,
+        "upstream_inference_cost": 0.002961,
+        "upstream_inference_prompt_cost": 0.000702
+      },
+      "is_byok": false,
+      "prompt_tokens": 936,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1438
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_0c57055995cafaca\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not translate the prediction into any concrete recourse or next step. It lists features with binary-looking weights, but gives no guidance on what changing them would mean for the person or decision.\",\n    \"audit_usefulness\": \"It is only mildly useful for auditing because it shows which features were considered important, but it does not explain the direction of influence or the rule conditions behind the prediction. Without a clearer connection to the model's behavior, it is hard to investigate why the model predicted class 0.\",\n    \"clarity\": \"The wording is simple, but the output is not very understandable because the feature values are presented as unlabeled 1.0000 and 0.0000 scores rather than plain-language conditions. A non-expert would struggle to interpret what these numbers mean.\",\n    \"completeness\": \"The explanation names several local factors, but it omits how they interact, whether they increase or decrease the prediction, and any threshold logic from the anchor method. As a result, it provides only a partial view of the specific decision.\",\n    \"concision\": \"The explanation is short and contains little redundancy, so it is compact. However, it is compact partly because it omits key interpretive information, which limits its usefulness.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is terse and identifies some relevant features, but it lacks directionality, interpretability, and actionable or diagnostic value. It is only minimally helpful for understanding the model's prediction.\",\n    \"semantic_plausibility\": \"The listed features are plausible drivers for the Adult income task, especially education, capital-gain, and hours-per-week. Still, the presentation as all-or-nothing scores without explanation of their meaning makes the output less semantically coherent than a proper anchor summary.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:29.888449+00:00"
+}

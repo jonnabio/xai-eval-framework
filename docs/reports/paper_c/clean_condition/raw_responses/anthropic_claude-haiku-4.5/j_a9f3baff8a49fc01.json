@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a9f3baff8a49fc01",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_cd6abd1a9433542b_9b8255f90651c8a0.txt",
+  "prompt_version": "9b8255f90651c8a0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165450-cYxO9AZOvhwjt2GWOxVm",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 529,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003737,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002645,
+        "upstream_inference_cost": 0.003737,
+        "upstream_inference_prompt_cost": 0.001092
+      },
+      "is_byok": false,
+      "prompt_tokens": 1092,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1621
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what changes would alter the prediction or how to achieve recourse. Without counterfactual suggestions or specific intervention targets, users cannot act on this information.\",\n    \"audit_usefulness\": \"The normalized scores reveal which features DICE identified as locally important, supporting model behavior inspection. However, the lack of actual counterfactual examples or threshold information limits deeper investigation of model logic and potential biases.\",\n    \"clarity\": \"The format is straightforward\u2014a ranked list of features with numerical scores\u2014but non-experts may not understand what these scores represent, why most are zero, or what the prediction class means in context. Domain knowledge of DICE and the Adult dataset is required.\",\n    \"completeness\": \"The explanation identifies top factors but omits critical context: the actual instance values, the counterfactual examples DICE generated, and why these features matter for the prediction. The abundance of zero-scored features suggests incomplete local decision information.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently presenting feature scores in ranked order. However, the inclusion of many zero-valued features adds minimal information and could be trimmed.\",\n    \"overall_quality\": \"The explanation provides a basic feature importance ranking but lacks the depth, context, and actionability expected from a counterfactual explanation method. It reads more like a raw output than a polished, user-ready explanation.\",\n    \"semantic_plausibility\": \"The features and their relative importance are plausible for the Adult income prediction task, and the dominance of native-country_Ireland is contextually reasonable. However, without instance values or domain grounding, full plausibility cannot be assessed.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:36.944991+00:00"
+}

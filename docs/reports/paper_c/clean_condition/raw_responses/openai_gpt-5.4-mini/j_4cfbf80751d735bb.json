@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_681f91e7c50b9380",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_4cfbf80751d735bb",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_681f91e7c50b9380_5f72e4924ac710ff.txt",
+  "prompt_version": "5f72e4924ac710ff",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165431-3frjelX7UoJ2RHOKiw60",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 470,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00282225,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002115,
+        "upstream_inference_cost": 0.00282225,
+        "upstream_inference_prompt_cost": 0.00070725
+      },
+      "is_byok": false,
+      "prompt_tokens": 943,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1413
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_681f91e7c50b9380\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps that could change the prediction. It only lists feature values, mostly as zeros, without stating what would need to change.\",\n    \"audit_usefulness\": \"It offers very limited audit value because it does not explain why the model predicted class 1 or which features increased or decreased the score. The output looks more like a sparse feature dump than a local behavioral explanation.\",\n    \"clarity\": \"The wording is simple, but the content is confusing because most listed factors are zero and no directionality is given. A non-expert would struggle to interpret what 'native-country_Ireland: 1.0000' means in relation to the prediction.\",\n    \"completeness\": \"Key local decision information is missing, especially the actual counterfactual changes, feature importance signs, or how the top factors relate to the positive prediction. The explanation does not meaningfully describe the model's decision context.\",\n    \"concision\": \"It is short, but much of the content is low-information repetition of zero-valued features. The brevity does not translate into usefulness, so the explanation is not efficiently informative.\",\n    \"overall_quality\": \"Overall, this is a weak explanation because it lacks interpretability, decision support, and meaningful local insight. It is only marginally informative and does not justify the model's positive prediction.\",\n    \"semantic_plausibility\": \"The listed features are plausible for the Adult dataset, but the pattern is odd because only one factor is nonzero and the rest are zero. That makes the explanation technically coherent but semantically unhelpful for understanding the prediction.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:13.492746+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_e4a3c652adf1d046",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_e0d7ec38707f1823",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_e4a3c652adf1d046_4874ad2b14da0059.txt",
+  "prompt_version": "4874ad2b14da0059",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165450-V5TVzKo7HCNPqzKV6Iro",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 493,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003568,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002465,
+        "upstream_inference_cost": 0.003568,
+        "upstream_inference_prompt_cost": 0.001103
+      },
+      "is_byok": false,
+      "prompt_tokens": 1103,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1596
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_e4a3c652adf1d046\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on how to interpret them or what actions could be taken to change the prediction. No recourse suggestions or decision review pathways are offered.\",\n    \"audit_usefulness\": \"The normalized scores (1.0 vs 0.0) clearly indicate which features anchor the prediction, supporting model behaviour inspection and potential bias investigation across demographic and economic dimensions.\",\n    \"clarity\": \"The format is straightforward with feature names and numerical scores, but lacks context about what the scores mean or why these features matter; a non-expert may struggle to interpret the 1.0/0.0 distinction.\",\n    \"completeness\": \"The explanation identifies five positive anchors (age, education-num, hours-per-week, occupation, relationship) and five zero-weighted features, providing reasonable coverage of the local decision boundary for the adult income prediction task.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only feature names and scores without extraneous text; however, the token count is modest and the format is already minimal.\",\n    \"overall_quality\": \"The explanation provides useful audit-level insight into feature importance but lacks clarity for non-experts and offers no actionability; it is technically sound but limited in practical utility.\",\n    \"semantic_plausibility\": \"The identified anchors (age, education, hours worked, executive role, marital status) are highly plausible predictors of high income in the adult dataset and align well with domain expectations about income determinants.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 4,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:35.529802+00:00"
+}

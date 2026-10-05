@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_95751d1d732b6cfa",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_a233d6c56271fcb9",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_95751d1d732b6cfa_bdd119901db53b4e.txt",
+  "prompt_version": "bdd119901db53b4e",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165430-pHZFN6G0A9UFVF5M4dOz",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002937,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.002937,
+        "upstream_inference_prompt_cost": 0.0007095
+      },
+      "is_byok": false,
+      "prompt_tokens": 946,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1441
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_95751d1d732b6cfa\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give concrete recourse steps or indicate what changes would most likely alter the prediction. The listed factors are mostly zeros, so a user cannot infer specific actions beyond noting education level.\",\n    \"audit_usefulness\": \"It offers very limited insight into the model's local behavior because it does not show directional contributions, counterfactual alternatives, or a coherent ranking of influential features. An auditor cannot use this alone to investigate potential bias or decision logic.\",\n    \"clarity\": \"The text is short and easy to read, but the meaning of \\\"top local factors\\\" is undermined by the mostly zero-valued entries and lack of explanation of how to interpret them. A non-expert would likely find it confusing rather than informative.\",\n    \"completeness\": \"It identifies one nonzero factor, education_7th-8th, but omits how the other features influenced the prediction in a meaningful way. There is no local decision context such as positive versus negative support or the relative importance of the listed variables.\",\n    \"concision\": \"The explanation is compact, but much of the content is low-information repetition of zero contributions. It could be substantially shorter while preserving the only meaningful signal.\",\n    \"overall_quality\": \"Overall this is a weak explanation because it provides almost no usable interpretation of why the model predicted class 0. It is readable and compact, but it lacks actionable, complete, and audit-relevant information.\",\n    \"semantic_plausibility\": \"The presence of education as a relevant feature is plausible for the Adult dataset, but the heavy concentration of zero-valued local factors makes the output feel mechanically generated and not very coherent as an explanation. The content is not contradictory, but it is not strongly plausible as a useful local rationale.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 1,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:13.038632+00:00"
+}

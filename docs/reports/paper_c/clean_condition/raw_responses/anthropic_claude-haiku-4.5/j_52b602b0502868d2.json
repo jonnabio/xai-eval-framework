@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_9294bc72ae3aeda0",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_52b602b0502868d2",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_9294bc72ae3aeda0_3013dd973c626f47.txt",
+  "prompt_version": "3013dd973c626f47",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165403-sQVyHsn7bvjyXAymfCLD",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 555,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003873,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002775,
+        "upstream_inference_cost": 0.003873,
+        "upstream_inference_prompt_cost": 0.001098
+      },
+      "is_byok": false,
+      "prompt_tokens": 1098,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1653
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_9294bc72ae3aeda0\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance weights but provides no guidance on how to change the prediction or what actions a user should take. Without context on what the prediction means or how features could be modified, the explanation offers minimal actionable value.\",\n    \"audit_usefulness\": \"The explanation clearly identifies which features anchor the prediction (1.0 weights) versus those that don't (0.0 weights), supporting model behaviour inspection. This binary distinction helps auditors understand which features the model relied on for this specific instance.\",\n    \"clarity\": \"The format is straightforward\u2014a list of features with numerical weights\u2014but lacks interpretation or context about what these weights mean or what the prediction represents. A non-expert reader would struggle to understand the significance of the 1.0 and 0.0 values.\",\n    \"completeness\": \"The explanation identifies five key anchoring features and ten features with zero weight, providing reasonable coverage of the local decision space. However, it lacks information about feature values, thresholds, or how these features interact to produce the prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting features and weights efficiently. The token count (82) is appropriate for the information density, though some brevity comes at the cost of interpretability.\",\n    \"overall_quality\": \"The explanation provides a mechanically sound anchor-based decomposition but lacks the contextual richness needed for practical use. It serves auditors better than end-users, and the absence of feature values or prediction interpretation limits its overall utility.\",\n    \"semantic_plausibility\": \"For the adult dataset predicting income, the identified anchors (education level, hours worked, advanced degree, never-married status, executive role) are plausible drivers of a high-income prediction. The feature selection aligns with domain expectations about income determinants.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:48.460964+00:00"
+}

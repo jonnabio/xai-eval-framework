@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_31247e881a13bce1",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_993caabef43ad9b8",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_31247e881a13bce1_8abf66d26fd78d15.txt",
+  "prompt_version": "8abf66d26fd78d15",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165515-Aoq7CNAwUBULDudOVE1I",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 1005,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 627,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.004572,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00376875,
+        "upstream_inference_cost": 0.004572,
+        "upstream_inference_prompt_cost": 0.00080325
+      },
+      "is_byok": false,
+      "prompt_tokens": 1071,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2076
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_31247e881a13bce1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The output provides only raw feature attribution weights without instance values or actionable paths for recourse.\",\n    \"audit_usefulness\": \"It gives an auditor directional weights for top features, but the lack of actual feature values for one-hot encoded variables limits deep inspection.\",\n    \"clarity\": \"The explanation is presented as an unformatted string of one-hot encoded feature names and numerical weights, making it difficult for non-experts to interpret.\",\n    \"completeness\": \"While ten local factors are provided, omitting the actual feature values and prediction baseline leaves the local context incomplete.\",\n    \"concision\": \"The explanation is compact and avoids conversational filler, delivering feature attribution scores directly.\",\n    \"overall_quality\": \"It is a minimally processed raw attribution list that offers basic audit signals but suffers from poor accessibility and missing instance values.\",\n    \"semantic_plausibility\": \"The directions of the weights generally align with domain expectations on the Adult dataset, such as age contributing positively and lower-wage occupations contributing negatively.\",\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:42.132102+00:00"
+}

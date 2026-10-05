@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_cd6abd1a9433542b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_6df6d8d836b8b7be",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_cd6abd1a9433542b_9b8255f90651c8a0.txt",
+  "prompt_version": "9b8255f90651c8a0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165389-eM3bIOKTRL06x3HzRTEl",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 504,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00297075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002268,
+        "upstream_inference_cost": 0.00297075,
+        "upstream_inference_prompt_cost": 0.00070275
+      },
+      "is_byok": false,
+      "prompt_tokens": 937,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1441
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_cd6abd1a9433542b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for changing the prediction. It lists features and weights, but not how the user could practically alter them or whether they are modifiable.\",\n    \"audit_usefulness\": \"It offers some local feature importance information, which can help an auditor see which variables were considered. However, the output is too sparse and many features are zeroed out, so it does not support a deep inspection of model behavior or error sources.\",\n    \"clarity\": \"The list format is easy to scan, but the meaning of the values is not clearly explained for a non-expert. Terms like 'DICE top local factors' and the significance of the 1.0000 and 0.4000 values are not intuitive without prior knowledge.\",\n    \"completeness\": \"The explanation names only two non-zero factors and then a series of zeros, which is not enough to understand the specific prediction well. It lacks directionality, baseline comparison, and a fuller set of locally relevant drivers.\",\n    \"concision\": \"The output is short and contains little redundancy, so it is compact. However, much of the space is spent on zero-valued features that add little information.\",\n    \"overall_quality\": \"This is a minimally informative local explanation: readable and compact, but not especially useful for decision understanding, recourse, or auditing. Its main weakness is that it does not explain how the listed factors relate to the predicted class.\",\n    \"semantic_plausibility\": \"The cited features are plausible for the Adult dataset, and occupation and native-country can reasonably appear among local factors. Still, the dominance of 'native-country_Ireland' with a value of 1.0000 is somewhat opaque and the many zero-valued entries limit confidence in the explanation's semantic relevance.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:32.123950+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_f567ef56c34dada8",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_a40d34aa8c0c3eb7",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_f567ef56c34dada8_23e8ed64d0bd26d5.txt",
+  "prompt_version": "23e8ed64d0bd26d5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165345-skr0rInPkHyNvbEEqiCr",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003477,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002375,
+        "upstream_inference_cost": 0.003477,
+        "upstream_inference_prompt_cost": 0.001102
+      },
+      "is_byok": false,
+      "prompt_tokens": 1102,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1577
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_f567ef56c34dada8\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies key decision factors but provides no guidance on how to change the prediction or what actions a user could take to improve their credit decision outcome.\",\n    \"audit_usefulness\": \"The normalized anchor weights (1.0 vs 0.0) clearly show which features drove the prediction, enabling auditors to inspect model reliance patterns and detect potential bias in age, checking status, or credit history weighting.\",\n    \"clarity\": \"The format is technical and requires familiarity with anchor notation and credit domain terminology; a non-expert would struggle to interpret the feature names and normalized weights without additional context.\",\n    \"completeness\": \"Four key anchors are identified with high weight (age, checking_status, credit_history, payment_plans), but the explanation lacks instance-specific values, thresholds, or reasoning for why these factors matter for this particular prediction.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their normalized importance weights in a structured format.\",\n    \"overall_quality\": \"The explanation provides useful audit-level insight into model decision logic but lacks clarity for end-users, actionable guidance, and contextual detail about the specific instance, limiting its practical utility.\",\n    \"semantic_plausibility\": \"The identified factors (age, checking account status, credit history, payment plans) are plausible and domain-consistent predictors of credit risk in German credit assessment, aligning with standard lending practices.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 2,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:49.600862+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c697ae24ec5760fd",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_7b24d518e312aa7d",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_c697ae24ec5760fd_414589ea2057298f.txt",
+  "prompt_version": "414589ea2057298f",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165325-56qYHmmRClsTGDzy4FSM",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 475,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003485,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002375,
+        "upstream_inference_cost": 0.003485,
+        "upstream_inference_prompt_cost": 0.00111
+      },
+      "is_byok": false,
+      "prompt_tokens": 1110,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1585
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c697ae24ec5760fd\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature contributions but provides no guidance on what actions could be taken to change the prediction or improve creditworthiness. No specific, feasible recourse steps are suggested.\",\n    \"audit_usefulness\": \"SHAP values with directional impacts (positive/negative) enable auditors to inspect model behavior and identify which features drive the denial prediction. This supports bias investigation and model logic verification.\",\n    \"clarity\": \"The format is concise and uses standard SHAP notation, but requires familiarity with SHAP values and feature names to interpret; a non-expert would struggle without domain context.\",\n    \"completeness\": \"The top 10 features are presented with their SHAP contributions, covering the main local drivers of the prediction. However, the base value and prediction confidence are absent, limiting full decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting only essential information (feature names and SHAP values) in a structured format without padding.\",\n    \"overall_quality\": \"The explanation is technically sound and useful for model auditing, but lacks clarity for non-experts and provides no actionable guidance. It serves a narrow technical audience well but falls short of broader usability.\",\n    \"semantic_plausibility\": \"The identified factors (no checking account, short employment, renting, education purpose) are plausible drivers of credit denial in the German credit domain, aligning with typical lending risk assessment logic.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:29.751791+00:00"
+}

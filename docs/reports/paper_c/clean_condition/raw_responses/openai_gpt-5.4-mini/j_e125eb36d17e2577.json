@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_6ce495f3482aecc1",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_e125eb36d17e2577",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_6ce495f3482aecc1_108311cfb5d39f1a.txt",
+  "prompt_version": "108311cfb5d39f1a",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165421-RbravfI7IYRtEXbniVwX",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 481,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.002871,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0021645,
+        "upstream_inference_cost": 0.002871,
+        "upstream_inference_prompt_cost": 0.0007065
+      },
+      "is_byok": false,
+      "prompt_tokens": 942,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1423
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_6ce495f3482aecc1\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not give any concrete recourse or next steps, only a list of feature values. A user cannot tell what to change or verify to affect the prediction.\",\n    \"audit_usefulness\": \"It identifies a few local features, but the 0/1 style output is too opaque to inspect how the XGBoost model reached the prediction. There is no indication of directionality, strength, or whether these conditions support class 0 or 1.\",\n    \"clarity\": \"The wording is short and readable, but the meaning of the feature values is unclear because '1.0000' and '0.0000' are not explained. A non-expert would not understand why these are called top local factors.\",\n    \"completeness\": \"It names several attributes, including the two most prominent ones, but it does not explain their impact on the prediction or provide enough local context to understand why the model predicted class 0. Key decision logic is missing.\",\n    \"concision\": \"The explanation is compact and contains little extraneous text, but much of the space is spent listing many zero-valued features. It is concise, though not maximally informative per word.\",\n    \"overall_quality\": \"Overall, this is a weak explanation: it is short and somewhat readable, but it lacks causal interpretation, direction of influence, and practical decision support. It is better viewed as a sparse feature listing than a useful local explanation.\",\n    \"semantic_plausibility\": \"The highlighted breast cancer features are plausible and consistent with the dataset domain, especially texture and concave points. However, the presentation of many zero-valued factors as top local factors is not very semantically meaningful.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 3,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:04.839632+00:00"
+}

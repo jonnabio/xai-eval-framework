@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_dc46675654a709a2",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_c19291a8975b4df4",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_dc46675654a709a2_75be590f15bdad49.txt",
+  "prompt_version": "75be590f15bdad49",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165411-6vYhd9vC7D82fMnEd0Pa",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 541,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003802,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002705,
+        "upstream_inference_cost": 0.003802,
+        "upstream_inference_prompt_cost": 0.001097
+      },
+      "is_byok": false,
+      "prompt_tokens": 1097,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1638
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_dc46675654a709a2\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies two anchor features (education-num and marital-status) but provides no guidance on how to interpret them or what actions could be taken to change the prediction. No recourse suggestions or decision review steps are offered.\",\n    \"audit_usefulness\": \"The explanation shows which features anchor the prediction and their importance weights, enabling an auditor to inspect model sensitivity to education and marital status. However, the lack of confidence scores and limited context reduces its utility for comprehensive bias investigation.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized weights, but non-expert readers may struggle to interpret what education-num values mean or why marital-status_Never-married is binary-weighted. The presentation assumes familiarity with the adult dataset encoding.\",\n    \"completeness\": \"The explanation identifies the two most important local drivers (education and marital status) but omits confidence intervals, prediction probability, or threshold information that would fully contextualize the decision. The zero-weights on other features suggest they were irrelevant, but this is not explicitly stated.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and weights. However, the inclusion of many zero-weighted features adds minimal information value and could be condensed further.\",\n    \"overall_quality\": \"The explanation provides basic local feature importance but lacks depth in interpretation, actionability, and confidence quantification. It serves a narrow audit purpose but falls short of supporting broader decision-making or recourse needs.\",\n    \"semantic_plausibility\": \"The identification of education and marital status as key predictors of income (the adult dataset target) is highly plausible and consistent with domain knowledge. The zero-weighting of capital gains/losses for this instance is also reasonable.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 3,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:56.381199+00:00"
+}

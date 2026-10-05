@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_651e27fdf46656c5",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_abd63b7a37b8a08b",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_651e27fdf46656c5_93efd6d95391c17d.txt",
+  "prompt_version": "93efd6d95391c17d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165346-PReUAouE7t9S1YLB04HY",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 485,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003526,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002425,
+        "upstream_inference_cost": 0.003526,
+        "upstream_inference_prompt_cost": 0.001101
+      },
+      "is_byok": false,
+      "prompt_tokens": 1101,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1586
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_651e27fdf46656c5\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies three key anchor features but provides no guidance on how to modify them or what actions a user could take to change the prediction outcome. No recourse pathways or decision review steps are suggested.\",\n    \"audit_usefulness\": \"The explanation clearly shows which features anchored the prediction (duration, checking_status, property_magnitude) and which did not, enabling an auditor to inspect model decision logic and identify potential bias patterns in credit decisions.\",\n    \"clarity\": \"The format is straightforward with feature names and normalized importance scores, though non-experts may struggle with feature names like 'checking_status_no checking' and the meaning of 1.0 vs 0.0 anchor weights without additional context.\",\n    \"completeness\": \"The explanation identifies the three most influential features but lacks information about their actual values for this instance, threshold ranges, or how they interact, limiting full understanding of the local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, presenting features and scores efficiently without unnecessary elaboration or padding.\",\n    \"overall_quality\": \"The explanation provides useful audit-level insight into model behavior through anchor identification, but lacks actionability, instance-specific values, and clarity for non-expert users, resulting in a moderately useful but incomplete explanation.\",\n    \"semantic_plausibility\": \"The identified anchors (loan duration, checking account status, property ownership) are plausible credit risk factors in lending decisions and align with domain expectations for credit approval models.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 3,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:55:51.049331+00:00"
+}

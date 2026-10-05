@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_0da6a71373977fce",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_ae3070c1c2083e5f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_0da6a71373977fce_7aa3bb4c481fd37b.txt",
+  "prompt_version": "7aa3bb4c481fd37b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165521-V0rpoyFZCuCHyY4Iis7F",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 467,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00343,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002335,
+        "upstream_inference_cost": 0.00343,
+        "upstream_inference_prompt_cost": 0.001095
+      },
+      "is_byok": false,
+      "prompt_tokens": 1095,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1562
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_0da6a71373977fce\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation identifies native-country_South as the sole driver but provides no guidance on feasible recourse actions or decision review steps; a user cannot act on this information.\",\n    \"audit_usefulness\": \"While the explanation isolates one feature as important, the overwhelming number of zero-weighted features and lack of context about the model's decision boundary limits diagnostic value for investigating bias or model errors.\",\n    \"clarity\": \"The format is straightforward and uses standard feature naming, but the meaning of the normalized weights and why only one feature matters is not explained for a non-expert reader.\",\n    \"completeness\": \"The explanation is severely incomplete, showing only that native-country_South has weight 1.0 while all other features have weight 0.0, without explaining the instance's actual feature values or the decision threshold.\",\n    \"concision\": \"The explanation is concise in length but padded with many zero-weight features that add no information; a more compact summary would be more efficient.\",\n    \"overall_quality\": \"The explanation fails to provide meaningful insight into the prediction, offering only a sparse weight vector without context, interpretation, or actionable guidance.\",\n    \"semantic_plausibility\": \"It is plausible that country of origin could influence income prediction, but the complete absence of all other features (age, education, hours-per-week) as factors is implausible given domain knowledge of income determinants.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 2,\n    \"clarity\": 2,\n    \"completeness\": 1,\n    \"concision\": 2,\n    \"overall_quality\": 1,\n    \"semantic_plausibility\": 2\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:46.029100+00:00"
+}

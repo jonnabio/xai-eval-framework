@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_778dd7d6e1653158",
+  "dry_run": false,
+  "judge_model": "google/gemini-3.8-flash",
+  "judgment_id": "j_f7155b5e26e6d585",
+  "model_version": "google/gemini-3.8-flash",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_778dd7d6e1653158_243fe4e40f36778d.txt",
+  "prompt_version": "243fe4e40f36778d",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165445-cXwtwx1kyN85NnVijRO1",
+    "requested_model": "google/gemini-3.8-flash",
+    "served_model": "google/gemini-3.8-flash",
+    "usage": {
+      "completion_tokens": 939,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 551,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00432075,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00352125,
+        "upstream_inference_cost": 0.00432075,
+        "upstream_inference_prompt_cost": 0.0007995
+      },
+      "is_byok": false,
+      "prompt_tokens": 1066,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 2005
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_778dd7d6e1653158\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation only lists raw attribution values without providing counterfactuals, guidance, or feasible steps for recourse.\",\n    \"audit_usefulness\": \"It provides precise numerical SHAP contributions for the top features, which aids model inspection, though omitting the actual feature values somewhat limits audit depth.\",\n    \"clarity\": \"The raw string of one-hot encoded feature names paired with floating-point values requires technical knowledge of machine learning and SHAP to interpret.\",\n    \"completeness\": \"The top ten drivers and their directional impact are shown, though the absence of baseline probability and input feature values leaves the local context incomplete.\",\n    \"concision\": \"The explanation is highly compact and presents the top contributing features without any conversational padding.\",\n    \"overall_quality\": \"While useful as a compact technical summary for data scientists, its lack of feature values, plain-language translation, and recourse limits its overall utility.\",\n    \"semantic_plausibility\": \"The negative contributions pushing toward the <=50K prediction align generally with standard domain patterns in the Adult dataset.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 2,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 3\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:57:32.925871+00:00"
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_c3a6d29157145c8e",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_f72846df5cf65a5f",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_c3a6d29157145c8e_4e614ca2d13f88f5.txt",
+  "prompt_version": "4e614ca2d13f88f5",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165365-3yLBNLs6HaE1PvCwYOeT",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 556,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003871,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.00278,
+        "upstream_inference_cost": 0.003871,
+        "upstream_inference_prompt_cost": 0.001091
+      },
+      "is_byok": false,
+      "prompt_tokens": 1091,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1647
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_c3a6d29157145c8e\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions a clinician or patient could take based on these measurements or the prediction itself. No recourse or decision-support pathway is offered.\",\n    \"audit_usefulness\": \"The explanation effectively shows which features drove the prediction and their relative SHAP contributions, enabling an auditor to inspect model behavior and identify potential biases in feature reliance. However, it lacks information about feature values or thresholds that would deepen bias investigation.\",\n    \"clarity\": \"The explanation is presented as a simple ranked list of feature names with numerical scores, which is straightforward and requires minimal domain knowledge to parse. However, the meaning of SHAP values and their interpretation may not be immediately obvious to non-technical readers.\",\n    \"completeness\": \"The explanation covers the top 10 contributing features with their SHAP values, which captures the main local drivers of the prediction. However, it does not include the actual feature values for this instance, baseline predictions, or the direction of influence (positive/negative contribution).\",\n    \"concision\": \"The explanation is compact and efficiently formatted as a ranked list without redundancy. Each entry conveys feature name and contribution score with minimal overhead, making good use of available tokens.\",\n    \"semantic_plausibility\": \"The identified features (worst area, perimeter, radius, concave points, texture) are well-established morphological characteristics used in breast cancer diagnosis and are plausible drivers of a malignancy prediction. The ranking and relative magnitudes align with domain expectations.\",\n    \"overall_quality\": \"The explanation provides a clear, concise, and plausible ranking of feature contributions suitable for model auditing, but lacks actionability, feature values, and directional context that would make it more complete and useful for clinical decision-making or detailed error investigation.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 5\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:11.340316+00:00"
+}

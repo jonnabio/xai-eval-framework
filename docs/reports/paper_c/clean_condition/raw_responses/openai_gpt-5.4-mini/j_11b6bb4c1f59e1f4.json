@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_7ee17e1b81806239",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_11b6bb4c1f59e1f4",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_7ee17e1b81806239_19fef100a307afd0.txt",
+  "prompt_version": "19fef100a307afd0",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165410-uN9zemHuIGykXDm8PJIF",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 495,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00294375,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022275,
+        "upstream_inference_cost": 0.00294375,
+        "upstream_inference_prompt_cost": 0.00071625
+      },
+      "is_byok": false,
+      "prompt_tokens": 955,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1450
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_7ee17e1b81806239\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation does not provide any concrete recourse or next steps for the person affected. It only lists local feature contributions without indicating what could be changed to alter the prediction.\",\n    \"audit_usefulness\": \"It gives a useful local ranking of features and their signed contributions, which helps inspect which variables influenced the logreg model output. However, the magnitudes are very small and there is no baseline, predicted probability, or comparison context, limiting deeper audit value.\",\n    \"clarity\": \"The output is short and uses a simple top-factor format that is easy to scan. A non-expert can understand that positive and negative values indicate influence, though the meaning of the encoded feature names may still be opaque.\",\n    \"completeness\": \"It identifies several local drivers of the prediction, but it omits the intercept, class score, and the direction of the final class decision beyond the label 0. The tiny coefficient values also make it hard to understand how strongly the instance is actually distinguished.\",\n    \"concision\": \"The explanation is compact and contains only the most relevant local factors. It avoids long prose and redundancy while still listing enough information to be minimally useful.\",\n    \"overall_quality\": \"This is a decent but limited LIME explanation: readable and locally informative, yet sparse on context and not very actionable. Its main strength is a concise feature ranking, but its diagnostic value is reduced by minimal effect sizes and lack of probability information.\",\n    \"semantic_plausibility\": \"The listed Adult dataset features such as education, capital-gain, marital status, occupation, relationship, and sex are domain-consistent and plausible drivers of an income-related classifier. The signs of the contributions are also plausible, though the extremely small magnitudes suggest the explanation is weakly differentiated.\"\n  },\n  \"scores\": {\n    \"actionability\": 1,\n    \"audit_usefulness\": 3,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 5,\n    \"overall_quality\": 3,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:52.820207+00:00"
+}

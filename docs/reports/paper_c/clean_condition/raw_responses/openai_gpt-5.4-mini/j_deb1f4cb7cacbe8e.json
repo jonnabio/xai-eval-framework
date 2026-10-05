@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_4440b587017f192b",
+  "dry_run": false,
+  "judge_model": "openai/gpt-5.4-mini",
+  "judgment_id": "j_deb1f4cb7cacbe8e",
+  "model_version": "openai/gpt-5.4-mini",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_4440b587017f192b_45fa0279d318239b.txt",
+  "prompt_version": "45fa0279d318239b",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165361-TrN1L7UfMjucWBUXsgfn",
+    "requested_model": "openai/gpt-5.4-mini",
+    "served_model": "openai/gpt-5.4-mini",
+    "usage": {
+      "completion_tokens": 491,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.00292125,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.0022095,
+        "upstream_inference_cost": 0.00292125,
+        "upstream_inference_prompt_cost": 0.00071175
+      },
+      "is_byok": false,
+      "prompt_tokens": 949,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1440
+    }
+  },
+  "response_text": "{\n  \"case_id\": \"exp4_4440b587017f192b\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists features that influenced the prediction, but it does not translate them into concrete recourse steps or tell the user what changes might alter the outcome. A person can infer general levers like credit amount or checking status, but no specific next action is provided.\",\n    \"audit_usefulness\": \"This is useful for auditing because it exposes the main local SHAP contributors and their directions, which helps inspect whether the model relied on sensible factors. However, it lacks magnitudes in the original feature space, baseline context, and information about how these factors combine.\",\n    \"clarity\": \"The format is straightforward and the feature-attribution list is easy to scan. Some entries may be opaque to non-experts, but the overall structure is understandable without specialized ML knowledge.\",\n    \"completeness\": \"It captures several key local drivers of the prediction, including residence duration, credit amount, duration, and checking status. Still, it does not explain the base value, total SHAP sum, or whether the listed signs are enough to justify the final class with confidence.\",\n    \"concision\": \"The explanation is compact and contains mostly high-value information with little redundancy. It is not fully maximally informative because it omits the model output scale and summary context, but the wording itself is efficient.\",\n    \"overall_quality\": \"Overall, this is a solid local explanation with clear feature attributions and reasonable interpretability. It is limited mainly by the lack of recourse guidance and missing contextual details needed for a fuller decision review.\",\n    \"semantic_plausibility\": \"The listed factors are plausible for German credit risk, and the directions of influence look broadly consistent with common expectations in this domain. Nothing appears contradictory or obviously nonsensical for a binary credit model.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 4,\n    \"clarity\": 4,\n    \"completeness\": 3,\n    \"concision\": 4,\n    \"overall_quality\": 4,\n    \"semantic_plausibility\": 4\n  }\n}",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:56:04.375101+00:00"
+}

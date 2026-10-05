@@ -1,0 +1,52 @@
+{
+  "case_id": "exp4_d372ea8e16367348",
+  "dry_run": false,
+  "judge_model": "anthropic/claude-haiku-4.5",
+  "judgment_id": "j_4f307b5c6b914131",
+  "model_version": "anthropic/claude-haiku-4.5",
+  "prompt_condition": "clean_no_metrics",
+  "prompt_path": "docs\\reports\\paper_c\\clean_condition\\prompts\\exp4_d372ea8e16367348_529c2649ca06bb00.txt",
+  "prompt_version": "529c2649ca06bb00",
+  "provider": "openrouter",
+  "replicate": 1,
+  "response_meta": {
+    "attempt": 1,
+    "finish_reason": "stop",
+    "generation_id": "gen-1791165487-fqFxc00ApiZqpckJ3uQf",
+    "requested_model": "anthropic/claude-haiku-4.5",
+    "served_model": "anthropic/claude-haiku-4.5",
+    "usage": {
+      "completion_tokens": 453,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": null,
+        "audio_tokens": 0,
+        "image_tokens": 0,
+        "reasoning_tokens": 0,
+        "rejected_prediction_tokens": null,
+        "text_tokens": null
+      },
+      "cost": 0.003355,
+      "cost_details": {
+        "upstream_inference_completions_cost": 0.002265,
+        "upstream_inference_cost": 0.003355,
+        "upstream_inference_prompt_cost": 0.00109
+      },
+      "is_byok": false,
+      "prompt_tokens": 1090,
+      "prompt_tokens_details": {
+        "audio_tokens": 0,
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "image_tokens": null,
+        "text_tokens": null,
+        "video_tokens": 0
+      },
+      "total_tokens": 1543
+    }
+  },
+  "response_text": "```json\n{\n  \"case_id\": \"exp4_d372ea8e16367348\",\n  \"flags\": {\n    \"format_problem\": false,\n    \"insufficient_context\": false,\n    \"safety_or_policy_issue\": false\n  },\n  \"rationales\": {\n    \"actionability\": \"The explanation lists feature importance scores but provides no guidance on what actions could be taken, what thresholds matter, or how to modify inputs to change the prediction.\",\n    \"audit_usefulness\": \"The normalized scores (1.0 vs 0.0) are useful for identifying which features anchored the decision, but lack actual feature values, decision boundaries, or sufficient detail to investigate potential model biases or errors.\",\n    \"clarity\": \"The format is straightforward and uses domain-specific feature names clearly, making it understandable to readers familiar with breast cancer datasets without requiring deep technical knowledge.\",\n    \"completeness\": \"The explanation identifies three key anchoring features but omits the actual feature values for the instance, decision thresholds, and confidence metrics needed for full local decision context.\",\n    \"concision\": \"The explanation is compact and avoids redundancy, efficiently listing features and their normalized importance scores without unnecessary elaboration.\",\n    \"overall_quality\": \"While the explanation clearly identifies anchoring features, it lacks actionable insights, instance-specific values, and sufficient audit detail to be truly useful for decision review or model inspection.\",\n    \"semantic_plausibility\": \"The three anchoring features (fractal dimension, smoothness, concave points) are all established morphological indicators in breast cancer diagnosis, making the selection plausible and consistent with domain knowledge.\"\n  },\n  \"scores\": {\n    \"actionability\": 2,\n    \"audit_usefulness\": 2,\n    \"clarity\": 4,\n    \"completeness\": 2,\n    \"concision\": 4,\n    \"overall_quality\": 2,\n    \"semantic_plausibility\": 4\n  }\n}\n```",
+  "retry_count": 0,
+  "rubric_version": "RUBRIC_V1_REBUILT_2026_09",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-10-05T01:58:11.606155+00:00"
+}
