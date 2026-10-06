@@ -52,8 +52,12 @@ def load(runs: Path) -> pd.DataFrame:
     rows = []
     for path in sorted(runs.glob("*/*/seed_*/*.jsonl")):
         for line in path.read_text(encoding="utf-8").splitlines():
-            if line.strip():
+            if not line.strip():
+                continue
+            try:
                 rows.append(json.loads(line))
+            except ValueError:
+                continue  # a line cut when a job was stopped; the job wrote the instance again
     df = pd.DataFrame(rows)
     df = df.drop_duplicates(["dataset", "model", "seed", "explainer", "instance"], keep="first")
     return df.drop(columns=[c for c in ("top",) if c in df.columns])

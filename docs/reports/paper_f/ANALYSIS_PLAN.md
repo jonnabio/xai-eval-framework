@@ -88,6 +88,10 @@ before the run. No setting is tuned per dataset.
 
 - Seeds: 42, 123, 456, 789, 101112. A seed fixes the split, the model and the explainer's
   sampling.
+- The run is made in five parts, one per seed, in the order above (author, 2026-10-05).
+  If time runs short, the study is reported with the complete seeds only, and with no
+  fewer than three; a seed that is not complete for all 256 conditions is left out whole.
+  The paper states how many seeds were run and why.
 - Instances: 200 from the test split per dataset, model and seed, stratified by predicted
   class; all test instances if there are fewer than 200. The four explainers explain the
   same instances.
@@ -251,3 +255,4 @@ pairs of datasets; the test of the dataset main effect; the three-tier synthesis
 | 2026-10-05 | 2.4 | Noted for the paper: KernelSHAP with its default settings returns at most 10 non-zero attributions, TreeSHAP returns one for every feature. Both are "SHAP with one configuration"; the sparsity and stability of SHAP therefore depend on the model family | Observed in the pilot; a property of the library defaults, left as planned |
 | 2026-10-05 | 7 (step 5) | Cost estimate from the pilot: 800 to 1,060 processor hours, about four to five and a half days with 8 jobs at once on the author's laptop (the earlier estimate from EXP2 run times was 585). The run was started on 2026-10-05 with 8 jobs at once, not the default of 10, because about 5 GB of memory was free | Pilot timings on this machine |
 | 2026-10-05 | 2.1 | Before `datasets.csv` was committed, the runner was tried on 3 instances of German Credit with two models (8 short jobs) to find programming errors. The outputs were written to a temporary folder outside the repository and are not used | Disclosure; the plan says the list is committed before any explanation is computed |
+| 2026-10-05 | 2.5, 7 | The run is made in five parts, one per seed (42, 123, 456, 789, 101112). The first, shuffled launch was stopped after 10 of 1,280 jobs and its finished jobs are kept. Between parts only completeness, failures and timing are looked at; the analysis is run once, on all the seeds reported. Fallback: with too little time, the complete seeds are reported, at least three; an incomplete seed is left out whole | Author decision, taken before any result of the run was seen. A seed is a full copy of the design, so any number of complete seeds is balanced |

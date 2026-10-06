@@ -42,8 +42,8 @@
 
 \twocolumn[
 \begin{flushleft}
-{\Large\bfseries Comparative analysis of four explanation methods across
-<<sum:datasets:value:w>> tabular datasets: do benchmark rankings generalise?\par}
+%% Title chosen by the author on 2026-10-05; not changed without the author's approval.
+{\Large\bfseries How Dataset-Dependent Are Tabular Explainability Benchmarks?\par}
 \medskip
 \iffull
 Jonathan Herrera-V\'asquez\textsuperscript{*}\par
@@ -86,32 +86,49 @@ A model that decides on credit, hiring or medical risk is often too complex to b
 directly, and post-hoc explanation methods are used to say which inputs drove a
 prediction. LIME fits a local linear model around the instance~\cite{ribeiro2016why},
 SHAP distributes the prediction among the features with Shapley
-values~\cite{lundberg2017unified,lundberg2020local}, Anchors returns a rule that keeps the
+values~\cite{lundberg2017unified}, Anchors returns a rule that keeps the
 prediction with high probability~\cite{ribeiro2018anchors}, and DiCE returns
-counterfactual instances that change it~\cite{mothilal2020dice}. A practitioner has to
-choose among them, and comparative studies are the usual guide.
+counterfactual instances that change it~\cite{mothilal2020dice}. Surveys of the field
+describe these methods and list the evaluation of explanations among its open
+problems~\cite{longo2024manifesto,mersha2024survey}, also for tabular
+data~\cite{obrienquinn2024tabular,santana2026tabular}. A practitioner has to choose
+among the methods, and comparative studies are the usual guide.
 
 \subsection{Related work}
 
-There is no single accepted measure of the quality of an
-explanation~\cite{doshivelez2017rigorous}. A systematic review groups the proposed
-measures into twelve properties, among them correctness, consistency and
-compactness~\cite{nauta2023anecdotal}. Faithfulness is commonly measured by removing the
-features an explanation names and observing the
-prediction~\cite{hooker2019benchmark,jacovi2020faithfulness}, and robustness by
-explaining slightly perturbed inputs~\cite{alvarezmelis2018robustness}. Different methods
-often name different features for the same prediction~\cite{krishna2024disagreement}, and
-it has been argued that no method can be the best in every
-neighbourhood~\cite{han2022which}. A recent comparison in this journal examined three
-methods on different types of data~\cite{kuszewska2026comparative}.
+There is no single accepted measure of the quality of an explanation. A study of the
+evaluation of local post-hoc methods on tabular data derives 20 criteria with guidelines
+for each~\cite{velmurugan2025guidelines}; an examination of the many proposed metrics
+finds duplication and calls for standard frameworks~\cite{pawlicki2024metrics}; and new
+measures, benchmarks and metric studies continue to
+appear~\cite{bello2025strength,sithakoul2024beexai,pereira2026local}. Where a ground
+truth for the explanation can be built, methods differ clearly in
+fidelity~\cite{mironicolau2024fidelity}.
+
+The methods compared here have known weaknesses. SHAP and LIME depend strongly on the
+model and on collinear features~\cite{salih2024perspective}, they can assign importance
+to features that a model with known rules does not use~\cite{hooshyar2024problems}, and
+Shapley values have been criticised as a basis for
+explanations~\cite{huang2024failings}. Different methods can explain the same
+prediction differently, and measures of their agreement have been
+proposed~\cite{parashar2026agreement,gao2026uncertainty}. Rule-based and counterfactual
+explanations for tabular data are active lines of
+work~\cite{tekin2026fuzzy,redelmeier2024mcce}. Applied studies compare the methods on
+one task: three methods on five datasets of different types in this
+journal~\cite{kuszewska2026comparative}, four importance measures on one medical
+dataset~\cite{biesaga2026comparison}, and LIME and SHAP on the prediction of software
+issues~\cite{schulte2024studying}.
 
 A comparison made on one dataset leaves a question open: would the order of the methods
-be the same on another? For classifiers this question has a standard answer. When
-algorithms are compared, the datasets are the sample, and the conclusion is only as
-general as that sample~\cite{demsar2006statistical}. Comparisons of explanation methods
-seldom follow this practice. The census income data known as
-Adult~\cite{becker1996adult} is a frequent single benchmark, and a framework for
-measuring explanation quality was itself first validated on it~\cite{herrera2026framework}.
+be the same on another? For attribution maps of images the answer was negative: metric
+results on one dataset did not necessarily hold on
+others~\cite{gevaert2024evaluating}. A recent benchmark of tabular classifiers
+curates a representative collection of datasets~\cite{erickson2025tabarena}, and
+tabular data are heterogeneous in feature types, cardinality and
+sparsity~\cite{somvanshi2026survey}. Comparisons of explanation methods on tabular data
+seldom use many datasets. The census income data known as Adult is a frequent
+single benchmark, and a framework for measuring explanation quality was itself first
+validated on it~\cite{herrera2026framework}.
 
 \subsection{Purpose and hypothesis}
 
@@ -154,8 +171,8 @@ testing, stratified by class.
 \subsection{Classifiers and explanation methods}
 
 Four classifiers are trained on every dataset with one configuration for all: logistic
-regression, a random forest~\cite{breiman2001random} of 100 trees,
-XGBoost~\cite{chen2016xgboost} with 100 trees of depth 4, and a multilayer perceptron
+regression, a random forest of 100 trees,
+XGBoost with 100 trees of depth 4, and a multilayer perceptron
 with one hidden layer of 100 units.
 
 The four explanation methods are also used with one configuration for all datasets and
@@ -181,7 +198,7 @@ Four measures are defined for all four methods and are used to rank them.
 \textit{Faithfulness gap}: the absolute change of the predicted probability when the
 features named by the explanation, up to the top 20\% of all features, are replaced by
 their training mean or mode; higher is better. \textit{Stability}: the mean Jaccard
-index~\cite{jaccard1912distribution} between the five top features of the explanation and
+index between the five top features of the explanation and
 those of the explanations of 10 perturbed copies of the instance, where numeric features
 receive Gaussian noise of 0.05 standard deviations; higher is better. \textit{Sparsity}:
 the share of features the explanation does not use; higher is better. \textit{Cost}: the
@@ -195,9 +212,9 @@ averaged over instances, seeds and classifiers, and the four methods are ranked.
 agreement between datasets is the mean Spearman correlation between the rankings of all
 pairs of datasets, which is Kendall's coefficient of concordance corrected for the number
 of datasets. It is reported with a 95\% percentile bootstrap
-interval~\cite{efron1993introduction} over datasets (10,000 resamples) and tested against
+interval over datasets (10,000 resamples) and tested against
 unrelated rankings with a permutation test (100,000 permutations of the ranks inside each
-dataset), with the Holm correction~\cite{holm1979simple} over the four measures. The same
+dataset), with the Holm correction over the four measures. The same
 correlation between the five seeds inside a dataset gives a ceiling: agreement between
 datasets cannot be expected to exceed agreement between two runs on the same dataset.
 
@@ -258,7 +275,10 @@ write the analysis code, edit the English text and format the references. The re
 question, the plan, the design and the interpretation are the author's. The author
 reviewed all content and takes full responsibility for it.
 
+%% Author's rule (2026-10-05) and the journal's template: every reference prints its DOI
+%% as an active URL. The style writes \href{https://doi.org/...}{doi:...}; print the URL.
+{\renewcommand{\href}[2]{\url{#1}}
 \bibliographystyle{elsarticle-num}
-\bibliography{references}
+\bibliography{references}}
 
 \end{document}

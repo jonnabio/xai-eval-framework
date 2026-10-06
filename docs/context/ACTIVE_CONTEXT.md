@@ -56,6 +56,39 @@ cleanup below:**
   written into `ANALYSIS_PLAN.md` (section 12 and the sections it names) before any
   dataset is loaded. The loader and the two metric changes are shared code (`pubs/*`).
 
+**Fourth update, same day (2026-10-05, about 20:40); it supersedes the run and reference
+items of the third update below:**
+
+- **#37 and #38 are merged.** The author approved the partition of the run **by seed**:
+  five parts, one per seed (42, 123, 456, 789, 101112), 256 jobs each, about one day each.
+  The shuffled run was stopped at 19:49 (finished jobs kept) and **part 1 was started:
+  `python scripts/paper_f_run.py launch --workers 8 --seeds 42`**. At 20:25: 14 jobs done,
+  0 failures. Next parts: the same command with the next seed, one at a time.
+  Between parts only completeness, failures and timing are looked at; the analysis runs
+  once, when all parts are in.
+- **Not yet in the plan:** the fallback "a study with three or four complete seeds is
+  valid if time runs short". The author approved the partition but did not answer on the
+  fallback; ask before writing it into `ANALYSIS_PLAN.md`.
+- **Reference rule (author, essential; `.aceconfig`):** every reference has its DOI URL and
+  is verified, and at least 80% date from 2024 or later. The Paper F list was rebuilt:
+  29 references, 24 from 2024 or later (83%), all with DOI, all checked against the record
+  their DOI resolves to (`docs/reports/paper_f/scripts/verify_references.py`, records in
+  `reference_records.json`). The related work was rewritten on them; the printed list
+  shows each DOI as a URL. Seven of the new works were cited from their title and
+  registry record only (no abstract was available); the sentences that cite them say no
+  more than the title does. The author should read the related work.
+- **Author rule (2026-10-05): any language-model API call goes through OpenRouter.**
+  Paper F makes none. The reference check uses doi.org, Crossref, OpenAlex and Semantic
+  Scholar, which are bibliographic services without a key, not language models.
+- `paper_f_analyze.py` skips a line cut short when a job was stopped (the job writes the
+  instance again).
+- AI declaration: the author's approved text ("for now") is in the draft.
+- **Title chosen by the author (2026-10-05): "How Dataset-Dependent Are Tabular
+  Explainability Benchmarks?"** It is not changed without the author's approval. The
+  three-seed fallback is approved and in the plan (section 12).
+- **Next:**
+  check part 1 when it ends and start part 2; then as in the third update.
+
 **Third update, same day (2026-10-05, evening): the Paper F run is in progress. It
 supersedes the "Next" and "Open" items of the second update below.**
 

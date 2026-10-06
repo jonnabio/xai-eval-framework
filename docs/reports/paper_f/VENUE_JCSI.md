@@ -117,7 +117,7 @@ they agree with the journal's own instructions.
 
 | Aspect | Decision for the manuscript |
 |---|---|
-| Title | A comparison, in the journal's usual form. Working title: *Comparative analysis of four explanation methods across sixteen tabular datasets: do benchmark rankings generalise?* The author decides the final title. |
+| Title | Chosen by the author on 2026-10-05: *How Dataset-Dependent Are Tabular Explainability Benchmarks?* It does not name a comparison, as the faster articles of the journal more often do; the author preferred a short research question, and that association was weak. |
 | Length | 7 to 8 pages in the template; measured in Word |
 | Hypothesis | One, stated at the end of the Introduction (analysis plan, section 6) |
 | Structure | The four sections of the journal, with these names |
