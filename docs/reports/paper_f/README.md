@@ -1,6 +1,6 @@
 # Paper F — External Validity of XAI Benchmark Conclusions
 
-**Working Title:** *To What Extent Do Comparative Conclusions About Model-Agnostic Explanation Methods Generalize Across Tabular Datasets?*  
+**Title (chosen by the author, 2026-10-05):** *How Dataset-Dependent Are Tabular Explainability Benchmarks?*  
 **Status (2026-10-03):** Analytical framework initiated. Pre-analysis framework and methodological appraisal established prior to dataset commitment or experimental execution. No empirical results have been generated.  
 **Status (2026-10-05):** Unchanged. Lane set up in the main folder (section 7). No venue is selected and the datasets B, C and D are not chosen. Section 4 below describes the other papers as of 2026-10-03; since then Paper B+C was split into Paper B (*CLEI Electronic Journal*) and Paper C (*Tecnología en Marcha*). The current status of every paper is in `docs/context/ACTIVE_CONTEXT.md`.  
 **Status (2026-10-05, later):** Venue chosen by the author: *Journal of Computer Sciences Institute* (`VENUE_JCSI.md`; 8 pages at most). The author approved the design of `DESIGN_PROPOSAL.md`; `ANALYSIS_PLAN.md` is now version 2: **16 datasets × 4 models × 4 explainers**, 200 instances, 5 seeds, permutation tests. **Sections 2, 3 and 5 below describe version 1 (4 datasets, 48 conditions) and are superseded by the plan.** No dataset has been loaded and no code of the experiment has been run.
