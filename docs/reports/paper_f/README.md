@@ -119,7 +119,9 @@ packages.
 | Full run, resumable | `python scripts/paper_f_run.py launch --workers 10` | `outputs/analysis/paper_f/runs/` (local until the run ends) |
 | All parts, unattended | Windows task `PaperF-chain-ensure` runs `python scripts/paper_f_chain.py --tick` every 10 minutes | starts the launcher of the first incomplete seed when none is running; log in `runs/_chain.log`; pause with the file `runs/_STOP` |
 | Parts done | `python scripts/paper_f_chain.py --status` | conditions done per seed |
+| Live dashboard | `python scripts\paper_f_monitor.py` (Command Prompt; `--every 5`, `--once`) | progress, speed, time left, jobs at work, failures, health; read-only, shows no measure |
 | Progress | `python scripts/paper_f_run.py status` | counts of job files, rows and failures |
+| Save finished jobs to git | `python scripts/paper_f_snapshot.py`, then commit and push `outputs/analysis/paper_f/raw/` | raw rows of every finished job, with `MANIFEST.csv` (rows, failed rows, SHA-256) |
 | Analysis | `python scripts/paper_f_analyze.py` | `outputs/analysis/paper_f/results/` |
 | Result tables and figure | `python scripts/paper_f_report.py` | `generated/tab_primary.tex`, `generated/tab_adult.tex`, `figures/fig1.pdf` (after the analysis) |
 | Manuscript | `python docs/reports/paper_f/scripts/build_paper_f.py` | `paper_f.tex`, `submission/*.pdf` |
