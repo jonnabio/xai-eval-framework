@@ -32,7 +32,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; seed 42 of five in progress on 2026-10-06); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; seed 42 of five at 199 of 256 conditions on 2026-10-06 14:54); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -41,6 +41,113 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-06 15:00 (Paper F run watched and snapshotted; Papers C and D submitted)
+
+This is the latest handoff. It covers the session of 2026-10-06 from 08:30 to 15:00. The
+handoff directly below (session end of the morning) is still the reference for the design,
+the code and the rules of the Paper F run; this one updates its state and its next steps.
+
+- **Completed**:
+  - **Lane** `paper-f` claimed on `paper/f-external-validity` as `paper-f-2026-10-06b`,
+    released at the end. No launcher was started by hand, `paper_f_config.toml` and
+    `scripts/paper_f_lib.py` were not edited, and the branch was not switched.
+  - **Raw data snapshots of Paper F**, five lane commits pushed (09:17, 11:15, 12:10,
+    14:03, 14:54): `outputs/analysis/paper_f/raw/` went from 115 to 206 finished jobs
+    (41,200 rows; seed 42: 199 jobs, 39,800 rows; seeds 123, 456 and 789: 3, 2 and 2 jobs
+    from the first, shuffled run). The pushed files were not checked again against the
+    manifest in this session.
+  - **Run health checked at each snapshot** (read-only): launcher, jobs, heartbeats,
+    scheduled task, memory, failures.
+  - **Paper D: recorded as submitted** to *Tecnología en Marcha* (author's report of
+    2026-10-06; date and number not given). The journal's author account exists.
+  - **Paper C: submitted by the author on 2026-10-06** to *Tecnología en Marcha* (number
+    not given). The author rejected the three-fact note of `EDITOR_NOTE.md` and asked for
+    a message in the format of the Paper D one; the assistant wrote it (files, author
+    data, declarations, a paragraph on the idea of the paper and its place in the thesis).
+    Before that, the two Word files were checked: the blind file has no author line, no
+    author in the file properties and no repository, Zenodo, ORCID or email string; the
+    author's name appears in it once, in reference [20], cited in the third person. The
+    AI declaration and the data availability section are in the template. Nothing in the
+    Paper C or Paper D folders was changed or rebuilt.
+  - Status table and note at the top of this file updated (two shared commits).
+- **Current State**:
+  - **The Paper F run is in progress and unattended.** At 2026-10-06 14:54: seed 42 at 199
+    of 256 conditions, 8 jobs at work, the launcher started by the tick at 07:22 still the
+    one running, its log with 0 failed jobs, scheduled task `PaperF-chain-ensure` last
+    result 0. Pace over the day: about 13.6 conditions an hour (103 conditions between
+    07:19 and 14:54), between about 9 and 19 an hour depending on the mix of methods.
+    With 57 conditions left, seed 42 should end between about 19:00 and 21:00 on
+    2026-10-06 if the pace holds; most of the running jobs are Anchors, the slow method,
+    so it may be later. The task then starts seed 123 by itself.
+  - **Failures in the finished jobs: 81 of 41,200 rows (0.20%)**: 70 DiCE rows with
+    `UserConfigValidationException` and 11 over the 1,200 s limit (6 DiCE, 5 Anchors).
+    **63 of the 70 are in one condition: DiCE on XGBoost for Ozone, seed 42 (63 of 200
+    instances, all predicted as class 0, each returned in about 4 s).** The stored reason
+    is only the exception name; that it is "no counterfactual found" is the assistant's
+    reading and was not confirmed. By the plan they count as failures of the method.
+  - **Memory is tight.** Free memory was 4.2 GB at 08:33, 16 MB at 12:10 and 380 MB at
+    14:54. The Python jobs held up to 8.2 GB; single Anchors jobs held 1.7 to 3.1 GB
+    (Ozone, Amazon Employee). No job failed for memory according to the launcher log.
+  - **No analysis has been run and no ranking has been looked at.**
+  - Rows written after the snapshot of 14:54 are on the laptop only.
+  - Papers B, C, D and E are submitted; F is the only paper in work.
+  - `docs/reports/paper_c/README.md`, `docs/reports/paper_c/EDITOR_NOTE.md` (lane
+    `paper-c`) and `docs/reports/paper_d/README.md` (lane `paper-d`) still say "not
+    submitted": the session held lane `paper-f` and could not leave its branch while the
+    run was active. This file is the current record.
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
+     `paper/f-external-validity`; stop if it fails.
+  2. `.venv\Scripts\python.exe scripts/paper_f_chain.py --status`, then
+     `.venv\Scripts\python.exe scripts/paper_f_snapshot.py`, and commit and push
+     `outputs/analysis/paper_f/raw/` (lane commit).
+  3. When seed 42 is complete: check 256 job files and 51,200 rows, and list the failures
+     by dataset, model and method. Completeness, failures and timing only.
+  4. Ask the author for the submission numbers of Papers C and D and the date of Paper
+     D's submission, and add them to the table above.
+  5. When the run allows a branch change (or from a `paper/c-*` and a `paper/d-*` branch
+     in a pause): correct the two READMEs and `EDITOR_NOTE.md` named above.
+  6. When the planned seeds are complete (five, or at least three by the fallback): steps
+     4 and 5 of the handoff below (analysis once, results into the manuscript, Zenodo,
+     registry, Word template, remove the scheduled task).
+- **Blockers/Issues**:
+  - **Memory**, as above: with browsers or other heavy applications open, jobs may be
+    killed and run again, which slows the run. The author was told twice.
+  - **The Ozone, XGBoost, DiCE condition fails on 31.5% of its instances.** To look at
+    when the seed is checked: whether the other seeds show it too, and what the plan says
+    about a condition with that share of failures. Not a reason to touch the run.
+  - `paper_f_chain.py --status` prints "launchers: 2" for one launcher: the `.venv`
+    starter process and the interpreter it starts are both counted. Not corrected (the
+    script is in use by the scheduled task).
+  - The launcher log's "queued" count did not add up with the status count at 14:02
+    (190 done, 8 running, 62 queued); not investigated.
+  - Paper C's message to the journal does not mention the other submission to the same
+    issue (Paper D) or the earlier public 32-page version that carries part of Table 1
+    and three values of the text. The assistant raised both; the author sent the message
+    without them. If the editor asks, `EDITOR_NOTE.md` has the exact account.
+  - The author wrote "interciencia" for the journal of Papers C and D; the assistant
+    recorded *Tecnología en Marcha*, the journal of every record and of both messages, and
+    asked the author to say if that is wrong. Not answered.
+  - Unchanged from the handoff below: time (about a day a seed, five seeds about
+    2026-10-12), the laptop must stay plugged in, lid open and logged in, snapshots are
+    not automatic.
+- **Notes**:
+  - **In the assistant's shell plain `python` has no scikit-learn**: every script that
+    imports `paper_f_lib` (status, snapshot, analysis, report) needs
+    `.venv\Scripts\python.exe`. `scripts/pubs/check_lane.py` works with plain `python`.
+  - Read-only health check used in this session: `Get-CimInstance Win32_Process` filtered
+    on `job --dataset` for the running jobs, the newest `*.heartbeat` under
+    `outputs/analysis/paper_f/runs/`, the tail of `_launcher_seed<seed>.log`, and
+    `Get-ScheduledTaskInfo PaperF-chain-ensure`.
+  - Failures per condition are in `raw/MANIFEST.csv` (column `failed`); the reason of each
+    failed row is in the field `fail_reason` of the `.jsonl` files.
+  - A cover message for a journal follows the author's Paper D format (greeting, title in
+    both languages, format line, files, author data, declarations), not a disclosure
+    note. The author's telephone for such messages is in the Paper D message they keep.
+  - The rules of the run stand: no launcher by hand, no edit of `paper_f_config.toml` or
+    `scripts/paper_f_lib.py`, no branch without the Paper F scripts; to pause after the
+    current part create `outputs/analysis/paper_f/runs/_STOP`.
 
 ## Session Handoff - 2026-10-06 (session end: Paper F set up, planned, run started and unattended; draft built)
 
