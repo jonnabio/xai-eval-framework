@@ -91,6 +91,11 @@ the code and the rules of the Paper F run; this one updates its state and its ne
     (Ozone, Amazon Employee). No job failed for memory according to the launcher log.
   - **No analysis has been run and no ranking has been looked at.**
   - Rows written after the snapshot of 14:54 are on the laptop only.
+  - **Pull request #42 is open and not merged** (`paper/f-external-validity` into `main`:
+    the five snapshots, the two status updates and this handoff; checks pass). The author
+    asked for the merge at the end of the session, and the assistant's `gh pr merge` was
+    refused by the permission system; the author merges it. Until then `main` does not
+    hold this session's work, and the branch is ahead of `main`. The lane lock is released.
   - Papers B, C, D and E are submitted; F is the only paper in work.
   - `docs/reports/paper_c/README.md`, `docs/reports/paper_c/EDITOR_NOTE.md` (lane
     `paper-c`) and `docs/reports/paper_d/README.md` (lane `paper-d`) still say "not
@@ -98,7 +103,9 @@ the code and the rules of the Paper F run; this one updates its state and its ne
     run was active. This file is the current record.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
-     `paper/f-external-validity`; stop if it fails.
+     `paper/f-external-validity`; stop if it fails. Check whether pull request #42 is
+     merged; if it is, bring the branch level with `main` (`git merge --ff-only
+     origin/main`, which changes no file).
   2. `.venv\Scripts\python.exe scripts/paper_f_chain.py --status`, then
      `.venv\Scripts\python.exe scripts/paper_f_snapshot.py`, and commit and push
      `outputs/analysis/paper_f/raw/` (lane commit).
