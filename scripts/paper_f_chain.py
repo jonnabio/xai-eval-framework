@@ -4,6 +4,13 @@
     python scripts/paper_f_chain.py            # supervise until every seed is complete
     python scripts/paper_f_chain.py --ensure   # start the supervisor only if none is running
     python scripts/paper_f_chain.py --status   # one line per seed
+    python scripts/paper_f_chain.py --tick     # one step, then exit (the scheduled task)
+
+Since 2026-10-06 the run is driven by --tick from a Windows scheduled task every 10
+minutes: a long-lived supervisor was found stopped in the morning without a trace, twice.
+A tick keeps no process alive: if no launcher is running, it starts the launcher of the
+first seed that is not complete. The count of launches per seed is kept in
+runs/_chain_state.json.
 
 For each seed, in the order of the configuration file:
   - if the seed is complete (one `.done` marker per condition), go to the next;
@@ -76,6 +83,7 @@ def supervisors() -> list[int]:
     mine = {os.getpid(), os.getppid()}
     return [p for p, c in processes()
             if "paper_f_chain.py" in c and "--ensure" not in c and "--status" not in c
+            and "--tick" not in c
             and p not in mine]
 
 
@@ -168,6 +176,41 @@ def ensure() -> int:
     return 0
 
 
+def tick() -> int:
+    """One step: if nothing is running, start the launcher of the first incomplete seed."""
+    import json
+    if STOP.exists() or launchers() or supervisors():
+        return 0
+    cfg = lib.config()
+    total = conditions(cfg)
+    state_path = RUNS / "_chain_state.json"
+    try:
+        state = json.loads(state_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        state = {}
+    for seed in cfg["seeds"]:
+        n = done(seed)
+        if n >= total:
+            if not state.get(f"complete_{seed}"):
+                state[f"complete_{seed}"] = True
+                log(f"seed {seed} complete: {n} of {total} conditions")
+            continue
+        launches = state.get(str(seed), 0)
+        if launches >= MAX_RELAUNCH:
+            if not state.get(f"gave_up_{seed}"):
+                state[f"gave_up_{seed}"] = True
+                log(f"seed {seed} INCOMPLETE after {launches} launches: {n} of {total} done; "
+                    "going on to the next seed")
+            continue
+        state[str(seed)] = launches + 1
+        state_path.write_text(json.dumps(state, indent=1), encoding="utf-8")
+        log(f"tick: seed {seed}: {n} of {total} done; starting launcher (launch {launches + 1})")
+        start_launcher(seed)
+        return 0
+    state_path.write_text(json.dumps(state, indent=1), encoding="utf-8")
+    return 0
+
+
 def status() -> int:
     cfg = lib.config()
     total = conditions(cfg)
@@ -182,9 +225,12 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--ensure", action="store_true")
     ap.add_argument("--status", action="store_true")
+    ap.add_argument("--tick", action="store_true")
     args = ap.parse_args()
     if args.status:
         return status()
+    if args.tick:
+        return tick()
     if args.ensure:
         return ensure()
     return supervise()
