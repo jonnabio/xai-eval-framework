@@ -115,6 +115,23 @@ supersedes the "Next" and "Open" items of the second update below.**
   proposed AI declaration; that four of the sixteen datasets are of one family (software
   defects), which the rule produced and the paper states as a limit.
 - **Open:** pull request for the branch (opened, not merged); the working title.
+- **Later the same evening (author):**
+  - **#37 is merged** at the author's request, so `main` holds the Paper F scripts.
+  - **Essential rule for references:** every reference carries its DOI URL and is
+    verified against the source, and at least 80% of the list dates from 2024 or later.
+    It is in `.aceconfig` (core rules) and in the Paper F README (section 7, rule 7);
+    `build_paper_f.py` reports the counts and `--final` fails while the rule is not met.
+    The draft does not meet it (22 cited, 3 from 2024 or later, several without DOI):
+    **the reference list has to be rebuilt from 2024 to 2026 literature, each entry
+    resolved and compared with its record, never written from memory.** The author said
+    the two NEW F entries were checked.
+  - **AI declaration:** the proposed text is approved "for now" and is in the template.
+  - **Title:** the author does not like the working title (too close to the earlier
+    article). **In the next iteration, propose five titles and ask the author to choose.**
+  - **The author wants the experiment done in parts** and asked how to partition it. The
+    assistant recommended parts by seed (each seed is one complete copy of the design);
+    the author's answer was pending when the session ended. The run started at 19:32
+    was left running in its shuffled order; nothing it computes is lost by re-ordering.
 
 **Second update, same day; the third update above supersedes its "Next" and "Open" items:**
 
