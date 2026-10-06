@@ -11,6 +11,12 @@ starts, stops or changes anything, so it is safe to open and close at any time.
 
 It shows progress, speed and failures. It shows no measure of any explanation method: the
 results are analysed once, when the run is complete (analysis plan, section 7).
+
+Time left is estimated from the work that remains, not from the count of conditions: the
+seconds of every row (`total_s`) are read only to add them up per job. A condition that is
+not finished is given the time the same condition took in another seed; when there is none,
+the mean of its dataset and method, then of its method. The seeds run one after another, so
+each seed gets its own end and the last one is the end of the run.
 """
 from __future__ import annotations
 
@@ -18,6 +24,7 @@ import argparse
 import csv
 import datetime as dt
 import os
+import re
 import subprocess
 import sys
 import time
@@ -31,6 +38,8 @@ CONFIG = ROOT / "docs" / "reports" / "paper_f" / "paper_f_config.toml"
 EXPLAINERS = ("lime", "shap", "anchors", "dice")
 MODELS = ("logreg", "rf", "xgb", "mlp")
 RATE_WINDOW_H = 3.0
+WORKERS = 8                 # jobs at once, as in paper_f_chain.py; read from the launcher when it runs
+MIN_ROWS = 10               # rows a job needs before its own pace is used to estimate it
 
 BOLD, DIM, GREEN, YELLOW, RED, CYAN, RESET = (
     "\x1b[1m", "\x1b[2m", "\x1b[32m", "\x1b[33m", "\x1b[31m", "\x1b[36m", "\x1b[0m")
@@ -52,18 +61,28 @@ def duration(seconds: float) -> str:
     return f"{h // 24}d {h % 24:02d}h" if h >= 48 else f"{h}h {m:02d}m"
 
 
-def count_lines(path: Path) -> tuple[int, int]:
-    """Rows and failed rows of a job file, without parsing the values."""
+def count_lines(path: Path) -> tuple[int, int, float]:
+    """Rows, failed rows and seconds of work of a job file, without parsing the values."""
     rows = failed = 0
+    secs = 0.0
+    key = b'"total_s": '
     try:
         with path.open("rb") as fh:
             for line in fh:
                 if line.strip():
                     rows += 1
                     failed += b'"failed": 1' in line
+                    i = line.rfind(key)
+                    if i >= 0:
+                        try:
+                            x = float(line[i + len(key):].split(b",")[0].split(b"}")[0])
+                        except ValueError:
+                            continue
+                        if x == x:
+                            secs += x
     except OSError:
         pass
-    return rows, failed
+    return rows, failed, secs
 
 
 def fail_reasons(path: Path) -> list[str]:
@@ -84,17 +103,62 @@ def fail_reasons(path: Path) -> list[str]:
     return reasons
 
 
-def launchers_alive() -> int | None:
-    """Number of launcher processes (two per launcher), or None when it cannot be read."""
-    cmd = ("(Get-CimInstance Win32_Process -Filter \"name like 'python%'\" | "
+def launchers_alive() -> tuple[int | None, int]:
+    """Number of launcher processes (two per launcher; None when it cannot be read) and
+    the number of jobs the launcher runs at once."""
+    cmd = ("Get-CimInstance Win32_Process -Filter \"name like 'python%'\" | "
            "Where-Object { $_.CommandLine -match 'paper_f_run.py launch' } | "
-           "Measure-Object).Count")
+           "ForEach-Object { $_.CommandLine }")
     try:
         out = subprocess.run(["powershell", "-NoProfile", "-Command", cmd], capture_output=True,
-                             text=True, timeout=30).stdout.strip()
-        return int(out)
-    except (OSError, ValueError, subprocess.TimeoutExpired):
+                             text=True, timeout=30)
+    except (OSError, subprocess.TimeoutExpired):
+        return None, WORKERS
+    if out.returncode != 0:
+        return None, WORKERS
+    found = [line for line in out.stdout.splitlines() if "paper_f_run.py" in line]
+    workers = WORKERS
+    for line in found:
+        m = re.search(r"--workers\s+(\d+)", line)
+        if m and int(m.group(1)) > 0:
+            workers = int(m.group(1))
+    return len(found), workers
+
+
+def time_left(snap: dict, workers: int) -> dict | None:
+    """Per seed: (hours of work left, seconds until its end counted from the end of the
+    seed before). None while no job is far enough to estimate from."""
+    n_inst, jobs = snap["n_inst"], snap["jobs"]
+    pools: dict[tuple, list[float]] = {}
+    own = {}
+    for (seed, d, m, e), (rows, secs, done) in jobs.items():
+        if not rows or not (done or rows >= MIN_ROWS):
+            continue
+        full = secs if done else secs / rows * n_inst
+        own[(seed, d, m, e)] = full
+        for key in ((d, m, e), (d, e), (e,), ()):
+            pools.setdefault(key, []).append(full)
+    if not pools:
         return None
+    mean = {k: sum(v) / len(v) for k, v in pools.items()}
+    out = {}
+    for seed in snap["seeds"]:
+        work = longest = 0.0
+        for d in snap["datasets"]:
+            for m in MODELS:
+                for e in EXPLAINERS:
+                    rows, _, done = jobs.get((seed, d, m, e), (0, 0.0, False))
+                    if done:
+                        continue
+                    full = own.get((seed, d, m, e))
+                    if full is None:
+                        full = next(mean[k] for k in ((d, m, e), (d, e), (e,), ()) if k in mean)
+                    left = full * max(0.0, 1 - rows / n_inst)
+                    work += left
+                    longest = max(longest, left)
+        # A seed cannot end before its longest job, however many jobs run at once.
+        out[seed] = (work / 3600, max(work / workers, longest))
+    return out
 
 
 def memory_free_gb() -> float | None:
@@ -121,7 +185,7 @@ def snapshot(cache: dict) -> dict:
     now = time.time()
     seeds = {s: {"done": 0, "rows": 0, "failed": 0, "recent": 0, "by_expl": dict.fromkeys(EXPLAINERS, 0),
                  "by_data": dict.fromkeys(datasets, 0)} for s in cfg["seeds"]}
-    active, reasons = [], {}
+    active, reasons, jobs = [], {}, {}
     for path in RUNS.glob("*/*/seed_*/*.jsonl"):
         dataset, model, seed_dir = path.relative_to(RUNS).parts[:3]
         seed = int(seed_dir.removeprefix("seed_"))
@@ -132,7 +196,8 @@ def snapshot(cache: dict) -> dict:
         key = (str(path), stat.st_size)
         if key not in cache:                      # count a file again only when it grew
             cache[key] = (count_lines(path), fail_reasons(path))
-        (rows, failed), why = cache[key]
+        (rows, failed, secs), why = cache[key]
+        jobs[(seed, dataset, model, path.stem)] = (rows, secs, marker.exists())
         s = seeds[seed]
         s["rows"] += rows
         s["failed"] += failed
@@ -158,10 +223,10 @@ def snapshot(cache: dict) -> dict:
                            "on_instance": now - started if started else None})
     return {"cfg": cfg, "datasets": datasets, "per_seed": per_seed, "n_inst": n_inst,
             "seeds": seeds, "active": sorted(active, key=lambda a: a["name"]),
-            "reasons": reasons, "now": now}
+            "reasons": reasons, "jobs": jobs, "now": now}
 
 
-def render(snap: dict, alive: int | None, use_colour: bool) -> str:
+def render(snap: dict, alive: int | None, workers: int, use_colour: bool) -> str:
     c = lambda t, code: colour(t, code, use_colour)  # noqa: E731
     seeds, per_seed, n_inst = snap["seeds"], snap["per_seed"], snap["n_inst"]
     limit = snap["cfg"]["run"]["time_limit_s"]
@@ -176,38 +241,57 @@ def render(snap: dict, alive: int | None, use_colour: bool) -> str:
     recent = sum(v["recent"] for v in seeds.values())
     rate = recent / RATE_WINDOW_H                     # conditions per hour, last hours
 
-    lines.append(c("SEEDS", BOLD))
+    left = time_left(snap, workers)
+    ends, at = {}, dt.datetime.now()                  # the seeds run one after another
+    if left is not None:
+        for s in seeds:
+            if seeds[s]["done"] < per_seed:
+                at += dt.timedelta(seconds=left[s][1])
+                ends[s] = at
+
+    lines.append(c("SEEDS", BOLD) + c("   conditions done, methods done of "
+                                      f"{per_seed // len(EXPLAINERS)} each, estimated end", DIM))
     for s, v in seeds.items():
         pct = 100 * v["done"] / per_seed
         state = (c("complete", GREEN) if v["done"] >= per_seed
                  else c("running ", CYAN) if s == current and snap["active"]
                  else c("waiting ", DIM))
-        lines.append(f"  seed {s:>6}  {bar(v['done'], per_seed)} {v['done']:>3}/{per_seed} "
-                     f"{pct:5.1f}%  rows {v['rows']:>6,}  {state}")
+        end = f"  ends {ends[s]:%a %d %b %H:%M}" if s in ends else ""
+        methods = " ".join(f"{e[0].upper()}{v['by_expl'][e]:>2}" for e in EXPLAINERS)
+        lines.append(f"  seed {s:>6}  {bar(v['done'], per_seed, 20)} {v['done']:>3}/{per_seed} "
+                     f"{pct:5.1f}%  {methods}  {state}{end}")
     all_total = per_seed * len(seeds)
-    lines.append(f"  {'all':>11}  {bar(total_done, all_total)} {total_done:>4}/{all_total} "
-                 f"{100 * total_done / all_total:5.1f}%  rows {total_rows:>7,}")
+    lines.append(f"  {'all':>11}  {bar(total_done, all_total, 20)} {total_done:>4}/{all_total} "
+                 f"{100 * total_done / all_total:5.1f}%  rows {total_rows:,}")
+    lines.append(c("  " + ", ".join(f"{e[0].upper()} = {e}" for e in EXPLAINERS), DIM))
     lines.append("")
 
-    lines.append(c("SPEED AND TIME LEFT", BOLD)
-                 + c(f"   (from the last {RATE_WINDOW_H:.0f} hours)", DIM))
-    if rate > 0 and current is not None:
-        left_seed = (per_seed - seeds[current]["done"]) / rate * 3600
-        left_all = (all_total - total_done) / rate * 3600
-        end_seed = dt.datetime.now() + dt.timedelta(seconds=left_seed)
-        end_all = dt.datetime.now() + dt.timedelta(seconds=left_all)
-        three = list(seeds)[:3]
-        left_three = sum(per_seed - seeds[s]["done"] for s in three) / rate * 3600
-        end_three = dt.datetime.now() + dt.timedelta(seconds=left_three)
-        lines += [f"  {rate:5.1f} conditions an hour",
-                  f"  seed {current}: {duration(left_seed)} left, about {end_seed:%a %d %b %H:%M}",
-                  f"  three seeds (fallback): about {end_three:%a %d %b %H:%M}",
-                  f"  five seeds: {duration(left_all)} left, about {end_all:%a %d %b %H:%M}"]
-    elif current is None:
+    lines.append(c("TIME LEFT", BOLD)
+                 + c(f"   (from the work that remains, {workers} jobs at once)", DIM))
+    if current is None:
         lines.append(c("  every seed is complete", GREEN))
+    elif left is None:
+        lines.append("  no job is far enough to estimate from yet; wait for the first ones")
     else:
-        lines.append("  no condition finished in the window yet; wait for the first ones")
-    lines.append(c("  Slow methods finish late, so the estimate moves during a seed.", DIM))
+        now = dt.datetime.now()
+        work_all = sum(left[s][0] for s in ends)
+        last = list(ends)[-1]
+        lines.append(f"  seed {current}: {duration((ends[current] - now).total_seconds())} left, "
+                     f"about {ends[current]:%a %d %b %H:%M}   "
+                     f"({left[current][0]:,.0f} job-hours of work)")
+        three = [s for s in list(seeds)[:3] if s in ends]
+        if three and len(seeds) > 3:
+            lines.append(f"  three seeds (fallback): {duration((ends[three[-1]] - now).total_seconds())} "
+                         f"left, about {ends[three[-1]]:%a %d %b %H:%M}")
+        lines.append(c(f"  ALL {len(seeds)} SEEDS: {duration((ends[last] - now).total_seconds())} left, "
+                       f"about {ends[last]:%a %d %b %H:%M}", BOLD)
+                     + f"   ({work_all:,.0f} job-hours of work)")
+        if rate > 0:
+            by_count = now + dt.timedelta(seconds=(all_total - total_done) / rate * 3600)
+            lines.append(c(f"  by the count of the last {RATE_WINDOW_H:.0f} hours "
+                           f"({rate:.1f} conditions an hour): about {by_count:%a %d %b %H:%M}", DIM))
+        lines.append(c("  It assumes the run is never stopped and the pace of the jobs stays as "
+                       "measured.", DIM))
     lines.append("")
 
     if current is not None:
@@ -278,12 +362,12 @@ def main() -> int:
     if use_colour:
         os.system("")                              # turns on ANSI codes in the Windows console
     cache: dict = {}
-    alive, alive_at = None, 0.0
+    alive, workers, alive_at = None, WORKERS, 0.0
     try:
         while True:
             if time.time() - alive_at > 30:        # the process list is slow to read
-                alive, alive_at = launchers_alive(), time.time()
-            text = render(snapshot(cache), alive, use_colour)
+                (alive, workers), alive_at = launchers_alive(), time.time()
+            text = render(snapshot(cache), alive, workers, use_colour)
             if args.once:
                 print(text)
                 return 0
