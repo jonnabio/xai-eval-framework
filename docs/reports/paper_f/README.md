@@ -2,7 +2,8 @@
 
 **Working Title:** *To What Extent Do Comparative Conclusions About Model-Agnostic Explanation Methods Generalize Across Tabular Datasets?*  
 **Status (2026-10-03):** Analytical framework initiated. Pre-analysis framework and methodological appraisal established prior to dataset commitment or experimental execution. No empirical results have been generated.  
-**Status (2026-10-05):** Unchanged. Lane set up in the main folder (section 7). No venue is selected and the datasets B, C and D are not chosen. Section 4 below describes the other papers as of 2026-10-03; since then Paper B+C was split into Paper B (*CLEI Electronic Journal*) and Paper C (*Tecnología en Marcha*). The current status of every paper is in `docs/context/ACTIVE_CONTEXT.md`.
+**Status (2026-10-05):** Unchanged. Lane set up in the main folder (section 7). No venue is selected and the datasets B, C and D are not chosen. Section 4 below describes the other papers as of 2026-10-03; since then Paper B+C was split into Paper B (*CLEI Electronic Journal*) and Paper C (*Tecnología en Marcha*). The current status of every paper is in `docs/context/ACTIVE_CONTEXT.md`.  
+**Status (2026-10-05, later):** Venue chosen by the author: *Journal of Computer Sciences Institute* (`VENUE_JCSI.md`; 8 pages at most). The author approved the design of `DESIGN_PROPOSAL.md`; `ANALYSIS_PLAN.md` is now version 2: **16 datasets × 4 models × 4 explainers**, 200 instances, 5 seeds, permutation tests. **Sections 2, 3 and 5 below describe version 1 (4 datasets, 48 conditions) and are superseded by the plan.** No dataset has been loaded and no code of the experiment has been run.
 
 ---
 
@@ -96,7 +97,8 @@ Paper F occupies a dedicated, unconfounded niche within the overarching research
 
 - [`README.md`](README.md) — This charter document.
 - [`ANALYSIS_PLAN.md`](ANALYSIS_PLAN.md) — Pre-analysis protocol locking hypotheses, metric formalizations, statistical procedures, and acceptance criteria.
-- [`DESIGN_PROPOSAL.md`](DESIGN_PROPOSAL.md) — Scientific Advisor's proposal of 2026-10-05 (number and choice of datasets, metrics, analysis, cost of the run). A proposal: it does not change the plan until the author approves it.
+- [`VENUE_JCSI.md`](VENUE_JCSI.md) — The journal's rules, a study of its times from received to published (data and scripts in `venue/`), and how the paper is shaped for it.
+- [`DESIGN_PROPOSAL.md`](DESIGN_PROPOSAL.md) — Approved by the author on 2026-10-05 and written into the plan. Scientific Advisor's proposal of 2026-10-05 (number and choice of datasets, metrics, analysis, cost of the run). A proposal: it does not change the plan until the author approves it.
 - [`METHODOLOGICAL_ANALYSIS.md`](METHODOLOGICAL_ANALYSIS.md) — Rigorous scientific appraisal of research challenges, algorithmic sensitivities, dataset selection archetypes, and threats to validity.
 
 ---

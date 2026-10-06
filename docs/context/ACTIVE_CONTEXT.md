@@ -17,7 +17,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Fourth draft on `main`, approved by the author, registered, 15 Word pages; **ready, not submitted**: the author sends it when the journal's author account exists (deadline 2026-10-15) | Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | **Ready, not submitted**: waits for the journal's author account (deadline 2026-10-15) | Author account requested 2026-10-04; the email of 2026-10-03 is not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | No venue selected | Analytical framework in progress | Pre-analysis plan and methodological appraisal exist; no empirical results or submission |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | Analysis plan version 2 approved (16 datasets × 4 models × 4 explainers); no code run | Venue chosen 2026-10-05; no empirical results or submission |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -55,6 +55,40 @@ cleanup below:**
 - **Next:** the author answers section 7 of the proposal; then the approved points are
   written into `ANALYSIS_PLAN.md` (section 12 and the sections it names) before any
   dataset is loaded. The loader and the two metric changes are shared code (`pubs/*`).
+
+**Second update, same day; it supersedes the "Next" item above:**
+
+- **#35 is merged** at the author's request (`main` at `220d3b425`).
+- **Venue (author, 2026-10-05): Journal of Computer Sciences Institute** (Lublin University
+  of Technology). Rules and a study of the journal are in
+  `docs/reports/paper_f/VENUE_JCSI.md`: English, **4 to 8 pages** in the journal's
+  two-column Word template, abstract of at most 800 characters, one hypothesis in the
+  Introduction, 2 or 3 conclusions, AI use declared in the manuscript and in the
+  submission system, no fees. The template is in `docs/reports/paper_f/venue/template/`
+  (local, git-ignored).
+- **Study of the journal** (84 articles, volumes 36 to 40): median 54.5 days from received
+  to accepted and 182.5 to published; the wait for the quarterly issue is most of it; the
+  12 articles from outside the publishing university took a median of 68 days to
+  acceptance. The issue of 30 December 2026 is very likely closed; **to reach the issue of
+  30 March 2027 the manuscript should be received by the end of November 2026.**
+- **Author decisions on the design (2026-10-05):** 16 datasets chosen by rule; four models
+  (logistic regression, random forest, XGBoost, MLP); 200 instances per dataset, model and
+  seed; both statistical models, the mixed model primary; permutation tests only; pairs of
+  datasets without p-values; a new run for every dataset, Adult included.
+  `ANALYSIS_PLAN.md` is **version 2** and holds them (section 12 is the log).
+- **Read by the assistant, to be confirmed by the author:** the author wrote "four datasets
+  it is" in a list whose other items say 16; it was read as "four models". The two new
+  metric definitions (stability by Jaccard of the top five features, faithfulness gap on
+  the top 20% of features) and the decision rule of plan section 6 are the advisor's and
+  were not commented on.
+- **Pull request #36** is open for `paper/f-external-validity` with the plan, the venue
+  file and this update. Not merged.
+- **Next:** (1) shared code on a `pubs/*` branch: a dataset loader and the two metric
+  changes with tests; (2) lane: configuration file and `scripts/paper_f_*` for profile,
+  training, run and analysis; (3) dataset profile and AUC gate, `datasets.csv` committed
+  before any explanation; (4) pilot; (5) full run, about 585 processor hours.
+- **Open:** whether the journal wants an anonymous file; where the run is made (laptop
+  assumed); the time limit per explanation, set after the pilot.
 
 - **Completed**:
   - **The Paper F lane could not be claimed.** `scripts/pubs/lanes.toml` named

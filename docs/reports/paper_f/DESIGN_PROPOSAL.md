@@ -1,7 +1,10 @@
 # Paper F — Design Proposal for the Author (Scientific Advisor)
 
 **Date:** 2026-10-05
-**Status:** Proposal. `ANALYSIS_PLAN.md` is not changed. If the author approves, each point
+**Status:** Approved by the author on 2026-10-05 (16 datasets by rule, 200 instances, four
+models, both statistical models with the mixed model as primary, permutation tests only,
+a new run) and written into `ANALYSIS_PLAN.md`, version 2. Kept as the record of the
+reasons. The text below is as proposed. Original status line: Proposal. `ANALYSIS_PLAN.md` is not changed. If the author approves, each point
 becomes a dated row of its section 12 and the sections it names are rewritten, before any
 dataset is loaded or any explainer is run.
 **Inputs:** `ANALYSIS_PLAN.md`, `METHODOLOGICAL_ANALYSIS.md`, the metric code in
