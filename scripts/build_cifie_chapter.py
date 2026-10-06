@@ -485,7 +485,6 @@ def main() -> int:
     header = (
         "---\n"
         f'title: "{title}"\n'
-        f'subtitle: "Recuento total de palabras: {words:,} palabras"\n'
         "author:\n" + "".join(f'  - "{a}, {affiliation}"\n' for a in authors) +
         "lang: es-ES\n---\n\n"
         f'::: {{custom-style="Author"}}\n**Recuento de Palabras:** {words:,} palabras\n:::\n\n'
