@@ -97,11 +97,33 @@ Paper F occupies a dedicated, unconfounded niche within the overarching research
 
 - [`README.md`](README.md) — This charter document.
 - [`ANALYSIS_PLAN.md`](ANALYSIS_PLAN.md) — Pre-analysis protocol locking hypotheses, metric formalizations, statistical procedures, and acceptance criteria.
+- [`paper_f_config.toml`](paper_f_config.toml) — Every setting of the experiment: seeds, the inclusion rule, the models, the explainers, the measures, the candidate pool.
+- [`paper_f_template.tex`](paper_f_template.tex) — Source of the manuscript. `paper_f.tex` and `generated/` are written from it by [`scripts/build_paper_f.py`](scripts/build_paper_f.py), which also builds `submission/paper_f_{blind,full}.pdf` (local). A result that does not exist yet is a red "[pending]" mark; `--final` refuses to build while one remains.
+- [`references.bib`](references.bib) — Entries checked for Papers C, D and E, and two new ones marked for the author's check.
 - [`VENUE_JCSI.md`](VENUE_JCSI.md) — The journal's rules, a study of its times from received to published (data and scripts in `venue/`), and how the paper is shaped for it.
 - [`DESIGN_PROPOSAL.md`](DESIGN_PROPOSAL.md) — Approved by the author on 2026-10-05 and written into the plan. Scientific Advisor's proposal of 2026-10-05 (number and choice of datasets, metrics, analysis, cost of the run). A proposal: it does not change the plan until the author approves it.
 - [`METHODOLOGICAL_ANALYSIS.md`](METHODOLOGICAL_ANALYSIS.md) — Rigorous scientific appraisal of research challenges, algorithmic sensitivities, dataset selection archetypes, and threats to validity.
 
 ---
+
+## 6a. Commands (added 2026-10-05)
+
+Run from the repository root with the project environment (`.venv\Scripts\python.exe`).
+The environment needs `anchor-exp==0.0.2.0` and `dice-ml==0.12` besides the project's
+packages.
+
+| Step | Command | Output |
+|---|---|---|
+| Datasets and inclusion rule | `python scripts/paper_f_datasets.py` | `outputs/analysis/paper_f/candidates.csv`, `datasets.csv` |
+| Pilot | `python scripts/paper_f_run.py launch --pilot` | `outputs/analysis/paper_f/pilot/` (local, not a result) |
+| Full run, resumable | `python scripts/paper_f_run.py launch --workers 10` | `outputs/analysis/paper_f/runs/` (local until the run ends) |
+| Progress | `python scripts/paper_f_run.py status` | counts of job files, rows and failures |
+| Analysis | `python scripts/paper_f_analyze.py` | `outputs/analysis/paper_f/results/` |
+| Manuscript | `python docs/reports/paper_f/scripts/build_paper_f.py` | `paper_f.tex`, `submission/*.pdf` |
+| Tests | `python -m pytest tests/analysis/test_paper_f_lib.py tests/analysis/test_paper_f_analyze.py` | |
+
+The run can be stopped at any time; the same launch command continues it. Downloaded data
+are in `data/openml/paper_f/` (git-ignored).
 
 ## 7. Lane and Working Rules (added 2026-10-05)
 

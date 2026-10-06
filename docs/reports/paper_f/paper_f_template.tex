@@ -1,0 +1,265 @@
+%% Paper F: do rankings of explanation methods hold across tabular datasets?
+%% Target: Journal of Computer Sciences Institute (JCSI). Rules: VENUE_JCSI.md.
+%%
+%% THIS IS THE SOURCE. paper_f.tex is GENERATED from it by scripts/build_paper_f.py, which
+%% replaces \input{generated/...} fragments and <<alias:key:column:format>> placeholders
+%% with values read from result files. Edit this file, never paper_f.tex.
+%%
+%% The journal takes Word in its own template: A4, two columns of 8 cm, 1 cm between,
+%% margins 2.5 cm (top, bottom) and 2 cm (left, right), Times New Roman 10 pt, single
+%% spacing, 4 to 8 pages. This source is set to the same page so that the PDF predicts
+%% the length. The submitted file is made in the journal's Word template.
+%%
+%% Review is double-blind. The default build omits author identity; the full build is
+%% made by defining \fullversion before this file.
+%%
+%% DRAFT of 2026-10-05: introduction and methods follow ANALYSIS_PLAN.md (version 2).
+%% The experiment has not been run. Every result is a visible "[pending]" mark; no
+%% number of the results, discussion or conclusions exists yet.
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[top=25mm,bottom=25mm,left=20mm,right=20mm,columnsep=10mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+\setlength{\emergencystretch}{3em}
+\setlength{\bibsep}{2pt}
+\providecommand{\fullurl}[1]{\url{#1}}  % used by entries taken from the Paper E list
+\newcommand{\pending}[1]{\textcolor{red}{[pending: #1]}}
+%% Code and data archive (full version only). Set when the Zenodo version exists.
+\newcommand{\paperfarchive}{\pending{Zenodo DOI}}
+
+\newif\iffull
+\ifdefined\fullversion \fulltrue \else \fullfalse \fi
+
+\begin{document}
+
+\twocolumn[
+\begin{flushleft}
+{\Large\bfseries Comparative analysis of four explanation methods across
+<<sum:datasets:value:w>> tabular datasets: do benchmark rankings generalise?\par}
+\medskip
+\iffull
+Jonathan Herrera-V\'asquez\textsuperscript{*}\par
+\smallskip
+{\small Department of Computer Science, Universidad Americana de Europa (UNADE),
+Canc\'un, Quintana Roo, Mexico\par}
+\else
+\textit{Author information omitted for double-blind review.}\par
+\fi
+\medskip
+\textbf{Abstract}\par
+\smallskip
+Explanation methods are usually compared on one dataset, and the resulting order is read
+as a property of the methods. We test whether it is. LIME, SHAP, Anchors and DiCE explain
+four classifiers on <<sum:datasets:value:d>> public tabular datasets chosen by a fixed
+rule; each method is ranked on faithfulness, stability, sparsity and cost. The agreement
+of the rankings between datasets is the mean rank correlation, with a bootstrap interval
+and a permutation test. \pending{main result, one sentence per ranked measure}
+\pending{what a result on the Adult dataset does and does not predict}
+
+\medskip
+\textit{Keywords}: explainable artificial intelligence; LIME; SHAP; benchmark;
+external validity; tabular data
+\medskip
+
+\iffull
+{\small \textsuperscript{*}Corresponding author. \textit{Email address}:
+jonnabio@gmail.com (J. Herrera-V\'asquez). ORCID:
+\url{https://orcid.org/0000-0002-7149-6635}\par}
+\medskip
+\fi
+\hrule
+\bigskip
+\end{flushleft}
+]
+
+\section{Introduction}
+
+A model that decides on credit, hiring or medical risk is often too complex to be read
+directly, and post-hoc explanation methods are used to say which inputs drove a
+prediction. LIME fits a local linear model around the instance~\cite{ribeiro2016why},
+SHAP distributes the prediction among the features with Shapley
+values~\cite{lundberg2017unified,lundberg2020local}, Anchors returns a rule that keeps the
+prediction with high probability~\cite{ribeiro2018anchors}, and DiCE returns
+counterfactual instances that change it~\cite{mothilal2020dice}. A practitioner has to
+choose among them, and comparative studies are the usual guide.
+
+\subsection{Related work}
+
+There is no single accepted measure of the quality of an
+explanation~\cite{doshivelez2017rigorous}. A systematic review groups the proposed
+measures into twelve properties, among them correctness, consistency and
+compactness~\cite{nauta2023anecdotal}. Faithfulness is commonly measured by removing the
+features an explanation names and observing the
+prediction~\cite{hooker2019benchmark,jacovi2020faithfulness}, and robustness by
+explaining slightly perturbed inputs~\cite{alvarezmelis2018robustness}. Different methods
+often name different features for the same prediction~\cite{krishna2024disagreement}, and
+it has been argued that no method can be the best in every
+neighbourhood~\cite{han2022which}. A recent comparison in this journal examined three
+methods on different types of data~\cite{kuszewska2026comparative}.
+
+A comparison made on one dataset leaves a question open: would the order of the methods
+be the same on another? For classifiers this question has a standard answer. When
+algorithms are compared, the datasets are the sample, and the conclusion is only as
+general as that sample~\cite{demsar2006statistical}. Comparisons of explanation methods
+seldom follow this practice. The census income data known as
+Adult~\cite{becker1996adult} is a frequent single benchmark, and a framework for
+measuring explanation quality was itself first validated on it~\cite{herrera2026framework}.
+
+\subsection{Purpose and hypothesis}
+
+The purpose of this work is to measure how far the order of four explanation methods,
+obtained on one tabular dataset, holds on other tabular datasets. The object of the
+research is therefore the transfer of a comparative conclusion and not the quality of
+any one method. The research covers binary classification on tabular data, four
+classifiers of different families and four measures on which the four methods can all be
+ranked.
+
+The research hypothesis is: \textit{on each measure, the order of the four explanation
+methods agrees across tabular datasets more than chance.} The hypothesis, the measures,
+the rule for choosing the datasets and the decision rule were fixed in a plan committed
+to a public repository before any explanation was computed.
+
+\section{Materials and methods}
+
+\subsection{Datasets}
+
+The datasets were chosen by a rule and not by hand, so that the choice could not favour
+one outcome. A dataset is included if it is public and usable without registration; is
+tabular with a binary target; has at least 1,000 rows and between 5 and 100 features; and
+if at least three of the four classifiers reach a cross-validated area under the ROC
+curve between 0.65 and 0.98 on it, which removes datasets that are noise or trivially
+separable. Candidates were taken from OpenML~\cite{vanschoren2014openml} in an order
+fixed beforehand, in six strata defined by the type of the features (numeric, mixed,
+categorical) and the number of rows (below or from 10,000).
+When fewer than sixteen of the listed candidates passed, the list was extended with the
+binary tasks of the OpenML-CC18 suite in the order of their identifier. Of
+<<sum:candidates:value:d>> candidates examined, <<sum:datasets:value:d>> are in the
+study (Table~\ref{tab:datasets}). The minority class is the positive class.
+
+\input{generated/tab_datasets}
+
+Numeric features are standardised and missing values replaced by the median; categorical
+features are one-hot encoded, with categories beyond the 20 most frequent of a feature
+grouped into one level. Each dataset is split into 80\% for training and 20\% for
+testing, stratified by class.
+
+\subsection{Classifiers and explanation methods}
+
+Four classifiers are trained on every dataset with one configuration for all: logistic
+regression, a random forest~\cite{breiman2001random} of 100 trees,
+XGBoost~\cite{chen2016xgboost} with 100 trees of depth 4, and a multilayer perceptron
+with one hidden layer of 100 units.
+
+The four explanation methods are also used with one configuration for all datasets and
+no tuning: LIME with 1,000 samples, 10 features and a kernel width of 3; SHAP with 50
+background rows, in its exact tree variant for the two tree models and its kernel variant
+for the other two; Anchors with a precision threshold of 0.95; and DiCE with random
+search for one counterfactual. Explanations are computed on the encoded features. An
+Anchors rule is read as the set of features it uses, and a counterfactual as the features
+it changes with the size of each change.
+
+\subsection{Research scenario}
+
+Each of the <<sum:datasets:value:d>> datasets is combined with the four classifiers and
+the four methods, and every combination is repeated with five random seeds that fix the
+split, the classifier and the sampling of the method. For each dataset, classifier and
+seed, 200 test instances are drawn, stratified by predicted class, and the four methods
+explain the same instances. An instance for which a method returns no explanation is kept
+and counted as a failure.
+
+\subsection{Measures}
+
+Four measures are defined for all four methods and are used to rank them.
+\textit{Faithfulness gap}: the absolute change of the predicted probability when the
+features named by the explanation, up to the top 20\% of all features, are replaced by
+their training mean or mode; higher is better. \textit{Stability}: the mean Jaccard
+index~\cite{jaccard1912distribution} between the five top features of the explanation and
+those of the explanations of 10 perturbed copies of the instance, where numeric features
+receive Gaussian noise of 0.05 standard deviations; higher is better. \textit{Sparsity}:
+the share of features the explanation does not use; higher is better. \textit{Cost}: the
+time to produce one explanation; lower is better. A failed instance takes the worst value
+observed for its dataset and classifier, so that failures cannot improve a mean.
+
+\subsection{Statistical analysis}
+
+The unit of analysis is the dataset. For each dataset and measure, the values are
+averaged over instances, seeds and classifiers, and the four methods are ranked. The
+agreement between datasets is the mean Spearman correlation between the rankings of all
+pairs of datasets, which is Kendall's coefficient of concordance corrected for the number
+of datasets. It is reported with a 95\% percentile bootstrap
+interval~\cite{efron1993introduction} over datasets (10,000 resamples) and tested against
+unrelated rankings with a permutation test (100,000 permutations of the ranks inside each
+dataset), with the Holm correction~\cite{holm1979simple} over the four measures. The same
+correlation between the five seeds inside a dataset gives a ceiling: agreement between
+datasets cannot be expected to exceed agreement between two runs on the same dataset.
+
+The decision rule was fixed in advance. With a corrected $p$ below 0.05, the order is
+said to generalise if the interval lies above 0.5, to be shared only weakly if it lies
+below 0.5, and to be of undetermined strength otherwise. A simulation made before the
+experiment showed that sixteen datasets detect a true correlation of 0.5 in nearly every
+study, whereas four detect it in half of them.
+
+Three further analyses are reported: for each pair of methods, the share of datasets in
+which the pair is ordered as on Adult, with an exact binomial interval; the largest rank
+change of each method between two datasets; and the share of the variance of the measure
+that belongs to the method, to the dataset and to their interaction, with the
+interaction tested by permutation.
+
+\section{Results}
+
+\pending{The experiment has not been run. This section will hold: Table 2, mean rank of
+each method per measure with the mean rank correlation, its interval, the corrected p,
+the ceiling and the decision; Figure 1, the rank of each method on each dataset, one
+panel per measure; Table 3, agreement with the order found on Adult for each pair of
+methods; one paragraph on failures; one paragraph on the variance shares.}
+
+\section{Discussion and conclusions}
+
+\pending{Discussion of the hypothesis for each measure, against the ceiling.}
+
+\textit{Possible sources of error.} \pending{to be completed with the results. Known
+before the run: explanations are computed on encoded features, so a categorical variable
+counts as several features; Anchors and DiCE are compared with LIME and SHAP through the
+features they name, not through their native output; each method has one configuration, and with it the kernel variant of SHAP returns at
+most 10 non-zero attributions while the tree variant returns one for every feature;
+four of the datasets are software-defect data of one family, so the sixteen are less
+independent than their number suggests;
+the datasets are binary classification tasks from one repository; cost depends on the
+machine.}
+
+\pending{Three numbered conclusions and directions for further research.}
+
+\section*{Data and code availability}
+\iffull
+All datasets are public and are identified by their OpenML identifier in the archive.
+The plan, the code, the per-instance results and the scripts that produce every table
+and figure are available at \url{https://github.com/jonnabio/xai-eval-framework},
+archived at \paperfarchive.
+\else
+All datasets are public. The plan, the code, the per-instance results and the scripts
+that produce every table and figure are in a public archive whose address is omitted for
+double-blind review.
+\fi
+
+%% DRAFT, FOR THE AUTHOR: the journal requires this declaration, with the name of the
+%% tool and the reason for its use. The text below is a proposal modelled on the
+%% author's declaration in Paper C; the author writes or approves the final text.
+\section*{Declaration on the use of generative AI}
+\pending{author's text. Proposal: The author used the AI tool Claude (Anthropic), under
+the author's direction, to help write the analysis code, edit the English text and
+format the references. The research question, the plan, the design and the
+interpretation are the author's. The author reviewed all content and takes full
+responsibility for it.}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+\end{document}
