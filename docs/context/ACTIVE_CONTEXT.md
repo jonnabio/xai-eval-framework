@@ -66,6 +66,14 @@ items of the third update below:**
   0 failures. Next parts: the same command with the next seed, one at a time.
   Between parts only completeness, failures and timing are looked at; the analysis runs
   once, when all parts are in.
+- **2026-10-06 07:22: the run is driven by `paper_f_chain.py --tick`** from the scheduled
+  task `PaperF-chain-ensure` (every 10 minutes): if no launcher runs, it starts the
+  launcher of the first incomplete seed. The long-lived supervisor described in the next
+  item was found stopped without a trace and is no longer used. Seed 42 at 07:19: 96 of
+  256 conditions, 20,150 of 51,200 rows, 14 failed instances (10 time limits, 4 DiCE
+  without a counterfactual). Pace: about 9 conditions an hour, so about 28 hours a seed.
+  `scripts/paper_f_report.py` (result tables and figure, tested on synthetic rows) exists
+  and is not yet wired into the manuscript. Pull request #40 is open.
 - **Unattended from 21:05 (author's request):** `scripts/paper_f_chain.py` supervises the
   parts: when a seed is complete it starts the next; a launcher that ends early is started
   again. The Windows scheduled task `PaperF-chain-ensure` (every 10 minutes and at logon)
