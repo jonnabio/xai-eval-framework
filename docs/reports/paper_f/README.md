@@ -162,3 +162,9 @@ Paper F is lane `paper-f` of `scripts/pubs/lanes.toml` (ADR-0021, amendment of 2
    files by a build script and registered in `pub/claim_registry.toml` (`[coverage]`,
    `[exclusivity]`, a `paper_f` resolver) before submission, as for Papers C, D and E.
 6. **Every figure has a committed generator.**
+7. **References (author rule, 2026-10-05, essential).** Every reference carries its DOI
+   URL. Every reference is verified against the source: the DOI resolves and the authors,
+   title, venue, year and pages are those of the record. At least 80% of the references
+   date from 2024 or later. `build_paper_f.py --final` must not pass while any of the
+   three fails. State on 2026-10-05: the draft cites 22 works, 3 of them from 2024 or
+   later, and several entries have no DOI, so the reference list has to be rebuilt.

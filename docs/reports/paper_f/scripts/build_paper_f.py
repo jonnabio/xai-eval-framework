@@ -135,6 +135,30 @@ def render(final: bool) -> tuple[Path, int]:
     return target, pending
 
 
+def reference_report(tex: str) -> tuple[str, bool]:
+    """The author's rule for references (README, section 7, rule 7), on the cited entries.
+
+    An entry counts as verified when it has a field `checked = {date}`, written by the
+    person or session that compared it with the record its DOI resolves to.
+    """
+    bib = (F / "references.bib").read_text(encoding="utf-8")
+    entries = {m.group(1): m.group(2) for m in
+               re.finditer(r"^@\w+\{([^,]+),(.*?)(?=^@|\Z)", bib, flags=re.M | re.S)}
+    cited: list[str] = []
+    for group in re.findall(r"\\cite\{([^}]*)\}", tex):
+        cited += [k.strip() for k in group.split(",") if k.strip() not in cited]
+    no_doi = [k for k in cited if not re.search(r"\bdoi\s*=", entries.get(k, ""))]
+    unchecked = [k for k in cited if not re.search(r"\bchecked\s*=", entries.get(k, ""))]
+    years = {k: int(m.group(1)) for k in cited
+             if (m := re.search(r"\byear\s*=\s*\{?(\d{4})", entries.get(k, "")))}
+    recent = sum(y >= 2024 for y in years.values())
+    share = recent / len(cited) if cited else 0.0
+    ok = not no_doi and not unchecked and share >= 0.8
+    text = (f"refs  {len(cited)} cited; {recent} from 2024 or later ({100 * share:.0f}%, "
+            f"rule: 80%); {len(no_doi)} without DOI; {len(unchecked)} not marked as checked")
+    return text, ok
+
+
 def build_pdf(full: bool) -> tuple[Path, int]:
     name = "paper_f_full" if full else "paper_f_blind"
     src = F / f"{name}.tex"
@@ -164,6 +188,10 @@ def main() -> int:
     OUT.mkdir(exist_ok=True)
     tex, pending = render(args.final)
     print("tex ", tex.relative_to(ROOT), f"({pending} pending marks)")
+    report, refs_ok = reference_report(tex.read_text(encoding="utf-8"))
+    print(report)
+    if args.final and not refs_ok:
+        sys.exit("--final: the reference rule is not met")
     for full in (False, True):
         pdf, pages = build_pdf(full)
         print("pdf ", pdf.relative_to(ROOT), f"({pages} pages)")
