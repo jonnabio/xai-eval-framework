@@ -1,0 +1,426 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{Mathematical \& Methodological Architecture of the PhD
+Dissertation: Rigorous Multi-Metric Benchmarking of Model-Agnostic
+Explainable
+AI}\label{mathematical-methodological-architecture-of-the-phd-dissertation-rigorous-multi-metric-benchmarking-of-model-agnostic-explainable-ai}
+
+\emph{Advanced PhD Level (Researchers, Doctoral Committee, \& Peer
+Reviewers)}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. Formal Problem Formulation \& Theoretical
+Foundations}\label{formal-problem-formulation-theoretical-foundations}
+
+Let \(f: \mathcal{X} \to \mathcal{Y}\) represent an opaque, non-linear
+black-box predictor trained over an input feature space
+\(\mathcal{X} \subseteq \mathbb{R}^d\) to map to a target space
+\(\mathcal{Y}\). In local post-hoc Explainable AI (XAI), given a target
+instance \(\mathbf{x} \in \mathcal{X}\), the goal is to construct an
+interpretable model \(g \in \mathcal{G}\) operating over a simplified
+binary input vector \(\mathbf{x}' \in \{0, 1\}^M\) that locally
+approximates the decision boundary of \(f\) around \(\mathbf{x}\).
+
+\subsubsection{1.1 Mathematical Formulation of Post-Hoc Explainer
+Paradigms}\label{mathematical-formulation-of-post-hoc-explainer-paradigms}
+
+\paragraph{A. Local Interpretable Model-agnostic Explanations
+(LIME)}\label{a.-local-interpretable-model-agnostic-explanations-lime}
+
+LIME formulates local explanation as an additive feature attribution
+optimization problem:
+\[\arg\min_{g \in \mathcal{G}} \mathcal{L}(f, g, \pi_{\mathbf{x}}) + \Omega(g)\]
+where \(\mathcal{L}\) measures the local unfaithfulness of \(g\) in
+approximating \(f\) over a perturbed sample space \(\mathcal{Z}\),
+weighted by an exponential proximity kernel:
+\[\pi_{\mathbf{x}}(\mathbf{z}) = \exp\left( -\frac{D(\mathbf{x}, \mathbf{z})^2}{\sigma^2} \right)\]
+and \(\Omega(g)\) penalizes model complexity (e.g., constraining the
+\(L_0\) norm \(\|g\|_0 \le K\)).
+
+\paragraph{B. Shapley Additive exPlanations (SHAP \&
+KernelSHAP)}\label{b.-shapley-additive-explanations-shap-kernelshap}
+
+SHAP calculates the unique additive feature attribution vector
+\(\boldsymbol{\phi} = (\phi_1, \dots, \phi_M) \in \mathbb{R}^M\)
+satisfying four fundamental game-theoretic axioms: \textbf{Efficiency}
+(\(\sum \phi_i = f(\mathbf{x}) - \mathbb{E}[f(\mathbf{x})]\)),
+\textbf{Symmetry}, \textbf{Dummy/Nullity}, and \textbf{Additivity}.
+
+The classical Shapley value for feature \(i\) given characteristic
+function
+\(v(S) = \mathbb{E}_{\mathbf{z} \sim \mathcal{D}}[f(\mathbf{z}) \mid \mathbf{z}_S = \mathbf{x}_S]\)
+is defined by:
+\[\phi_i(v) = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!(|N|-|S|-1)!}{|N|!} \Big[ v(S \cup \{i\}) - v(S) \Big]\]
+
+KernelSHAP estimates \(\boldsymbol{\phi}\) by solving a weighted linear
+regression over simplified coalition vectors
+\(\mathbf{z}' \in \{0,1\}^M\) with Shapley kernel weights:
+\[\pi_{\mathbf{x}}(\mathbf{z}') = \frac{M - 1}{\binom{M}{|\mathbf{z}'|} |\mathbf{z}'| (M - |\mathbf{z}'|)}\]
+
+\paragraph{C. Anchors (High-Precision Rule
+Explanations)}\label{c.-anchors-high-precision-rule-explanations}
+
+An Anchor is a rule predicate \(A \subseteq \text{predicates}\) such
+that \(A(\mathbf{x}) = 1\), maximizing coverage
+\(\text{cov}(A) = \mathbb{P}_{\mathbf{z} \sim \mathcal{D}}[A(\mathbf{z}) = 1]\)
+subject to a high-precision probabilistic constraint:
+\[\mathbb{P}_{\mathbf{z} \sim \mathcal{D}(\cdot \mid A(\mathbf{z})=1)} \Big[ f(\mathbf{z}) = f(\mathbf{x}) \Big] \ge \tau \quad \text{with confidence } 1 - \delta\]
+where \(\tau \in (0, 1]\) (typically \(\tau = 0.95\)).
+
+\paragraph{D. Diverse Counterfactual Explanations
+(DiCE)}\label{d.-diverse-counterfactual-explanations-dice}
+
+DiCE generates a set of \(K\) diverse counterfactual instances
+\(\mathbf{C} = \{\mathbf{c}_1, \dots, \mathbf{c}_K\}\) solving the
+multi-objective loss:
+\[\arg\min_{\mathbf{c}_1, \dots, \mathbf{c}_K} \frac{1}{K}\sum_{k=1}^K \text{loss}(f(\mathbf{c}_k), y^*) + \frac{\alpha}{K}\sum_{k=1}^K \text{dist}(\mathbf{x}, \mathbf{c}_k) - \beta \cdot \text{DPP\_diversity}(\mathbf{c}_1, \dots, \mathbf{c}_K)\]
+where \(y^* \neq f(\mathbf{x})\) is the desired counterfactual target
+class, \(\text{dist}(\cdot, \cdot)\) is a normalized distance metric,
+and \(\text{DPP\_diversity}\) maximizes the determinant of the diversity
+kernel matrix using a Determinantal Point Process.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. The FOM-7 Operational Protocol: 7-Gate Governance
+Architecture}\label{the-fom-7-operational-protocol-7-gate-governance-architecture}
+
+To eliminate experimental drift, un-reproducible seed variation, and
+reporting bias in XAI evaluation, this dissertation introduces the
+\textbf{FOM-7 Protocol} (\emph{Framework for Operational Metrics in 7
+Gates}).
+
+\begin{verbatim}
+[ Gate 1: Freezing ] ──> Pre-registered design & hypothesis matrix (300 cells)
+         │
+         ▼
+[ Gate 2: Execution ] ──> Deterministic execution under manifest isolation
+         │
+         ▼
+[ Gate 3: Audit ]     ──> Artifact integrity check (|E*| = 275 qualified cells)
+         │
+         ▼
+[ Gate 4: Harmonize ] ──> Block-level aggregation over K=15 (model x sample-size) blocks
+         │
+         ▼
+[ Gate 5: Export ]    ──> Non-parametric inferential testing (Friedman + Nemenyi + Holm)
+         │
+         ▼
+[ Gate 6: Profile ]   ──> Variance decomposition (CV = sigma/mu) separating seeds from methods
+         │
+         ▼
+[ Gate 7: Report ]    ──> Provenance-backed claim registry (pub/claim_registry.toml)
+\end{verbatim}
+
+\subsubsection{2.1 Formal Specification of the 7
+Gates}\label{formal-specification-of-the-7-gates}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Gate 1 (Freezing):} Pre-registration of experimental space
+  \(\mathcal{E} = \mathcal{M} \times \mathcal{X}_{exp} \times \mathcal{S} \times \mathcal{N}\),
+  where \(|\mathcal{M}|=5\) model families
+  (\(\text{LogReg}, \text{RF}, \text{XGB}, \text{SVM}, \text{MLP}\)),
+  \(|\mathcal{X}_{exp}|=4\) explainers
+  (\(\text{LIME}, \text{SHAP}, \text{Anchors}, \text{DiCE}\)),
+  \(|\mathcal{S}|=5\) random seeds, and \(|\mathcal{N}|=3\) sample sizes
+  (\(N \in \{100, 500, 1000\}\)), producing 300 planned experimental
+  cells.
+\item
+  \textbf{Gate 2 (Execution):} Containerized execution via deterministic
+  manifest files.
+\item
+  \textbf{Gate 3 (Audit):} Rigorous filtering of cell artifacts:
+  \[\mathcal{E}^* = \{ e \in \mathcal{E} \mid \text{status}(e) \in \{\text{ok\_instance}, \text{ok\_aggregated}\} \}\]
+  In our benchmark, \(|\mathcal{E}^*| = 275\) qualified cells
+  (\(91.67\%\) yield); non-qualifying cells (primarily constraint
+  timeouts in DiCE/Anchors) are formally audited and logged rather than
+  imputed.
+\item
+  \textbf{Gate 4 (Harmonization):} Block-level metric aggregation across
+  \(K=15\) model-size blocks
+  (\(\text{block}_{m, n} = \text{model}_m \times \text{size}_n\)).
+\item
+  \textbf{Gate 5 (Exportation):} Inferential statistical evaluation
+  using non-parametric Friedman tests:
+  \[Q = \frac{12 K}{k(k+1)} \left[ \sum_{j=1}^k \bar{R}_j^2 - \frac{k(k+1)^2}{4} \right] \sim \chi^2_{k-1}\]
+  Followed by post-hoc Nemenyi tests with Critical Distance (\(CD\)):
+  \[CD = q_{\alpha, k} \sqrt{\frac{k(k+1)}{6K}}\] with Holm-Bonferroni
+  step-down multiplicity correction.
+\item
+  \textbf{Gate 6 (Profiling):} Variance decomposition isolating
+  seed-induced stochasticity (\(\sigma^2_{\text{seed}}\)) from true
+  explainer main effects (\(\sigma^2_{\text{method}}\)) via the
+  Coefficient of Variation (\(CV = \frac{\sigma}{\mu}\)).
+\item
+  \textbf{Gate 7 (Reporting):} Automated verification mapping published
+  numbers back to raw execution artifacts via
+  \texttt{pub/claim\_registry.toml}.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. The PhD Publication Matrix: Scientific Arc \&
+Contributions}\label{the-phd-publication-matrix-scientific-arc-contributions}
+
+\begin{verbatim}
+                          ┌─────────────────────────────────────────┐
+                          │   PhD Thesis: Rigorous XAI Evaluation   │
+                          └────────────────────┬────────────────────┘
+                                               │
+         ┌─────────────────────────────────────┼─────────────────────────────────────┐
+         │                                     │                                     │
+         ▼                                     ▼                                     ▼
+[ Theoretical & Methodological ]      [ Empirical Benchmark ]               [ Governance & Human ]
+  ├── Paper A (RIMI 2026): FOM-7        ├── Paper B (CLEIej): LIME vs SHAP    ├── Paper E (CyS): Pareto Frontier
+  └── Paper C (Tec. Marcha): Scaling    └── Paper D (Tec. Marcha): Adult      └── Paper F (JCSI): Human/LLM Judge
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Paper A: Theoretical \& Methodological Framework (FOM-7
+Protocol)}\label{paper-a-theoretical-methodological-framework-fom-7-protocol}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Venue \& Status:} Published in \emph{Revista de Investigación
+  Multidisciplinaria Iberoamericana (RIMI)} (2026, DOI:
+  \texttt{10.69850/rimi.vi3.307}).
+\item
+  \textbf{Core Contribution:} Establishes the formal mathematical
+  foundation of multi-metric evaluation
+  (\(\text{Fidelity}, \text{Stability}, \text{Sparsity}, \text{Cost}, \text{Faithfulness Gap}\))
+  and specifies the 7-gate FOM-7 protocol.
+\item
+  \textbf{Key Finding:} Proves that single-metric evaluations (e.g.,
+  fidelity alone) create false rankings because methods optimize
+  different objective trade-offs.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Paper B: Scaled Empirical Comparison --- LIME vs
+SHAP}\label{paper-b-scaled-empirical-comparison-lime-vs-shap}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Venue \& Status:} Submitted to \emph{CLEI Electronic Journal
+  (CLEIej)} (2026-10-04, Subm. \#1196).
+\item
+  \textbf{Core Hypotheses Tested:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(H_1\):
+    \(\text{Stability}(\text{SHAP}) > \text{Stability}(\text{LIME})\)
+    (\(p < 0.001\), confirmed).
+  \item
+    \(H_2\):
+    \(\text{Sparsity}(\text{LIME}) < \text{Sparsity}(\text{SHAP})\)
+    (confirmed).
+  \item
+    \(H_3\): \(\text{Cost}(\text{LIME}) \ll \text{Cost}(\text{SHAP})\)
+    (\(p < 0.001\), confirmed).
+  \end{itemize}
+\item
+  \textbf{Key Finding:} Proves that KernelSHAP's Shapley kernel
+  optimization guarantees numerical stability under input perturbation,
+  whereas LIME's monte-carlo perturbation sampling introduces
+  significant seed variance (\(\sigma^2_{\text{seed}}\)), leading to
+  instability across runs.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Paper C: Scalability, Sample Size Dynamics, \&
+Robustness}\label{paper-c-scalability-sample-size-dynamics-robustness}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Venue \& Status:} Ready to submit to \emph{Tecnología en
+  Marcha} (AI Special Issue, Zenodo v0.12.0 DOI:
+  \texttt{10.5281/zenodo.23165763}).
+\item
+  \textbf{Core Contribution:} Analyzes the functional scaling behavior
+  of explainers as background sample size \(N\) increases from 100 to
+  1,000 instances.
+\item
+  \textbf{Key Finding:} Demonstrates that KernelSHAP's computational
+  complexity scales as \(\mathcal{O}(N \cdot M \cdot 2^M)\) without
+  background sub-sampling, creating a steep execution cost barrier,
+  whereas tree-specific algorithms (TreeSHAP) exploit structural paths
+  to reduce complexity to \(\mathcal{O}(N \cdot L \cdot D^2)\).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Paper D: Empirical Validation on Tabular Benchmarks (UCI
+Adult)}\label{paper-d-empirical-validation-on-tabular-benchmarks-uci-adult}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Venue \& Status:} Ready to submit to \emph{Tecnología en
+  Marcha} (AI Special Issue).
+\item
+  \textbf{Core Contribution:} First comprehensive multi-model,
+  multi-explainer benchmark execution over the \emph{UCI Adult Income}
+  tabular dataset across 300 experimental cells.
+\item
+  \textbf{Key Finding:} Provides empirical mean ranks across 15 complete
+  model blocks:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Fidelity:} SHAP (\(\bar{R}=0.8081\)) significantly
+    outperforms LIME (\(\bar{R}=0.5602\), \(p < 0.05\)).
+  \item
+    \textbf{Structural vs Attributional Methods:} Anchors and DiCE
+    cannot be evaluated on linear feature attribution scales; they
+    require rule-coverage and counterfactual distance metrics
+    respectively.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Paper E: Pareto Optimization Frontiers \& XAI
+Governance}\label{paper-e-pareto-optimization-frontiers-xai-governance}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Venue \& Status:} Submitted to \emph{Computación y Sistemas
+  (CIC-IPN)} (2026-10-04, Subm. \#6783).
+\item
+  \textbf{Core Contribution:} Formulates XAI selection as a
+  Multi-Objective Optimization Problem (MOOP):
+  \[\max_{g \in \mathcal{G}} \Big( \text{Fidelity}(g), \text{Stability}(g), -\text{Cost}(g), -\text{Sparsity}(g) \Big)\]
+\item
+  \textbf{Key Finding:} Identifies the non-dominated Pareto frontier:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Healthcare / High-Stakes Audit:} SHAP dominates (maximal
+    stability and fidelity).
+  \item
+    \textbf{Low-Latency Production API:} LIME / TreeSHAP dominate
+    (minimal cost, low sparsity).
+  \item
+    Provides a formal governance decision framework for deploying XAI in
+    regulated industries.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Paper F: Human \& LLM-as-a-Judge Semantic
+Alignment}\label{paper-f-human-llm-as-a-judge-semantic-alignment}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Venue \& Status:} Early development (\emph{Journal of Computer
+  Sciences Institute}).
+\item
+  \textbf{Core Contribution:} Investigates the semantic alignment
+  between quantitative mathematical metrics
+  (\(\text{Fidelity}, \text{Stability}\)) and human/LLM cognitive
+  evaluations.
+\item
+  \textbf{Key Finding:} Formulates a pre-analysis plan testing whether
+  high-fidelity mathematical attribution vectors correspond to superior
+  human task performance and LLM explanation preference.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Synthesis \& Doctoral Defense
+Narrative}\label{synthesis-doctoral-defense-narrative}
+
+This dissertation unifies these six papers into a cohesive defense
+thesis:
+
+\[\text{Opaque Model } f(\mathbf{x}) \xrightarrow[\text{Gate 1--3}]{\text{FOM-7 Protocol}} \text{Audited Explanations } g(\mathbf{x}) \xrightarrow[\text{Gate 4--6}]{\text{Pareto Evaluation}} \text{Defensible XAI Governance}\]
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{The Core Gap:} The unvalidated proliferation of post-hoc
+  explainers created a crisis of evaluation in XAI.
+\item
+  \textbf{The Methodological Solution (Paper A):} The 7-gate FOM-7
+  protocol provides mathematical rigor, statistical multiplicity
+  control, and artifact auditability.
+\item
+  \textbf{Empirical Benchmarking (Papers B, C, D):} Extensive empirical
+  evidence on 300 cells establishes exact performance trade-offs between
+  LIME, SHAP, Anchors, and DiCE across 5 model families.
+\item
+  \textbf{Decision Governance \& Human Alignment (Papers E, F):} Pareto
+  frontier analysis and semantic alignment bridge the gap between
+  mathematical evaluation and real-world deployment.
+\end{enumerate}
+
+\end{document}
