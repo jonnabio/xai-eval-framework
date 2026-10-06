@@ -229,7 +229,10 @@ methods; one paragraph on failures; one paragraph on the variance shares.}
 \textit{Possible sources of error.} \pending{to be completed with the results. Known
 before the run: explanations are computed on encoded features, so a categorical variable
 counts as several features; Anchors and DiCE are compared with LIME and SHAP through the
-features they name, not through their native output; each method has one configuration;
+features they name, not through their native output; each method has one configuration, and with it the kernel variant of SHAP returns at
+most 10 non-zero attributions while the tree variant returns one for every feature;
+four of the datasets are software-defect data of one family, so the sixteen are less
+independent than their number suggests;
 the datasets are binary classification tasks from one repository; cost depends on the
 machine.}
 

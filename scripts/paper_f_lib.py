@@ -367,6 +367,8 @@ def evaluate(explainer: Explainer, x: np.ndarray, instance: int, base: np.ndarra
             t0 = time.perf_counter()
             w, extra = explainer.explain(x, seed % (2**31))
             out["cost_ms"] = 1000 * (time.perf_counter() - t0)
+    except (MemoryError, OSError):
+        raise  # the machine, not the method: the job stops and the launcher runs it again
     except Exception as exc:
         out.update(failed=1, fail_reason=f"{type(exc).__name__}: {exc}"[:200],
                    total_s=time.perf_counter() - started)
@@ -390,6 +392,8 @@ def evaluate(explainer: Explainer, x: np.ndarray, instance: int, base: np.ndarra
                 np.random.seed((seed + c + 1) % (2**32))
                 wp, _ = explainer.explain(xp, (seed + c + 1) % (2**31))
             scores.append(jaccard(top, top_set(wp, m["top_k"], tol)))
+        except (MemoryError, OSError):
+            raise
         except Exception:
             failed_copies += 1
             scores.append(0.0)

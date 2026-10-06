@@ -6,7 +6,7 @@ and appends one JSON line per instance. A job that is run again skips the instan
 already holds, so an interrupted run is resumed by running the same command.
 
     python scripts/paper_f_run.py job --dataset adult --model rf --seed 42 --explainer lime
-    python scripts/paper_f_run.py launch --workers 12            # every job of datasets.csv
+    python scripts/paper_f_run.py launch --workers 10            # every job of datasets.csv
     python scripts/paper_f_run.py launch --pilot                 # plan section 7, step 4
     python scripts/paper_f_run.py status
 
@@ -18,17 +18,16 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
+import random
 import subprocess
 import sys
 import time
+import traceback
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paper_f_lib as lib  # noqa: E402
-
-# Rough seconds per instance (EXP2 medians), used only to start the longest jobs first.
-WEIGHT = {("rf", "anchors"): 57, ("rf", "dice"): 23, ("mlp", "anchors"): 13, ("xgb", "dice"): 11,
-          ("mlp", "dice"): 9, ("logreg", "dice"): 8, ("xgb", "anchors"): 5, ("logreg", "anchors"): 3}
 
 
 def job_path(root: Path, dataset: str, model: str, seed: int, explainer: str) -> Path:
@@ -57,11 +56,15 @@ def run_job(args) -> int:
     path = job_path(root, args.dataset, args.model, args.seed, args.explainer)
     path.parent.mkdir(parents=True, exist_ok=True)
     beat = path.with_suffix(".heartbeat")
+    marker = path.with_suffix(".done")
+    if marker.exists():
+        return 0
     data = lib.prepare(args.dataset, args.model, args.seed, cfg)
     instances = data["instances"][:args.limit] if args.limit else data["instances"]
     done = read_done(path)
     todo = [int(i) for i in instances if int(i) not in done]
     if not todo:
+        marker.write_text(str(len(instances)), encoding="utf-8")
         return 0
     explainer = lib.make_explainer(args.explainer, data["model"], data, args.seed, cfg)
     for pos in todo:
@@ -72,6 +75,7 @@ def run_job(args) -> int:
         row.update(lib.evaluate(explainer, data["X_test"][pos], pos, data["base"], cfg))
         append(path, row)
     beat.unlink(missing_ok=True)
+    marker.write_text(str(len(instances)), encoding="utf-8")
     return 0
 
 
@@ -92,14 +96,17 @@ def launch(args) -> int:
         root, datasets, seeds, limit = lib.OUT / "pilot", args.datasets or ["adult"], [42], 20
     else:
         root = Path(args.out)
-        datasets, seeds, limit = args.datasets or study_datasets(), cfg["seeds"], args.limit
+        datasets, seeds, limit = args.datasets or study_datasets(), args.seeds or cfg["seeds"], args.limit
     jobs = [(d, m, s, e) for d in datasets for m in (args.models or lib.MODELS) for s in seeds
             for e in (args.explainers or lib.EXPLAINERS)]
-    jobs.sort(key=lambda j: -WEIGHT.get((j[1], j[3]), 1))
+    # A fixed shuffle mixes long and short jobs, so that the memory-heavy ones (Anchors on
+    # the random forest) do not all run at the same time.
+    random.Random(20261005).shuffle(jobs)
     limit_s = cfg["run"]["time_limit_s"]
     logs = root / "_logs"
     logs.mkdir(parents=True, exist_ok=True)
     running: dict[tuple, subprocess.Popen] = {}
+    born: dict[tuple, float] = {}
     retries: dict[tuple, int] = {}
     failed: list[tuple] = []
     started = time.time()
@@ -110,6 +117,12 @@ def launch(args) -> int:
                "--explainer", e, "--out", str(root)] + (["--limit", str(limit)] if limit else [])
         log = (logs / f"{d}_{m}_{s}_{e}.log").open("a", encoding="utf-8")
         running[job] = subprocess.Popen(cmd, stdout=log, stderr=log, cwd=lib.ROOT)
+        born[job] = time.time()
+
+    def again(job: tuple) -> None:
+        """A job that stopped for a reason of the machine is run again, up to five times."""
+        retries[job] = retries.get(job, 0) + 1
+        (queue if retries[job] <= 5 else failed).append(job)
 
     queue = list(jobs)
     while queue or running:
@@ -120,12 +133,15 @@ def launch(args) -> int:
             path = job_path(root, *job)
             beat = path.with_suffix(".heartbeat")
             code = proc.poll()
-            if code is None and limit_s and beat.exists():
-                try:
-                    hb = json.loads(beat.read_text(encoding="utf-8"))
-                except ValueError:
-                    continue
-                if time.time() - hb["started"] > limit_s:
+            if code is None and limit_s:
+                hb = None
+                if beat.exists():
+                    try:
+                        hb = json.loads(beat.read_text(encoding="utf-8"))
+                    except ValueError:
+                        continue
+                if hb and time.time() - hb["started"] > limit_s:
+                    # One instance took too long: a failure of the method on that instance.
                     proc.kill()
                     proc.wait()
                     append(path, {"dataset": job[0], "model": job[1], "seed": job[2],
@@ -134,16 +150,18 @@ def launch(args) -> int:
                     beat.unlink(missing_ok=True)
                     del running[job]
                     queue.insert(0, job)
+                elif not hb and time.time() - born[job] > limit_s:
+                    # Stuck before the first instance (loading, training): the machine.
+                    proc.kill()
+                    proc.wait()
+                    del running[job]
+                    again(job)
                 continue
             if code is None:
                 continue
             del running[job]
             if code != 0:
-                retries[job] = retries.get(job, 0) + 1
-                if retries[job] <= 2:
-                    queue.append(job)
-                else:
-                    failed.append(job)
+                again(job)
         if int(time.time() - started) % 300 < 2:
             print(f"{time.strftime('%H:%M:%S')} running {len(running)} queued {len(queue)} "
                   f"failed {len(failed)}", flush=True)
@@ -178,17 +196,29 @@ def main() -> int:
     j.add_argument("--limit", type=int, default=0)
     j.add_argument("--out", default=default_out)
     l = sub.add_parser("launch")
-    l.add_argument("--workers", type=int, default=12)
+    l.add_argument("--workers", type=int, default=10)
     l.add_argument("--pilot", action="store_true")
     l.add_argument("--datasets", nargs="*")
     l.add_argument("--models", nargs="*")
     l.add_argument("--explainers", nargs="*")
+    l.add_argument("--seeds", nargs="*", type=int)
     l.add_argument("--limit", type=int, default=0)
     l.add_argument("--out", default=default_out)
     s = sub.add_parser("status")
     s.add_argument("--out", default=default_out)
     args = ap.parse_args()
-    return {"job": run_job, "launch": launch, "status": status}[args.command](args)
+    if args.command == "job":
+        # Leave without the interpreter's shutdown: after a native crash in a library its
+        # threads can keep the process alive, and the launcher would wait for it.
+        try:
+            code = run_job(args)
+        except BaseException:
+            traceback.print_exc()
+            code = 1
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os._exit(code)
+    return {"launch": launch, "status": status}[args.command](args)
 
 
 if __name__ == "__main__":

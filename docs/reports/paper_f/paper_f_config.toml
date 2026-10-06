@@ -63,7 +63,10 @@ mask_fraction = 0.2         # share of features masked by the faithfulness gap, 
 zero_tolerance = 1e-8       # an attribution below this is "not used"
 
 [run]
-time_limit_s = 0            # per instance and explainer; 0 = not set. Set after the pilot.
+# Seconds for one instance and explainer (the explanation and its 10 stability copies).
+# Set on 2026-10-05 after the pilot, where the longest case took 270 s. An instance that
+# exceeds it is recorded as a failure with the reason "time limit".
+time_limit_s = 1200
 
 # Candidate pool, in the order of the plan. `id` is the OpenML data identifier; the version
 # and the target are read from the OpenML record at download and stored with the data.
