@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-"""Generate Spanish PNG figures for the thesis Chapter 4."""
+"""Generate Spanish PNG figures for thesis Chapter 4 and CIFIE chapter (Color + B/W versions)."""
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import matplotlib
@@ -15,7 +16,10 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 STATS = ROOT / "outputs" / "analysis" / "paper_a_exp2_stats"
-OUT = ROOT / "thesis" / "assets" / "figures"
+OUT_THESIS = ROOT / "thesis" / "assets" / "figures"
+CIFIE_FIG = ROOT / "publications" / "book_chapters" / "2026_cifie_xai_fom7" / "figures"
+CIFIE_EXP = CIFIE_FIG / "exported"
+CIFIE_BW = CIFIE_FIG / "bw"
 
 METHOD_ORDER = ["shap", "lime", "anchors", "dice"]
 METHOD_LABELS = {
@@ -24,11 +28,17 @@ METHOD_LABELS = {
     "anchors": "Anchors",
     "dice": "DiCE",
 }
-COLORS = {
+COLORS_COLOR = {
     "shap": "#1f77b4",
     "lime": "#ff7f0e",
     "anchors": "#2ca02c",
     "dice": "#d62728",
+}
+MARKERS_BW = {
+    "shap": ("o", "#1a1a1a", "#1a1a1a"),
+    "lime": ("s", "#ffffff", "#1a1a1a"),
+    "anchors": ("^", "#777777", "#1a1a1a"),
+    "dice": ("D", "#333333", "#1a1a1a"),
 }
 METRIC_LABELS = {
     "fidelity": "Fidelidad",
@@ -40,7 +50,9 @@ METRIC_LABELS = {
 
 
 def setup() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
+    OUT_THESIS.mkdir(parents=True, exist_ok=True)
+    CIFIE_EXP.mkdir(parents=True, exist_ok=True)
+    CIFIE_BW.mkdir(parents=True, exist_ok=True)
     plt.rcParams.update(
         {
             "font.family": "DejaVu Sans",
@@ -56,13 +68,17 @@ def setup() -> None:
     )
 
 
-def save(fig: plt.Figure, filename: str) -> None:
+def save(fig: plt.Figure, filename: str, is_bw: bool = False) -> None:
     fig.tight_layout()
-    fig.savefig(OUT / filename, bbox_inches="tight")
+    # Save to thesis folder
+    fig.savefig(OUT_THESIS / filename, bbox_inches="tight")
+    # Save to CIFIE chapter folders
+    target_cifie = CIFIE_BW if is_bw else CIFIE_EXP
+    fig.savefig(target_cifie / filename, bbox_inches="tight")
     plt.close(fig)
 
 
-def figure_stability_cost() -> None:
+def figure_stability_cost(is_bw: bool = False) -> None:
     df = pd.read_csv(STATS / "exp2_block_method_summary.csv")
     grouped = (
         df.groupby("method")[["stability", "cost", "fidelity"]]
@@ -77,20 +93,41 @@ def figure_stability_cost() -> None:
         xerr = grouped.loc[method, ("cost", "std")]
         yerr = grouped.loc[method, ("stability", "std")]
         size = 110 + 240 * grouped.loc[method, ("fidelity", "mean")]
-        ax.errorbar(
-            x,
-            y,
-            xerr=xerr,
-            yerr=yerr,
-            fmt="o",
-            markersize=np.sqrt(size),
-            color=COLORS[method],
-            ecolor=COLORS[method],
-            elinewidth=1.0,
-            capsize=3,
-            alpha=0.9,
-            label=METHOD_LABELS[method],
-        )
+        
+        if is_bw:
+            fmt_str, m_face, m_edge = MARKERS_BW[method]
+            ax.errorbar(
+                x,
+                y,
+                xerr=xerr,
+                yerr=yerr,
+                fmt=fmt_str,
+                markersize=np.sqrt(size),
+                markerfacecolor=m_face,
+                markeredgecolor=m_edge,
+                ecolor="#333333",
+                elinewidth=1.0,
+                capsize=3,
+                alpha=0.9,
+                label=METHOD_LABELS[method],
+            )
+        else:
+            col = COLORS_COLOR[method]
+            ax.errorbar(
+                x,
+                y,
+                xerr=xerr,
+                yerr=yerr,
+                fmt="o",
+                markersize=np.sqrt(size),
+                color=col,
+                ecolor=col,
+                elinewidth=1.0,
+                capsize=3,
+                alpha=0.9,
+                label=METHOD_LABELS[method],
+            )
+
         ax.annotate(
             METHOD_LABELS[method],
             (x, y),
@@ -113,17 +150,18 @@ def figure_stability_cost() -> None:
         fontsize=8,
         color="#555555",
     )
-    save(fig, "fig_estabilidad_coste_es.png")
+    save(fig, "fig_estabilidad_coste_es.png", is_bw=is_bw)
 
 
-def figure_metric_correlation() -> None:
+def figure_metric_correlation(is_bw: bool = False) -> None:
     df = pd.read_csv(STATS / "exp2_run_level_metrics.csv")
     metrics = ["fidelity", "stability", "sparsity", "faithfulness_gap", "cost"]
     corr = df[metrics].corr(method="spearman")
     labels = [METRIC_LABELS[m] for m in metrics]
 
     fig, ax = plt.subplots(figsize=(6.2, 5.4))
-    im = ax.imshow(corr.values, vmin=-1, vmax=1, cmap="RdBu_r")
+    cmap_str = "Greys" if is_bw else "RdBu_r"
+    im = ax.imshow(corr.values, vmin=-1, vmax=1, cmap=cmap_str)
     ax.set_xticks(range(len(labels)), labels=labels, rotation=35, ha="right")
     ax.set_yticks(range(len(labels)), labels=labels)
     ax.set_title("Correlación entre métricas del banco de pruebas")
@@ -144,10 +182,10 @@ def figure_metric_correlation() -> None:
         fontsize=8,
         color="#555555",
     )
-    save(fig, "fig_correlacion_metricas_es.png")
+    save(fig, "fig_correlacion_metricas_es.png", is_bw=is_bw)
 
 
-def figure_coverage() -> None:
+def figure_coverage(is_bw: bool = False) -> None:
     inv = pd.read_csv(STATS / "exp2_run_inventory.csv")
     inv["analizable"] = inv["status"].isin(["ok_instance", "ok_aggregated"])
     pivot = (
@@ -164,7 +202,8 @@ def figure_coverage() -> None:
     ratio = pivot / 15.0
 
     fig, ax = plt.subplots(figsize=(6.6, 4.4))
-    im = ax.imshow(ratio.values, vmin=0, vmax=1, cmap="YlGnBu")
+    cmap_str = "Greys" if is_bw else "YlGnBu"
+    im = ax.imshow(ratio.values, vmin=0, vmax=1, cmap=cmap_str)
     ax.set_xticks(range(len(METHOD_ORDER)), [METHOD_LABELS[m] for m in METHOD_ORDER])
     ax.set_yticks(range(len(pivot.index)), [m.upper() if m != "logreg" else "LOGREG" for m in pivot.index])
     ax.set_xlabel("Método explicador")
@@ -186,15 +225,21 @@ def figure_coverage() -> None:
         fontsize=8,
         color="#555555",
     )
-    save(fig, "fig_cobertura_exp2_es.png")
+    save(fig, "fig_cobertura_exp2_es.png", is_bw=is_bw)
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--mode", choices=["color", "bw", "both"], default="both")
+    args = parser.parse_args()
+
     setup()
-    figure_stability_cost()
-    figure_metric_correlation()
-    figure_coverage()
-    print(f"Figuras generadas en {OUT}")
+    modes = [False] if args.mode == "color" else ([True] if args.mode == "bw" else [False, True])
+    for is_bw in modes:
+        figure_stability_cost(is_bw=is_bw)
+        figure_metric_correlation(is_bw=is_bw)
+        figure_coverage(is_bw=is_bw)
+    print(f"Figuras generadas en {OUT_THESIS}, {CIFIE_EXP} y {CIFIE_BW}")
 
 
 if __name__ == "__main__":
