@@ -1,6 +1,6 @@
 # Active Context: XAI Evaluation Framework
 
-## Publication status - 2026-10-05
+## Publication status - 2026-10-06
 
 **Correction (author, 2026-10-05): Paper D is not submitted.** *Tecnología en Marcha*
 takes submissions through an author account; the email of 2026-10-03 with the manuscript
@@ -17,7 +17,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Fourth draft on `main`, approved by the author, registered, 15 Word pages; **ready, not submitted**: the author sends it when the journal's author account exists (deadline 2026-10-15) | Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | **Ready, not submitted**: waits for the journal's author account (deadline 2026-10-15) | Author account requested 2026-10-04; the email of 2026-10-03 is not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | Analysis plan version 2 approved (16 datasets × 4 models × 4 explainers); no code run | Venue chosen 2026-10-05; no empirical results or submission |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; seed 42 of five in progress on 2026-10-06); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -26,6 +26,169 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-06 (session end: Paper F set up, planned, run started and unattended; draft built)
+
+This is the latest handoff and the full state at the end of the session of 2026-10-05 and
+2026-10-06. It supersedes the Paper F handoff of 2026-10-05 directly below and its four
+"update" blocks, which keep the detail of each step. The Paper C handoff further below is
+unchanged and still current for Papers B, C, D and E.
+
+- **Completed**:
+  - **Lane.** The Paper F lane could not be claimed: `lanes.toml` named the missing folder
+    `../xai-paper-f`. The lane now names the main folder and also owns
+    `docs/planning/paper_f_*`, `scripts/paper_f_*` and `tests/analysis/test_paper_f_*`
+    (ADR-0021, amendment of 2026-10-05). Stale working trees pruned; set-up branches
+    deleted. Pull request #33 was closed and replaced by #34 so that no Paper C or Paper D
+    commit travelled with the lane change.
+  - **Pull requests merged at the author's request:** #32, #34, #35, #36, #37, #38, #39,
+    #40, #41. In this session the assistant's `gh pr merge --merge` was accepted each time
+    the author had asked for that merge; a merge the author had not asked for and a forced
+    push were refused.
+  - **Venue (author): *Journal of Computer Sciences Institute*** (Lublin University of
+    Technology). Rules and a study of 84 of its articles in
+    `docs/reports/paper_f/VENUE_JCSI.md`: English, 4 to 8 pages in the journal's two-column
+    Word template, abstract of at most 800 characters, one hypothesis, 2 or 3 conclusions,
+    AI use declared, double-blind, no fees. Median 54.5 days from received to accepted and
+    182.5 to published; to reach the issue of 30 March 2027 the manuscript should be
+    received by the end of November 2026.
+  - **Design (author decisions; `ANALYSIS_PLAN.md` version 2, log in its section 12):**
+    16 datasets chosen by a fixed rule × 4 models (logistic regression, random forest,
+    XGBoost, MLP) × 4 explainers (LIME, SHAP, Anchors, DiCE), 5 seeds, 200 instances by
+    predicted class; four ranked measures (faithfulness gap on the top 20% of features,
+    stability as Jaccard of the top five features, sparsity, cost); permutation tests only;
+    mean rank correlation between datasets as the primary quantity, with a bootstrap
+    interval, a ceiling from the seeds and a decision rule at 0.5; a new run for every
+    dataset, Adult included. Reasons in `DESIGN_PROPOSAL.md`; power simulation in
+    `scripts/paper_f_power_simulation.py`.
+  - **Datasets.** The rule passed 12 of the 17 listed candidates; the plan's widening step
+    added JM1, PC4, PC3 and KC1 from the OpenML-CC18 suite. Final list of 16 in
+    `outputs/analysis/paper_f/datasets.csv`, all 77 candidates with the rule each failed in
+    `candidates.csv`; committed before the pilot.
+  - **Code (all in the lane, 17 tests):** `paper_f_config.toml`; `scripts/paper_f_lib.py`
+    (data, models, explainers, measures), `paper_f_datasets.py`, `paper_f_run.py`
+    (resumable jobs and launcher), `paper_f_analyze.py`, `paper_f_report.py` (result tables
+    and figure, tested on synthetic rows, not yet wired into the manuscript),
+    `paper_f_chain.py`, `paper_f_snapshot.py`, `paper_f_monitor.py`.
+  - **Pilot** (plan section 7): Adult with 20 instances, then two instances of every
+    condition; no programming error; two machine problems found and handled in the
+    launcher; outputs deleted. Time limit set to 1,200 s per instance and explainer.
+  - **Run.** Started 2026-10-05 19:32, restarted at 19:49 **in five parts, one per seed**
+    (author decision), with 8 jobs at once. Fallback approved by the author and in the
+    plan: with too little time, the complete seeds are reported, at least three.
+  - **Unattended operation** (author's request for the night): the Windows scheduled task
+    `PaperF-chain-ensure` runs `scripts/paper_f_chain.py --tick` every 10 minutes and at
+    logon; if no launcher is running it starts the launcher of the first incomplete seed.
+    A long-lived supervisor was tried first and was found stopped without a trace on the
+    morning of 2026-10-06; it is no longer used. The tick was tested by stopping the
+    launcher and its jobs and letting the task start them again.
+  - **Raw data on GitHub** (author's request): `scripts/paper_f_snapshot.py` copies the
+    rows of finished jobs, unchanged, to `outputs/analysis/paper_f/raw/` with
+    `MANIFEST.csv` (rows, failed rows, SHA-256). Two snapshots are on `main`: 115 finished
+    jobs, 23,000 rows (seed 42: 108 jobs). The pushed files were checked against the
+    manifest.
+  - **Dashboard for the author:** `python scripts\paper_f_monitor.py` from the Command
+    Prompt (read-only; `--every 5`, `--once`).
+  - **Manuscript draft:** `paper_f_template.tex` (source), generated `paper_f.tex`,
+    `scripts/build_paper_f.py`; blind and full PDF in `docs/reports/paper_f/submission/`
+    (local, git-ignored), 4 and 5 pages. Introduction and methods are written; every
+    result is a red "[pending]" mark (7 marks).
+    - **Title, chosen by the author: "How Dataset-Dependent Are Tabular Explainability
+      Benchmarks?"** Not changed without the author's approval.
+    - AI declaration: the author's text, approved "for now".
+    - The author read the rewritten related work on 2026-10-05 and made no change.
+  - **Reference rule (author, essential; in `.aceconfig`):** every reference has its DOI
+    URL and is verified, and at least 80% date from 2024 or later. The list was rebuilt:
+    29 references, 24 from 2024 or later (83%), each checked against the record its DOI
+    resolves to (`docs/reports/paper_f/scripts/verify_references.py`,
+    `reference_records.json`); the printed list shows DOI URLs; the build reports the
+    counts and `--final` fails while the rule is not met.
+  - **Author rule: any language-model API call goes through OpenRouter.** Paper F makes
+    none.
+- **Current State**:
+  - **The run is in progress on the author's laptop.** At 2026-10-06 08:40: seed 42 at
+    108 of 256 conditions (about 22,400 of 51,200 rows), 8 jobs at work, about 8.3
+    conditions an hour. Expected: seed 42 complete about 02:00 on 2026-10-07; three seeds
+    about 2026-10-09 afternoon; five seeds about 2026-10-12. The scheduled task starts each
+    next seed by itself.
+  - Failed instances so far: 30 of about 24,000 rows (0.12%): 19 DiCE without a
+    counterfactual, 11 over the time limit (Anchors on the random forest for PC3, DiCE on
+    XGBoost for QSAR). They count as failures of the method, as the plan says.
+  - **No analysis has been run and no ranking has been looked at.** One disclosure is in
+    the plan: the analysis script was run once on the 512 pilot rows to test it.
+  - `main` holds all the work; the main folder is on `paper/f-external-validity`, level
+    with `main`, clean. No pull request is open. The lane lock is released.
+  - Rows written after the snapshot of 08:40 are on the laptop only.
+  - Last verification: `verify_claims.py` 1189 claims / 1518 sites / 29 files fully
+    registered; `verify_sync.py`; `scan_shared_literals.py --strict` 0 unexplained; 17
+    Paper F tests. No Paper F number is in the claim registry yet.
+- **Next Steps**:
+  1. Start with `python scripts/pubs/check_lane.py claim --owner <session name>` on
+     `paper/f-external-validity`; stop if it fails.
+  2. `python scripts/paper_f_chain.py --status` (or the dashboard). Then
+     `python scripts/paper_f_snapshot.py`, and commit and push
+     `outputs/analysis/paper_f/raw/` (lane commit; pull request when the author asks).
+  3. When a seed ends: check it is complete (256 job files, 51,200 rows) and list the
+     failures by dataset, model and method. Completeness, failures and timing only.
+  4. When the planned seeds are complete (five, or at least three by the fallback): run
+     `python scripts/paper_f_analyze.py` **once**, commit
+     `outputs/analysis/paper_f/results/`, run `paper_f_report.py`, write results,
+     discussion, three conclusions and the 800-character abstract in
+     `paper_f_template.tex`, wire the two tables and the figure, build with `--final`.
+  5. Then: Zenodo version, claim registry for `paper_f.tex` on a `pubs/*` branch, the
+     files in the journal's Word template (blind and full), and
+     `Unregister-ScheduledTask PaperF-chain-ensure`.
+  6. Unchanged: Papers C and D wait for the *Tecnología en Marcha* author account (deadline
+     2026-10-15); Papers B and E wait for their journals.
+- **Blockers/Issues**:
+  - **Time.** A seed takes about 28 hours with 8 jobs, more than the pilot predicted; five
+    seeds end about 2026-10-12. The author decides when to stop if the fallback is used.
+  - **Memory.** With 8 jobs and browsers open the laptop had 0.3 GB free; after the author
+    closed applications, 4.8 GB. A job that runs out of memory is run again, so results
+    are not affected, but the run slows down.
+  - **The laptop must stay plugged in, with the lid open and the user logged in.** Windows
+    may restart for an update between 00:00 and 07:00; the run then resumes at logon.
+  - Why the first supervisor process stopped was not found; the tick design avoids
+    depending on it.
+  - Snapshots of the raw data are not automatic.
+  - Four of the sixteen datasets are software-defect data of one family (JM1, PC4, PC3,
+    KC1), and no small all-categorical dataset passed the rule; the draft states both.
+  - Anchors runs through `anchor-exp` (the reference implementation), not `alibi` as in
+    EXP2 and EXP3: `alibi` cannot be installed on Python 3.13.
+  - KernelSHAP returns at most 10 non-zero attributions and TreeSHAP one per feature, so
+    the sparsity and stability of SHAP depend on the model family (noted in the plan).
+  - The author approved the AI declaration "for now"; it needs a final confirmation.
+  - Seven of the new references were cited from title and registry record only (no
+    abstract available); their sentences say no more than the titles.
+  - The paper has no result yet; nothing can be said about the hypothesis.
+- **Notes**:
+  - **While the run is active:** do not start a launcher by hand, do not edit
+    `paper_f_config.toml` or `scripts/paper_f_lib.py` (new jobs read them from disk), and do
+    not switch the main folder to a branch without the Paper F scripts. To pause after the
+    current part, create the empty file `outputs/analysis/paper_f/runs/_STOP`.
+  - **Opening a new chat does not affect the run**: it is driven by the scheduled task, not
+    by a session. Suggested line to add to the usual opening prompt: "We continue Paper F.
+    Read the handoff of 2026-10-06 in ACTIVE_CONTEXT.md. The experiment is running
+    unattended on this laptop: do not start a launcher by hand, do not edit
+    paper_f_config.toml or scripts/paper_f_lib.py, and do not switch branch. First run
+    python scripts/paper_f_snapshot.py and commit and push outputs/analysis/paper_f/raw/."
+  - Moving the computing to a Claude cloud session was considered and not done: a cloud
+    session cannot control processes on the laptop, cost is one of the four measures and
+    timings from another machine are not comparable, and the local data and finished rows
+    would not carry over.
+  - Commands are in `docs/reports/paper_f/README.md`, section 6a. Run files:
+    `outputs/analysis/paper_f/runs/` (local): `_chain.log`, `_chain_state.json`,
+    `_launcher_seed<seed>.log`, `_logs/`.
+  - The project `.venv` needs `anchor-exp==0.0.2.0` and `dice-ml==0.12` besides its
+    packages.
+  - Python's own certificate store rejects this network's chain; downloads use `curl`.
+    OpenML answers slowly and sometimes resets; `paper_f_datasets.py` retries.
+  - A shell heredoc mangled LaTeX backslashes three more times in this session: edit `.tex`
+    files with the editor tool or a script file written with it.
+  - Lane commits and shared commits (`ACTIVE_CONTEXT.md`, `.aceconfig`, `lanes.toml`) are
+    separate commits; the hook and CI enforce it.
+  - The raw files under `raw/` are stored byte for byte (`.gitattributes`: `-text`), so the
+    SHA-256 of the manifest holds after a checkout.
 
 ## Session Handoff - 2026-10-05 (Paper F: lane set up in the main folder; no result, no code run)
 
