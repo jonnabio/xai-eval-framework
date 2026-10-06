@@ -2,13 +2,16 @@
 
 ## Publication status - 2026-10-06
 
-**Update (author, 2026-10-06): Paper D is submitted, and the author account exists.** The
-author reported on 2026-10-06 that Paper D was submitted to *Tecnología en Marcha* and that
-they now have the journal's author account. The date of the submission and its number
-were not given and are not recorded here. Paper C is ready and is the next to be sent
-through the same account (deadline 2026-10-15); the text for the editor needs its item 1
-corrected, because `docs/reports/paper_c/EDITOR_NOTE.md` still says that Paper D was sent
-on 3 October. This note supersedes the correction of 2026-10-05 below and every later line
+**Update (author, 2026-10-06): Papers C and D are both submitted to *Tecnología en
+Marcha*.** The author reported on 2026-10-06, first that Paper D was submitted and that the
+journal's author account exists, and later the same day that Paper C was sent too. No
+submission number was given for either paper, and the date of Paper D's submission was not
+given; neither is recorded here. Paper C went with a message in the format of Paper D's
+(files, author data, declarations, and a paragraph on the idea of the paper and its place
+in the thesis), not with the three-fact note of `docs/reports/paper_c/EDITOR_NOTE.md`: the
+message does not mention the other submission to the same issue or the earlier 32-page
+version (author's choice; both points were raised). Files named in it: `paper_c_blind.docx`,
+`paper_c_full.docx`, `Figure1.tiff` and the two PDFs. This note supersedes the correction of 2026-10-05 below and every later line
 of this file that says Papers C and D wait for the account. `docs/reports/paper_d/README.md`
 (lane `paper-d`) and `docs/reports/paper_c/README.md` and `EDITOR_NOTE.md` (lane `paper-c`)
 are not yet updated: the session of 2026-10-06 held lane `paper-f` and could not leave its
@@ -26,7 +29,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
 | **B** | *CLEI Electronic Journal* (CLEIej) | Submitted; under review | Submitted 2026-10-04; submission 1196 |
-| **C** | *Tecnología en Marcha*, AI special issue | Fourth draft on `main`, approved by the author, registered, 15 Word pages; **ready, not submitted**: the author account exists since 2026-10-06 and the author is about to send it (deadline 2026-10-15) | Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
+| **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
 | **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; seed 42 of five in progress on 2026-10-06); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
