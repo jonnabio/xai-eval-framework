@@ -121,6 +121,7 @@ packages.
 | Parts done | `python scripts/paper_f_chain.py --status` | conditions done per seed |
 | Progress | `python scripts/paper_f_run.py status` | counts of job files, rows and failures |
 | Analysis | `python scripts/paper_f_analyze.py` | `outputs/analysis/paper_f/results/` |
+| Result tables and figure | `python scripts/paper_f_report.py` | `generated/tab_primary.tex`, `generated/tab_adult.tex`, `figures/fig1.pdf` (after the analysis) |
 | Manuscript | `python docs/reports/paper_f/scripts/build_paper_f.py` | `paper_f.tex`, `submission/*.pdf` |
 | Tests | `python -m pytest tests/analysis/test_paper_f_lib.py tests/analysis/test_paper_f_analyze.py` | |
 
