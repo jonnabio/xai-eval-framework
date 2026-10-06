@@ -83,7 +83,10 @@ items of the third update below:**
 - `paper_f_analyze.py` skips a line cut short when a job was stopped (the job writes the
   instance again).
 - AI declaration: the author's approved text ("for now") is in the draft.
-- **Next:** the author chooses a title among five proposals (given in the session);
+- **Title chosen by the author (2026-10-05): "How Dataset-Dependent Are Tabular
+  Explainability Benchmarks?"** It is not changed without the author's approval. The
+  three-seed fallback is approved and in the plan (section 12).
+- **Next:**
   check part 1 when it ends and start part 2; then as in the third update.
 
 **Third update, same day (2026-10-05, evening): the Paper F run is in progress. It
