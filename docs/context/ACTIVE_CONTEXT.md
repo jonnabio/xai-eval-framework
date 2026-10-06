@@ -66,6 +66,21 @@ items of the third update below:**
   0 failures. Next parts: the same command with the next seed, one at a time.
   Between parts only completeness, failures and timing are looked at; the analysis runs
   once, when all parts are in.
+- **Handoff of 2026-10-06 08:30 (the session was closed for length; start here):**
+  - Run healthy: seed 42 at 108 of 256 conditions, 8 jobs, about 8.5 conditions an hour,
+    expected to end about 02:00 on 2026-10-07; the scheduled task then starts seed 123.
+    30 failed instances of 24,025 rows. #40 is merged.
+  - **Raw data on GitHub:** `scripts/paper_f_snapshot.py` copies the rows of finished jobs
+    to `outputs/analysis/paper_f/raw/` with `MANIFEST.csv`; 109 jobs (21,800 rows) are
+    committed and pushed, checked against the manifest. **Not automatic:** at the start
+    of each session run the script, then commit and push `raw/`. Pull request **#41**
+    (snapshot, script, dashboard) is open, checks pass, not merged.
+  - Dashboard for the author: `python scripts\paper_f_monitor.py` (read-only).
+  - Memory: keep browsers closed; with 8 jobs the laptop had 0.3 GB free before the
+    author closed applications (4.8 GB free after).
+  - Next: snapshot and push; when seed 42 is complete check 256 jobs and 51,200 rows;
+    nothing is analysed until the planned seeds are complete (minimum three).
+    Remove the scheduled task when the run is over.
 - **2026-10-06 07:22: the run is driven by `paper_f_chain.py --tick`** from the scheduled
   task `PaperF-chain-ensure` (every 10 minutes): if no launcher runs, it starts the
   launcher of the first incomplete seed. The long-lived supervisor described in the next
