@@ -117,6 +117,8 @@ packages.
 | Datasets and inclusion rule | `python scripts/paper_f_datasets.py` | `outputs/analysis/paper_f/candidates.csv`, `datasets.csv` |
 | Pilot | `python scripts/paper_f_run.py launch --pilot` | `outputs/analysis/paper_f/pilot/` (local, not a result) |
 | Full run, resumable | `python scripts/paper_f_run.py launch --workers 10` | `outputs/analysis/paper_f/runs/` (local until the run ends) |
+| All parts, unattended | `python scripts/paper_f_chain.py --ensure` | runs the seeds one after another; log in `runs/_chain.log`; pause with the file `runs/_STOP` |
+| Parts done | `python scripts/paper_f_chain.py --status` | conditions done per seed |
 | Progress | `python scripts/paper_f_run.py status` | counts of job files, rows and failures |
 | Analysis | `python scripts/paper_f_analyze.py` | `outputs/analysis/paper_f/results/` |
 | Manuscript | `python docs/reports/paper_f/scripts/build_paper_f.py` | `paper_f.tex`, `submission/*.pdf` |
