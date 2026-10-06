@@ -1,184 +1,88 @@
-# Por qué importa la inteligencia artificial explicable
+# Métodos de explicabilidad: LIME, SHAP, Anchors y DiCE
 
-Fuente inicial: `references/candidate_literature_2026-09-28.md`, `sources/evidence_map.md` y `planning/chapter_scaffold_2026-09-28.md`.
+## Diversidad de objetos explicativos
 
-## Funciones de la explicación durante el ciclo de vida
+Los métodos de explicabilidad agnósticos al modelo post-hoc no generan la misma clase de artefacto analítico. De acuerdo con las necesidades de la audiencia y la naturaleza de la tarea de auditoría, la respuesta explicativa se materializa en distintos **objetos explicativos**:
 
-La necesidad de explicación aparece antes, durante y después del despliegue. En el
-diseño, los artefactos explicativos pueden ayudar a descubrir dependencias espurias,
-variables proxy, fugas de información o comportamientos incompatibles con el
-conocimiento del dominio. En la validación, permiten formular pruebas dirigidas sobre
-casos límite y comparar si distintos modelos apoyan sus salidas en patrones
-semejantes. Durante la operación, pueden contribuir al monitoreo de cambios, al
-análisis de incidentes y a la identificación de condiciones en las que una salida no
-debería aceptarse sin revisión. Después de una decisión, pueden apoyar la
-documentación, la auditoría y la contestabilidad. Estas funciones pertenecen a un
-ciclo de gestión del riesgo y no a un único momento de visualización (Tabassi, 2023). Véase la Figura 5.
+1. **Atribución numérica de características:** Vectores de ponderación real que asignan un valor numérico positivo o negativo a cada variable de entrada, representando su contribución neta a la predicción final.
+2. **Reglas de decisión lógicas:** Conjuntos de condiciones condicionales de la forma $\text{SI } (x_1 > v_1) \land (x_2 = v_2) \text{ ENTONCES predicción } = Y$, que delimitan una región de suficiencia local.
+3. **Explicaciones contrafactuales:** Modificaciones mínimas y realizables sobre los atributos de una instancia de entrada que alteran el resultado del modelo hacia una clase objetivo deseada (*¿Qué cambios mínimos debería realizar el usuario para ser aprobado?*).
 
-Cada función exige evidencia diferente. Para depurar, puede ser útil localizar qué
-características influyen en predicciones anómalas; para validar, importa comprobar si
-esa señal se conserva ante perturbaciones relevantes; para supervisar, deben
-comunicarse incertidumbre, límites y condiciones de uso; para auditar, se necesita
-trazabilidad entre datos, versión del modelo, configuración del explicador y
-conclusión. Una misma gráfica no satisface automáticamente todas esas necesidades.
-Tampoco todo fallo requiere otro algoritmo explicativo: en ocasiones la respuesta
-adecuada es mejorar los datos, restringir el ámbito de uso, elegir un modelo
-interpretable por diseño o impedir que el sistema decida sin intervención humana.
+![Figura 3. Cuatro objetos explicativos y métodos agnósticos evaluados en FOM-7. Fuente: elaboración propia a partir de Ribeiro et al. (2016, 2018), Lundberg y Lee (2017) y Mothilal et al. (2020).](../figures/exported/fig_d4_objetos_explicativos_es.png)
 
-Entender la explicación como parte del ciclo de vida evita dos reducciones frecuentes.
-La primera consiste en identificar XAI con una imagen o lista de importancias
-producida después del entrenamiento. La segunda consiste en evaluar esa salida fuera
-del proceso que pretende apoyar. Una explicación útil para diagnosticar un error de
-desarrollo puede ser inadecuada para comunicar una decisión individual. Del mismo
-modo, una representación eficaz en una demostración controlada puede perder valor si
-el modelo, los datos o las condiciones operativas cambian.
+La Figura 3 sintetiza la relación entre estos objetos explicativos y los cuatro algoritmos agnósticos evaluados en nuestro benchmark: LIME, SHAP, Anchors y DiCE. A continuación, se detalla la formulación técnica de cada uno de ellos.
 
-## Audiencias, preguntas y responsabilidades distintas
+## LIME: Explicaciones locales interpretables agnósticas al modelo
 
-No existe una explicación universal porque tampoco existe un destinatario universal.
-Quien desarrolla un sistema necesita información que permita reproducir y corregir
-su comportamiento. Un equipo de validación necesita pruebas independientes y
-criterios de aceptación. Un profesional del dominio necesita conocer la pertinencia
-de la evidencia, los límites y la posibilidad de apartarse de la recomendación. La
-dirección de una organización requiere comprender exposición al riesgo y controles.
-Una autoridad supervisora necesita documentación verificable. La persona afectada
-por una decisión necesita una comunicación comprensible, específica y vinculada con
-las posibilidades reales de revisión o actuación.
+Propuesto por Ribeiro et al. (2016), **LIME** (*Local Interpretable Model-agnostic Explanations*) asume que, aunque un modelo de aprendizaje automático complejo $f(x)$ sea altamente no lineal en todo su dominio, su comportamiento en el entorno inmediato de una instancia específica $x$ puede aproximarse de forma efectiva mediante una función interpretable simple $g \in G$ (como un modelo lineal).
 
-Phillips et al. (2021) sostienen que el significado de una explicación depende del
-usuario y de la situación, mientras Miller (2019) muestra que las explicaciones
-humanas suelen ser selectivas, sociales y contrastivas: con frecuencia responden por
-qué ocurrió un resultado en lugar de otro. Estas observaciones ayudan a diseñar la
-comunicación, pero no eliminan la obligación técnica de comprobar que lo comunicado
-corresponde al comportamiento del sistema. La explicación destinada a una persona
-afectada puede priorizar claridad y contraste; la dirigida a un auditor puede exigir
-artefactos, parámetros y pruebas que serían impropios para esa comunicación. Adaptar
-el formato no autoriza a cambiar el hecho explicado ni a ocultar incertidumbre.
+Para construir esta aproximación local, LIME genera un conjunto de perturbaciones sintéticas $z'$ en la vecindad de la instancia de interés $x$, evalúa la respuesta del modelo original $f(z')$ para cada muestra perturbada, y asigna un peso de proximidad $\pi_x(z)$ mediante un núcleo de distancia exponencial:
 
-La consecuencia metodológica es directa: antes de seleccionar un método XAI deben
-declararse la pregunta, la audiencia y la acción que la explicación pretende apoyar.
-Sin esa especificación, términos como “comprensible”, “útil” o “accionable” carecen
-de un criterio verificable. Una evaluación rigurosa debe distinguir, además, entre
-percepción subjetiva, comprensión demostrada, desempeño en una tarea y posibilidad
-de actuar. Son resultados relacionados, pero no equivalentes.
+$$\pi_x(z) = \exp\left( -\frac{D(x, z)^2}{\sigma^2} \right)$$
 
-![Figura 5. Funciones de la explicación a lo largo del ciclo de vida y necesidades de cada audiencia. Fuente: elaboración propia a partir de Tabassi (2023) y Phillips et al. (2021).](../figures/exported/fig_d5_ciclo_audiencias_es.png)
+donde $D(x, z)$ es la distancia (por ejemplo, euclidiana o de coseno) entre la instancia original $x$ y la perturbada $z$, y $\sigma$ es el ancho de banda del núcleo. La función explicativa $g$ se obtiene resolviendo el siguiente problema de optimización ponderado:
 
-## Explicabilidad, confianza y confiabilidad
+$$\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g)$$
 
-La explicabilidad es una dimensión de la IA confiable, no un sustituto de las demás.
-El marco de gestión de riesgos de NIST sitúa explicabilidad e interpretabilidad junto
-con validez y fiabilidad, seguridad, resiliencia, privacidad, equidad, transparencia
-y rendición de cuentas; también advierte que estas características dependen del
-contexto y pueden entrar en tensión (Tabassi, 2023). Una explicación técnicamente
-fiel no corrige un conjunto de datos sesgado, no garantiza seguridad y no convierte
-una predicción en causal. Del mismo modo, una interfaz clara no compensa un modelo
-inválido para la población o el uso previstos.
+donde $\mathcal{L}(f, g, \pi_x)$ representa la medida de infidelidad de la aproximación $g$ con respecto a $f$ ponderada por la distancia $\pi_x$, y $\Omega(g)$ es una penalización sobre la complejidad del modelo interpretable (como el número de características no nulas).
 
-También debe distinguirse confianza de confianza calibrada. El objetivo no es elevar
-la aceptación del sistema, sino favorecer una dependencia proporcional a su
-competencia y a la evidencia disponible. Una explicación persuasiva puede aumentar
-la confianza aun cuando sea incompleta; una explicación compleja pero exacta puede
-no ayudar a una persona a decidir. La revisión sistemática de Kim et al. (2024)
-organiza la evaluación humana en dimensiones diferentes: calidad de la explicación
-en contexto, contribución a la interacción humano-IA y contribución al desempeño.
-Que una persona declare comprender o confiar en el sistema no demuestra por sí mismo
-que decida mejor.
+Para un estudiante o usuario no experto, la intuición de LIME equivale a tomar una fotografía macro de una montaña rocosa: vista desde lejos la montaña tiene una forma hiper-compleja e irregular, pero si nos acercamos a un metro cuadrado de su superficie, la pared parece casi completamente plana y puede describirse fácilmente con una pendiente simple.
 
-La evidencia experimental refuerza esta cautela. En las tareas estudiadas por
-Alufaisan et al. (2021), proporcionar una predicción de IA tendió a mejorar la
-exactitud humana, pero añadir información explicativa no produjo evidencia concluyente
-de una mejora adicional. En una serie de experimentos prerregistrados sobre modelos
-de precios de vivienda, Poursabzi-Sangdeh et al. (2021) observaron que un modelo claro
-y con pocas variables facilitaba simular sus predicciones, sin mejorar necesariamente
-el seguimiento apropiado de la recomendación; en condiciones concretas, la
-transparencia incluso dificultó detectar y corregir errores grandes. Estos resultados
-no prueban que las explicaciones nunca ayuden. Muestran que comprensión del modelo,
-confianza, corrección de errores y desempeño decisional deben medirse por separado y
-dentro de la tarea experimental que los produce.
+## SHAP: Explicaciones basadas en teoría de juegos cooperativos
 
-## Supervisión, gobernanza y contestabilidad
+Desarrollado por Lundberg y Lee (2017), **SHAP** (*SHapley Additive exPlanations*) unifica diversos métodos de atribución post-hoc bajo el marco matemático formal de los valores de Shapley, un concepto originario de la teoría de juegos cooperativos (Shapley, 1953).
 
-La importancia práctica de la XAI también se refleja en marcos de gobernanza que
-vinculan transparencia con uso apropiado y supervisión humana. Para los sistemas de
-alto riesgo dentro de su ámbito, el artículo 13 del Reglamento de Inteligencia
-Artificial de la Unión Europea exige un grado de transparencia que permita a los
-responsables del despliegue interpretar la salida y utilizarla adecuadamente; el
-artículo 14 relaciona la supervisión con comprender capacidades y límites, reconocer
-el sesgo de automatización y poder ignorar, revertir o interrumpir una salida cuando
-corresponda (European Parliament & Council of the European Union, 2024). Esta
-exigencia no prescribe un explicador universal ni demuestra la eficacia de una
-técnica concreta. Sí muestra que la interpretación debe integrarse con información
-sobre desempeño, limitaciones, documentación y capacidad real de intervención.
+En el contexto de XAI, la predicción del modelo complejo sobre una instancia $x$ se interpreta como el "pago" (*payout*) obtenido en un juego de colaboración, donde las características del dato de entrada actúan como los "jugadores" que cooperan para lograr dicho resultado. La atribución de Shapley $\phi_i$ asignada a la característica $i$ cuantifica el aporte marginal promedio de dicha variable sobre todas las posibles coaliciones o combinaciones de características $S \subseteq F \setminus \{i\}$:
 
-La contestabilidad amplía esa lógica. Una explicación solo contribuye a impugnar una
-decisión si identifica un resultado concreto, se conecta con el proceso que puede
-revisarlo y no ofrece cambios imposibles como si fueran opciones reales. Por tanto,
-la gobernanza de explicaciones abarca más que su forma: incluye procedencia,
-responsabilidad, registro de versiones, conservación de evidencia y vías para actuar
-ante un error. En ausencia de esas condiciones, la explicación corre el riesgo de
-convertirse en una justificación unilateral del sistema.
+$$\phi_i(x) = \sum_{S \subseteq F \setminus \{i\}} \frac{\vert S \vert ! (\vert F \vert - \vert S \vert - 1)!}{\vert F \vert !} \left[ f_x(S \cup \{i\}) - f_x(S) \right]$$
 
-## Ámbitos de aplicación y horizontes próximos
+donde $F$ es el conjunto total de características y $f_x(S)$ representa la predicción esperada del modelo cuando únicamente las variables en la coalición $S$ están presentes o son observadas.
 
-### Por qué examinar la XAI por ámbitos
+La fortaleza matemática distintiva de SHAP radica en que es el **único** método de atribución local que garantiza simultáneamente cuatro propiedades axiomáticas fundamentales:
+1. **Eficiencia (Aditividad local):** La suma de las atribuciones de todas las características equivale a la diferencia entre la predicción local $f(x)$ y la predicción promedio base $\mathbb{E}[f(X)]$, es decir, $\sum_{i=1}^{\vert F \vert} \phi_i(x) = f(x) - \mathbb{E}[f(X)]$.
+2. **Simetría:** Si dos características $i$ y $j$ contribuyen exactamente lo mismo a todas las coaliciones posibles, sus valores asignados son idénticos ($\phi_i = \phi_j$).
+3. **Jugador nulo (Dummy):** Si una característica $i$ no altera la salida del modelo en ninguna coalición ($f_x(S \cup \{i\}) = f_x(S)$), su valor de Shapley es cero ($\phi_i = 0$).
+4. **Monotonicidad (Consistencia):** Si la contribución marginal de una característica aumenta o se mantiene igual en un modelo alternativo, su valor atribuido no puede disminuir.
 
-Las secciones anteriores mostraron que una explicación solo adquiere valor cuando se conoce la pregunta que responde, la audiencia a la que sirve y la evidencia que la respalda. Los ámbitos de aplicación hacen visible esa dependencia. En cada uno cambia la decisión apoyada por el sistema, cambia quién necesita la explicación, cambia el daño que puede causar una explicación engañosa y cambia la evidencia que debería exigirse antes de confiar en ella. Por eso, esta sección no presenta un catálogo de usos, sino cinco ámbitos que plantean exigencias explicativas distintas.
+Para calcular estos valores en clasificadores agnósticos de caja negra, Lundberg y Lee introdujeron **KernelSHAP**, una estimación basada en regresión lineal ponderada mediante un núcleo de Shapley especializado que aproxima numéricamente la fórmula combinatoria de Shapley.
 
-Cada ámbito se examina con la misma pauta: la decisión o tarea, el actor que necesita la explicación, un ejemplo acotado, el beneficio plausible, el modo de fallo y la evidencia necesaria. Los ejemplos son escenarios ilustrativos construidos para aclarar el razonamiento; no describen resultados de un sistema concreto. Las afirmaciones empíricas se apoyan en las fuentes citadas y se limitan a lo que esas fuentes estudiaron. Cada ámbito se cierra con un horizonte próximo, formulado como una trayectoria de investigación o de gobernanza respaldada por la literatura, no como una predicción.
+## Anchors: Reglas de decisión de alta precisión con garantías formales
 
-### Salud y biomedicina
+A diferencia de los métodos de atribución continua como LIME y SHAP, **Anchors** (Ribeiro et al., 2018) genera explicaciones basadas en reglas lógicas condicionales denominadas "anclas". Una regla $A$ se define como un conjunto de predicados booleanos aplicados sobre las características de entrada (por ejemplo, $\text{Edad} > 35 \land \text{Estado\_Civil} = \text{Casado}$).
 
-En salud, los modelos de aprendizaje automático apoyan tareas como la estratificación del riesgo, la priorización de casos o la lectura de imágenes. La explicación la necesitan actores distintos: el equipo que desarrolla y valida el modelo, el profesional que decide sobre un paciente, el comité que autoriza su uso y la persona afectada por la decisión. La Organización Mundial de la Salud sitúa la transparencia, la explicabilidad y la inteligibilidad entre sus principios éticos para la IA en salud, junto con la protección de la autonomía, la seguridad, la responsabilidad, la equidad y la sostenibilidad, y vincula esos principios con una gobernanza que acompaña todo el ciclo de vida del sistema (World Health Organization, 2021).
+El objetivo central de Anchors es garantizar que, mientras se cumplan las condiciones fijadas en la regla $A$, la predicción del modelo complejo permanezca invariante con una probabilidad extremadamente alta. Formalmente, una regla $A$ se considera un "ancla" válida para la instancia $x$ si cumple la siguiente restricción probabilística PAC (*Probably Approximately Correct*):
 
-Un escenario ilustrativo aclara el beneficio posible. Un equipo evalúa un modelo que estima riesgo a partir de imágenes y examina mapas de relevancia sobre un conjunto de casos. Si las regiones destacadas coinciden de forma sistemática con marcas de adquisición o anotaciones del equipo técnico, y no con hallazgos anatómicos, la explicación ha servido para interrogar el modelo y detectar una dependencia espuria antes del despliegue. Esa es una función valiosa y verificable: ayuda a formular hipótesis sobre el comportamiento del modelo que luego pueden contrastarse.
+$$P\left( \text{prec}(A) \ge 1 - \gamma \right) \ge 1 - \delta$$
 
-El modo de fallo aparece cuando la misma herramienta se traslada a la decisión individual. Ghassemi et al. (2021) sostienen, desde una perspectiva crítica, que los enfoques post-hoc actuales pueden ayudar a interrogar un modelo, pero no garantizan que una explicación concreta sea correcta para un paciente concreto; un mapa de calor puede parecer razonable para el clínico y, aun así, no justificar la predicción. Su recomendación es exigir validación rigurosa del desempeño en lugar de confiar en la plausibilidad de la explicación. La evidencia necesaria, por tanto, no es solo una explicación comprensible, sino validación clínica del modelo, estudios sobre cómo cambian las decisiones profesionales y documentación del alcance en que el sistema puede usarse.
+donde la precisión local $\text{prec}(A)$ mide la proporción de instancias perturbadas $z$ satisfechas por la regla $A$ que mantienen la predicción original $f(x)$:
 
-**Horizonte próximo.** La trayectoria más respaldada es la integración de la explicabilidad en la gobernanza del ciclo de vida: documentación, validación antes del despliegue y seguimiento posterior (World Health Organization, 2021). La pregunta abierta es empírica: si las explicaciones mejoran decisiones clínicas reales, algo que requiere estudios centrados en humanos y en la aplicación, cuya práctica aún carece de marcos de evaluación homogéneos (Kim et al., 2024).
+$$\text{prec}(A) = \mathbb{E}_{z \sim D(z|A)} \left[ \mathbb{I}(f(x) = f(z)) \right]$$
 
-### Finanzas y decisiones de asignación
+aquí $D(z|A)$ es la distribución de perturbaciones condicionada a que se satisfaga la regla $A$, $\gamma$ es el margen de error permitido (por ejemplo, $\gamma = 0.05$ para una precisión del 95%), y $\delta$ representa el parámetro de confianza estadística.
 
-En finanzas, la explicabilidad acompaña decisiones que asignan oportunidades o gestionan riesgos. La revisión sistemática de Weber et al. (2024) documenta aplicaciones de XAI en la gestión del riesgo, incluida la evaluación crediticia, en la gestión de carteras, en el análisis de mercados y en la prevención del blanqueo de capitales, con una cobertura de evidencia desigual entre esas áreas. La existencia de aplicaciones no demuestra, por sí sola, su eficacia operativa ni su adecuación regulatoria.
+Además de exigir alta precisión, el algoritmo busca maximizar la **cobertura** (*coverage*) de la regla, definida como la probabilidad de que una instancia aleatoria del espacio de entrada satisfaga las condiciones de $A$:
 
-La evaluación crediticia muestra con claridad por qué una misma decisión exige explicaciones diferentes. Ante la denegación de un crédito, un analista de riesgos necesita saber si el modelo se apoya en variables que actúan como sustitutos de atributos protegidos o en patrones incompatibles con la política de la entidad; para ello son útiles las atribuciones agregadas y las auditorías sobre subgrupos. La persona solicitante necesita otra cosa: entender la decisión, poder impugnarla y saber qué cambios razonables podrían alterar el resultado. Esa segunda necesidad remite a las explicaciones contrafactuales y al llamado *recourse* algorítmico (Wachter et al., 2017; Karimi et al., 2022). La normativa refuerza esta distinción: el Reglamento de Inteligencia Artificial de la Unión Europea clasifica como de alto riesgo los sistemas destinados a evaluar la solvencia de personas físicas y exige, para esos sistemas, un grado de transparencia que permita a quienes los despliegan interpretar sus resultados y usarlos adecuadamente (European Parliament & Council of the European Union, 2024).
+$$\text{cov}(A) = P_{z \sim D}(A(z) = 1)$$
 
-Los modos de fallo son conocidos. Las variables correlacionadas pueden repartir la importancia de forma engañosa, y un contrafactual válido para el modelo puede proponer cambios imposibles, costosos o ajenos a la situación real de la persona. La literatura sobre contrafactuales advierte que una alternativa puede satisfacer la condición formal de cambiar la predicción y, aun así, apoyarse en regiones poco plausibles de los datos o ignorar restricciones de factibilidad (Laugel et al., 2019; Poyiadzi et al., 2020; Karimi et al., 2022). El caso empírico de este capítulo emplea un problema tabular de ingresos con variables demográficas y laborales; sus resultados ilustran el tipo de evaluación aplicable a este ámbito, pero no se trasladan automáticamente al crédito.
+Anchors utiliza un enfoque de búsqueda por haces (*beam search*) guiado por algoritmos de bandidos multi-brazo (*Multi-Armed Bandits*) para explorar eficientemente el espacio de reglas candidatas sin evaluar innecesariamente el clasificador original.
 
-**Horizonte próximo.** La combinación de obligaciones de transparencia y de decisiones con consecuencias individuales hace previsible una demanda creciente de explicaciones auditables y de recursos contrafactuales factibles. La brecha científica es la evaluación del *recourse*: demostrar que una alternativa propuesta es viable, estable y justa para la persona, y no solo válida para el modelo.
+## DiCE: Generación de explicaciones contrafactuales diversas
 
-### Ciberseguridad e infraestructura crítica
+Propuesto por Mothilal et al. (2020), **DiCE** (*Diverse Counterfactual Explanations*) aborda la explicabilidad desde la perspectiva de la causalidad computacional y la acción prescriptiva. En lugar de explicar por qué el modelo tomó una decisión pasada, un contrafactual responde a la pregunta accionable: *¿Cuál es el conjunto mínimo de cambios en los atributos de entrada que alteraría la predicción del modelo hacia la clase deseada $y^*$?*
 
-En ciberseguridad, los modelos apoyan la detección de intrusiones, software malicioso y otras amenazas, y las explicaciones se dirigen sobre todo a analistas que deben decidir con rapidez qué alertas investigar. La revisión de Rjoub et al. (2023) organiza estos usos y subraya desafíos propios del ámbito, entre ellos las restricciones operativas y la presencia de adversarios.
+Si denotamos como $x$ la instancia de entrada original y como $c$ una instancia contrafactual candidata, DiCE formula la búsqueda de contrafactuales mediante la minimización de una función de pérdida multiobjetivo que equilibra la validez del resultado, la proximidad en el espacio de características y la diversidad entre un conjunto de $k$ contrafactuales generados $\{c_1, c_2, \dots, c_k\}$:
 
-El escenario típico es el de un analista que recibe una alerta sobre un dominio o un flujo de red y necesita saber qué rasgos llevaron al detector a marcarlo. Una explicación útil puede ayudar a priorizar alertas, a descartar falsos positivos y a documentar la decisión. Sin embargo, la evidencia disponible invita a la cautela. En un estudio con participantes con conocimientos de ciberseguridad, Roch et al. (2026) observaron que las explicaciones no mejoraron el desempeño ni la confianza en la tarea estudiada, de bloqueo de dominios maliciosos. El resultado se limita a esa población, esa tarea y ese diseño de explicación, pero muestra que la utilidad para el analista no puede darse por supuesta.
+$$\min_{c_1, \dots, c_k} \frac{1}{k} \sum_{i=1}^k \mathcal{L}_{loss}(f(c_i), y^*) + \frac{\lambda_1}{k} \sum_{i=1}^k \text{dist}(x, c_i) - \lambda_2 \text{dpp}(c_1, \dots, c_k)$$
 
-El ámbito añade un modo de fallo que en otros es secundario: el adversario. Se ha demostrado que explicadores post-hoc como LIME y SHAP pueden ser manipulados para ocultar el comportamiento real de un modelo (Slack et al., 2020). En un entorno donde un atacante tiene incentivos para evadir la detección, una explicación también es una superficie de ataque. La evidencia necesaria incluye, por tanto, pruebas de robustez de las explicaciones y evaluación dentro del flujo de trabajo real del analista.
+donde:
+* $\mathcal{L}_{loss}(f(c_i), y^*)$ es la pérdida de clasificación (por ejemplo, error cuadrático medio o entropía cruzada) que penaliza la distancia entre la predicción sobre el contrafactual $f(c_i)$ y la clase objetivo $y^*$.
+* $\text{dist}(x, c_i)$ es una métrica de distancia normalizada entre la instancia original y la contrafactual (combinando distancia de Manhattan para características continuas y distancia de Hamming para categóricas) para garantizar que los cambios sugeridos sean mínimos y realistas.
+* $\text{dpp}(c_1, \dots, c_k)$ representa una métrica de diversidad basada en Procesos de Determinantes Puntos (*Determinantal Point Processes*, DPP), la cual promueve que los $k$ contrafactuales entregados exploren distintas vías de modificación (por ejemplo, una opción basada en aumentar el nivel educativo versus una opción basada en modificar el capital invertido).
 
-**Horizonte próximo.** La trayectoria más probable es la incorporación de explicaciones en los flujos de triaje de alertas. Las necesidades de investigación son la evaluación operativa, con tiempos, carga de trabajo y errores reales, y la evidencia sobre ataques dirigidos específicamente a las explicaciones en sistemas desplegados, todavía escasa.
+## Trade-offs operacionales entre métodos
 
-### Sistemas autónomos e industriales
+Ningún método de explicabilidad es universalmente superior a los demás en todas las dimensiones operacionales. La elección de un explicador implica aceptar compromisos estructurales de diseño (*trade-offs*):
 
-En los sistemas autónomos, las decisiones se encadenan en tiempo real y los errores pueden tener consecuencias físicas. La revisión sistemática de Kuznietsov et al. (2024) sobre conducción autónoma distingue varias funciones de la XAI: el diseño de componentes interpretables, las explicaciones mediante modelos sustitutos, el monitoreo del sistema, la validación y la comunicación con los ocupantes y otros usuarios. Un ingeniero que revisa por qué un vehículo frenó ante un obstáculo inexistente, o por qué un modelo de mantenimiento predictivo anticipó una avería en una línea industrial, usa la explicación como herramienta de diagnóstico y de validación.
+![Figura 5. Marco sintético de trade-offs operacionales en evaluación post-hoc de XAI. Fuente: elaboración propia a partir de Tabassi (2023) y Phillips et al. (2021).](../figures/exported/fig_d5_ciclo_audiencias_es.png)
 
-Ese uso técnico debe distinguirse de la comunicación con las personas. Kaufman et al. (2025) mostraron, en escenarios simulados, que explicaciones erróneas de un vehículo autónomo redujeron la comodidad, la dependencia, la satisfacción y la confianza en la conducción de los participantes, aun cuando el comportamiento de conducción se mantenía constante. El resultado mide juicios humanos, no seguridad del vehículo, pero indica que la calidad de la explicación influye en la respuesta de las personas con independencia de lo que el sistema haga.
-
-El modo de fallo principal es confundir una justificación legible con una garantía. Una explicación puede contribuir a la validación y al análisis de fallos, pero no constituye por sí misma un caso de seguridad (Kuznietsov et al., 2024). La evidencia necesaria incluye pruebas del sistema completo, análisis de escenarios límite y mecanismos para detectar cuándo el entorno se aleja de las condiciones de validación.
-
-**Horizonte próximo.** La literatura apunta a integrar las explicaciones en el monitoreo y la validación continuos, más que a ofrecerlas solo como comunicación. Una dificultad transversal refuerza esta dirección: una explicación ajustada a una distribución de datos puede dejar de aproximar adecuadamente el modelo cuando la distribución cambia, lo que obliga a evaluar las explicaciones también frente a esos cambios (Lakkaraju et al., 2020).
-
-### Modelos fundacionales, de lenguaje y multimodales
-
-Los modelos de lenguaje de gran escala amplían y transforman el problema. Zhao et al. (2024) muestran que su explicabilidad exige métodos adaptados al tamaño de los modelos y a su forma de uso, y que la evaluación de esas explicaciones, incluida su fidelidad al proceso interno, enfrenta problemas distintos de los de la XAI tabular. Además, estos modelos pueden generar por sí mismos razonamientos en lenguaje natural, lo que crea una tentación nueva: tratar la justificación que el modelo escribe como si describiera cómo llegó a su respuesta.
-
-La evidencia experimental muestra por qué esa tentación es arriesgada. Turpin et al. (2023) introdujeron sesgos controlados en las indicaciones y observaron que los razonamientos en cadena podían omitir los factores que efectivamente influyeron en la respuesta y justificar respuestas sesgadas. Zaman y Srivastava (2026) matizan esa conclusión: que un razonamiento no mencione un factor no basta para declararlo infiel, porque puede ser incompleto sin ser engañoso, y las conclusiones varían según la métrica y el presupuesto de inferencia. El debate no está cerrado, pero ambos trabajos coinciden en un punto metodológico: la fidelidad de una explicación generada depende de cómo se mida.
-
-Un equipo que verifica si un asistente responde a partir de los documentos que se le proporcionan ilustra la exigencia práctica. La explicación que el propio modelo redacta no demuestra por sí sola que la respuesta se apoye en esas fuentes; se requieren pruebas que manipulen la evidencia disponible y observen si la respuesta cambia en consecuencia.
-
-**Horizonte próximo.** La explicabilidad de estos modelos es uno de los frentes más activos del campo, y su evaluación sigue abierta. Las extensiones a sistemas multimodales plantean las mismas preguntas con mayor complejidad, y la evidencia sobre la fidelidad de sus explicaciones es todavía limitada.
-
-### Lo que los ámbitos tienen en común
-
-Los cinco ámbitos confirman tres ideas que recorren el capítulo. Primero, ningún tipo de explicación sirve a todas las audiencias: el equipo técnico, el profesional que decide, la persona afectada y el regulador formulan preguntas distintas sobre el mismo sistema. Segundo, el beneficio de una explicación depende de la evidencia que la respalda, no de su claridad; en varios de los estudios citados, las explicaciones no mejoraron el desempeño en la tarea, y las explicaciones erróneas deterioraron la respuesta de las personas. Tercero, cada ámbito añade condiciones propias, como la validación clínica, la factibilidad del *recourse*, la presencia de adversarios, la seguridad física o la fidelidad de razonamientos generados.
-
-Estas coincidencias explican el orden del resto del capítulo. Antes de comparar métodos concretos es necesario entender qué objeto explicativo produce cada familia y por qué evaluar esos objetos resulta difícil. La sección siguiente aborda ese problema, que prepara la presentación de FOM-7 como una respuesta acotada para la evaluación funcional y comparativa de explicaciones.
+Como se resume en la Figura 5, mientras que SHAP proporciona la mayor rigurosidad axiomática y fidelidad local, su costo de computación crece exponencialmente con la dimensionalidad de las características. LIME ofrece una velocidad de procesamiento superior a costa de una menor estabilidad estocástica. Anchors otorga reglas intuitivas e inalterables pero con coberturas locales acotadas, y DiCE entrega prescripciones altamente accionables pero requiere optimizaciones numéricas complejas sobre el espacio de entradas.

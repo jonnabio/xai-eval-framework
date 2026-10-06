@@ -2,53 +2,25 @@
 
 ## De predecir a responder por decisiones
 
-La expansión de la inteligencia artificial en actividades científicas,
-profesionales y administrativas ha trasladado parte del problema desde la capacidad
-de predecir hacia la capacidad de responder por una predicción. En una tarea de bajo
-impacto puede bastar con que el sistema funcione de manera adecuada. Cuando su salida
-orienta un diagnóstico, una asignación de crédito, una alerta de seguridad, una
-decisión laboral o una intervención automatizada, también importa conocer qué
-información utilizó, bajo qué condiciones puede fallar, quién debe supervisarlo y qué
-evidencia permite cuestionar su resultado. La inteligencia artificial explicable
-(*explainable artificial intelligence*, XAI) adquiere relevancia en ese tránsito: no
-como ornamento comunicativo añadido a un modelo, sino como conjunto de recursos para
-investigar, justificar y delimitar su comportamiento en un contexto de uso (Barredo Arrieta
-et al., 2020; Ali et al., 2023).
+La expansión acelerada de los sistemas de aprendizaje automático en procesos de decisión con alto impacto social e individual ha transformado profundamente la relación entre la tecnología y la responsabilidad institucional. Durante décadas, el éxito de un modelo predictivo se medía de manera casi exclusiva mediante métricas agregadas de rendimiento estadístico, tales como el área bajo la curva ROC (AUC-ROC), la exactitud (*accuracy*) o el F1-score. Sin embargo, cuando la salida de un algoritmo determina la concesión de un crédito hipotecario, la asignación de una pena o medida cautelar, la admisión universitaria o el diagnóstico de una patología grave, el criterio puramente predictivo resulta insuficiente. En estos contextos, las partes interesadas —pacientes, solicitantes, auditores, jueces y la sociedad en su conjunto— demandan justificaciones examinables sobre las razones que condujeron a una determinación particular (Barredo Arrieta et al., 2020; Ali et al., 2023).
 
-Esta función no se reduce a “abrir” una caja negra. Un sistema puede documentar su
-arquitectura y seguir siendo difícil de comprender para quien toma una decisión; a la
-inversa, una explicación sencilla puede ser intuitiva y, sin embargo, describir de
-forma inexacta el proceso que produjo la salida. Los principios propuestos por
-Phillips et al. (2021) separan precisamente la existencia de una explicación, su
-significado para una persona concreta, su correspondencia con el proceso del sistema
-y el reconocimiento de los límites de conocimiento. La separación es crucial: que
-una explicación exista o resulte legible no establece todavía que sea correcta,
-útil o suficiente.
+Esta exigencia ha impulsado la rápida evolución de la Inteligencia Artificial Explicable (*Explainable Artificial Intelligence*, XAI). En paralelo, marcos normativos internacionales como el Reglamento General de Protección de Datos de la Unión Europea (GDPR, por sus siglas en inglés) y la Ley de Inteligencia Artificial de la UE (*EU AI Act*) han formalizado el denominado "derecho a una explicación" para las personas sujetas a decisiones automatizadas. A pesar de este consenso regulatorio y ético, existe una confusión sustancial en la literatura técnica y en la práctica profesional: se suele asumir de forma implícita que cualquier algoritmo que emita un gráfico de importancia de variables o una regla verbal ya es "explicable" y, por ende, automáticamente confiable.
 
-Por ello, el problema científico de la XAI no consiste únicamente en generar
-representaciones comprensibles. Consiste en determinar cuándo un artefacto
-explicativo aporta evidencia para una finalidad definida. Una explicación dirigida a
-depurar un modelo responde una pregunta distinta de otra destinada a apoyar una
-decisión profesional, documentar una auditoría o permitir que una persona afectada
-comprenda y cuestione un resultado. Su calidad depende de la relación entre modelo,
-objeto explicativo, audiencia, tarea, riesgo y criterio de evaluación.
+Como han subrayado agudamente Phillips et al. (2021) y Tabassi (2023) en las directrices del NIST (*National Institute of Standards and Technology*), la mera presencia de un artefacto explicativo no garantiza que este transmita fielmente el mecanismo de razonamiento del modelo básico, ni que resulte comprensible o útil para la toma de decisiones humanas. Una explicación visualmente atractiva o fácil de leer puede enmascarar sesgos graves o aproximaciones matemáticas inexactas, mientras que un desglose matemáticamente perfecto de gradientes internos puede ser totalmente incomprensible para un analista de dominio sin formación matemática avanzada.
 
-## Objetivo, tesis y recorrido del capítulo
+## El problema científico y la hipótesis de trabajo
 
-Este capítulo ofrece una síntesis científica y legible de los fundamentos, las
-aplicaciones emergentes y las principales brechas de la XAI, y presenta FOM-7 como
-una respuesta metodológica acotada al problema de evaluar comparativamente
-explicaciones post-hoc. Su pregunta rectora es: ¿bajo qué condiciones una explicación
-de un sistema de IA puede considerarse evidencia útil, reproducible y defendible para
-una audiencia y un propósito concretos?
+El núcleo del problema científico en la evaluación de XAI reside en la ausencia histórica de un protocolo de prueba estandarizado y multi-métrica. Cuando un auditor aplica dos explicadores agnósticos reconocidos —por ejemplo, LIME y KernelSHAP— sobre la misma instancia de un modelo de gradiente aumentado (XGBoost), es muy frecuente obtener rankings de importancia de atributos contradictorios. Frente a esta divergencia, surge la pregunta inevitable: ¿cuál de los explicadores dice la verdad? ¿Es posible medir la calidad intrínseca de una explicación sin depender de la intuición subjetiva del usuario?
 
-La tesis central es que una explicación no se convierte en evidencia por ser clara o
-convincente. Debe existir correspondencia entre la pregunta formulada, el objeto
-explicativo, el constructo evaluado, la audiencia, el diseño de prueba y el alcance de
-la afirmación. Desde esa tesis, el capítulo define primero qué es y qué no es XAI;
-examina después áreas de aplicación mediante ejemplos y límites; organiza las
-brechas técnicas, humanas, causales, operativas y de gobernanza; y finalmente presenta
-FOM-7 y el caso Adult/tabular como demostración de una evaluación funcionalmente
-fundamentada. El caso no establece un ranking universal de explicadores. Su función
-es mostrar cómo la trazabilidad y el control del diseño permiten distinguir una
-salida plausible de una afirmación empírica defendible.
+La hipótesis que articula este trabajo sostiene que la calidad de una explicación post-hoc no es una propiedad unidimensional ni reducible a una única métrica estática. Por el contrario, la confiabilidad explicativa requiere una evaluación integral que pondere simultáneamente la fidelidad local con respecto al modelo original, la estabilidad ante perturbaciones en los datos de entrada, la parsimonia o complejidad cognitiva del artefacto generado, la cobertura operacional dentro de la población de datos y la viabilidad computacional para su despliegue práctico.
+
+## Estructura del capítulo y contribuciones principales
+
+Para desarrollar esta tesis de manera progresiva y didáctica, este capítulo se estructura en una secuencia pedagógica diseñada para acompañar al lector desde las nociones elementales hasta la aplicación avanzada de ingeniería de auditoría:
+
+1. **Fundamentos conceptuales (Sección 03):** Se clarifica la terminología esencial del área, deslindando con precisión los conceptos de transparencia, interpretabilidad y explicabilidad, así como la dicotomía clave entre modelos interpretables por diseño y explicaciones post-hoc.
+2. **Métodos agnósticos principales (Sección 04):** Se exponen la lógica intuitiva y las formulaciones matemáticas de cuatro explicadores emblemáticos: LIME, SHAP, Anchors y DiCE.
+3. **La crisis de evaluación en XAI (Sección 05):** Se analizan las patologías operacionales de los explicadores post-hoc, examinando el efecto Rashomon, las perturbaciones fuera de distribución (*Out-of-Distribution*, OOD) y los riesgos de distorsión.
+4. **El protocolo operativo FOM-7 (Sección 06):** Se introduce formalmente el marco de evaluación de siete puertas (*Framework for Operational Metrics in 7 Gates*), detallando sus ecuaciones cuantitativas y criterios de validez.
+5. **Diseño empírico y benchmark (Secciones 07 y 08):** Se presenta la evaluación experimental rigurosa sobre el conjunto de datos *UCI Adult Income* evaluando cinco familias de modelos con 10 figuras descriptivas y 2 tablas normalizadas APA 7.
+6. **Implicaciones y conclusiones (Secciones 09 y 10):** Se destilan recomendaciones aplicadas para la gobernanza de sistemas de IA y se resumen los compromisos de futuro.

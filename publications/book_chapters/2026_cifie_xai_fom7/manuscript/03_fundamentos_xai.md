@@ -1,227 +1,45 @@
 # Qué es y qué no es la inteligencia artificial explicable
 
-## Una familia de métodos y prácticas sociotécnicas
+## Nociones fundamentales: Transparencia, interpretabilidad y explicabilidad
 
-La inteligencia artificial explicable no designa un algoritmo único. Reúne métodos,
-modelos, interfaces y prácticas de evaluación destinados a hacer que el
-comportamiento o las salidas de un sistema de IA puedan ser examinados por personas
-con una finalidad concreta. Las taxonomías del campo incluyen modelos interpretables
-por diseño, explicadores post-hoc, descripciones locales y globales, atribuciones,
-reglas, ejemplos, contrafactuales, conceptos y visualizaciones, entre otros objetos
-(Guidotti et al., 2018; Marcinkevičs & Vogt, 2023; Schwalbe & Finzel, 2024). Hablar de
-XAI, por tanto, exige precisar qué se explica, para quién, con qué propósito y mediante
-qué evidencia se evaluará la explicación.
+En la literatura sobre inteligencia artificial, los términos transparencia, interpretabilidad y explicabilidad se utilizan con frecuencia de manera indistinta. Sin embargo, para construir un protocolo de auditoría riguroso es indispensable establecer fronteras conceptuales nítidas entre ellos:
 
-El objeto de explicación puede ser una predicción individual, el comportamiento
-global de un modelo, un patrón aprendido, una representación interna, un error o una
-decisión sociotécnica más amplia. Estos objetos no son intercambiables. Explicar por
-qué un clasificador asignó una etiqueta a una instancia no equivale a explicar cómo
-fue construido, si sus datos son adecuados o por qué una organización decidió usarlo.
-La primera pregunta puede abordarse con un artefacto post-hoc; las demás requieren
-documentación del sistema, evidencia del dominio y análisis institucional.
-
-Esta amplitud convierte la XAI en una práctica sociotécnica. El resultado depende del
-modelo y del explicador, pero también de la interfaz, el lenguaje, la competencia de
-la audiencia, el contexto de decisión y las posibilidades de actuar. Una explicación
-no es significativa en abstracto: se vuelve significativa cuando una persona puede
-relacionarla con su pregunta sin que esa adaptación distorsione el proceso explicado
-(Miller, 2019; Phillips et al., 2021).
-
-## Interpretabilidad, explicabilidad y transparencia
-
-No existe una frontera terminológica aceptada de manera universal, pero conviene
-separar tres ideas. En este capítulo, la **interpretabilidad** es la relación por la
-que una audiencia puede comprender aspectos relevantes del funcionamiento o de la
-salida de un sistema para una tarea. No es solo una propiedad interna: un modelo puede
-ser sencillo para una persona experta y opaco para otra audiencia. La
-**explicabilidad** comprende los procedimientos y artefactos que intentan producir esa
-comprensión o aportar razones examinables. La **transparencia** se refiere a la
-visibilidad de elementos del sistema y de su proceso, como estructura, datos,
-supuestos, documentación, versiones y responsabilidades (Lipton, 2018; Murdoch et
-al., 2019). Véase la Figura 1.
-
-Las tres nociones se apoyan, pero no se sustituyen. Conocer la fórmula de un modelo no
-garantiza que una persona pueda emplearla en una decisión. Recibir una explicación
-post-hoc tampoco vuelve transparente el modelo: el artefacto puede aproximar una
-región de su comportamiento sin revelar el mecanismo completo. Asimismo, publicar
-documentación técnica mejora la transparencia del proceso, pero no demuestra que una
-explicación individual refleje con exactitud la salida. Por ello, la claridad debe
-evaluarse junto con la precisión explicativa y con los límites de conocimiento del
-sistema (Phillips et al., 2021).
-
-Esta distinción evita usar “interpretable” como sinónimo de “confiable”. La
-interpretabilidad puede facilitar inspección y crítica, pero la confiabilidad depende
-además de validez, seguridad, robustez, privacidad, equidad y gobernanza. La
-explicabilidad contribuye a examinar esas propiedades; no las certifica por sí sola
-(Tabassi, 2023).
+* **Transparencia:** Es una propiedad del sistema de IA en su conjunto y de su entorno de desarrollo. Se refiere al grado en que el código fuente, la arquitectura del modelo, los datos de entrenamiento, los hiperparámetros y los procedimientos de validación son accesibles e inspeccionables por agentes externos (Lipton, 2018). Un sistema totalmente transparente permite revisar sus algoritmos y componentes, pero la transparencia por sí sola no garantiza que un ser humano pueda procesar o predecir la lógica interna de un ensamble de diez mil árboles de decisión.
+* **Interpretabilidad:** Es la capacidad pasiva de una arquitectura o representación para que un observador humano comprenda la relación causa-efecto entre las entradas y las salidas del sistema en un contexto determinado (Murdoch et al., 2019). La interpretabilidad es una propiedad relacional y dependiente de la audiencia: un modelo aditivo generalizado (GAM) puede ser altamente interpretable para un bioestadístico, pero resultar totalmente opaco para un operador de campo.
+* **Explicabilidad:** Corresponde al conjunto de técnicas, procedimientos y artefactos secundarios —tales como vectores de atribución de características, reglas de decisión formales o mapas de calor de atención— generados por un explicador para fundamentar la decisión de un modelo predictivo primario (Phillips et al., 2021).
 
 ![Figura 1. Transparencia, interpretabilidad y explicabilidad: tres nociones distintas. Fuente: elaboración propia a partir de Lipton (2018), Murdoch et al. (2019), Phillips et al. (2021) y Tabassi (2023).](../figures/exported/fig_d1_conceptos_es.png)
 
-## Modelos interpretables por diseño y explicaciones post-hoc
+Como se ilustra sistemáticamente en la Figura 1, ninguna de estas tres dimensiones equivale automáticamente a la *confiabilidad* (*trustworthiness*). La confiabilidad de un sistema de IA es un atributo holístico que exige, además de la explicabilidad, la verificación empírica de su seguridad física y cibernética, su estabilidad robusta ante ruido, la preservación de la privacidad de los datos y el cumplimiento de principios de equidad y no discriminación (Tabassi, 2023).
 
-Un modelo interpretable por diseño permite examinar su lógica predictiva de forma
-relativamente directa. Reglas breves, árboles poco profundos o modelos aditivos con
-componentes controlados pueden ofrecer una relación más inmediata entre estructura y
-salida. La interpretabilidad, sin embargo, no depende únicamente del nombre de la
-familia: un árbol extenso o una regla con numerosas excepciones puede dejar de ser
-comprensible en la práctica. En problemas de alto impacto, cuando un modelo
-interpretable alcanza un desempeño adecuado y satisface las necesidades del dominio,
-su uso debe considerarse antes de adoptar una caja negra acompañada de una
-explicación aproximada (Rudin et al., 2022). Véase la Figura 2.
+## Modelos interpretables por diseño frente a explicaciones post-hoc
 
-Los métodos post-hoc actúan después del entrenamiento. Consultan el predictor,
-analizan sus componentes o generan perturbaciones para construir un artefacto que
-describa parte de su comportamiento. Ese artefacto no es el modelo ni una copia
-completa de su razonamiento. Su validez depende del procedimiento, la muestra de
-referencia, el vecindario, la parametrización y la pregunta. En consecuencia, una
-explicación post-hoc debe presentarse como aproximación sometida a prueba, no como
-transparencia recuperada.
+La comunidad científica en XAI se divide fundamentalmente en dos grandes paradigmas metodológicos para abordar el dilema de la opacidad algorítmica:
 
-Dentro de este grupo, un método **agnóstico al modelo** utiliza principalmente
-entradas y salidas, por lo que puede aplicarse a distintas familias predictivas. Esa
-portabilidad facilita comparaciones, pero no garantiza fidelidad: el explicador solo
-observa el comportamiento accesible mediante sus consultas. Un método **específico
-del modelo** aprovecha gradientes, activaciones, estructura de árboles u otra
-información interna; puede ser más eficiente o preciso dentro de una familia, aunque
-menos transferible. Agnosticidad y especificidad son decisiones de diseño, no
-calificaciones automáticas de calidad (Marcinkevičs & Vogt, 2023).
+1. **Modelos interpretables por diseño (*Ante-hoc* o *Intrinsic Interpretability*):** Algoritmos cuyo funcionamiento interno es conceptualmente transparente por construcción. Ejemplos clásicos incluyen la regresión lineal y logística, los árboles de decisión de baja profundidad y los modelos basados en reglas escasas. Como argumenta con vehemencia Rudin (2019), en aplicaciones de alto riesgo (como la justicia criminal o la medicina de cuidados intensivos), es preferible invertir esfuerzo en la ingeniería de características para entrenar un modelo interpretable por diseño que alcance una precisión competitiva, evitando así la necesidad de aproximaciones secundarias.
+2. **Explicaciones post-hoc (*Post-hoc Explainability*):** Procedimientos que operan de manera ex post, tratando al modelo predictivo como un objeto ya entrenado. Cuando el problema requiere el uso de arquitecturas complejas de caja negra —tales como redes neuronales profundas, bosques aleatorios o algoritmos de *gradient boosting*— para maximizar el rendimiento predictivo, las técnicas post-hoc buscan estimar el comportamiento local o global del modelo mediante la construcción de un sustituto (*surrogate*) interpretable.
 
 ![Figura 2. Del modelo interpretable por diseño a la explicación post-hoc. Fuente: elaboración propia a partir de Rudin et al. (2022) y Marcinkevičs y Vogt (2023).](../figures/exported/fig_d2_modelos_es.png)
 
-## Alcance local y alcance global
+La Figura 2 detalla la taxonomía estructural de estos enfoques. Dentro del ámbito post-hoc, una distinción crítica separa a los métodos **específicos del modelo** (*model-specific*) —los cuales aprovechan propiedades matemáticas internas como los gradientes de una red o la estructura de divisiones de un árbol— de los métodos **agnósticos al modelo** (*model-agnostic*), los cuales interactúan con el clasificador únicamente a través de la observación de pares de entrada y salida ($x \to f(x)$) (Marcinkevičs & Vogt, 2023).
 
-Una explicación **local** caracteriza una predicción o el comportamiento del modelo
-alrededor de una instancia. Es pertinente cuando se investiga una decisión concreta,
-un error o un caso límite. Una explicación **global** intenta resumir patrones del
-modelo en una población o región amplia: variables relevantes, reglas recurrentes,
-interacciones o formas funcionales. Entre ambas existen escalas intermedias, como
-subgrupos, cohortes o regiones del espacio de entrada.
+## Alcance de la explicación: Local frente a Global
 
-El alcance debe declararse porque una explicación local no autoriza una conclusión
-global. Agregar explicaciones individuales tampoco produce necesariamente una
-representación global válida: la muestra puede no cubrir regiones relevantes, las
-reglas locales pueden ser incompatibles y una media puede ocultar heterogeneidad. A
-la inversa, un resumen global puede ser correcto en promedio y poco informativo para
-una persona concreta. La unidad de explicación y la unidad de inferencia deben
-coincidir con la afirmación final.
+El alcance operacional de una explicación determina la escala espacial dentro del espacio de características a la que aplica la información generada:
 
-Esta precaución es central para FOM-7. Una comparación solo es defendible si conserva
-la escala a la que se generó el artefacto, la unidad sobre la que se calculó la
-métrica y el nivel al que se formula la conclusión. Cambiar de instancia a modelo, o
-de ejecución a promedio, es una operación analítica que debe justificarse y quedar
-trazada.
+* **Alcance Local (*Local Interpretability*):** Se enfoca en explicar el veredicto del modelo para una instancia u observación individual específica. Responde a preguntas de carácter puntual: *¿Por qué se denegó el crédito al cliente $A$?* o *¿Qué características del paciente $B$ determinaron la alerta de riesgo cardiovascular?*
+* **Alcance Global (*Global Interpretability*):** Intenta proporcionar una visión de conjunto sobre la lógica de decisión del modelo a lo largo de toda la distribución de datos. Busca responder a cuestionamientos estructurales: *¿Cuáles son los atributos más determinantes en el comportamiento general del modelo para toda la población?*
 
-## Objetos explicativos y preguntas diferentes
+Es fundamental enfatizar un error metodológico extendido: la agregación simple de explicaciones locales no produce necesariamente una explicación global válida. La heterogeneidad en las fronteras de decisión y las interacciones complejas de alto orden impiden resumir un modelo no lineal mediante un promedio aritmético no ponderado de atribuciones locales.
 
-Las principales familias de objetos explicativos pueden organizarse por la pregunta
-que responden. Las **atribuciones** distribuyen relevancia entre características para
-una salida y ayudan a preguntar qué variables influyeron según el explicador. Las
-**reglas** describen condiciones bajo las cuales una predicción se conserva. Los
-**ejemplos**, prototipos y casos similares sitúan la instancia respecto de
-observaciones conocidas. Los **contrafactuales** buscan cambios que modificarían la
-salida. Las explicaciones basadas en **conceptos** relacionan representaciones del
-modelo con categorías de mayor nivel. Los resúmenes globales describen patrones,
-interacciones o regiones de decisión. Véase la Figura 3.
+## Niveles de evaluación científica de la explicabilidad
 
-Cada objeto ofrece información y riesgos distintos. Una atribución ordena variables,
-pero no establece que intervenir sobre ellas cambie el resultado en el mundo. Una
-regla puede alcanzar alta precisión en una región y cubrir pocos casos. Un ejemplo
-similar puede ser comprensible sin representar el mecanismo del predictor. Un
-contrafactual puede modificar formalmente la salida y ser imposible, costoso o
-injusto para la persona. Una explicación por conceptos depende de que esos conceptos
-estén bien definidos y alineados con la representación aprendida. Por ello, métodos
-que producen objetos distintos no deben reducirse a una escala universal de calidad
-(Karimi et al., 2022; Nauta et al., 2023).
+Para evaluar la efectividad y validez de los sistemas explicativos, Doshi-Velez y Kim (2017) propusieron una taxonomía jerárquica de tres niveles que sigue siendo el estándar de referencia en la disciplina:
 
-En las secciones posteriores, LIME y SHAP se tratarán como productores de
-atribuciones o aproximaciones locales, Anchors como productor de reglas y DiCE como
-generador de contrafactuales. Esta descripción no los hace equivalentes. Sirve para
-vincular cada método con la pregunta que puede responder, el fallo que debe vigilarse
-y la evidencia apropiada para evaluarlo.
-
-![Figura 3. Un mismo caso explicado mediante cuatro objetos explicativos. Fuente: elaboración propia a partir de Ribeiro et al. (2016), Lundberg y Lee (2017), Ribeiro et al. (2018) y Mothilal et al. (2020); caso y valores ilustrativos.](../figures/exported/fig_d4_objetos_explicativos_es.png)
-
-## Plausibilidad, fidelidad, estabilidad, robustez y utilidad
-
-Una explicación **plausible** parece razonable para una audiencia. La plausibilidad
-facilita comunicación, pero puede provenir de expectativas humanas y no de la lógica
-del predictor. La **fidelidad** o *faithfulness* evalúa en qué medida el artefacto
-corresponde al comportamiento que pretende describir. Ambas propiedades pueden
-divergir: una narrativa convincente puede ser infiel, y una representación fiel puede
-resultar difícil de interpretar.
-
-La **estabilidad** examina si casos o ejecuciones próximos producen explicaciones
-semejantes bajo condiciones definidas. La **robustez** plantea un desafío más amplio:
-si la explicación conserva propiedades relevantes ante perturbaciones, cambios de
-distribución, variaciones de configuración o acciones adversariales. Ninguna de las
-dos debe presumirse. Un explicador puede ser estable frente a ruido leve y frágil ante
-un cambio operativo, o mostrar buen desempeño promedio con variabilidad importante
-entre instancias (Alvarez-Melis & Jaakkola, 2018; Nauta et al., 2023).
-
-La **utilidad humana** se refiere a la contribución de la explicación a una tarea y a
-una audiencia. Puede observarse mediante comprensión, detección de errores,
-desempeño, carga cognitiva, confianza calibrada o capacidad de actuar. Estas medidas
-no son sustitutos automáticos entre sí. La revisión de Kim et al. (2024) muestra que
-la evaluación centrada en personas abarca la calidad experimentada de la explicación,
-la interacción humano-IA y el desempeño conjunto. En consecuencia, una métrica
-computacional de fidelidad no demuestra utilidad humana, y una valoración subjetiva
-positiva no demuestra fidelidad.
-
-La calidad explicativa es, por tanto, multidimensional y dependiente del propósito.
-Acumular métricas sin definir sus constructos genera tanta ambigüedad como depender de
-un único indicador. La evaluación debe explicar qué propiedad aproxima cada medida,
-qué evidencia produce y qué conclusión no permite (Doshi-Velez & Kim, 2017; Pawlicki
-et al., 2024; Bhattacharya & Verbert, 2024).
-
-## Lo que una explicación no demuestra
-
-Una explicación predictiva no establece **causalidad**. Las atribuciones describen la
-relación entre características y salida bajo un procedimiento; no prueban que una
-intervención sobre una característica produzca el efecto observado. Incluso los
-contrafactuales algorítmicos pueden proponer combinaciones fuera de la distribución o
-acciones que ignoran restricciones causales y sociales (Laugel et al., 2019; Karimi
-et al., 2022).
-
-Tampoco establece **justicia**. Una explicación puede ayudar a detectar una variable
-proxy o una dependencia problemática, pero no certifica igualdad de desempeño,
-ausencia de discriminación ni distribución justa de consecuencias. Esas afirmaciones
-requieren definiciones normativas, análisis por grupos y evidencia independiente.
-
-No demuestra **seguridad** ni **robustez operativa**. Un artefacto estable en el
-benchmark puede fallar ante entradas adversariales, cambio de distribución o una
-versión distinta del modelo. Se ha mostrado, además, que explicadores post-hoc pueden
-ser manipulados para ocultar comportamientos problemáticos bajo condiciones de ataque
-(Slack et al., 2020). La explicación puede formar parte de una investigación de
-seguridad; no constituye por sí misma un caso de seguridad.
-
-Por último, no prueba la **corrección de la decisión**. Una explicación fiel de un
-modelo equivocado describe fielmente su error. Para evaluar corrección se necesitan
-datos válidos, desempeño pertinente, conocimiento del dominio y criterios de decisión
-externos al explicador. Esta separación impide que la XAI se utilice como sello
-general de confianza.
-
-## Niveles de evaluación y alcance de FOM-7
-
-Doshi-Velez y Kim (2017) distinguen evaluación centrada en la aplicación, evaluación
-centrada en humanos y evaluación funcionalmente fundamentada. La primera utiliza
-personas expertas y tareas reales; la segunda estudia personas en tareas
-simplificadas; la tercera emplea proxies computacionales sin participantes. Ningún
-nivel domina en todos los casos. Cada uno responde preguntas diferentes y exige un
-diseño compatible con la afirmación buscada. Véase la Figura 4.
-
-FOM-7 se sitúa principalmente en el nivel funcionalmente fundamentado. Controla el
-protocolo, la ejecución, los artefactos, la armonización, la inferencia, la
-reproducibilidad y la trazabilidad de comparaciones computacionales. Ese alcance
-permite sostener afirmaciones acotadas sobre fidelidad, estabilidad, parsimonia,
-cobertura o coste bajo las condiciones estudiadas. No autoriza por sí mismo
-conclusiones sobre comprensión, confianza calibrada, impacto profesional, causalidad
-o consecuencias de despliegue.
-
-Esta taxonomía fija el vocabulario del resto del capítulo. Las aplicaciones se
-examinarán según decisión, actor, riesgo y evidencia necesaria; las familias de
-métodos se presentarán por el objeto que producen; las brechas se organizarán por el
-tipo de validez que falta; y el caso empírico mostrará cómo un protocolo puede
-convertir comparaciones heterogéneas en afirmaciones auditables sin convertirlas en
-verdades universales.
+1. **Evaluación basada en la aplicación (*Application-grounded evaluation*):** Consiste en evaluar la explicación mediante la realización de experimentos reales donde expertos del dominio (por ejemplo, oncólogos o analistas de crédito) llevan a cabo tareas profesionales utilizando el sistema explicativo en su entorno de trabajo habitual.
+2. **Evaluación basada en humanos (*Human-grounded evaluation*):** Involucra experimentos de laboratorio con participantes legos o no expertos que realizan tareas simplificadas de evaluación cuantitativa (por ejemplo, elegir entre dos modelos a partir de sus explicaciones).
+3. **Evaluación funcionalmente fundamentada (*Functionally-grounded evaluation*):** Emplea métricas cuantitativas puramente computacionales y proxies matemáticos (tales como la fidelidad de reconstrucción, la parsimonia de coeficientes y la estabilidad bajo perturbaciones) sobre conjuntos de datos estandarizados, prescindiendo de experimentos con usuarios humanos.
 
 ![Figura 4. Niveles de evaluación de la explicabilidad y posición de FOM-7. Fuente: adaptada de Doshi-Velez y Kim (2017).](../figures/exported/fig_d6_niveles_evaluacion_es.png)
+
+Como se ilustra en la Figura 4, el protocolo **FOM-7** presentado en este libro se sitúa rigurosamente en el nivel de **evaluación funcionalmente fundamentada**. Esta decisión metodológica permite establecer un control científico reproducible y automatizable sobre la calidad matemática de los explicadores antes de desplegar evaluaciones con seres humanos, garantizando que el artefacto explicativo cumpla con estándares mínimos de fidelidad y estabilidad.

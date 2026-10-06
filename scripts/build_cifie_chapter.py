@@ -472,15 +472,24 @@ def main() -> int:
     args = parser.parse_args()
 
     sections = sorted(p for p in MANUSCRIPT.glob("[01][0-9]_*.md") if not p.name.startswith("00_"))
-    if [p.name[:2] for p in sections] != [f"{i:02d}" for i in range(1, 12)]:
-        raise SystemExit(f"expected sections 01..11, found {[p.name for p in sections]}")
+    expected = [f"{i:02d}" for i in range(1, len(sections) + 1)]
+    if [p.name[:2] for p in sections] != expected:
+        raise SystemExit(f"expected sections {expected[0]}..{expected[-1]}, found {[p.name[:2] for p in sections]}")
 
     title, authors, affiliation = design_sheet()
-    header = "---\n" f'title: "{title}"\n' "author:\n" + "".join(
-        f'  - "{a}, {affiliation}"\n' for a in authors) + "lang: es-ES\n---\n\n"
     body = "\n\n".join(p.read_text(encoding="utf-8").strip() for p in sections)
     body, n_tables = place_tables(body)
     body = reader_facing_body(body)
+    words = len(re.findall(r"\w+", body))
+
+    header = (
+        "---\n"
+        f'title: "{title}"\n'
+        f'subtitle: "Recuento total de palabras: {words:,} palabras"\n'
+        "author:\n" + "".join(f'  - "{a}, {affiliation}"\n' for a in authors) +
+        "lang: es-ES\n---\n\n"
+        f'::: {{custom-style="Author"}}\n**Recuento de Palabras:** {words:,} palabras\n:::\n\n'
+    )
     source = header + body + "\n\n" + references()
 
     args.out = args.out.resolve()
