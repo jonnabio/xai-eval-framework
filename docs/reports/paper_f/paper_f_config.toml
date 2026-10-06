@@ -1,0 +1,153 @@
+# Paper F configuration. Read by scripts/paper_f_lib.py. Fixed before any model is trained
+# (ANALYSIS_PLAN.md, sections 2 and 3). A change after that point is a deviation and is
+# logged in section 12 of the plan.
+
+seeds = [42, 123, 456, 789, 101112]
+test_size = 0.2
+n_instances = 200
+min_datasets = 12
+target_datasets = 16
+
+[rule]                      # plan section 2.1
+min_rows = 1000
+min_features = 5
+max_features = 100
+auc_low = 0.65
+auc_high = 0.98
+min_models_in_range = 3
+size_cut = 10000            # rows; "large" from here
+cv_folds = 5
+gate_seed = 42
+
+[preprocessing]
+# Categories beyond the 20 most frequent of a feature are grouped into one level, so that a
+# feature with thousands of categories does not produce thousands of columns.
+max_categories = 20
+
+[models.logreg]
+C = 1.0
+max_iter = 1000
+
+[models.rf]
+n_estimators = 100
+
+[models.xgb]
+n_estimators = 100
+max_depth = 4
+learning_rate = 0.1
+
+[models.mlp]
+hidden_layer_sizes = [100]
+max_iter = 500
+
+[explainers.lime]           # EXP2: kernel_width 3.0, 10 features, 1,000 samples
+kernel_width = 3.0
+num_features = 10
+num_samples = 1000
+
+[explainers.shap]           # EXP2: 50 background rows; TreeSHAP for rf and xgb, KernelSHAP otherwise
+n_background = 50
+
+[explainers.anchors]        # EXP2: precision threshold 0.95
+threshold = 0.95
+
+[explainers.dice]           # EXP2: random search, one counterfactual, all columns continuous
+method = "random"
+total_cfs = 1
+
+[measures]
+top_k = 5                   # features compared by the stability measure
+stability_copies = 10
+stability_noise_sd = 0.05   # in standard deviations of each numeric feature
+mask_fraction = 0.2         # share of features masked by the faithfulness gap, at least one
+zero_tolerance = 1e-8       # an attribution below this is "not used"
+
+[run]
+time_limit_s = 0            # per instance and explainer; 0 = not set. Set after the pilot.
+
+# Candidate pool, in the order of the plan. `id` is the OpenML data identifier; the version
+# and the target are read from the OpenML record at download and stored with the data.
+[[dataset]]
+key = "phoneme"
+id = 1489
+stratum = "numeric-small"
+
+[[dataset]]
+key = "spambase"
+id = 44
+stratum = "numeric-small"
+
+[[dataset]]
+key = "qsar_biodeg"
+id = 1494
+stratum = "numeric-small"
+
+[[dataset]]
+key = "ozone_level"
+id = 1487
+stratum = "numeric-small"
+
+[[dataset]]
+key = "magic_telescope"
+id = 1120
+stratum = "numeric-large"
+
+[[dataset]]
+key = "electricity"
+id = 151
+stratum = "numeric-large"
+
+[[dataset]]
+key = "credit_default"
+id = 42477
+stratum = "numeric-large"
+
+[[dataset]]
+key = "german_credit"
+id = 31
+stratum = "mixed-small"
+
+[[dataset]]
+key = "churn"
+id = 40701
+stratum = "mixed-small"
+
+[[dataset]]
+key = "sick"
+id = 38
+stratum = "mixed-small"
+
+[[dataset]]
+key = "compas"
+id = 42192
+stratum = "mixed-small"
+
+[[dataset]]
+key = "adult"
+id = 1590
+stratum = "mixed-large"
+
+[[dataset]]
+key = "bank_marketing"
+id = 1461
+stratum = "mixed-large"
+
+[[dataset]]
+key = "nomao"
+id = 1486
+stratum = "mixed-large"
+
+[[dataset]]
+key = "kr_vs_kp"
+id = 3
+stratum = "categorical-small"
+
+[[dataset]]
+key = "mushroom"
+id = 24
+stratum = "categorical-small"
+
+[[dataset]]
+key = "amazon_employee"
+id = 4135
+stratum = "categorical-large"
