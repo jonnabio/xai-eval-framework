@@ -56,7 +56,60 @@ cleanup below:**
   written into `ANALYSIS_PLAN.md` (section 12 and the sections it names) before any
   dataset is loaded. The loader and the two metric changes are shared code (`pubs/*`).
 
-**Second update, same day; it supersedes the "Next" item above:**
+**Third update, same day (2026-10-05, evening): the Paper F run is in progress. It
+supersedes the "Next" and "Open" items of the second update below.**
+
+- **#36 is merged** at the author's request. Author decisions: four models and sixteen
+  datasets; the two new measure definitions and the decision rule are confirmed; the
+  review is double-blind, so a version without author is built.
+- **THE FULL RUN IS RUNNING** on the author's laptop since 2026-10-05 19:32 (local time):
+  `python scripts/paper_f_run.py launch --workers 8`, started as a detached process
+  (process id in `outputs/analysis/paper_f/runs/_launcher.pid`, log in
+  `runs/_launcher.log`). 1,280 jobs (16 datasets × 4 models × 5 seeds × 4 explainers),
+  200 instances each. Estimate from the pilot: 800 to 1,060 processor hours, **four to
+  five and a half days**. It is resumable: the same command continues it and skips what is
+  done. Progress: `python scripts/paper_f_run.py status`. The laptop must stay on and
+  awake. Do not start a second launcher while one runs.
+- **Environment:** `anchor-exp==0.0.2.0` and `dice-ml==0.12` were installed into the
+  project `.venv` (nothing was downgraded). `alibi` cannot be installed on Python 3.13, so
+  Anchors uses the reference implementation; logged in the plan.
+- **Code (lane files, branch `paper/f-external-validity`, pushed):**
+  `docs/reports/paper_f/paper_f_config.toml`; `scripts/paper_f_lib.py`,
+  `paper_f_datasets.py`, `paper_f_run.py`, `paper_f_analyze.py`; 14 tests in
+  `tests/analysis/test_paper_f_*`. The loader and measures are in the lane, not in `src/`
+  (a logged change of the plan), so no shared code changed.
+- **Datasets:** the rule gave 12 of the 17 pool candidates; the widening step added JM1,
+  PC4, PC3 and KC1 from OpenML-CC18. `outputs/analysis/paper_f/datasets.csv` (16) and
+  `candidates.csv` (77, with the rule each failed) were committed before the pilot.
+  Downloaded data: `data/openml/paper_f/` (git-ignored).
+- **Pilot done** (Adult with 20 instances; then two instances of every condition). No
+  programming error; two machine problems found and handled in the launcher (memory with
+  14 jobs at once; a job alive after a crash in XGBoost). Pilot outputs deleted.
+- **Correction recorded in the plan (section 12):** the advisor had said that the
+  framework's fidelity is not defined for Anchors and DiCE. That was wrong: EXP2 and EXP3
+  report as fidelity a faithfulness correlation that is defined for any attribution. The
+  four ranked measures do not change; the correlation is reported for the four explainers
+  as a secondary measure.
+- **Draft of the paper:** `docs/reports/paper_f/paper_f_template.tex` (source),
+  `scripts/build_paper_f.py`, `references.bib`; built files
+  `docs/reports/paper_f/submission/paper_f_blind.pdf` and `paper_f_full.pdf` (local, 4
+  pages). Introduction and methods are written; every result is a red "[pending]" mark.
+  The blind file shows no author data except the self-citation of the RIMI article.
+- **Next, when the run ends:**
+  1. `python scripts/paper_f_run.py status`; expect 1,280 job files and 256,000 rows.
+     `launch` prints the jobs that failed five times, if any.
+  2. `python scripts/paper_f_analyze.py`, once, on the complete data; commit
+     `outputs/analysis/paper_f/results/`.
+  3. Write results, discussion, three conclusions and the abstract (at most 800
+     characters) in the template; figure generator; build with `--final`.
+  4. Zenodo version, claim registry (`pubs/*` branch), the journal's Word template,
+     blind and full files; AI declaration by the author.
+- **For the author to check:** the two references marked NEW F in `references.bib`; the
+  proposed AI declaration; that four of the sixteen datasets are of one family (software
+  defects), which the rule produced and the paper states as a limit.
+- **Open:** pull request for the branch (opened, not merged); the working title.
+
+**Second update, same day; the third update above supersedes its "Next" and "Open" items:**
 
 - **#35 is merged** at the author's request (`main` at `220d3b425`).
 - **Venue (author, 2026-10-05): Journal of Computer Sciences Institute** (Lublin University
