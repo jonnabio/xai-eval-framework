@@ -70,6 +70,13 @@ supersedes the "Next" and "Open" items of the second update below.**
   five and a half days**. It is resumable: the same command continues it and skips what is
   done. Progress: `python scripts/paper_f_run.py status`. The laptop must stay on and
   awake. Do not start a second launcher while one runs.
+  - **While the run is active, do not switch the main folder to a branch that lacks the
+    Paper F scripts** (any branch that has not taken `main` after the Paper F pull request
+    is merged): every new job reads `scripts/paper_f_*.py` and the configuration from the
+    working tree. Do not edit `paper_f_config.toml` or `paper_f_lib.py` during the run.
+    To work on another paper meanwhile, merge the Paper F pull request first and have that
+    branch take `main`, or stop the launcher (`Stop-Process -Id <pid>`; then stop the
+    remaining `paper_f_run.py job` processes) and start it again afterwards.
 - **Environment:** `anchor-exp==0.0.2.0` and `dice-ml==0.12` were installed into the
   project `.venv` (nothing was downgraded). `alibi` cannot be installed on Python 3.13, so
   Anchors uses the reference implementation; logged in the plan.
