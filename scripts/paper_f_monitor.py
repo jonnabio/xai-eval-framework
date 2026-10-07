@@ -15,8 +15,10 @@ results are analysed once, when the run is complete (analysis plan, section 7).
 Time left is estimated from the work that remains, not from the count of conditions: the
 seconds of every row (`total_s`) are read only to add them up per job. A condition that is
 not finished is given the time the same condition took in another seed; when there is none,
-the mean of its dataset and method, then of its method. The seeds run one after another, so
-each seed gets its own end and the last one is the end of the run.
+the mean of its dataset and method, then of its method. The seeds run in order, and the
+workers that a seed no longer needs take jobs of the next seed, so the end of a seed is
+the time its work and the work of the seeds before it need together; the end of the last
+seed is the end of the run.
 """
 from __future__ import annotations
 
@@ -126,8 +128,8 @@ def launchers_alive() -> tuple[int | None, int]:
 
 
 def time_left(snap: dict, workers: int) -> dict | None:
-    """Per seed: (hours of work left, seconds until its end counted from the end of the
-    seed before). None while no job is far enough to estimate from."""
+    """Per seed: (hours of work left, seconds from now until its end). None while no job
+    is far enough to estimate from."""
     n_inst, jobs = snap["n_inst"], snap["jobs"]
     pools: dict[tuple, list[float]] = {}
     own = {}
@@ -142,6 +144,7 @@ def time_left(snap: dict, workers: int) -> dict | None:
         return None
     mean = {k: sum(v) / len(v) for k, v in pools.items()}
     out = {}
+    before = 0.0                 # work of the seeds before this one, which is done first
     for seed in snap["seeds"]:
         work = longest = 0.0
         for d in snap["datasets"]:
@@ -157,7 +160,8 @@ def time_left(snap: dict, workers: int) -> dict | None:
                     work += left
                     longest = max(longest, left)
         # A seed cannot end before its longest job, however many jobs run at once.
-        out[seed] = (work / 3600, max(work / workers, longest))
+        before += work
+        out[seed] = (work / 3600, max(before / workers, longest))
     return out
 
 
@@ -242,19 +246,21 @@ def render(snap: dict, alive: int | None, workers: int, use_colour: bool) -> str
     rate = recent / RATE_WINDOW_H                     # conditions per hour, last hours
 
     left = time_left(snap, workers)
-    ends, at = {}, dt.datetime.now()                  # the seeds run one after another
+    ends, at = {}, dt.datetime.now()
     if left is not None:
         for s in seeds:
             if seeds[s]["done"] < per_seed:
-                at += dt.timedelta(seconds=left[s][1])
+                # A seed does not end before the seed in front of it.
+                at = max(at, dt.datetime.now() + dt.timedelta(seconds=left[s][1]))
                 ends[s] = at
 
     lines.append(c("SEEDS", BOLD) + c("   conditions done, methods done of "
                                       f"{per_seed // len(EXPLAINERS)} each, estimated end", DIM))
+    at_work = {a["seed"] for a in snap["active"]}
     for s, v in seeds.items():
         pct = 100 * v["done"] / per_seed
         state = (c("complete", GREEN) if v["done"] >= per_seed
-                 else c("running ", CYAN) if s == current and snap["active"]
+                 else c("running ", CYAN) if s in at_work
                  else c("waiting ", DIM))
         end = f"  ends {ends[s]:%a %d %b %H:%M}" if s in ends else ""
         methods = " ".join(f"{e[0].upper()}{v['by_expl'][e]:>2}" for e in EXPLAINERS)

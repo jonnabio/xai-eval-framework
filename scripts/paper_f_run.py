@@ -90,6 +90,31 @@ def expected(root: Path, cfg: dict, limit: int) -> int:
     return limit or cfg["n_instances"]
 
 
+def ordered_jobs(datasets, models, seeds, explainers) -> list[tuple]:
+    """Jobs (dataset, model, seed, explainer) in the order they are started: seed after
+    seed, and inside a seed in a fixed shuffled order, the same for every seed.
+
+    The shuffle mixes long and short jobs, so that the memory-heavy ones (Anchors on the
+    random forest) do not all run at the same time. The seeds are kept in order so that
+    each one is complete before most of the next is run; when a seed has fewer jobs left
+    than there are workers, the free workers take jobs of the next seed (plan section 12,
+    2026-10-07: the last job of seed 42 ran alone for ten hours).
+    """
+    jobs = []
+    for s in seeds:
+        part = [(d, m, s, e) for d in datasets for m in models for e in explainers]
+        random.Random(20261005).shuffle(part)
+        jobs += part
+    return jobs
+
+
+def requeue(queue: list[tuple], job: tuple, seeds: list[int]) -> None:
+    """Put a job back behind the queued jobs of its own seed, before those of later seeds."""
+    rank = seeds.index(job[2])
+    pos = next((i for i, q in enumerate(queue) if seeds.index(q[2]) > rank), len(queue))
+    queue.insert(pos, job)
+
+
 def launch(args) -> int:
     cfg = lib.config()
     if args.pilot:
@@ -97,11 +122,11 @@ def launch(args) -> int:
     else:
         root = Path(args.out)
         datasets, seeds, limit = args.datasets or study_datasets(), args.seeds or cfg["seeds"], args.limit
-    jobs = [(d, m, s, e) for d in datasets for m in (args.models or lib.MODELS) for s in seeds
-            for e in (args.explainers or lib.EXPLAINERS)]
-    # A fixed shuffle mixes long and short jobs, so that the memory-heavy ones (Anchors on
-    # the random forest) do not all run at the same time.
-    random.Random(20261005).shuffle(jobs)
+    seeds = list(dict.fromkeys(seeds))
+    jobs = ordered_jobs(datasets, args.models or lib.MODELS, seeds,
+                        args.explainers or lib.EXPLAINERS)
+    stop = root / "_STOP"
+    begun: set[int] = set()
     limit_s = cfg["run"]["time_limit_s"]
     logs = root / "_logs"
     logs.mkdir(parents=True, exist_ok=True)
@@ -122,12 +147,23 @@ def launch(args) -> int:
     def again(job: tuple) -> None:
         """A job that stopped for a reason of the machine is run again, up to five times."""
         retries[job] = retries.get(job, 0) + 1
-        (queue if retries[job] <= 5 else failed).append(job)
+        if retries[job] <= 5:
+            requeue(queue, job, seeds)
+        else:
+            failed.append(job)
 
     queue = list(jobs)
     while queue or running:
         while queue and len(running) < args.workers:
+            # With the stop file, a seed that has not begun is not begun.
+            if queue[0][2] not in begun and stop.exists():
+                break
+            begun.add(queue[0][2])
             start(queue.pop(0))
+        if queue and not running and stop.exists():
+            print(f"{time.strftime('%H:%M:%S')} stop file found; {len(queue)} jobs left "
+                  f"in the queue", flush=True)
+            return 0
         time.sleep(2)
         for job, proc in list(running.items()):
             path = job_path(root, *job)
