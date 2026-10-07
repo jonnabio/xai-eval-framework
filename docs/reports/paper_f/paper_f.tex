@@ -186,12 +186,33 @@ it changes with the size of each change.
 
 \subsection{Research scenario}
 
-Each of the 16 datasets is combined with the four classifiers and
-the four methods, and every combination is repeated with five random seeds that fix the
-split, the classifier and the sampling of the method. For each dataset, classifier and
-seed, 200 test instances are drawn, stratified by predicted class, and the four methods
-explain the same instances. An instance for which a method returns no explanation is kept
-and counted as a failure.
+The design is a full factorial. Each of the 16 datasets is combined
+with the four classifiers and the four methods, and every combination is repeated with
+five seeds: 42, 123, 456, 789 and 101112. The values carry no meaning;
+they were written in the configuration file before any classifier was trained.
+
+A seed is one complete repetition of the study. It fixes the split of each dataset into
+training and test data, the random state of each classifier, the choice of the instances
+to explain and the random draws of each method. The draws for an instance are derived
+from the seed and the position of the instance, so they do not depend on the order in
+which the computations run. For each dataset, classifier and seed, 200 test instances are
+drawn, stratified by predicted class, and the four methods explain the same instances of
+the same fitted classifier. A difference between two methods inside such a block cannot
+therefore come from the data, the classifier or the instances. The perturbed copies used
+by the stability measure are also the same for the four methods. An instance for which a
+method returns no explanation, or needs more than 1,200~s, is kept and counted as a
+failure.
+
+In total the design has 320 fitted classifiers
+(16 datasets, four classifiers, five seeds),
+1,280 runs of one method on one classifier, and
+256,000 explained instances, 200 per run. The stability measure
+requires 10 further explanations of every instance, so the design calls for
+2,816,000 explanations. The seeds are run one after another, and a
+seed enters the analysis only when all its 256 runs are complete, so
+the analysed data are balanced whatever the number of seeds. \pending{number of complete
+seeds analysed, and the reason if fewer than five} The analysis is run once, after the
+last seed.
 
 \subsection{Measures}
 
@@ -208,40 +229,66 @@ observed for its dataset and classifier, so that failures cannot improve a mean.
 
 \subsection{Statistical analysis}
 
-The unit of analysis is the dataset. For each dataset and measure, the values are
-averaged over instances, seeds and classifiers, and the four methods are ranked. The
-agreement between datasets is the mean Spearman correlation between the rankings of all
-pairs of datasets, which is Kendall's coefficient of concordance corrected for the number
-of datasets. It is reported with a 95\% percentile bootstrap
-interval over datasets (10,000 resamples) and tested against
-unrelated rankings with a permutation test (100,000 permutations of the ranks inside each
-dataset), with the Holm correction over the four measures. The same
-correlation between the five seeds inside a dataset gives a ceiling: agreement between
-datasets cannot be expected to exceed agreement between two runs on the same dataset.
+The unit of analysis is the dataset: the hypothesis is about datasets, and the
+16 datasets are the only independent units of the design.
+Instances, classifiers and seeds are not counted as independent evidence; they make the
+ranking of each dataset less noisy. For each dataset, method and measure, the mean over
+the instances of a run is taken first, and then the mean of the
+20 runs (four classifiers, five seeds), which
+rest on 4,000 explained instances. The four methods are then
+ranked in each dataset.
+
+The agreement between datasets is the mean Spearman correlation between the rankings of
+all 120 pairs of datasets, which is Kendall's coefficient of concordance
+$W$ corrected for the number of datasets $k$, $(kW-1)/(k-1)$. It is reported with a 95\%
+percentile bootstrap interval over datasets (10,000 resamples). The null hypothesis is
+that the rankings of different datasets are unrelated. It is tested with a one-sided
+permutation test: the four ranks are permuted independently inside each dataset, which
+makes the 24 possible orders equally likely in every dataset, 100,000 times. The $p$
+value is the share of permutations whose agreement is at least the observed one, the
+observed one included, so its smallest possible value is about $10^{-5}$. The test
+assumes no distribution of the measures. The Holm correction over the four measures
+keeps the probability of any false rejection at 0.05 or less.
+
+The seeds are used a second time. The same correlation is computed between the rankings
+of the five seeds inside each dataset and averaged over datasets. It
+measures how well one repetition on a dataset reproduces another, and the agreement
+between datasets is read against it. Two limits apply. A seed changes the split, the
+classifier, the instances and the draws of the method together, so this value measures
+their joint effect and does not separate them. And the rankings compared between datasets
+are means of five seeds, which are more stable than the ranking of one
+seed, so the value is a conservative reference and not a strict upper bound.
 
 The decision rule was fixed in advance. With a corrected $p$ below 0.05, the order is
 said to generalise if the interval lies above 0.5, to be shared only weakly if it lies
-below 0.5, and to be of undetermined strength otherwise. A simulation made before the
-experiment showed that sixteen datasets detect a true correlation of 0.5 in nearly every
-study, whereas four detect it in half of them.
+below 0.5, and to be of undetermined strength otherwise. The number of datasets was checked
+by a simulation made before the experiment (20,000 simulated studies for each case, four
+methods). With sixteen datasets the test rejects in 4.8\% of the
+studies when the true correlation is 0, close to its nominal level of 5\%, in
+77\% when it is 0.2 and in more than 99.9\% when it is 0.5; with
+four datasets it rejects in 51\% when it is 0.5. With sixteen
+datasets, the estimate of a true correlation of 0.5 falls between
+0.27 and 0.72 in 95\% of the
+studies, which is why the rule has an outcome of undetermined strength.
 
 Three further analyses are reported: for each pair of methods, the share of datasets in
 which the pair is ordered as on Adult, with an exact binomial interval; the largest rank
-change of each method between two datasets; and the share of the variance of the measure
-that belongs to the method, to the dataset and to their interaction, with the
-interaction tested by permutation.
+change of each method between two datasets; and the share of the variance of the
+1,280 run means that belongs to the method, to the dataset and to their
+interaction, with the seeds as replicates. The interaction is tested by permuting the
+method labels inside each block of dataset, classifier and seed (10,000 permutations).
 
 \section{Results}
 
 \pending{The experiment has not been run. This section will hold: Table 2, mean rank of
 each method per measure with the mean rank correlation, its interval, the corrected p,
-the ceiling and the decision; Figure 1, the rank of each method on each dataset, one
+the agreement between seeds and the decision; Figure 1, the rank of each method on each dataset, one
 panel per measure; Table 3, agreement with the order found on Adult for each pair of
 methods; one paragraph on failures; one paragraph on the variance shares.}
 
 \section{Discussion and conclusions}
 
-\pending{Discussion of the hypothesis for each measure, against the ceiling.}
+\pending{Discussion of the hypothesis for each measure, against the agreement between seeds.}
 
 \textit{Possible sources of error.} \pending{to be completed with the results. Known
 before the run: explanations are computed on encoded features, so a categorical variable
