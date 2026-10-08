@@ -32,7 +32,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; seed 42 of five at 199 of 256 conditions on 2026-10-06 14:54); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-08 08:28: 553 of 1,280 conditions, seed 42 complete, seed 123 at 254 of 256, seed 456 at 41; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -42,9 +42,125 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-08 08:30 (Paper F: seed 42 complete, seeds overlap, methods revised, dashboard)
+
+This is the latest handoff. It covers the session from 2026-10-06 15:40 to 2026-10-08
+08:30 (lane `paper-f`, owner `claude-status-2026-10-06`, branch
+`paper/f-external-validity`). The handoff below (2026-10-06 15:00) and the one after it
+remain the reference for the design, the code and the rules of the run, except where
+this one says otherwise.
+
+- **Completed**:
+  - **Seed 42 is complete and checked** (2026-10-07 10:38): 256 of 256 job files, every
+    job at 200 instances, 51,200 rows, no duplicate instance. 268 failed rows (0.52%):
+    156 in DiCE on the random forest for Amazon Employee, 63 in DiCE on XGBoost for
+    Ozone, the rest time limits and single rows in 16 other conditions. Completeness and
+    failures only; no measure was read.
+  - **The seeds now overlap at their ends** (author decision of 2026-10-07, "Change
+    approved"; commit `26bbb5ba9`; plan section 12). The last job of seed 42 (DiCE on
+    the random forest for QSAR biodegradation, about five minutes an instance) ran alone
+    for about ten hours while seven workers waited. From seed 123 on, the scheduled task
+    starts **one launcher for every incomplete seed** (`paper_f_run.py launch --workers 8
+    --seeds 123 456 789 101112`): seeds in order, the same fixed shuffle inside each
+    seed, and the workers a seed no longer needs take jobs of the next seed. Code:
+    `scripts/paper_f_run.py` (`ordered_jobs`, `requeue`), `scripts/paper_f_chain.py`
+    (`tick`, `seeds_to_launch`), tests `tests/analysis/test_paper_f_run.py` (4 pass).
+    First live use: the tick of 2026-10-07 10:38 started the launcher by itself; the
+    overlap was seen working on 2026-10-08 03:44 (5 jobs of seed 123 and 3 of seed 456).
+    `paper_f_config.toml` and `scripts/paper_f_lib.py` were not edited.
+  - **Dashboard** `scripts/paper_f_monitor.py` (commits `af6fff948`, `26bbb5ba9`): each
+    seed shows its conditions, its methods done and its estimated end; one end for the
+    whole run. Time left comes from the work that remains (the `total_s` of the rows,
+    summed per job), not from the count of conditions. It shows no measure.
+  - **Methods of the manuscript revised** (commit `feb0657b4`, Scientific Editor): the
+    seed values and what a seed fixes, the blocking, the time limit, the size of the
+    design (320 fitted classifiers, 1,280 runs, 256,000 explained instances, 2,816,000
+    explanations), only complete seeds analysed, the unit of analysis, the null
+    hypothesis and the form of the permutation test, the Holm family, the figures of the
+    power simulation. The counts and the simulation figures are rendered by
+    `build_paper_f.py` from `paper_f_config.toml`, `datasets.csv` and
+    `power_simulation.csv` (aliases `sum:*`, `pow:*`, format `pct1`). Build: 5 pages of
+    8, 8 pending marks; `verify_claims.py` and `verify_sync.py` pass.
+  - **Raw data snapshots**, 11 lane commits from 2026-10-07 05:30 to 2026-10-08 07:40
+    (`726bf8cde` to `49ed7570f`): `outputs/analysis/paper_f/raw/` holds 545 finished jobs
+    and 109,000 rows. The pushed files were not checked again against the manifest.
+  - A LinkedIn text about the run was written for the author (not stored in the
+    repository). The author was told that the dashboard header prints the title of the
+    paper and that the review is double-blind.
+- **Current State**:
+  - **The run is in progress and unattended.** At 2026-10-08 08:28: 553 of 1,280
+    conditions (43.2%), 111,570 rows; seed 42 complete; seed 123 at 254 of 256 (its last
+    two DiCE jobs at work: Ozone on the random forest at 166 of 200, QSAR biodegradation
+    on the random forest at 91 of 200); seed 456 at 41 of 256 on the other six workers;
+    seeds 789 and 101112 at 2 and 0. One launcher, 8 jobs, 0 failed jobs in its log
+    (`runs/_launcher_seed123.log`), empty error log, scheduled task
+    `PaperF-chain-ensure` last result 0, 5.4 GB free.
+  - **Estimated end of the run: Saturday 2026-10-10, in the evening** (dashboard:
+    19:38). The estimate moved earlier during seed 123 and assumes no stop.
+  - **Failures so far: 544 of 111,570 rows (0.49%)**, mostly DiCE errors in the same
+    conditions as in seed 42 (the jump of 153 rows on 2026-10-08 near 02:00 came while
+    DiCE on the random forest for Amazon Employee was at work; the attribution was not
+    checked row by row). That the DiCE errors mean "no counterfactual found" is still
+    the assistant's reading, not confirmed.
+  - **Memory** fell to 0.2 GB free on 2026-10-07 near 23:00 with six or seven Anchors
+    jobs at once; no job failed for it.
+  - **No analysis has been run and no ranking has been looked at.**
+  - Rows written after the snapshot of 2026-10-08 07:40 are on the laptop only.
+  - The monitoring loop of the session is stopped; nothing watches the run but the
+    scheduled task.
+  - The methods section calls the agreement between seeds a conservative reference, not
+    a "ceiling" (plan section 12, 2026-10-06; wording only, the computation is
+    unchanged). **Open to the author's change.**
+  - Papers B, C, D and E are submitted; F is the only paper in work.
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
+     `paper/f-external-validity`; stop if it fails.
+  2. `.venv\Scripts\python.exe scripts\paper_f_monitor.py --once --no-colour`, check
+     `runs/_launcher_seed123.log` and the scheduled task, then
+     `.venv\Scripts\python.exe scripts/paper_f_snapshot.py` and commit and push
+     `outputs/analysis/paper_f/raw/` (lane commit).
+  3. When a seed completes: 256 job files, 51,200 rows, no duplicate, failures by
+     dataset, model and method. Completeness, failures and timing only. Seed 123 is next.
+  4. While the run goes on, with the author's go-ahead: the Results section as a
+     skeleton with placeholders wired to the analysis files, the wording of each of the
+     four outcomes of the decision rule written before the result, and the pending mark
+     for the number of seeds wired to fill itself.
+  5. When the five seeds are complete: the analysis once, results into the manuscript,
+     Zenodo, claim registry (the design counts and the power figures of the methods are
+     not registered yet), the journal's Word template, remove the scheduled task.
+  6. Ask the author for the submission numbers of Papers C and D and the date of Paper
+     D's submission. Correct `docs/reports/paper_c/README.md`, `EDITOR_NOTE.md` and
+     `docs/reports/paper_d/README.md` when the run allows a branch change.
+- **Blockers/Issues**:
+  - **Estimate of a seed's end is optimistic** when its slow job (DiCE on the random
+    forest for QSAR biodegradation) starts late; the end of the whole run is not
+    affected, because the other workers go on with the next seed.
+  - The dashboard's "BY METHOD" and "BY DATASET" sections show the first incomplete seed
+    only; during an overlap the next seed appears in the seeds table and under "JOBS AT
+    WORK".
+  - The references of the Paper F draft stand at 83% from 2024 or later against the
+    rule of 80%: one more older citation would break it.
+  - The project environment has no linter (`ruff` and `pyflakes` are not installed);
+    the scripts changed in this session were compile-checked and tested, not linted.
+  - Twice in the session the automatic safety check of the assistant's tools failed for
+    some minutes, and once it refused the launcher change until the author approved it.
+- **Notes**:
+  - **Never start a launcher by hand.** The scheduled task starts it within 10 minutes.
+    To pause: create `outputs/analysis/paper_f/runs/_STOP`. Its meaning changed on
+    2026-10-07: the seeds already begun are finished and no other seed is begun.
+  - An open dashboard window started before 2026-10-07 08:55 runs the old code: close it
+    (Ctrl+C) and start `python scripts\paper_f_monitor.py` again; this does not touch
+    the run.
+  - Cost is wall time. The number of jobs at work fell below eight at the end of seed 42
+    and stays at eight from seed 123 on; to be named in the paper under "cost depends on
+    the machine" (plan section 12, 2026-10-07).
+  - Paper F scripts need `.venv\Scripts\python.exe`. Do not edit `paper_f_config.toml`
+    or `scripts/paper_f_lib.py`, do not switch branch while the run is active, and do
+    not run `paper_f_analyze.py` before the planned seeds are complete.
+
 ## Session Handoff - 2026-10-06 15:00 (Paper F run watched and snapshotted; Papers C and D submitted)
 
-This is the latest handoff. It covers the session of 2026-10-06 from 08:30 to 15:00. The
+This handoff covers the session of 2026-10-06 from 08:30 to 15:00. The
 handoff directly below (session end of the morning) is still the reference for the design,
 the code and the rules of the Paper F run; this one updates its state and its next steps.
 
