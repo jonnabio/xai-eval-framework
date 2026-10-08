@@ -108,6 +108,10 @@ this one says otherwise.
   - Rows written after the snapshot of 2026-10-08 07:40 are on the laptop only.
   - The monitoring loop of the session is stopped; nothing watches the run but the
     scheduled task.
+  - **Pull request #42 is merged** (2026-10-08, merge commit `ee0438963`): `main` holds
+    the work of this session and of the one before. The branch was brought level with
+    `main` (fast-forward, no file changed). The commit that adds this line is on the
+    branch only, with no pull request; the lane lock is released.
   - The methods section calls the agreement between seeds a conservative reference, not
     a "ceiling" (plan section 12, 2026-10-06; wording only, the computation is
     unchanged). **Open to the author's change.**
