@@ -6,12 +6,14 @@
    are written from the same files.
 
        alias   file                                              key
-       sum     values computed here from datasets.csv and candidates.csv   metric
+       sum     values computed here from datasets.csv, candidates.csv and
+               paper_f_config.toml (the size of the design)      metric
+       pow     outputs/analysis/paper_f/power_simulation.csv     <datasets>_<true correlation>
        prim    outputs/analysis/paper_f/results/primary.csv      measure
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
-   (lower case, capitalised); u2, u3 decimals; pct percentage without decimals;
-   p p-value ("<0.001" or three decimals).
+   (lower case, capitalised); u2, u3 decimals; pct, pct1 percentage without and with one
+   decimal; p p-value ("<0.001" or three decimals).
 
    A placeholder whose result file does not exist yet is rendered as a red "[pending]"
    mark. With --final the build stops on any pending mark.
@@ -29,6 +31,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -53,10 +56,28 @@ def read(path: Path) -> list[dict[str, str]]:
 def tables() -> dict[str, dict[str, dict[str, str]]]:
     out: dict[str, dict[str, dict[str, str]]] = {}
     if (RES / "datasets.csv").exists():
-        out["sum"] = {
-            "datasets": {"value": str(len(read(RES / "datasets.csv")))},
-            "candidates": {"value": str(len(read(RES / "candidates.csv")))},
+        with (F / "paper_f_config.toml").open("rb") as fh:
+            cfg = tomllib.load(fh)
+        # Size of the design as planned: every dataset has at least 1,000 rows (the rule),
+        # so the 20% test split always holds the n_instances that are explained.
+        d, seeds, inst = len(read(RES / "datasets.csv")), len(cfg["seeds"]), cfg["n_instances"]
+        models, methods = len(cfg["models"]), len(cfg["explainers"])
+        size = {
+            "datasets": d, "candidates": len(read(RES / "candidates.csv")),
+            "seeds": seeds, "pairs": d * (d - 1) // 2,
+            "fits": d * models * seeds,                      # trained classifiers
+            "runs": d * models * methods * seeds,            # one method on one classifier
+            "runs_seed": d * models * methods,
+            "runs_dataset": models * seeds,                  # per dataset and method
+            "inst_dataset": models * seeds * inst,           # per dataset and method
+            "explained": d * models * methods * seeds * inst,
+            "explanations": d * models * methods * seeds * inst
+            * (1 + cfg["measures"]["stability_copies"]),
         }
+        out["sum"] = {k: {"value": str(v)} for k, v in size.items()}
+    if (RES / "power_simulation.csv").exists():
+        out["pow"] = {f"{r['k_datasets']}_{r['true_rho_bar']}": r
+                      for r in read(RES / "power_simulation.csv")}
     if (RES / "results" / "primary.csv").exists():
         out["prim"] = {r["measure"]: r for r in read(RES / "results" / "primary.csv")}
     return out
@@ -74,6 +95,8 @@ def fmt(v: float, f: str) -> str:
         return f"{v:.{f[1]}f}".replace("-", "$-$")
     if f == "pct":
         return f"{100 * v:.0f}"
+    if f == "pct1":
+        return f"{100 * v:.1f}"
     if f == "p":
         return "$<$0.001" if v < 0.001 else f"{v:.3f}"
     raise KeyError(f"unknown format {f}")

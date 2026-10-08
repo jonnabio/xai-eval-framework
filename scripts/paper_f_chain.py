@@ -8,8 +8,11 @@
 
 Since 2026-10-06 the run is driven by --tick from a Windows scheduled task every 10
 minutes: a long-lived supervisor was found stopped in the morning without a trace, twice.
-A tick keeps no process alive: if no launcher is running, it starts the launcher of the
-first seed that is not complete. The count of launches per seed is kept in
+A tick keeps no process alive: if no launcher is running, it starts one launcher for
+every seed that is not complete, in the order of the configuration file. The launcher
+runs the seeds in that order and gives the workers that a seed no longer needs to the
+next seed (since 2026-10-07: the last job of seed 42 ran alone for ten hours while seven
+workers waited). The count of launches is kept, for the first seed of each launch, in
 runs/_chain_state.json.
 
 For each seed, in the order of the configuration file:
@@ -22,8 +25,9 @@ For each seed, in the order of the configuration file:
 
 It computes nothing itself and reads no result: it counts marker files and starts
 `paper_f_run.py launch --seeds <seed>`. While it runs it asks Windows not to go to sleep
-for being idle. To pause after the current part, create the file
-outputs/analysis/paper_f/runs/_STOP ; delete it and run --ensure to go on.
+for being idle. To pause, create the file outputs/analysis/paper_f/runs/_STOP : the
+seeds already begun are finished and no other seed is begun. Delete it to go on; the
+scheduled task starts the launcher again.
 
 Log: outputs/analysis/paper_f/runs/_chain.log
 """
@@ -106,13 +110,20 @@ def keep_awake(on: bool) -> None:
         ES_CONTINUOUS | (ES_SYSTEM_REQUIRED if on else 0))
 
 
-def start_launcher(seed: int) -> None:
-    out = (RUNS / f"_launcher_seed{seed}.log").open("a", encoding="utf-8")
-    err = (RUNS / f"_launcher_seed{seed}.err.log").open("a", encoding="utf-8")
+def start_launcher(seeds: list[int]) -> None:
+    """One launcher for the seeds given, in that order; its log is named after the first."""
+    out = (RUNS / f"_launcher_seed{seeds[0]}.log").open("a", encoding="utf-8")
+    err = (RUNS / f"_launcher_seed{seeds[0]}.err.log").open("a", encoding="utf-8")
     flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) | getattr(subprocess, "DETACHED_PROCESS", 0)
     subprocess.Popen([str(PYTHON), "scripts/paper_f_run.py", "launch", "--workers", str(WORKERS),
-                      "--seeds", str(seed)], cwd=lib.ROOT, stdout=out, stderr=err,
+                      "--seeds", *map(str, seeds)], cwd=lib.ROOT, stdout=out, stderr=err,
                      stdin=subprocess.DEVNULL, creationflags=flags)
+
+
+def seeds_to_launch(seeds: list[int], counts: dict[int, int], total: int, state: dict) -> list[int]:
+    """The seeds a new launcher takes: not complete and not given up, in order."""
+    return [s for s in seeds
+            if counts[s] < total and state.get(str(s), 0) < MAX_RELAUNCH]
 
 
 def wait_no_launcher() -> None:
@@ -149,7 +160,7 @@ def supervise() -> int:
                 relaunches += 1
                 log(f"seed {seed}: {done(seed)} of {total} done; starting launcher "
                     f"(launch {relaunches})")
-                start_launcher(seed)
+                start_launcher([seed])
                 time.sleep(30)
             else:
                 wait_no_launcher()
@@ -177,7 +188,7 @@ def ensure() -> int:
 
 
 def tick() -> int:
-    """One step: if nothing is running, start the launcher of the first incomplete seed."""
+    """One step: if nothing is running, start one launcher for the incomplete seeds."""
     import json
     if STOP.exists() or launchers() or supervisors():
         return 0
@@ -188,26 +199,27 @@ def tick() -> int:
         state = json.loads(state_path.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         state = {}
+    counts = {seed: done(seed) for seed in cfg["seeds"]}
     for seed in cfg["seeds"]:
-        n = done(seed)
+        n = counts[seed]
         if n >= total:
             if not state.get(f"complete_{seed}"):
                 state[f"complete_{seed}"] = True
                 log(f"seed {seed} complete: {n} of {total} conditions")
-            continue
-        launches = state.get(str(seed), 0)
-        if launches >= MAX_RELAUNCH:
-            if not state.get(f"gave_up_{seed}"):
-                state[f"gave_up_{seed}"] = True
-                log(f"seed {seed} INCOMPLETE after {launches} launches: {n} of {total} done; "
-                    "going on to the next seed")
-            continue
-        state[str(seed)] = launches + 1
-        state_path.write_text(json.dumps(state, indent=1), encoding="utf-8")
-        log(f"tick: seed {seed}: {n} of {total} done; starting launcher (launch {launches + 1})")
-        start_launcher(seed)
-        return 0
+        elif state.get(str(seed), 0) >= MAX_RELAUNCH and not state.get(f"gave_up_{seed}"):
+            state[f"gave_up_{seed}"] = True
+            log(f"seed {seed} INCOMPLETE after {state[str(seed)]} launches: {n} of {total} "
+                "done; going on to the next seed")
+    todo = seeds_to_launch(cfg["seeds"], counts, total, state)
+    if todo:
+        # The launch is counted for the first seed only: it is the one at work.
+        first = todo[0]
+        state[str(first)] = state.get(str(first), 0) + 1
     state_path.write_text(json.dumps(state, indent=1), encoding="utf-8")
+    if todo:
+        log(f"tick: seeds {todo}: {counts[first]} of {total} done in seed {first}; "
+            f"starting launcher (launch {state[str(first)]})")
+        start_launcher(todo)
     return 0
 
 
