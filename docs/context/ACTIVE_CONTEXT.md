@@ -32,7 +32,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-08 08:28: 553 of 1,280 conditions, seed 42 complete, seed 123 at 254 of 256, seed 456 at 41; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-09 08:54: 847 of 1,280 conditions, seeds 42 and 123 complete, seed 456 at 255 of 256, seed 789 at 80; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -42,9 +42,39 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-09 09:00 (Paper F: 847 of 1,280, seeds 42 and 123 complete, snapshot)
+
+This is the latest handoff; it updates the state of the run only. The handoff below
+(2026-10-08 08:30) remains the reference for the rules, the next steps and the notes.
+Lane `paper-f`, owner `claude-2026-10-08-paper-f`, branch `paper/f-external-validity`.
+
+- **Completed**:
+  - **Raw data snapshot** of 2026-10-09 09:00 (commit `cd8b9f720`, pushed):
+    `outputs/analysis/paper_f/raw/` holds 847 finished jobs and 169,400 rows (seed 42:
+    256 jobs; seed 123: 256; seed 456: 255; seed 789: 80). The pushed files were not
+    checked again against the manifest.
+- **Current State**:
+  - **The run is in progress and unattended.** At 2026-10-09 08:54: 847 of 1,280
+    conditions (66.2%), 170,432 rows; seeds 42 and 123 complete; seed 456 at 255 of 256
+    (its last job, DiCE on the random forest for QSAR biodegradation, at 111 of 200);
+    seed 789 at 80; seed 101112 not begun. One launcher, 8 jobs, 0 failed jobs, scheduled
+    task last result 0, no `_STOP` file, 3.1 GB of memory free.
+  - **Estimated end of the run: Saturday 2026-10-10, about 20:17** (dashboard, from the
+    work that remains).
+  - **Failures: 852 of 170,432 rows (0.50%)**: 738 DiCE "no counterfactual", 64 Anchors
+    time limit, 50 DiCE time limit (dashboard labels).
+  - **Seed 123 is complete by count (256 jobs, 51,200 rows) but its check is not done**:
+    job files at 200 instances, no duplicate instance, failures by dataset, model and
+    method.
+  - No analysis has been run and no ranking has been looked at.
+- **Notes**:
+  - **The lane lock goes stale after 12 hours** (`lock_stale_hours`): a session that
+    lasts overnight must claim again before it commits. This session's first commit was
+    refused for that reason; the lock was free and was claimed again.
+
 ## Session Handoff - 2026-10-08 08:30 (Paper F: seed 42 complete, seeds overlap, methods revised, dashboard)
 
-This is the latest handoff. It covers the session from 2026-10-06 15:40 to 2026-10-08
+This handoff is superseded for the state of the run by the one above. It covers the session from 2026-10-06 15:40 to 2026-10-08
 08:30 (lane `paper-f`, owner `claude-status-2026-10-06`, branch
 `paper/f-external-validity`). The handoff below (2026-10-06 15:00) and the one after it
 remain the reference for the design, the code and the rules of the run, except where
