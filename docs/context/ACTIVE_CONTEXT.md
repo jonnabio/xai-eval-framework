@@ -42,7 +42,7 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
-## Session Handoff - 2026-10-10 07:50 (Paper F: 1,120 of 1,280, snapshot, PR #43 merged at the author's request)
+## Session Handoff - 2026-10-10 07:50 (Paper F: 1,120 of 1,280, snapshot, PR #43 open: merge refused to the assistant)
 
 This is the latest handoff (same session and owner as the one of 2026-10-09 20:45 below,
 which remains valid for the checks of seeds 42, 123 and 456).
@@ -52,10 +52,10 @@ which remains valid for the checks of seeds 42, 123 and 456).
     files): `outputs/analysis/paper_f/raw/` holds 1,120 finished jobs and 224,000 rows
     (seed 789: 255 jobs, 51,000 rows; seed 101112: 97 jobs, 19,400 rows). Checked against
     the manifest: 1,120 entries, 1,120 files, none missing, no SHA-256 mismatch.
-  - **Pull request #43 merged into `main`** on the author's instruction of 2026-10-10
-    ("commit, push and merge all that can be"), after this commit was pushed and its
-    checks passed. If a later line of this file or `git log origin/main` says otherwise,
-    the merge did not go through.
+  - **Pull request #43 is NOT merged.** The author asked for the merge on 2026-10-10
+    ("commit, push and merge all that can be"); the three checks passed on the pushed
+    head, but the assistant's permission system refused `gh pr merge 43 --merge` again.
+    The author merges it (page button or the same command in their own terminal).
 - **Current State**:
   - **The run is in progress and unattended.** At 2026-10-10 07:42: 1,120 of 1,280
     conditions (87.5%), 224,864 rows. Seed 789 at 255 of 256: the last job, DiCE on the
@@ -71,7 +71,8 @@ which remains valid for the checks of seeds 42, 123 and 456).
     been looked at.
   - Rows written after the snapshot of 2026-10-10 07:45 are on the laptop only.
 - **Next Steps**:
-  1. Claim the lane (stop if it fails).
+  1. Claim the lane (stop if it fails). After the author merges pull request #43:
+     `git fetch origin` and `git merge --ff-only origin/main`.
   2. Dashboard, launcher log, scheduled task, snapshot, commit and push.
   3. Check seed 789 when its last job ends, and seed 101112 when complete, as seeds 123
      and 456 were checked.
@@ -79,8 +80,9 @@ which remains valid for the checks of seeds 42, 123 and 456).
      the handoff of 2026-10-08 08:30 (Results skeleton with the author's go-ahead, the
      analysis once, removal of the scheduled task; submission numbers of Papers C and D
      and their READMEs).
-- **Blockers/Issues**: those of the handoff of 2026-10-09 19:00 stand, except the merge:
-  the assistant could merge once the author asked for it in the conversation.
+- **Blockers/Issues**: those of the handoff of 2026-10-09 19:00 stand, the merge
+  included: the author's request in the conversation did not lift the refusal; a
+  permission rule for PowerShell in the settings would.
 
 ## Session Handoff - 2026-10-09 20:45 (Paper F: 986 of 1,280, seeds 123 and 456 checked, snapshot)
 
