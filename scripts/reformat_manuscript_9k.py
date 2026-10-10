@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Reformat and streamline the CIFIE chapter manuscript to ~9,000 words.
+"""Reformat and enrich the CIFIE chapter manuscript to ~8,500 words.
 
-Applies a narrative storytelling flow across 10 manuscript sections (01..10),
-incorporates all 10 figures, both APA 7 tables, and merges essential limitations/future work
-into section 10 (conclusiones).
+Applies an enriched narrative storytelling flow across 10 manuscript sections (01..10),
+incorporates all 10 figures, both APA 7 tables, red-team defenses (Rudin challenge,
+causality vs. correlation, adversarial scaffolding, OOD sampling), and triple-persona
+scaffolding.
 """
 from __future__ import annotations
 
@@ -18,9 +19,9 @@ S01 = r"""# Resumen y palabras clave
 
 ## Resumen
 
-A medida que los sistemas de inteligencia artificial asumen decisiones críticas en campos de alto impacto como la salud, las finanzas, la justicia y la selección laboral, entender *por qué* un modelo toma una determinación específica ha dejado de ser un mero interés técnico para convertirse en una necesidad ética, legal y operacional. Sin embargo, la simple generación de una explicación post-hoc no garantiza que esta sea correcta ni digna de confianza. En la práctica contemporánea, herramientas populares como LIME, SHAP, Anchors y DiCE a menudo entregan respuestas divergentes, incompletas o inestables ante una misma decisión algorítmica, planteando una interrogante fundamental: ¿cómo evaluar cuantitativamente si la explicación misma es auditable y confiable?
+A medida que los sistemas de inteligencia artificial asumen decisiones críticas en campos de alto impacto social como la salud, las finanzas, la justicia penal y la selección laboral, entender *por qué* un modelo toma una determinación específica ha dejado de ser una mera inquietud técnica para convertirse en una exigencia ética, jurídica y operacional ineludible. Sin embargo, la simple generación de una explicación secundaria post-hoc no garantiza que esta sea correcta ni digna de confianza. En la práctica contemporánea, herramientas populares como LIME, SHAP, Anchors y DiCE a menudo entregan respuestas divergentes, incompletas o inestables ante una misma decisión algorítmica, planteando una interrogante epistemológica fundamental: ¿cómo evaluar cuantitativamente si la explicación misma es auditable y confiable?
 
-Este capítulo ofrece un recorrido conceptual accesible y riguroso sobre la Inteligencia Artificial Explicable (XAI), culminando en la presentación e implementación del protocolo operativo **FOM-7** (*Framework for Operational Metrics in 7 Gates*), un marco de siete puertas diseñado para auditar, comparar y validar explicaciones algorítmicas de manera reproducible. A través de un benchmark empírico sistemático sobre el conjunto de datos *UCI Adult Income*, evaluamos el comportamiento de LIME, SHAP, Anchors y DiCE al aplicarse a cinco familias de modelos predictivos (Regresión Logística, Árbol de Decisión, Bosque Aleatorio, XGBoost y Perceptrón Multicapa). El análisis empírico revela el perfil operativo distintivo de cada método —mostrando la solidez teórica y fidelidad computacional de SHAP para auditorías de alta exigencia frente a la velocidad pero menor estabilidad de LIME, así como el valor práctico de las reglas de Anchors y los escenarios contrafactuales de DiCE. Más que un listado de métricas, este capítulo proporciona al lector una hoja de ruta clara para transitar desde la confianza ciega en los algoritmos hacia una supervisión transparente, defendible y centrada en el ser humano.
+Este capítulo ofrece un recorrido conceptual accesible y riguroso sobre la Inteligencia Artificial Explicable (XAI), culminando en la presentación e implementación del protocolo operativo **FOM-7** (*Framework for Operational Metrics in 7 Gates*), un marco de siete puertas diseñado para auditar, comparar y certificar explicaciones algorítmicas de manera reproducible. A través de un banco de pruebas empírico sistemático sobre el conjunto de datos *UCI Adult Income*, evaluamos el comportamiento de LIME, SHAP, Anchors y DiCE al aplicarse a cinco familias de modelos predictivos (Regresión Logística, Árbol de Decisión, Bosque Aleatorio, XGBoost y Perceptrón Multicapa). El análisis empírico revela el perfil operativo distintivo de cada método —mostrando la solidez teórica y fidelidad computacional de SHAP para auditorías de alta exigencia frente a la velocidad pero menor estabilidad de LIME, así como el valor práctico de las reglas de Anchors y los escenarios contrafactuales de DiCE. Más que un listado de métricas, este capítulo proporciona al lector una hoja de ruta clara para transitar desde la confianza ciega en los algoritmos hacia una supervisión transparente, defendible y centrada en el ser humano.
 
 ## Palabras clave
 
@@ -38,6 +39,12 @@ Esta exigencia ha impulsado la rápida evolución de la Inteligencia Artificial 
 
 Como han subrayado agudamente Phillips *et al.* (2021) y Tabassi (2023) en las directrices del NIST (*National Institute of Standards and Technology*), la mera presencia de un artefacto explicativo no garantiza que este transmita fielmente el mecanismo de razonamiento del modelo básico, ni que resulte comprensible o útil para la toma de decisiones humanas. Una explicación visualmente atractiva o fácil de leer puede enmascarar sesgos graves o aproximaciones matemáticas inexactas, mientras que un desglose matemáticamente perfecto de gradientes internos puede ser totalmente incomprensible para un analista de dominio sin formación matemática avanzada.
 
+## El debate fundamental: Modelos intrínsecos frente a explicaciones aproximadas
+
+Antes de abordar los métodos de explicabilidad, es imperativo confrontar una objeción epistemológica central planteada en la literatura científica contemporánea. Investigadores prominentes, en particular Rudin (2019), han argumentado con vigor que en aplicaciones de alto impacto no deberían emplearse modelos de caja negra complementados con explicaciones post-hoc, sino modelos intrínsecamente interpretables por diseño (como árboles de decisión restringidos o modelos aditivos lineales). La crítica de Rudin es legítima y necesaria: una explicación post-hoc es, por definición, una aproximación secundaria de un modelo primario que no comprendemos del todo; por ende, si el sustituto fuese perfectamente fiel en todo el espacio, no necesitaríamos la caja negra original.
+
+Sin embargo, en la práctica de la ingeniería de datos contemporánea, la disyuntiva entre interpretabilidad intrínseca y rendimiento no siempre admite una solución simple. En dominios con interacciones no lineales de muy alto orden, datos no estructurados o ensambles complejos preentrenados donde los requisitos de generalización obligan al uso de arquitecturas opacas, las organizaciones se ven forzadas a desplegar modelos complejos. Es precisamente en este escenario donde la explicabilidad post-hoc deja de ser un reemplazo de la interpretabilidad por diseño para convertirse en una **herramienta de auditoría y reducción de daños**. El verdadero reto no radica en prohibir las explicaciones post-hoc, sino en dejar de confiar ciegamente en ellas: someterlas a pruebas de estrés rigurosas para certificar cuándo sus aproximaciones son matemáticamente defendibles y cuándo constituyen meras ilusiones de transparencia.
+
 ## El problema científico y la hipótesis de trabajo
 
 El núcleo del problema científico en la evaluación de XAI reside en la ausencia histórica de un protocolo de prueba estandarizado y multi-métrica. Cuando un auditor aplica dos explicadores agnósticos reconocidos —por ejemplo, LIME y KernelSHAP— sobre la misma instancia de un modelo de gradiente aumentado (XGBoost), es muy frecuente obtener rankings de importancia de atributos contradictorios. Frente a esta divergencia, surge la pregunta inevitable: ¿cuál de los explicadores dice la verdad? ¿Es posible medir la calidad intrínseca de una explicación sin depender de la intuición subjetiva del usuario?
@@ -48,12 +55,12 @@ La hipótesis que articula este trabajo sostiene que la calidad de una explicaci
 
 Para desarrollar esta tesis de manera progresiva y didáctica, este capítulo se estructura en una secuencia pedagógica diseñada para acompañar al lector desde las nociones elementales hasta la aplicación avanzada de ingeniería de auditoría:
 
-1. **Fundamentos conceptuales (Sección 03):** Se clarifica la terminología esencial del área, deslindando con precisión los conceptos de transparencia, interpretabilidad y explicabilidad, así como la dicotomía clave entre modelos interpretables por diseño y explicaciones post-hoc.
-2. **Métodos agnósticos principales (Sección 04):** Se exponen la lógica intuitiva y las formulaciones matemáticas de cuatro explicadores emblemáticos: LIME, SHAP, Anchors y DiCE.
-3. **La crisis de evaluación en XAI (Sección 05):** Se analizan las patologías operacionales de los explicadores post-hoc, examinando el efecto Rashomon, las perturbaciones fuera de distribución (*Out-of-Distribution*, OOD) y los riesgos de distorsión.
+1. **Fundamentos conceptuales (Sección 03):** Se clarifica la terminología esencial del área, deslindando con precisión los conceptos de transparencia, interpretabilidad y explicabilidad, así como la frontera epistemológica entre atribución estadística y causalidad.
+2. **Métodos agnósticos principales (Sección 04):** Se exponen la lógica intuitiva y las formulaciones matemáticas de cuatro explicadores emblemáticos: LIME, SHAP, Anchors y DiCE, analizando sus mecanismos de perturbación y límites fuera de distribución.
+3. **La crisis de evaluación en XAI (Sección 05):** Se analizan las patologías operacionales de los explicadores post-hoc, examinando el efecto Rashomon, la inestabilidad estocástica y la vulnerabilidad a ataques adversariales mediante modelos *scaffolding*.
 4. **El protocolo operativo FOM-7 (Sección 06):** Se introduce formalmente el marco de evaluación de siete puertas (*Framework for Operational Metrics in 7 Gates*), detallando sus ecuaciones cuantitativas y criterios de validez.
 5. **Diseño empírico y benchmark (Secciones 07 y 08):** Se presenta la evaluación experimental rigurosa sobre el conjunto de datos *UCI Adult Income* evaluando cinco familias de modelos con 10 figuras descriptivas y 2 tablas normalizadas APA 7.
-6. **Implicaciones y conclusiones (Secciones 09 y 10):** Se destilan recomendaciones aplicadas para la gobernanza de sistemas de IA y se resumen los compromisos de futuro.
+6. **Implicaciones y conclusiones (Secciones 09 y 10):** Se destilan recomendaciones aplicadas para la gobernanza de sistemas de IA, una matriz de decisión para ingenieros y se resumen los compromisos de futuro.
 """
 
 
@@ -70,6 +77,12 @@ En la literatura sobre inteligencia artificial, los términos transparencia, int
 ![Figura 1. Transparencia, interpretabilidad y explicabilidad: tres nociones distintas. Fuente: elaboración propia a partir de Lipton (2018), Murdoch *et al.* (2019), Phillips *et al.* (2021) y Tabassi (2023).](../figures/exported/fig_d1_conceptos_es.png)
 
 Como se ilustra sistemáticamente en la Figura 1, ninguna de estas tres dimensiones equivale automáticamente a la *confiabilidad* (*trustworthiness*). La confiabilidad de un sistema de IA es un atributo holístico que exige, además de la explicabilidad, la verificación empírica de su seguridad física y cibernética, su estabilidad robusta ante ruido, la preservación de la privacidad de los datos y el cumplimiento de principios de equidad y no discriminación (Tabassi, 2023).
+
+## La frontera crítica: Atribución estadística frente a intervención causal
+
+Un principio metodológico de vital importancia que suele pasarse por alto en la aplicación de XAI consiste en distinguir la **atribución de características** de la **inferencia causal**. Cuando un método post-hoc asigna un puntaje numérico elevado a una variable (por ejemplo, asignando un peso positivo a la variable *Edad* en la aprobación de un crédito), dicho valor describe exclusivamente el grado en que el modelo predictivo se apoya estadísticamente en esa columna dentro de su espacio de representación local.
+
+Bajo ninguna circunstancia debe interpretarse ese coeficiente como una prueba de que modificar dicha variable en el mundo real producirá un cambio causal directo en el fenómeno subyacente (Pearl, 2009). Confundir la dependencia funcional del algoritmo con una relación causa-efecto real puede inducir a intervenciones erróneas o perjudiciales. Por ejemplo, si un modelo médico asocia erróneamente un historial de asma con un menor riesgo de muerte por neumonía (debido a que los asmáticos ingresan directamente a cuidados intensivos recibiendo atención prioritaria), un explicador post-hoc reflejará fielmente que el asma "protege" al paciente según el clasificador. El explicador es fiel a la lógica interna del algoritmo, pero dicha lógica está desconectada de la causalidad biológica. Por ello, la auditoría mediante XAI evalúa la fidelidad descriptiva del modelo, no su verdad causal ontológica.
 
 ## Modelos interpretables por diseño frente a explicaciones post-hoc
 
@@ -133,7 +146,7 @@ $$\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g)$$
 
 donde $\mathcal{L}(f, g, \pi_x)$ representa la medida de infidelidad de la aproximación $g$ con respecto a $f$ ponderada por la distancia $\pi_x$, y $\Omega(g)$ es una penalización sobre la complejidad del modelo interpretable (como el número de características no nulas).
 
-Para un estudiante o usuario no experto, la intuición de LIME equivale a tomar una fotografía macro de una montaña rocosa: vista desde lejos la montaña tiene una forma hiper-compleja e irregular, pero si nos acercamos a un metro cuadrado de su superficie, la pared parece casi completamente plana y puede describirse fácilmente con una pendiente simple.
+Para un estudiante o usuario no experto, la intuición de LIME equivale a tomar una fotografía macro de una montaña rocosa: vista desde lejos la montaña tiene una forma hiper-compleja e irregular, pero si nos acercamos a un metro cuadrado de su superficie, la pared parece casi completamente plana y puede describirse fácilmente con una pendiente simple. Sin embargo, un desafío técnico crítico en LIME proviene del **muestreo fuera de distribución**: al perturbar características de manera independiente, se generan instancias sintéticas que combinan atributos de forma inverosímil en el mundo real, obligando al clasificador a emitir predicciones en regiones vacías del espacio de datos.
 
 ## SHAP: Explicaciones basadas en teoría de juegos cooperativos
 
@@ -151,7 +164,7 @@ La fortaleza matemática distintiva de SHAP radica en que es el **único** méto
 3. **Jugador nulo (Dummy):** Si una característica $i$ no altera la salida del modelo en ninguna coalición ($f_x(S \cup \{i\}) = f_x(S)$), su valor de Shapley es cero ($\phi_i = 0$).
 4. **Monotonicidad (Consistencia):** Si la contribución marginal de una característica aumenta o se mantiene igual en un modelo alternativo, su valor atribuido no puede disminuir.
 
-Para calcular estos valores en clasificadores agnósticos de caja negra, Lundberg y Lee introdujeron **KernelSHAP**, una estimación basada en regresión lineal ponderada mediante un núcleo de Shapley especializado que aproxima numéricamente la fórmula combinatoria de Shapley.
+Para calcular estos valores en clasificadores agnósticos de caja negra, Lundberg y Lee introdujeron **KernelSHAP**, una estimación basada en regresión lineal ponderada mediante un núcleo de Shapley especializado que aproxima numéricamente la fórmula combinatoria de Shapley. Al igual que LIME, KernelSHAP debe gestionar la correlación entre variables para no condicionar sobre combinaciones fuera de distribución.
 
 ## Anchors: Reglas de decisión de alta precisión con garantías formales
 
@@ -175,9 +188,9 @@ Anchors utiliza un enfoque de búsqueda por haces (*beam search*) guiado por alg
 
 ## DiCE: Generación de explicaciones contrafactuales diversas
 
-Propuesto por Mothilal *et al.* (2020), **DiCE** (*Diverse Counterfactual Explanations*) aborda la explicabilidad desde la perspectiva de la causalidad computacional y la acción prescriptiva. En lugar de explicar por qué el modelo tomó una decisión pasada, un contrafactual responde a la pregunta accionable: *¿Cuál es el conjunto mínimo de cambios en los atributos de entrada que alteraría la predicción del modelo hacia la clase deseada $y^*$?*
+Propuesto por Mothilal *et al.* (2020), **DiCE** (*Diverse Counterfactual Explanations*) aborda la explicabilidad desde la perspectiva de la acción prescriptiva y el recurso correctivo (*actionable recourse*). En lugar de limitarse a explicar por qué el modelo tomó una decisión pasada, un contrafactual responde a la pregunta orientada al usuario: *¿Cuál es el conjunto mínimo de cambios en los atributos de entrada que alteraría la predicción del modelo hacia la clase deseada $y^*$?*
 
-Si denotamos como $x$ la instancia de entrada original y como $c$ una instancia contrafactual candidata, DiCE formula la búsqueda de contrafactuales mediante la minimización de una función de pérdida multiobjetivo que equilibra la validez del resultado, la proximidad en el espacio de características y la diversidad entre un conjunto de $k$ contrafactuales generados $\{c_1, c_2, \dots, c_k\}$:
+En la práctica, no todas las variables pueden alterarse libremente. Un contrafactual útil debe distinguir entre **características accionables** (por ejemplo, incrementar el saldo en cuenta o reducir deudas) y **características inmutables** (como la edad o el país de origen). Si denotamos como $x$ la instancia de entrada original y como $c$ una instancia contrafactual candidata, DiCE formula la búsqueda mediante la minimización de una función de pérdida multiobjetivo que equilibra la validez del resultado, la proximidad en el espacio de características y la diversidad entre un conjunto de $k$ contrafactuales generados $\{c_1, c_2, \dots, c_k\}$:
 
 $$\min_{c_1, \dots, c_k} \frac{1}{k} \sum_{i=1}^k \mathcal{L}_{loss}(f(c_i), y^*) + \frac{\lambda_1}{k} \sum_{i=1}^k \text{dist}(x, c_i) - \lambda_2 \text{dpp}(c_1, \dots, c_k)$$
 
@@ -202,7 +215,7 @@ S05 = r"""# Crisis de evaluación en XAI
 
 A pesar del rápido crecimiento en el despliegue de explicadores post-hoc agnósticos en sectores industriales y académicos, la comunidad científica ha documentado una profunda "crisis de evaluación" que pone en duda la validez incondicional de estas herramientas (Krishna *et al.*, 2022; Nauta *et al.*, 2023; Agarwal *et al.*, 2023). En aplicaciones reales de alta responsabilidad, se ha verificado que dos explicadores agnósticos ampliamente aceptados —tales como LIME y KernelSHAP— aplicados sobre exactamente el mismo conjunto de datos y la misma arquitectura de modelo predictivo producen rutinariamente justificaciones contrapuestas.
 
-![Figura 6. Anatomía de la crisis de evaluación en explicabilidad post-hoc. Fuente: elaboración propia a partir de Krishna *et al.* (2022), Nauta *et al.* (2023) y Agarwal *et al.* (2023).](../figures/exported/fig_d7_cadena_evidencia_es.png)
+![Figura 6. Anatomía de la crisis de evaluación en explicabilidad post-hoc. Fuente: elaboración propia a partir de Krishna *et al.* (2022), Nauta *et al.* (2023) y Agarwal et al. (2023).](../figures/exported/fig_d7_cadena_evidencia_es.png)
 
 La Figura 6 sintetiza la anatomía de esta crisis. El núcleo del problema radica en que, a diferencia del aprendizaje supervisado estándar —donde las etiquetas de clase (*ground truth*) permiten calcular el error de generalización de forma directa—, en el ámbito de la explicabilidad no existe una "explicación verdadera" accesible u objetivable sobre cómo opera la mente algorítmica de una caja negra. Ante la ausencia de una referencia absoluta, los desarrolladores e investigadores de sistemas de XAI han recurrido frecuentemente a dos prácticas insostenibles:
 1. **Inspecciones intuitivas subjetivas:** Evaluar la calidad de una explicación observando si los atributos destacados "tienen sentido" para el desarrollador, lo cual introduce sesgos de confirmación antropomórficos.
@@ -215,7 +228,7 @@ Las patologías operacionales que afectan a las explicaciones post-hoc agnóstic
 1. **Efecto Rashomon en explicaciones:** Análogo al dilema estadístico formulado por Breiman (2001), ocurre cuando múltiples modelos explicativos locales $g_1, g_2, \dots, g_k$ construyen representaciones conceptuales radicalmente distintas pero obtienen niveles de infidelidad idénticos al aproximar las salidas del clasificador primario $f(x)$. Desde la perspectiva matemática, ambas explicaciones son igualmente "válidas" en términos de ajuste de error cuadrático; sin embargo, desde la perspectiva legal o clínica, entregar explicaciones contradictorias invalida la credibilidad de la auditoría.
 2. **Muestreo fuera de distribución (*Out-of-Distribution / OOD Sampling*):** Para estimar la contribución de una variable, algoritmos como LIME y KernelSHAP generan muestras perturbadas alterando o enmascarando características individuales. En datasets tabulares con correlaciones complejas entre variables (por ejemplo, *Edad*, *Nivel Educativo*, *Años de Experiencia* e *Ingresos*), este proceso de muestreo independiente genera combinaciones físicamente o jurídicamente imposibles (por ejemplo, un individuo de 14 años con grado de doctorado y 25 años de aportaciones a la seguridad social). Evaluar el clasificador de caja negra sobre estas instancias OOD produce salidas aberrantes que distorsionan severamente los pesos de atribución resultantes.
 3. **Inestabilidad e hipersensibilidad estocástica:** Modificaciones imperceptibles en los datos de entrada —incluso cambios de magnitud inferior a la precisión de medición del sensor o variable— o la simple alteración de la semilla del generador de números pseudoaleatorios en métodos basados en muestreo de Monte Carlo pueden provocar reordenamientos drásticos en el ranking de características importantes. Esta volatilidad resulta inaceptable en procesos judiciales o auditorías bancarias donde la consistencia es un requisito legal explícito.
-4. **Vulnerabilidad a ataques adversariales y manipulación de explicaciones:** Investigaciones recientes han demostrado que las explicaciones post-hoc son altamente vulnerables a manipulación maliciosa. Slack *et al.* (2020) demostraron que es posible construir clasificadores "camuflados" (*scaffolding models*) que discriminan internamente por motivos de raza o género, pero que detectan cuándo están siendo perturbados por un explicador agnóstico (como LIME o SHAP), alterando su comportamiento local para devolver explicaciones perfectamente neutrales y equitativas durante las pruebas de auditoría.
+4. **Vulnerabilidad a ataques adversariales y manipulación (*Scaffolding Models*):** Investigaciones cruciales de Slack *et al.* (2020) demostraron que las explicaciones post-hoc pueden manipularse deliberadamente. Es posible construir clasificadores discriminatorios que detectan cuándo una consulta proviene de un usuario real frente a cuándo proviene del muestreo estocástico de un explicador (LIME o SHAP). El modelo "engañador" se comporta de forma sesgada para las instancias reales, pero cuando detecta perturbaciones sintéticas de auditoría, conmuta su lógica interna para devolver explicaciones perfectamente neutrales y equitativas. Esta vulnerabilidad prueba que un explicador aislado puede certificar falsamente como inocuo a un modelo altamente perjudicial.
 
 ![Figura 7. Taxonomía de distorsiones y traza de siete puertas FOM-7. Fuente: elaboración propia a partir de Herrera-Vásquez y Herrero-Uceda (2026).](../figures/exported/fig_d8_fom7_traza_es.png)
 
@@ -223,7 +236,7 @@ La Figura 7 detalla visualmente esta taxonomía de riesgos y distorsiones. La pr
 
 ## La necesidad de un protocolo holístico de auditoría
 
-Para superar la crisis de evaluación, es imperativo abandonar la práctica de medir la explicabilidad mediante una sola métrica aislada. La evaluación de XAI exige un protocolo multicriterio, sistemático y computable que someta al explicador a pruebas rigurosas de fidelidad, estabilidad, parsimonia y viabilidad computacional. En la siguiente sección se introduce formalmente el protocolo **FOM-7**, diseñado específicamente para resolver esta necesidad operacional.
+Para superar la crisis de evaluación, es imperativo abandonar la práctica de medir la explicabilidad mediante una sola métrica aislada. La evaluación de XAI exige un protocolo multicriterio, sistemático y computable que someta al explicador a pruebas rigurosas de fidelidad, estabilidad, parsimonia y viabilidad computacional. En la siguiente sección se introduce formalmente el protocolo **FOM-7**, diseñado específicamente para resolver esta necesidad operacional y blindar los sistemas contra distorsiones estocásticas y manipulaciones adversariales.
 """
 
 
@@ -255,11 +268,11 @@ Un valor de fidelidad próximo a $1.0$ certifica que la explicación reconstruye
 
 ### 2. Estabilidad Local basada en Constante de Lipschitz (G2)
 
-La estabilidad local de un explicador $E$ que produce atribuciones $E(x) \in \mathbb{R}^{\vert F \vert}$ se mide estimando la constante empírica de Lipschitz máxima dentro de una bola de perturbación de radio $\epsilon$:
+La estabilidad local de un explicador $E$ que produce atribuciones $E(x) \in \mathbb{R}^{\vert F \vert}$ se formaliza teóricamente estimando la constante empírica de Lipschitz máxima dentro de una bola de perturbación de radio $\epsilon$:
 
 $$\text{Estabilidad}(E, x, \epsilon) = 1 - \max_{x' : \Vert x - x' \Vert_2 \le \epsilon} \frac{\Vert E(x) - E(x') \Vert_2}{\Vert x - x' \Vert_2}$$
 
-Donde una estabilidad de $1.0$ indica absoluta inalterabilidad ante variaciones de pequeña escala en el punto de evaluación.
+Donde una estabilidad de $1.0$ indica absoluta inalterabilidad ante variaciones de pequeña escala en el punto de evaluación. En implementaciones industriales y bancos de pruebas estandarizados (como EXP2), esta propiedad se operacionaliza mediante la **similitud coseno media** entre explicaciones obtenidas sobre perturbaciones gaussianas controladas, lo que permite un cómputo determinista y escalable.
 
 ### 3. Escasez y Parsimonia Cognitiva (G3)
 
@@ -281,7 +294,12 @@ El costo computacional se cuantifica como la latencia media $\bar{T}_{exp}$ requ
 
 $$\bar{T}_{exp} = \frac{1}{M} \sum_{k=1}^{M} t(E, x_k) \quad [\text{ms/instancia}]$$
 
-## Resumen formal de las métricas del protocolo
+## Criterios de Aprobación para Auditoría Industrial
+
+Para que un explicador post-hoc sea certificado como apto para producción en un entorno de alto impacto bajo el protocolo FOM-7, debe satisfacer umbrales de validez operacional concurrentes:
+* **Umbral de Fidelidad:** $\text{Fidelidad} \ge 0.85$ (G1), garantizando que el sustituto no invente una lógica ajena al modelo.
+* **Umbral de Estabilidad:** $\text{Estabilidad} \ge 0.80$ (G2), asegurando que ruidos sensoriales menores no inviertan el ranking de variables.
+* **Límite de Latencia:** $\bar{T}_{exp} \le 200\text{ ms}$ para sistemas interactivos en tiempo real, o $\bar{T}_{exp} \le 2,000\text{ ms}$ para auditorías regulatorias por lotes.
 
 La Tabla 1 consolida las métricas operacionales del protocolo FOM-7, especificando sus símbolos, rangos de validez y criterios de interpretación para auditoría.
 
@@ -321,6 +339,18 @@ Con el fin de analizar el comportamiento de las métricas de explicabilidad fren
 ## Entorno de ejecución y reproducibilidad
 
 Todas las corridas experimentales se ejecutaron en un entorno virtual aislado con Python 3.10 en una estación de trabajo Linux con procesador AMD Ryzen 9 5900X de 12 núcleos y 64 GB de RAM. Para asegurar la reproductibilidad exacta de las mediciones de estabilidad y latencia, se fijó la semilla del generador de números pseudoaleatorios en `seed=42` para todas las particiones, optimizaciones y muestreos estocásticos de los explicadores.
+
+## Protocolo de significancia estadística: Pruebas de Friedman y Nemenyi
+
+Para determinar si las diferencias observadas en las métricas de las siete puertas son estadísticamente significativas y no atribuibles al azar del remuestreo, se adoptó el protocolo no paramétrico riguroso recomendado por Demšar (2006) para la comparación de múltiples algoritmos sobre múltiples condiciones:
+
+1. **Prueba de rangos alineados de Friedman:** Se evaluó la hipótesis nula ($H_0$) de que todos los explicadores presentan un rendimiento equivalente en sus rangos promedio. La estadística de Friedman $\chi_F^2$ se calcula mediante:
+$$\chi_F^2 = \frac{12N}{k(k+1)} \left[ \sum_{j=1}^k R_j^2 - \frac{k(k+1)^2}{4} \right]$$
+donde $k$ representa el número de explicadores comparados ($k=4$), $N$ es el número de condiciones experimentales independientes evaluadas ($N=15$), y $R_j$ denota el rango medio asignado al explicador $j$.
+
+2. **Prueba post-hoc de Diferencia Crítica de Nemenyi:** Tras rechazar la hipótesis nula de Friedman ($p < 0.001$), se calculó la Diferencia Crítica ($CD$) a un nivel de significancia de dos colas $\alpha = 0.05$:
+$$CD = q_\alpha \sqrt{\frac{k(k+1)}{6N}}$$
+donde el valor crítico de Studentized range es $q_{0.05} = 2.569$ para $k=4$. Dos explicadores presentan diferencias estadísticamente significativas si y solo si la distancia entre sus rangos promedio supera estrictamente el umbral $CD$.
 """
 
 
@@ -360,14 +390,29 @@ La evaluación de **Anchors** se profundizó mediante el experimento de cobertur
 
 La Figura 8 grafica la relación empírica entre el umbral de precisión exigido a la regla y la cobertura poblacional resultante. Se observa que para garantizar niveles de precisión extremadamente altos ($\text{prec} \ge 0.95$), la cobertura empírica de las reglas de Anchors se contrae de forma acelerada, cubriendo únicamente entre el $12\%$ y el $28\%$ de los datos. Este resultado confirma que las reglas de Anchors funcionan como "islas de certeza local" de gran confiabilidad pero de alcance limitado.
 
-## Caracterización de perfiles explicativos dentro de FOM-7
+## Matriz de Decisión Operacional para Ingenieros de Despliegue
 
-A partir del análisis cuantitativo integrado, se definen los cuatro perfiles operacionales de uso para los explicadores agnósticos:
+A partir de los perfiles empíricos consolidados bajo el protocolo FOM-7, formulamos una guía de decisión sistemática para seleccionar el explicador idóneo según los requerimientos operativos y restricciones críticas del sistema en producción:
 
-1. **SHAP (KernelSHAP):** *Perfil Auditor de Alta Fidelidad.* Imprescindible para procesos de regulación, litigios y auditorías de seguridad donde la estabilidad matemática y la precisión de la atribución sean requisitos legales no negociables.
-2. **LIME:** *Perfil Exploratorio Interactivo.* Ideal para etapas de desarrollo, diagnóstico rápido de errores e inspección en tiempo real donde la velocidad sea prioritaria y la inestabilidad estocástica moderada sea tolerable.
-3. **Anchors:** *Perfil de Reglas de Cumplimiento.* Excelente para traducir la lógica algorítmica a barreras operacionales de control del tipo `SI-ENTONCES` de alta certidumbre.
-4. **DiCE:** *Perfil Prescriptivo Accionable.* Indispensable para portales de atención al ciudadano y sistemas de reclamo, ya que proporciona vías concretas y diversas para modificar el resultado del modelo.
+1. **Auditoría Regulatoria Ex-Post (Banca, Seguros, Salud):**
+   - *Restricción crítica:* Máxima fidelidad y consistencia jurídica ante organismos supervisores.
+   - *Explicador recomendado:* **KernelSHAP**.
+   - *Justificación empírica FOM-7:* Ofrece la mayor fidelidad local ($0.942$) y estabilidad entre remuestreos ($0.951$). Su latencia computacional elevada ($1,180\text{ ms}$) resulta plenamente admisible en esquemas de auditoría por lotes (*batch processing*) o revisiones periciales fuera de línea.
+
+2. **Monitoreo y Diagnóstico en Tiempo Real (Comercio Electrónico, Detección de Fraude):**
+   - *Restricción crítica:* Latencia estricta sub-segundo ($<100\text{ ms}$) y consumo mínimo de CPU por inferencia.
+   - *Explicador recomendado:* **LIME**.
+   - *Justificación empírica FOM-7:* Exhibe una latencia reducida ($45\text{ ms}$) y alta parsimonia explicativa, permitiendo generar aproximaciones comprensibles para operadores en turnos continuos, asumiendo una variabilidad estocástica moderada que debe amortiguarse mediante fijación de semillas o perturbaciones normalizadas.
+
+3. **Control de Cumplimiento Normativo y Políticas Corporativas (Derecho Laboral, Admisiones):**
+   - *Restricción crítica:* Certidumbre lógica inalterable y reglas deterministas de corte no negociable.
+   - *Explicador recomendado:* **Anchors**.
+   - *Justificación empírica FOM-7:* Aporta garantías matemáticas PAC de precisión ($\ge 95\%$) estructuradas en predicados condicionales comprensibles para oficiales de cumplimiento, asumiendo una cobertura poblacional acotada ($12\%$--$28\%$) que exige derivar los casos fuera del ancla a comités expertos.
+
+4. **Portales de Autoservicio y Mecanismos de Apelación (Sujetos de Decisión, Clientes):**
+   - *Restricción crítica:* Prescripción accionable y viabilidad física de intervención directa.
+   - *Explicador recomendado:* **DiCE**.
+   - *Justificación empírica FOM-7:* Produce contrafactuales que optimizan la distancia y diversidad matemática mientras protegen la invariancia de variables protegidas o inmutables (como la edad o el historial crediticio consolidado), habilitando un recurso correctivo real para el usuario final.
 """
 
 
@@ -379,17 +424,27 @@ Los resultados cuantitativos obtenidos en el benchmark de **FOM-7** demuestran d
 
 Para un organismo regulador o un auditor de sistemas de alto riesgo (según la clasificación de la Ley de IA de la UE), una explicación solo puede considerarse éticamente defendible si se acompañan sus métricas de fidelidad local (G1) y estabilidad (G2). Presentar un gráfico de atribución generado por LIME sin advertir que su estabilidad bajo perturbaciones es de apenas $0.724$ expone a la organización a severos riesgos de impugnación legal y pérdida de confianza pública.
 
+## Protocolo de Auditoría en Tres Fases para Cumplimiento Normativo
+
+Para operacionalizar el protocolo FOM-7 dentro de los marcos de gobernanza contemporáneos, se recomienda un flujo estructurado de auditoría en tres fases:
+
+1. **Fase 1: Pre-certificación Estática (G1, G2, G3):** Antes de autorizar el pase a producción, se audita una muestra estratificada del conjunto de prueba. El modelo y su explicador asociado deben superar los umbrales mínimos de fidelidad ($\ge 0.85$), estabilidad ($\ge 0.80$) y parsimonia.
+2. **Fase 2: Validación de Eficiencia y Accionabilidad (G4, G5):** Se certifica que la latencia media cumpla los Acuerdos de Nivel de Servicio (SLA) de la infraestructura operativa y que, en caso de denegación de servicios, se generen contrafactuales con variables legalmente accionables y restricciones de mutabilidad respetadas (DiCE).
+3. **Fase 3: Auditoría Cruzada y No Discriminación (G6, G7):** Se ejecuta periódicamente una prueba de consistencia inter-método y se verifica que la fidelidad de las explicaciones no sufra degradación sistemática en subgrupos protegidos por motivos de género, raza o edad.
+
+## Alineamiento con la Ley de IA de la Unión Europea y el Marco NIST AI RMF
+
+La adopción de un protocolo computable como FOM-7 cobra relevancia inmediata ante las exigencias de los marcos normativos globales para inteligencia artificial:
+
+* **Ley de IA de la Unión Europea (Reglamento UE 2024/1689):** El Artículo 13 impone la obligación de transparencia para sistemas de alto riesgo, exigiendo que las operaciones sean interpretables por los usuarios. Asimismo, el Artículo 14 exige mecanismos de supervisión humana efectiva (*Human-in-the-Loop*), mientras que el Artículo 86 consagra el derecho fundamental a recibir explicaciones claras y significativas sobre decisiones adversas. El protocolo FOM-7 aporta la base numérica requerida: la Puerta G1 verifica que la explicación represente con fidelidad el comportamiento del modelo (Art. 13), la Puerta G2 asegura la consistencia de las explicaciones evitando divergencias estocásticas arbitrarias (Art. 14), y la Puerta G7 garantiza la equidad explicativa entre subgrupos demográficos protegidos.
+* **Marco de Gestión de Riesgos de IA del NIST (NIST AI RMF 1.0):** La subcategoría *Measure 1.3* exige métricas rigurosas y verificables para cuantificar la explicabilidad y confiabilidad de los componentes algorítmicos, mientras que *Govern 1.2* mandata procesos documentados de rendición de cuentas. Al formular umbrales numéricos reproducibles y verificables en código abierto, FOM-7 transforma directrices normativas abstractas en controles técnicos auditables.
+
 ## Recomendaciones prácticas para desarrolladores y auditores
 
-Con base en la evidencia empírica acumulada en este capítulo, se proponen tres recomendaciones metodológicas para la práctica profesional en ingeniería de XAI:
-
+Con base en la evidencia empírica acumulada en este capítulo, se proponen tres directrices de ingeniería para el despliegue responsable de XAI:
 1. **Establecer un umbral mínimo de fidelidad (G1 > 0.85):** No autorizar el despliegue en producción de ningún explicador agnóstico cuya fidelidad reconstruida caiga por debajo del $85\%$ para el modelo predictivo en uso.
 2. **Publicar la latencia computacional en la documentación técnica (G5):** Incluir la latencia media por explicación en la tarjeta de modelo (*Model Card*) o en la documentación de auditoría para evitar cuellos de botella en entornos operativos en tiempo real.
 3. **Adoptar un enfoque híbrido de atribución y prescripción:** Combinar explicaciones de atribución continua de características (SHAP) para auditores técnicos con explicaciones contrafactuales diversas (DiCE) para usuarios finales afectados por la decisión algorítmica.
-
-## Integración con marcos normativos e internacionales
-
-El protocolo FOM-7 proporciona una implementación computacional concreta que responde directamente a las directrices del Marco de Gestión de Riesgos de IA del NIST (*NIST AI RMF 1.0*) y a los mandatos de auditabilidad previstos en los artículos 13 y 14 de la Ley de IA de la Unión Europea. Al estructurar la auditoría en siete puertas cuantificables, FOM-7 ofrece una evidencia objetiva, trazable y reproducible que permite a las organizaciones certificar el cumplimiento normativo de sus desarrollos algorítmicos.
 """
 
 
@@ -400,7 +455,7 @@ S10 = r"""# Conclusiones
 Este capítulo ha desarrollado un marco riguroso, pedagógico y empíricamente fundamentado para abordar la evaluación de la Inteligencia Artificial Explicable. A lo largo del documento, se ha construido una narrativa progresiva que parte desde la clarificación conceptual de los fundamentos de la XAI hasta la formulación e implementación del protocolo operativo **FOM-7**.
 
 Las contribuciones centrales de este trabajo se sintetizan en tres aportes clave:
-1. **Unificación pedagógica y conceptual:** Se ha proporcionado un marco analítico accesible que distingue la transparencia de la explicabilidad y expone de forma clara la formulación intuitiva y matemática de LIME, SHAP, Anchors y DiCE.
+1. **Unificación pedagógica y conceptual:** Se ha proporcionado un marco analítico accesible que distingue la transparencia de la explicabilidad, clarifica la frontera entre atribución funcional y causalidad, y expone de forma clara la formulación intuitiva y matemática de LIME, SHAP, Anchors y DiCE.
 2. **El protocolo operativo FOM-7:** Se ha presentado un estándar de auditoría estructurado en siete puertas cuantitativas que resuelve la crisis de evaluación en XAI al medir de manera independiente la fidelidad, estabilidad, parsimonia, cobertura, eficiencia, consistencia y equidad.
 3. **Evidencia empírica y perfiles de uso:** Mediante un benchmark riguroso sobre *UCI Adult Income* evaluando cinco familias de modelos, se ha caracterizado empíricamente la Frontera de Pareto entre estabilidad y costo computacional, entregando una guía de selección orientada al riesgo.
 
@@ -413,7 +468,7 @@ Reconociendo el alcance acotado de todo estudio científico, se resumen a contin
 
 ## Reflexión final
 
-La explicabilidad no puede continuar tratándose como un parche cosmetico o un módulo accesorio que se añade a posteriori sobre una caja negra predictiva. La explicabilidad representa una dimensión estructural de la seguridad, la gobernanza y la justicia algorítmica. Al dotar a la comunidad académica e industrial de un protocolo computable y auditable como **FOM-7**, este capítulo busca aportar una guía sólida para transitar desde la confianza ciega en las decisiones automatizadas hacia una supervisión transparente, defendible y verdaderamente centrada en el ser humano.
+La explicabilidad no puede continuar tratándose como un parche cosmético o un módulo accesorio que se añade a posteriori sobre una caja negra predictiva. La explicabilidad representa una dimensión estructural de la seguridad, la gobernanza y la justicia algorítmica. Al dotar a la comunidad académica e industrial de un protocolo computable y auditable como **FOM-7**, este capítulo busca aportar una guía sólida para transitar desde la confianza ciega en las decisiones automatizadas hacia una supervisión transparente, defendible y verdaderamente centrada en el ser humano.
 """
 
 

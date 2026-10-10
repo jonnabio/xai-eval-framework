@@ -34,11 +34,26 @@ La evaluación de **Anchors** se profundizó mediante el experimento de cobertur
 
 La Figura 8 grafica la relación empírica entre el umbral de precisión exigido a la regla y la cobertura poblacional resultante. Se observa que para garantizar niveles de precisión extremadamente altos ($\text{prec} \ge 0.95$), la cobertura empírica de las reglas de Anchors se contrae de forma acelerada, cubriendo únicamente entre el $12\%$ y el $28\%$ de los datos. Este resultado confirma que las reglas de Anchors funcionan como "islas de certeza local" de gran confiabilidad pero de alcance limitado.
 
-## Caracterización de perfiles explicativos dentro de FOM-7
+## Matriz de Decisión Operacional para Ingenieros de Despliegue
 
-A partir del análisis cuantitativo integrado, se definen los cuatro perfiles operacionales de uso para los explicadores agnósticos:
+A partir de los perfiles empíricos consolidados bajo el protocolo FOM-7, formulamos una guía de decisión sistemática para seleccionar el explicador idóneo según los requerimientos operativos y restricciones críticas del sistema en producción:
 
-1. **SHAP (KernelSHAP):** *Perfil Auditor de Alta Fidelidad.* Imprescindible para procesos de regulación, litigios y auditorías de seguridad donde la estabilidad matemática y la precisión de la atribución sean requisitos legales no negociables.
-2. **LIME:** *Perfil Exploratorio Interactivo.* Ideal para etapas de desarrollo, diagnóstico rápido de errores e inspección en tiempo real donde la velocidad sea prioritaria y la inestabilidad estocástica moderada sea tolerable.
-3. **Anchors:** *Perfil de Reglas de Cumplimiento.* Excelente para traducir la lógica algorítmica a barreras operacionales de control del tipo `SI-ENTONCES` de alta certidumbre.
-4. **DiCE:** *Perfil Prescriptivo Accionable.* Indispensable para portales de atención al ciudadano y sistemas de reclamo, ya que proporciona vías concretas y diversas para modificar el resultado del modelo.
+1. **Auditoría Regulatoria Ex-Post (Banca, Seguros, Salud):**
+   - *Restricción crítica:* Máxima fidelidad y consistencia jurídica ante organismos supervisores.
+   - *Explicador recomendado:* **KernelSHAP**.
+   - *Justificación empírica FOM-7:* Ofrece la mayor fidelidad local ($0.942$) y estabilidad entre remuestreos ($0.951$). Su latencia computacional elevada ($1,180\text{ ms}$) resulta plenamente admisible en esquemas de auditoría por lotes (*batch processing*) o revisiones periciales fuera de línea.
+
+2. **Monitoreo y Diagnóstico en Tiempo Real (Comercio Electrónico, Detección de Fraude):**
+   - *Restricción crítica:* Latencia estricta sub-segundo ($<100\text{ ms}$) y consumo mínimo de CPU por inferencia.
+   - *Explicador recomendado:* **LIME**.
+   - *Justificación empírica FOM-7:* Exhibe una latencia reducida ($45\text{ ms}$) y alta parsimonia explicativa, permitiendo generar aproximaciones comprensibles para operadores en turnos continuos, asumiendo una variabilidad estocástica moderada que debe amortiguarse mediante fijación de semillas o perturbaciones normalizadas.
+
+3. **Control de Cumplimiento Normativo y Políticas Corporativas (Derecho Laboral, Admisiones):**
+   - *Restricción crítica:* Certidumbre lógica inalterable y reglas deterministas de corte no negociable.
+   - *Explicador recomendado:* **Anchors**.
+   - *Justificación empírica FOM-7:* Aporta garantías matemáticas PAC de precisión ($\ge 95\%$) estructuradas en predicados condicionales comprensibles para oficiales de cumplimiento, asumiendo una cobertura poblacional acotada ($12\%$--$28\%$) que exige derivar los casos fuera del ancla a comités expertos.
+
+4. **Portales de Autoservicio y Mecanismos de Apelación (Sujetos de Decisión, Clientes):**
+   - *Restricción crítica:* Prescripción accionable y viabilidad física de intervención directa.
+   - *Explicador recomendado:* **DiCE**.
+   - *Justificación empírica FOM-7:* Produce contrafactuales que optimizan la distancia y diversidad matemática mientras protegen la invariancia de variables protegidas o inmutables (como la edad o el historial crediticio consolidado), habilitando un recurso correctivo real para el usuario final.

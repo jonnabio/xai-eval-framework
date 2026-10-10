@@ -26,7 +26,7 @@ $$\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g)$$
 
 donde $\mathcal{L}(f, g, \pi_x)$ representa la medida de infidelidad de la aproximación $g$ con respecto a $f$ ponderada por la distancia $\pi_x$, y $\Omega(g)$ es una penalización sobre la complejidad del modelo interpretable (como el número de características no nulas).
 
-Para un estudiante o usuario no experto, la intuición de LIME equivale a tomar una fotografía macro de una montaña rocosa: vista desde lejos la montaña tiene una forma hiper-compleja e irregular, pero si nos acercamos a un metro cuadrado de su superficie, la pared parece casi completamente plana y puede describirse fácilmente con una pendiente simple.
+Para un estudiante o usuario no experto, la intuición de LIME equivale a tomar una fotografía macro de una montaña rocosa: vista desde lejos la montaña tiene una forma hiper-compleja e irregular, pero si nos acercamos a un metro cuadrado de su superficie, la pared parece casi completamente plana y puede describirse fácilmente con una pendiente simple. Sin embargo, un desafío técnico crítico en LIME proviene del **muestreo fuera de distribución**: al perturbar características de manera independiente, se generan instancias sintéticas que combinan atributos de forma inverosímil en el mundo real, obligando al clasificador a emitir predicciones en regiones vacías del espacio de datos.
 
 ## SHAP: Explicaciones basadas en teoría de juegos cooperativos
 
@@ -44,7 +44,7 @@ La fortaleza matemática distintiva de SHAP radica en que es el **único** méto
 3. **Jugador nulo (Dummy):** Si una característica $i$ no altera la salida del modelo en ninguna coalición ($f_x(S \cup \{i\}) = f_x(S)$), su valor de Shapley es cero ($\phi_i = 0$).
 4. **Monotonicidad (Consistencia):** Si la contribución marginal de una característica aumenta o se mantiene igual en un modelo alternativo, su valor atribuido no puede disminuir.
 
-Para calcular estos valores en clasificadores agnósticos de caja negra, Lundberg y Lee introdujeron **KernelSHAP**, una estimación basada en regresión lineal ponderada mediante un núcleo de Shapley especializado que aproxima numéricamente la fórmula combinatoria de Shapley.
+Para calcular estos valores en clasificadores agnósticos de caja negra, Lundberg y Lee introdujeron **KernelSHAP**, una estimación basada en regresión lineal ponderada mediante un núcleo de Shapley especializado que aproxima numéricamente la fórmula combinatoria de Shapley. Al igual que LIME, KernelSHAP debe gestionar la correlación entre variables para no condicionar sobre combinaciones fuera de distribución.
 
 ## Anchors: Reglas de decisión de alta precisión con garantías formales
 
@@ -68,9 +68,9 @@ Anchors utiliza un enfoque de búsqueda por haces (*beam search*) guiado por alg
 
 ## DiCE: Generación de explicaciones contrafactuales diversas
 
-Propuesto por Mothilal *et al.* (2020), **DiCE** (*Diverse Counterfactual Explanations*) aborda la explicabilidad desde la perspectiva de la causalidad computacional y la acción prescriptiva. En lugar de explicar por qué el modelo tomó una decisión pasada, un contrafactual responde a la pregunta accionable: *¿Cuál es el conjunto mínimo de cambios en los atributos de entrada que alteraría la predicción del modelo hacia la clase deseada $y^*$?*
+Propuesto por Mothilal *et al.* (2020), **DiCE** (*Diverse Counterfactual Explanations*) aborda la explicabilidad desde la perspectiva de la acción prescriptiva y el recurso correctivo (*actionable recourse*). En lugar de limitarse a explicar por qué el modelo tomó una decisión pasada, un contrafactual responde a la pregunta orientada al usuario: *¿Cuál es el conjunto mínimo de cambios en los atributos de entrada que alteraría la predicción del modelo hacia la clase deseada $y^*$?*
 
-Si denotamos como $x$ la instancia de entrada original y como $c$ una instancia contrafactual candidata, DiCE formula la búsqueda de contrafactuales mediante la minimización de una función de pérdida multiobjetivo que equilibra la validez del resultado, la proximidad en el espacio de características y la diversidad entre un conjunto de $k$ contrafactuales generados $\{c_1, c_2, \dots, c_k\}$:
+En la práctica, no todas las variables pueden alterarse libremente. Un contrafactual útil debe distinguir entre **características accionables** (por ejemplo, incrementar el saldo en cuenta o reducir deudas) y **características inmutables** (como la edad o el país de origen). Si denotamos como $x$ la instancia de entrada original y como $c$ una instancia contrafactual candidata, DiCE formula la búsqueda mediante la minimización de una función de pérdida multiobjetivo que equilibra la validez del resultado, la proximidad en el espacio de características y la diversidad entre un conjunto de $k$ contrafactuales generados $\{c_1, c_2, \dots, c_k\}$:
 
 $$\min_{c_1, \dots, c_k} \frac{1}{k} \sum_{i=1}^k \mathcal{L}_{loss}(f(c_i), y^*) + \frac{\lambda_1}{k} \sum_{i=1}^k \text{dist}(x, c_i) - \lambda_2 \text{dpp}(c_1, \dots, c_k)$$
 

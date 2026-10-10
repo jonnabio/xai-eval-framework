@@ -30,3 +30,15 @@ Con el fin de analizar el comportamiento de las métricas de explicabilidad fren
 ## Entorno de ejecución y reproducibilidad
 
 Todas las corridas experimentales se ejecutaron en un entorno virtual aislado con Python 3.10 en una estación de trabajo Linux con procesador AMD Ryzen 9 5900X de 12 núcleos y 64 GB de RAM. Para asegurar la reproductibilidad exacta de las mediciones de estabilidad y latencia, se fijó la semilla del generador de números pseudoaleatorios en `seed=42` para todas las particiones, optimizaciones y muestreos estocásticos de los explicadores.
+
+## Protocolo de significancia estadística: Pruebas de Friedman y Nemenyi
+
+Para determinar si las diferencias observadas en las métricas de las siete puertas son estadísticamente significativas y no atribuibles al azar del remuestreo, se adoptó el protocolo no paramétrico riguroso recomendado por Demšar (2006) para la comparación de múltiples algoritmos sobre múltiples condiciones:
+
+1. **Prueba de rangos alineados de Friedman:** Se evaluó la hipótesis nula ($H_0$) de que todos los explicadores presentan un rendimiento equivalente en sus rangos promedio. La estadística de Friedman $\chi_F^2$ se calcula mediante:
+$$\chi_F^2 = \frac{12N}{k(k+1)} \left[ \sum_{j=1}^k R_j^2 - \frac{k(k+1)^2}{4} \right]$$
+donde $k$ representa el número de explicadores comparados ($k=4$), $N$ es el número de condiciones experimentales independientes evaluadas ($N=15$), y $R_j$ denota el rango medio asignado al explicador $j$.
+
+2. **Prueba post-hoc de Diferencia Crítica de Nemenyi:** Tras rechazar la hipótesis nula de Friedman ($p < 0.001$), se calculó la Diferencia Crítica ($CD$) a un nivel de significancia de dos colas $\alpha = 0.05$:
+$$CD = q_\alpha \sqrt{\frac{k(k+1)}{6N}}$$
+donde el valor crítico de Studentized range es $q_{0.05} = 2.569$ para $k=4$. Dos explicadores presentan diferencias estadísticamente significativas si y solo si la distancia entre sus rangos promedio supera estrictamente el umbral $CD$.

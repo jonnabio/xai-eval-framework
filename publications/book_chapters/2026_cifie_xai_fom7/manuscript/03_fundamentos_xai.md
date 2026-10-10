@@ -12,6 +12,12 @@ En la literatura sobre inteligencia artificial, los términos transparencia, int
 
 Como se ilustra sistemáticamente en la Figura 1, ninguna de estas tres dimensiones equivale automáticamente a la *confiabilidad* (*trustworthiness*). La confiabilidad de un sistema de IA es un atributo holístico que exige, además de la explicabilidad, la verificación empírica de su seguridad física y cibernética, su estabilidad robusta ante ruido, la preservación de la privacidad de los datos y el cumplimiento de principios de equidad y no discriminación (Tabassi, 2023).
 
+## La frontera crítica: Atribución estadística frente a intervención causal
+
+Un principio metodológico de vital importancia que suele pasarse por alto en la aplicación de XAI consiste en distinguir la **atribución de características** de la **inferencia causal**. Cuando un método post-hoc asigna un puntaje numérico elevado a una variable (por ejemplo, asignando un peso positivo a la variable *Edad* en la aprobación de un crédito), dicho valor describe exclusivamente el grado en que el modelo predictivo se apoya estadísticamente en esa columna dentro de su espacio de representación local.
+
+Bajo ninguna circunstancia debe interpretarse ese coeficiente como una prueba de que modificar dicha variable en el mundo real producirá un cambio causal directo en el fenómeno subyacente (Pearl, 2009). Confundir la dependencia funcional del algoritmo con una relación causa-efecto real puede inducir a intervenciones erróneas o perjudiciales. Por ejemplo, si un modelo médico asocia erróneamente un historial de asma con un menor riesgo de muerte por neumonía (debido a que los asmáticos ingresan directamente a cuidados intensivos recibiendo atención prioritaria), un explicador post-hoc reflejará fielmente que el asma "protege" al paciente según el clasificador. El explicador es fiel a la lógica interna del algoritmo, pero dicha lógica está desconectada de la causalidad biológica. Por ello, la auditoría mediante XAI evalúa la fidelidad descriptiva del modelo, no su verdad causal ontológica.
+
 ## Modelos interpretables por diseño frente a explicaciones post-hoc
 
 La comunidad científica en XAI se divide fundamentalmente en dos grandes paradigmas metodológicos para abordar el dilema de la opacidad algorítmica:

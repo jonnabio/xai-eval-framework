@@ -26,11 +26,11 @@ Un valor de fidelidad próximo a $1.0$ certifica que la explicación reconstruye
 
 ### 2. Estabilidad Local basada en Constante de Lipschitz (G2)
 
-La estabilidad local de un explicador $E$ que produce atribuciones $E(x) \in \mathbb{R}^{\vert F \vert}$ se mide estimando la constante empírica de Lipschitz máxima dentro de una bola de perturbación de radio $\epsilon$:
+La estabilidad local de un explicador $E$ que produce atribuciones $E(x) \in \mathbb{R}^{\vert F \vert}$ se formaliza teóricamente estimando la constante empírica de Lipschitz máxima dentro de una bola de perturbación de radio $\epsilon$:
 
 $$\text{Estabilidad}(E, x, \epsilon) = 1 - \max_{x' : \Vert x - x' \Vert_2 \le \epsilon} \frac{\Vert E(x) - E(x') \Vert_2}{\Vert x - x' \Vert_2}$$
 
-Donde una estabilidad de $1.0$ indica absoluta inalterabilidad ante variaciones de pequeña escala en el punto de evaluación.
+Donde una estabilidad de $1.0$ indica absoluta inalterabilidad ante variaciones de pequeña escala en el punto de evaluación. En implementaciones industriales y bancos de pruebas estandarizados (como EXP2), esta propiedad se operacionaliza mediante la **similitud coseno media** entre explicaciones obtenidas sobre perturbaciones gaussianas controladas, lo que permite un cómputo determinista y escalable.
 
 ### 3. Escasez y Parsimonia Cognitiva (G3)
 
@@ -52,7 +52,12 @@ El costo computacional se cuantifica como la latencia media $\bar{T}_{exp}$ requ
 
 $$\bar{T}_{exp} = \frac{1}{M} \sum_{k=1}^{M} t(E, x_k) \quad [\text{ms/instancia}]$$
 
-## Resumen formal de las métricas del protocolo
+## Criterios de Aprobación para Auditoría Industrial
+
+Para que un explicador post-hoc sea certificado como apto para producción en un entorno de alto impacto bajo el protocolo FOM-7, debe satisfacer umbrales de validez operacional concurrentes:
+* **Umbral de Fidelidad:** $\text{Fidelidad} \ge 0.85$ (G1), garantizando que el sustituto no invente una lógica ajena al modelo.
+* **Umbral de Estabilidad:** $\text{Estabilidad} \ge 0.80$ (G2), asegurando que ruidos sensoriales menores no inviertan el ranking de variables.
+* **Límite de Latencia:** $\bar{T}_{exp} \le 200\text{ ms}$ para sistemas interactivos en tiempo real, o $\bar{T}_{exp} \le 2,000\text{ ms}$ para auditorías regulatorias por lotes.
 
 La Tabla 1 consolida las métricas operacionales del protocolo FOM-7, especificando sus símbolos, rangos de validez y criterios de interpretación para auditoría.
 
