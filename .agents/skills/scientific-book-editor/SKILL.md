@@ -10,11 +10,11 @@ description: >-
 
 ## Overview
 
-The `scientific-book-editor` skill establishes an editorial framework for authoring, reviewing, polishing, and auditing high-stakes scientific book chapters, peer-reviewed monographs, and doctoral dissertation publications. It combines rigorous mathematical verification with structural storytelling and strict editorial compliance (APA 7th ed., Springer, IEEE, and TintAzul/CIFIE editorial guidelines).
+The `scientific-book-editor` skill establishes an advanced editorial framework for authoring, reviewing, stress-testing, and auditing high-stakes scientific book chapters, peer-reviewed monographs, and doctoral dissertation publications. It combines rigorous mathematical verification with structural storytelling, peer-review red-teaming, and strict editorial compliance (APA 7th ed., Springer, IEEE, and TintAzul/CIFIE editorial guidelines).
 
 ---
 
-## The Four Editorial Pillars
+## The Four Core Editorial Pillars
 
 Every review conducted under this skill evaluates the manuscript across four interdependent dimensions:
 
@@ -31,7 +31,7 @@ Every review conducted under this skill evaluates the manuscript across four int
 ### 2. Technical & Mathematical Integrity
 * **Notation Consistency:** Ensure mathematical symbols are unambiguous and standardized throughout all sections (e.g., primary model $f(x)$, local surrogate $g \in G$, proximity kernel $\pi_x$, Shapley values $\phi_i$, Lipschitz perturbation radius $\epsilon$).
 * **Fidelity of Analogies:** Intuitive analogies (such as explaining local surrogates to a 12-year-old or non-expert) must be conceptually truthful and not contradict the formal equations.
-* **Claim Provenance & Exclusivity:** Ensure empirical claims cite the exact experimental blocks (e.g., EXP2 benchmark data, Friedman $\chi^2_F$, Nemenyi critical difference) and respect publication exclusivity boundaries between thesis papers.
+* **Claim Provenance & Exclusivity:** Ensure empirical claims cite the exact experimental blocks (e.g., EXP2 benchmark data, Friedman $\chi^2_F$, Nemenyi critical difference) and respect publication exclusivity boundaries between thesis papers (`pub/claim_registry.toml`).
 
 ### 3. Editorial & Typography Standards (APA 7 / CIFIE)
 * **Heading Hierarchy:**
@@ -47,9 +47,50 @@ Every review conducted under this skill evaluates the manuscript across four int
   * Figures must have pre-callouts in the text before appearing, clear descriptive captions citing data provenance, and dual support for color (digital) and high-contrast patterned B/W (print).
 
 ### 4. Word-Budget Governance & Conciseness
-* **Strict Word Limits:** Actively track and maintain manuscript target length (e.g., target ~9,000 words total).
+* **Strict Word Limits:** Actively track and maintain manuscript target length (e.g., target ~8,500 words total).
 * **Elimination of Redundancy:** Prune repetitive definitions of baseline concepts across successive sections. Define once in Fundamentals and reference thereafter.
 * **Information Density:** Replace passive voice and empty academic filler with precise, active, and defendable claims.
+
+---
+
+## Advanced Editorial Level-Up Modules
+
+To elevate the manuscript to the highest tier of international scientific publishing, the editor executes five specialized audit modules:
+
+### Module A: Peer-Review Red-Teaming (Stress-Testing Objections)
+Anticipates and neutralizes the hardest critiques from skeptical peer reviewers in top AI venues (NeurIPS, ICML, FAccT):
+1. **The Rudin Challenge (Inherent Interpretability vs. Post-hoc):** Ensure the text explicitly justifies when post-hoc explanation is acceptable (high-dimensional non-linear trade-offs) and acknowledges Rudin's (2019) warning against blind post-hoc trust.
+2. **The Causality vs. Correlation Boundary:** Check that feature attributions are never conflated with causal interventions; clarify that post-hoc scores reflect statistical association within the local model surrogate.
+3. **Adversarial Scaffolding & Manipulation:** Proactively address the vulnerability of post-hoc explainers to adversarial manipulation (Slack *et al.*, 2020) and how multi-gate auditing (FOM-7) detects these distortions.
+4. **Out-of-Distribution (OOD) Perturbations:** Highlight the dangers of independent feature perturbation in tabular data and how proximity kernels mitigate unrealistic synthetic points.
+
+### Module B: Micro-Level Claim-to-Evidence Matrix
+Every quantitative assertion in the manuscript must be traceable to experimental benchmark outputs:
+* Verify that metric figures (e.g., $AUC = 0.917$ for XGBoost, $\text{Fidelidad} = 0.942$, latency $45\text{ ms}$, $\chi^2_F = 42.12$, Kendall's $W = 0.936$) match benchmark logs.
+* Guard against premature leakage of empirical findings reserved for concurrent thesis publications (Papers B, C, D).
+
+### Module C: Triple-Persona Reader Scaffolding
+Ensure that every chapter section delivers value across three distinct reader profiles:
+1. **The Regulator & Legal Auditor:** Provides concrete compliance takeaways, EU AI Act Art. 13/14 alignment, and auditability checklists.
+2. **The ML Engineer & Practitioner:** Highlights operational trade-offs, Pareto frontiers, latency constraints, and deployment guidelines.
+3. **The Graduate Student & Researcher:** Details formal mathematical axiomatizations, PAC constraints, Lipschitz continuity, and open research directions.
+
+### Module D: Stylistic Micro-Editing & Stylometry (High-Prestige Academic Spanish)
+* **Eradicating Latent Anglicisms:**
+  * *"Trade-off"* $\to$ *Tensión operacional / compromiso de diseño*.
+  * *"Performance"* $\to$ *Rendimiento / desempeño predictivo*.
+  * *"Pipeline"* $\to$ *Canalización / flujo de procesamiento*.
+  * *"Ground truth"* $\to$ *Terreno de verdad / referencia empírica*.
+  * *"Benchmark"* $\to$ *Banco de pruebas comparativo / benchmark empírico*.
+* **Sentence Cadence & Rhythm:** Prune overly long Spanish periods (>45 words) that induce cognitive fatigue; balance short assertive statements with explanatory clauses.
+* **De-nominalization:** Replace passive nominalizations (*"la realización de la optimización del modelo"*) with active verbs (*"optimizar el modelo"*).
+
+### Module E: Section Health Index (SHI) Scorecard (0–100)
+Assigns a quantitative audit score to each manuscript section:
+* **Argumentative Narrative & Flow (25 pts):** Clear topic sentences, transitions, and connection to the overarching thesis story.
+* **Mathematical Rigor & Notation (25 pts):** Formal notation integrity, no Pandoc syntax clashes, and truthful analogies.
+* **Empirical Grounding & Evidence (25 pts):** Traceable claims, proper figure/table callouts, and statistical significance tests.
+* **Stylistic Elegance & APA 7 (25 pts):** High-prestige academic Spanish, italicized *et al.*, and zero Anglicisms.
 
 ---
 
