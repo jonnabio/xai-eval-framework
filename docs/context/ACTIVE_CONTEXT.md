@@ -32,7 +32,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-09 08:54: 847 of 1,280 conditions, seeds 42 and 123 complete, seed 456 at 255 of 256, seed 789 at 80; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-09 18:50: 975 of 1,280 conditions, seeds 42, 123 and 456 complete, seed 789 at 207 of 256; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -42,9 +42,83 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-09 19:00 (Paper F: 975 of 1,280, three seeds complete, PR #43 open)
+
+This is the latest handoff. It covers the session from 2026-10-08 (start) to 2026-10-09
+19:00 (lane `paper-f`, owner `claude-2026-10-08-paper-f`, branch
+`paper/f-external-validity`). The handoff of 2026-10-08 08:30 below remains the reference
+for the design, the code and the rules of the run.
+
+- **Completed**:
+  - **Two raw data snapshots**, lane commits `cd8b9f720` (2026-10-09 09:00, 302 new job
+    files) and `9cc530205` (2026-10-09 18:50, 128 new job files), both pushed:
+    `outputs/analysis/paper_f/raw/` holds 975 finished jobs and 195,000 rows (seeds 42,
+    123 and 456: 256 jobs and 51,200 rows each; seed 789: 207 jobs, 41,400 rows). The
+    pushed files were not checked again against the manifest.
+  - **Pull request #43 opened** against `main` (snapshots and context only; no code, no
+    manuscript, no analysis). Its three checks (`lanes`, `fragments`,
+    `exp4-reconstruction`) passed on the first two commits; they were not watched again
+    after the later pushes.
+  - Context file updated (this handoff and the one of 09:00 below; Paper F row of the
+    status table).
+  - Nothing else was changed: no code, no manuscript, no configuration. No launcher was
+    started by hand and the branch was not switched.
+- **Current State**:
+  - **The run is in progress and unattended.** At 2026-10-09 18:50: 975 of 1,280
+    conditions (76.2%), 195,877 rows; seeds 42, 123 and 456 complete; seed 789 at 207 of
+    256 (dashboard: ends Sat 2026-10-10 06:39); seed 101112 not begun. One launcher, 8
+    jobs, 0 failed jobs in `runs/_launcher_seed123.log`, scheduled task
+    `PaperF-chain-ensure` last result 0, no `_STOP` file at 08:54.
+  - **Estimated end of the run: Saturday 2026-10-10, about 21:18** (dashboard, from the
+    work that remains; 21:44 by the count of the last three hours). It moved one hour
+    later during the day.
+  - **Failures: 945 of 195,879 rows (0.48%)**: 812 DiCE "no counterfactual", 70 Anchors
+    time limit, 63 DiCE time limit (dashboard labels).
+  - **Seeds 123 and 456 are complete by count but their checks are not done** (job
+    files at 200 instances, no duplicate instance, failures by dataset, model and
+    method). Only seed 42 is checked.
+  - **Pull request #43 is open, not merged.** The assistant's tool refused the merge
+    ("merge without review"); the author has to merge it. The branch is ahead of `main`
+    by the commits of this session and is pushed.
+  - Rows written after the snapshot of 2026-10-09 18:50 are on the laptop only.
+  - No analysis has been run and no ranking has been looked at.
+  - The lane lock is released; nothing watches the run but the scheduled task.
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
+     `paper/f-external-validity`; stop if it fails.
+  2. If pull request #43 is still open, the author merges it (page button or
+     `gh pr merge 43 --merge`); then `git fetch origin` and
+     `git merge --ff-only origin/main` on the branch.
+  3. `.venv\Scripts\python.exe scripts\paper_f_monitor.py --once --no-colour`, the
+     launcher log and the scheduled task, then
+     `.venv\Scripts\python.exe scripts/paper_f_snapshot.py` and commit and push
+     `outputs/analysis/paper_f/raw/`.
+  4. Check seeds 123 and 456 (and 789 when complete) as seed 42 was checked:
+     completeness, failures and timing only.
+  5. Steps 4 to 6 of the handoff of 2026-10-08 08:30 are unchanged: the Results skeleton
+     with the author's go-ahead; when the five seeds are complete, the analysis once and
+     what follows; the submission numbers of Papers C and D and their READMEs.
+- **Blockers/Issues**:
+  - **The assistant cannot merge a pull request by itself** in this setup; the author
+    merges, or adds a permission rule for it.
+  - The blockers of the handoff of 2026-10-08 08:30 stand (seed-end estimate optimistic,
+    dashboard sections show the first incomplete seed only, references at 83% against
+    the 80% rule, no linter in the environment).
+  - The Gmail, Google Calendar, Google Drive and Notion connectors were not authorized
+    in this session.
+- **Notes**:
+  - **The lane lock goes stale after 12 hours** (`lock_stale_hours` in
+    `scripts/pubs/check_lane.py`): a session that lasts overnight must claim again before
+    it commits. The first commit of 2026-10-09 was refused for that reason; the lock was
+    free and was claimed again under the same owner.
+  - The rules of the run are unchanged: never start a launcher by hand, do not edit
+    `paper_f_config.toml` or `scripts/paper_f_lib.py`, do not switch branch while the run
+    is active, do not run `paper_f_analyze.py` before the five seeds are complete, use
+    `.venv\Scripts\python.exe`.
+
 ## Session Handoff - 2026-10-09 09:00 (Paper F: 847 of 1,280, seeds 42 and 123 complete, snapshot)
 
-This is the latest handoff; it updates the state of the run only. The handoff below
+This handoff is superseded by the one above. It updated the state of the run only. The handoff below
 (2026-10-08 08:30) remains the reference for the rules, the next steps and the notes.
 Lane `paper-f`, owner `claude-2026-10-08-paper-f`, branch `paper/f-external-validity`.
 
