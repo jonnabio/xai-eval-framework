@@ -153,7 +153,7 @@ Propuesto por Ribeiro *et al.* (2016), **LIME** (*Local Interpretable Model-agno
 ### Mecanismo algorítmico
 
 Para construir la aproximación local alrededor de un registro $x$:
-1. **Generación de perturbaciones:** Genera $K$ muestras sintéticas $z'$ en el entorno de $x$ aplicando ruido gaussiano sobre variables continuas y remuestreo sobre categóricas.
+1. **Generación de perturbaciones:** Genera $K$ muestras sintéticas $z'$ en el entorno inmediato de $x$ aplicando **ruido gaussiano** (pequeñas fluctuaciones aleatorias centradas en cero extraídas de una distribución normal, $\mathcal{N}(0, \sigma^2)$, que generan registros ligeramente modificados o «gemelos con ruido») sobre las variables continuas, y remuestreo empírico sobre las categóricas.
 2. **Evaluación de la caja negra:** Envía las muestras $z'$ al clasificador primario para obtener sus probabilidades predichas $f(z')$.
 3. **Ponderación por proximidad:** Asigna a cada muestra sintética $z'$ un peso de relevancia $\pi_x(z)$ mediante un núcleo exponencial gaussiano basado en la distancia $D(x, z)$ (distancia euclidiana o de coseno en el espacio escalado):
 $$\pi_x(z) = \exp\left( -\frac{D(x, z)^2}{\sigma^2} \right)$$
