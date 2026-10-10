@@ -1,5 +1,41 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-10 (CIFIE Book Chapter - Didactic Equation Audit & Condensation)
+
+- **Completed**:
+  - **Comprehensive Scientific Equation Audit (18 Display Equations)**: Audited every single mathematical formula across the CIFIE book chapter manuscript (`publications/book_chapters/2026_cifie_xai_fom7/manuscript/`).
+    - *Section 04 (8 equations)*: LIME proximity kernel $\pi_x(z)$, LIME Lasso optimization $\xi(x)$, Shapley values $\phi_i(x)$, KernelSHAP kernel $\pi(z')$, Anchors PAC bound $P(\text{prec} \ge 1-\gamma)$, Anchors local precision $\text{prec}(A)$, Anchors coverage $\text{cov}(A)$, DiCE multi-objective loss with DPP diversity $\det(\mathbf{K})$.
+    - *Section 06 (8 equations)*: Gate 1 Fidelity ($R^2$ analog), Gate 2 Lipschitz stability, Gate 2 operational cosine stability, Gate 3 Sparsity, Gate 4 Coverage, Gate 5 Latency $\bar{T}_{exp}$, Gate 6 Spearman consistency, Gate 7 Demographic parity four-fifths ratio.
+    - *Section 07 (2 equations)*: Friedman aligned ranks $\chi_F^2$, Nemenyi Critical Difference $CD$.
+  - **Plain-Language & Data Engineering Intuition Integration**: Added intuitive explanations before every equation (grounded in data engineering concepts: weights, decay filters, loss penalties, stability variances, rank permutations) and complete symbol-by-symbol parameter definitions after each formula.
+  - **Didactic Clarification of Gaussian Noise**: Explained the concept and role of Gaussian noise ($\mathcal{N}(0, \sigma^2)$) in the perturbation step of LIME (Section 04) as small random fluctuations generating jittered twin records, connecting it to out-of-distribution (OOD) risks.
+  - **LaTeX & Markdown Formatting Compliance**: Escaped absolute values and vector norms using `\vert` and `\Vert` in all equations to prevent Pandoc AST table parsing conflicts.
+  - **Word Budget Governance ($\le$ 8,800 words ceiling)**: Carefully condensed Section 01, Section 02, and Section 05 prose while expanding didactic explanations. Final compiled word count is **8,738 words** (prose: 8,313 words; APA tables: ~425 words), strictly complying with the $\le 8,800$-word limit with a 62-word buffer.
+  - **Artifact Compilation & Verification**: Successfully recompiled clean Word (`.docx`) and PDF (`.pdf`) editions with 10 sections, 2 APA tables, and 10 figures.
+  - **Remote Synchronization**: Committed and pushed all manuscript sections, build scripts, and compiled output artifacts to `origin/thesis/rca-001-phase-2`.
+
+- **Current State**:
+  - **Branch**: `thesis/rca-001-phase-2` (commit `c7d7f8e03`). Tree clean. Synced with GitHub remote.
+  - **Word Count**: Exactly 8,738 words reported by `build_cifie_chapter.py` (prose: 8,313 words; tables: 425 words; 62-word margin under 8,800 limit).
+  - **Manuscript Files**: Sections 01 through 10 in `publications/book_chapters/2026_cifie_xai_fom7/manuscript/` are up to date and consistent with `scripts/reformat_manuscript_9k.py`.
+  - **Compiled Deliverables**:
+    - `publications/book_chapters/2026_cifie_xai_fom7/drafts/v3_editorial_review/cifie_xai_fom7_2026-10-10.docx`
+    - `publications/book_chapters/2026_cifie_xai_fom7/drafts/v3_editorial_review/cifie_xai_fom7_2026-10-10.pdf`
+  - **Lane Lock**: Free (`check_lane.py status` confirms `lock: free`).
+
+- **Next Steps**:
+  1. Author editorial sign-off on the generated Word/PDF review copies.
+  2. If submitting the CIFIE book chapter, export/package final draft artifacts according to editorial guidelines.
+  3. Resume Task 3 / RCA-001 Phase 2 on the thesis lane when transitioning back to doctoral thesis dissertation work.
+
+- **Blockers/Issues**:
+  - None for the CIFIE book chapter. All 18 equations audited and explained, length ceiling strictly observed, and artifacts compiled cleanly.
+
+- **Notes**:
+  - To regenerate the manuscript from the script: `python scripts/reformat_manuscript_9k.py`.
+  - To compile both Word and PDF drafts: `python scripts/build_cifie_chapter.py --pdf`.
+  - Remember that the rendered chapter total word count in `build_cifie_chapter.py` accounts for both markdown prose and the two embedded APA tables (`table_metrics.md` and `table_results_summary.md`, ~425 words combined). Any future prose additions must keep total prose $\le 8,375$ words to stay within the 8,800 total ceiling.
+
 ## Session update - 2026-10-03 (Paper D reproducibility and archive)
 
 - **Data availability statement rewritten** in `paper_d_template.tex` (full and blind
