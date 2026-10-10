@@ -24,25 +24,29 @@ Evalúa el coeficiente de determinación local entre el sustituto explicativo $g
 
 $$\text{Fidelidad}(g, f, x) = 1 - \frac{\sum_{z \in Z_x} \pi_x(z) \left( f(z) - g(z) \right)^2}{\sum_{z \in Z_x} \pi_x(z)}$$
 
-Un valor de $1.0$ representa una réplica perfecta de la frontera local; valores inferiores a $0.85$ indican un desacoplamiento inaceptable respecto al clasificador real.
+Esta métrica opera análogamente a un coeficiente de determinación local $R^2$: el numerador suma las discrepancias al cuadrado entre la predicción de la caja negra $f(z)$ y la del sustituto $g(z)$ ponderadas por proximidad $\pi_x(z)$, mientras el denominador normaliza por la masa total de ponderación. Un valor de $1.0$ indica coincidencia absoluta en toda la vecindad; valores inferiores a $0.85$ evidencian que el sustituto no refleja fielmente la frontera del modelo.
 
 ### 2. Estabilidad Local basada en la Constante de Lipschitz y Similitud Coseno (G2)
 
-Teóricamente, la estabilidad se define acotando la constante de Lipschitz del operador explicativo $E(x) \in \mathbb{R}^{\vert F \vert}$ en una bola de radio $\epsilon$:
+Teóricamente, la estabilidad se define acotando la constante de Lipschitz máxima del operador explicativo $E(x) \in \mathbb{R}^{\vert F \vert}$ dentro de una bola de perturbación de radio $\epsilon$:
 
 $$\text{Estabilidad}(E, x, \epsilon) = 1 - \max_{x' : \Vert x - x' \Vert_2 \le \epsilon} \frac{\Vert E(x) - E(x') \Vert_2}{\Vert x - x' \Vert_2}$$
 
-Para viabilizar este cómputo de manera determinista y escalable en producción, FOM-7 calcula la **similitud coseno media** entre vectores de atribución obtenidos bajo perturbaciones gaussianas controladas ($\sigma_{\text{ruido}} = 0.05 \cdot \sigma_X$):
+La fracción $\frac{\|E(x) - E(x')\|_2}{\|x - x'\|_2}$ mide la tasa máxima de variación del vector de explicación frente a una variación en la entrada. Si un cambio microscópico en los datos genera un giro brusco en las atribuciones, la fracción se dispara y la estabilidad colapsa.
+
+Para operacionalizar este cálculo de manera escalable y determinista en pipelines de producción, FOM-7 evalúa la **similitud coseno media** entre los vectores de atribución obtenidos sobre $B$ perturbaciones gaussianas controladas ($\sigma_{\text{ruido}} = 0.05 \cdot \sigma_X$):
 
 $$\text{Estabilidad}_{\text{cos}}(E, x) = \frac{1}{B} \sum_{b=1}^B \frac{E(x) \cdot E(x + \delta_b)}{\Vert E(x) \Vert_2 \, \Vert E(x + \delta_b) \Vert_2}$$
 
-donde $B$ es el número de muestras de validación y $\delta_b \sim \mathcal{N}(0, \sigma^2 I)$. Un valor próximo a $1.0$ garantiza que ruidos menores no alterarán la jerarquía de factores reportados.
+donde el producto punto dividido por el producto de las normas euclidianas mide si las explicaciones apuntan en la misma dirección geométrica en el espacio de características. Un valor de $1.0$ certifica que los factores destacados y sus signos son idénticos bajo ruido; valores por debajo de $0.80$ alertan sobre volatilidad estocástica inaceptable.
 
 ### 3. Parsimonia y Escasez de Coeficientes (G3)
 
-Mide la fracción de variables cuya atribución absoluta cae por debajo de un umbral de significancia práctica $\tau$:
+Mide la fracción de variables cuya atribución absoluta cae por debajo de un umbral de significancia práctica $\tau$ (típicamente $\tau = 0.01$):
 
 $$\text{Escasez}(E(x), \tau) = \frac{1}{\vert F \vert} \sum_{i=1}^{\vert F \vert} \mathbb{I}(\vert \phi_i(x) \vert \le \tau)$$
+
+donde $|F|$ es la cantidad total de columnas. Una escasez elevada (por ejemplo, $\ge 0.85$ en una tabla de 100 variables) indica que el explicador filtra el ruido de fondo y concentra la atención en pocas variables críticas.
 
 ### 4. Cobertura Empírica de Reglas (G4)
 
@@ -50,25 +54,29 @@ Para métodos basados en predicados condicionales (Anchors), cuantifica la propo
 
 $$\text{Cobertura}(A) = \frac{1}{N} \sum_{j=1}^{N} \mathbb{I}(A(x_j) = 1)$$
 
+donde $A(x_j) = 1$ indica que el registro $j$ cumple todos los predicados de la regla.
+
 ### 5. Latencia Computacional Media (G5)
 
-Tiempo medio de CPU/GPU $t(E, x_k)$ requerido para generar la explicación de una instancia sobre un lote de $M$ casos:
+Tiempo medio de CPU/GPU $t(E, x_k)$ requerido para generar la explicación completa de una instancia sobre un lote representativo de $M$ casos:
 
 $$\bar{T}_{exp} = \frac{1}{M} \sum_{k=1}^{M} t(E, x_k) \quad [\text{ms/instancia}]$$
 
 ### 6. Consistencia Inter-método (G6)
 
-Mide la correlación de rangos de Spearman entre los vectores de atribución generados por dos explicadores $E_1$ y $E_2$ sobre la misma instancia:
+Mide el coeficiente de correlación de rangos de Spearman entre las jerarquías de variables ordenadas por dos explicadores $E_1$ y $E_2$ sobre la misma instancia:
 
 $$\text{Consistencia}(E_1, E_2, x) = 1 - \frac{6 \sum_{i=1}^{|F|} d_i^2}{|F| (|F|^2 - 1)}$$
 
-donde $d_i$ es la diferencia entre los rangos asignados a la característica $i$.
+donde $d_i = \text{rango}(E_1)_i - \text{rango}(E_2)_i$ es la diferencia entre los puestos asignados a la variable $i$ por ambos métodos. Si ambos explicadores coinciden exactamente en el orden de las variables, $d_i = 0$ para toda $i$ y la consistencia es $+1.0$; si entregan órdenes invertidos, la consistencia se degrada hacia $-1.0$.
 
 ### 7. Equidad en la Explicación (G7)
 
-Evalúa la paridad en la fidelidad local media entre subgrupos demográficos protegidos (como género o etnia), aplicando el criterio regulatorio de la regla de los cuatro quintos:
+Evalúa la paridad en la fidelidad local media entre subgrupos demográficos protegidos (como género o etnia), aplicando el criterio regulatorio de la regla de los cuatro quintos (*Four-Fifths Rule*):
 
 $$\text{Paridad}(G_1) = \min_{a, b \in \mathcal{A}} \frac{\bar{G}_1(A = a)}{\bar{G}_1(A = b)} \ge 0.80$$
+
+donde $\bar{G}_1(A = a)$ es la fidelidad media del explicador en el subgrupo protegido $a$, y $\mathcal{A}$ es el conjunto de subgrupos. La razón compara el grupo con menor fidelidad frente al grupo con mayor fidelidad: si la razón cae por debajo de $0.80$, existe una brecha discriminatoria inadmisible en la calidad de la auditoría.
 
 ## Criterios de Aprobación para Auditoría de Producción
 

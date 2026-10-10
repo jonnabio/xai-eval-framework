@@ -21,12 +21,12 @@ Propuesto por Ribeiro *et al.* (2016), **LIME** (*Local Interpretable Model-agno
 Para construir la aproximación local alrededor de un registro $x$:
 1. **Generación de perturbaciones:** Genera $K$ muestras sintéticas $z'$ en el entorno de $x$ aplicando ruido gaussiano sobre variables continuas y remuestreo sobre categóricas.
 2. **Evaluación de la caja negra:** Envía las muestras $z'$ al clasificador primario para obtener sus probabilidades predichas $f(z')$.
-3. **Ponderación por proximidad:** Asigna a cada muestra sintética $z'$ un peso $\pi_x(z)$ mediante un núcleo exponencial basado en la distancia $D(x, z)$ (euclidiana o coseno):
+3. **Ponderación por proximidad:** Asigna a cada muestra sintética $z'$ un peso de relevancia $\pi_x(z)$ mediante un núcleo exponencial gaussiano basado en la distancia $D(x, z)$ (distancia euclidiana o de coseno en el espacio escalado):
 $$\pi_x(z) = \exp\left( -\frac{D(x, z)^2}{\sigma^2} \right)$$
-donde $\sigma$ es el ancho de banda del núcleo.
-4. **Ajuste del modelo sustituto:** Ajusta una regresión lineal resolviendo:
+donde $\sigma$ es el ancho de banda del núcleo que define el radio de la vecindad local. En términos operacionales, si la muestra perturbada $z$ es idéntica a $x$ ($D=0$), su peso es máximo ($\pi=1.0$); a medida que la distancia aumenta, el peso decae exponencialmente hacia cero, asegurando que solo los puntos muy cercanos influyan en la explicación.
+4. **Ajuste del modelo sustituto:** Encuentra el modelo interpretable óptimo $g \in G$ (típicamente una regresión lineal simple $g(z') = w_0 + \sum w_i z'_i$) resolviendo:
 $$\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g)$$
-donde $\mathcal{L}$ mide el error cuadrático ponderado entre $f(z)$ y $g(z)$, y $\Omega(g)$ es una penalización L1 (Lasso) que fuerza a que solo un subconjunto reducido de variables conserve coeficientes no nulos.
+donde $\mathcal{L}$ representa el error cuadrático medio ponderado por la proximidad $\pi_x$ (midiendo la discrepancia entre las predicciones del modelo complejo $f(z)$ y las del sustituto $g(z)$), y $\Omega(g) = \alpha \sum |w_i|$ es una regularización tipo Lasso que penaliza la complejidad, forzando a que la mayoría de los pesos sean cero para entregar una explicación con pocas variables dominantes.
 
 ### Riesgo operacional: Muestras fuera de distribución (*OOD*)
 
@@ -44,7 +44,11 @@ Shapley resuelve esta asignación calculando el **aporte marginal promedio de ca
 
 $$\phi_i(x) = \sum_{S \subseteq F \setminus \{i\}} \frac{\vert S \vert ! (\vert F \vert - \vert S \vert - 1)!}{\vert F \vert !} \left[ f_x(S \cup \{i\}) - f_x(S) \right]$$
 
-donde $F$ es el conjunto de características, $S$ es una coalición que no contiene a la variable $i$, y $f_x(S)$ es la predicción esperada condicionada a los valores observados en $S$.
+Para interpretar esta formulación:
+* $F$ es el conjunto total de columnas o características.
+* $S$ representa un subconjunto de características (coalición) que excluye a la variable de interés $i$.
+* El término entre corchetes $[f_x(S \cup \{i\}) - f_x(S)]$ mide la contribución marginal: cuánto cambia la predicción del modelo cuando la variable $i$ se incorpora a la coalición $S$.
+* La fracción con factoriales $\frac{|S|!(|F|-|S|-1)!}{|F|!}$ es un factor de ponderación probabilístico que representa la probabilidad de que la variable $i$ ingrese exactamente después del subconjunto $S$ en una permutación aleatoria uniforme de todas las características. Al promediar sobre todas las coaliciones posibles, Shapley garantiza un reparto distributivo matemáticamente justo.
 
 ### Los cuatro axiomas de Shapley
 
@@ -62,7 +66,7 @@ Para cajas negras genéricas, **KernelSHAP** resuelve esta barrera estimando los
 
 $$\pi(z') = \frac{|F| - 1}{\binom{|F|}{|z'|} |z'| (|F| - |z'|)}$$
 
-donde $|z'|$ es el número de características presentes en la muestra sintética. Este núcleo asigna el peso máximo a coaliciones con muy pocas o casi todas las variables presentes, que es donde el impacto marginal resulta más informativo. Aunque viabiliza el cálculo, su latencia media ronda los $1,180\text{ ms}$ por registro. Resulta idóneo para auditorías periódicas por lotes (*batch*), pero prohibitivo para microservicios en tiempo real con alta concurrencia.
+donde $|F|$ es el número total de características y $|z'|$ es el número de variables presentes en la muestra sintética evaluada. El denominador combina el coeficiente binomial $\binom{|F|}{|z'|}$ con el tamaño de la coalición: esto asigna intencionalmente los pesos más elevados a las coaliciones extremas (aquellas con una sola variable o con casi todas), ya que es precisamente en los extremos donde resulta más sencillo aislar el efecto individual de cada atributo. Aunque viabiliza el cómputo, su latencia media ronda los $1,180\text{ ms}$ por registro, siendo adecuada para lotes pero costosa para tiempo real.
 
 ## Anchors: Reglas condicionales con garantías formales
 
@@ -72,17 +76,21 @@ Una regla $A$ (el "ancla") es un conjunto de predicados booleanos sobre las vari
 
 $$P\left( \text{prec}(A) \ge 1 - \gamma \right) \ge 1 - \delta$$
 
-donde la precisión local $\text{prec}(A)$ mide la proporción de perturbaciones locales $z$ que preservan la predicción original:
+donde la precisión local $\text{prec}(A)$ mide la proporción de perturbaciones locales $z$ que preservan la predicción original $f(x)$:
 
 $$\text{prec}(A) = \mathbb{E}_{z \sim D(z|A)} \left[ \mathbb{I}(f(x) = f(z)) \right]$$
 
-aquí $\gamma$ es la tolerancia de error ($0.05$ para $95\%$ de precisión), y $\delta$ representa el nivel de significancia estadística.
+En estas ecuaciones:
+* $\mathbb{I}(\cdot)$ es la función indicadora booleana (retorna $1$ si la condición se cumple y $0$ en caso contrario).
+* $D(z|A)$ es la distribución de perturbaciones locales condicionada a que se cumplan las reglas de $A$.
+* $\gamma$ representa el margen de error tolerable (por ejemplo, $\gamma = 0.05$ para exigir un $95\%$ de precisión).
+* $\delta$ representa el riesgo de fallo estadístico admisible (por ejemplo, $\delta = 0.01$ para un $99\%$ de confianza estadística). En términos prácticos, la regla garantiza que tenemos al menos un $99\%$ de certeza de que la precisión local superará el $95\%$.
 
-El algoritmo busca maximizar la **cobertura** (*coverage*) de la regla en la población:
+El algoritmo busca simultáneamente maximizar la **cobertura** (*coverage*) de la regla en la población:
 
 $$\text{cov}(A) = P_{z \sim D}(A(z) = 1)$$
 
-Anchors implementa una búsqueda por haces (*beam search*) guiada por bandidos multi-brazo (*Multi-Armed Bandits*), explorando eficientemente el espacio combinatorio de reglas candidatas sin evaluar innecesariamente el clasificador.
+donde $A(z) = 1$ indica que la instancia $z$ satisface todas las condiciones del ancla. La cobertura mide el porcentaje de la base de datos que se rige por esta regla. Anchors implementa una búsqueda por haces (*beam search*) guiada por bandidos multi-brazo (*Multi-Armed Bandits*), explorando eficientemente el espacio combinatorio de reglas candidatas sin evaluar innecesariamente el clasificador.
 
 ## DiCE: Explicaciones contrafactuales diversas y recurso accionable
 
@@ -97,10 +105,10 @@ Dado un punto $x$ y una clase deseada $y^*$, DiCE optimiza un conjunto de $k$ co
 
 $$\min_{c_1, \dots, c_k} \frac{1}{k} \sum_{i=1}^k \mathcal{L}_{loss}(f(c_i), y^*) + \frac{\lambda_1}{k} \sum_{i=1}^k \text{dist}(x, c_i) - \lambda_2 \text{dpp}(c_1, \dots, c_k)$$
 
-donde:
-* $\mathcal{L}_{loss}$ penaliza contrafactuales que no alcancen la clase $y^*$.
-* $\text{dist}(x, c_i)$ fuerza a que las modificaciones requeridas sean mínimas (distancia L1 para continuas y Hamming para categóricas).
-* $\text{dpp}(c_1, \dots, c_k) = \det(\mathbf{K})$ promueve la diversidad mediante Procesos de Determinantes Puntos (*Determinantal Point Processes*), donde $\mathbf{K}$ es una matriz semidefinida positiva cuyas entradas $K_{i,j} = \frac{1}{1 + \text{dist}(c_i, c_j)}$ capturan la proximidad mutua; maximizar el determinante equivale a maximizar el volumen espacial cubierto, garantizando alternativas cualitativamente distintas.
+Esta función de pérdida equilibra tres objetivos mediante hiperparámetros de penalización $\lambda_1$ y $\lambda_2$:
+* **Validez de clase ($\mathcal{L}_{loss}$):** Penaliza si la predicción sobre el contrafactual $f(c_i)$ no alcanza la categoría deseada $y^*$ (fuerza al modelo a cambiar de veredicto).
+* **Proximidad física ($\text{dist}$):** Penaliza la distancia entre el usuario original $x$ y el contrafactual $c_i$ (combinando norma L1 para variables continuas y distancia de Hamming para categóricas), garantizando que las modificaciones requeridas sean mínimas.
+* **Diversidad prescriptiva ($\text{dpp}$):** Resta el término $\text{dpp}(c_1, \dots, c_k) = \det(\mathbf{K})$, donde $\mathbf{K}$ es una matriz de similitud entre contrafactuales ($K_{i,j} = \frac{1}{1 + \text{dist}(c_i, c_j)}$). Al restar el determinante, el optimizador maximiza la separación espacial entre los $k$ contrafactuales, entregando opciones cualitativamente distintas (por ejemplo, una opción basada en elevar ingresos frente a otra basada en reducir endeudamiento).
 
 ## Compromisos operacionales entre explicadores
 

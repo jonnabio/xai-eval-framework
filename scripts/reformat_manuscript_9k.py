@@ -19,9 +19,9 @@ S01 = r"""# Resumen y palabras clave
 
 ## Resumen
 
-A medida que los sistemas de aprendizaje automático asumen decisiones críticas en finanzas, salud, empleo y justicia, comprender *por qué* un modelo emite un veredicto específico se ha convertido en un requisito indispensable de ingeniería, gobernanza y cumplimiento normativo. En la ingeniería de datos tradicional, la observabilidad se fundamenta en flujos deterministas, trazas de linaje (*data lineage*) y pruebas unitarias reproducibles. No obstante, cuando un pipeline culmina en un modelo complejo de caja negra (ensambles de árboles o redes neuronales densas), la telemetría estándar se vuelve ciega ante la lógica interna que transformó las variables de entrada en la predicción final.
+A medida que los sistemas de aprendizaje automático asumen decisiones críticas en finanzas, salud, empleo y justicia, comprender *por qué* un modelo emite un veredicto es un requisito indispensable de ingeniería, gobernanza y cumplimiento normativo. En la ingeniería de datos tradicional, la observabilidad se fundamenta en flujos deterministas, linaje (*data lineage*) y pruebas unitarias. Sin embargo, al culminar un pipeline en una caja negra no lineal (ensambles o redes neuronales), la telemetría estándar se vuelve ciega ante la lógica interna que transformó las variables en la predicción final.
 
-Para abordar esta opacidad ha emergido la Inteligencia Artificial Explicable (*Explainable Artificial Intelligence*, XAI). Sin embargo, herramientas populares como LIME, SHAP, Anchors y DiCE a menudo entregan explicaciones divergentes, inestables o de alta latencia ante una misma instancia, evidenciando la falta de un estándar cuantitativo de evaluación.
+Para abordar esta opacidad ha emergido la Inteligencia Artificial Explicable (*Explainable Artificial Intelligence*, XAI). No obstante, herramientas populares como LIME, SHAP, Anchors y DiCE a menudo entregan explicaciones divergentes, inestables o de alta latencia ante una misma instancia, evidenciando la falta de un estándar cuantitativo de evaluación.
 
 Este capítulo ofrece un recorrido riguroso y orientado a la ingeniería sobre los métodos agnósticos de XAI, presentando el protocolo **FOM-7** (*Framework for Operational Metrics in 7 Gates*), un marco de siete puertas de control para auditar y certificar explicadores algorítmicos. Mediante un benchmark experimental sobre el conjunto de datos *UCI Adult Income*, evaluamos sistemáticamente cuatro explicadores sobre cinco familias de modelos predictivos (Regresión Logística, Árbol de Decisión, Bosque Aleatorio, XGBoost y Perceptrón Multicapa). Los resultados caracterizan la frontera de Pareto entre la alta fidelidad y estabilidad axiomática de KernelSHAP frente a la agilidad computacional de LIME, así como el valor operacional de las reglas de Anchors y los contrafactuales de DiCE. El capítulo concluye con una matriz de decisión para ingenieros y un flujo de auditoría en tres fases alineado con la Ley de IA de la Unión Europea y el marco NIST AI RMF.
 
@@ -35,13 +35,13 @@ S02 = r"""# Introducción
 
 ## Del pipeline determinista a la opacidad algorítmica
 
-En la ingeniería de datos y el desarrollo de software, la confiabilidad de los sistemas descansa en el determinismo y la trazabilidad. Al diseñar una canalización de procesamiento (*pipeline*) en SQL, Spark o dbt, cada transformación responde a reglas de negocio explícitas (`CASE WHEN ... THEN ...`), contratos de esquema rigurosos y pruebas de integridad referencial. Si una consulta devuelve un resultado anómalo, el equipo inspecciona el plan de ejecución (`EXPLAIN ANALYZE`), audita el linaje de datos y depura el código hasta aislar la causa raíz.
+En la ingeniería de datos, la confiabilidad descansa en el determinismo y la trazabilidad. Al diseñar una canalización de procesamiento (*pipeline*) en SQL, Spark o dbt, cada transformación responde a reglas de negocio explícitas (`CASE WHEN ... THEN ...`), contratos de esquema rigurosos y pruebas de integridad referencial. Si una consulta falla, el equipo inspecciona el plan de ejecución (`EXPLAIN ANALYZE`), audita el linaje de datos y aísla la causa raíz.
 
-La integración de modelos de aprendizaje automático altera radicalmente este paradigma. Cuando una canalización culmina en un clasificador no lineal de alta dimensionalidad —como un ensamble de *gradient boosting* (XGBoost) o una red neuronal profunda—, la lógica de decisión deja de residir en instrucciones de código legibles para distribuirse en millones de hiperplanos o matrices densas de parámetros. Las herramientas habituales de telemetría (Prometheus, Grafana, Evidently o DataDog) monitorizan métricas macroscópicas: latencia de inferencia, rendimiento (*throughput*), deriva de datos (*data drift*) y métricas estadísticas agregadas como exactitud (*accuracy*) o AUC-ROC.
+El aprendizaje automático altera este paradigma. Cuando la canalización culmina en un clasificador no lineal de alta dimensionalidad —como un ensamble *gradient boosting* (XGBoost) o una red neuronal profunda—, la lógica deja de residir en instrucciones legibles para distribuirse en millones de hiperplanos o matrices densas de parámetros. La telemetría habitual (Prometheus, Evidently) rastrea métricas macroscópicas: latencia, deriva de datos (*drift*) y desempeño agregado (AUC-ROC, exactitud).
 
-El problema fundamental es que estos indicadores globales son **ciegos a las decisiones individuales**. Indican que el modelo acierta en el $88\%$ de los casos, pero no responden al interrogante que formula un cliente, un analista o un oficial de cumplimiento: *¿Por qué el registro número 45,210 fue rechazado para este crédito o catalogado como paciente de alto riesgo?* (Barredo Arrieta *et al.*, 2020; Ali *et al.*, 2023). En este contexto, la Inteligencia Artificial Explicable (*Explainable Artificial Intelligence*, XAI) constituye la **capa de observabilidad y depuración de la lógica interna del modelo**, necesaria para hacer gobernable y auditable un sistema en producción.
+Sin embargo, estos indicadores son **ciegos a las decisiones individuales**. Indican que el modelo acierta en el $88\%$ de los casos, pero no responden al interrogante que formula un cliente o un oficial de cumplimiento: *¿Por qué el registro número 45,210 fue rechazado para este crédito o catalogado como paciente de alto riesgo?* (Barredo Arrieta *et al.*, 2020; Ali *et al.*, 2023). En este contexto, la Inteligencia Artificial Explicable (*Explainable Artificial Intelligence*, XAI) constituye la **capa de observabilidad y depuración interna del modelo**, indispensable para gobernar y auditar el sistema en producción.
 
-Esta necesidad se ha consolidado en mandatos jurídicos vinculantes, tales como el Reglamento General de Protección de Datos de la Unión Europea (GDPR, Artículos 13 a 15 y 22) y la Ley de Inteligencia Artificial de la UE (*EU AI Act*, Reglamento UE 2024/1689, Artículos 13 y 14), que exigen explicaciones claras, significativas y no discriminatorias ante decisiones automatizadas de alto impacto.
+Esta necesidad se consolida en mandatos jurídicos vinculantes, como el Reglamento General de Protección de Datos de la Unión Europea (GDPR, Artículos 13 a 15 y 22) y la Ley de Inteligencia Artificial de la UE (*EU AI Act*, Reglamento UE 2024/1689, Artículos 13 y 14), que exigen explicaciones claras, significativas y no discriminatorias ante decisiones automatizadas de alto impacto.
 
 ## El dilema de diseño: Modelos interpretables frente a explicaciones post-hoc
 
@@ -51,7 +51,7 @@ La advertencia de Rudin es de gran relevancia para la ingeniería:
 1. Una explicación post-hoc es, por definición matemática, una **aproximación imperfecta** de la caja negra; si fuese idéntica en todo el dominio de datos, la caja negra original resultaría superflua.
 2. En múltiples problemas con datos tabulares estructurados, una cuidadosa ingeniería de características combinada con modelos aditivos generalizados (GAMs) o árboles de baja profundidad alcanza un desempeño predictivo equiparable al de modelos opacos, eliminando la incertidumbre de la explicación.
 
-No obstante, en entornos industriales complejos, prescindir de modelos no lineales avanzados no siempre es factible. En presencia de interacciones de muy alto orden, grandes volúmenes de datos o arquitecturas preentrenadas, las organizaciones despliegan ensambles complejos para maximizar la generalización. En ese escenario, la explicabilidad post-hoc opera como una **herramienta de auditoría y reducción de daños**. El reto de ingeniería no radica en confiar ciegamente en estas explicaciones, sino en someterlas a pruebas cuantitativas rigurosas para certificar si la aproximación es suficientemente fiel, estable y reproducible (Phillips *et al.*, 2021; Tabassi, 2023).
+No obstante, en entornos industriales complejos, prescindir de modelos no lineales avanzados no siempre es factible. Ante interacciones complejas de alto orden, grandes volúmenes de datos o arquitecturas preentrenadas, las organizaciones despliegan ensambles para maximizar la generalización. En ese escenario, la explicabilidad post-hoc opera como una **herramienta de auditoría y reducción de daños**. El reto de ingeniería radica en someter estas explicaciones a pruebas cuantitativas rigurosas para certificar si su aproximación es suficientemente fiel, estable y reproducible (Phillips *et al.*, 2021; Tabassi, 2023).
 
 ## El problema científico: La divergencia entre explicadores
 
@@ -63,14 +63,14 @@ La hipótesis de este trabajo sostiene que la confiabilidad de una explicación 
 
 ## Hoja de ruta del capítulo
 
-Para acompañar al lector técnico desde los fundamentos conceptuales hasta la implementación de pruebas operativas, este capítulo se estructura en seis etapas:
+Para guiar al lector técnico desde los fundamentos teóricos hasta la auditoría práctica, el capítulo se organiza en seis etapas:
 
-1. **Fundamentos conceptuales (Sección 03):** Se delimitan los conceptos de transparencia, interpretabilidad y explicabilidad, y se distingue la atribución estadística de la inferencia causal en datos tabulares.
-2. **Métodos agnósticos principales (Sección 04):** Se exponen la lógica algorítmica, las formulaciones matemáticas y las restricciones computacionales de LIME, SHAP, Anchors y DiCE.
-3. **La crisis de evaluación en XAI (Sección 05):** Se analizan las fallas operacionales de los explicadores: el efecto Rashomon, la inestabilidad por muestreo aleatorio y la deformación por datos fuera de distribución (*OOD*).
-4. **El protocolo operativo FOM-7 (Sección 06):** Se introduce formalmente el marco de siete puertas (*Framework for Operational Metrics in 7 Gates*), con sus ecuaciones cuantitativas y umbrales de pase/fallo para auditoría industrial.
-5. **Diseño empírico y benchmark (Secciones 07 y 08):** Se detalla la evaluación experimental sobre el dataset *UCI Adult Income* comparando cinco familias de clasificadores mediante 10 figuras y 2 tablas normalizadas APA 7.
-6. **Implicaciones operacionales y gobernanza (Secciones 09 y 10):** Se propone una matriz de decisión para ingenieros, un flujo de auditoría en tres fases alineado con la Ley de IA de la UE y se sintetiza la agenda de trabajo futuro.
+1. **Fundamentos conceptuales (Sección 03):** Delimitación de transparencia, interpretabilidad y explicabilidad, y distinción entre atribución estadística e inferencia causal.
+2. **Métodos agnósticos principales (Sección 04):** Lógica algorítmica, ecuaciones matemáticas y costos computacionales de LIME, SHAP, Anchors y DiCE.
+3. **La crisis de evaluación en XAI (Sección 05):** Fallas operacionales: efecto Rashomon, inestabilidad estocástica y deformación fuera de distribución (*OOD*).
+4. **El protocolo operativo FOM-7 (Sección 06):** Marco de siete puertas con formulaciones cuantitativas y umbrales de pase/fallo para auditoría industrial.
+5. **Diseño empírico y benchmark (Secciones 07 y 08):** Evaluación experimental sobre *UCI Adult Income* contrastando cinco clasificadores con 10 figuras y 2 tablas APA 7.
+6. **Gobernanza e implicaciones (Secciones 09 y 10):** Matriz de decisión técnica, flujo de certificación en tres fases para la Ley de IA de la UE y agenda de investigación.
 """
 
 
@@ -155,12 +155,12 @@ Propuesto por Ribeiro *et al.* (2016), **LIME** (*Local Interpretable Model-agno
 Para construir la aproximación local alrededor de un registro $x$:
 1. **Generación de perturbaciones:** Genera $K$ muestras sintéticas $z'$ en el entorno de $x$ aplicando ruido gaussiano sobre variables continuas y remuestreo sobre categóricas.
 2. **Evaluación de la caja negra:** Envía las muestras $z'$ al clasificador primario para obtener sus probabilidades predichas $f(z')$.
-3. **Ponderación por proximidad:** Asigna a cada muestra sintética $z'$ un peso $\pi_x(z)$ mediante un núcleo exponencial basado en la distancia $D(x, z)$ (euclidiana o coseno):
+3. **Ponderación por proximidad:** Asigna a cada muestra sintética $z'$ un peso de relevancia $\pi_x(z)$ mediante un núcleo exponencial gaussiano basado en la distancia $D(x, z)$ (distancia euclidiana o de coseno en el espacio escalado):
 $$\pi_x(z) = \exp\left( -\frac{D(x, z)^2}{\sigma^2} \right)$$
-donde $\sigma$ es el ancho de banda del núcleo.
-4. **Ajuste del modelo sustituto:** Ajusta una regresión lineal resolviendo:
+donde $\sigma$ es el ancho de banda del núcleo que define el radio de la vecindad local. En términos operacionales, si la muestra perturbada $z$ es idéntica a $x$ ($D=0$), su peso es máximo ($\pi=1.0$); a medida que la distancia aumenta, el peso decae exponencialmente hacia cero, asegurando que solo los puntos muy cercanos influyan en la explicación.
+4. **Ajuste del modelo sustituto:** Encuentra el modelo interpretable óptimo $g \in G$ (típicamente una regresión lineal simple $g(z') = w_0 + \sum w_i z'_i$) resolviendo:
 $$\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g)$$
-donde $\mathcal{L}$ mide el error cuadrático ponderado entre $f(z)$ y $g(z)$, y $\Omega(g)$ es una penalización L1 (Lasso) que fuerza a que solo un subconjunto reducido de variables conserve coeficientes no nulos.
+donde $\mathcal{L}$ representa el error cuadrático medio ponderado por la proximidad $\pi_x$ (midiendo la discrepancia entre las predicciones del modelo complejo $f(z)$ y las del sustituto $g(z)$), y $\Omega(g) = \alpha \sum |w_i|$ es una regularización tipo Lasso que penaliza la complejidad, forzando a que la mayoría de los pesos sean cero para entregar una explicación con pocas variables dominantes.
 
 ### Riesgo operacional: Muestras fuera de distribución (*OOD*)
 
@@ -178,7 +178,11 @@ Shapley resuelve esta asignación calculando el **aporte marginal promedio de ca
 
 $$\phi_i(x) = \sum_{S \subseteq F \setminus \{i\}} \frac{\vert S \vert ! (\vert F \vert - \vert S \vert - 1)!}{\vert F \vert !} \left[ f_x(S \cup \{i\}) - f_x(S) \right]$$
 
-donde $F$ es el conjunto de características, $S$ es una coalición que no contiene a la variable $i$, y $f_x(S)$ es la predicción esperada condicionada a los valores observados en $S$.
+Para interpretar esta formulación:
+* $F$ es el conjunto total de columnas o características.
+* $S$ representa un subconjunto de características (coalición) que excluye a la variable de interés $i$.
+* El término entre corchetes $[f_x(S \cup \{i\}) - f_x(S)]$ mide la contribución marginal: cuánto cambia la predicción del modelo cuando la variable $i$ se incorpora a la coalición $S$.
+* La fracción con factoriales $\frac{|S|!(|F|-|S|-1)!}{|F|!}$ es un factor de ponderación probabilístico que representa la probabilidad de que la variable $i$ ingrese exactamente después del subconjunto $S$ en una permutación aleatoria uniforme de todas las características. Al promediar sobre todas las coaliciones posibles, Shapley garantiza un reparto distributivo matemáticamente justo.
 
 ### Los cuatro axiomas de Shapley
 
@@ -196,7 +200,7 @@ Para cajas negras genéricas, **KernelSHAP** resuelve esta barrera estimando los
 
 $$\pi(z') = \frac{|F| - 1}{\binom{|F|}{|z'|} |z'| (|F| - |z'|)}$$
 
-donde $|z'|$ es el número de características presentes en la muestra sintética. Este núcleo asigna el peso máximo a coaliciones con muy pocas o casi todas las variables presentes, que es donde el impacto marginal resulta más informativo. Aunque viabiliza el cálculo, su latencia media ronda los $1,180\text{ ms}$ por registro. Resulta idóneo para auditorías periódicas por lotes (*batch*), pero prohibitivo para microservicios en tiempo real con alta concurrencia.
+donde $|F|$ es el número total de características y $|z'|$ es el número de variables presentes en la muestra sintética evaluada. El denominador combina el coeficiente binomial $\binom{|F|}{|z'|}$ con el tamaño de la coalición: esto asigna intencionalmente los pesos más elevados a las coaliciones extremas (aquellas con una sola variable o con casi todas), ya que es precisamente en los extremos donde resulta más sencillo aislar el efecto individual de cada atributo. Aunque viabiliza el cómputo, su latencia media ronda los $1,180\text{ ms}$ por registro, siendo adecuada para lotes pero costosa para tiempo real.
 
 ## Anchors: Reglas condicionales con garantías formales
 
@@ -206,17 +210,21 @@ Una regla $A$ (el "ancla") es un conjunto de predicados booleanos sobre las vari
 
 $$P\left( \text{prec}(A) \ge 1 - \gamma \right) \ge 1 - \delta$$
 
-donde la precisión local $\text{prec}(A)$ mide la proporción de perturbaciones locales $z$ que preservan la predicción original:
+donde la precisión local $\text{prec}(A)$ mide la proporción de perturbaciones locales $z$ que preservan la predicción original $f(x)$:
 
 $$\text{prec}(A) = \mathbb{E}_{z \sim D(z|A)} \left[ \mathbb{I}(f(x) = f(z)) \right]$$
 
-aquí $\gamma$ es la tolerancia de error ($0.05$ para $95\%$ de precisión), y $\delta$ representa el nivel de significancia estadística.
+En estas ecuaciones:
+* $\mathbb{I}(\cdot)$ es la función indicadora booleana (retorna $1$ si la condición se cumple y $0$ en caso contrario).
+* $D(z|A)$ es la distribución de perturbaciones locales condicionada a que se cumplan las reglas de $A$.
+* $\gamma$ representa el margen de error tolerable (por ejemplo, $\gamma = 0.05$ para exigir un $95\%$ de precisión).
+* $\delta$ representa el riesgo de fallo estadístico admisible (por ejemplo, $\delta = 0.01$ para un $99\%$ de confianza estadística). En términos prácticos, la regla garantiza que tenemos al menos un $99\%$ de certeza de que la precisión local superará el $95\%$.
 
-El algoritmo busca maximizar la **cobertura** (*coverage*) de la regla en la población:
+El algoritmo busca simultáneamente maximizar la **cobertura** (*coverage*) de la regla en la población:
 
 $$\text{cov}(A) = P_{z \sim D}(A(z) = 1)$$
 
-Anchors implementa una búsqueda por haces (*beam search*) guiada por bandidos multi-brazo (*Multi-Armed Bandits*), explorando eficientemente el espacio combinatorio de reglas candidatas sin evaluar innecesariamente el clasificador.
+donde $A(z) = 1$ indica que la instancia $z$ satisface todas las condiciones del ancla. La cobertura mide el porcentaje de la base de datos que se rige por esta regla. Anchors implementa una búsqueda por haces (*beam search*) guiada por bandidos multi-brazo (*Multi-Armed Bandits*), explorando eficientemente el espacio combinatorio de reglas candidatas sin evaluar innecesariamente el clasificador.
 
 ## DiCE: Explicaciones contrafactuales diversas y recurso accionable
 
@@ -231,10 +239,10 @@ Dado un punto $x$ y una clase deseada $y^*$, DiCE optimiza un conjunto de $k$ co
 
 $$\min_{c_1, \dots, c_k} \frac{1}{k} \sum_{i=1}^k \mathcal{L}_{loss}(f(c_i), y^*) + \frac{\lambda_1}{k} \sum_{i=1}^k \text{dist}(x, c_i) - \lambda_2 \text{dpp}(c_1, \dots, c_k)$$
 
-donde:
-* $\mathcal{L}_{loss}$ penaliza contrafactuales que no alcancen la clase $y^*$.
-* $\text{dist}(x, c_i)$ fuerza a que las modificaciones requeridas sean mínimas (distancia L1 para continuas y Hamming para categóricas).
-* $\text{dpp}(c_1, \dots, c_k) = \det(\mathbf{K})$ promueve la diversidad mediante Procesos de Determinantes Puntos (*Determinantal Point Processes*), donde $\mathbf{K}$ es una matriz semidefinida positiva cuyas entradas $K_{i,j} = \frac{1}{1 + \text{dist}(c_i, c_j)}$ capturan la proximidad mutua; maximizar el determinante equivale a maximizar el volumen espacial cubierto, garantizando alternativas cualitativamente distintas.
+Esta función de pérdida equilibra tres objetivos mediante hiperparámetros de penalización $\lambda_1$ y $\lambda_2$:
+* **Validez de clase ($\mathcal{L}_{loss}$):** Penaliza si la predicción sobre el contrafactual $f(c_i)$ no alcanza la categoría deseada $y^*$ (fuerza al modelo a cambiar de veredicto).
+* **Proximidad física ($\text{dist}$):** Penaliza la distancia entre el usuario original $x$ y el contrafactual $c_i$ (combinando norma L1 para variables continuas y distancia de Hamming para categóricas), garantizando que las modificaciones requeridas sean mínimas.
+* **Diversidad prescriptiva ($\text{dpp}$):** Resta el término $\text{dpp}(c_1, \dots, c_k) = \det(\mathbf{K})$, donde $\mathbf{K}$ es una matriz de similitud entre contrafactuales ($K_{i,j} = \frac{1}{1 + \text{dist}(c_i, c_j)}$). Al restar el determinante, el optimizador maximiza la separación espacial entre los $k$ contrafactuales, entregando opciones cualitativamente distintas (por ejemplo, una opción basada en elevar ingresos frente a otra basada en reducir endeudamiento).
 
 ## Compromisos operacionales entre explicadores
 
@@ -316,25 +324,29 @@ Evalúa el coeficiente de determinación local entre el sustituto explicativo $g
 
 $$\text{Fidelidad}(g, f, x) = 1 - \frac{\sum_{z \in Z_x} \pi_x(z) \left( f(z) - g(z) \right)^2}{\sum_{z \in Z_x} \pi_x(z)}$$
 
-Un valor de $1.0$ representa una réplica perfecta de la frontera local; valores inferiores a $0.85$ indican un desacoplamiento inaceptable respecto al clasificador real.
+Esta métrica opera análogamente a un coeficiente de determinación local $R^2$: el numerador suma las discrepancias al cuadrado entre la predicción de la caja negra $f(z)$ y la del sustituto $g(z)$ ponderadas por proximidad $\pi_x(z)$, mientras el denominador normaliza por la masa total de ponderación. Un valor de $1.0$ indica coincidencia absoluta en toda la vecindad; valores inferiores a $0.85$ evidencian que el sustituto no refleja fielmente la frontera del modelo.
 
 ### 2. Estabilidad Local basada en la Constante de Lipschitz y Similitud Coseno (G2)
 
-Teóricamente, la estabilidad se define acotando la constante de Lipschitz del operador explicativo $E(x) \in \mathbb{R}^{\vert F \vert}$ en una bola de radio $\epsilon$:
+Teóricamente, la estabilidad se define acotando la constante de Lipschitz máxima del operador explicativo $E(x) \in \mathbb{R}^{\vert F \vert}$ dentro de una bola de perturbación de radio $\epsilon$:
 
 $$\text{Estabilidad}(E, x, \epsilon) = 1 - \max_{x' : \Vert x - x' \Vert_2 \le \epsilon} \frac{\Vert E(x) - E(x') \Vert_2}{\Vert x - x' \Vert_2}$$
 
-Para viabilizar este cómputo de manera determinista y escalable en producción, FOM-7 calcula la **similitud coseno media** entre vectores de atribución obtenidos bajo perturbaciones gaussianas controladas ($\sigma_{\text{ruido}} = 0.05 \cdot \sigma_X$):
+La fracción $\frac{\|E(x) - E(x')\|_2}{\|x - x'\|_2}$ mide la tasa máxima de variación del vector de explicación frente a una variación en la entrada. Si un cambio microscópico en los datos genera un giro brusco en las atribuciones, la fracción se dispara y la estabilidad colapsa.
+
+Para operacionalizar este cálculo de manera escalable y determinista en pipelines de producción, FOM-7 evalúa la **similitud coseno media** entre los vectores de atribución obtenidos sobre $B$ perturbaciones gaussianas controladas ($\sigma_{\text{ruido}} = 0.05 \cdot \sigma_X$):
 
 $$\text{Estabilidad}_{\text{cos}}(E, x) = \frac{1}{B} \sum_{b=1}^B \frac{E(x) \cdot E(x + \delta_b)}{\Vert E(x) \Vert_2 \, \Vert E(x + \delta_b) \Vert_2}$$
 
-donde $B$ es el número de muestras de validación y $\delta_b \sim \mathcal{N}(0, \sigma^2 I)$. Un valor próximo a $1.0$ garantiza que ruidos menores no alterarán la jerarquía de factores reportados.
+donde el producto punto dividido por el producto de las normas euclidianas mide si las explicaciones apuntan en la misma dirección geométrica en el espacio de características. Un valor de $1.0$ certifica que los factores destacados y sus signos son idénticos bajo ruido; valores por debajo de $0.80$ alertan sobre volatilidad estocástica inaceptable.
 
 ### 3. Parsimonia y Escasez de Coeficientes (G3)
 
-Mide la fracción de variables cuya atribución absoluta cae por debajo de un umbral de significancia práctica $\tau$:
+Mide la fracción de variables cuya atribución absoluta cae por debajo de un umbral de significancia práctica $\tau$ (típicamente $\tau = 0.01$):
 
 $$\text{Escasez}(E(x), \tau) = \frac{1}{\vert F \vert} \sum_{i=1}^{\vert F \vert} \mathbb{I}(\vert \phi_i(x) \vert \le \tau)$$
+
+donde $|F|$ es la cantidad total de columnas. Una escasez elevada (por ejemplo, $\ge 0.85$ en una tabla de 100 variables) indica que el explicador filtra el ruido de fondo y concentra la atención en pocas variables críticas.
 
 ### 4. Cobertura Empírica de Reglas (G4)
 
@@ -342,25 +354,29 @@ Para métodos basados en predicados condicionales (Anchors), cuantifica la propo
 
 $$\text{Cobertura}(A) = \frac{1}{N} \sum_{j=1}^{N} \mathbb{I}(A(x_j) = 1)$$
 
+donde $A(x_j) = 1$ indica que el registro $j$ cumple todos los predicados de la regla.
+
 ### 5. Latencia Computacional Media (G5)
 
-Tiempo medio de CPU/GPU $t(E, x_k)$ requerido para generar la explicación de una instancia sobre un lote de $M$ casos:
+Tiempo medio de CPU/GPU $t(E, x_k)$ requerido para generar la explicación completa de una instancia sobre un lote representativo de $M$ casos:
 
 $$\bar{T}_{exp} = \frac{1}{M} \sum_{k=1}^{M} t(E, x_k) \quad [\text{ms/instancia}]$$
 
 ### 6. Consistencia Inter-método (G6)
 
-Mide la correlación de rangos de Spearman entre los vectores de atribución generados por dos explicadores $E_1$ y $E_2$ sobre la misma instancia:
+Mide el coeficiente de correlación de rangos de Spearman entre las jerarquías de variables ordenadas por dos explicadores $E_1$ y $E_2$ sobre la misma instancia:
 
 $$\text{Consistencia}(E_1, E_2, x) = 1 - \frac{6 \sum_{i=1}^{|F|} d_i^2}{|F| (|F|^2 - 1)}$$
 
-donde $d_i$ es la diferencia entre los rangos asignados a la característica $i$.
+donde $d_i = \text{rango}(E_1)_i - \text{rango}(E_2)_i$ es la diferencia entre los puestos asignados a la variable $i$ por ambos métodos. Si ambos explicadores coinciden exactamente en el orden de las variables, $d_i = 0$ para toda $i$ y la consistencia es $+1.0$; si entregan órdenes invertidos, la consistencia se degrada hacia $-1.0$.
 
 ### 7. Equidad en la Explicación (G7)
 
-Evalúa la paridad en la fidelidad local media entre subgrupos demográficos protegidos (como género o etnia), aplicando el criterio regulatorio de la regla de los cuatro quintos:
+Evalúa la paridad en la fidelidad local media entre subgrupos demográficos protegidos (como género o etnia), aplicando el criterio regulatorio de la regla de los cuatro quintos (*Four-Fifths Rule*):
 
 $$\text{Paridad}(G_1) = \min_{a, b \in \mathcal{A}} \frac{\bar{G}_1(A = a)}{\bar{G}_1(A = b)} \ge 0.80$$
+
+donde $\bar{G}_1(A = a)$ es la fidelidad media del explicador en el subgrupo protegido $a$, y $\mathcal{A}$ es el conjunto de subgrupos. La razón compara el grupo con menor fidelidad frente al grupo con mayor fidelidad: si la razón cae por debajo de $0.80$, existe una brecha discriminatoria inadmisible en la calidad de la auditoría.
 
 ## Criterios de Aprobación para Auditoría de Producción
 
@@ -411,12 +427,17 @@ Las pruebas se ejecutaron en Python 3.10 sobre una estación de trabajo AMD Ryze
 
 Para determinar si las diferencias observadas en las métricas de FOM-7 reflejan superioridad algorítmica real y no fluctuaciones muestrales, se aplicó el protocolo no paramétrico de Demšar (2006):
 
-1. **Prueba de rangos alineados de Friedman:** Evalúa la hipótesis nula ($H_0$) de rendimiento equivalente en rangos promedio across experimental blocks:
+1. **Prueba de rangos alineados de Friedman:** Evalúa la hipótesis nula ($H_0$) de que todos los explicadores presentan un rendimiento equivalente en sus rangos promedio a través de las condiciones experimentales:
+
 $$\chi_F^2 = \frac{12N}{k(k+1)} \left[ \sum_{j=1}^k R_j^2 - \frac{k(k+1)^2}{4} \right]$$
-donde $k=4$ explicadores, $N=15$ condiciones experimentales (cruces de modelos y tamaños de muestra), y $R_j$ es el rango medio del explicador $j$.
-2. **Prueba post-hoc de Diferencia Crítica de Nemenyi:** Tras rechazar $H_0$ ($p < 0.001$), se calcula la Diferencia Crítica ($CD$) a nivel $\alpha = 0.05$:
+
+donde $k=4$ es el número de explicadores comparados, $N=15$ es el número de bloques experimentales (cruces de modelos y tamaños de muestra), y $R_j = \frac{1}{N} \sum_{i=1}^N r_i^j$ es el rango promedio obtenido por el explicador $j$. Si todos los métodos tuviesen un rendimiento indistinguible, sus rangos promedio serían idénticos ($R_j \approx \frac{k+1}{2} = 2.5$) y el estadístico $\chi_F^2$ sería cercano a cero. Un valor elevado de $\chi_F^2$ con $p < 0.001$ rechaza formalmente la equivalencia entre métodos.
+
+2. **Prueba post-hoc de Diferencia Crítica de Nemenyi:** Tras rechazar $H_0$, se calcula el umbral de Diferencia Crítica ($CD$) a un nivel de significancia de dos colas $\alpha = 0.05$:
+
 $$CD = q_\alpha \sqrt{\frac{k(k+1)}{6N}}$$
-donde el valor crítico de rango studentizado es $q_{0.05} = 2.569$ para $k=4$. Si la distancia entre rangos promedio de dos métodos supera estrictamente $CD$, la superioridad queda estadísticamente demostrada.
+
+donde $q_{0.05} = 2.569$ es el valor crítico de la distribución de rango studentizado para $k=4$ algoritmos. Geométricamente, $CD$ define la distancia mínima requerida entre los rangos promedio de dos explicadores $|R_a - R_b|$: si la diferencia supera estrictamente el valor $CD$, se concluye con un $95\%$ de certeza estadística que el explicador con mejor rango supera al otro.
 """
 
 

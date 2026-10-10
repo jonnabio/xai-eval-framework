@@ -33,9 +33,14 @@ Las pruebas se ejecutaron en Python 3.10 sobre una estación de trabajo AMD Ryze
 
 Para determinar si las diferencias observadas en las métricas de FOM-7 reflejan superioridad algorítmica real y no fluctuaciones muestrales, se aplicó el protocolo no paramétrico de Demšar (2006):
 
-1. **Prueba de rangos alineados de Friedman:** Evalúa la hipótesis nula ($H_0$) de rendimiento equivalente en rangos promedio across experimental blocks:
+1. **Prueba de rangos alineados de Friedman:** Evalúa la hipótesis nula ($H_0$) de que todos los explicadores presentan un rendimiento equivalente en sus rangos promedio a través de las condiciones experimentales:
+
 $$\chi_F^2 = \frac{12N}{k(k+1)} \left[ \sum_{j=1}^k R_j^2 - \frac{k(k+1)^2}{4} \right]$$
-donde $k=4$ explicadores, $N=15$ condiciones experimentales (cruces de modelos y tamaños de muestra), y $R_j$ es el rango medio del explicador $j$.
-2. **Prueba post-hoc de Diferencia Crítica de Nemenyi:** Tras rechazar $H_0$ ($p < 0.001$), se calcula la Diferencia Crítica ($CD$) a nivel $\alpha = 0.05$:
+
+donde $k=4$ es el número de explicadores comparados, $N=15$ es el número de bloques experimentales (cruces de modelos y tamaños de muestra), y $R_j = \frac{1}{N} \sum_{i=1}^N r_i^j$ es el rango promedio obtenido por el explicador $j$. Si todos los métodos tuviesen un rendimiento indistinguible, sus rangos promedio serían idénticos ($R_j \approx \frac{k+1}{2} = 2.5$) y el estadístico $\chi_F^2$ sería cercano a cero. Un valor elevado de $\chi_F^2$ con $p < 0.001$ rechaza formalmente la equivalencia entre métodos.
+
+2. **Prueba post-hoc de Diferencia Crítica de Nemenyi:** Tras rechazar $H_0$, se calcula el umbral de Diferencia Crítica ($CD$) a un nivel de significancia de dos colas $\alpha = 0.05$:
+
 $$CD = q_\alpha \sqrt{\frac{k(k+1)}{6N}}$$
-donde el valor crítico de rango studentizado es $q_{0.05} = 2.569$ para $k=4$. Si la distancia entre rangos promedio de dos métodos supera estrictamente $CD$, la superioridad queda estadísticamente demostrada.
+
+donde $q_{0.05} = 2.569$ es el valor crítico de la distribución de rango studentizado para $k=4$ algoritmos. Geométricamente, $CD$ define la distancia mínima requerida entre los rangos promedio de dos explicadores $|R_a - R_b|$: si la diferencia supera estrictamente el valor $CD$, se concluye con un $95\%$ de certeza estadística que el explicador con mejor rango supera al otro.
