@@ -32,7 +32,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-09 18:50: 975 of 1,280 conditions, seeds 42, 123 and 456 complete, seed 789 at 207 of 256; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-09 20:25: 986 of 1,280 conditions, seeds 42, 123 and 456 complete and checked, seed 789 at 218 of 256; estimated end Sat 2026-10-10 late evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -42,9 +42,68 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-09 20:45 (Paper F: 986 of 1,280, seeds 123 and 456 checked, snapshot)
+
+This is the latest handoff (lane `paper-f`, owner `claude-2026-10-09-paper-f`, branch
+`paper/f-external-validity`). The handoff of 2026-10-08 08:30 below remains the reference
+for the design, the code and the rules of the run.
+
+- **Completed**:
+  - **Raw data snapshot**, lane commit `8572f02d2` (2026-10-09 20:30, 13 new job files of
+    seed 789), pushed: `outputs/analysis/paper_f/raw/` holds 988 finished jobs and 197,600
+    rows (seed 789: 220 jobs, 44,000 rows).
+  - **The snapshot was checked against the manifest**: 988 entries, 988 files, none
+    missing, no SHA-256 mismatch (local files, after the commit).
+  - **Seeds 123 and 456 are checked**, with the same check run again on seed 42, which
+    gave the figures recorded on 2026-10-07 (268 failed rows; 156 and 63 in the two
+    largest conditions). For each of the three seeds: 256 of 256 job files, every job at
+    200 instances, 51,200 rows, no duplicate instance, no unreadable line, the four
+    methods of every dataset and model on the same instances, rows and failed counts
+    equal to the manifest. Completeness, failures and timing only; no measure was read.
+
+    | Seed | Failed rows | Conditions with a failure | DiCE no counterfactual | DiCE time limit | Anchors time limit | Job-hours |
+    |---|---|---|---|---|---|---|
+    | 42 | 268 (0.52%) | 17 | 227 | 17 | 24 | 200.9 |
+    | 123 | 288 (0.56%) | 12 | 252 | 18 | 18 | 148.7 |
+    | 456 | 309 (0.60%) | 11 | 259 | 28 | 22 | 153.2 |
+
+    The same three conditions carry most failures in every seed: DiCE on the random
+    forest for Amazon Employee (156, 153, 151 of 200), DiCE on XGBoost for Ozone (63, 94,
+    98) and DiCE on the random forest for QSAR (10, 17, 26). "No counterfactual" is the
+    dashboard label for the raw reason `dice: UserConfigValidationException`. Job-hours
+    are the sum of `total_s`; Anchors and DiCE take 98% of them.
+  - No code, manuscript or configuration was changed. No launcher was started by hand
+    and the branch was not switched. The check script was a temporary file and is not
+    committed.
+- **Current State**:
+  - **The run is in progress and unattended.** At 2026-10-09 20:25: 986 of 1,280
+    conditions (77.0%), 198,741 rows; seed 789 at 218 of 256 (dashboard: ends Sat
+    2026-10-10 08:14); seed 101112 not begun. One launcher, 8 jobs, no line with a failed
+    job in `outputs/analysis/paper_f/runs/_launcher_seed123.log`, scheduled task
+    `PaperF-chain-ensure` last result 0 at 20:18, no `_STOP` file.
+  - **Estimated end of the run: Saturday 2026-10-10, about 21:43** (dashboard, from the
+    work that remains); **Sunday 2026-10-11 00:52** by the count of the last three hours.
+  - **Free memory was 0.5 GB** at 20:25 (dashboard).
+  - Failures: 948 of 198,741 rows (0.48%): 812 DiCE no counterfactual, 73 Anchors time
+    limit, 63 DiCE time limit.
+  - **Pull request #43 is open, not merged**; mergeable, and its three checks passed on
+    `c2a624eec`. They were not watched after the push of `8572f02d2`.
+  - Rows written after the snapshot of 2026-10-09 20:30 are on the laptop only.
+  - No analysis has been run and no ranking has been looked at.
+- **Next Steps**:
+  1. Claim the lane (stop if it fails); the author merges pull request #43, then
+     `git fetch origin` and `git merge --ff-only origin/main`.
+  2. Dashboard, launcher log, scheduled task, snapshot, commit and push, as before.
+  3. Check seed 789 when complete (and 101112 after it) in the same way.
+  4. Steps 4 to 6 of the handoff of 2026-10-08 08:30 are unchanged: the Results skeleton
+     with the author's go-ahead; when the five seeds are complete, the analysis once and
+     what follows; the submission numbers of Papers C and D and their READMEs.
+- **Blockers/Issues**: those of the handoff of 19:00 below stand.
+- **Notes**: the launcher logs are in `outputs/analysis/paper_f/runs/`, not in `runs/`.
+
 ## Session Handoff - 2026-10-09 19:00 (Paper F: 975 of 1,280, three seeds complete, PR #43 open)
 
-This is the latest handoff. It covers the session from 2026-10-08 (start) to 2026-10-09
+Superseded by the handoff of 20:45 above. It covers the session from 2026-10-08 (start) to 2026-10-09
 19:00 (lane `paper-f`, owner `claude-2026-10-08-paper-f`, branch
 `paper/f-external-validity`). The handoff of 2026-10-08 08:30 below remains the reference
 for the design, the code and the rules of the run.
