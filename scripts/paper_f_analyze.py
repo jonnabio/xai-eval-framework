@@ -18,6 +18,8 @@ outputs/analysis/paper_f/results/:
     variance.csv         shares of the sum of squares, and the explainer-by-dataset test
     frontier.csv         explainers not dominated on faithfulness gap and cost, per dataset
     secondary.csv        measures that are reported and not ranked
+    primary_complete_cases.csv   the primary analysis on the instances where all four
+                                 explainers succeeded (plan section 3, sensitivity check)
 
 Only permutation tests are used. Intervals are bootstrap or exact binomial.
 """
@@ -72,6 +74,13 @@ def impute_failures(df: pd.DataFrame) -> pd.DataFrame:
         fill = df.set_index(["dataset", "model"]).index.map(worst)
         df[measure] = df[measure].where(df["failed"] == 0, pd.Series(fill, index=df.index))
     return df
+
+
+def complete_cases(df: pd.DataFrame) -> pd.DataFrame:
+    """The instances that all four explainers explained (plan 3, sensitivity check)."""
+    keys = ["dataset", "model", "seed", "instance"]
+    ok = (df["failed"] == 0).groupby([df[k] for k in keys]).transform("sum")
+    return df[ok == len(EXPL)]
 
 
 def cell_means(df: pd.DataFrame) -> pd.DataFrame:
@@ -362,6 +371,9 @@ def main() -> int:
     dataset_pairs(ranks).to_csv(out / "dataset_pairs.csv", index=False)
     variance(cells, rng).to_csv(out / "variance.csv", index=False)
     frontier(cells).to_csv(out / "frontier.csv", index=False)
+    # Last, so that the random draws of the analyses above do not depend on it.
+    primary(cell_means(complete_cases(raw)), rng)[0].to_csv(
+        out / "primary_complete_cases.csv", index=False)
     print(table[["measure", "datasets", "mean_rank_corr", "ci_low", "ci_high", "p_holm",
                  "ceiling_seeds", "decision"]].to_string(index=False))
     return 0

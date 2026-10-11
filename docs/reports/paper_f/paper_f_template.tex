@@ -14,8 +14,9 @@
 %% made by defining \fullversion before this file.
 %%
 %% DRAFT of 2026-10-05: introduction and methods follow ANALYSIS_PLAN.md (version 2).
-%% The experiment has not been run. Every result is a visible "[pending]" mark; no
-%% number of the results, discussion or conclusions exists yet.
+%% 2026-10-11: the Results section is a skeleton wired to the analysis files, written
+%% before the analysis was run. No number of the results, discussion or conclusions is
+%% typed by hand: each is a placeholder or a visible "[pending]" mark.
 \documentclass[10pt,a4paper,twocolumn]{article}
 \usepackage[top=25mm,bottom=25mm,left=20mm,right=20mm,columnsep=10mm]{geometry}
 \usepackage{fontspec}
@@ -209,9 +210,8 @@ In total the design has <<sum:fits:value:int>> fitted classifiers
 requires 10 further explanations of every instance, so the design calls for
 <<sum:explanations:value:int>> explanations. The seeds are run one after another, and a
 seed enters the analysis only when all its <<sum:runs_seed:value:d>> runs are complete, so
-the analysed data are balanced whatever the number of seeds. \pending{number of complete
-seeds analysed, and the reason if fewer than five} The analysis is run once, after the
-last seed.
+the analysed data are balanced whatever the number of seeds. The analysis below uses
+<<run:all:seeds:w>> complete seeds. It is run once, after the last seed.
 
 \subsection{Measures}
 
@@ -279,11 +279,62 @@ method labels inside each block of dataset, classifier and seed (10,000 permutat
 
 \section{Results}
 
-\pending{The experiment has not been run. This section will hold: Table 2, mean rank of
-each method per measure with the mean rank correlation, its interval, the corrected p,
-the agreement between seeds and the decision; Figure 1, the rank of each method on each dataset, one
-panel per measure; Table 3, agreement with the order found on Adult for each pair of
-methods; one paragraph on failures; one paragraph on the variance shares.}
+%% SKELETON of 2026-10-11, written before the analysis was run. Every number is a
+%% placeholder read from outputs/analysis/paper_f/results/; the sentence printed for each
+%% decision of the rule is fixed in scripts/build_paper_f.py (OUTCOME). The pending marks
+%% are the sentences that can only be written with the results in view.
+The run produced <<run:all:runs:int>> runs and <<run:all:instances:int>> explained
+instances in <<run:all:seeds:w>> complete seeds. A method returned no explanation, or
+exceeded the time limit, for <<run:all:failed:int>> instances
+(<<run:all:failure_rate:pct2>>\%): <<fail:dice:failures:int>> of DiCE,
+<<fail:anchors:failures:int>> of Anchors, <<fail:lime:failures:int>> of LIME and
+<<fail:shap:failures:int>> of SHAP. \pending{where the failures concentrate, one sentence}
+
+<<input:generated/tab_primary.tex:Table 2, mean rank of each method and agreement between datasets>>
+
+\begin{figure*}[t]
+\centering
+<<input:figures/fig1.pdf:Figure 1>>
+\caption{Rank of each method (1 = best) on each dataset, one panel per measure. Adult is
+the first dataset; the others are in alphabetical order.}
+\label{fig:ranks}
+\end{figure*}
+
+Table~\ref{tab:primary} gives the mean rank of each method and the agreement of the
+rankings between datasets, and Figure~\ref{fig:ranks} shows the rank of each method on
+each dataset. The decision rule gives the following. For the faithfulness gap
+($\bar{\rho}=$~<<prim:gap:mean_rank_corr:u2>>), <<prim:gap:decision:outcome>>. For
+stability ($\bar{\rho}=$~<<prim:stability:mean_rank_corr:u2>>),
+<<prim:stability:decision:outcome>>. For sparsity
+($\bar{\rho}=$~<<prim:sparsity:mean_rank_corr:u2>>), <<prim:sparsity:decision:outcome>>.
+For cost ($\bar{\rho}=$~<<prim:cost_ms:mean_rank_corr:u2>>),
+<<prim:cost_ms:decision:outcome>>.
+
+The agreement between seeds inside a dataset is <<prim:gap:ceiling_seeds:u2>>,
+<<prim:stability:ceiling_seeds:u2>>, <<prim:sparsity:ceiling_seeds:u2>> and
+<<prim:cost_ms:ceiling_seeds:u2>> for the four measures in the same order. On the
+instances that all four methods explained, the agreement between datasets is
+<<sens:gap:mean_rank_corr:u2>>, <<sens:stability:mean_rank_corr:u2>>,
+<<sens:sparsity:mean_rank_corr:u2>> and <<sens:cost_ms:mean_rank_corr:u2>>.
+\pending{whether any decision changes on these instances, one sentence}
+
+<<input:generated/tab_adult.tex:Table 3, agreement with the order found on Adult>>
+
+Table~\ref{tab:adult} counts, for each pair of methods, the datasets in which the pair is
+in the same order as on Adult. \pending{reading of Table 3 and the largest rank change of
+a method between two datasets, two sentences}
+
+Of the variance of the <<sum:runs:value:int>> run means, the method accounts for
+<<var:gap_method:share:pct>>\%, <<var:stability_method:share:pct>>\%,
+<<var:sparsity_method:share:pct>>\% and <<var:cost_ms_method:share:pct>>\% (faithfulness
+gap, stability, sparsity, cost), the dataset for <<var:gap_dataset:share:pct>>\%,
+<<var:stability_dataset:share:pct>>\%, <<var:sparsity_dataset:share:pct>>\% and
+<<var:cost_ms_dataset:share:pct>>\%, and the interaction of method and dataset for
+<<var:gap_interaction:share:pct>>\%, <<var:stability_interaction:share:pct>>\%,
+<<var:sparsity_interaction:share:pct>>\% and <<var:cost_ms_interaction:share:pct>>\%. The
+permutation $p$ of the interaction is <<var:gap_interaction:p_perm:p>>,
+<<var:stability_interaction:p_perm:p>>, <<var:sparsity_interaction:p_perm:p>> and
+<<var:cost_ms_interaction:p_perm:p>>.
 
 \section{Discussion and conclusions}
 

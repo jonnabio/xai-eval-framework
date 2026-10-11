@@ -10,13 +10,22 @@
                paper_f_config.toml (the size of the design)      metric
        pow     outputs/analysis/paper_f/power_simulation.csv     <datasets>_<true correlation>
        prim    outputs/analysis/paper_f/results/primary.csv      measure
+       sens    .../results/primary_complete_cases.csv            measure
+       run     .../results/cells.csv, summed here                all
+       fail    .../results/failures.csv, summed by method        explainer
+       var     .../results/variance.csv, balanced analysis       <measure>_<method|dataset|interaction>
+       chg     .../results/rank_change.csv                       <measure>_<explainer>
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
-   (lower case, capitalised); u2, u3 decimals; pct, pct1 percentage without and with one
-   decimal; p p-value ("<0.001" or three decimals).
+   (lower case, capitalised); u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
+   two decimals; p p-value ("<0.001" or three decimals); outcome the sentence of OUTCOME
+   for a decision of the rule (analysis plan, section 6).
 
    A placeholder whose result file does not exist yet is rendered as a red "[pending]"
    mark. With --final the build stops on any pending mark.
+
+   <<input:path:label>> becomes the table fragment or the figure at `path` (relative to
+   this paper's folder) when the file exists, and a pending mark with `label` otherwise.
 
 2. Build: submission/paper_f_{blind,full}.pdf with Tectonic. The submitted Word file is
    made in the journal's template (VENUE_JCSI.md); this PDF predicts its length.
@@ -45,7 +54,24 @@ MAX_PAGES = 8
 WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
          "fourteen fifteen sixteen seventeen eighteen nineteen twenty").split()
 TOKEN = re.compile(r"<<([a-z]+):([^:<>]+):([a-z_0-9]+):([a-zA-Z0-9]+)>>")
+INPUT = re.compile(r"<<input:([^:<>]+):([^<>]+)>>")
 STRATA = {"numeric": "numeric", "mixed": "mixed", "categorical": "categorical"}
+# The sentence printed for each decision of the rule. Written on 2026-10-11, before the
+# analysis was run; the keys are the strings paper_f_analyze.py writes to primary.csv.
+OUTCOME = {
+    "no evidence that the order is shared":
+        "there is no evidence that the order of the methods is shared between datasets",
+    "the order generalises":
+        "the order of the methods generalises: it is shared between datasets and the "
+        "interval lies above 0.5",
+    "the order is shared only weakly":
+        "the order of the methods is shared between datasets only weakly: the interval "
+        "lies below 0.5",
+    "shared, strength not determined":
+        "the order of the methods is shared between datasets, with a strength that is not "
+        "determined: the interval contains 0.5",
+}
+TERMS = {"explainer": "method", "dataset": "dataset", "explainer x dataset": "interaction"}
 
 
 def read(path: Path) -> list[dict[str, str]]:
@@ -78,8 +104,32 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
     if (RES / "power_simulation.csv").exists():
         out["pow"] = {f"{r['k_datasets']}_{r['true_rho_bar']}": r
                       for r in read(RES / "power_simulation.csv")}
-    if (RES / "results" / "primary.csv").exists():
-        out["prim"] = {r["measure"]: r for r in read(RES / "results" / "primary.csv")}
+    res = RES / "results"
+    if (res / "primary.csv").exists():
+        out["prim"] = {r["measure"]: r for r in read(res / "primary.csv")}
+    if (res / "primary_complete_cases.csv").exists():
+        out["sens"] = {r["measure"]: r for r in read(res / "primary_complete_cases.csv")}
+    if (res / "cells.csv").exists():
+        cells = read(res / "cells.csv")
+        n = sum(int(r["n"]) for r in cells)
+        failed = round(sum(float(r["failure_rate"]) * int(r["n"]) for r in cells))
+        out["run"] = {"all": {"seeds": str(len({r["seed"] for r in cells})),
+                              "runs": str(len(cells)), "instances": str(n),
+                              "failed": str(failed), "failure_rate": str(failed / n)}}
+    if (res / "failures.csv").exists():
+        by: dict[str, list[int]] = {}
+        for r in read(res / "failures.csv"):
+            t = by.setdefault(r["explainer"], [0, 0])
+            t[0] += int(float(r["failures"]))
+            t[1] += int(r["instances"])
+        out["fail"] = {e: {"failures": str(f), "instances": str(n), "rate": str(f / n)}
+                       for e, (f, n) in by.items()}
+    if (res / "variance.csv").exists():
+        out["var"] = {f"{r['measure']}_{TERMS[r['term']]}": r for r in read(res / "variance.csv")
+                      if r["analysis"] == "mixed model (balanced)" and r["term"] in TERMS}
+    if (res / "rank_change.csv").exists():
+        out["chg"] = {f"{r['measure']}_{r['explainer']}": r
+                      for r in read(res / "rank_change.csv")}
     return out
 
 
@@ -95,8 +145,8 @@ def fmt(v: float, f: str) -> str:
         return f"{v:.{f[1]}f}".replace("-", "$-$")
     if f == "pct":
         return f"{100 * v:.0f}"
-    if f == "pct1":
-        return f"{100 * v:.1f}"
+    if f in ("pct1", "pct2"):
+        return f"{100 * v:.{f[3]}f}"
     if f == "p":
         return "$<$0.001" if v < 0.001 else f"{v:.3f}"
     raise KeyError(f"unknown format {f}")
@@ -133,14 +183,24 @@ def render(final: bool) -> tuple[Path, int]:
     def sub(m: re.Match) -> str:
         alias, key, col, f = m.groups()
         if alias not in data:
-            return f"\\pending{{{alias}:{key}}}"
+            return f"\\pending{{{alias}:{escape(key)}}}"
         try:
+            if f == "outcome":
+                return OUTCOME[data[alias][key][col]]
             return fmt(float(data[alias][key][col]), f)
         except (KeyError, ValueError) as exc:
             problems.append(f"{m.group(0)}: {exc!r}")
             return m.group(0)
 
-    out = TOKEN.sub(sub, template)
+    def place(m: re.Match) -> str:
+        path, label = m.groups()
+        if not (F / path).exists():
+            return f"\\pending{{{label}}}"
+        if path.endswith(".tex"):
+            return f"\\input{{{path[:-4]}}}"
+        return f"\\includegraphics[width=\\textwidth]{{{path}}}"
+
+    out = TOKEN.sub(sub, INPUT.sub(place, template))
     problems += [f"unresolved: {t}" for t in re.findall(r"<<[^>]*>>", out)]
     if problems:
         sys.exit("render failed:\n" + "\n".join(sorted(set(problems))[:20]))

@@ -79,6 +79,18 @@ def test_failures_take_the_worst_value():
     assert out.loc[0, "cost_ms"] == same["cost_ms"].max()
 
 
+def test_complete_cases_drop_an_instance_for_all_four_explainers():
+    df = synthetic(shared=True)
+    df.loc[0, "failed"] = 1
+    first = df.loc[0]
+    out = an.complete_cases(df)
+    same = (out["dataset"] == first["dataset"]) & (out["model"] == first["model"]) \
+        & (out["seed"] == first["seed"]) & (out["instance"] == first["instance"])
+    assert len(out) == len(df) - 4 and not same.any() and (out["failed"] == 0).all()
+    table, _ = an.primary(an.cell_means(out), np.random.default_rng(1))
+    assert (table["decision"] == "the order generalises").all()
+
+
 def test_variance_shares_sum_to_one_and_find_the_interaction():
     shared = an.variance(an.cell_means(synthetic(shared=True)), np.random.default_rng(2))
     part = shared[(shared["measure"] == "gap") & (shared["analysis"] == "mixed model (balanced)")]
