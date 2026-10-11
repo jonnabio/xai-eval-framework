@@ -83,19 +83,24 @@ jonnabio@gmail.com (J. Herrera-V\'asquez). ORCID:
 
 \section{Introduction}
 
-A model that decides on credit, hiring or medical risk is often an ensemble of trees or a
-neural network, too complex to be read directly. The person affected by a decision, the
-developer who debugs the model and the auditor who approves it all need to know which
-inputs drove a prediction, and post-hoc explanation methods are the usual way to find
-out. The four methods studied here give three kinds of answer. LIME fits a local linear
+A model that decides on credit or medical risk is often an ensemble of trees or a neural
+network, too complex to be read directly: in finance, where credit management is the
+task most often addressed, the opaque models whose explanations are studied most are
+neural networks, XGBoost and random forests~\cite{cerneviciene2024finance}. Those who
+decide with such a model and those affected by its decisions need to know which inputs
+drove a prediction, and they do not need the same
+explanation~\cite{kim2024stakeholder}. Post-hoc explanation methods are the usual way
+to find out. The four methods studied here give three kinds of answer. LIME fits a local linear
 model around the instance~\cite{ribeiro2016why} and SHAP distributes the prediction
 among the features with Shapley values~\cite{lundberg2017unified}: both assign a weight
 to every feature. Anchors returns a rule that keeps the prediction with high
 probability~\cite{ribeiro2018anchors}, and DiCE returns counterfactual instances that
 change it~\cite{mothilal2020dice}.
 
-None of these methods comes with a guarantee of quality, so a practitioner has to choose
-among them, and comparative studies are the usual guide. Such a study applies the
+Explanation methods often disagree on the same prediction, and practitioners have been
+found to resolve the disagreement with ad hoc
+heuristics~\cite{krishna2022disagreement}. A practitioner therefore has to choose among
+the methods, and comparative studies are the usual guide. Such a study applies the
 methods to a model and scores them on properties of the explanation: how faithfully it
 reflects the model, how stable it is under small changes of the input, how short it is
 and how long it takes to compute. Surveys of the field describe the methods and list
@@ -107,7 +112,10 @@ The product of a comparative study is an order: on a given measure, one method i
 than another. That order is useful only if it holds outside the study. A reader who
 adopts the method ranked first will apply it to other data, and so relies on an
 assumption the study seldom tests: that the order is a property of the methods and not of
-the dataset on which they were compared. If the order changes from one dataset to the
+the dataset on which they were compared. A large benchmark of explanation methods makes
+the same criticism of current studies: they examine few methods, rely on one or a few
+metrics and ignore the model architecture and the nature of the input data, and
+conflicting metrics lead to unreliable rankings~\cite{klein2024maze}. If the order changes from one dataset to the
 next, a result obtained on a single benchmark says little about the choice the
 practitioner faces. If it does not change, single-dataset studies are worth more than
 their design suggests. Either answer is useful.
