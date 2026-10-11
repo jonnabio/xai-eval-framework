@@ -83,7 +83,18 @@ CIFIE handoff of 2026-10-10 on `main`.
   branch protection, so nothing refuses a direct push.
 - **Done here**: `chapter/cifie-sync-2026-09` fast-forwarded to `origin/main`
   (`e0a927875`) and pushed, so the next chapter session has its own branch.
-- **For the author to decide** (nothing below was started):
+- **Author's decisions (2026-10-10, after reading the points below)**:
+  1. The file sent to CIFIE / TintAzul is the package of 20:03 (text 2).
+  2. **The chapter is text 3** (`392b2fc8c`). The package is to be rebuilt from it.
+  3. **Nothing is done on the chapter, the thesis generator or the package until the
+     Paper F run has ended.**
+  4. Branch protection on `main`: agreed; the author sets it on GitHub (steps given in
+     the conversation).
+  5. **The chapter has a limit of 9,000 words.** `.aceconfig` and `.ace/roles/roles.md`
+     are corrected.
+  Still open: whether a corrected file is sent to the editor after the rebuild, and
+  whether the three thesis figures of `ba418a927` are the wanted ones.
+- **The points as they were put to the author** (nothing below was started):
   1. Which file was really sent to CIFIE / TintAzul, and whether a corrected file must
      follow it.
   2. Which text is the chapter: text 3 as it stands, or text 2 with every number either
