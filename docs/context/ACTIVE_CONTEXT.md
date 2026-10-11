@@ -32,7 +32,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-10 07:42: 1,120 of 1,280 conditions, seeds 42, 123 and 456 complete and checked, seed 789 at 255 of 256, seed 101112 at 97 of 256; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-10 20:19: 1,271 of 1,280 conditions, seeds 42, 123, 456 and 789 complete and checked, seed 101112 at 247 of 256; estimated end in the night of 2026-10-10 to 2026-10-11); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -42,9 +42,55 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-10 20:30 (Paper F: 1,271 of 1,280, four seeds complete and checked, snapshot)
+
+This is the latest handoff for lane `paper-f` (same session and owner as the two below;
+the one of 2026-10-09 20:45 holds the checks of seeds 42, 123 and 456).
+
+- **Completed**:
+  - **Raw data snapshot**, lane commit `52bdbe61f` (2026-10-10 20:20, 151 new job
+    files): `outputs/analysis/paper_f/raw/` holds 1,271 finished jobs and 254,200 rows
+    (seeds 42, 123, 456 and 789: 256 jobs and 51,200 rows each; seed 101112: 247 jobs,
+    49,400 rows). Checked against the manifest: 1,271 entries, 1,271 files, none missing,
+    no SHA-256 mismatch.
+  - **Seed 789 is checked**, as the three before it: 256 of 256 job files, every job at
+    200 instances, 51,200 rows, no duplicate instance, no unreadable line, the four
+    methods of every dataset and model on the same instances, counts equal to the
+    manifest. 276 failed rows (0.54%) in 10 conditions: 222 DiCE no counterfactual, 41
+    DiCE time limit, 13 Anchors time limit; 148 in DiCE on the random forest for Amazon
+    Employee, 72 in DiCE on XGBoost for Ozone, 41 in DiCE on the random forest for QSAR
+    (the job that ended last; 10, 17 and 26 in the earlier seeds). 161.8
+    job-hours. Completeness, failures and timing only; no measure was read.
+  - A pull request for this snapshot and the context is opened against `main` (number in
+    `gh pr list`); the author merges it.
+- **Current State**:
+  - **The run is in progress and unattended, nine jobs from the end.** At 2026-10-10
+    20:19: 1,271 of 1,280 conditions (99.3%), 254,610 rows; seed 101112 at 247 of 256.
+    Eight jobs at work, one queued, no line with a failed job in the launcher log,
+    scheduled task last result 0 at 20:18, no `_STOP` file, 1.1 GB of memory free.
+  - **Estimated end: Sunday 2026-10-11, about 04:35** (dashboard, from the work that
+    remains; the last jobs are DiCE and Anchors on random forests, the slowest).
+  - Failures: 1,416 of 254,610 rows (0.56%): 1,212 DiCE no counterfactual, 106 DiCE time
+    limit, 98 Anchors time limit.
+  - **`main` gained 21 commits of the CIFIE lane on 2026-10-10** (chapter, its scripts,
+    thesis figures, this file). None touches a Paper F file or the code of the run. The
+    branch was not merged with `main`: a trial (`git merge-tree`) shows no conflict.
+    Do it after the run ends, not before: it rewrites about 210 files of the tree.
+  - No analysis has been run and no ranking has been looked at.
+  - Rows written after the snapshot of 2026-10-10 20:20 are on the laptop only.
+- **Next Steps**:
+  1. Claim the lane (stop if it fails).
+  2. Dashboard: when it shows 1,280 of 1,280 and no job at work, take the last snapshot,
+     check seed 101112 as the others, commit, push, pull request.
+  3. Then, and only then: remove the scheduled task `PaperF-chain-ensure` (ask the
+     author first), bring `main` into the branch, and go to steps 4 to 6 of the handoff
+     of 2026-10-08 08:30 (Results skeleton with the author's go-ahead, the analysis once;
+     submission numbers of Papers C and D and their READMEs).
+- **Blockers/Issues**: those of the handoff of 07:50 below stand.
+
 ## Session Handoff - 2026-10-10 07:50 (Paper F: 1,120 of 1,280, snapshot, PR #43 merged by the author)
 
-This is the latest handoff (same session and owner as the one of 2026-10-09 20:45 below,
+Superseded for the state of the run by the handoff of 20:30 above (same session and owner as the one of 2026-10-09 20:45 below,
 which remains valid for the checks of seeds 42, 123 and 456).
 
 - **Completed**:
