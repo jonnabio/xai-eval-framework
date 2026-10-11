@@ -195,7 +195,12 @@ def render(final: bool) -> tuple[Path, int]:
     def place(m: re.Match) -> str:
         path, label = m.groups()
         if not (F / path).exists():
-            return f"\\pending{{{label}}}"
+            # A table that does not exist yet still takes its number and its label, so
+            # that the draft builds before the results exist.
+            stem = Path(path).stem
+            anchor = (f"\\refstepcounter{{table}}\\label{{tab:{stem[4:]}}}"
+                      if stem.startswith("tab_") else "")
+            return f"\\pending{{{label}}}{anchor}"
         if path.endswith(".tex"):
             return f"\\input{{{path[:-4]}}}"
         return f"\\includegraphics[width=\\textwidth]{{{path}}}"
