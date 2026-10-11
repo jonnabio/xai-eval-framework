@@ -1,40 +1,45 @@
 # Active Context: XAI Evaluation Framework
 
-## Session Handoff - 2026-10-10 (CIFIE Book Chapter - Didactic Equation Audit & Condensation)
+## Session Handoff - 2026-10-10 (CIFIE Book Chapter - Final Submission Package & Dispatch for First Editorial Revision)
 
 - **Completed**:
-  - **Comprehensive Scientific Equation Audit (18 Display Equations)**: Audited every single mathematical formula across the CIFIE book chapter manuscript (`publications/book_chapters/2026_cifie_xai_fom7/manuscript/`).
-    - *Section 04 (8 equations)*: LIME proximity kernel $\pi_x(z)$, LIME Lasso optimization $\xi(x)$, Shapley values $\phi_i(x)$, KernelSHAP kernel $\pi(z')$, Anchors PAC bound $P(\text{prec} \ge 1-\gamma)$, Anchors local precision $\text{prec}(A)$, Anchors coverage $\text{cov}(A)$, DiCE multi-objective loss with DPP diversity $\det(\mathbf{K})$.
-    - *Section 06 (8 equations)*: Gate 1 Fidelity ($R^2$ analog), Gate 2 Lipschitz stability, Gate 2 operational cosine stability, Gate 3 Sparsity, Gate 4 Coverage, Gate 5 Latency $\bar{T}_{exp}$, Gate 6 Spearman consistency, Gate 7 Demographic parity four-fifths ratio.
-    - *Section 07 (2 equations)*: Friedman aligned ranks $\chi_F^2$, Nemenyi Critical Difference $CD$.
-  - **Plain-Language & Data Engineering Intuition Integration**: Added intuitive explanations before every equation (grounded in data engineering concepts: weights, decay filters, loss penalties, stability variances, rank permutations) and complete symbol-by-symbol parameter definitions after each formula.
-  - **Didactic Clarification of Gaussian Noise**: Explained the concept and role of Gaussian noise ($\mathcal{N}(0, \sigma^2)$) in the perturbation step of LIME (Section 04) as small random fluctuations generating jittered twin records, connecting it to out-of-distribution (OOD) risks.
-  - **LaTeX & Markdown Formatting Compliance**: Escaped absolute values and vector norms using `\vert` and `\Vert` in all equations to prevent Pandoc AST table parsing conflicts.
-  - **Word Budget Governance ($\le$ 8,800 words ceiling)**: Carefully condensed Section 01, Section 02, and Section 05 prose while expanding didactic explanations. Final compiled word count is **8,738 words** (prose: 8,313 words; APA tables: ~425 words), strictly complying with the $\le 8,800$-word limit with a 62-word buffer.
-  - **Artifact Compilation & Verification**: Successfully recompiled clean Word (`.docx`) and PDF (`.pdf`) editions with 10 sections, 2 APA tables, and 10 figures.
-  - **Remote Synchronization**: Committed and pushed all manuscript sections, build scripts, and compiled output artifacts to `origin/thesis/rca-001-phase-2`.
+  - **Scientific Editorial Optimization & Readability Governance**:
+    - Conducted comprehensive length and readability optimization across all 10 manuscript sections (`01` through `10`) in accordance with `.agents/skills/scientific-book-editor/SKILL.md`.
+    - Total chapter length governed at **8,019 words** (7,594 prose words + 425 table words), providing a robust safety margin of **981 words** below the 9,000-word limit.
+    - Zero sentences > 40 words remain across the entire manuscript; average sentence length $ASL = 17.6$ words; readability index Fernández-Huerta = 58.3/100, Flesch-Szigriszt = 41.0/100.
+    - Resolved page 13 diagramation: typeset the four Shapley axioms into four distinct, numbered paragraphs with display LaTeX formulas and vertical rhythm.
+  - **Publication-Grade Data Visualization**:
+    - Staged all 14 publication figures (`fig_d1` through `fig_d12`, `fig_cd_diagram_es`, `fig_estabilidad_coste_es`, `fig_cobertura_exp2_es`).
+    - Created dual-format figures: high-resolution color PNGs (300–600 DPI), vector SVGs/PDFs for diagrams 1–11, and hatched high-contrast monochrome versions for print.
+  - **Compilation of Final Deliverables**:
+    - Built color digital Word & PDF (`capitulo_cifie_xai_fom7_color.docx`, `.pdf`) and print-ready monochrome Word & PDF (`capitulo_cifie_xai_fom7_bn_impresion.docx`, `.pdf`).
+  - **Staging and Pre-filling of the Final Submission Package**:
+    - Created structured directory `publications/book_chapters/2026_cifie_xai_fom7/final/submission_package/` with subdirectories `01_capitulo/`, `02_figuras/`, and `03_formatos_editoriales_tintazul/`.
+    - Pre-filled and checked official TintAzul forms: `CHECKLIST DEL AUTOR.docx` (all 55 checkboxes marked `☑`), `DECLARACIÓN DE AUTORÍA.docx` (author metadata, RIMI prior publication disclosure, auxiliary AI declaration, no conflicts of interest), and `LICENCIA DE PUBLICACIÓN Y CESIÓN LIMITADA DE DEREC.docx` (metadata and license terms).
+    - Generated actionable author guide `CHECKLIST_REVISION_ENVIO_AUTOR.md` and package manifest `README_PAQUETE_ENVIO.md`.
+    - Authored short formal submission cover message for CIFIE / TintAzul Editorial Board.
+  - **Formal First Revision Dispatch**:
+    - Chapter package submitted for first editorial revision.
 
 - **Current State**:
-  - **Branch**: `thesis/rca-001-phase-2` (commit `c7d7f8e03`). Tree clean. Synced with GitHub remote.
-  - **Word Count**: Exactly 8,738 words reported by `build_cifie_chapter.py` (prose: 8,313 words; tables: 425 words; 62-word margin under 8,800 limit).
-  - **Manuscript Files**: Sections 01 through 10 in `publications/book_chapters/2026_cifie_xai_fom7/manuscript/` are up to date and consistent with `scripts/reformat_manuscript_9k.py`.
-  - **Compiled Deliverables**:
-    - `publications/book_chapters/2026_cifie_xai_fom7/drafts/v3_editorial_review/cifie_xai_fom7_2026-10-10.docx`
-    - `publications/book_chapters/2026_cifie_xai_fom7/drafts/v3_editorial_review/cifie_xai_fom7_2026-10-10.pdf`
+  - **Branch**: `thesis/rca-001-phase-2` merged into `main`.
+  - **Manuscript**: 10 sections in `publications/book_chapters/2026_cifie_xai_fom7/manuscript/` (8,019 words, APA 7, 14 active figures, 4 tables).
+  - **Deliverables**: Final package staged under `publications/book_chapters/2026_cifie_xai_fom7/final/submission_package/`.
+  - **Editorial Forms**: Pre-filled `.docx` files in `final/submission_package/03_formatos_editoriales_tintazul/` ready for author signature.
   - **Lane Lock**: Free (`check_lane.py status` confirms `lock: free`).
 
 - **Next Steps**:
-  1. Author editorial sign-off on the generated Word/PDF review copies.
-  2. If submitting the CIFIE book chapter, export/package final draft artifacts according to editorial guidelines.
-  3. Resume Task 3 / RCA-001 Phase 2 on the thesis lane when transitioning back to doctoral thesis dissertation work.
+  1. Await formal feedback and peer-review observations from the CIFIE / TintAzul Editorial Committee.
+  2. Upon receiving review comments, address requested revisions, update manuscript sections, and regenerate compiled deliverables.
+  3. Keep Paper B+C unreleased data protected under exclusivity rules during subsequent editorial cycles.
 
 - **Blockers/Issues**:
-  - None for the CIFIE book chapter. All 18 equations audited and explained, length ceiling strictly observed, and artifacts compiled cleanly.
+  - None. Submission package for first editorial revision is complete, compliant, and dispatched.
 
 - **Notes**:
-  - To regenerate the manuscript from the script: `python scripts/reformat_manuscript_9k.py`.
-  - To compile both Word and PDF drafts: `python scripts/build_cifie_chapter.py --pdf`.
-  - Remember that the rendered chapter total word count in `build_cifie_chapter.py` accounts for both markdown prose and the two embedded APA tables (`table_metrics.md` and `table_results_summary.md`, ~425 words combined). Any future prose additions must keep total prose $\le 8,375$ words to stay within the 8,800 total ceiling.
+  - Word count must stay strictly $\le 9,000$ words (excluding references).
+  - Always maintain APA 7 references and callouts for all 14 figures.
+  - To regenerate dual builds: `python scripts/build_cifie_chapter.py` (color) and `python scripts/build_cifie_chapter.py --bw` (print).
 
 ## Session update - 2026-10-03 (Paper D reproducibility and archive)
 
