@@ -61,8 +61,9 @@ the one of 2026-10-09 20:45 holds the checks of seeds 42, 123 and 456).
     Employee, 72 in DiCE on XGBoost for Ozone, 41 in DiCE on the random forest for QSAR
     (the job that ended last; 10, 17 and 26 in the earlier seeds). 161.8
     job-hours. Completeness, failures and timing only; no measure was read.
-  - A pull request for this snapshot and the context is opened against `main` (number in
-    `gh pr list`); the author merges it.
+  - **Pull request #44** (this snapshot and the context) is open against `main`; the
+    author merges it. Its checks `lanes` and `exp4-reconstruction` pass; **`fragments`
+    fails, and the cause is on `main`, not in this branch** (see Blockers).
 - **Current State**:
   - **The run is in progress and unattended, nine jobs from the end.** At 2026-10-10
     20:19: 1,271 of 1,280 conditions (99.3%), 254,610 rows; seed 101112 at 247 of 256.
@@ -86,7 +87,21 @@ the one of 2026-10-09 20:45 holds the checks of seeds 42, 123 and 456).
      author first), bring `main` into the branch, and go to steps 4 to 6 of the handoff
      of 2026-10-08 08:30 (Results skeleton with the author's go-ahead, the analysis once;
      submission numbers of Papers C and D and their READMEs).
-- **Blockers/Issues**: those of the handoff of 07:50 below stand.
+- **Blockers/Issues**:
+  - **`main` fails `pubs-sync` / `fragments` since the CIFIE merge `88b059e19`**
+    (push run of 2026-10-11 02:08 UTC; the run before it, on `6ff63331b`, passed).
+    `verify_claims.py` reports, all in
+    `publications/book_chapters/2026_cifie_xai_fom7/manuscript/`: (a) exclusivity: the
+    chapter prints values registered as results of unpublished manuscripts (0.85, 0.80,
+    0.05, 0.01, 0.75, 0.10, 0.001 in sections 06, 07 and 09; several read like
+    thresholds, which is for the CIFIE lane to judge, ADR-0018); (b) coverage: numeric
+    literals neither registered nor declared unbacked (sections 02, 04, 06, 07, 08, 09);
+    (c) `10_limitaciones_trabajo_futuro.md` and `11_conclusiones.md` are still listed in
+    the registry but were replaced by `10_conclusiones.md`. Every pull request against
+    `main` shows this failure until the CIFIE lane repairs it. On this branch alone
+    `verify_claims.py` passes (1,189 claims). Not touched here: the files belong to the
+    CIFIE lane and to `pub/`, outside lane `paper-f`.
+  - Those of the handoff of 07:50 below stand.
 
 ## Session Handoff - 2026-10-10 07:50 (Paper F: 1,120 of 1,280, snapshot, PR #43 merged by the author)
 
