@@ -12,14 +12,16 @@
        prim    outputs/analysis/paper_f/results/primary.csv      measure
        sens    .../results/primary_complete_cases.csv            measure
        run     .../results/cells.csv, summed here                all
-       fail    .../results/failures.csv, summed by method        explainer
+       fail    .../results/failures.csv, summed by method        explainer; top1..top3, top
        var     .../results/variance.csv, balanced analysis       <measure>_<method|dataset|interaction>
-       chg     .../results/rank_change.csv                       <measure>_<explainer>
+       chg     .../results/rank_change.csv                       <measure>_<explainer>; <measure>
+       mod     .../results/per_model.csv                         <model>_<measure>
+       cmp     decisions of prim against sens                    all
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
    (lower case, capitalised); u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
    two decimals; p p-value ("<0.001" or three decimals); outcome the sentence of OUTCOME
-   for a decision of the rule (analysis plan, section 6).
+   for a decision of the rule (analysis plan, section 6); txt a name, as it is.
 
    A placeholder whose result file does not exist yet is rendered as a red "[pending]"
    mark. With --final the build stops on any pending mark.
@@ -72,6 +74,9 @@ OUTCOME = {
         "determined: the interval contains 0.5",
 }
 TERMS = {"explainer": "method", "dataset": "dataset", "explainer x dataset": "interaction"}
+MODELS = {"logreg": "logistic regression", "rf": "the random forest", "xgb": "XGBoost",
+          "mlp": "the multilayer perceptron"}
+METHODS = {"lime": "LIME", "shap": "SHAP", "anchors": "Anchors", "dice": "DiCE"}
 
 
 def read(path: Path) -> list[dict[str, str]]:
@@ -124,12 +129,33 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
             t[1] += int(r["instances"])
         out["fail"] = {e: {"failures": str(f), "instances": str(n), "rate": str(f / n)}
                        for e, (f, n) in by.items()}
+        # The three conditions with the most failures, with the names printed in the text.
+        names = {r["key"]: r["name"] for r in read(RES / "datasets.csv")}
+        rows = sorted(read(res / "failures.csv"), key=lambda r: -float(r["failures"]))[:3]
+        total = sum(f for f, _ in by.values())
+        for i, r in enumerate(rows, 1):
+            out["fail"][f"top{i}"] = {
+                "failures": str(int(float(r["failures"]))), "instances": r["instances"],
+                "dataset": names.get(r["dataset"], r["dataset"]),
+                "model": MODELS[r["model"]], "explainer": METHODS[r["explainer"]]}
+        top = sum(int(float(r["failures"])) for r in rows)
+        out["fail"]["top"] = {"share": str(top / total if total else 0.0)}
+    if (res / "per_model.csv").exists():
+        out["mod"] = {f"{r['model']}_{r['measure']}": r for r in read(res / "per_model.csv")}
+    if "prim" in out and "sens" in out:
+        out["cmp"] = {"all": {"changed": str(sum(
+            out["prim"][m]["decision"] != out["sens"][m]["decision"] for m in out["prim"]))}}
     if (res / "variance.csv").exists():
         out["var"] = {f"{r['measure']}_{TERMS[r['term']]}": r for r in read(res / "variance.csv")
                       if r["analysis"] == "mixed model (balanced)" and r["term"] in TERMS}
     if (res / "rank_change.csv").exists():
-        out["chg"] = {f"{r['measure']}_{r['explainer']}": r
-                      for r in read(res / "rank_change.csv")}
+        change = read(res / "rank_change.csv")
+        out["chg"] = {f"{r['measure']}_{r['explainer']}": r for r in change}
+        for m in {r["measure"] for r in change}:
+            part = [r for r in change if r["measure"] == m]
+            out["chg"][m] = {
+                "largest": str(max(float(r["largest_change"]) for r in part)),
+                "first": str(sum(int(r["times_first"]) > 0 for r in part))}
     return out
 
 
@@ -187,6 +213,8 @@ def render(final: bool) -> tuple[Path, int]:
         try:
             if f == "outcome":
                 return OUTCOME[data[alias][key][col]]
+            if f == "txt":
+                return escape(data[alias][key][col])
             return fmt(float(data[alias][key][col]), f)
         except (KeyError, ValueError) as exc:
             problems.append(f"{m.group(0)}: {exc!r}")
