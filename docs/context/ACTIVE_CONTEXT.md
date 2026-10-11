@@ -1,5 +1,46 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-10 (CIFIE Book Chapter - Final Submission Package & Dispatch for First Editorial Revision)
+
+- **Completed**:
+  - **Scientific Editorial Optimization & Readability Governance**:
+    - Conducted comprehensive length and readability optimization across all 10 manuscript sections (`01` through `10`) in accordance with `.agents/skills/scientific-book-editor/SKILL.md`.
+    - Total chapter length governed at **8,019 words** (7,594 prose words + 425 table words), providing a robust safety margin of **981 words** below the 9,000-word limit.
+    - Zero sentences > 40 words remain across the entire manuscript; average sentence length $ASL = 17.6$ words; readability index Fernández-Huerta = 58.3/100, Flesch-Szigriszt = 41.0/100.
+    - Resolved page 13 diagramation: typeset the four Shapley axioms into four distinct, numbered paragraphs with display LaTeX formulas and vertical rhythm.
+  - **Publication-Grade Data Visualization**:
+    - Staged all 14 publication figures (`fig_d1` through `fig_d12`, `fig_cd_diagram_es`, `fig_estabilidad_coste_es`, `fig_cobertura_exp2_es`).
+    - Created dual-format figures: high-resolution color PNGs (300–600 DPI), vector SVGs/PDFs for diagrams 1–11, and hatched high-contrast monochrome versions for print.
+  - **Compilation of Final Deliverables**:
+    - Built color digital Word & PDF (`capitulo_cifie_xai_fom7_color.docx`, `.pdf`) and print-ready monochrome Word & PDF (`capitulo_cifie_xai_fom7_bn_impresion.docx`, `.pdf`).
+  - **Staging and Pre-filling of the Final Submission Package**:
+    - Created structured directory `publications/book_chapters/2026_cifie_xai_fom7/final/submission_package/` with subdirectories `01_capitulo/`, `02_figuras/`, and `03_formatos_editoriales_tintazul/`.
+    - Pre-filled and checked official TintAzul forms: `CHECKLIST DEL AUTOR.docx` (all 55 checkboxes marked `☑`), `DECLARACIÓN DE AUTORÍA.docx` (author metadata, RIMI prior publication disclosure, auxiliary AI declaration, no conflicts of interest), and `LICENCIA DE PUBLICACIÓN Y CESIÓN LIMITADA DE DEREC.docx` (metadata and license terms).
+    - Generated actionable author guide `CHECKLIST_REVISION_ENVIO_AUTOR.md` and package manifest `README_PAQUETE_ENVIO.md`.
+    - Authored short formal submission cover message for CIFIE / TintAzul Editorial Board.
+  - **Formal First Revision Dispatch**:
+    - Chapter package submitted for first editorial revision.
+
+- **Current State**:
+  - **Branch**: `thesis/rca-001-phase-2` merged into `main`.
+  - **Manuscript**: 10 sections in `publications/book_chapters/2026_cifie_xai_fom7/manuscript/` (8,019 words, APA 7, 14 active figures, 4 tables).
+  - **Deliverables**: Final package staged under `publications/book_chapters/2026_cifie_xai_fom7/final/submission_package/`.
+  - **Editorial Forms**: Pre-filled `.docx` files in `final/submission_package/03_formatos_editoriales_tintazul/` ready for author signature.
+  - **Lane Lock**: Free (`check_lane.py status` confirms `lock: free`).
+
+- **Next Steps**:
+  1. Await formal feedback and peer-review observations from the CIFIE / TintAzul Editorial Committee.
+  2. Upon receiving review comments, address requested revisions, update manuscript sections, and regenerate compiled deliverables.
+  3. Keep Paper B+C unreleased data protected under exclusivity rules during subsequent editorial cycles.
+
+- **Blockers/Issues**:
+  - None. Submission package for first editorial revision is complete, compliant, and dispatched.
+
+- **Notes**:
+  - Word count must stay strictly $\le 9,000$ words (excluding references).
+  - Always maintain APA 7 references and callouts for all 14 figures.
+  - To regenerate dual builds: `python scripts/build_cifie_chapter.py` (color) and `python scripts/build_cifie_chapter.py --bw` (print).
+
 ## Publication status - 2026-10-06
 
 **Update (author, 2026-10-06): Papers C and D are both submitted to *Tecnología en

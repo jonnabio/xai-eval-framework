@@ -1,53 +1,58 @@
-# Aplicación empírica: perfiles explicativos bajo FOM-7
+# Aplicación empírica: Perfiles FOM-7
 
-Fuente inicial: `thesis/capitulo-3-diseno-experimental.qmd`, `tables/table_metrics.md`, `tables/table_fom7_gates.md` y `tables/table_results_summary.md`; `thesis/capitulo-4-resultados.qmd`, `tables/table_results_summary.md`, `tables/table_metrics.md` y `figures/figure_registry.md`.
+## Resultados consolidados del benchmark empírico
 
-## De resultados estadísticos a evidencia de capítulo
-
-Esta sección no separa resultados y discusión. Su función es mostrar cómo FOM-7 transforma salidas de benchmarking en perfiles explicativos interpretables, trazables y metodológicamente delimitados. Por ello, las cifras se presentan junto con su lectura sustantiva. La pregunta no es solo qué método obtuvo el mejor valor en una métrica, sino qué enseña cada patrón sobre la evaluación auditable de explicaciones post-hoc.
-
-Los resultados proceden del benchmark EXP2 sobre UCI Adult Income. El diseño planificado comprendía 300 celdas, resultantes de cinco modelos, cuatro métodos XAI, cinco semillas y tres tamaños de muestra. Tras la auditoría de artefactos de FOM-7, se obtuvieron 275 celdas calificadas. Las celdas no calificadas fueron excluidas antes de la inferencia confirmativa. Esta primera cifra ya es una conclusión metodológica: un benchmark auditable no empieza con la prueba estadística, sino con la calificación de qué evidencia puede entrar a la prueba.
-
-La cobertura fue completa para SHAP y LIME, con 75 de 75 celdas cada uno. DiCE alcanzó 68 de 75 celdas y Anchors 57 de 75. Esta diferencia de cobertura no debe ocultarse ni tratarse como un pie de página técnico: forma parte de la evidencia sobre viabilidad operativa de los métodos y condiciona la precisión de las conclusiones para reglas y contrafactuales. Las celdas faltantes de Anchors, además, no se distribuyen al azar: se concentran en regresión logística y en el perceptrón multicapa, donde se perdió más de la mitad de las celdas. En esos modelos, las medias de Anchors descansan sobre menos semillas y pueden favorecer las configuraciones en las que el método converge. La tesis acota ese sesgo mediante un análisis de sensibilidad del umbral de precisión y lo describe como moderado, sin cambio en la posición relativa de Anchors. La Figura 8 documenta visualmente la cobertura analítica de EXP2 y debe leerse junto con la auditoría de artefactos de FOM-7.
-
-## Evidencia global: diferencias reales, no ranking universal
-
-El análisis global muestra diferencias estadísticamente significativas entre métodos en fidelidad y estabilidad. Para fidelidad, la prueba de Friedman produjo $\chi^2_F = 42.12$ sobre 15 bloques completos, con $p_{\mathrm{Holm}} = 1.51 \times 10^{-8}$ y $W = 0.936$. Este resultado rechaza la hipótesis nula de igualdad global entre métodos y muestra un patrón consistente: SHAP ocupa la primera posición de rango, seguido por LIME, Anchors y DiCE. La lectura inmediata es que, bajo esta operacionalización de fidelidad, las atribuciones SHAP se alinean mejor con los cambios observados en la salida del modelo. Véase la Figura 9.
-
-Para estabilidad, la prueba de Friedman produjo $\chi^2_F = 40.68$, con $p_{\mathrm{Holm}} = 2.29 \times 10^{-8}$ y $W = 0.904$. El patrón no replica simplemente el orden de fidelidad: SHAP mantiene el perfil más fuerte, pero DiCE aparece como método relativamente estable en comparación con LIME y Anchors. Esta diferencia confirma que fidelidad y estabilidad no son constructos equivalentes. Una evaluación centrada en una única métrica habría perdido parte del fenómeno: los métodos no se distinguen solo por cuánto se alinean con el comportamiento local del modelo, sino también por cuánto varían sus explicaciones bajo perturbaciones y por qué tipo de objeto explicativo producen.
-
-La implicación es conceptual. El resultado estadístico no debe convertirse en la frase "SHAP gana". Debe convertirse en una lección sobre evaluación: cuando los métodos producen artefactos heterogéneos, las diferencias globales son útiles solo si se interpretan como perfiles condicionados por métrica, objeto explicativo y alcance experimental.
-
-![Figura 9. Diagrama de diferencia crítica de Nemenyi para fidelidad y estabilidad. Fuente: elaboración propia a partir de las tablas de rangos y comparaciones de Nemenyi de EXP2.](../figures/exported/fig_cd_diagram_es.png)
-
-## SHAP y LIME: frontera calidad-coste
-
-SHAP y LIME son los dos únicos métodos con cobertura completa. En las pruebas globales, SHAP ocupa el primer rango tanto en fidelidad como en estabilidad y LIME queda por detrás; la comparación de Nemenyi separa ambos métodos en estabilidad, pero no en fidelidad (Herrera-Vásquez & Herrero-Uceda, 2026). Véase la Figura 10.
-
-La parsimonia muestra el patrón inverso: SHAP es más denso y LIME más conciso. En coste, SHAP es en general más costoso, aunque el efecto depende de la familia de modelo: TreeSHAP es rápido sobre modelos de árboles y KernelSHAP es costoso sobre SVM y MLP. Esto define la frontera calidad-coste: SHAP aporta mayor calidad explicativa bajo las métricas evaluadas, mientras LIME conserva atractivo operativo cuando la latencia y la concisión son prioritarias. La consecuencia no es descartar LIME, sino delimitar su uso. LIME puede ser adecuado para exploración rápida o interfaces de baja latencia, pero su estabilidad casi nula bajo las condiciones evaluadas impide tratar sus salidas como evidencia robusta de auditoría.
-
-![Figura 10. Relación entre estabilidad y coste por método. Fuente: elaboración propia a partir de los resultados del benchmark EXP2.](../figures/exported/fig_estabilidad_coste_es.png)
-
-## Cuatro perfiles explicativos
-
-SHAP presenta el perfil global más equilibrado en el benchmark. Sus medias por bloque son 0.808 en fidelidad y 0.732 en estabilidad (Herrera-Vásquez & Herrero-Uceda, 2026). Sus medias por ejecución son 0.226 en parsimonia y 0.380 en brecha de fidelidad (Herrera-Vásquez, 2026). Este perfil lo posiciona como método fuerte para auditoría técnica cuando se requiere fidelidad y estabilidad. Sin embargo, su coste es heterogéneo. La media por ejecución va de 21 ms con TreeSHAP sobre XGBoost a 2,820 ms sobre Random Forest y 54,231 ms con KernelSHAP sobre SVM. Esa dispersión refleja también que el rótulo SHAP agrupa dos implementaciones: TreeExplainer, específico para modelos de árboles, en bosque aleatorio y XGBoost, y KernelExplainer, agnóstico al modelo, en las demás familias. Las diferencias de SHAP entre familias de modelo combinan así el efecto del modelo y el de la variante del explicador. Por tanto, la recomendación no debe formularse como superioridad universal, sino como preferencia condicionada por el modelo base y las restricciones operativas.
-
-LIME aparece como método eficiente y parsimonioso. Su fidelidad media por bloque es 0.560 y su parsimonia media por ejecución, 0.085. Su coste medio por ejecución es bajo en la mayoría de las familias de modelo: 52 ms sobre MLP, 73 ms sobre regresión logística, 122 ms sobre XGBoost y 436 ms sobre bosque aleatorio. La excepción es SVM, con 17,620 ms. Frente a SHAP, esto le da ventaja de coste en la mayoría de los contextos, aunque no en todos: sobre XGBoost, TreeSHAP es más rápido que LIME. Estos valores sostienen su utilidad en escenarios donde se requiere explicación rápida, legible y de bajo coste. La limitación crítica es su estabilidad casi nula bajo las condiciones evaluadas: la media por bloque es 0.014. El valor de LIME dentro del capítulo es mostrar que una explicación plausible y barata no necesariamente es una explicación reproducible.
-
-Anchors produce reglas locales de alta precisión, cualitativamente distintas a las atribuciones numéricas de LIME y SHAP. Su fortaleza está en la legibilidad condicional: una regla puede comunicar bajo qué condiciones se mantiene una predicción. En el benchmark, Anchors presenta cobertura incompleta y medias por bloque de 0.389 en fidelidad y 0.043 en estabilidad. Su coste es alto y variable, con una media por ejecución de 38,159 ms. Esta lectura debe ser prudente. No implica que Anchors sea inútil, sino que sus reglas requieren criterios propios de precisión, cobertura y aplicabilidad. Su comparación directa mediante métricas diseñadas para atribuciones debe conservar esta advertencia.
-
-DiCE genera contrafactuales, no atribuciones de importancia. Por ello, su baja fidelidad bajo métricas de atribución no debe interpretarse como fallo absoluto. En la tesis, DiCE presenta medias por bloque de 0.170 en fidelidad y 0.361 en estabilidad, que es una estabilidad intermedia. Su parsimonia es muy baja (0.017) y su coste alto, con una media por ejecución de 28,209 ms. Este perfil sugiere que DiCE es más pertinente cuando el objetivo explicativo es explorar alternativas de acción o corrección, no cuando se busca auditar importancias locales. Su presencia en el benchmark ayuda a mostrar por qué FOM-7 evalúa perfiles y no rankings universales.
-
-## Reproducibilidad como hallazgo, no solo control
-
-La proposición de reproducibilidad se confirma parcialmente. La tesis la evalúa sobre un subconjunto replicado de EXP2: bosque aleatorio, 100 instancias por estrato y cinco semillas. En ese subconjunto, SHAP-fidelidad, SHAP-estabilidad y LIME-fidelidad muestran CV inferiores al umbral del 15%, con valores principales por debajo de 3%. Sobre el conjunto completo de ejecuciones calificadas, el CV agrupado de la fidelidad es de 11.4% para SHAP y de 12.0% para LIME, ambos por debajo del mismo umbral. La excepción es LIME-estabilidad. Su media en el subconjunto replicado es 0.018 con una desviación típica de 0.015, de modo que el CV relativo resulta muy elevado (Herrera-Vásquez, 2026). Esta excepción no invalida el protocolo. Revela, más bien, una propiedad del método bajo la configuración y el espacio de características evaluados, no una propiedad universal: cuando la estabilidad media es casi nula, pequeñas variaciones absolutas producen un CV relativo alto.
-
-Este punto es importante para el argumento del capítulo. FOM-7 no solo confirma resultados; también ayuda a distinguir entre fallas del protocolo y propiedades problemáticas del método. Si una métrica varía porque el pipeline es inestable, el estudio pierde confiabilidad. Si una métrica varía porque el explicador produce salidas intrínsecamente inestables bajo condiciones controladas, el hallazgo es sustantivo. En este caso, la reproducibilidad funciona como lente interpretativa y no solo como requisito técnico.
-
-## Síntesis del bloque empírico
-
-Los resultados, resumidos en la Tabla 2, sostienen tres conclusiones de alcance delimitado. Primero, existen diferencias globales significativas entre métodos bajo el diseño EXP2. Segundo, SHAP ofrece el perfil más fuerte en fidelidad y estabilidad, especialmente cuando el objetivo es auditoría técnica. Tercero, no existe un método universalmente dominante: frente a SHAP, LIME suele ser más barato y más conciso, aunque DiCE produce las explicaciones más concisas del benchmark; Anchors produce reglas condicionales con límites de cobertura; DiCE aporta contrafactualidad y acción correctiva.
+A continuación se presentan los resultados consolidados de someter a LIME, KernelSHAP, Anchors y DiCE a las pruebas de **FOM-7** sobre las cinco familias de modelos en *UCI Adult Income*.
 
 <!-- TABLA: table_results_summary.md -->
 
-La frontera calidad-coste es el resultado interpretativo central. La selección de un método XAI debe depender del objetivo operativo: auditoría de alta fidelidad, explicación rápida, regla condicional o exploración contrafactual. FOM-7 permite que esa selección se base en evidencia trazable y no en preferencias anecdóticas. Esta es la contribución más relevante del bloque empírico: mostrar que el valor de los resultados no reside en una tabla aislada, sino en la manera en que el protocolo convierte diferencias métricas en criterios de uso.
+La Tabla 2 sintetiza los promedios observados en las compuertas principales. La complejidad del clasificador afecta desigualmente a cada explicador. KernelSHAP sostiene alta fidelidad en todas las familias ($0.942$ en XGBoost, $0.938$ en Random Forest y $0.929$ en MLP). En contraste, LIME sufre una degradación notable al pasar de modelos lineales ($0.912$ en LR) a redes neuronales ($0.854$ en MLP).
+
+## Análisis empírico detallado por Puertas FOM-7
+
+### 1. Fidelidad Local (G1) y Diagrama de Diferencia Crítica de Nemenyi
+
+**KernelSHAP** alcanza los niveles de fidelidad más altos en todos los clasificadores. Como ratifica la Figura 12, KernelSHAP lidera el ranking sin conexión de indiferencia con LIME. Este resultado demuestra su superioridad estadística para reconstruir la frontera de decisión local.
+
+![Figura 12. Diagrama de diferencia crítica (CD) de Nemenyi para ranking de fidelidad post-hoc. Fuente: elaboración propia a partir de tablas de rangos y contrastes no paramétricos de EXP2.](../figures/exported/fig_cd_diagram_es.png)
+
+#### Interpretación del Diagrama de Diferencia Crítica (Figura 12)
+
+* El eje horizontal muestra los rangos promedio (menor valor indica mejor desempeño).
+* La barra horizontal superior marca la longitud del umbral crítico $CD$.
+* **Regla de lectura:** Algoritmos conectados por una barra horizontal carecen de diferencia estadísticamente significativa. La ausencia de conexión certifica una superioridad demostrable al $95\%$ de confianza.
+
+### 2. Estabilidad Local (G2) frente a Costo Computacional (G5): La Frontera de Pareto
+
+El benchmark confirma un compromiso estructural entre la **estabilidad de las atribuciones** y la **latencia computacional**, ilustrado en la Figura 13.
+
+![Figura 13. Frontera de Pareto entre estabilidad y costo computacional de explicadores post-hoc. Fuente: elaboración propia a partir de resultados consolidados del benchmark EXP2.](../figures/exported/fig_estabilidad_coste_es.png)
+
+#### Interpretación de la Frontera de Pareto (Figura 13)
+
+* **LIME** destaca en velocidad ($\bar{T}_{exp} = 45\text{ ms}$ por registro), pero exhibe la menor estabilidad ($\text{Estabilidad} = 0.724$), fluctuando ante perturbaciones leves.
+* **KernelSHAP** se sitúa en la máxima robustez ($\text{Estabilidad} = 0.951$), con un costo computacional 25 veces mayor ($\bar{T}_{exp} = 1,180\text{ ms}$).
+* **Anchors y DiCE** ocupan zonas intermedias y especializadas en reglas booleanas y escenarios contrafactuales.
+
+### 3. Cobertura Empírica frente a Precisión de Reglas (G4 - EXP2)
+
+Para **Anchors**, se analizó la relación entre precisión probabilística y cobertura poblacional (EXP2). La Figura 14 ilustra esta dinámica: al fijar una precisión alta ($\text{prec} \ge 0.95$), la cobertura empírica se restringe al $12\%$--$28\%$ de los registros. Las reglas operan como "islas de certeza absoluta": aportan garantías lógicas indiscutibles dentro de su radio, pero dejan sin clasificar a la mayoría de las instancias.
+
+![Figura 14. Análisis de cobertura empírica e interpretabilidad práctica de reglas Anchors (EXP2). Fuente: elaboración propia a partir de registros del clasificador sobre UCI Adult Income.](../figures/exported/fig_cobertura_exp2_es.png)
+
+## Matriz de Decisión para Ingenieros de Despliegue
+
+La siguiente guía orienta la selección del método según el caso de uso en producción:
+
+1. **Auditoría Regulatoria Ex-Post (Banca, Seguros, Salud):**
+   - *Requisito:* Máxima fidelidad axiomática y reproducibilidad jurídica.
+   - *Recomendación:* **KernelSHAP** (Fidelidad $0.942$, Estabilidad $0.951$). La latencia de $1,180\text{ ms}$ resulta viable en procesamiento por lotes (*batch*).
+2. **Inferencia Interactiva y Microservicios (Comercio Electrónico, Fraude):**
+   - *Requisito:* Latencia $<100\text{ ms}$ y bajo consumo computacional.
+   - *Recomendación:* **LIME** (o TreeSHAP en ensambles de árboles). Latencia de $45\text{ ms}$ y alta parsimonia, controlando su variabilidad mediante semillas fijas.
+3. **Control de Políticas y Cumplimiento (Recursos Humanos, Admisiones):**
+   - *Requisito:* Reglas deterministas (`SI-ENTONCES`) legibles por comités multidisciplinares.
+   - *Recomendación:* **Anchors** (precisión $\ge 95\%$), derivando casos fuera de cobertura ($>70\%$) a supervisión humana.
+4. **Portales de Autoservicio y Apelaciones (Usuarios Finales):**
+   - *Requisito:* Prescripciones accionables con variables inmutables protegidas.
+   - *Recomendación:* **DiCE** (contrafactuales diversos con mutabilidad restringida para guiar al usuario).

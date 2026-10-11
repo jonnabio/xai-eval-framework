@@ -1,21 +1,22 @@
 # Paquete de envío
 
-## Estado actual (2026-10-03)
+## Estado actual (2026-10-10)
 
-El capítulo está en revisión científica y editorial; no está listo para envío. La
-lista de trabajo es la "Consolidated pending list" de
-`planning/science_first_revision_plan_2026-09-28.md`, y el diagnóstico editorial está
-en `editorial/editorial_compliance_assessment_2026-09-30.md`.
+El paquete de envío completo ha sido preparado y depositado en:
+`publications/book_chapters/2026_cifie_xai_fom7/final/submission_package/`.
+
+El manuscrito final cumple con el límite editorial (8.019 palabras < 9.000 palabras), incluye las 14 figuras activas citadas y auditadas, la separación diagramática de los axiomas de Shapley en la página 13, maquetación dual (color digital y monocromática para imprenta) y todos los formatos de TintAzul listos para revisión y firma del autor.
 
 ## Entregables exigidos por TintAzul / CIFIE
 
-| Entregable | Base | Estado |
+| Entregable | Base | Estado en `final/submission_package/` |
 | --- | --- | --- |
-| Capítulo en la plantilla oficial (Word) | `editorial/GUÍA-PLANTILLA.docx`; build `scripts/build_cifie_chapter.py` | Pendiente [E-FMT, contenido pendiente] |
-| Lista de verificación del autor, firmada | `editorial/CHECKLIST DEL AUTOR.docx`; estado en `compliance/author_checklist_working.md` | Pendiente [E-FORMS] |
-| Declaración de autoría, originalidad y uso de IA, firmada por todos los autores | `editorial/DECLARACIÓN DE AUTORÍA.docx` | Pendiente de decisiones E-AI, E-AUTH y E-PRIOR [E-FORMS] |
-| Licencia de publicación y cesión limitada de derechos, firmada | `editorial/LICENCIA DE PUBLICACIÓN Y CESIÓN LIMITADA DE DEREC.docx` | Pendiente [E-FORMS] |
-| Hoja de diseño editorial | `manuscript/00_hoja_diseno_editorial.md` (no se publica) | Actualizar a los campos de la plantilla; confirmar si se entrega [E-FRONT, E-Q1] |
+| Capítulo en la plantilla oficial (Word y PDF, Color y B/N) | `01_capitulo/` | **Completado y generado** (`capitulo_cifie_xai_fom7_color.docx`, `.pdf`, `..._bn_impresion.docx`, `.pdf`) |
+| Figuras independientes (Color, B/N y Vectoriales) | `02_figuras/` | **Completado** (14 figuras en `digital_color/`, `vectorial_editable/`, `impresion_bn/`) |
+| Lista de verificación del autor | `03_formatos_editoriales_tintazul/CHECKLIST DEL AUTOR.docx` | **Preparado** (pendiente firma del autor; ver `CHECKLIST_REVISION_ENVIO_AUTOR.md`) |
+| Declaración de autoría, originalidad y uso de IA | `03_formatos_editoriales_tintazul/DECLARACIÓN DE AUTORÍA.docx` | **Preparado** (pendiente firma del autor; ver instrucciones de decisiones E-AI, E-AUTH y E-PRIOR) |
+| Licencia de publicación y cesión limitada de derechos | `03_formatos_editoriales_tintazul/LICENCIA DE PUBLICACIÓN...docx` | **Preparado** (pendiente firma del autor) |
+| Guías y rúbrica oficial de evaluación | `03_formatos_editoriales_tintazul/` | **Disponibles para consulta** (`GUÍA-PLANTILLA`, `GUÍA RÁPIDA APA`, `RÚBRICA OFICIAL`) |
 
 ## Figuras actuales del capítulo
 
