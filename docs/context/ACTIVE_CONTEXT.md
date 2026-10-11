@@ -73,7 +73,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-10 07:42: 1,120 of 1,280 conditions, seeds 42, 123 and 456 complete and checked, seed 789 at 255 of 256, seed 101112 at 97 of 256; estimated end Sat 2026-10-10 in the evening); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-10 20:19: 1,271 of 1,280 conditions, seeds 42, 123, 456 and 789 complete and checked, seed 101112 at 247 of 256; estimated end in the night of 2026-10-10 to 2026-10-11); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -83,9 +83,70 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
-## Session Handoff - 2026-10-10 07:50 (Paper F: 1,120 of 1,280, snapshot, PR #43 open: merge refused to the assistant)
+## Session Handoff - 2026-10-10 20:30 (Paper F: 1,271 of 1,280, four seeds complete and checked, snapshot)
 
-This is the latest handoff (same session and owner as the one of 2026-10-09 20:45 below,
+This is the latest handoff for lane `paper-f` (same session and owner as the two below;
+the one of 2026-10-09 20:45 holds the checks of seeds 42, 123 and 456).
+
+- **Completed**:
+  - **Raw data snapshot**, lane commit `52bdbe61f` (2026-10-10 20:20, 151 new job
+    files): `outputs/analysis/paper_f/raw/` holds 1,271 finished jobs and 254,200 rows
+    (seeds 42, 123, 456 and 789: 256 jobs and 51,200 rows each; seed 101112: 247 jobs,
+    49,400 rows). Checked against the manifest: 1,271 entries, 1,271 files, none missing,
+    no SHA-256 mismatch.
+  - **Seed 789 is checked**, as the three before it: 256 of 256 job files, every job at
+    200 instances, 51,200 rows, no duplicate instance, no unreadable line, the four
+    methods of every dataset and model on the same instances, counts equal to the
+    manifest. 276 failed rows (0.54%) in 10 conditions: 222 DiCE no counterfactual, 41
+    DiCE time limit, 13 Anchors time limit; 148 in DiCE on the random forest for Amazon
+    Employee, 72 in DiCE on XGBoost for Ozone, 41 in DiCE on the random forest for QSAR
+    (the job that ended last; 10, 17 and 26 in the earlier seeds). 161.8
+    job-hours. Completeness, failures and timing only; no measure was read.
+  - **Pull request #44** (this snapshot and the context) is open against `main`; the
+    author merges it. Its checks `lanes` and `exp4-reconstruction` pass; **`fragments`
+    fails, and the cause is on `main`, not in this branch** (see Blockers).
+- **Current State**:
+  - **The run is in progress and unattended, nine jobs from the end.** At 2026-10-10
+    20:19: 1,271 of 1,280 conditions (99.3%), 254,610 rows; seed 101112 at 247 of 256.
+    Eight jobs at work, one queued, no line with a failed job in the launcher log,
+    scheduled task last result 0 at 20:18, no `_STOP` file, 1.1 GB of memory free.
+  - **Estimated end: Sunday 2026-10-11, about 04:35** (dashboard, from the work that
+    remains; the last jobs are DiCE and Anchors on random forests, the slowest).
+  - Failures: 1,416 of 254,610 rows (0.56%): 1,212 DiCE no counterfactual, 106 DiCE time
+    limit, 98 Anchors time limit.
+  - **`main` gained 21 commits of the CIFIE lane on 2026-10-10** (chapter, its scripts,
+    thesis figures, this file). None touches a Paper F file or the code of the run. The
+    branch was not merged with `main`: a trial (`git merge-tree`) shows no conflict.
+    Do it after the run ends, not before: it rewrites about 210 files of the tree.
+  - No analysis has been run and no ranking has been looked at.
+  - Rows written after the snapshot of 2026-10-10 20:20 are on the laptop only.
+- **Next Steps**:
+  1. Claim the lane (stop if it fails).
+  2. Dashboard: when it shows 1,280 of 1,280 and no job at work, take the last snapshot,
+     check seed 101112 as the others, commit, push, pull request.
+  3. Then, and only then: remove the scheduled task `PaperF-chain-ensure` (ask the
+     author first), bring `main` into the branch, and go to steps 4 to 6 of the handoff
+     of 2026-10-08 08:30 (Results skeleton with the author's go-ahead, the analysis once;
+     submission numbers of Papers C and D and their READMEs).
+- **Blockers/Issues**:
+  - **`main` fails `pubs-sync` / `fragments` since the CIFIE merge `88b059e19`**
+    (push run of 2026-10-11 02:08 UTC; the run before it, on `6ff63331b`, passed).
+    `verify_claims.py` reports, all in
+    `publications/book_chapters/2026_cifie_xai_fom7/manuscript/`: (a) exclusivity: the
+    chapter prints values registered as results of unpublished manuscripts (0.85, 0.80,
+    0.05, 0.01, 0.75, 0.10, 0.001 in sections 06, 07 and 09; several read like
+    thresholds, which is for the CIFIE lane to judge, ADR-0018); (b) coverage: numeric
+    literals neither registered nor declared unbacked (sections 02, 04, 06, 07, 08, 09);
+    (c) `10_limitaciones_trabajo_futuro.md` and `11_conclusiones.md` are still listed in
+    the registry but were replaced by `10_conclusiones.md`. Every pull request against
+    `main` shows this failure until the CIFIE lane repairs it. On this branch alone
+    `verify_claims.py` passes (1,189 claims). Not touched here: the files belong to the
+    CIFIE lane and to `pub/`, outside lane `paper-f`.
+  - Those of the handoff of 07:50 below stand.
+
+## Session Handoff - 2026-10-10 07:50 (Paper F: 1,120 of 1,280, snapshot, PR #43 merged by the author)
+
+Superseded for the state of the run by the handoff of 20:30 above (same session and owner as the one of 2026-10-09 20:45 below,
 which remains valid for the checks of seeds 42, 123 and 456).
 
 - **Completed**:
@@ -93,10 +154,11 @@ which remains valid for the checks of seeds 42, 123 and 456).
     files): `outputs/analysis/paper_f/raw/` holds 1,120 finished jobs and 224,000 rows
     (seed 789: 255 jobs, 51,000 rows; seed 101112: 97 jobs, 19,400 rows). Checked against
     the manifest: 1,120 entries, 1,120 files, none missing, no SHA-256 mismatch.
-  - **Pull request #43 is NOT merged.** The author asked for the merge on 2026-10-10
-    ("commit, push and merge all that can be"); the three checks passed on the pushed
-    head, but the assistant's permission system refused `gh pr merge 43 --merge` again.
-    The author merges it (page button or the same command in their own terminal).
+  - **Pull request #43 is merged** (2026-10-10 14:13 UTC, 08:13 local, merge commit
+    `6ff63331b`). The author ran `gh pr merge 43 --merge` in their own terminal, after the
+    assistant's permission system refused the same command again, then fast-forwarded
+    `paper/f-external-validity` to `origin/main` and pushed it. The branch was level with
+    `main` before the commit that records this.
 - **Current State**:
   - **The run is in progress and unattended.** At 2026-10-10 07:42: 1,120 of 1,280
     conditions (87.5%), 224,864 rows. Seed 789 at 255 of 256: the last job, DiCE on the
@@ -112,8 +174,7 @@ which remains valid for the checks of seeds 42, 123 and 456).
     been looked at.
   - Rows written after the snapshot of 2026-10-10 07:45 are on the laptop only.
 - **Next Steps**:
-  1. Claim the lane (stop if it fails). After the author merges pull request #43:
-     `git fetch origin` and `git merge --ff-only origin/main`.
+  1. Claim the lane (stop if it fails). The next snapshots need a new pull request.
   2. Dashboard, launcher log, scheduled task, snapshot, commit and push.
   3. Check seed 789 when its last job ends, and seed 101112 when complete, as seeds 123
      and 456 were checked.
@@ -123,7 +184,9 @@ which remains valid for the checks of seeds 42, 123 and 456).
      and their READMEs).
 - **Blockers/Issues**: those of the handoff of 2026-10-09 19:00 stand, the merge
   included: the author's request in the conversation did not lift the refusal; a
-  permission rule for PowerShell in the settings would.
+  permission rule for PowerShell in the settings would. Until then the assistant gives
+  the author the commands (`cd` to the folder, `gh pr merge <n> --merge`, `git fetch
+  origin`, `git merge --ff-only origin/main`, `git push origin <branch>`).
 
 ## Session Handoff - 2026-10-09 20:45 (Paper F: 986 of 1,280, seeds 123 and 456 checked, snapshot)
 
