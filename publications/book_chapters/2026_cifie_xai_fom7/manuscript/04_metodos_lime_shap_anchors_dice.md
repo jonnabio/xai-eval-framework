@@ -1,154 +1,31 @@
-# Métodos de explicabilidad: LIME, SHAP, Anchors y DiCE
+# Por qué importa la inteligencia artificial explicable
 
-## Diversidad de artefactos explicativos
+Fuente inicial: `references/candidate_literature_2026-09-28.md`, `sources/evidence_map.md` y `planning/chapter_scaffold_2026-09-28.md`.
 
-En el desarrollo de software analítico, los métodos agnósticos post-hoc generan diferentes **artefactos explicativos** según las necesidades de la audiencia:
+## Funciones, audiencias y responsabilidad
 
-1. **Atribuciones numéricas continuas de características:** Vectores de números reales que ponderan la contribución positiva o negativa de cada variable a la inferencia puntual (LIME, KernelSHAP).
-2. **Reglas de decisión booleanas:** Condiciones condicionales (`SI x1 > 3 AND x2 = 'A' ENTONCES predicción = 1`) que delimitan una región de certeza inalterable (Anchors).
-3. **Explicaciones contrafactuales prescriptivas:** Muestras sintéticas que indican la alteración mínima en los datos de entrada requerida para conmutar la predicción hacia una categoría deseada (DiCE).
+La explicación puede apoyar el diseño, la validación, la operación y la auditoría: por ejemplo, revelar dependencias espurias, orientar pruebas de casos límite o documentar incidentes. Su función forma parte de la gestión del riesgo durante todo el ciclo de vida, no de una visualización aislada (Tabassi, 2023). La evidencia necesaria depende de la tarea, y una explicación debe revisarse si cambian el modelo, los datos o las condiciones operativas. Véase la Figura 5.
 
-La Figura 4 sintetiza estos cuatro objetos explicativos y sus algoritmos representativos. A continuación se examinan sus mecanismos formales, formulaciones matemáticas y consideraciones de ingeniería.
+No hay una explicación universal: desarrolladores requieren trazabilidad; validadores, pruebas independientes; profesionales, límites y criterios de intervención; y las personas afectadas, razones comprensibles y vías reales de revisión. El significado depende del usuario y la tarea (Phillips et al., 2021); las explicaciones humanas también son selectivas y contrastivas (Miller, 2019). Por ello, antes de elegir un método deben declararse pregunta, audiencia y acción prevista, y distinguirse percepción, comprensión, desempeño y capacidad de actuar.
 
-![Figura 4. Cuatro objetos explicativos y métodos agnósticos evaluados en FOM-7. Fuente: elaboración propia a partir de Ribeiro *et al.* (2016, 2018), Lundberg y Lee (2017) y Mothilal *et al.* (2020).](../figures/exported/fig_d4_objetos_explicativos_es.png)
+![Figura 5. Funciones de la explicación a lo largo del ciclo de vida y necesidades de cada audiencia. Fuente: elaboración propia a partir de Tabassi (2023) y Phillips et al. (2021).](../figures/exported/fig_d5_ciclo_audiencias_es.png)
 
-## LIME: Explicaciones locales interpretables agnósticas al modelo
+La explicabilidad es una dimensión de la IA confiable, no un sustituto de validez, seguridad, privacidad, equidad o rendición de cuentas; estas propiedades dependen del contexto y pueden entrar en tensión (Tabassi, 2023). La meta es confianza calibrada, no aceptación indiscriminada. Kim et al. (2024) distinguen calidad contextual, interacción humano-IA y desempeño. En tareas estudiadas por Alufaisan et al. (2021), la predicción de IA tendió a mejorar la exactitud humana, pero la explicación no añadió una mejora concluyente. Poursabzi-Sangdeh et al. (2021) hallaron que la transparencia podía facilitar la simulación del modelo sin mejorar el seguimiento apropiado y, en ciertas condiciones, dificultar la detección de errores. Comprensión, confianza y desempeño deben evaluarse por separado.
 
-Propuesto por Ribeiro *et al.* (2016), **LIME** (*Local Interpretable Model-agnostic Explanations*) asume una premisa geométrica intuitiva. Aunque la frontera de un clasificador $f(x)$ sea compleja a escala global, en la vecindad inmediata de un punto $x$ puede aproximarse mediante un plano tangente lineal simple ($g \in G$).
+Para sistemas de alto riesgo cubiertos por el Reglamento de Inteligencia Artificial de la Unión Europea, los artículos 13 y 14 exigen transparencia útil para interpretar resultados y supervisión capaz de reconocer límites, detectar sesgo de automatización e ignorar, revertir o detener salidas cuando corresponda (European Parliament & Council of the European Union, 2024). La contestabilidad requiere además conectar la explicación con una decisión concreta y una vía efectiva de revisión. La gobernanza incluye procedencia, versiones, responsabilidad y conservación de evidencia; no prescribe un explicador universal.
 
-### Mecanismo algorítmico
+## Aplicaciones y riesgos por dominio
 
-Para construir la aproximación local alrededor de un registro $x$:
+La decisión, la audiencia y el daño potencial varían por ámbito; también varía la evidencia necesaria. Los cinco ejemplos siguientes son ilustrativos, no resultados de sistemas concretos, y las afirmaciones empíricas se limitan a las fuentes citadas.
 
-1. **Generación de perturbaciones:** Genera $K$ muestras sintéticas $z'$ en el entorno de $x$. Aplica ruido gaussiano $\mathcal{N}(0, \sigma^2)$ sobre variables continuas y remuestreo empírico sobre las categóricas.
-2. **Evaluación de la caja negra:** Envía las muestras $z'$ al clasificador primario para obtener sus probabilidades predichas $f(z')$.
-3. **Ponderación por proximidad:** Asigna a cada muestra sintética $z'$ un factor de ponderación $\pi_x(z)$ mediante un núcleo exponencial gaussiano:
+**Salud y biomedicina.** Los modelos apoyan estratificación de riesgo, priorización y lectura de imágenes; OMS vincula transparencia y explicabilidad con autonomía, seguridad, equidad y gobernanza del ciclo de vida (World Health Organization, 2021). Un mapa de relevancia puede ayudar a detectar dependencia de marcas de adquisición, pero no demuestra que la explicación sea correcta para un paciente. Ghassemi et al. (2021) recomiendan validar desempeño en vez de confiar en plausibilidad. Se requieren validación clínica y estudios de decisiones reales; la evaluación humana sigue sin marcos homogéneos (Kim et al., 2024).
 
-$$\pi_x(z) = \exp\left( -\frac{D(x, z)^2}{\sigma^2} \right)$$
+**Finanzas y decisiones de asignación.** XAI se aplica a crédito, carteras, mercados y prevención del blanqueo, aunque la evidencia es desigual (Weber et al., 2024). En crédito, analistas requieren auditorías de variables proxy y subgrupos; solicitantes necesitan razones impugnables y cambios factibles (*recourse*) (Wachter et al., 2017; Karimi et al., 2022). El Reglamento europeo clasifica la evaluación de solvencia de personas como alto riesgo (European Parliament & Council of the European Union, 2024). Variables correlacionadas y contrafactuales inviables pueden inducir conclusiones engañosas (Laugel et al., 2019; Poyiadzi et al., 2020). El caso Adult del capítulo no se generaliza automáticamente al crédito; queda abierta la evaluación de un *recourse* viable, estable y justo.
 
-donde $\sigma$ define el radio de la vecindad. Si $z$ coincide con $x$ ($D=0$), el peso es máximo ($\pi=1.0$). A mayor distancia, el peso decae hacia cero, confinando la optimización al entorno local.
+**Ciberseguridad e infraestructura crítica.** XAI apoya la detección y priorización de alertas bajo restricciones operativas y adversarios (Rjoub et al., 2023). Sin embargo, un estudio de bloqueo de dominios maliciosos no halló mejoras de desempeño ni confianza con explicaciones; el resultado se limita a su tarea y participantes (Roch et al., 2026). LIME y SHAP también pueden manipularse para ocultar el comportamiento del modelo (Slack et al., 2020). Se requieren pruebas adversariales y evaluación en flujos reales de triaje.
 
-4. **Ajuste del modelo sustituto:** Ajusta el modelo lineal interpretable $g(z') = w_0 + \sum w_i z'_i$ resolviendo:
+**Sistemas autónomos e industriales.** XAI puede apoyar diseño, monitoreo, validación y diagnóstico, pero no constituye por sí sola un caso de seguridad (Kuznietsov et al., 2024). En escenarios simulados, explicaciones erróneas redujeron comodidad, dependencia, satisfacción y confianza, sin medir seguridad del vehículo (Kaufman et al., 2025). Se requieren pruebas del sistema completo, escenarios límite y evaluación ante cambios de distribución (Lakkaraju et al., 2020).
 
-$$\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g)$$
+**Modelos fundacionales, de lenguaje y multimodales.** El razonamiento en lenguaje natural no demuestra cómo se produjo una respuesta; su fidelidad requiere pruebas específicas (Zhao et al., 2024). Con sesgos controlados en indicaciones, los razonamientos pueden omitir factores influyentes (Turpin et al., 2023), aunque una omisión no prueba por sí sola engaño y las conclusiones dependen de la métrica y el presupuesto de inferencia (Zaman & Srivastava, 2026). Para sistemas multimodales, la evidencia aún es limitada; conviene manipular las fuentes disponibles y comprobar si la respuesta cambia.
 
-donde $\mathcal{L}$ representa el error cuadrático ponderado por $\pi_x$, y $\Omega(g) = \alpha \sum |w_i|$ es una regularización Lasso que induce esparcidad.
-
-### Riesgo operacional: Muestras fuera de distribución (*OOD*)
-
-Desde la perspectiva de datos, la debilidad de LIME radica en perturbar columnas de forma desacoplada. Esta independencia puede violar la integridad lógica del esquema (por ejemplo, combinando `Edad = 18` con `Años_Estudio = 22`). Al recibir registros situados en zonas anómalas (*Out-of-Distribution*, OOD), el clasificador extrapola erráticamente, sesgando los coeficientes del sustituto lineal.
-
-Como ilustra la Figura 5, el núcleo $\pi_x(z)$ concentra la atención sobre la vecindad local (Panel A), permitiendo que la recta tangente $g(z)$ aproxime la frontera no lineal. Sin embargo, ante correlaciones empíricas marcadas (Panel B), la perturbación cartesiana proyecta muestras hacia regiones OOD vacías, distorsionando la estimación de los pesos locales.
-
-![Figura 5. Fundamento geométrico de LIME y riesgo de perturbaciones fuera de distribución (OOD). Panel A: aproximación lineal local tangente $g(z)$ ponderada por el núcleo de decaimiento gaussiano $\pi_x(z)$. Panel B: generación de instancias sintéticas independientes que violan la correlación natural del esquema tabular. Fuente: elaboración propia a partir de Ribeiro *et al.* (2016).](../figures/exported/fig_d9_lime_geometria_es.png)
-
-## SHAP: Explicaciones aditivas basadas en teoría de juegos cooperativos
-
-Desarrollado por Lundberg y Lee (2017), **SHAP** (*SHapley Additive exPlanations*) formula la atribución de características transformando el problema en un juego cooperativo de teoría de juegos (Shapley, 1953).
-
-### Intuición para el ingeniero de datos
-
-Considere cuatro variables de una tabla (`Ingresos`, `Puntaje_Crediticio`, `Edad`, `Deuda`) que colaboran para emitir una probabilidad $f(x) = 0.85$, frente a una media poblacional $\mathbb{E}[f(X)] = 0.50$. La discrepancia a explicar es $+0.35$. El aporte marginal de `Puntaje_Crediticio` puede ser $+0.20$ de forma aislada. No obstante, al integrarse en una coalición donde `Ingresos` ya está presente, su contribución puede caer a $+0.08$ por redundancia informativa.
-
-Shapley resuelve esta distribución calculando el **aporte marginal promedio de cada variable a través de todas las coaliciones posibles**:
-
-$$\phi_i(x) = \sum_{S \subseteq F \setminus \{i\}} \frac{\vert S \vert ! (\vert F \vert - \vert S \vert - 1)!}{\vert F \vert !} \left[ f_x(S \cup \{i\}) - f_x(S) \right]$$
-
-En esta formulación:
-
-* $F$ representa el conjunto total de características.
-* $S$ denota un subconjunto (coalición) que excluye a la variable de interés $i$.
-* La diferencia $[f_x(S \cup \{i\}) - f_x(S)]$ mide el cambio en la predicción al incorporar la variable $i$ a la coalición $S$.
-* El factor combinatorio $\frac{|S|!(|F|-|S|-1)!}{|F|!}$ pondera uniformemente todas las posibles permutaciones de entrada de las variables.
-
-### Los cuatro axiomas de Shapley
-
-SHAP es el único método local de atribución que satisface simultáneamente cuatro propiedades axiomáticas fundamentales de la teoría de juegos cooperativos (Shapley, 1953; Lundberg & Lee, 2017):
-
-1. **Eficiencia (Aditividad local):** La suma de los valores reconstruye exactamente la desviación respecto al promedio poblacional:
-   $$\sum_{i=1}^{\vert F \vert} \phi_i(x) = f(x) - \mathbb{E}[f(X)]$$
-
-2. **Simetría:** Si dos variables $i$ y $j$ realizan aportes idénticos en toda coalición $S \subseteq F \setminus \{i, j\}$ ($f_x(S \cup \{i\}) = f_x(S \cup \{j\})$), reciben igual valor:
-   $$\phi_i(x) = \phi_j(x)$$
-
-3. **Jugador nulo (*Dummy*):** Si una columna $i$ no altera la predicción en ninguna coalición ($f_x(S \cup \{i\}) = f_x(S)$), su contribución es cero:
-   $$\phi_i(x) = 0$$
-
-4. **Monotonicidad (Consistencia):** Si el aporte marginal de una variable no disminuye entre modelos, su atribución asignada no puede decrecer:
-   $$\phi_i(f', x) \ge \phi_i(f, x)$$
-
-
-
-### Costo computacional: La explosión combinatoria y KernelSHAP
-
-Para $M$ variables existen $2^M$ coaliciones. Con $M=10$ columnas se evalúan $1,024$ combinaciones. Con $M=30$, el cálculo exacto supera mil millones de evaluaciones ($2^{30} \approx 1.07 \times 10^9$), volviéndose inviable.
-
-Para cajas negras genéricas, **KernelSHAP** estima estos valores mediante regresión ponderada utilizando un núcleo combinatorio:
-
-$$\pi(z') = \frac{|F| - 1}{\binom{|F|}{|z'|} |z'| (|F| - |z'|)}$$
-
-donde $|F|$ es el número total de atributos y $|z'|$ el tamaño de la coalición activa. La formulación asigna los mayores pesos a coaliciones unitarias y cuasi-completas, donde aislar el impacto individual resulta más limpio. Su latencia media bordea $1,180\text{ ms}$ por registro, haciéndolo apto para auditorías por lotes, pero exigente en tiempo real.
-
-La Figura 6 resume esta arquitectura matemática. El Panel A ilustra el retículo booleano de coaliciones $2^{|F|}$. El Panel B expone la curva en U del núcleo KernelSHAP $\pi(z')$, que prioriza los extremos combinatorios. Finalmente, el Panel C grafica la cascada aditiva que satisface la eficiencia local reconstruyendo $f(x)$.
-
-![Figura 6. Teoría de juegos cooperativos y ponderación de coaliciones en SHAP. Panel A: retículo booleano de subconjuntos ($2^{|F|}$) para tres variables y ruta de contribución marginal. Panel B: curva en U del núcleo combinatorio $\pi(z')$ en KernelSHAP, que concentra la masa de ponderación en coaliciones extremas. Panel C: descomposición aditiva en cascada que satisface el axioma de eficiencia local $\sum \phi_i = f(x) - \mathbb{E}[f(X)]$. Fuente: elaboración propia a partir de Lundberg y Lee (2017).](../figures/exported/fig_d10_shap_coaliciones_es.png)
-
-## Anchors: Reglas condicionales con garantías formales
-
-A diferencia de los vectores numéricos, **Anchors** (Ribeiro *et al.*, 2018) genera reglas lógicas `SI-ENTONCES`.
-
-Una regla $A$ (el ancla) reúne predicados booleanos sobre las variables de entrada (por ejemplo, $\text{Edad} > 35 \land \text{Estado\_Civil} = \text{Casado}$). La regla es válida si garantiza que, mientras se cumplan dichos predicados, la predicción se mantendrá invariante bajo el marco PAC (*Probably Approximately Correct*):
-
-$$P\left( \text{prec}(A) \ge 1 - \gamma \right) \ge 1 - \delta$$
-
-donde la precisión local $\text{prec}(A)$ mide la proporción de perturbaciones locales $z$ que preservan la predicción original $f(x)$:
-
-$$\text{prec}(A) = \mathbb{E}_{z \sim D(z|A)} \left[ \mathbb{I}(f(x) = f(z)) \right]$$
-
-En estas formulaciones:
-
-* $\mathbb{I}(\cdot)$ es la función indicadora booleana.
-* $D(z|A)$ es la distribución de perturbaciones locales condicionada al cumplimiento de $A$.
-* $\gamma$ representa el margen de error admisible (por ejemplo, $\gamma = 0.05$ para exigir $95\%$ de precisión).
-* $\delta$ es el nivel de significancia estadística (por ejemplo, $\delta = 0.01$ para un $99\%$ de confianza).
-
-Simultáneamente, el algoritmo busca maximizar la **cobertura** (*coverage*) de la regla en la población:
-
-$$\text{cov}(A) = P_{z \sim D}(A(z) = 1)$$
-
-donde $A(z) = 1$ indica que la instancia cumple las condiciones del ancla. Anchors emplea una búsqueda por haces (*beam search*) guiada por bandidos multi-brazo, optimizando el espacio de reglas sin incurrir en evaluaciones exhaustivas.
-
-## DiCE: Explicaciones contrafactuales diversas y recurso accionable
-
-Propuesto por Mothilal *et al.* (2020), **DiCE** (*Diverse Counterfactual Explanations*) adopta un enfoque prescriptivo. Responde a la pregunta del usuario: *¿cuál es el cambio mínimo en mis datos que conmutaría la decisión del modelo hacia la clase deseada?*
-
-En producción, un contrafactual viable debe respetar restricciones operativas:
-
-* **Variables inmutables:** Atributos intrínsecos como la *Edad* no admiten modificación retroactiva.
-* **Dirección monótona:** La *Antigüedad Laboral* solo puede incrementarse.
-* **Rangos factibles:** Evitar combinaciones incompatibles con la realidad operativa.
-
-Dado un punto $x$ y una clase deseada $y^*$, DiCE optimiza un conjunto de $k$ contrafactuales $\{c_1, \dots, c_k\}$ resolviendo:
-
-$$\min_{c_1, \dots, c_k} \frac{1}{k} \sum_{i=1}^k \mathcal{L}_{loss}(f(c_i), y^*) + \frac{\lambda_1}{k} \sum_{i=1}^k \text{dist}(x, c_i) - \lambda_2 \text{dpp}(c_1, \dots, c_k)$$
-
-Esta función objetivo balancea tres metas mediante multiplicadores de Lagrange $\lambda_1$ y $\lambda_2$:
-
-* **Validez de clase ($\mathcal{L}_{loss}$):** Conduce la predicción del contrafactual $f(c_i)$ hacia la categoría meta $y^*$.
-* **Proximidad ($\text{dist}$):** Minimiza la distancia entre la instancia $x$ y $c_i$, combinando la norma L1 para variables continuas y distancia de Hamming para categóricas.
-* **Diversidad ($\text{dpp}$):** Resta el término $\text{dpp}(c_1, \dots, c_k) = \det(\mathbf{K})$, donde $\mathbf{K}$ es la matriz de similitud entre contrafactuales ($K_{i,j} = \frac{1}{1 + \text{dist}(c_i, c_j)}$). Al penalizar configuraciones redundantes, entrega vías de acción cualitativamente diferenciadas.
-
-La Figura 7 compara las geometrías de estos artefactos. El Panel A ilustra el hiper-rectángulo de invarianza de Anchors bajo garantías PAC ($97.4\%$ de precisión local con $22.5\%$ de cobertura). El Panel B esquematiza el balance de fuerzas en DiCE: la tracción de conmutación ($\mathcal{L}_{loss}$), la resistencia de proximidad ($\lambda_1$), la repulsión determinante ($\det \mathbf{K}$) y los topes de inmutabilidad.
-
-![Figura 7. Topología de reglas en Anchors y física multiobjetivo en DiCE. Panel A: hiper-rectángulo de invarianza delimitado por predicados booleanos bajo garantías PAC ($P(\text{prec} \ge 1-\gamma) \ge 1-\delta$) y cobertura empírica asociada. Panel B: balance de vectores de optimización en DiCE que combina la conmutación de clase ($\mathcal{L}_{loss}$), la tracción de proximidad ($\lambda_1$), la repulsión determinante ($\lambda_2 \det(\mathbf{K})$) y las barreras de inmutabilidad. Fuente: elaboración propia a partir de Ribeiro *et al.* (2018) y Mothilal *et al.* (2020).](../figures/exported/fig_d11_anchors_dice_es.png)
-
-## Compromisos operacionales entre explicadores
-
-La selección de un explicador exige ponderar compromisos de diseño (*trade-offs*). Como resume la Figura 8:
-
-* **KernelSHAP:** Máxima solidez axiomática y fidelidad local, con latencia computacional alta ($>1\text{ s}$ por instancia).
-* **LIME:** Rápida ejecución ($<50\text{ ms}$) y alta parsimonia, sujeto a inestabilidad estocástica y sensibilidad a datos OOD.
-* **Anchors:** Reglas deterministas con certidumbre formal demostrable, con cobertura poblacional acotada ($12\%$--$28\%$).
-* **DiCE:** Elevado valor prescriptivo para el usuario, requiriendo optimización numérica multiobjetivo sujeta a restricciones de factibilidad.
-
-![Figura 8. Marco sintético de trade-offs operacionales en evaluación post-hoc de XAI. Fuente: elaboración propia a partir de Tabassi (2023) y Phillips *et al.* (2021).](../figures/exported/fig_d5_ciclo_audiencias_es.png)
+En conjunto, audiencia, evidencia y riesgo determinan qué explicación resulta pertinente. La claridad no garantiza beneficio: algunas tareas no mejoraron con explicaciones y otras se vieron perjudicadas por explicaciones erróneas. La evaluación debe incorporar requisitos propios de cada dominio —validación clínica, *recourse* factible, resistencia a adversarios, seguridad física o fidelidad de razonamientos— antes de comparar métodos y presentar FOM-7 como protocolo de evaluación funcional.

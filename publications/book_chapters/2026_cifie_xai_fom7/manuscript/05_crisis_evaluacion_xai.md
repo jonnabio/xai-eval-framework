@@ -1,39 +1,35 @@
-# Crisis de evaluación en XAI
+# La crisis de evaluación en XAI
 
-## La crisis de confiabilidad en explicabilidad post-hoc
+Fuente inicial: `planning/section06_gaps_brief_2026-09-30.md`; `thesis/capitulo-1-marco-teorico.qmd`, `thesis/capitulo-2-fundamentos.qmd` y `pub/fragments/paper_c_abstract_en.tex`.
 
-En ingeniería de software, un módulo se valida mediante pruebas deterministas (`assert output == expected`). En aprendizaje supervisado, el rendimiento se comprueba contrastando predicciones con etiquetas de referencia (*ground truth*).
+## De las métricas a la evidencia
 
-En la explicabilidad post-hoc enfrentamos una **crisis de evaluación estructural**: **no existe una referencia empírica sobre cómo razona internamente una caja negra** (Krishna *et al.*, 2022; Nauta *et al.*, 2023; Agarwal *et al.*, 2023). Ante la ausencia de un estándar formal, los equipos han recurrido a dos prácticas vulnerables:
+La XAI dispone de métodos, métricas y herramientas maduras, pero calcular indicadores no basta para producir evidencia comparable y acumulable. Persisten diferencias en definiciones métricas, criterios de inclusión, configuraciones y agregación, además de confusión entre resultados exploratorios y confirmatorios (Doshi-Velez & Kim, 2017; Kadir et al., 2023; Canha et al., 2025; Pawlicki et al., 2024; Bhattacharya & Verbert, 2024). Por ello, nombres como LIME o SHAP no son unidades experimentales suficientes: la comparación debe identificar configuración, artefacto, métrica, prueba y alcance de la afirmación. FOM-7 organiza esa cadena de evidencia.
 
-1. **Plausibilidad intuitiva:** Asumir que una explicación es correcta si sus variables confirman los sesgos previos del analista.
-2. **Métricas circulares:** Evaluar un explicador utilizando las mismas funciones para las que fue optimizado.
+**Fidelidad.** Comparar objetos distintos requiere más que una sola métrica. La fidelidad estima correspondencia con el comportamiento del modelo, pero no capta estabilidad, parsimonia, coste o adecuación al objeto explicativo. Depende de perturbaciones, enmascaramiento, referencias y supuestos sobre características ausentes; no equivale a causalidad ni a calidad universal (Alvarez-Melis & Jaakkola, 2018; Zheng et al., 2025). La evaluación debe combinar dimensiones y leer perfiles condicionados por la tarea (Nauta et al., 2023; Pawlicki et al., 2024).
 
-Como sintetiza la Figura 9, desplegar un explicador sin controles cuantitativos independientes introduce un segundo componente opaco dentro de la arquitectura de supervisión.
+**Métrica y afirmación.** Una métrica no respalda afirmaciones más amplias que su constructo: fidelidad local no demuestra utilidad humana; estabilidad no prueba causalidad; precisión de una regla no garantiza cobertura; y validez contrafactual para el modelo no implica factibilidad personal. Véase la Figura 6.
 
-![Figura 9. Anatomía de la crisis de evaluación en explicabilidad post-hoc. Fuente: elaboración propia a partir de Krishna *et al.* (2022), Nauta *et al.* (2023) y Agarwal *et al.* (2023).](../figures/exported/fig_d7_cadena_evidencia_es.png)
+Como los métodos producen sustitutos, atribuciones, reglas y contrafactuales, una escala común puede confundir desalineación métrica con falta de valor explicativo. Una afirmación comparativa debe identificar objeto, métrica, diseño, unidad y alcance; FOM-7 exige trazabilidad al artefacto (Kadir et al., 2023; Nauta et al., 2023; Bhattacharya & Verbert, 2024).
 
-## Taxonomía de riesgos y patologías operacionales
+![Figura 6. Cadena de evidencia de una afirmación sobre explicaciones y fallo típico de cada eslabón. Fuente: elaboración propia.](../figures/exported/fig_d7_cadena_evidencia_es.png)
 
-Para un ingeniero de datos que gestiona canalizaciones en producción, las fallas de los explicadores post-hoc se agrupan en cuatro patologías críticas:
+**Reproducibilidad.** Deben versionarse datos, modelos, semillas, parámetros, métricas, agregación, análisis y exclusiones. Sin esos registros, no se distinguen efectos del modelo de los del explicador. El benchmarking funcional documenta el ciclo desde configuración y artefactos hasta inferencia y reporte (Hedström et al., 2023; Agarwal et al., 2022; Canha et al., 2025).
 
-### 1. El Efecto Rashomon en explicaciones
-Inspirado en Breiman (2001), ocurre cuando múltiples modelos sustitutos obtienen un ajuste numérico equivalente ante la caja negra, pero entregan **jerarquías de atributos contradictorias**. Ambos sustitutos son válidos matemáticamente, pero uno señala a la *Edad* como factor dominante y el otro a la *Deuda*. En una auditoría regulatoria, esta discrepancia destruye la credibilidad técnica del sistema.
+**Herramientas y gobernanza.** Quantus y OpenXAI facilitan el cálculo y la comparación de métricas, pero no definen admisibilidad, separación de calibración y confirmación, ni el alcance de las conclusiones. FOM-7 complementa estas herramientas con reglas de evidencia (Hedström et al., 2023; Agarwal et al., 2022).
 
-### 2. Inestabilidad estocástica y contratos de reproducibilidad
-En ingeniería de datos, la reproducibilidad es ineludible: procesar el mismo registro con el mismo pipeline debe generar idéntico resultado. Sin embargo, al depender de muestreos Monte Carlo, **ejecutar dos veces LIME o KernelSHAP sobre la misma instancia con diferente semilla aleatoria altera el orden de las variables explicativas**. En bases de datos corporativas donde las explicaciones se persisten para auditoría, esta volatilidad estocástica genera inconsistencias graves.
+## Brechas de validez y alcance de FOM-7
 
-### 3. Deformación por muestreo fuera de distribución (*OOD*)
-Al perturbar variables de forma independiente para estimar derivadas locales, los explicadores generan combinaciones sintéticas que violan las correlaciones del esquema relacional (por ejemplo, altos salarios en empleos no cualificados). Los modelos, al recibir registros atípicos, devuelven probabilidades erráticas que distorsionan los pesos de atribución resultantes.
+### Validez técnica y de constructo
 
-### 4. Vulnerabilidad adversarial: Modelos con andamios (*Scaffolding*)
-Slack *et al.* (2020) demostraron que los explicadores agnósticos pueden manipularse deliberadamente. Es viable entrenar un clasificador con una bifurcación lógica oculta:
+**Técnica.** Fidelidad y estabilidad dependen de perturbaciones y configuración; un explicador también puede manipularse para ocultar el comportamiento del modelo (Alvarez-Melis & Jaakkola, 2018; Slack et al., 2020; Zheng et al., 2025). FOM-7 evalúa bajo condiciones declaradas, pero no prueba robustez adversarial. **Constructo.** Una etiqueta métrica no garantiza medir la propiedad de interés; la evaluación sigue siendo multidimensional y dependiente de tarea (Nauta et al., 2023; Pawlicki et al., 2024; Bhattacharya & Verbert, 2024). FOM-7 explicita constructos y unidades, pero no valida cada proxy.
 
-* Aplica una lógica discriminatoria sobre consultas de la distribución operativa real.
-* Conmuta hacia un modelo neutral cuando detecta la dispersión característica de las perturbaciones de LIME o SHAP.
+### Validez humana, causal y de acción
 
-Como resultado, el explicador emite un informe que certifica equidad algorítmica, mientras el clasificador discrimina activamente en producción.
+**Humana.** Comprensión, confianza calibrada y desempeño son distintos; las explicaciones no mejoran necesariamente decisiones en las tareas estudiadas (Kim et al., 2024; Alufaisan et al., 2021; Poursabzi-Sangdeh et al., 2021). FOM-7 no evalúa impacto humano. **Causal y de acción.** Una atribución no es un efecto causal; un contrafactual puede ser inviable o injusto aunque cambie la predicción (Wachter et al., 2017; Laugel et al., 2019; Karimi et al., 2022). FOM-7 no establece causalidad ni factibilidad personal.
 
-La Figura 10 expone cómo cada una de las siete puertas de FOM-7 actúa como una barrera técnica de contención ante estas fallas operacionales.
+### Validez operativa y de gobernanza
 
-![Figura 10. Taxonomía de distorsiones y traza de siete puertas FOM-7. Fuente: elaboración propia a partir de Herrera-Vásquez y Herrero-Uceda (2026).](../figures/exported/fig_d8_fom7_traza_es.png)
+**Operativa.** Reproducibilidad, coste y cambio de distribución afectan el uso durante el ciclo de vida (Hedström et al., 2023; Lakkaraju et al., 2020; Tabassi, 2023). FOM-7 registra configuración, variación y coste, pero no monitoriza despliegues. **Gobernanza.** Transparencia y supervisión no constituyen por sí mismas un estándar de evidencia; FOM-7 aporta trazabilidad, no certificación regulatoria (Phillips et al., 2021; European Parliament & Council of the European Union, 2024). **Modelos emergentes.** La fidelidad de razonamientos generados depende de la prueba; la evidencia multimodal es limitada (Zhao et al., 2024; Turpin et al., 2023; Zaman & Srivastava, 2026), por lo que FOM-7 requiere adaptación.
+
+La brecha común es conectar artefacto, constructo, audiencia y decisión. FOM-7 organiza evidencia funcional y cubre parcialmente las validez técnica, de constructo, operativa y de gobernanza; no sustituye evaluación humana, causal ni de despliegue. La sección siguiente desarrolla sus siete puertas.

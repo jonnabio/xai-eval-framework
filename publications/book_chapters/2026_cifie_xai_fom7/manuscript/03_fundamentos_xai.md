@@ -1,56 +1,31 @@
 # Qué es y qué no es la inteligencia artificial explicable
 
-## Nociones fundamentales: Transparencia, interpretabilidad y explicabilidad
+## XAI: conceptos, modelos y objetos explicativos
 
-En la práctica técnica, transparencia, interpretabilidad y explicabilidad suelen confundirse. Para diseñar controles de auditoría eficaces, conviene delimitar sus fronteras operacionales:
+La XAI reúne modelos, explicadores, interfaces y prácticas para examinar salidas o comportamientos de IA con un propósito definido; no designa un algoritmo único. Incluye atribuciones, reglas, ejemplos, contrafactuales y resúmenes locales o globales (Guidotti et al., 2018; Marcinkevičs & Vogt, 2023; Schwalbe & Finzel, 2024). El objeto puede ser una predicción, un patrón del modelo o una decisión sociotécnica; esas preguntas no son intercambiables. La explicación depende también de la audiencia, el contexto y la posibilidad de actuar (Miller, 2019; Phillips et al., 2021).
 
-* **Transparencia:** Propiedad sistémica del entorno de ingeniería. Describe la accesibilidad del código fuente, linaje y versiones de datos (en DVC o Delta Lake), grafos de ejecución (DAGs en Airflow) y esquemas de validación (Lipton, 2018). Un repositorio público en Git es necesario para auditar, pero no permite anticipar la conducta de un ensamble de mil árboles.
-* **Interpretabilidad:** Cualidad intrínseca de una arquitectura matemática que permite a un observador discernir directamente la relación entre entradas y salidas (Murdoch *et al.*, 2019). Un modelo es interpretable por diseño si su estructura equivale a una regla booleana simple o a una regresión con pocos coeficientes.
-* **Explicabilidad:** Propiedad extrínseca y activa. Consiste en construir aproximaciones secundarias, sustitutos locales o artefactos visuales —vectores de pesos, reglas de decisión o contrafactuales— para interpretar la inferencia de un clasificador opaco (Phillips *et al.*, 2021).
+En este capítulo, **interpretabilidad** describe si una audiencia comprende aspectos relevantes del sistema para una tarea; **explicabilidad**, los procedimientos y artefactos que buscan ofrecer razones examinables; y **transparencia**, la visibilidad de estructura, datos, supuestos, versiones y responsabilidades (Lipton, 2018; Murdoch et al., 2019). Véase la Figura 1. Se relacionan, pero no se sustituyen: una explicación post-hoc no revela todo el mecanismo, y la claridad no prueba fidelidad (Phillips et al., 2021). Ninguna de estas propiedades certifica por sí sola confiabilidad, seguridad, equidad o validez (Tabassi, 2023).
 
-Como ilustra la Figura 1, ninguna de estas cualidades garantiza por sí sola la **confiabilidad** (*trustworthiness*). Un sistema puede generar explicaciones legibles y mantener sesgos demográficos o inestabilidad ante perturbaciones menores (Tabassi, 2023).
+![Figura 1. Transparencia, interpretabilidad y explicabilidad: tres nociones distintas. Fuente: elaboración propia a partir de Lipton (2018), Murdoch et al. (2019), Phillips et al. (2021) y Tabassi (2023).](../figures/exported/fig_d1_conceptos_es.png)
 
-![Figura 1. Transparencia, interpretabilidad y explicabilidad: tres nociones distintas. Fuente: elaboración propia a partir de Lipton (2018), Murdoch *et al.* (2019), Phillips *et al.* (2021) y Tabassi (2023).](../figures/exported/fig_d1_conceptos_es.png)
+Los modelos interpretables por diseño —por ejemplo, reglas breves, árboles poco profundos y modelos aditivos— exponen su lógica de forma directa, aunque la complejidad puede reducir su comprensión práctica. Si alcanzan desempeño adecuado para el dominio, deben considerarse antes que una caja negra post-hoc (Rudin et al., 2022). Véase la Figura 2. Los explicadores post-hoc construyen aproximaciones a partir de consultas o componentes del predictor; no recuperan el modelo completo. Los métodos agnósticos usan entradas y salidas, mientras los específicos aprovechan información interna. Ningún enfoque garantiza fidelidad por su etiqueta: la validez depende de configuración, referencia y pregunta (Marcinkevičs & Vogt, 2023).
 
-## La trampa de la ingeniería: Atribución estadística frente a causalidad
+![Figura 2. Del modelo interpretable por diseño a la explicación post-hoc. Fuente: elaboración propia a partir de Rudin et al. (2022) y Marcinkevičs y Vogt (2023).](../figures/exported/fig_d2_modelos_es.png)
 
-Un error crítico en XAI consiste en equiparar la **atribución de características** con la **inferencia causal**.
+Una explicación **local** caracteriza una instancia o región próxima; una **global** resume patrones de una población. Subgrupos y cohortes son escalas intermedias. Lo local no autoriza generalizar: agregar explicaciones puede ocultar heterogeneidad, y un promedio global puede no describir un caso. FOM-7 exige alinear escala del artefacto, unidad de análisis y alcance de la conclusión.
 
-Si un método post-hoc asigna un peso positivo a una columna (por ejemplo, $+0.32$ a *Antigüedad de la Cuenta*), el valor describe únicamente cómo el algoritmo utilizó esa variable para minimizar su función de pérdida. No implica que ejecutar una instrucción SQL (`UPDATE cuentas SET antiguedad = antiguedad + 3`) incremente la solvencia real del usuario (Pearl, 2009).
+Las **atribuciones** asignan relevancia a características; las **reglas** expresan condiciones suficientes; los **ejemplos** sitúan un caso respecto de otros; los **contrafactuales** proponen cambios; y los **conceptos** relacionan representaciones con categorías. Véase la Figura 3. Sus riesgos difieren: una atribución no prueba causalidad, una regla precisa puede tener poca cobertura y un contrafactual puede ser inviable. Por ello, objetos distintos no deben reducirse a una escala universal (Karimi et al., 2022; Nauta et al., 2023). LIME y SHAP producen atribuciones; Anchors, reglas; DiCE, contrafactuales.
 
-El caso clásico de predicción de mortalidad por neumonía evidencia este riesgo. Un modelo asignó menor riesgo de muerte a pacientes con antecedentes de asma. El motivo era operativo: estos pacientes eran ingresados directamente en la Unidad de Cuidados Intensivos (UCI), recibiendo atención temprana que reducía su letalidad. El algoritmo capturó fielmente esa correlación en los datos hospitalarios. Un explicador reflejaría que el asma "protege" al paciente. Sin embargo, derivar de allí una política médica —demorando la atención a pacientes asmáticos— sería perjudicial. La explicabilidad mide la **fidelidad descriptiva del modelo**, no la estructura causal del fenómeno real.
+![Figura 3. Un mismo caso explicado mediante cuatro objetos explicativos. Fuente: elaboración propia a partir de Ribeiro et al. (2016), Lundberg y Lee (2017), Ribeiro et al. (2018) y Mothilal et al. (2020); caso y valores ilustrativos.](../figures/exported/fig_d4_objetos_explicativos_es.png)
 
-## Taxonomía de métodos: Intrínsecos frente a Post-hoc
+## Qué propiedades puede demostrar una explicación
 
-El ecosistema de XAI se divide en dos paradigmas:
+La **plausibilidad** describe si una explicación parece razonable; la **fidelidad**, cuánto corresponde al comportamiento del predictor. Pueden divergir. La **estabilidad** mide consistencia bajo variaciones definidas; la **robustez**, resistencia ante perturbaciones, cambios de distribución o ataques (Alvarez-Melis & Jaakkola, 2018; Nauta et al., 2023). La utilidad humana requiere evaluar una tarea y audiencia concretas —comprensión, interacción o desempeño— y no se deduce de fidelidad ni de satisfacción declarada (Kim et al., 2024). La evaluación debe definir qué constructo aproxima cada métrica y qué inferencia permite (Doshi-Velez & Kim, 2017; Pawlicki et al., 2024; Bhattacharya & Verbert, 2024).
 
-1. **Modelos intrínsecamente interpretables (*Ante-hoc* o por diseño):** Algoritmos transparentes por construcción (regresiones lineales regularizadas, árboles simples o GAMs). Mantienen fidelidad total a su lógica interna sin requerir sustitutos.
-2. **Explicaciones a posteriori (*Post-hoc*):** Métodos aplicados sobre modelos opacos ya entrenados (ensambles XGBoost o redes densas). Construyen un sustituto local (*surrogate*) que aproxima la conducta del clasificador en una vecindad específica.
+Una explicación no prueba **causalidad**: atribuciones no son efectos de intervención y contrafactuales pueden ignorar restricciones causales o sociales (Laugel et al., 2019; Karimi et al., 2022). Tampoco certifica **justicia**, ausencia de sesgo o corrección de una decisión; se requieren análisis por grupos y criterios externos al explicador. No garantiza **seguridad**: explicadores post-hoc pueden manipularse para ocultar comportamientos (Slack et al., 2020). Una explicación fiel también puede describir el error de un modelo.
 
-Como detalla la Figura 2, los métodos post-hoc se clasifican en:
+## Niveles de evaluación y alcance de FOM-7
 
-* **Específicos del modelo (*Model-specific*):** Exigen acceso a estructuras internas, como gradientes o topologías de árbol (TreeSHAP).
-* **Agnósticos al modelo (*Model-agnostic*):** Tratan al clasificador como una caja negra ($x \to f(x)$). Envían perturbaciones sintéticas y analizan las respuestas sin asumir ninguna arquitectura interna (Marcinkevičs & Vogt, 2023).
+La evaluación puede ser *application-grounded* (expertos y tareas reales), *human-grounded* (personas en tareas simplificadas) o *functionally grounded* (proxies computacionales sin participantes) (Doshi-Velez & Kim, 2017). Véase la Figura 4. FOM-7 se sitúa en este último nivel: gobierna comparaciones computacionales y permite afirmaciones acotadas sobre las métricas observadas, pero no demuestra comprensión, impacto profesional, causalidad ni efectos de despliegue.
 
-![Figura 2. Del modelo interpretable por diseño a la explicación post-hoc. Fuente: elaboración propia a partir de Rudin *et al.* (2022) y Marcinkevičs y Vogt (2023).](../figures/exported/fig_d2_modelos_es.png)
-
-## Alcance operacional: Explicaciones Locales frente a Globales
-
-El alcance espacial define la escala analítica de la explicación:
-
-* **Alcance Local (*Local Interpretability*):** Explica la decisión sobre una instancia individual (*¿por qué se denegó la transacción #8812?*).
-* **Alcance Global (*Global Interpretability*):** Describe la dinámica global del clasificador sobre toda la población (*¿cuáles atributos dominan las decisiones de la cartera?*).
-
-Un principio de ingeniería central: **la suma de explicaciones locales no equivale a una explicación global válida**. Debido a las fronteras de decisión no lineales, promediar atribuciones locales de miles de registros puede enmascarar dinámicas contrapuestas y generar conclusiones erróneas.
-
-## Niveles de evaluación científica: La posición de FOM-7
-
-Doshi-Velez y Kim (2017) clasificaron la evaluación de explicabilidad en tres niveles:
-
-1. **Evaluación basada en la aplicación (*Application-grounded*):** Expertos del dominio (patólogos o analistas de crédito) resuelven problemas en su flujo habitual usando explicaciones, midiendo mejoras en su productividad real.
-2. **Evaluación basada en humanos (*Human-grounded*):** Pruebas de laboratorio con usuarios legos evaluando tareas abstractas, como elegir entre dos predicciones según la claridad visual.
-3. **Evaluación funcionalmente fundamentada (*Functionally-grounded*):** Métricas matemáticas objetivas (fidelidad de reconstrucción, estabilidad ante perturbaciones, parsimonia y tiempo de CPU por inferencia) sobre bancos de pruebas reproducibles, sin intervención de sujetos humanos.
-
-Como ilustra la Figura 3, el protocolo **FOM-7** opera en el nivel de **evaluación funcionalmente fundamentada**. Esta decisión equivale a implementar pruebas unitarias y de integración en desarrollo de software. Antes de exponer un explicador a pruebas de usuario (*UAT*), el equipo técnico debe certificar que satisface umbrales cuantitativos de estabilidad, fidelidad y latencia.
-
-![Figura 3. Niveles de evaluación de la explicabilidad y posición de FOM-7. Fuente: adaptada de Doshi-Velez y Kim (2017).](../figures/exported/fig_d6_niveles_evaluacion_es.png)
+![Figura 4. Niveles de evaluación de la explicabilidad y posición de FOM-7. Fuente: adaptada de Doshi-Velez y Kim (2017).](../figures/exported/fig_d6_niveles_evaluacion_es.png)
