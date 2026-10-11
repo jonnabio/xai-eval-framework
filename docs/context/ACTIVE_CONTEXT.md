@@ -42,6 +42,61 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## CIFIE chapter: findings of 2026-10-10 21:30, decisions open for the author
+
+Written by the Paper F session (owner `claude-2026-10-09-paper-f`) at the author's request
+to check the failed `fragments` check. Read-only on the chapter: no chapter, thesis,
+script or registry file was edited. It supersedes the "Blockers/Issues: None" line of the
+CIFIE handoff of 2026-10-10 on `main`.
+
+- **The check is green again.** Commit `392b2fc8c` (2026-10-10 20:48, pushed straight to
+  `main`) rewrote the 13 manuscript files; `pubs-sync` passes on it and on `e0a927875`.
+  Pull request #44 (Paper F) is merged.
+- **There are now three texts of the chapter, and they disagree**:
+  1. the text of 2026-10-07 and before (`5747e8450`);
+  2. the text of 2026-10-10 20:03 (`3c0a1b446`, 10 sections), which fails the check;
+  3. the text of `392b2fc8c` (11 sections), which passes. It equals no earlier commit:
+     it is a new text, not a restoration of text 1.
+- **The submission package on `main` is text 2, not the source.** The four files in
+  `final/submission_package/01_capitulo/` were built at 20:03 and not rebuilt. The
+  `.docx` carries every literal the check refused, with the same counts as text 2, and
+  none of them is in the source now. The CIFIE handoff says this package was "submitted
+  for first editorial revision".
+- **What the package prints that no registered claim backs** (found by reading
+  `capitulo_cifie_xai_fom7_color.docx`): an AUC for each model (0.852, 0.841, 0.917,
+  0.891), one of them a decision tree; fidelity by model for KernelSHAP (0.942, 0.938,
+  0.929) and LIME (0.912, 0.854); a latency of 1,180 ms; Anchors at 97.4% precision and
+  22.5% coverage; "N=15 experimental blocks", p<0.001; "AMD Ryzen 9 5900X, 64 GB". The
+  strings "Ryzen" and "1,180" appear nowhere in `thesis/`, `docs/reports/`, `pub/`,
+  `src/`, `configs/` or `experiments/`. Whether any of these numbers is true was not
+  established; none is traceable. The values that matched unpublished paper results
+  (0.85, 0.80, 0.05, 0.01, 0.75, 0.10, 0.001) are thresholds and worked examples in the
+  package text, not results of Papers B to F.
+- **Lane separation was not kept** (ADR-0021): the 21 commits of 2026-10-05 to
+  2026-10-10 were made on `thesis/rca-001-phase-2`, not on a `chapter/cifie-*` branch,
+  and reached `main` by a direct merge and a direct push, without a pull request.
+  `check_lane.py --range 6ff63331b..88b059e19` fails on 11 of them (lane paths mixed
+  with shared paths). `ba418a927` changed thesis files:
+  `scripts/generate_spanish_thesis_figures.py` now writes every figure to the thesis
+  folder and to the chapter folder, in colour or in black and white according to a
+  flag, and it rewrote three figures under `thesis/assets/figures/`. `main` has no
+  branch protection, so nothing refuses a direct push.
+- **Done here**: `chapter/cifie-sync-2026-09` fast-forwarded to `origin/main`
+  (`e0a927875`) and pushed, so the next chapter session has its own branch.
+- **For the author to decide** (nothing below was started):
+  1. Which file was really sent to CIFIE / TintAzul, and whether a corrected file must
+     follow it.
+  2. Which text is the chapter: text 3 as it stands, or text 2 with every number either
+     traced to an artifact and registered, or removed.
+  3. Then, in the chapter lane (`../xai-chapter`, branch `chapter/cifie-*`): rebuild the
+     package from the chosen text and check the `.docx` again.
+  4. Separate the thesis figure generator from the chapter (shared script: a `pubs/*`
+     branch in the main folder, after the Paper F run ends), and say whether the three
+     thesis figures of `ba418a927` are the wanted ones.
+  5. Branch protection on `main` (pull request and the three checks required).
+  6. The CIFIE handoff states a limit of 9,000 words; `.aceconfig` says the chapter has
+     no word limit. One of the two is out of date.
+
 ## Session Handoff - 2026-10-10 20:30 (Paper F: 1,271 of 1,280, four seeds complete and checked, snapshot)
 
 This is the latest handoff for lane `paper-f` (same session and owner as the two below;
