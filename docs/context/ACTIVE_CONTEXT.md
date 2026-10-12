@@ -136,10 +136,14 @@ manuscript and the rules; its "Current State" of the run is superseded.
     (limit 8). The blind files are checked for author data (Word signs a saved file
     with the Windows user; the script sets the properties again).
 - **Current State**:
-  - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
-    has not yet said to remove it.
-  - Open for submission: the journal asks for the file name
-    `surname_of_corresponding_author.docx` (rename `paper_f_full.docx`); whether the
+  - **The scheduled task `PaperF-chain-ensure` was removed on 2026-10-12** at the
+    author's instruction; no task and no process of the run is left. Pull request #47
+    is merged (`5bda60a41`).
+  - The Word file with author data is now written as `submission/herrera-vasquez.docx`
+    with `herrera-vasquez.pdf`, the name the journal asks for; the blind files keep
+    `paper_f_blind`. An older `paper_f_full.docx` may remain in the folder: it was
+    open in another program and could not be deleted.
+  - Open for submission: whether the
     uploaded file must be anonymous is still to be asked (`VENUE_JCSI.md`); the header
     lines "JCSI 40 (2025) 000-000, Received, Accepted" are the template's and are the
     editors' to fill. In the LaTeX PDF only, reference 31 prints its article number
