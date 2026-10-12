@@ -106,6 +106,93 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-12, SESSION END (Paper F submitted; all six papers published or under review)
+
+This is the latest handoff and the one to read first. It closes the session of
+2026-10-11 and 2026-10-12 on lane `paper-f` (branch `paper/f-external-validity`; owners
+`claude-2026-10-11-paper-f` to `claude-2026-10-12-paper-f-close`). The four "parts" of
+2026-10-12 below it and the handoff of 2026-10-11 20:00 keep the detail of each step;
+where they differ from this one on state or next steps, this one holds.
+
+- **Completed**:
+  - **Paper F submitted** to *Journal of Computer Sciences Institute* on 2026-10-12,
+    **submission 10503**
+    (https://ph.pollub.pl/index.php/jcsi/dashboard/mySubmissions?workflowSubmissionId=10503).
+    The author confirmed uploading `herrera-vasquez.docx` and `herrera-vasquez.pdf`, and
+    nothing else.
+  - **Experiment closed**: run complete (1,280 runs, 256,000 explained instances, five
+    seeds checked); the planned analysis run once (`b7b8d576b`); the scheduled task
+    `PaperF-chain-ensure` removed.
+  - **Manuscript**: written, put in the journal's Word template
+    (`build_paper_f_docx.py`, 8 pages, the limit), checked against the journal's
+    guidelines, set in the impersonal voice (the author's rule for a paper signed
+    alone), and revised after three reviews: the session's, an independent one and
+    Codex's (`docs/review/scientific-rigor-review_paper_f_2026-10-12*.md`, each with the
+    disposition of its findings). **Scope decided by the author: agreement of rankings
+    under fixed settings and one evaluation protocol, not a ranking of explanation
+    quality.**
+  - **Three analyses made after the results, each logged in the plan before it was
+    run**: the software-defect family counted once (`paper_f_posthoc_family.py`), the
+    descriptive counts (`paper_f_posthoc_descriptives.py`), the protocol counts and the
+    restart audit (`paper_f_posthoc_protocol.py`). No planned result changed.
+  - **Claim registry**: `scripts/pubs/register_paper_f.py`, resolver `paper_f`, 119
+    claims; CI runs `--check`; `verify_claims.py` 1,308 claims, 33 files.
+  - **Zenodo**: three versions cut during the session; the manuscript cites the last,
+    **0.15.0, `10.5281/zenodo.23325483`**, release `paper-f-jcsi-2026-10-12-r2`.
+  - Pull requests #45 to #55 merged. The publication status table is dated 2026-10-12.
+- **Current State**:
+  - **Every paper of the project is published (A) or under review (B, C, D, E, F).**
+    Nothing is running: no task, no process, no open pull request once this handoff is
+    merged. `main` and the Paper F branch are level; the lane lock is free.
+  - `docs/reports/paper_f/submission/` (local, not in git) holds the submitted
+    `herrera-vasquez.docx` and `.pdf` and the blind pair, all built from `334fb753c`.
+    A rebuild overwrites them.
+  - The archive 0.15.0 equals the submitted state: the commits after its release change
+    one line of text (the DOI) and the records of the submission.
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` for the lane of the
+     task at hand; stop if it fails.
+  2. Wait for the journals. Record every decision in the status table of this file and
+     in the README of the paper. Paper F: first assessment in 1 to 2 weeks, review in 1
+     to 4, by the journal's stated times.
+  3. If Paper F gets a revision: edit `paper_f_template.tex`; then
+     `.venv\Scripts\python.exe docs/reports/paper_f/scripts/build_paper_f.py --final`,
+     `scripts/pubs/register_paper_f.py` (shared file, separate commit),
+     `docs/reports/paper_f/scripts/build_paper_f_docx.py` (the Word file closed), delete
+     the two LaTeX PDFs it leaves in `submission/`; a new Zenodo version only if code or
+     results change.
+  4. Still asked of the author: the submission numbers of Papers C and D and the date
+     of Paper D's submission; the final text of Paper F's comments to the editor.
+  5. With the papers out, the open work of the project is the thesis (see the handoffs
+     of the thesis lane) and the parked CIFIE chapter.
+- **Blockers/Issues**:
+  - None blocks anything. Known limits of the submitted Paper F, for a response to
+    reviewers: no comparison with the nearest tabular studies; two references described
+    from their abstracts (Klein et al. 2024, Gevaert et al. 2024); the faithfulness gap
+    at an equal number of masked features and measures native to each output are named
+    as further work; `audit_resume.csv` rests on file times of the author's disk and
+    cannot be repeated from the archive; the paper is at the page limit and the
+    abstract nine characters under its limit.
+  - The comments to the editor that the author sent were not shown to the session. The
+    draft stated that the thesis is not deposited, that no specific funding was
+    received, and that other manuscripts of the project are under review.
+- **Notes**:
+  - **Do not rebuild Paper F, change its text or run `paper_f_analyze.py` unless a
+    revision is requested.** The plan allows the analysis once; anything further is
+    logged in `ANALYSIS_PLAN.md` section 12 before it is run.
+  - Commit shared files (`docs/context/`, `docs/review/`, `pub/`, `scripts/pubs/`,
+    `.zenodo.json`, `CITATION.cff`) apart from lane files; write commit messages to a
+    file and use `git commit -F`.
+  - `gh pr merge` and `gh release create` were refused by the assistant's permission
+    system on 2026-10-11 and accepted on 2026-10-12 after the author's instruction: try
+    once, and give the author the exact command if refused.
+  - Zenodo route: bump `.zenodo.json` and `CITATION.cff`, merge to `main`, `git tag
+    <name> origin/main`, push the tag, `gh release create <tag> --verify-tag --title ...
+    --notes-file ...`, then read the DOI from
+    `https://zenodo.org/api/records?q=conceptrecid:19297723&all_versions=true`.
+  - Other reviewers (Codex) work in the same folder: read `git status` after a claim,
+    and do not touch files another session left uncommitted without the author's word.
+
 ## Session Handoff - 2026-10-12, fourth part (Paper F SUBMITTED to JCSI, submission 10503)
 
 Latest handoff for lane `paper-f` (owner `claude-2026-10-12-paper-f-submitted`). It
@@ -123,9 +210,8 @@ supersedes the Current State and Next Steps of the "third part" below.
 - **Current State**:
   - Files in `docs/reports/paper_f/submission/` at the time of submission, built from
     `334fb753c`: `herrera-vasquez.docx` (SHA-256 `67470c68a1d95276...`) and
-    `herrera-vasquez.pdf` (`f97b864a518d4d39...`), 8 pages. **Not confirmed by
-    the author:** that these exact files were uploaded, whether the author's own read
-    changed anything in the Word file by hand, and the final text of the comments to the
+    `herrera-vasquez.pdf` (`f97b864a518d4d39...`), 8 pages. **Confirmed by the author on 2026-10-12:** these two files, and no
+    other, were uploaded. Not shown to the session: the final text of the comments to the
     editor (the draft said the thesis is not deposited, that no specific funding was
     received and that other manuscripts of the project are under review; the author was
     asked to confirm each).
