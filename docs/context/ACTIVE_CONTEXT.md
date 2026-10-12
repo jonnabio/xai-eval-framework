@@ -59,7 +59,12 @@
   - Always maintain APA 7 references and callouts for all 14 figures.
   - To regenerate dual builds: `python scripts/build_cifie_chapter.py` (color) and `python scripts/build_cifie_chapter.py --bw` (print).
 
-## Publication status - 2026-10-06
+## Publication status - 2026-10-12
+
+**Update (2026-10-12): Paper F is submitted to *Journal of Computer Sciences Institute*,
+submission 10503** (the journal's acknowledgement, passed on by the author). With it every
+paper of the project is published (A) or under review (B, C, D, E, F). The table below is
+current; the notes of 2026-10-06 and 2026-10-05 that follow are kept as history.
 
 **Update (author, 2026-10-06): Papers C and D are both submitted to *Tecnología en
 Marcha*.** The author reported on 2026-10-06, first that Paper D was submitted and that the
