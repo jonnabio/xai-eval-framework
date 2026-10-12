@@ -190,6 +190,6 @@ F07 and F08 need the author.
 | F04 | Fixed: "as configured here"; the random search of DiCE is named |
 | F05 | Softened to "may reflect"; printing the means is left to the author |
 | F06 | Fixed: (a) and (b) described |
-| F07 | Open, question 1 |
+| F07 | Closed on the author's decision of 2026-10-12: the check was run (scripts/paper_f_posthoc_family.py, logged in the plan before it was run). With one software-defect dataset in place of four, for each of the four, the agreement is 0.64 to 0.67 (faithfulness gap), 0.85 to 0.88 (stability), 0.76 to 0.77 (sparsity) and 0.86 to 0.87 (cost); the decision of the rule is unchanged in 16 of 16 cases. Reported in the Results, labelled as made after the results |
 | F08 | Open, question 3 |
 | F09 | The two sentences reworded; dataset names left as they are |
