@@ -123,9 +123,10 @@ packages.
 | Progress | `python scripts/paper_f_run.py status` | counts of job files, rows and failures |
 | Save finished jobs to git | `python scripts/paper_f_snapshot.py`, then commit and push `outputs/analysis/paper_f/raw/` | raw rows of every finished job, with `MANIFEST.csv` (rows, failed rows, SHA-256) |
 | Analysis | `python scripts/paper_f_analyze.py` | `outputs/analysis/paper_f/results/` |
+| Check made after the results: the software-defect family counted once | python scripts/paper_f_posthoc_family.py | outputs/analysis/paper_f/results/posthoc_defect_family.csv (plan section 12, 2026-10-12) |
 | Result tables and figure | `python scripts/paper_f_report.py` | `generated/tab_primary.tex`, `generated/tab_adult.tex`, `figures/fig1.pdf` (after the analysis) |
 | Manuscript | `python docs/reports/paper_f/scripts/build_paper_f.py` | `paper_f.tex`, `submission/*.pdf` |
-| Word files in the journal's template | `python docs/reports/paper_f/scripts/build_paper_f_docx.py` (needs `venue/template/JCSI_template_2025.docx`, Quarto and Word) | `submission/paper_f_{blind,full}.docx` and `_word.pdf` (local); the page count is Word's |
+| Word files in the journal's template | `python docs/reports/paper_f/scripts/build_paper_f_docx.py` (needs `venue/template/JCSI_template_2025.docx`, Quarto and Word) | `submission/herrera-vasquez.docx` and `.pdf` (the name the journal asks for), `submission/paper_f_blind.docx` and `paper_f_blind_word.pdf` (local); the page count is Word's |
 | Claim registry | `python scripts/pubs/register_paper_f.py` (shared files, through `main`); `--check` in CI | the Paper F block of `pub/claim_registry.toml` |
 | Tests | `python -m pytest tests/analysis/test_paper_f_lib.py tests/analysis/test_paper_f_analyze.py` | |
 

@@ -171,6 +171,22 @@ faithful and at least as fast. LIME is on it for 15 datasets, SHAP for 14, Ancho
 8. **DiCE failures** are recorded as `UserConfigValidationException`; that this means "no
    counterfactual found" is a reading, not checked in the library code.
 
+## 9a. Check made after the results: the software-defect family counted once
+
+Added 2026-10-12 (posthoc_defect_family.csv; plan section 12; rigor review F07). The
+primary analysis repeated on 13 datasets, the twelve others and one of JM1, KC1, PC3 and
+PC4, once for each of the four. Not part of the planned analysis.
+
+| Measure | Planned (16 datasets) | Family counted once: range of the four runs | Lowest interval end | Decision |
+|---|---|---|---|---|
+| Faithfulness gap | 0.67 | 0.64 to 0.67 | 0.42 | unchanged in all four |
+| Stability | 0.88 | 0.85 to 0.88 | 0.75 | unchanged in all four |
+| Sparsity | 0.79 | 0.76 to 0.77 | 0.61 | unchanged in all four |
+| Cost | 0.87 | 0.86 to 0.87 | 0.80 | unchanged in all four |
+
+The family raised the faithfulness and sparsity figures by about 0.03 at most; no
+decision of the rule depends on it. Limit 1 of section 9 is answered by this check.
+
 ## 10. Reported, not ranked (`secondary.csv`)
 
 Means over the 64 dataset-and-classifier cells, successful instances only. Faithfulness

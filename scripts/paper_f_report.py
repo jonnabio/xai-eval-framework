@@ -62,7 +62,7 @@ def primary_table(results: Path) -> str:
         ranks = " & ".join(f"{r[f'mean_rank_{m}']:.2f}" for m, _ in METHODS)
         lines.append(f"{label} & {ranks} & {signed(r['mean_rank_corr'])} & "
                      f"{signed(r['ci_low'])} to {signed(r['ci_high'])} & {p_value(r['p_holm'])} & "
-                     f"{signed(r['ceiling_seeds'])} \\\\")
+                     f"{signed(r['ceiling_seeds'], 3)} \\\\")   # 0.995 would print as 1.00
     lines += [r"\bottomrule", r"\end{tabular}", r"\end{table*}", ""]
     return "\n".join(lines)
 

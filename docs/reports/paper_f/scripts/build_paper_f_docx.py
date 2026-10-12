@@ -5,8 +5,11 @@
 
 Reads paper_f.tex (written by build_paper_f.py; run that first) and writes, to submission/:
 
-    paper_f_full.docx, paper_f_blind.docx      the manuscript in the journal's template
-    paper_f_full_word.pdf, paper_f_blind_word.pdf   the same, printed by Word
+    herrera-vasquez.docx, herrera-vasquez.pdf     the manuscript in the journal's template
+                                                  and the same printed by Word, under the
+                                                  name the journal asks for (the surname of
+                                                  the corresponding author)
+    paper_f_blind.docx, paper_f_blind_word.pdf    the same without author data
 
 The journal's file (venue/template/JCSI_template_2025.docx, downloaded from the journal site
 and not redistributed here) is the package: its styles, headers, footers and settings are
@@ -44,15 +47,39 @@ TECTONIC = ROOT / "tools" / "tectonic-portable" / (
     "tectonic.exe" if sys.platform == "win32" else "tectonic")
 MAX_PAGES = 8
 TEXT_WIDTH_EMU = 6_050_000          # a little under the 17 cm between the margins
-FIGURE_ALT = ("Four line charts, one for each measure (faithfulness gap, stability, sparsity, "
-              "cost), showing the rank from 1 to 4 of LIME, SHAP, Anchors and DiCE on each of "
-              "the sixteen datasets.")
+# Alternative descriptions, by the journal's rules (type of chart, axes, legend, the main
+# trend; no "the figure shows"). They state no number: the values are in the tables and
+# the text, which the claim registry checks. Read them again if the results change.
+FIGURE_ALT = ("Four line charts, one for each measure: faithfulness gap, stability, sparsity "
+              "and cost. Horizontal axis: the sixteen datasets, Adult first, the others in "
+              "alphabetical order. Vertical axis: rank, from 1 (best) at the top to 4. One line "
+              "for each method: LIME, SHAP, Anchors and DiCE. SHAP is first on most datasets "
+              "for faithfulness gap and stability, and last on most for sparsity. DiCE is last "
+              "on every dataset for stability. LIME is first on all datasets but one for cost. "
+              "The lines of LIME and Anchors cross on several datasets for faithfulness gap, "
+              "and those of Anchors and DiCE cross for sparsity and cost.")
+TABLE_ALT = [
+    ("Datasets of the study",
+     "One row for each of the sixteen datasets. Columns: name, OpenML identifier, number of "
+     "rows, number of features, percentage of numeric features, percentage of the minority "
+     "class, and stratum by feature type and size."),
+    ("Mean rank of each method and agreement between datasets",
+     "One row for each measure: faithfulness gap, stability, sparsity and cost. Columns: mean "
+     "rank of LIME, SHAP, Anchors and DiCE over the datasets, mean rank correlation between "
+     "datasets, its 95% interval, corrected p value, and agreement between seeds."),
+    ("Agreement with the order found on Adult",
+     "One row for each of the six pairs of methods. Columns: the four measures. Each cell is "
+     "the number of the fifteen other datasets in which the pair is in the same order as on "
+     "Adult."),
+]
 AUTHOR = "Jonathan Herrera-V\u00e1squez"
 AFFILIATION = ("Department of Computer Science, Universidad Americana de Europa (UNADE), "
                "Canc\u00fan, Quintana Roo, Mexico")
 EMAIL = "jonnabio@gmail.com"
 ORCID = "0000-0002-7149-6635"
 BLIND_AUTHOR = "Author information omitted for double-blind review"
+# The journal asks for the source as surname_of_corresponding_author.docx and a matching PDF.
+FULL_NAME = "herrera-vasquez"
 
 PAGE = ('<w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1418" w:right="1134" w:bottom="1418" '
         'w:left="1134" w:header="709" w:footer="709" w:gutter="0"/>')
@@ -250,7 +277,11 @@ def convert_body(pandoc_doc: str, template_doc: str) -> tuple[str, int]:
     wide = after_formula = False
     for b in blocks:
         if b.startswith("<w:tbl>"):
-            out.append(restyle_table(b, example_tblpr, 0))
+            # pandoc puts the caption before its table, so `tables` is this table's number.
+            title, description = TABLE_ALT[tables - 1]
+            alt = (f'<w:tblCaption w:val="{escape(title)}"/>'
+                   f'<w:tblDescription w:val="{escape(description)}"/></w:tblPr>')
+            out.append(restyle_table(b, example_tblpr.replace("</w:tblPr>", alt), 0))
             continue
         if b == "<w:p/>":
             continue
@@ -385,7 +416,7 @@ def merge_namespaces(template_doc: str, pandoc_doc: str) -> str:
 
 
 def assemble(full: bool, tex: str, refs: list[tuple[str, str]]) -> Path:
-    name = "paper_f_full" if full else "paper_f_blind"
+    name = FULL_NAME if full else "paper_f_blind"
     tex = resolve_full(tex, full)
     src = F / f"_{name}_pandoc.tex"
     tmp = OUT / f"_{name}_pandoc.docx"
@@ -512,7 +543,9 @@ def word_pass(docx: Path, full: bool, tex: str) -> int:
     """Word updates the fields, repaginates, saves, prints the PDF; returns the pages."""
     script = OUT / "_word.ps1"
     script.write_text(WORD_SCRIPT, encoding="utf-8")
-    pdf = docx.with_name(docx.stem + "_word.pdf")
+    # The full file takes the journal's name for both; the blind PDF is told apart from
+    # the LaTeX one of build_paper_f.py.
+    pdf = docx.with_suffix(".pdf") if full else docx.with_name(docx.stem + "_word.pdf")
     try:
         r = subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File",
                             str(script), str(docx), str(pdf), "full" if full else "blind"],

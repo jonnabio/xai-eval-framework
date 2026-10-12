@@ -73,7 +73,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-11 08:15: 1,279 of 1,280 conditions, seeds 42, 123, 456 and 789 complete and checked, seed 101112 at 255 of 256, its last job at 156 of 200 instances; estimated end 2026-10-11 near midday); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Ready to submit after the author's read; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Run complete (1,280 runs, 256,000 explained instances), analysis run once, manuscript in the journal's Word template at 7 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.13.0, [10.5281/zenodo.23307705](https://doi.org/10.5281/zenodo.23307705), release `paper-f-jcsi-2026-10-11`; a newer version is due before submission. To be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -82,6 +82,106 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-12 (session end: Paper F ready except for an independent review that asks for a major revision of the text)
+
+This is the latest handoff for lane `paper-f` (owner `claude-2026-10-11-paper-f`, branch
+`paper/f-external-validity`, session of 2026-10-11 and 2026-10-12). It supersedes the
+state of the handoff below it, which keeps the detail of each step.
+
+- **Completed**:
+  - **Run finished and checked**: 1,280 of 1,280 conditions, 256,000 rows; seed 101112
+    checked as the other four; last raw snapshot `3d01a842a`.
+  - **Analysis run once** (`b7b8d576b`). Agreement of the method orders between the 16
+    datasets (95% interval; decision): faithfulness gap 0.67 (0.49 to 0.85; shared,
+    strength not determined), stability 0.88, sparsity 0.79 and cost 0.87 (the order
+    generalises); Holm p below 0.001 on all four. `RESULTS_REPORT.md` holds every
+    analysis and its limits.
+  - **Manuscript finished**: abstract (691 of 800 characters), reading of Table 3,
+    discussion, sources of error, three conclusions; sections named as the journal
+    names them; every number a placeholder read from a result file; `--final` passes
+    with no pending mark.
+  - **Zenodo 0.13.0**, `10.5281/zenodo.23307705`, release `paper-f-jcsi-2026-10-11`
+    (the author ran `gh release create`).
+  - **Claim registry**: `scripts/pubs/register_paper_f.py`, resolver `paper_f`, 106
+    claims, CI runs `--check`; `verify_claims.py` 1,295 claims, 33 files.
+  - **Word files in the journal's template**
+    (`docs/reports/paper_f/scripts/build_paper_f_docx.py`): `submission/herrera-vasquez.docx`
+    and `.pdf` (the name the journal asks for) and `paper_f_blind.docx` with
+    `paper_f_blind_word.pdf`; 7 pages in Word; alternative descriptions for the figure
+    and the three tables; the blind files checked for author data. Local, not committed.
+  - **Checked against the journal's guidelines** (read 2026-10-12): all met; the file
+    to upload is the one with author data.
+  - **Rigor review by the session** (`docs/review/scientific-rigor-review_paper_f_2026-10-12.md`,
+    minor revision, mean 3.9) and its fixes; F07 closed by a **check made after the
+    results, logged before it was run** (`scripts/paper_f_posthoc_family.py`,
+    `c19951630`): with the software-defect family counted once, all 16 decisions stand.
+  - **Independent review** by a separate reviewer that had not seen the session's
+    review or notes: `docs/review/scientific-rigor-review_paper_f_2026-10-12_independent.md`.
+    **Grade: major revision of the text, mean 3.6; no number wrong, no rerun asked.**
+    None of its findings is applied.
+  - The scheduled task `PaperF-chain-ensure` was removed (author's instruction);
+    pull requests #45, #46 and #47 merged by the author.
+- **Current State**:
+  - **Paper F is not submitted.** The draft meets the journal's rules, and the
+    independent review says two of its conclusions claim more than the design supports
+    (see Blockers). The author is doing their own read of the draft.
+  - The Word files in `submission/` are those of `7debefdaa` (text before the
+    independent review).
+  - The Zenodo archive (0.13.0) is behind the code: the registration script, the Word
+    builder and the post hoc check came after it.
+  - The lane lock is released. The branch holds the commits of pull request #48.
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
+     `paper/f-external-validity`; stop if it fails. If pull request #48 is still open,
+     the author merges it: `gh pr merge 48 --merge`.
+  2. Read the independent review with the author and decide on F01 and F02 first
+     (Blockers). Take the author's own changes to the draft at the same time.
+  3. Scientific Editor: revise `paper_f_template.tex`; then, in this order,
+     `.venv\Scripts\python.exe docs/reports/paper_f/scripts/build_paper_f.py --final`,
+     `scripts/pubs/register_paper_f.py` (shared file, separate commit),
+     `docs/reports/paper_f/scripts/build_paper_f_docx.py` (close the Word file first),
+     and delete the two LaTeX PDFs the first command writes to `submission/`.
+  4. New Zenodo version: bump `.zenodo.json` and `CITATION.cff` to 0.14.0 by pull
+     request, `git tag <name> origin/main`, push the tag; the author runs
+     `gh release create <tag> --verify-tag --title ... --notes-file ...`; read the DOI
+     from `https://zenodo.org/api/records?q=conceptrecid:19297723&all_versions=true`
+     and set `\paperfarchive` in the template.
+  5. Submit `herrera-vasquez.docx` and `herrera-vasquez.pdf` through the journal site;
+     declare the AI tool there too. To be received by the end of November 2026.
+- **Blockers/Issues**:
+  - **Independent review, F01 (major):** on sparsity, stability and cost much of the
+    order is fixed by the output format and the settings (LIME is set to 10 features,
+    KernelSHAP returns 10, TreeSHAP nearly all), so three "generalises" verdicts and
+    Conclusion 1 partly restate the configuration. The paper does not say so.
+  - **Independent review, F02 (major):** the faithfulness gap goes with the number of
+    features an explanation names, so "sparsity reverses faithfulness" and Conclusion 3
+    are partly built into the definitions; the present caveat is too weak for them.
+  - Its minor findings: stability re-seeds each perturbed copy (not in the Methods);
+    the Anchors-DiCE exception on cost depends on the mean of a heavy-tailed time; the
+    variance shares of cost are an effect of the millisecond scale; analyses computed
+    and not reported are not named as omitted; two Methods sentences do not match the
+    code (LIME's random state; what the 1,200 s limit covers); the null could hardly
+    have held; limits not stated (9 of 16 datasets fully numeric, DiCE on one-hot
+    columns, measures depend on the encoded number of features).
+  - **The new counts of the independent review were not re-derived by the session.**
+    It reports that every number printed in the paper matches its own re-derivation.
+  - Still open from the session's review: F05 (print the mean number of features used;
+    now bound up with the independent F02) and F08 (two references read on abstracts
+    only; one sentence of the Introduction without a citation).
+  - The assistant cannot merge pull requests or create GitHub releases in this setup.
+- **Notes**:
+  - Do not run `scripts/paper_f_analyze.py` again: the plan says once. A further check
+    is logged in `ANALYSIS_PLAN.md` section 12 before it is run, as on 2026-10-12.
+  - Commit shared files (`docs/context/`, `docs/review/`, `pub/`, `scripts/pubs/`)
+    apart from lane files; the lane guard refuses a mixed commit. Write a commit
+    message that holds double quotes to a file and use `git commit -F`.
+  - `build_paper_f_docx.py` needs `venue/template/JCSI_template_2025.docx` (local),
+    Quarto and Word; an edit made by hand in the Word file is lost at the next build.
+  - Scratch scripts must not be named after standard-library modules (a `bisect.py`
+    in the scratch folder broke `import random`); run them with `python -I`.
+  - PowerShell eats backticks inside double-quoted strings (a `v` after one becomes a
+    control character); patch Markdown with the Edit tool or a script file.
 
 ## Session Handoff - 2026-10-11 20:00 (Paper F: run complete, analysis run once, results report)
 
@@ -135,11 +235,40 @@ manuscript and the rules; its "Current State" of the run is superseded.
     Figure 1 span the page between continuous section breaks. **7 pages in Word**
     (limit 8). The blind files are checked for author data (Word signs a saved file
     with the Windows user; the script sets the properties again).
+  - **Check against the journal's guidelines (2026-10-12)**, read that day from the
+    submissions page and the page on alternative descriptions; the template on the site
+    is identical to the local copy. Sections renamed to the journal's ("Selected
+    results", "Result discussion and conclusions"); alternative descriptions written for
+    Figure 1 and the three tables; the author confirmed the AI declaration for
+    submission. The guidelines list title, author and affiliation as obligatory and do
+    not ask for an anonymous file: the file to upload is `herrera-vasquez.docx` with its
+    PDF.
+  - **Rigor review of Paper F**:
+    `docs/review/scientific-rigor-review_paper_f_2026-10-12.md` (minor revision, mean
+    3.9; written in the session that wrote the text, so not independent). F01 (major):
+    the abstract and Conclusion 2 said the first place transfers best, which stability
+    and sparsity contradict (the last place is as regular there). Fixed, with F02
+    (two departures from the plan now named), F03 (agreement between seeds printed with
+    three decimals: 0.995 is not 1.00), F04, F06 and F09. **Open for the author:** F05 (print
+    the mean number of features used), F08 (two references read on abstracts only; one
+    sentence of the Introduction without a citation).
+  - After the fixes: abstract 691 characters, 7 pages in Word.
+  - **F07 closed (author's decision, 2026-10-12): the check with the software-defect
+    family counted once was run** (scripts/paper_f_posthoc_family.py, logged in the
+    plan before the run, result c19951630 committed before interpretation). Thirteen
+    datasets, once for each of the four that can be kept: agreement 0.64 to 0.67
+    (faithfulness gap), 0.85 to 0.88, 0.76 to 0.77, 0.86 to 0.87; the decision of the
+    rule unchanged in 16 of 16 cases. Reported in the Results as a check made after the
+    results. Registry: 106 claims of Paper F; `verify_claims.py` 1,295 claims; 58 tests.
 - **Current State**:
-  - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
-    has not yet said to remove it.
-  - Open for submission: the journal asks for the file name
-    `surname_of_corresponding_author.docx` (rename `paper_f_full.docx`); whether the
+  - **The author's own read of the draft is pending**, at the author's wish.
+  - **The scheduled task `PaperF-chain-ensure` was removed on 2026-10-12** at the
+    author's instruction; no task and no process of the run is left. Pull request #47
+    is merged (`5bda60a41`).
+  - The Word file with author data is now written as `submission/herrera-vasquez.docx`
+    with `herrera-vasquez.pdf`, the name the journal asks for; the blind files keep
+    `paper_f_blind`. The older `paper_f_full.docx` was deleted on 2026-10-12.
+  - Open for submission: whether the
     uploaded file must be anonymous is still to be asked (`VENUE_JCSI.md`); the header
     lines "JCSI 40 (2025) 000-000, Received, Accepted" are the template's and are the
     editors' to fill. In the LaTeX PDF only, reference 31 prints its article number
