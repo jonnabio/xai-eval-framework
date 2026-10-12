@@ -109,14 +109,16 @@ manuscript and the rules; its "Current State" of the run is superseded.
     22 Paper F tests pass.
 - **Current State**:
   - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
-    has not yet said to remove it. `origin/main` is not merged into the branch.
+    has not yet said to remove it.
+  - `origin/main` was merged into the branch (no conflict, no Paper F file changed) and
+    **pull request #45 was merged by the author** (2026-10-11, merge commit
+    `b313ae59f`). The branch was brought level with `main` by fast-forward; the commit
+    that adds this line is on the branch only, with no pull request.
   - Pending marks left for the Scientific Editor: two sentences of the abstract, the
     reading of Table 3, Discussion, sources of error, three conclusions, Zenodo DOI.
-  - Pull request #45 is open and carries this session's commits.
 - **Next Steps**:
-  1. Claim the lane. The author merges pull request #45 and says whether the scheduled
-     task may be removed.
-  2. `git merge origin/main` on the branch (no conflict in the trial of 2026-10-10).
+  1. Claim the lane. The author says whether the scheduled task may be removed.
+  2. (Done: `main` and the branch are level.)
   3. Scientific Editor, new session: write the pending sentences from
      `RESULTS_REPORT.md` (sections 1, 3, 6 and 9); keep within 8 pages.
   4. Claim registry for Paper F, Zenodo version, the journal's Word template; to be
