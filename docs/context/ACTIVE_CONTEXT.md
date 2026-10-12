@@ -120,9 +120,31 @@ manuscript and the rules; its "Current State" of the run is superseded.
     system refused). The full version cites it; `build_paper_f.py --final` passes with
     **no pending mark**. A change to code or results needs a new version; a text change
     does not.
+  - **Claim registry** (2026-10-11, commit `3057490f4`): 98 claims of Paper F, written
+    by `scripts/pubs/register_paper_f.py` and re-derived by the new `paper_f` resolver
+    (it reads the tables of the Paper F build). The manuscript and its three generated
+    tables are under `[coverage]` and `[exclusivity]`; eight design constants are
+    structural. CI runs `register_paper_f.py --check`. `verify_claims.py`: 1,287
+    claims, 1,626 sites, 33 files. After any rebuild that changes a printed number, run
+    the script again (shared file: separate commit).
+  - **Word files in the journal's template**:
+    `docs/reports/paper_f/scripts/build_paper_f_docx.py` writes
+    `submission/paper_f_{blind,full}.docx` and their PDFs printed by Word (local, not
+    committed). The template's package is kept and only its body replaced; every
+    paragraph has a style of the template; equations are native; Tables 1 and 2 and
+    Figure 1 span the page between continuous section breaks. **7 pages in Word**
+    (limit 8). The blind files are checked for author data (Word signs a saved file
+    with the Windows user; the script sets the properties again).
 - **Current State**:
   - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
     has not yet said to remove it.
+  - Open for submission: the journal asks for the file name
+    `surname_of_corresponding_author.docx` (rename `paper_f_full.docx`); whether the
+    uploaded file must be anonymous is still to be asked (`VENUE_JCSI.md`); the header
+    lines "JCSI 40 (2025) 000-000, Received, Accepted" are the template's and are the
+    editors' to fill. In the LaTeX PDF only, reference 31 prints its article number
+    joined to the DOI (a quirk of the style for an entry with no volume); the Word
+    file is right.
   - For the author to read in the draft: Table 2 prints the agreement between seeds for
     sparsity as 1.00 (the value is 0.995); two sentences of the Results skeleton read
     stiffly ("0 of LIME and 0 of SHAP", "for zero of the four measures"); dataset names
@@ -138,8 +160,10 @@ manuscript and the rules; its "Current State" of the run is superseded.
   2. (Done: `main` and the branch are level.)
   3. (Done: the pending sentences are written.) The author reads the draft
      (`submission/paper_f_full.pdf`, local) and gives changes.
-  4. Claim registry for Paper F, the journal's Word template (the Zenodo version is
-     done); to be received by the journal by the end of November 2026.
+  4. (Done: Zenodo version, claim registry, Word files.) After the author's changes:
+     rebuild (`build_paper_f.py --final`, `register_paper_f.py`,
+     `build_paper_f_docx.py`) and submit; to be received by the journal by the end of
+     November 2026.
 - **Blockers/Issues**:
   - The faithfulness-gap decision turns on an interval end of 0.4875 against the fixed
     0.5; the rule is applied as written and the paper must say so.
