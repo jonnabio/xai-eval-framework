@@ -42,6 +42,53 @@ decided to split it: Paper B is the paired SHAP-LIME study now submitted separat
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
 
+## Session Handoff - 2026-10-11 20:00 (Paper F: run complete, analysis run once, results report)
+
+This is the latest handoff (lane `paper-f`, owner `claude-2026-10-11-paper-f`, branch
+`paper/f-external-validity`, role Data Scientist). The one below it stays valid for the
+manuscript and the rules; its "Current State" of the run is superseded.
+
+- **Completed**:
+  - **The run is complete**: 1,280 of 1,280 conditions, 256,000 rows; the last job ended
+    on 2026-10-11 11:22. Last raw snapshot `3d01a842a` (1,280 jobs, checked against the
+    run folder by SHA-256).
+  - **Seed 101112 checked** as the other four: 256 job files, every job at 200 instances,
+    no duplicate, the four methods on the same instances; 284 failed rows (0.55%).
+    Whole run: 1,425 failed rows (0.56%), 826.9 job-hours.
+  - **The analysis was run once** (`scripts/paper_f_analyze.py`); result files committed
+    before any interpretation (`b7b8d576b`, `outputs/analysis/paper_f/results/`).
+  - **Primary result** (agreement of the method orders between the 16 datasets, 95%
+    interval, decision; Holm p below 0.001 on all four): faithfulness gap 0.67 (0.49 to
+    0.85), shared, strength not determined; stability 0.88 (0.79 to 0.95), sparsity 0.79
+    (0.66 to 0.92) and cost 0.87 (0.82 to 0.91), the order generalises. Agreement
+    between seeds: 0.95 to 0.995. The complete-case check gives the same four decisions.
+  - **Results report**: `docs/reports/paper_f/RESULTS_REPORT.md` (every analysis, the
+    limits, and what is not planned and only descriptive).
+  - Tables 2 and 3 and Figure 1 generated; draft built: 7 pages of 8, 7 pending marks.
+    22 Paper F tests pass.
+- **Current State**:
+  - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
+    has not yet said to remove it. `origin/main` is not merged into the branch.
+  - Pending marks left for the Scientific Editor: two sentences of the abstract, the
+    reading of Table 3, Discussion, sources of error, three conclusions, Zenodo DOI.
+  - Pull request #45 is open and carries this session's commits.
+- **Next Steps**:
+  1. Claim the lane. The author merges pull request #45 and says whether the scheduled
+     task may be removed.
+  2. `git merge origin/main` on the branch (no conflict in the trial of 2026-10-10).
+  3. Scientific Editor, new session: write the pending sentences from
+     `RESULTS_REPORT.md` (sections 1, 3, 6 and 9); keep within 8 pages.
+  4. Claim registry for Paper F, Zenodo version, the journal's Word template; to be
+     received by the journal by the end of November 2026.
+- **Blockers/Issues**:
+  - The faithfulness-gap decision turns on an interval end of 0.4875 against the fixed
+    0.5; the rule is applied as written and the paper must say so.
+  - The four software-defect datasets agree with each other more than the rest on the
+    faithfulness gap (0.90 against 0.66; descriptive, not planned).
+  - That the DiCE `UserConfigValidationException` means "no counterfactual" is still
+    not checked in the library code.
+  - The blockers of the handoff below (page budget, the uncited sentence) stand.
+
 ## Session Handoff - 2026-10-11 08:20 (Paper F: one job from the end; manuscript ready for the analysis)
 
 This is the latest handoff. It closes the session that began on 2026-10-09 (lane
