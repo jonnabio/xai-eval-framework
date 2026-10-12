@@ -130,11 +130,12 @@ state of the handoff below it, which keeps the detail of each step.
     independent review).
   - The Zenodo archive (0.13.0) is behind the code: the registration script, the Word
     builder and the post hoc check came after it.
-  - The lane lock is released. The branch holds the commits of pull request #48.
+  - The lane lock is released. Pull request #48 is merged (`be3b9a049`, 2026-10-12,
+    by the assistant on the author's instruction; `gh pr merge` was accepted this
+    time). `main` and the branch are level, apart from the commit that adds this line.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
-     `paper/f-external-validity`; stop if it fails. If pull request #48 is still open,
-     the author merges it: `gh pr merge 48 --merge`.
+     `paper/f-external-validity`; stop if it fails.
   2. Read the independent review with the author and decide on F01 and F02 first
      (Blockers). Take the author's own changes to the draft at the same time.
   3. Scientific Editor: revise `paper_f_template.tex`; then, in this order,
@@ -169,7 +170,9 @@ state of the handoff below it, which keeps the detail of each step.
   - Still open from the session's review: F05 (print the mean number of features used;
     now bound up with the independent F02) and F08 (two references read on abstracts
     only; one sentence of the Introduction without a citation).
-  - The assistant cannot merge pull requests or create GitHub releases in this setup.
+  - The assistant's permission system refused `gh pr merge` on 2026-10-11 and accepted
+    it on 2026-10-12, and refused `gh release create`. Try once; if refused, give the
+    author the exact command.
 - **Notes**:
   - Do not run `scripts/paper_f_analyze.py` again: the plan says once. A further check
     is logged in `ANALYSIS_PLAN.md` section 12 before it is run, as on 2026-10-12.
