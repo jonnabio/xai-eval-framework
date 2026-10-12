@@ -125,6 +125,8 @@ packages.
 | Analysis | `python scripts/paper_f_analyze.py` | `outputs/analysis/paper_f/results/` |
 | Result tables and figure | `python scripts/paper_f_report.py` | `generated/tab_primary.tex`, `generated/tab_adult.tex`, `figures/fig1.pdf` (after the analysis) |
 | Manuscript | `python docs/reports/paper_f/scripts/build_paper_f.py` | `paper_f.tex`, `submission/*.pdf` |
+| Word files in the journal's template | `python docs/reports/paper_f/scripts/build_paper_f_docx.py` (needs `venue/template/JCSI_template_2025.docx`, Quarto and Word) | `submission/paper_f_{blind,full}.docx` and `_word.pdf` (local); the page count is Word's |
+| Claim registry | `python scripts/pubs/register_paper_f.py` (shared files, through `main`); `--check` in CI | the Paper F block of `pub/claim_registry.toml` |
 | Tests | `python -m pytest tests/analysis/test_paper_f_lib.py tests/analysis/test_paper_f_analyze.py` | |
 
 The run can be stopped at any time; the same launch command continues it. Downloaded data
