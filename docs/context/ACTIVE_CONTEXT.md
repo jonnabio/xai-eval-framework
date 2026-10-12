@@ -141,8 +141,7 @@ manuscript and the rules; its "Current State" of the run is superseded.
     is merged (`5bda60a41`).
   - The Word file with author data is now written as `submission/herrera-vasquez.docx`
     with `herrera-vasquez.pdf`, the name the journal asks for; the blind files keep
-    `paper_f_blind`. An older `paper_f_full.docx` may remain in the folder: it was
-    open in another program and could not be deleted.
+    `paper_f_blind`. The older `paper_f_full.docx` was deleted on 2026-10-12.
   - Open for submission: whether the
     uploaded file must be anonymous is still to be asked (`VENUE_JCSI.md`); the header
     lines "JCSI 40 (2025) 000-000, Received, Accepted" are the template's and are the
