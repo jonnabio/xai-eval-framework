@@ -91,7 +91,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Revised after three reviews (session, independent, Codex); awaits the author's read; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Framed as agreement of rankings under a fixed evaluation protocol. Manuscript in the journal's Word template at 8 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.14.0, [10.5281/zenodo.23323623](https://doi.org/10.5281/zenodo.23323623); a newer version is due before submission. To be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Revised after three reviews (session, independent, Codex); awaits the author's read; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Framed as agreement of rankings under a fixed evaluation protocol. Manuscript in the journal's Word template at 8 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483), release `paper-f-jcsi-2026-10-12-r2`. To be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -130,19 +130,25 @@ Latest handoff for lane `paper-f` (owner `claude-2026-10-12-paper-f-codex-fixes`
     119 claims of Paper F, `verify_claims.py` 1,308 claims; 66 tests pass.
   - Word files rebuilt: abstract 791 characters; **8 pages in Word, the limit**.
 - **Current State**:
-  - **Not submitted.** Pull request #52 carries the voice change and this revision.
-  - **The Zenodo archive (0.14.0) is behind again**: the paper now prints figures from
-    `posthoc_protocol.py`, which is not in it. A new version is needed before submission.
+  - **Not submitted.** Pull request #52 (the voice change and this revision) was merged
+    by the author.
+  - **Zenodo version 0.15.0: `10.5281/zenodo.23325483`**
+    (https://doi.org/10.5281/zenodo.23325483), from GitHub release
+    `paper-f-jcsi-2026-10-12-r2` on `main` at `9c2e83239` (pull request #53, the version
+    bump, merged by the assistant as a step of the cut the author asked for). It holds
+    the revised text, `posthoc_protocol.py` and its results. The manuscript cites it and
+    the Word files are rebuilt (8 pages). The commit that puts the DOI in the template
+    came after the release; it changes one line of text, so the archive stays current.
   - The paper is at the page limit and the abstract nine characters under its limit:
     any addition needs a cut.
 - **Next Steps**:
-  1. Claim the lane; the author merges pull request #52 (or instructs the merge).
+  1. Claim the lane; the author merges the open pull request that cites the new DOI.
   2. The author's own read of `submission/herrera-vasquez.docx`.
   3. A confirming review of the revised text, if the author wants one.
-  4. New Zenodo version (0.15.0) once the text is final: bump `.zenodo.json` and
-     `CITATION.cff`, merge, `git tag <name> origin/main`, push the tag,
-     `gh release create <tag> --verify-tag ...`, read the DOI, set `\paperfarchive`,
-     rebuild.
+  4. A further Zenodo version only if code or results change after 0.15.0 (a change of
+     text alone does not need one): bump `.zenodo.json` and `CITATION.cff`, merge,
+     `git tag <name> origin/main`, push the tag, `gh release create <tag> --verify-tag
+     ...`, read the DOI, set `\paperfarchive`, rebuild.
   5. Submit `herrera-vasquez.docx` and `.pdf`; declare the AI tool in the system. To be
      received by the end of November 2026.
 - **Blockers/Issues**:
