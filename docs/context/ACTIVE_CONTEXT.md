@@ -91,7 +91,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Revised after an independent review; awaits the author's read and a second independent review; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Run complete (1,280 runs, 256,000 explained instances), analysis run once, manuscript in the journal's Word template at 7 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.14.0, [10.5281/zenodo.23323623](https://doi.org/10.5281/zenodo.23323623), release `paper-f-jcsi-2026-10-12`. To be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Revised after three reviews (session, independent, Codex); awaits the author's read; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Framed as agreement of rankings under a fixed evaluation protocol. Manuscript in the journal's Word template at 8 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.14.0, [10.5281/zenodo.23323623](https://doi.org/10.5281/zenodo.23323623); a newer version is due before submission. To be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -100,6 +100,66 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-12, third part (Paper F: impersonal voice; revised for the Codex review, narrower scope)
+
+Latest handoff for lane `paper-f` (owner `claude-2026-10-12-paper-f-codex-fixes`, branch
+`paper/f-external-validity`). It supersedes the Current State and Next Steps of the
+"second part" below.
+
+- **Completed**:
+  - **Impersonal voice** (author's rule: a paper signed alone has no "we"): the two
+    first-person sentences reworded; none is left.
+  - **Codex's review and its handoff note committed unchanged** (`0a03083bd`), at the
+    author's instruction.
+  - **Manuscript revised for the Codex review**
+    (`docs/review/scientific-rigor-review_paper_f_2026-10-12_codex.md`, with the
+    editor's disposition added below the reviewer's text). The author's decision: the
+    paper is about agreement of rankings under fixed settings and one evaluation
+    protocol, not about explanation quality. Abstract, Introduction, Measures,
+    Statistical analysis, Results, Discussion and the three conclusions say so. The
+    hypothesis, the rule and every planned result are unchanged; the sentences printed
+    for the outcomes of the rule (`OUTCOME`) are reworded, same classes (plan section 12).
+  - **Counts and audit made after the results, logged before the run**
+    (`scripts/paper_f_posthoc_protocol.py`, results `049bf4000`): Anchors rules above
+    the masking budget 18%, above five 10%; DiCE faster than Anchors on 8, 9 and 14 of
+    16 datasets (planned mean, mean of successes, median of successes); median
+    difference of Anchors and DiCE 0.05 in gap and sparsity against ranges of 0.13 and
+    0.54; cost ratio 1.9 against 246; no LIME job restarted (0 of 320).
+  - Figure 1 is 5.6 in high (was 6.6) so that the text fits; registry written again:
+    119 claims of Paper F, `verify_claims.py` 1,308 claims; 66 tests pass.
+  - Word files rebuilt: abstract 791 characters; **8 pages in Word, the limit**.
+- **Current State**:
+  - **Not submitted.** Pull request #52 carries the voice change and this revision.
+  - **The Zenodo archive (0.14.0) is behind again**: the paper now prints figures from
+    `posthoc_protocol.py`, which is not in it. A new version is needed before submission.
+  - The paper is at the page limit and the abstract nine characters under its limit:
+    any addition needs a cut.
+- **Next Steps**:
+  1. Claim the lane; the author merges pull request #52 (or instructs the merge).
+  2. The author's own read of `submission/herrera-vasquez.docx`.
+  3. A confirming review of the revised text, if the author wants one.
+  4. New Zenodo version (0.15.0) once the text is final: bump `.zenodo.json` and
+     `CITATION.cff`, merge, `git tag <name> origin/main`, push the tag,
+     `gh release create <tag> --verify-tag ...`, read the DOI, set `\paperfarchive`,
+     rebuild.
+  5. Submit `herrera-vasquez.docx` and `.pdf`; declare the AI tool in the system. To be
+     received by the end of November 2026.
+- **Blockers/Issues**:
+  - Codex F02 is done in part: no comparison with the nearest tabular studies was
+    added, because no new reference was searched and verified. Two references are
+    still described from their abstracts (Klein et al., Gevaert et al.).
+  - Codex F07 and F12 in part: no per-seed or per-classifier variation of the changing
+    pairs; the four-number lists and the dataset labels of Figure 1 are as before.
+  - The paper reports five things made after the results (software-defect check, two
+    sets of counts, the median cost order, the restart audit); each is labelled in the
+    text and logged in the plan before it was run. `audit_resume.csv` depends on file
+    times of the author's disk and cannot be repeated from the archive.
+- **Notes**:
+  - `revise2.py`-style edits: exact replacements matched on whitespace-normalised text,
+    run with `python -I`; the template has long lines and PowerShell quoting breaks them.
+  - If the Word file grows past 8 pages, the first lever is the height of Figure 1
+    (`scripts/paper_f_report.py`, `figsize`), then the per-classifier paragraph.
 
 ## Session Handoff - 2026-10-12, second part (Paper F revised for the independent review; Zenodo 0.14.0; ready for the author's read)
 
