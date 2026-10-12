@@ -73,7 +73,7 @@ def _literal(v: float, f: str) -> tuple[str | None, int, float]:
         return (None if v < 0.001 else f"{v:.3f}"), 3, 1.0
     if f in ("pct1", "pct2"):
         return f"{100 * v:.{f[3]}f}", int(f[3]), 100.0
-    if f in ("u2", "u3"):
+    if f in ("u1", "u2", "u3"):
         return f"{abs(v):.{f[1]}f}", int(f[1]), 1.0
     raise KeyError(f"unknown format {f}")
 

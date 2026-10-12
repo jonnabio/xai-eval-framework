@@ -187,6 +187,29 @@ PC4, once for each of the four. Not part of the planned analysis.
 The family raised the faithfulness and sparsity figures by about 0.03 at most; no
 decision of the rule depends on it. Limit 1 of section 9 is answered by this check.
 
+## 9b. Counts made after the results: how the measures behave
+
+Added 2026-10-12 (`posthoc_descriptives.csv`; plan section 12; independent review F01, F02,
+F04, F07). Descriptive; no test.
+
+| Method | Features named (mean) | Features the gap masks (mean) | Time-limit failures | Other failures |
+|---|---|---|---|---|
+| LIME | 9.5 | 6.5 | 0 | 0 |
+| SHAP | 21.3 | 8.0 | 0 | 0 |
+| Anchors | 3.0 | 2.1 | 99 | 0 |
+| DiCE | 3.0 | 2.7 | 114 | 1,212 |
+
+- The encoded datasets have 5 to 180 features.
+- With the median of a run in place of its mean, DiCE is faster than Anchors on 14 of the
+  16 datasets; with the planned mean, on 8. The planned order of the two turns on a small
+  share of very slow DiCE searches.
+- What this changes in the reading: on sparsity, stability and cost much of the order
+  follows from the output format, the algorithm and the settings (LIME set to 10
+  features, kernel SHAP at most 10, tree SHAP every feature; DiCE's random search; the
+  price of the two search methods), and the faithfulness gap grows with the number of
+  features named. Sections 1 and 3 of this report were written before these counts and
+  should be read with them.
+
 ## 10. Reported, not ranked (`secondary.csv`)
 
 Means over the 64 dataset-and-classifier cells, successful instances only. Faithfulness

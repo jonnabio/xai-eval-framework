@@ -294,3 +294,26 @@ needed.
   of the cost variance shares (F05); the planned analyses not reported (F06); the wrong
   statement on LIME's draws and the scope of the time limit (F07); the composition of the
   sixteen and DiCE's continuous one-hot columns (F10).
+
+## Editor's disposition (2026-10-12, not by the reviewer)
+
+Added by the session that edits the manuscript, at the author's instruction to fix every
+finding. The text above is the reviewer's and is unchanged. Figures printed for these
+fixes come from `scripts/paper_f_posthoc_descriptives.py`, logged in the plan before it
+was run; they equal the reviewer's counts (features masked 8.0, 6.5, 2.7 and 2.1; DiCE
+faster than Anchors on 14 of 16 datasets by run medians; 99 and 114 time-limit failures).
+
+| Finding | Action in `paper_f_template.tex` |
+|---|---|
+| F01 | Fixed. Abstract, a new paragraph of the Discussion and Conclusion 1 say that much of the agreement on sparsity, stability and cost follows from the output format, the algorithm and the settings, and name the orders the data decide. The mean number of features each method names is printed. Answer taken to question 1: the claim is about the methods as configured |
+| F02 | Fixed in the text. The mean number of masked features is printed beside the features named; the Discussion and Conclusion 3 say the opposition of sparsity and the gap is partly built into the definitions; the gap at an equal number of masked features is named as further work. It is not computed |
+| F03 | Fixed. The Measures say that each copy is explained with new draws, that data without numeric features receive no noise, and what happens with five features or fewer |
+| F04 | Fixed. The planned mean stays the reported result; the Results add the count with run medians, labelled as made after the results, and the Discussion says the order on cost turns on the slow searches of DiCE |
+| F05 | Fixed. The Results say the cost shares are of raw times and print the three-way term |
+| F06 | Fixed. The last section lists the planned analyses that are in the archive and not in the paper, and what the aligned-rank check confirms |
+| F07 | Fixed. The sentence on the draws excepts LIME; the time limit is said to cover an explanation and its ten copies; the time-limit failures are counted by method |
+| F08 | Fixed in the Discussion: rejection of the null was to be expected; the evidence is the size of the agreement and the pairs that change |
+| F09 | Fixed. Conclusion 2 names only the order of Anchors and DiCE, the pair whose three comparisons hold on fewer than 12 of 15 datasets |
+| F10 | Fixed. The sources of error give the composition of the sixteen and DiCE's treatment of one-hot columns; the Methods give the range of encoded features |
+| F11 | "Candidates examined" is now "candidates listed". The two further unplanned checks are not added |
+| Question 3 | Open: the cited papers have not been read in full |
