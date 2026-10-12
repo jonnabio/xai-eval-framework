@@ -185,3 +185,26 @@ Independent review (`..._independent.md`): F01 and F02 are substantially address
 For the narrower paper, the immediate work is editorial: clarify the contribution, describe the proxies and their limits, remove deterministic/causal overstatements, and align abstract and conclusions. Small archive-based checks can then answer the tied-feature, runtime and restart questions. No full benchmark rerun is requested by this review. Stronger claims about native explanation quality or fair cross-format superiority would require further evidence.
 
 **Suggested scoped takeaway:** “Under fixed configurations and a common feature-based evaluation protocol, rankings were largely consistent across the selected tabular tasks. Some agreement reflects output constraints and metric construction; observed exceptions show why a ranking should be interpreted together with its evaluation protocol rather than treated as a universal ordering of explanation quality.”
+
+## Editor's disposition (2026-10-12, not by the reviewer)
+
+Added by the session that edits the manuscript, at the author's instruction to implement
+the suggestions. The text above is the reviewer's and is unchanged. The author's first
+decision is taken as the narrower paper: agreement of rankings under fixed settings and
+one evaluation protocol. New figures come from `scripts/paper_f_posthoc_protocol.py`,
+logged in the plan (section 12) before it was run.
+
+| Finding | Action in `paper_f_template.tex` |
+|---|---|
+| F01 | Done. The Measures say what the reduction to weights discards and that the measures are proxies on the features named; the Introduction, the abstract and Conclusion 1 say the object is the rankings this protocol produces, not explanation quality. Native checks are named as further work, not computed |
+| F02 | Done in part. The opening is bounded ("often compared on one or a few datasets"; "typically yields"; "not always tested"); the two unsupported sentences on tabular practice and the uncited sentence are removed or reworded; the Purpose says the question is not new and names what the study adds. Klein et al. is described from its abstract as a benchmark of saliency methods. **Not done:** a comparison with the nearest tabular studies; no new reference was added, since none was searched and verified |
+| F03 | Done. G is called a masking-based proxy; the Measures disclose inputs outside the data and one-hot groups that no category has; a larger G is said not to be evidence of a better explanation; "largest measured gap" |
+| F04 | Done. "Where the data decide" is replaced by "the comparisons whose order varies across the evaluated datasets"; a sentence says the study does not separate the contribution of the dataset from that of representation, settings, classifier and measure; "generalises" is defined as a class of the rule, in the Methods and in the sentences of the outcomes |
+| F05 | Done. The hypothesis and the rule stay as registered; the Methods call 0.5 a convention fixed in advance and not a validated threshold; the Discussion already led with the size of the agreement |
+| F06 | Done. The datasets are said to be chosen by a rule fixed before any explanation was computed and not to be a random sample; independence is said to be assumed for resampling and approximate; the intervals are said not to describe a new domain |
+| F07 | Done with medians. The Results give the median difference of Anchors and DiCE in gap and sparsity beside the median range of the four methods, and the median cost ratio beside the range; the Methods say the four classifiers are weighted equally and that SHAP pools two variants. Per-seed and per-classifier variation of the pairs is not shown |
+| F08 | Done. Ties broken by column index are stated in the Measures; the share of Anchors rules above each budget is printed (18% above the masking budget, 10% above five) |
+| F09 | Done. The three statements are softened as proposed |
+| F10 | Done. The planned mean with failures, the mean of successes and the median of successes are given side by side (DiCE faster on 8, 9 and 14 of 16 datasets), and the conclusion is stated as a dependence on how slow searches are counted |
+| F11 | Done. By the file times of the run's working directory, the time on disk of every one of the 320 LIME jobs exceeds the time of its rows by 0.4 s at most: none was restarted (`results/audit_resume.csv`, a dated record that cannot be repeated from the archive). "One after another" is corrected to the overlapping schedule. The failure wording was already "returned no explanation" |
+| F12 | Done in part. Abstract: fixed settings and operational measures; Figure 1: the caption explains the lines and the ties, and the figure is slightly lower; RESULTS_REPORT carries a note on the scope. Not done: a table in place of the four-number lists; readable dataset labels in Figure 1 |
