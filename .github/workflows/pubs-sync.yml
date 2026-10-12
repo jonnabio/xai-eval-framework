@@ -15,6 +15,11 @@ jobs:
         with:
           python-version: "3.11"
 
+      # ACTIVE_CONTEXT.md is a state file of at most 300 lines that names its archive,
+      # and the archive index lists every archive file (.ace/standards/context.md).
+      - name: Check the context file and its archive index
+        run: python3 scripts/pubs/check_active_context.py
+
       - name: Generate fragments
         run: python3 scripts/pubs/generate_fragments.py
 
