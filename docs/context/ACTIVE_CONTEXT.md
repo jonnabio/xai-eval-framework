@@ -73,7 +73,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Ready to submit after the author's read; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Run complete (1,280 runs, 256,000 explained instances), analysis run once, manuscript in the journal's Word template at 7 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.13.0, [10.5281/zenodo.23307705](https://doi.org/10.5281/zenodo.23307705), release `paper-f-jcsi-2026-10-11`; a newer version is due before submission. To be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Revised after an independent review; awaits the author's read and a second independent review; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Run complete (1,280 runs, 256,000 explained instances), analysis run once, manuscript in the journal's Word template at 7 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.14.0, [10.5281/zenodo.23323623](https://doi.org/10.5281/zenodo.23323623), release `paper-f-jcsi-2026-10-12`. To be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -82,6 +82,84 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-12, second part (Paper F revised for the independent review; Zenodo 0.14.0; ready for the author's read)
+
+This is the latest handoff for lane `paper-f` (owner `claude-2026-10-12-paper-f`, branch
+`paper/f-external-validity`). It supersedes the Current State, Next Steps and Blockers of
+the handoff below it, whose Completed list and Notes stay valid.
+
+- **Completed**:
+  - **Every finding of the independent review is answered in the manuscript**
+    (`docs/review/scientific-rigor-review_paper_f_2026-10-12_independent.md`; the editor's
+    disposition is added below the reviewer's text, which is unchanged).
+    - F01 (major): the abstract, a new paragraph of the Discussion and Conclusion 1 say
+      that much of the agreement on sparsity, stability and cost follows from the output
+      format, the algorithm and the settings of the methods, and name the orders the data
+      decide (Anchors against DiCE on sparsity and cost; LIME, SHAP and Anchors on the
+      faithfulness gap).
+    - F02 (major): the features named and the features masked by the gap are printed;
+      the Discussion and Conclusion 3 say the opposition of sparsity and the gap is
+      partly built into the definitions; the gap at an equal number of masked features
+      is named as further work and is not computed.
+    - F03 to F10 (minor): stability copies and their new draws; LIME's random generator;
+      what the time limit covers and its failures by method; the cost order by run
+      medians; the scale of the cost variance shares; the planned analyses left in the
+      archive; the composition of the sixteen; DiCE on one-hot columns; the range of
+      encoded features.
+  - **Descriptive counts made after the results, logged in the plan before the run**
+    (`scripts/paper_f_posthoc_descriptives.py`, result `84adac49c`): features named
+    9.5, 21.3, 3.0 and 3.0 (LIME, SHAP, Anchors, DiCE); features masked 6.5, 8.0, 2.1 and
+    2.7; encoded features 5 to 180; DiCE faster than Anchors on 14 of 16 datasets by run
+    medians, 8 by the planned mean; time-limit failures 99 (Anchors) and 114 (DiCE).
+    They equal the reviewer's own counts.
+  - **Zenodo version 0.14.0: `10.5281/zenodo.23323623`**
+    (https://doi.org/10.5281/zenodo.23323623), from GitHub release
+    `paper-f-jcsi-2026-10-12` on `main` at `6cf87b09b`. The manuscript cites it. Both
+    `gh pr merge` and `gh release create` were accepted in this part of the session.
+  - Registry written again: 114 claims of Paper F; `verify_claims.py` 1,303 claims;
+    62 tests pass. Pull request #50 merged.
+  - Word files rebuilt: `submission/herrera-vasquez.docx` and `.pdf`,
+    `paper_f_blind.docx` and `paper_f_blind_word.pdf`; abstract 736 characters; **7 pages
+    in Word**.
+- **Current State**:
+  - **Paper F is not submitted.** No number of the planned analysis and no decision of
+    the rule changed in the revision; what changed is what the conclusions claim.
+  - The archive (0.14.0) holds the revised text, the two post hoc scripts and their
+    results, the registry and the Word builder. The commit that puts the new DOI in the
+    template came after the release; it changes one line of text, so the archive stays
+    current.
+  - The lane lock is released; `main` and the branch are level.
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
+  2. The author's own read of `submission/herrera-vasquez.docx`. Changes go into
+     `paper_f_template.tex`, not into the Word file (it is rebuilt).
+  3. A second independent review of the revised text, to confirm that the fixes answer
+     F01 and F02 (the first one reviewed the text of `8130db825`..`7debefdaa`).
+  4. After both: `build_paper_f.py --final`, `register_paper_f.py` (shared file,
+     separate commit), `build_paper_f_docx.py` (close the Word file first), delete the
+     two LaTeX PDFs in `submission/`; a new Zenodo version only if code or results
+     change.
+  5. Submit `herrera-vasquez.docx` and `herrera-vasquez.pdf` through the journal site and
+     declare the AI tool there. To be received by the end of November 2026.
+- **Blockers/Issues**:
+  - The revision was written by the session that wrote the first text; it has not been
+    reviewed independently (Next Steps 3).
+  - Not done, and stated in the paper as further work: the faithfulness gap at an equal
+    number of masked features (it needs the fitted classifiers, so a new computation).
+  - Open since the first reviews: two references read on their abstracts only (Klein et
+    al. 2024; Gevaert et al. 2024, on which the Discussion builds a contrast) and one
+    sentence of the Introduction without a citation.
+  - The paper now reports three things made after the results (the software-defect
+    check, the descriptive counts, the median cost order). Each is labelled in the text
+    and logged in the plan before it was run.
+- **Notes**:
+  - Edit long passages of the template with a Python script of exact replacements run
+    with `python -I`, or with the Edit tool. PowerShell blocked a command that held a
+    LaTeX macro next to `Remove-Item`, and eats backticks in double-quoted strings.
+  - If the author has `herrera-vasquez.docx` open in Word, the build cannot write it:
+    with no unsaved changes the document can be closed through COM, rebuilt and opened
+    again, as was done on 2026-10-12.
 
 ## Session Handoff - 2026-10-12 (session end: Paper F ready except for an independent review that asks for a major revision of the text)
 
