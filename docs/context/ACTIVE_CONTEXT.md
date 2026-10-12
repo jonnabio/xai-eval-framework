@@ -135,7 +135,28 @@ manuscript and the rules; its "Current State" of the run is superseded.
     Figure 1 span the page between continuous section breaks. **7 pages in Word**
     (limit 8). The blind files are checked for author data (Word signs a saved file
     with the Windows user; the script sets the properties again).
+  - **Check against the journal's guidelines (2026-10-12)**, read that day from the
+    submissions page and the page on alternative descriptions; the template on the site
+    is identical to the local copy. Sections renamed to the journal's ("Selected
+    results", "Result discussion and conclusions"); alternative descriptions written for
+    Figure 1 and the three tables; the author confirmed the AI declaration for
+    submission. The guidelines list title, author and affiliation as obligatory and do
+    not ask for an anonymous file: the file to upload is `herrera-vasquez.docx` with its
+    PDF.
+  - **Rigor review of Paper F**:
+    `docs/review/scientific-rigor-review_paper_f_2026-10-12.md` (minor revision, mean
+    3.9; written in the session that wrote the text, so not independent). F01 (major):
+    the abstract and Conclusion 2 said the first place transfers best, which stability
+    and sparsity contradict (the last place is as regular there). Fixed, with F02
+    (two departures from the plan now named), F03 (agreement between seeds printed with
+    three decimals: 0.995 is not 1.00), F04, F06 and F09. **Open for the author:** F07
+    (a post hoc check with one software-defect dataset in place of four), F05 (print
+    the mean number of features used), F08 (two references read on abstracts only; one
+    sentence of the Introduction without a citation).
+  - After the fixes: abstract 691 characters, 7 pages in Word, 98 claims registered
+    again, 54 tests pass.
 - **Current State**:
+  - **The author's own read of the draft is pending**, at the author's wish.
   - **The scheduled task `PaperF-chain-ensure` was removed on 2026-10-12** at the
     author's instruction; no task and no process of the run is left. Pull request #47
     is merged (`5bda60a41`).
