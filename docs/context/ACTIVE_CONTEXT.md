@@ -149,12 +149,17 @@ manuscript and the rules; its "Current State" of the run is superseded.
     the abstract and Conclusion 2 said the first place transfers best, which stability
     and sparsity contradict (the last place is as regular there). Fixed, with F02
     (two departures from the plan now named), F03 (agreement between seeds printed with
-    three decimals: 0.995 is not 1.00), F04, F06 and F09. **Open for the author:** F07
-    (a post hoc check with one software-defect dataset in place of four), F05 (print
+    three decimals: 0.995 is not 1.00), F04, F06 and F09. **Open for the author:** F05 (print
     the mean number of features used), F08 (two references read on abstracts only; one
     sentence of the Introduction without a citation).
-  - After the fixes: abstract 691 characters, 7 pages in Word, 98 claims registered
-    again, 54 tests pass.
+  - After the fixes: abstract 691 characters, 7 pages in Word.
+  - **F07 closed (author's decision, 2026-10-12): the check with the software-defect
+    family counted once was run** (scripts/paper_f_posthoc_family.py, logged in the
+    plan before the run, result c19951630 committed before interpretation). Thirteen
+    datasets, once for each of the four that can be kept: agreement 0.64 to 0.67
+    (faithfulness gap), 0.85 to 0.88, 0.76 to 0.77, 0.86 to 0.87; the decision of the
+    rule unchanged in 16 of 16 cases. Reported in the Results as a check made after the
+    results. Registry: 106 claims of Paper F; `verify_claims.py` 1,295 claims; 58 tests.
 - **Current State**:
   - **The author's own read of the draft is pending**, at the author's wish.
   - **The scheduled task `PaperF-chain-ensure` was removed on 2026-10-12** at the
