@@ -93,7 +93,8 @@ def figure(results: Path, out: Path) -> None:
     ranks = pd.read_csv(results / "ranks.csv")
     # Datasets in one fixed order for the four panels: Adult first, then by name.
     names = sorted(ranks["dataset"].unique(), key=lambda d: (d != "adult", d))
-    fig, axes = plt.subplots(4, 1, figsize=(7.0, 6.6), sharex=True)
+    # 5.6 in high (6.6 until 2026-10-12): the lower panels leave the page limit to the text.
+    fig, axes = plt.subplots(4, 1, figsize=(7.0, 5.6), sharex=True)
     for ax, (key, label) in zip(axes, MEASURES):
         part = ranks[ranks["measure"] == key].set_index("dataset").loc[names]
         for m, shown in METHODS:
