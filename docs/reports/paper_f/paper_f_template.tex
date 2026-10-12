@@ -356,7 +356,13 @@ instances that all four methods explained, the agreement between datasets is
 <<sens:gap:mean_rank_corr:u2>>, <<sens:stability:mean_rank_corr:u2>>,
 <<sens:sparsity:mean_rank_corr:u2>> and <<sens:cost_ms:mean_rank_corr:u2>>.
 The number of measures for which the decision differs from the one above is
-<<cmp:all:changed:w>>.
+<<cmp:all:changed:w>>. In a check made after the results were seen, the analysis was
+repeated with one software-defect dataset in place of the four (<<fam:all:datasets:d>>
+datasets), once for each of the <<fam:all:runs:w>>. The agreement between datasets was
+then <<fam:gap:rho_min:u2>> to <<fam:gap:rho_max:u2>>, <<fam:stability:rho_min:u2>> to
+<<fam:stability:rho_max:u2>>, <<fam:sparsity:rho_min:u2>> to <<fam:sparsity:rho_max:u2>>
+and <<fam:cost_ms:rho_min:u2>> to <<fam:cost_ms:rho_max:u2>>, and the decision of the
+rule was the one above in <<fam:all:same:d>> of the <<fam:all:cases:d>> cases.
 
 Computed for each classifier alone, the agreement between datasets is, in the order
 faithfulness gap, stability, sparsity and cost: <<mod:logreg_gap:mean_rank_corr:u2>>,
@@ -446,9 +452,8 @@ tree variant returns one for every feature, which affects the sparsity and stabi
 SHAP. The failures are concentrated in three conditions of DiCE; the analysis of the
 instances that all four methods explained gives the same decisions. Four of the datasets
 are software-defect data of one family, so the <<sum:datasets:value:w>> are less
-independent than their number suggests; in a comparison made after the results were
-seen, these four agree with each other on the faithfulness gap more than the other pairs
-of datasets do, so that estimate is probably favourable. With four methods a ranking
+independent than their number suggests; with the family counted once, in the check
+reported above, the decisions do not change. With four methods a ranking
 takes few values, and the value 0.5 of the rule is a convention. The datasets are binary
 classification tasks from one repository, and cost is wall time on one machine. Two
 analyses depart from the plan, as its log records: the variance shares are a balanced

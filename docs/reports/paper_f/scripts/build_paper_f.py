@@ -18,6 +18,7 @@
        mod     .../results/per_model.csv                         <model>_<measure>
        cmp     decisions of prim against sens                    all
        adult   .../results/pairs_vs_adult.csv                    <measure>_<method>-<method>; all
+       fam     .../results/posthoc_defect_family.csv             <kept>_<measure>; <measure>; all
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
    (lower case, capitalised); u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
@@ -151,6 +152,20 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
     if "prim" in out and "sens" in out:
         out["cmp"] = {"all": {"changed": str(sum(
             out["prim"][m]["decision"] != out["sens"][m]["decision"] for m in out["prim"]))}}
+    if (res / "posthoc_defect_family.csv").exists() and "prim" in out:
+        # The check with the software-defect family counted once (made after the results).
+        fam = read(res / "posthoc_defect_family.csv")
+        out["fam"] = {f"{r['kept']}_{r['measure']}": r for r in fam}
+        for m in {r["measure"] for r in fam}:
+            part = [r for r in fam if r["measure"] == m]
+            out["fam"][m] = {
+                "rho_min": str(min(float(r["mean_rank_corr"]) for r in part)),
+                "rho_max": str(max(float(r["mean_rank_corr"]) for r in part)),
+                "ci_low_min": str(min(float(r["ci_low"]) for r in part))}
+        out["fam"]["all"] = {
+            "cases": str(len(fam)), "runs": str(len({r["kept"] for r in fam})),
+            "datasets": fam[0]["datasets"],
+            "same": str(sum(r["decision"] == out["prim"][r["measure"]]["decision"] for r in fam))}
     if (res / "variance.csv").exists():
         out["var"] = {f"{r['measure']}_{TERMS[r['term']]}": r for r in read(res / "variance.csv")
                       if r["analysis"] == "mixed model (balanced)" and r["term"] in TERMS}
