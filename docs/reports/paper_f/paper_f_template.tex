@@ -73,11 +73,10 @@ correlation between datasets is <<prim:gap:mean_rank_corr:u2>>,
 <<prim:stability:mean_rank_corr:u2>>, <<prim:sparsity:mean_rank_corr:u2>> and
 <<prim:cost_ms:mean_rank_corr:u2>> for the four measures, above chance in all
 ($p$~<<prim:gap:p_holm:p>>); its 95\% interval lies above 0.5 except for faithfulness.
-Of <<adult:all:comparisons:d>> pairwise orders found on the Adult dataset,
-<<adult:all:all_same:d>> hold on all <<adult:all:others:d>> other datasets, but that of
-Anchors and DiCE on cost holds on <<adult:cost_ms_anchors-dice:same_order:d>>. The method
-ranked first is the same on <<chg:sparsity_dice:times_first:d>> to
-<<chg:cost_ms_lime:times_first:d>> of the <<sum:datasets:value:d>> datasets.
+Much of this agreement follows from the output format and the settings of the methods,
+not from the data. Of <<adult:all:comparisons:d>> pairwise orders found on the Adult
+dataset, <<adult:all:all_same:d>> hold on all <<adult:all:others:d>> other datasets; the
+order of Anchors and DiCE is the one that changes.
 
 \medskip
 \textit{Keywords}: explainable artificial intelligence; LIME; SHAP; benchmark;
@@ -183,15 +182,16 @@ fixed beforehand, in six strata defined by the type of the features (numeric, mi
 categorical) and the number of rows (below or from 10,000).
 When fewer than sixteen of the listed candidates passed, the list was extended with the
 binary tasks of the OpenML-CC18 suite in the order of their identifier. Of
-<<sum:candidates:value:d>> candidates examined, <<sum:datasets:value:d>> are in the
+<<sum:candidates:value:d>> candidates listed, <<sum:datasets:value:d>> are in the
 study (Table~\ref{tab:datasets}). The minority class is the positive class.
 
 \input{generated/tab_datasets}
 
 Numeric features are standardised and missing values replaced by the median; categorical
 features are one-hot encoded, with categories beyond the 20 most frequent of a feature
-grouped into one level. Each dataset is split into 80\% for training and 20\% for
-testing, stratified by class.
+grouped into one level; the encoded datasets have <<desc:encoded_features_min:value:d>>
+to <<desc:encoded_features_max:value:d>> features. Each dataset is split into 80\% for
+training and 20\% for testing, stratified by class.
 
 \subsection{Classifiers and explanation methods}
 
@@ -204,7 +204,8 @@ The four explanation methods are also used with one configuration for all datase
 no tuning: LIME with 1,000 samples, 10 features and a kernel width of 3; SHAP with 50
 background rows, in its exact tree variant for the two tree models and its kernel variant
 for the other two; Anchors with a precision threshold of 0.95; and DiCE with random
-search for one counterfactual. Explanations are computed on the encoded features.
+search for one counterfactual, the encoded columns being treated as continuous.
+Explanations are computed on the encoded features.
 
 \subsection{Research scenario}
 
@@ -215,15 +216,17 @@ they were written in the configuration file before any classifier was trained.
 
 A seed is one complete repetition of the study. It fixes the split of each dataset into
 training and test data, the random state of each classifier, the choice of the instances
-to explain and the random draws of each method. The draws for an instance are derived
-from the seed and the position of the instance, so they do not depend on the order in
-which the computations run. For each dataset, classifier and seed, 200 test instances are
+to explain and the random draws of each method. For SHAP, Anchors and DiCE the draws for
+an instance are derived from the seed and the position of the instance, so they do not
+depend on the order in which the computations run; LIME keeps one random generator for a
+run, so its draws depend on the instances explained before. For each dataset, classifier
+and seed, 200 test instances are
 drawn, stratified by predicted class, and the four methods explain the same instances of
 the same fitted classifier. A difference between two methods inside such a block cannot
 therefore come from the data, the classifier or the instances. The perturbed copies used
 by the stability measure are also the same for the four methods. An instance for which a
-method returns no explanation, or needs more than 1,200~s, is kept and counted as a
-failure.
+method returns no explanation, or whose explanation and ten stability copies need more
+than 1,200~s, is kept and counted as a failure.
 
 In total the design has <<sum:fits:value:int>> fitted classifiers
 (<<sum:datasets:value:d>> datasets, four classifiers, <<sum:seeds:value:w>> seeds),
@@ -254,7 +257,10 @@ where $\tilde{x}$ is $x$ with the features of $T_m$ replaced by their training m
 S=\frac{1}{10}\sum_{c=1}^{10}\frac{|T_5(x)\cap T_5(x^{(c)})|}{|T_5(x)\cup T_5(x^{(c)})|},
 \end{equation}
 where $x^{(c)}$ is a copy of $x$ whose numeric features receive Gaussian noise of 0.05
-standard deviations; a copy that cannot be explained counts as 0. \textit{Sparsity} is
+standard deviations; a copy that cannot be explained counts as 0. Each copy is explained
+with new random draws, so $S$ also counts the randomness of the method itself; a dataset
+without numeric features receives no noise, and with $d\le 5$ a method that names every
+feature scores 1. \textit{Sparsity} is
 $1-|U|/d$, and \textit{cost} is the time to produce one explanation. Higher is better for
 $G$, $S$ and sparsity, lower for cost. A failed instance takes the worst value observed
 for its dataset and classifier, so that failures cannot improve a mean; the analysis is
@@ -321,7 +327,10 @@ instances in <<run:all:seeds:w>> complete seeds. A method returned no explanatio
 exceeded the time limit, for <<run:all:failed:int>> instances
 (<<run:all:failure_rate:pct2>>\%). By method they are <<fail:dice:failures:int>> for DiCE,
 <<fail:anchors:failures:int>> for Anchors, <<fail:lime:failures:int>> for LIME and
-<<fail:shap:failures:int>> for SHAP. Three conditions
+<<fail:shap:failures:int>> for SHAP. The time limit accounts for
+<<desc:failures_time_limit_anchors:value:d>> failures of Anchors and
+<<desc:failures_time_limit_dice:value:d>> of DiCE, which depend on the machine and its
+load. Three conditions
 hold <<fail:top:share:pct>>\% of them: <<fail:top1:explainer:txt>> on
 <<fail:top1:model:txt>> for <<fail:top1:dataset:txt>> (<<fail:top1:failures:int>> of
 <<fail:top1:instances:int>> instances), <<fail:top2:explainer:txt>> on
@@ -392,6 +401,17 @@ positions on the four measures, and <<chg:gap:first:d>>, <<chg:stability:first:d
 <<chg:sparsity:first:d>> and <<chg:cost_ms:first:d>> of the four methods are ranked first
 on at least one dataset.
 
+Three counts made after the results were seen describe how the measures behave. An
+explanation names on average <<desc:features_used_lime:value:u1>> features for LIME,
+<<desc:features_used_shap:value:u1>> for SHAP, <<desc:features_used_anchors:value:u1>> for
+Anchors and <<desc:features_used_dice:value:u1>> for DiCE, and the faithfulness gap masks
+<<desc:features_masked_lime:value:u1>>, <<desc:features_masked_shap:value:u1>>,
+<<desc:features_masked_anchors:value:u1>> and <<desc:features_masked_dice:value:u1>> of
+them. With the median of a run in place of its mean, DiCE is faster than Anchors on
+<<desc:median_cost_faster_dice:value:d>> of the <<sum:datasets:value:d>> datasets, against
+<<desc:mean_cost_faster_dice:value:d>> with the mean: a small share of very slow searches
+decides the planned order of the two.
+
 Of the variance of the <<sum:runs:value:int>> run means, the method accounts for
 <<var:gap_method:share:pct>>\%, <<var:stability_method:share:pct>>\%,
 <<var:sparsity_method:share:pct>>\% and <<var:cost_ms_method:share:pct>>\% (faithfulness
@@ -402,7 +422,9 @@ gap, stability, sparsity, cost), the dataset for <<var:gap_dataset:share:pct>>\%
 <<var:sparsity_interaction:share:pct>>\% and <<var:cost_ms_interaction:share:pct>>\%. The
 permutation $p$ of the interaction is <<var:gap_interaction:p_perm:p>>,
 <<var:stability_interaction:p_perm:p>>, <<var:sparsity_interaction:p_perm:p>> and
-<<var:cost_ms_interaction:p_perm:p>>.
+<<var:cost_ms_interaction:p_perm:p>>. For cost these are shares of raw times, in which a
+few slow conditions dominate: the interaction of method, dataset and classifier holds
+<<var:cost_ms_threeway:share:pct>>\%.
 
 \section{Result discussion and conclusions}
 
@@ -411,7 +433,9 @@ between datasets more than chance. For stability, sparsity and cost the interval
 agreement lies above 0.5, so by the rule fixed in advance the order generalises. For the
 faithfulness gap the interval runs from <<prim:gap:ci_low:u2>> to
 <<prim:gap:ci_high:u2>>; its lower end falls just below 0.5, and the rule gives a shared
-order of undetermined strength. We report that outcome as the rule gives it.
+order of undetermined strength. We report that outcome as the rule gives it. That the
+orders are not unrelated was to be expected; the evidence of the study is the size of the
+agreement and the identity of the pairs that change.
 
 The agreement between datasets, from <<prim:gap:mean_rank_corr:u2>> to
 <<prim:stability:mean_rank_corr:u2>>, is below the agreement between seeds on every
@@ -420,63 +444,80 @@ measure, which runs from <<prim:gap:ceiling_seeds:u3>> to
 alters the order more than repeating the study on the same dataset does, and since the
 agreement between seeds is a conservative reference, the difference is not produced by
 the comparison. The interaction of method and dataset is significant on every measure.
-A dataset does change how the methods compare, though seldom enough to change which is
-first: SHAP has the largest faithfulness gap on <<chg:gap_shap:times_first:d>> of the
-<<sum:datasets:value:d>> datasets and the highest stability on
-<<chg:stability_shap:times_first:d>>, LIME is the fastest on
-<<chg:cost_ms_lime:times_first:d>>, and DiCE or Anchors gives the sparsest explanation on
-all. The last place is as regular on two measures: DiCE is the least stable on every
-dataset and SHAP uses the most features on <<chg:sparsity_shap:times_last:d>>. The
-irregular part is specific. On the faithfulness gap LIME and Anchors each range from rank
-<<chg:gap_lime:best_rank:d>> to rank <<chg:gap_lime:worst_rank:d>>, and which of Anchors
-and DiCE is slower changes from one dataset to the next (Table~\ref{tab:adult}). For
-images, metric results on one dataset did not necessarily hold on
-others~\cite{gevaert2024evaluating}; for these four methods on tabular data they mostly
-do.
 
-No method is first on all measures. The order on sparsity is close to the reverse of the
-order on faithfulness and stability (Table~\ref{tab:primary}), so a choice between the
-methods remains a choice between properties, whatever the dataset. The size of a measure
+Much of the agreement on sparsity, stability and cost follows from the output format, the
+algorithm and the settings of the methods, and would be expected on any dataset. LIME is set
+to 10 features and the kernel variant of SHAP returns at most 10, while the tree variant
+weights every feature, so SHAP cannot be the sparser of the two where a dataset has more
+than 10 encoded features. DiCE searches at random and each stability copy is explained
+with new draws, which places it last on stability on every dataset and favours the
+deterministic tree variant of SHAP. LIME and SHAP are faster than the two search methods
+on every dataset. The orders that the data decide are fewer: that of Anchors and DiCE on
+sparsity and on cost, and that of LIME, SHAP and Anchors on the faithfulness gap. There
+the first place changes little, SHAP having the largest gap on
+<<chg:gap_shap:times_first:d>> of the <<sum:datasets:value:d>> datasets, while LIME and
+Anchors each range from rank <<chg:gap_lime:best_rank:d>> to rank
+<<chg:gap_lime:worst_rank:d>>. The order of Anchors and DiCE is that of Adult on
+<<adult:cost_ms_anchors-dice:same_order:d>> to <<adult:gap_anchors-dice:same_order:d>> of
+the <<adult:all:others:d>> other datasets on three measures (Table~\ref{tab:adult}), and
+on cost it turns on the slow searches of DiCE. For images, metric results on one dataset
+did not necessarily hold on others~\cite{gevaert2024evaluating}; for these four methods
+on tabular data they mostly do, in part for the reasons just given.
+
+No method is first on all measures, and the order on sparsity is close to the reverse of
+the order on the faithfulness gap (Table~\ref{tab:primary}). That opposition is in part
+built into the two definitions: the gap masks only the features an explanation names, so
+a method that names fewer features has fewer of them masked, as the counts above show. A
+gap measured at an equal number of masked features would separate the two; it needs the
+fitted classifiers and is left for further work. The size of a measure
 is another matter: the dataset accounts for more of the variance of the faithfulness gap
 than the method does, so a value of the gap cannot be carried from one dataset to another
 even where the order can.
 
 \textit{Possible sources of error.} Explanations are computed on encoded features, so a
 categorical variable counts as several features. Anchors and DiCE are compared with LIME
-and SHAP through the features they name, not through their native output; they name few
-features, and the faithfulness gap masks only the features an explanation names, so part
-of their low gap may reflect a short explanation. Each method has one configuration; DiCE
-uses random search, which may account for part of its low stability, and
-with it the kernel variant of SHAP returns at most 10 non-zero attributions while the
-tree variant returns one for every feature, which affects the sparsity and stability of
-SHAP. The failures are concentrated in three conditions of DiCE; the analysis of the
+and SHAP through the features they name, not through their native output, so the
+faithfulness gap and the stability measure depend on how many features a method names.
+Each method has one configuration, and the orders described above as following from it
+could differ with another. DiCE treats one-hot columns as continuous, so a counterfactual
+can hold a value that no category has. The failures are concentrated in three conditions of DiCE; the analysis of the
 instances that all four methods explained gives the same decisions. Four of the datasets
 are software-defect data of one family, so the <<sum:datasets:value:w>> are less
 independent than their number suggests; with the family counted once, in the check
 reported above, the decisions do not change. With four methods a ranking
 takes few values, and the value 0.5 of the rule is a convention. The datasets are binary
-classification tasks from one repository, and cost is wall time on one machine. Two
-analyses depart from the plan, as its log records: the variance shares are a balanced
-decomposition of sums of squares and not the mixed model named there, and cost relative
-to the prediction time was not computed.
+classification tasks from one repository; <<sum:numeric_only:value:w>> of the
+<<sum:datasets:value:w>> have only numeric features and <<sum:categorical_only:value:w>>
+only categorical ones. Cost is wall time on one machine. Two analyses depart from the
+plan, as its log records: the variance shares are a balanced decomposition of sums of
+squares and not the mixed model named there, and cost relative to the prediction time
+was not computed. The aligned-rank check of the interaction, the matrix of dataset pairs,
+the frontier of cost and faithfulness, the secondary measures and the failure rate of
+every condition were computed as planned and are in the archive, not in this paper; the
+aligned-rank check confirms the test of the interaction and gives no comparable shares.
 
 The conclusions are:
 \begin{enumerate}
 \setlength{\itemsep}{0pt}
-\item The order of LIME, SHAP, Anchors and DiCE found on one tabular dataset is largely
-a property of the methods as configured here: it agrees across <<sum:datasets:value:d>> datasets on
-stability, sparsity and cost, and on the faithfulness gap with a strength that this
-study does not determine.
-\item The method ranked first on a measure is the same on most datasets. The order of
-LIME and Anchors, and above all that of Anchors and DiCE, changes between datasets and
-should not be taken from a single one.
-\item The order on one measure does not transfer to another measure: SHAP, ranked
-first on faithfulness and stability, is ranked last on sparsity.
+\item The order of LIME, SHAP, Anchors and DiCE, as configured here, agrees across
+<<sum:datasets:value:d>> tabular datasets on the four measures, on the faithfulness gap
+with a strength that this study does not determine. On sparsity, stability and cost much
+of that agreement follows from the output format, the algorithm and the settings of the
+methods, and is not evidence about datasets.
+\item Where the data decide the order, the first place changes little: SHAP has the
+largest faithfulness gap on <<chg:gap_shap:times_first:d>> of the
+<<sum:datasets:value:d>> datasets. The order of Anchors and DiCE is the one that changes,
+and should not be taken from a single dataset.
+\item The order on one measure does not transfer to another, and the opposition between
+sparsity and the faithfulness gap is partly a consequence of their definitions. It should
+not be read as a property of the methods until faithfulness is measured independently of
+the number of features an explanation names.
 \end{enumerate}
-Further research should test whether the result holds for multiclass and regression
-tasks, for datasets from other repositories and with configurations tuned for each
-dataset, and should examine which properties of a dataset go with a change of order, a
-question this design does not answer.
+Further research should measure the faithfulness gap at an equal number of masked
+features, test whether the result holds for multiclass and regression tasks, for datasets
+from other repositories and with configurations tuned for each dataset, and examine which
+properties of a dataset go with a change of order, a question this design does not
+answer.
 
 \section*{Data and code availability}
 \iffull

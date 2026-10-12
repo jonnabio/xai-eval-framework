@@ -19,9 +19,10 @@
        cmp     decisions of prim against sens                    all
        adult   .../results/pairs_vs_adult.csv                    <measure>_<method>-<method>; all
        fam     .../results/posthoc_defect_family.csv             <kept>_<measure>; <measure>; all
+       desc    .../results/posthoc_descriptives.csv              <metric>_<key>
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
-   (lower case, capitalised); u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
+   (lower case, capitalised); u1, u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
    two decimals; p p-value ("<0.001" or three decimals); outcome the sentence of OUTCOME
    for a decision of the rule (analysis plan, section 6); txt a name, as it is.
 
@@ -78,7 +79,8 @@ OUTCOME = {
         "the order of the methods is shared between datasets, with a strength that is not "
         "determined: the interval contains 0.5",
 }
-TERMS = {"explainer": "method", "dataset": "dataset", "explainer x dataset": "interaction"}
+TERMS = {"explainer": "method", "dataset": "dataset", "explainer x dataset": "interaction",
+         "explainer x dataset x model": "threeway"}
 MODELS = {"logreg": "logistic regression", "rf": "the random forest", "xgb": "XGBoost",
           "mlp": "the multilayer perceptron"}
 METHODS = {"lime": "LIME", "shap": "SHAP", "anchors": "Anchors", "dice": "DiCE"}
@@ -113,6 +115,9 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
         out["sum"] = {k: {"value": str(v)} for k, v in size.items()}
         # The rows of Table 1, by dataset key (read by the claim registry, not by the text).
         out["data"] = {r["key"]: r for r in read(RES / "datasets.csv")}
+        share = [float(r["share_numeric"]) for r in read(RES / "datasets.csv")]
+        out["sum"]["numeric_only"] = {"value": str(sum(s == 1.0 for s in share))}
+        out["sum"]["categorical_only"] = {"value": str(sum(s == 0.0 for s in share))}
     if (RES / "power_simulation.csv").exists():
         out["pow"] = {f"{r['k_datasets']}_{r['true_rho_bar']}": r
                       for r in read(RES / "power_simulation.csv")}
@@ -166,6 +171,10 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
             "cases": str(len(fam)), "runs": str(len({r["kept"] for r in fam})),
             "datasets": fam[0]["datasets"],
             "same": str(sum(r["decision"] == out["prim"][r["measure"]]["decision"] for r in fam))}
+    if (res / "posthoc_descriptives.csv").exists():
+        # Descriptive counts made after the results (plan section 12, 2026-10-12).
+        out["desc"] = {f"{r['metric']}_{r['key']}": r
+                       for r in read(res / "posthoc_descriptives.csv")}
     if (res / "variance.csv").exists():
         out["var"] = {f"{r['measure']}_{TERMS[r['term']]}": r for r in read(res / "variance.csv")
                       if r["analysis"] == "mixed model (balanced)" and r["term"] in TERMS}
@@ -204,7 +213,7 @@ def fmt(v: float, f: str) -> str:
     if f in ("w", "W"):
         word = WORDS[int(round(v))]
         return word.capitalize() if f == "W" else word
-    if f in ("u2", "u3"):
+    if f in ("u1", "u2", "u3"):
         return f"{v:.{f[1]}f}".replace("-", "$-$")
     if f == "pct":
         return f"{100 * v:.0f}"
