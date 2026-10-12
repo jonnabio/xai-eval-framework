@@ -47,9 +47,31 @@ TECTONIC = ROOT / "tools" / "tectonic-portable" / (
     "tectonic.exe" if sys.platform == "win32" else "tectonic")
 MAX_PAGES = 8
 TEXT_WIDTH_EMU = 6_050_000          # a little under the 17 cm between the margins
-FIGURE_ALT = ("Four line charts, one for each measure (faithfulness gap, stability, sparsity, "
-              "cost), showing the rank from 1 to 4 of LIME, SHAP, Anchors and DiCE on each of "
-              "the sixteen datasets.")
+# Alternative descriptions, by the journal's rules (type of chart, axes, legend, the main
+# trend; no "the figure shows"). They state no number: the values are in the tables and
+# the text, which the claim registry checks. Read them again if the results change.
+FIGURE_ALT = ("Four line charts, one for each measure: faithfulness gap, stability, sparsity "
+              "and cost. Horizontal axis: the sixteen datasets, Adult first, the others in "
+              "alphabetical order. Vertical axis: rank, from 1 (best) at the top to 4. One line "
+              "for each method: LIME, SHAP, Anchors and DiCE. SHAP is first on most datasets "
+              "for faithfulness gap and stability, and last on most for sparsity. DiCE is last "
+              "on every dataset for stability. LIME is first on all datasets but one for cost. "
+              "The lines of LIME and Anchors cross on several datasets for faithfulness gap, "
+              "and those of Anchors and DiCE cross for sparsity and cost.")
+TABLE_ALT = [
+    ("Datasets of the study",
+     "One row for each of the sixteen datasets. Columns: name, OpenML identifier, number of "
+     "rows, number of features, percentage of numeric features, percentage of the minority "
+     "class, and stratum by feature type and size."),
+    ("Mean rank of each method and agreement between datasets",
+     "One row for each measure: faithfulness gap, stability, sparsity and cost. Columns: mean "
+     "rank of LIME, SHAP, Anchors and DiCE over the datasets, mean rank correlation between "
+     "datasets, its 95% interval, corrected p value, and agreement between seeds."),
+    ("Agreement with the order found on Adult",
+     "One row for each of the six pairs of methods. Columns: the four measures. Each cell is "
+     "the number of the fifteen other datasets in which the pair is in the same order as on "
+     "Adult."),
+]
 AUTHOR = "Jonathan Herrera-V\u00e1squez"
 AFFILIATION = ("Department of Computer Science, Universidad Americana de Europa (UNADE), "
                "Canc\u00fan, Quintana Roo, Mexico")
@@ -255,7 +277,11 @@ def convert_body(pandoc_doc: str, template_doc: str) -> tuple[str, int]:
     wide = after_formula = False
     for b in blocks:
         if b.startswith("<w:tbl>"):
-            out.append(restyle_table(b, example_tblpr, 0))
+            # pandoc puts the caption before its table, so `tables` is this table's number.
+            title, description = TABLE_ALT[tables - 1]
+            alt = (f'<w:tblCaption w:val="{escape(title)}"/>'
+                   f'<w:tblDescription w:val="{escape(description)}"/></w:tblPr>')
+            out.append(restyle_table(b, example_tblpr.replace("</w:tblPr>", alt), 0))
             continue
         if b == "<w:p/>":
             continue
