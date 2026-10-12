@@ -221,7 +221,7 @@ requires 10 further explanations of every instance, so the design calls for
 2,816,000 explanations. The seeds are run one after another, and a
 seed enters the analysis only when all its 256 runs are complete, so
 the analysed data are balanced whatever the number of seeds. The analysis below uses
-\pending{run:all} complete seeds. It is run once, after the last seed.
+five complete seeds. It is run once, after the last seed.
 
 \subsection{Measures}
 
@@ -303,24 +303,24 @@ method labels inside each block of dataset, classifier and seed (10,000 permutat
 %% placeholder read from outputs/analysis/paper_f/results/; the sentence printed for each
 %% decision of the rule is fixed in scripts/build_paper_f.py (OUTCOME). The pending marks
 %% are the sentences that can only be written with the results in view.
-The run produced \pending{run:all} runs and \pending{run:all} explained
-instances in \pending{run:all} complete seeds. A method returned no explanation, or
-exceeded the time limit, for \pending{run:all} instances
-(\pending{run:all}\%): \pending{fail:dice} of DiCE,
-\pending{fail:anchors} of Anchors, \pending{fail:lime} of LIME and
-\pending{fail:shap} of SHAP. Three conditions
-hold \pending{fail:top}\% of them: \pending{fail:top1} on
-\pending{fail:top1} for \pending{fail:top1} (\pending{fail:top1} of
-\pending{fail:top1} instances), \pending{fail:top2} on
-\pending{fail:top2} for \pending{fail:top2} (\pending{fail:top2}) and
-\pending{fail:top3} on \pending{fail:top3} for \pending{fail:top3}
-(\pending{fail:top3}).
+The run produced 1,280 runs and 256,000 explained
+instances in five complete seeds. A method returned no explanation, or
+exceeded the time limit, for 1,425 instances
+(0.56\%): 1,326 of DiCE,
+99 of Anchors, 0 of LIME and
+0 of SHAP. Three conditions
+hold 90\% of them: DiCE on
+the random forest for Amazon\_employee\_access (770 of
+1,000 instances), DiCE on
+XGBoost for ozone-level-8hr (407) and
+DiCE on the random forest for qsar-biodeg
+(102).
 
-\pending{Table 2, mean rank of each method and agreement between datasets}\refstepcounter{table}\label{tab:primary}
+\input{generated/tab_primary}
 
 \begin{figure*}[t]
 \centering
-\pending{Figure 1}
+\includegraphics[width=\textwidth]{figures/fig1.pdf}
 \caption{Rank of each method (1 = best) on each dataset, one panel per measure. Adult is
 the first dataset; the others are in alphabetical order.}
 \label{fig:ranks}
@@ -329,54 +329,54 @@ the first dataset; the others are in alphabetical order.}
 Table~\ref{tab:primary} gives the mean rank of each method and the agreement of the
 rankings between datasets, and Figure~\ref{fig:ranks} shows the rank of each method on
 each dataset. The decision rule gives the following. For the faithfulness gap
-($\bar{\rho}=$~\pending{prim:gap}), \pending{prim:gap}. For
-stability ($\bar{\rho}=$~\pending{prim:stability}),
-\pending{prim:stability}. For sparsity
-($\bar{\rho}=$~\pending{prim:sparsity}), \pending{prim:sparsity}.
-For cost ($\bar{\rho}=$~\pending{prim:cost\_ms}),
-\pending{prim:cost\_ms}.
+($\bar{\rho}=$~0.67), the order of the methods is shared between datasets, with a strength that is not determined: the interval contains 0.5. For
+stability ($\bar{\rho}=$~0.88),
+the order of the methods generalises: it is shared between datasets and the interval lies above 0.5. For sparsity
+($\bar{\rho}=$~0.79), the order of the methods generalises: it is shared between datasets and the interval lies above 0.5.
+For cost ($\bar{\rho}=$~0.87),
+the order of the methods generalises: it is shared between datasets and the interval lies above 0.5.
 
-The agreement between seeds inside a dataset is \pending{prim:gap},
-\pending{prim:stability}, \pending{prim:sparsity} and
-\pending{prim:cost\_ms} for the four measures in the same order. On the
+The agreement between seeds inside a dataset is 0.95,
+0.97, 1.00 and
+0.98 for the four measures in the same order. On the
 instances that all four methods explained, the agreement between datasets is
-\pending{sens:gap}, \pending{sens:stability},
-\pending{sens:sparsity} and \pending{sens:cost\_ms}.
-The decision differs from the one above for \pending{cmp:all} of the four measures.
+0.67, 0.85,
+0.84 and 0.87.
+The decision differs from the one above for zero of the four measures.
 
 Computed for each classifier alone, the agreement between datasets is, in the order
-faithfulness gap, stability, sparsity and cost: \pending{mod:logreg\_gap},
-\pending{mod:logreg\_stability}, \pending{mod:logreg\_sparsity} and
-\pending{mod:logreg\_cost\_ms} for logistic regression;
-\pending{mod:rf\_gap}, \pending{mod:rf\_stability},
-\pending{mod:rf\_sparsity} and \pending{mod:rf\_cost\_ms} for the
-random forest; \pending{mod:xgb\_gap}, \pending{mod:xgb\_stability},
-\pending{mod:xgb\_sparsity} and \pending{mod:xgb\_cost\_ms} for
-XGBoost; and \pending{mod:mlp\_gap}, \pending{mod:mlp\_stability},
-\pending{mod:mlp\_sparsity} and \pending{mod:mlp\_cost\_ms} for the
+faithfulness gap, stability, sparsity and cost: 0.73,
+0.80, 0.87 and
+0.85 for logistic regression;
+0.71, 0.80,
+0.71 and 0.79 for the
+random forest; 0.64, 0.82,
+0.78 and 0.89 for
+XGBoost; and 0.64, 0.82,
+0.88 and 0.91 for the
 multilayer perceptron.
 
-\pending{Table 3, agreement with the order found on Adult}\refstepcounter{table}\label{tab:adult}
+\input{generated/tab_adult}
 
 Table~\ref{tab:adult} counts, for each pair of methods, the datasets in which the pair is
 in the same order as on Adult. \pending{reading of Table 3, one sentence} Between two
-datasets the rank of a method changes by up to \pending{chg:gap},
-\pending{chg:stability}, \pending{chg:sparsity} and \pending{chg:cost\_ms}
-positions on the four measures, and \pending{chg:gap}, \pending{chg:stability},
-\pending{chg:sparsity} and \pending{chg:cost\_ms} of the four methods are ranked first
+datasets the rank of a method changes by up to 3,
+2, 2 and 1
+positions on the four measures, and 3, 2,
+2 and 2 of the four methods are ranked first
 on at least one dataset.
 
 Of the variance of the 1,280 run means, the method accounts for
-\pending{var:gap\_method}\%, \pending{var:stability\_method}\%,
-\pending{var:sparsity\_method}\% and \pending{var:cost\_ms\_method}\% (faithfulness
-gap, stability, sparsity, cost), the dataset for \pending{var:gap\_dataset}\%,
-\pending{var:stability\_dataset}\%, \pending{var:sparsity\_dataset}\% and
-\pending{var:cost\_ms\_dataset}\%, and the interaction of method and dataset for
-\pending{var:gap\_interaction}\%, \pending{var:stability\_interaction}\%,
-\pending{var:sparsity\_interaction}\% and \pending{var:cost\_ms\_interaction}\%. The
-permutation $p$ of the interaction is \pending{var:gap\_interaction},
-\pending{var:stability\_interaction}, \pending{var:sparsity\_interaction} and
-\pending{var:cost\_ms\_interaction}.
+19\%, 65\%,
+43\% and 6\% (faithfulness
+gap, stability, sparsity, cost), the dataset for 40\%,
+14\%, 25\% and
+8\%, and the interaction of method and dataset for
+9\%, 9\%,
+10\% and 17\%. The
+permutation $p$ of the interaction is $<$0.001,
+$<$0.001, $<$0.001 and
+$<$0.001.
 
 \section{Discussion and conclusions}
 
