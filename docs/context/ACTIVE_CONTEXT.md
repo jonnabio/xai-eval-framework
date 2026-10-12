@@ -107,9 +107,19 @@ manuscript and the rules; its "Current State" of the run is superseded.
     limits, and what is not planned and only descriptive).
   - Tables 2 and 3 and Figure 1 generated; draft built: 7 pages of 8, 7 pending marks.
     22 Paper F tests pass.
+  - **Draft finished for the author's revision** (Scientific Editor, same session, at
+    the author's request): abstract (723 of 800 characters, now measured by the build),
+    reading of Table 3, Discussion, sources of error and three conclusions written from
+    `RESULTS_REPORT.md`; every number is still a placeholder (new alias `adult` in
+    `build_paper_f.py`, read from `pairs_vs_adult.csv`). Figure 1 no longer floats past
+    the references. Build: 7 pages of 8, **one pending mark, the Zenodo DOI**.
 - **Current State**:
   - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
     has not yet said to remove it.
+  - For the author to read in the draft: Table 2 prints the agreement between seeds for
+    sparsity as 1.00 (the value is 0.995); two sentences of the Results skeleton read
+    stiffly ("0 of LIME and 0 of SHAP", "for zero of the four measures"); dataset names
+    in the text are the OpenML names.
   - `origin/main` was merged into the branch (no conflict, no Paper F file changed) and
     **pull request #45 was merged by the author** (2026-10-11, merge commit
     `b313ae59f`). The branch was brought level with `main` by fast-forward; the commit
@@ -119,8 +129,8 @@ manuscript and the rules; its "Current State" of the run is superseded.
 - **Next Steps**:
   1. Claim the lane. The author says whether the scheduled task may be removed.
   2. (Done: `main` and the branch are level.)
-  3. Scientific Editor, new session: write the pending sentences from
-     `RESULTS_REPORT.md` (sections 1, 3, 6 and 9); keep within 8 pages.
+  3. (Done: the pending sentences are written.) The author reads the draft
+     (`submission/paper_f_full.pdf`, local) and gives changes.
   4. Claim registry for Paper F, Zenodo version, the journal's Word template; to be
      received by the journal by the end of November 2026.
 - **Blockers/Issues**:
