@@ -91,7 +91,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Revised after three reviews (session, independent, Codex); awaits the author's read; not submitted** (2026-10-12) | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?". Framed as agreement of rankings under a fixed evaluation protocol. Manuscript in the journal's Word template at 8 pages of 8 (`docs/reports/paper_f/submission/herrera-vasquez.docx`, local). Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483), release `paper-f-jcsi-2026-10-12-r2`. To be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | Submitted; under review | Submitted 2026-10-12; submission 10503. Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; 8 pages in the journal's Word template. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483), release `paper-f-jcsi-2026-10-12-r2`. Target issue: 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -100,6 +100,49 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-12, fourth part (Paper F SUBMITTED to JCSI, submission 10503)
+
+Latest handoff for lane `paper-f` (owner `claude-2026-10-12-paper-f-submitted`). It
+supersedes the Current State and Next Steps of the "third part" below.
+
+- **Completed**:
+  - **Paper F is submitted** to *Journal of Computer Sciences Institute*: **submission
+    10503**, confirmed by the journal's acknowledgement, which the author passed on
+    2026-10-12
+    (https://ph.pollub.pl/index.php/jcsi/dashboard/mySubmissions?workflowSubmissionId=10503).
+  - Before that, the same day: Zenodo 0.15.0 (`10.5281/zenodo.23325483`) cut and cited;
+    pull requests #52, #53 and #54 merged; comments for the editor drafted for the author
+    (summary, files, originality, prior public availability, no conflict of interest, use
+    of generative AI, alternative descriptions).
+- **Current State**:
+  - Files in `docs/reports/paper_f/submission/` at the time of submission, built from
+    `334fb753c`: `herrera-vasquez.docx` (SHA-256 `67470c68a1d95276...`) and
+    `herrera-vasquez.pdf` (`f97b864a518d4d39...`), 8 pages. **Not confirmed by
+    the author:** that these exact files were uploaded, whether the author's own read
+    changed anything in the Word file by hand, and the final text of the comments to the
+    editor (the draft said the thesis is not deposited, that no specific funding was
+    received and that other manuscripts of the project are under review; the author was
+    asked to confirm each).
+  - All six papers of the project are now published or submitted: A published; B, C, D,
+    E and F under review.
+- **Next Steps**:
+  1. Wait for the journal. Its stated times: first assessment 1 to 2 weeks, review 1 to 4
+     weeks. Record every decision here and in `docs/reports/paper_f/README.md`.
+  2. If a revision is asked: claim the lane; edit `paper_f_template.tex`; then
+     `build_paper_f.py --final`, `register_paper_f.py`, `build_paper_f_docx.py`; a new
+     Zenodo version only if code or results change.
+  3. Ask the author to confirm the three points under Current State.
+- **Blockers/Issues**:
+  - Known limits of the submitted text, for a response to reviewers: no comparison with
+    the nearest tabular studies (Codex F02, in part); two references described from
+    their abstracts (Klein et al., Gevaert et al.); the faithfulness gap at an equal
+    number of masked features and native measures of each output are named as further
+    work and not computed; five analyses were made after the results, each labelled and
+    logged in the plan before it was run.
+- **Notes**:
+  - Do not rebuild Paper F or change its text unless a revision is requested: a rebuild
+    overwrites the submitted Word file in `submission/`.
 
 ## Session Handoff - 2026-10-12, third part (Paper F: impersonal voice; revised for the Codex review, narrower scope)
 
