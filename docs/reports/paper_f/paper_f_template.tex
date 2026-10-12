@@ -17,6 +17,9 @@
 %% 2026-10-11: the Results section is a skeleton wired to the analysis files, written
 %% before the analysis was run. No number of the results, discussion or conclusions is
 %% typed by hand: each is a placeholder or a visible "[pending]" mark.
+%% 2026-10-11, after the analysis (results b7b8d576b): abstract, reading of Table 3,
+%% discussion, sources of error and conclusions written from RESULTS_REPORT.md. Numbers
+%% are still placeholders. The only pending mark left is the Zenodo DOI.
 \documentclass[10pt,a4paper,twocolumn]{article}
 \usepackage[top=25mm,bottom=25mm,left=20mm,right=20mm,columnsep=10mm]{geometry}
 \usepackage{fontspec}
@@ -32,6 +35,9 @@
 \usepackage[numbers,sort&compress]{natbib}
 \setlength{\emergencystretch}{3em}
 \setlength{\bibsep}{2pt}
+%% Figure 1 takes about 70% of a page; with the default limit it floats past the references.
+\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
 \providecommand{\fullurl}[1]{\url{#1}}  % used by entries taken from the Paper E list
 \newcommand{\pending}[1]{\textcolor{red}{[pending: #1]}}
 %% Code and data archive (full version only). Set when the Zenodo version exists.
@@ -59,12 +65,18 @@ Canc\'un, Quintana Roo, Mexico\par}
 \textbf{Abstract}\par
 \smallskip
 Explanation methods are usually compared on one dataset, and the resulting order is read
-as a property of the methods. We test whether it is. LIME, SHAP, Anchors and DiCE explain
-four classifiers on <<sum:datasets:value:d>> public tabular datasets chosen by a fixed
-rule; each method is ranked on faithfulness, stability, sparsity and cost. The agreement
-of the rankings between datasets is the mean rank correlation, with a bootstrap interval
-and a permutation test. \pending{main result, one sentence per ranked measure}
-\pending{what a result on the Adult dataset does and does not predict}
+as a property of the methods. We test this for LIME, SHAP, Anchors and DiCE on four
+classifiers and <<sum:datasets:value:d>> public tabular datasets chosen by a fixed rule,
+ranking the methods on faithfulness, stability, sparsity and cost. The mean rank
+correlation between datasets is <<prim:gap:mean_rank_corr:u2>>,
+<<prim:stability:mean_rank_corr:u2>>, <<prim:sparsity:mean_rank_corr:u2>> and
+<<prim:cost_ms:mean_rank_corr:u2>> for the four measures, above chance in all
+($p$~<<prim:gap:p_holm:p>>); its 95\% interval lies above 0.5 except for faithfulness.
+Of <<adult:all:comparisons:d>> pairwise orders found on the Adult dataset,
+<<adult:all:all_same:d>> hold on all <<adult:all:others:d>> other datasets, but that of
+Anchors and DiCE on cost holds on <<adult:cost_ms_anchors-dice:same_order:d>>. The method
+ranked first is the same on <<chg:sparsity_dice:times_first:d>> to
+<<chg:cost_ms_lime:times_first:d>> of the datasets; the order below it transfers less.
 
 \medskip
 \textit{Keywords}: explainable artificial intelligence; LIME; SHAP; benchmark;
@@ -358,7 +370,13 @@ multilayer perceptron.
 <<input:generated/tab_adult.tex:Table 3, agreement with the order found on Adult>>
 
 Table~\ref{tab:adult} counts, for each pair of methods, the datasets in which the pair is
-in the same order as on Adult. \pending{reading of Table 3, one sentence} Between two
+in the same order as on Adult. Of the <<adult:all:comparisons:d>> comparisons,
+<<adult:all:all_same:d>> hold on all <<adult:all:others:d>> other datasets and
+<<adult:all:most:d>> on at least 12; the <<adult:all:fewer:w>> that hold on fewer all
+concern Anchors and DiCE, whose order on cost is that of Adult on
+<<adult:cost_ms_anchors-dice:same_order:d>> datasets (exact 95\% interval
+<<adult:cost_ms_anchors-dice:ci_low:u2>> to <<adult:cost_ms_anchors-dice:ci_high:u2>>).
+Between two
 datasets the rank of a method changes by up to <<chg:gap:largest:d>>,
 <<chg:stability:largest:d>>, <<chg:sparsity:largest:d>> and <<chg:cost_ms:largest:d>>
 positions on the four measures, and <<chg:gap:first:d>>, <<chg:stability:first:d>>,
@@ -379,19 +397,70 @@ permutation $p$ of the interaction is <<var:gap_interaction:p_perm:p>>,
 
 \section{Discussion and conclusions}
 
-\pending{Discussion of the hypothesis for each measure, against the agreement between seeds.}
+The hypothesis is supported on each of the four measures: the order of the methods agrees
+between datasets more than chance. For stability, sparsity and cost the interval of the
+agreement lies above 0.5, so by the rule fixed in advance the order generalises. For the
+faithfulness gap the interval runs from <<prim:gap:ci_low:u2>> to
+<<prim:gap:ci_high:u2>>; its lower end falls just below 0.5, and the rule gives a shared
+order of undetermined strength. We report that outcome as the rule gives it.
 
-\textit{Possible sources of error.} \pending{to be completed with the results. Known
-before the run: explanations are computed on encoded features, so a categorical variable
-counts as several features; Anchors and DiCE are compared with LIME and SHAP through the
-features they name, not through their native output; each method has one configuration, and with it the kernel variant of SHAP returns at
-most 10 non-zero attributions while the tree variant returns one for every feature;
-four of the datasets are software-defect data of one family, so the sixteen are less
-independent than their number suggests;
-the datasets are binary classification tasks from one repository; cost depends on the
-machine.}
+The agreement between datasets, from <<prim:gap:mean_rank_corr:u2>> to
+<<prim:stability:mean_rank_corr:u2>>, is below the agreement between seeds on every
+measure, which is <<prim:gap:ceiling_seeds:u2>> or more. Changing the dataset therefore
+alters the order more than repeating the study on the same dataset does, and since the
+agreement between seeds is a conservative reference, the difference is not produced by
+the comparison. The interaction of method and dataset is significant on every measure.
+A dataset does change how the methods compare, though seldom enough to change which is
+first: SHAP has the largest faithfulness gap on <<chg:gap_shap:times_first:d>> of the
+<<sum:datasets:value:d>> datasets and the highest stability on
+<<chg:stability_shap:times_first:d>>, LIME is the fastest on
+<<chg:cost_ms_lime:times_first:d>>, and DiCE or Anchors gives the sparsest explanation on
+all. Below the first place the order moves. On the faithfulness gap LIME and Anchors each
+range from rank <<chg:gap_lime:best_rank:d>> to rank <<chg:gap_lime:worst_rank:d>>, and
+which of Anchors and DiCE is slower changes from one dataset to the next. For images,
+metric results on one dataset did not necessarily hold on
+others~\cite{gevaert2024evaluating}; for these four methods on tabular data they mostly
+do, and the exceptions are found in the middle of the order.
 
-\pending{Three numbered conclusions and directions for further research.}
+No method is first on all measures. The order on sparsity is close to the reverse of the
+order on faithfulness and stability (Table~\ref{tab:primary}), so a choice between the
+methods remains a choice between properties, whatever the dataset. The size of a measure
+is another matter: the dataset accounts for more of the variance of the faithfulness gap
+than the method does, so a value of the gap cannot be carried from one dataset to another
+even where the order can.
+
+\textit{Possible sources of error.} Explanations are computed on encoded features, so a
+categorical variable counts as several features. Anchors and DiCE are compared with LIME
+and SHAP through the features they name, not through their native output; they name few
+features, and the faithfulness gap masks only the features an explanation names, so part
+of their low gap reflects a short explanation. Each method has one configuration, and
+with it the kernel variant of SHAP returns at most 10 non-zero attributions while the
+tree variant returns one for every feature, which affects the sparsity and stability of
+SHAP. The failures are concentrated in three conditions of DiCE; the analysis of the
+instances that all four methods explained gives the same decisions. Four of the datasets
+are software-defect data of one family, so the <<sum:datasets:value:w>> are less
+independent than their number suggests; in a comparison made after the results were
+seen, these four agree with each other on the faithfulness gap more than the other pairs
+of datasets do, so that estimate is probably favourable. With four methods a ranking
+takes few values, and the value 0.5 of the rule is a convention. The datasets are binary
+classification tasks from one repository, and cost is wall time on one machine.
+
+The conclusions are:
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\item The order of LIME, SHAP, Anchors and DiCE found on one tabular dataset is largely
+a property of the methods: it agrees across <<sum:datasets:value:d>> datasets on
+stability, sparsity and cost, and on the faithfulness gap with a strength that this
+study does not determine.
+\item What transfers best is the first place on a measure. The order below it, and above
+all the order of Anchors and DiCE, should not be taken from a single dataset.
+\item The order on one measure does not transfer to another measure: SHAP, ranked
+first on faithfulness and stability, is ranked last on sparsity.
+\end{enumerate}
+Further research should test whether the result holds for multiclass and regression
+tasks, for datasets from other repositories and with configurations tuned for each
+dataset, and should examine which properties of a dataset go with a change of order, a
+question this design does not answer.
 
 \section*{Data and code availability}
 \iffull

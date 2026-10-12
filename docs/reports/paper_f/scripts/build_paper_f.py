@@ -17,6 +17,7 @@
        chg     .../results/rank_change.csv                       <measure>_<explainer>; <measure>
        mod     .../results/per_model.csv                         <model>_<measure>
        cmp     decisions of prim against sens                    all
+       adult   .../results/pairs_vs_adult.csv                    <measure>_<method>-<method>; all
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
    (lower case, capitalised); u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
@@ -53,6 +54,8 @@ RES = ROOT / "outputs" / "analysis" / "paper_f"
 TECTONIC = ROOT / "tools" / "tectonic-portable" / (
     "tectonic.exe" if sys.platform == "win32" else "tectonic")
 MAX_PAGES = 8
+MAX_ABSTRACT = 800  # characters, spaces included (VENUE_JCSI.md)
+ADULT_MOST = 12     # "at least 12 of the 15 other datasets", the count printed in the text
 WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
          "fourteen fifteen sixteen seventeen eighteen nineteen twenty").split()
 TOKEN = re.compile(r"<<([a-z]+):([^:<>]+):([a-z_0-9]+):([a-zA-Z0-9]+)>>")
@@ -148,6 +151,15 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
     if (res / "variance.csv").exists():
         out["var"] = {f"{r['measure']}_{TERMS[r['term']]}": r for r in read(res / "variance.csv")
                       if r["analysis"] == "mixed model (balanced)" and r["term"] in TERMS}
+    if (res / "pairs_vs_adult.csv").exists():
+        pairs = read(res / "pairs_vs_adult.csv")
+        out["adult"] = {f"{r['measure']}_{r['pair'].replace(' vs ', '-')}": r for r in pairs}
+        same, others = [int(r["same_order"]) for r in pairs], int(pairs[0]["datasets"])
+        out["adult"]["all"] = {
+            "comparisons": str(len(pairs)), "others": str(others),
+            "all_same": str(sum(s == others for s in same)),
+            "most": str(sum(s >= ADULT_MOST for s in same)),
+            "fewer": str(sum(s < ADULT_MOST for s in same))}
     if (res / "rank_change.csv").exists():
         change = read(res / "rank_change.csv")
         out["chg"] = {f"{r['measure']}_{r['explainer']}": r for r in change}
@@ -251,6 +263,14 @@ def render(final: bool) -> tuple[Path, int]:
     return target, pending
 
 
+def abstract_length(tex: str) -> int:
+    """Characters of the abstract as printed, spaces included."""
+    text = tex.split("\\textbf{Abstract}\\par", 1)[1].split("\\medskip", 1)[0]
+    text = text.replace("\\smallskip", "").replace("\\%", "%").replace("~", " ")
+    text = re.sub(r"\$<\$", "<", text).replace("$", "")
+    return len(" ".join(text.split()))
+
+
 def reference_report(tex: str) -> tuple[str, bool]:
     """The author's rule for references (README, section 7, rule 7), on the cited entries.
 
@@ -304,6 +324,10 @@ def main() -> int:
     OUT.mkdir(exist_ok=True)
     tex, pending = render(args.final)
     print("tex ", tex.relative_to(ROOT), f"({pending} pending marks)")
+    abstract = abstract_length(tex.read_text(encoding="utf-8"))
+    print(f"abstract  {abstract} characters (limit {MAX_ABSTRACT})")
+    if args.final and abstract > MAX_ABSTRACT:
+        sys.exit("--final: the abstract is over the journal's limit")
     report, refs_ok = reference_report(tex.read_text(encoding="utf-8"))
     print(report)
     if args.final and not refs_ok:
