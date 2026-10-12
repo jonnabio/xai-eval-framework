@@ -1,5 +1,23 @@
 # Active Context: XAI Evaluation Framework
 
+## Session Handoff - 2026-10-12 (Codex scientific review of current Paper F)
+
+- At the author's request, reviewed the current revised Paper F argument, measures,
+  design, implementation and interpretation. Report:
+  `docs/review/scientific-rigor-review_paper_f_2026-10-12_codex.md`.
+- Recommendation: major revision of the argument and interpretation. The existing
+  experiment supports a narrower study of ranking agreement under fixed settings and
+  common feature-based proxies; native explanation-quality claims need further evidence.
+- Independently reproduced the four primary point estimates from `cells.csv`;
+  `verify_claims.py` passed (1,303 claims / 1,642 sites). No planned analysis or
+  experiment was rerun. No manuscript, code, registry or result artifact was edited.
+- New questions include evaluator-created invalid one-hot inputs, column-index tie
+  handling for Anchors, successful-only runtime medians versus failure-penalized means,
+  and conditional restart dependence of LIME's random generator. The report separates
+  verified implementation behavior from unverified occurrence during the run.
+- Next: author reviews the questions and chooses the intended scope before revisions.
+  Review and context changes are uncommitted; no push or submission was made.
+
 ## Session Handoff - 2026-10-10 (CIFIE Book Chapter - Final Submission Package & Dispatch for First Editorial Revision)
 
 - **Completed**:
