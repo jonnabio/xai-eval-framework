@@ -112,7 +112,14 @@ manuscript and the rules; its "Current State" of the run is superseded.
     reading of Table 3, Discussion, sources of error and three conclusions written from
     `RESULTS_REPORT.md`; every number is still a placeholder (new alias `adult` in
     `build_paper_f.py`, read from `pairs_vs_adult.csv`). Figure 1 no longer floats past
-    the references. Build: 7 pages of 8, **one pending mark, the Zenodo DOI**.
+    the references. Build: 7 pages of 8.
+  - **Zenodo version 0.13.0: `10.5281/zenodo.23307705`**
+    (https://doi.org/10.5281/zenodo.23307705), from GitHub release
+    `paper-f-jcsi-2026-10-11` on `main` at `f196ab2e5` (pull request #46, merged by the
+    author; the author also ran `gh release create`, which the assistant's permission
+    system refused). The full version cites it; `build_paper_f.py --final` passes with
+    **no pending mark**. A change to code or results needs a new version; a text change
+    does not.
 - **Current State**:
   - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
     has not yet said to remove it.
@@ -131,8 +138,8 @@ manuscript and the rules; its "Current State" of the run is superseded.
   2. (Done: `main` and the branch are level.)
   3. (Done: the pending sentences are written.) The author reads the draft
      (`submission/paper_f_full.pdf`, local) and gives changes.
-  4. Claim registry for Paper F, Zenodo version, the journal's Word template; to be
-     received by the journal by the end of November 2026.
+  4. Claim registry for Paper F, the journal's Word template (the Zenodo version is
+     done); to be received by the journal by the end of November 2026.
 - **Blockers/Issues**:
   - The faithfulness-gap decision turns on an interval end of 0.4875 against the fixed
     0.5; the rule is applied as written and the paper must say so.
