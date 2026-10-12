@@ -30,7 +30,11 @@ comparativa funcionalmente fundamentada.
 - Idioma: español.
 - Registro: científico, preciso y accesible para lectores técnicos no especializados
   en XAI.
-- Extensión objetivo: entre catorce mil y dieciséis mil palabras, sin referencias.
+- Extensión máxima: 9.000 palabras de cuerpo, sin referencias; objetivo de trabajo:
+  8.800 palabras (editor, 2026-10-01).
+- Estilo estructural: pocas secciones principales con ideas desarrolladas; integrar
+  nombres de dominios, métodos y puertas dentro de la prosa en lugar de crear una
+  subsección para cada elemento.
 - Contribución original: FOM-7 y su demostración empírica acotada.
 - Función del benchmark: caso metodológico, no eje exclusivo del capítulo ni ranking
   universal de métodos.
@@ -92,15 +96,13 @@ oficiales. Los resultados humanos deben conservar el límite de su tarea experim
 **Función:** ofrecer una definición general de XAI y fijar el vocabulario que usará el
 resto del capítulo.
 
-**Subsecciones previstas:**
+**Bloques de argumento:**
 
-1. XAI como familia de métodos y prácticas sociotécnicas.
-2. Interpretabilidad, explicabilidad y transparencia.
-3. Modelo interpretable por diseño y explicación post-hoc.
-4. Escala local y global.
-5. Objetos explicativos: atribuciones, reglas, ejemplos, contrafactuales y conceptos.
-6. Plausibilidad, fidelidad, estabilidad, robustez y utilidad humana.
-7. Lo que una explicación no prueba: causalidad, justicia, seguridad o corrección.
+1. XAI como práctica sociotécnica: qué se explica, para quién y con qué propósito.
+2. Conceptos, modelos y objetos explicativos: interpretabilidad, transparencia,
+   métodos post-hoc, escalas local/global, atribuciones, reglas y contrafactuales.
+3. Propiedades, límites y niveles de evaluación: fidelidad, estabilidad, robustez,
+   utilidad humana y alcance funcionalmente fundamentado de FOM-7.
 
 **Regla conceptual:** cada término se define una vez; las secciones posteriores deben
 remitir a esta taxonomía en lugar de redefinirlo.
@@ -112,7 +114,8 @@ remitir a esta taxonomía en lugar de redefinirlo.
 **Función:** conectar XAI con decisiones y riesgos concretos. El catálogo técnico que
 actualmente ocupa este archivo se trasladará y comprimirá en la sección 05.
 
-**Plantilla para cada dominio:**
+Los cinco dominios se integran bajo un bloque común, con su nombre como entrada en
+prosa y sin una subsección separada por dominio. Cada uno conserva:
 
 1. decisión o tarea apoyada por IA;
 2. actor que necesita la explicación;
@@ -121,7 +124,7 @@ actualmente ocupa este archivo se trasladará y comprimirá en la sección 05.
 5. objeto explicativo y evidencia que podrían ayudar; y
 6. brecha científica todavía abierta.
 
-#### 04.1 Salud y biomedicina
+**Salud y biomedicina.**
 
 - Ejemplo: un equipo clínico investiga si un predictor de riesgo depende de señal
   clínicamente pertinente o de un artefacto de adquisición.
@@ -129,7 +132,7 @@ actualmente ocupa este archivo se trasladará y comprimirá en la sección 05.
   relevancia causal.
 - Evidencia prevista: C04-C06.
 
-#### 04.2 Finanzas y asignación de oportunidades
+**Finanzas y asignación de oportunidades.**
 
 - Ejemplo: una institución audita una decisión de crédito mientras la persona afectada
   necesita una explicación comprensible y una vía de contestación o recourse.
@@ -137,7 +140,7 @@ actualmente ocupa este archivo se trasladará y comprimirá en la sección 05.
   una explicación engañosa.
 - Evidencia prevista: C03, C09 y literatura actual sobre recourse.
 
-#### 04.3 Ciberseguridad e infraestructura crítica
+**Ciberseguridad e infraestructura crítica.**
 
 - Ejemplo: un analista determina por qué se marcó un dominio o flujo y si la
   explicación aporta contexto accionable para la respuesta.
@@ -145,7 +148,7 @@ actualmente ocupa este archivo se trasladará y comprimirá en la sección 05.
   adversario también puede atacar la explicación.
 - Evidencia prevista: C10, C14 y literatura actual sobre ataques a explicaciones.
 
-#### 04.4 Sistemas autónomos e industriales
+**Sistemas autónomos e industriales.**
 
 - Ejemplo: un ingeniero o pasajero examina por qué un sistema tomó una acción y si la
   explicación es coherente con sensores, contexto y comportamiento observado.
@@ -153,7 +156,7 @@ actualmente ocupa este archivo se trasladará y comprimirá en la sección 05.
   errónea puede degradar confianza y dependencia aun cuando la conducta sea idéntica.
 - Evidencia prevista: C11 y C15.
 
-#### 04.5 Modelos fundacionales, generativos y de lenguaje
+**Modelos fundacionales, generativos y de lenguaje.**
 
 - Ejemplo: un equipo investiga si una respuesta se apoya en la evidencia suministrada
   o si el racional verbaliza una justificación posterior.
@@ -163,57 +166,38 @@ actualmente ocupa este archivo se trasladará y comprimirá en la sección 05.
 - Multimodalidad: presentar como extensión de agenda salvo que se añada evidencia
   específica antes de redactar.
 
-### 05. Familias explicativas y el problema de evaluarlas
+### 05. La crisis de evaluación y las brechas de validez
 
 **Archivo de producción:** `05_crisis_evaluacion_xai.md`
 
-**Función:** explicar las familias principales por la pregunta que responden y mostrar
-por qué una comparación exige métricas compatibles con el objeto explicativo.
+**Función:** conectar madurez técnica con la falta de evidencia comparable; explicar
+por qué métricas y objetos distintos requieren afirmaciones acotadas; introducir las
+siete brechas en grupos amplios antes de FOM-7.
 
-**Subsecciones previstas:**
+**Bloques de argumento:**
 
-1. ¿Qué influyó? Atribuciones y sustitutos locales: LIME y SHAP.
-2. ¿En qué condiciones? Reglas locales: Anchors.
-3. ¿Qué tendría que cambiar? Contrafactuales y recourse: DiCE.
-4. Métodos específicos, conceptos, ejemplos y explicaciones globales.
-5. Del objeto explicativo al constructo de evaluación.
-6. Evaluación funcional, human-grounded y application-grounded.
+1. Crisis de medición, fidelidad aislada, reproducibilidad y gobernanza.
+2. Brechas agrupadas: técnica/constructo; humana/causal; operativa/gobernanza/modelos
+  emergentes. Nombrar cada brecha en la prosa, no como siete subtítulos.
+3. Alcance parcial de FOM-7 y transición al protocolo.
 
-**Regla editorial:** para cada método conservar solo pregunta, salida, supuesto,
-fortaleza, fallo y evidencia apropiada. Las fórmulas permanecen únicamente cuando
-aclaren una diferencia conceptual necesaria.
-
-### 06. Brechas científicas de la XAI
+### 06. FOM-7 como respuesta metodológica acotada
 
 **Archivo de producción:** `06_protocolo_fom7.md`
 
-**Función:** reorganizar la antigua “crisis de evaluación” como una taxonomía de siete
-brechas que justifique la necesidad de FOM-7 sin presentarlo como solución universal.
+**Función:** presentar la secuencia de admisibilidad y sus límites funcionales.
+Mantener las siete puertas identificables con etiquetas en línea dentro de un solo
+bloque de protocolo, no con un subtítulo independiente para cada puerta.
 
-**Brechas:**
-
-1. **Técnica:** fidelidad, estabilidad, robustez, coste y sensibilidad a configuración.
-2. **De constructo:** métricas que no corresponden al objeto o propósito explicativo.
-3. **Humana:** comprensión, desempeño, confianza calibrada y diferencias de audiencia.
-4. **Causal y de acción:** atribución no causal y recourse formalmente válido pero no
-   necesariamente factible.
-5. **Operativa:** cambio de distribución, monitoreo, latencia, seguridad y ciclo de
-   vida.
-6. **De gobernanza:** documentación, contestabilidad, responsabilidad y requisitos
-   dependientes del dominio.
-7. **De modelos emergentes:** lenguaje, generación, agentes y multimodalidad.
-
-**Evidencia crítica incorporada:** C06-C08, C13-C17 y fuentes existentes de evaluación,
-robustez, recourse y ataques.
-
-### 07. FOM-7 como respuesta metodológica acotada
+### 07. Métodos evaluados y diseño del benchmark
 
 **Archivo de producción:** `07_diseno_empirico.md`
 
-**Función:** presentar FOM-7 como protocolo que gobierna la admisibilidad de evidencia
-comparativa funcionalmente fundamentada.
+**Función:** describir los cuatro objetos explicativos y el diseño reproducible de EXP1
+y EXP2. Presentar LIME, SHAP, Anchors y DiCE como entradas en prosa, y agrupar factores,
+muestreo, métricas, unidades e inferencia en un bloque de diseño.
 
-**Secuencia operativa:**
+**Secuencia de FOM-7 (en sección 06):**
 
 1. Congelamiento del protocolo.
 2. Ejecución controlada por lotes.
@@ -233,15 +217,11 @@ de despliegue.
 
 **Función:** integrar diseño y resultados esenciales como demostración de FOM-7.
 
-**Subsecciones previstas:**
+**Bloques de argumento:**
 
-1. Pregunta y alcance del caso Adult/tabular.
-2. Diseño: datos, modelos, métodos, semillas, tamaños y unidad de análisis.
-3. Calificación de artefactos y cobertura.
-4. Métricas, agregación y pruebas compatibles con el diseño.
-5. Resultados globales de fidelidad y estabilidad.
-6. Perfiles diferenciados de LIME, SHAP, Anchors y DiCE.
-7. Lección metodológica: calidad, coste, cobertura y objeto explicativo.
+1. Diseño EXP2 y calificación de artefactos.
+2. Resultados globales y perfiles por método.
+3. Reproducibilidad, selección condicionada y alcance de la evidencia.
 
 **Reglas de protección:**
 
@@ -258,13 +238,10 @@ de despliegue.
 **Función:** convertir el marco y el caso en decisiones prácticas sin ampliar el
 alcance empírico.
 
-**Subsecciones previstas:**
+**Bloques de argumento:**
 
-1. Selección de métodos por propósito, audiencia y riesgo.
-2. Explicaciones como parte de una cadena de evidencia.
-3. Evaluación durante el ciclo de vida, no solo antes del despliegue.
-4. Documentación, supervisión y contestabilidad.
-5. Qué puede transferirse de FOM-7 y qué requiere validación adicional.
+1. Selección condicionada de métodos y gobernanza de la evidencia.
+2. Uso de FOM-7, relación con las herramientas del campo y límites de transferencia.
 
 ### 10. Limitaciones y agenda científica
 
@@ -272,7 +249,7 @@ alcance empírico.
 
 **Función:** separar los límites del caso de las brechas generales del campo.
 
-**Bloque A: límites del caso:**
+**Bloque de límites:** integrar en una discusión continua, no una subsección por límite:
 
 - un conjunto de datos tabular;
 - familias de modelos, métodos y métricas declaradas;
@@ -280,7 +257,7 @@ alcance empírico.
 - sensibilidad a configuraciones y artefactos disponibles; y
 - transferencia de FOM-7 todavía no demostrada en otros dominios.
 
-**Bloque B: agenda científica:**
+**Agenda científica:** agrupar las líneas en párrafos desarrollados, no en subtítulos:
 
 1. evaluación humana y confianza calibrada;
 2. causalidad, factibilidad y consecuencias del recourse;
@@ -308,14 +285,14 @@ La conclusión no repetirá el catálogo de resultados ni añadirá líneas futu
 | Material actual | Acción estructural | Destino |
 | --- | --- | --- |
 | Introducción sobre opacidad y evidencia | Conservar, ampliar audiencias y reducir repetición de FOM-7 | 02 |
-| Definiciones conceptuales | Consolidar y eliminar redefiniciones posteriores | 03 |
-| Catálogo LIME, SHAP, Anchors y DiCE | Comprimir por pregunta, salida y fallo | 05 |
-| Crisis de evaluación | Dividir entre problema de evaluación y siete brechas | 05-06 |
-| Protocolo FOM-7 | Mover completo, después de las brechas | 07 |
-| Diseño empírico | Comprimir y unir con resultados | 08 |
-| Resultados protegidos | Conservar como demostración acotada | 08 |
-| Implicaciones | Reescribir después de cerrar aplicaciones y brechas | 09 |
-| Limitaciones actuales | Separar límites del caso y agenda general | 10 |
+| Definiciones conceptuales | Integrar conceptos, modelos, objetos y niveles bajo pocos bloques | 03 |
+| Aplicaciones | Cinco dominios bajo un bloque, con entradas en prosa | 04 |
+| Crisis y brechas de validez | Agrupar siete brechas en tres temas de validez | 05 |
+| Protocolo FOM-7 | Mantener siete puertas con etiquetas en línea bajo un bloque | 06 |
+| Métodos y diseño empírico | Métodos y componentes del diseño como entradas en prosa bajo dos bloques | 07 |
+| Resultados protegidos | Conservar como demostración acotada, con tres bloques de lectura | 08 |
+| Implicaciones | Dos bloques amplios sobre selección, gobernanza y transferencia | 09 |
+| Limitaciones actuales | Un bloque de límites seguido de una agenda integrada | 10 |
 | Resumen y conclusiones | Reescribir al final | 01 y 11 |
 
 ## Puertas antes de mover prosa
@@ -325,5 +302,7 @@ La conclusión no repetirá el catálogo de resultados ni añadirá líneas futu
 - Cualquier movimiento de una cifra protegida exige verificación inmediata.
 - La arquitectura debe mantenerse dentro de once archivos de sección para conservar
   el contrato del build.
+- Priorizar pocos subtítulos que agrupen ideas desarrolladas; usar entradas en prosa
+  para métodos, dominios y puertas, y evitar un subtítulo por elemento de una lista.
 - Después de completar una unidad estructural se debe construir el Word y revisar las
   páginas modificadas.

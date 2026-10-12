@@ -448,22 +448,47 @@ def monochrome_embedded_images(docx: Path) -> None:
     tmp.replace(docx)
 
 
+def export_to_pdf(docx: Path) -> Path:
+    """Export the formatted Word document to PDF using MS Word COM interface."""
+    pdf_path = docx.with_suffix(".pdf")
+    cmd = (
+        f"$word = New-Object -ComObject Word.Application; "
+        f"$word.Visible = $false; "
+        f"$doc = $word.Documents.Open('{docx}'); "
+        f"$doc.SaveAs([ref]'{pdf_path}', [ref]17); "
+        f"$doc.Close(); "
+        f"$word.Quit();"
+    )
+    subprocess.run(["powershell", "-NoProfile", "-Command", cmd], check=True)
+    return pdf_path
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     default_out = CHAPTER / "drafts" / "v3_editorial_review" / f"cifie_xai_fom7_{date.today():%Y-%m-%d}.docx"
     parser.add_argument("--out", type=Path, default=default_out)
+    parser.add_argument("--bw", "--monochrome", action="store_true", help="Convert embedded figures to monochrome for print submission")
+    parser.add_argument("--pdf", action="store_true", help="Export a PDF version alongside the Word document")
     args = parser.parse_args()
 
     sections = sorted(p for p in MANUSCRIPT.glob("[01][0-9]_*.md") if not p.name.startswith("00_"))
-    if [p.name[:2] for p in sections] != [f"{i:02d}" for i in range(1, 12)]:
-        raise SystemExit(f"expected sections 01..11, found {[p.name for p in sections]}")
+    expected = [f"{i:02d}" for i in range(1, len(sections) + 1)]
+    if [p.name[:2] for p in sections] != expected:
+        raise SystemExit(f"expected sections {expected[0]}..{expected[-1]}, found {[p.name[:2] for p in sections]}")
 
     title, authors, affiliation = design_sheet()
-    header = "---\n" f'title: "{title}"\n' "author:\n" + "".join(
-        f'  - "{a}, {affiliation}"\n' for a in authors) + "lang: es-ES\n---\n\n"
     body = "\n\n".join(p.read_text(encoding="utf-8").strip() for p in sections)
     body, n_tables = place_tables(body)
     body = reader_facing_body(body)
+    words = len(re.findall(r"\w+", body))
+
+    header = (
+        "---\n"
+        f'title: "{title}"\n'
+        "author:\n" + "".join(f'  - "{a}, {affiliation}"\n' for a in authors) +
+        "lang: es-ES\n---\n\n"
+        f'::: {{custom-style="Author"}}\n**Recuento de Palabras:** {words:,} palabras\n:::\n\n'
+    )
     source = header + body + "\n\n" + references()
 
     args.out = args.out.resolve()
@@ -480,11 +505,19 @@ def main() -> int:
     format_academic_text(args.out)
     apply_template_format(args.out)
     hanging_indent(args.out)
-    monochrome_embedded_images(args.out)
+    if args.bw:
+        monochrome_embedded_images(args.out)
 
     words = len(re.findall(r"\w+", body))
     shown = args.out.relative_to(ROOT) if args.out.is_relative_to(ROOT) else args.out
-    print(f"OK: {len(sections)} sections, {n_tables} tables, ~{words} words -> {shown.as_posix()}")
+    mode_str = " (B/W print mode)" if args.bw else " (Color digital mode)"
+    print(f"OK: {len(sections)} sections, {n_tables} tables, ~{words} words -> {shown.as_posix()}{mode_str}")
+
+    if args.pdf:
+        pdf_out = export_to_pdf(args.out)
+        pdf_shown = pdf_out.relative_to(ROOT) if pdf_out.is_relative_to(ROOT) else pdf_out
+        print(f"OK: PDF exported -> {pdf_shown.as_posix()}")
+
     return 0
 
 

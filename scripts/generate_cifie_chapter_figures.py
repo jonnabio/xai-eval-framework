@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate reader-facing scientific figures specific to the CIFIE chapter.
+"""Generate reader-facing scientific figures specific to the CIFIE chapter (Color + B/W versions).
 
 The source statistics remain the qualified EXP2 exports. This script exists so
 chapter figures can be adjusted for book-page legibility without modifying the
@@ -7,6 +7,7 @@ thesis figures or their protected numerical content.
 """
 from __future__ import annotations
 
+import argparse
 from itertools import combinations
 from pathlib import Path
 
@@ -19,14 +20,9 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 STATS = ROOT / "outputs" / "analysis" / "paper_a_exp2_stats"
-OUT = (
-    ROOT
-    / "publications"
-    / "book_chapters"
-    / "2026_cifie_xai_fom7"
-    / "figures"
-    / "exported"
-)
+FIG = ROOT / "publications" / "book_chapters" / "2026_cifie_xai_fom7" / "figures"
+OUT = FIG / "exported"
+OUT_BW = FIG / "bw"
 
 METHOD_ORDER = ["shap", "lime", "anchors", "dice"]
 METHOD_LABELS = {
@@ -35,11 +31,17 @@ METHOD_LABELS = {
     "anchors": "Anchors",
     "dice": "DiCE",
 }
-COLORS = {
+COLORS_COLOR = {
     "shap": "#1f77b4",
     "lime": "#ff7f0e",
     "anchors": "#2ca02c",
     "dice": "#d62728",
+}
+MARKERS_BW = {
+    "shap": ("o", "#1a1a1a", "#1a1a1a"),
+    "lime": ("s", "#ffffff", "#1a1a1a"),
+    "anchors": ("^", "#777777", "#1a1a1a"),
+    "dice": ("D", "#333333", "#1a1a1a"),
 }
 CD_VALUE = 1.211
 
@@ -69,7 +71,7 @@ def nonsignificant_pairs(metric: str) -> list[tuple[str, str]]:
     return pairs
 
 
-def figure_cd_diagram() -> Path:
+def figure_cd_diagram(is_bw: bool = False) -> Path:
     """Render a legible two-panel critical-difference diagram for Word."""
     plt.rcParams.update(
         {
@@ -105,8 +107,14 @@ def figure_cd_diagram() -> Path:
 
         for method in ordered:
             rank = ranks[method]
-            ax.plot(rank, 0.60, "o", color=COLORS[method], markersize=9, zorder=5)
-            # The only near-collision in each panel is staggered vertically.
+            if is_bw:
+                m_shape, m_face, m_edge = MARKERS_BW[method]
+                ax.plot(rank, 0.60, m_shape, markerfacecolor=m_face, markeredgecolor=m_edge, markersize=8, zorder=5)
+                text_col = "#1a1a1a"
+            else:
+                text_col = COLORS_COLOR[method]
+                ax.plot(rank, 0.60, "o", color=text_col, markersize=9, zorder=5)
+
             label_y = 1.10 if method == staggered_method else 0.88
             ax.text(
                 rank,
@@ -115,7 +123,7 @@ def figure_cd_diagram() -> Path:
                 ha="center",
                 va="bottom",
                 fontsize=9,
-                color=COLORS[method],
+                color=text_col,
                 weight="bold",
             )
             ax.text(rank, 0.43, f"{rank:.1f}", ha="center", va="top", fontsize=8)
@@ -143,10 +151,11 @@ def figure_cd_diagram() -> Path:
             ax.plot(pair_ranks, [y_bar, y_bar], color="#333333", lw=4, solid_capstyle="round")
             for method in pair:
                 rank = ranks[method]
+                drop_col = "#555555" if is_bw else COLORS_COLOR[method]
                 ax.plot(
                     [rank, rank],
                     [0.60, y_bar],
-                    color=COLORS[method],
+                    color=drop_col,
                     lw=1.1,
                     ls=":",
                     alpha=0.75,
@@ -174,16 +183,23 @@ def figure_cd_diagram() -> Path:
     )
     fig.subplots_adjust(left=0.06, right=0.98, top=0.82, bottom=0.22, wspace=0.24)
 
-    OUT.mkdir(parents=True, exist_ok=True)
-    output = OUT / "fig_cd_diagram_es.png"
+    target_dir = OUT_BW if is_bw else OUT
+    target_dir.mkdir(parents=True, exist_ok=True)
+    output = target_dir / "fig_cd_diagram_es.png"
     fig.savefig(output, bbox_inches="tight")
     plt.close(fig)
     return output
 
 
 def main() -> int:
-    output = figure_cd_diagram()
-    print(f"OK: {output.relative_to(ROOT).as_posix()}")
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--mode", choices=["color", "bw", "both"], default="both")
+    args = parser.parse_args()
+
+    modes = [False] if args.mode == "color" else ([True] if args.mode == "bw" else [False, True])
+    for is_bw in modes:
+        output = figure_cd_diagram(is_bw=is_bw)
+        print(f"OK ({'BW' if is_bw else 'Color'}): {output.relative_to(ROOT).as_posix()}")
     return 0
 
 

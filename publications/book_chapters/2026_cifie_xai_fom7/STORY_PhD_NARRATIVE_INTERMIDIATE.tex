@@ -1,0 +1,406 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{La Historia de la Tesis Doctoral: Evaluación Cuantitativa de
+Inteligencia Artificial Explicable
+(XAI)}\label{la-historia-de-la-tesis-doctoral-evaluaciuxf3n-cuantitativa-de-inteligencia-artificial-explicable-xai}
+
+\emph{Nivel Intermedio (Estudiantes Universitarios de Informática,
+Ciencia de Datos e Ingeniería)}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. Introducción y Motivación: La Opacidad de la IA y el Reto
+de la
+Evaluación}\label{introducciuxf3n-y-motivaciuxf3n-la-opacidad-de-la-ia-y-el-reto-de-la-evaluaciuxf3n}
+
+En la era del aprendizaje automático moderno, los modelos predictivos
+como las Redes Neuronales Profundas (MLP), las Máquinas de Vectores de
+Soporte (SVM) y los Ensambles de Árboles (Random Forest, XGBoost)
+alcanzan un rendimiento excepcional. Sin embargo, su arquitectura
+interna se comporta como una \textbf{``Caja Negra''}
+(\(\mathbf{y} = f(\mathbf{x})\)), donde millones de parámetros hacen
+imposible auditar de manera directa el proceso inferencial.
+
+En sectores de alto impacto como las finanzas, la medicina o la
+justicia, el marco legal y ético exige \textbf{explicabilidad} (Sistemas
+de IA Explicable, XAI). Para lograrlo, la comunidad ha desarrollado
+explicadores post-hoc agnósticos al modelo. Estos algoritmos intentan
+aproximar el comportamiento de \(f(\mathbf{x})\) alrededor de una
+instancia sin necesidad de acceder a la arquitectura interna del modelo.
+
+Sin embargo, surgió un problema de investigación fundamental:
+\textbf{¿Cómo sabemos si las explicaciones producidas por estos
+explicadores son confiables?} Diferentes métodos de explicación (como
+LIME o SHAP) aplicados al mismo modelo y a la misma instancia
+frecuentemente producen explicaciones contradictorias. Sin un protocolo
+estandarizado de evaluación cuantitativa, los científicos y auditores
+corren el riesgo de caer en una ``ilusión de transparencia''.
+
+Esta tesis aborda dicha brecha mediante el desarrollo, validación y
+benchmarking del \textbf{Protocolo FOM-7} (\emph{Framework for
+Operational Metrics in 7 Gates}).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. Los Métodos de Explicabilidad y las Métricas
+Cuantitativas}\label{los-muxe9todos-de-explicabilidad-y-las-muxe9tricas-cuantitativas}
+
+\subsubsection{A. Los Métodos de Explicabilidad
+Estudiados}\label{a.-los-muxe9todos-de-explicabilidad-estudiados}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Atribución de Características (Feature Attribution):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{LIME (Local Interpretable Model-agnostic Explanations):}
+    Genera una perturbación sintética en el vecindario de la instancia
+    \(\mathbf{x}\) y entrena un modelo sustituto lineal simple (\(g\))
+    ponderado por proximidad espacial.
+  \item
+    \textbf{SHAP (Shapley Additive exPlanations):} Calcula la
+    contribución marginal de cada característica basándose en la teoría
+    de juegos cooperativos (Valores de Shapley), garantizando
+    propiedades axiomáticas como consistencia y eficiencia.
+  \end{itemize}
+\item
+  \textbf{Reglas Locales (Rule-based):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Anchors:} Construye reglas lógicas del tipo
+    \texttt{SI\ condición\ ENTONCES\ predicción} con garantías
+    estadísticas de precisión local en un vecindario de datos.
+  \end{itemize}
+\item
+  \textbf{Explicaciones Contrafactuales (Counterfactuals):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{DiCE (Diverse Counterfactual Explanations):} Encuentra las
+    modificaciones mínimas necesarias en las características de la
+    entrada para cambiar la predicción del modelo hacia una clase
+    objetivo deseada.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{B. Las 5 Métricas Cuantitativas de
+Evaluación}\label{b.-las-5-muxe9tricas-cuantitativas-de-evaluaciuxf3n}
+
+Para comparar objetivamente estos métodos, la tesis formaliza cinco
+métricas cuantitativas: 1. \textbf{Fidelidad (Fidelity):} Grado de
+acuerdo entre la predicción del modelo sustituto/explicador y el modelo
+caja negra original. 2. \textbf{Estabilidad (Stability):} Continuidad de
+la explicación ante pequeñas perturbaciones en la entrada (medida
+mediante distancias de repetición o coeficientes de variación). 3.
+\textbf{Parsimonia (Sparsity / Complexity):} Fracción de características
+no nulas utilizadas en la explicación (privilegiando explicaciones
+breves y cognitivamente manejables). 4. \textbf{Coste Computacional
+(Cost):} Tiempo de ejecución (\emph{wall-clock time}) en milisegundos
+por instancia explicada. 5. \textbf{Brecha de Fidelidad (Faithfulness
+Gap):} Error cuadrático medio entre la degradación real del modelo al
+remover características y la expectativa teórica del explicador.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. La Estructura de la Investigación: Artículos A a
+F}\label{la-estructura-de-la-investigaciuxf3n-artuxedculos-a-a-f}
+
+La tesis doctoral se desarrolla a través de 6 artículos interconectados
+que construyen progresivamente la evidencia científica:
+
+\begin{verbatim}
+[Opacidad de IA] ──> [Conflicto LIME vs SHAP] ──> [Necesidad de Gobernanza]
+                                   │
+  ┌────────────────────────────────┴────────────────────────────────┐
+  │                                                                 │
+  ▼                                                                 ▼
+[Artículo A: Protocolo FOM-7] ──> [Artículo B: LIME vs SHAP] ──> [Artículo C: Escalabilidad]
+  (Publicado - RIMI 2026)          (Enviado - CLEIej)              (Listo para envío)
+                                                                    │
+  ┌─────────────────────────────────────────────────────────────────┘
+  │
+  ▼
+[Artículo D: Aplicación Empírica] ──> [Artículo E: Frontera Pareto] ──> [Artículo F: Alineación Humana]
+  (Listo para envío - Tec. Marcha)      (Enviado - CyS CIC-IPN)          (En desarrollo - JCSI)
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Artículo A: Fundamentación Teórica y el Protocolo
+FOM-7}\label{artuxedculo-a-fundamentaciuxf3n-teuxf3rica-y-el-protocolo-fom-7}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Publicado en \emph{Revista de Investigación
+  Multidisciplinaria Iberoamericana (RIMI)} (2026, DOI:
+  \texttt{10.69850/rimi.vi3.307}).
+\item
+  \textbf{Objetivo:} Definir un estándar metodológico auditable para
+  evaluar explicadores post-hoc sin incurrir en fugas de datos o sesgos
+  de varianza.
+\item
+  \textbf{Aporte:} Formalización de las \textbf{7 Puertas de FOM-7}:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \emph{Congelación:} Pre-registro determinista del diseño
+    experimental y del plan inferencial.
+  \item
+    \emph{Ejecución:} Generación de resultados crudos por celda
+    experimental con semillas fijas.
+  \item
+    \emph{Auditoría:} Verificación de integridad de artefactos (filtrado
+    de ejecuciones nulas o corruptas).
+  \item
+    \emph{Armonización:} Agregación de métricas por bloques
+    homogeneizados (modelo \(\times\) tamaño muestra).
+  \item
+    \emph{Exportación:} Evaluación estadística no paramétrica (Pruebas
+    de Friedman y Nemenyi con ajuste de Holm).
+  \item
+    \emph{Perfilado:} Aislamiento de la varianza algorítmica (semilla)
+    frente a los efectos principales del método.
+  \item
+    \emph{Reporte:} Registro trazable de afirmaciones científicas
+    delimitadas por constructo y dominio.
+  \end{enumerate}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Artículo B: El Duelo Comparativo --- LIME vs SHAP a
+Escala}\label{artuxedculo-b-el-duelo-comparativo-lime-vs-shap-a-escala}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Enviado a \emph{CLEI Electronic Journal (CLEIej)}
+  (2026-10-04, Subm. \#1196).
+\item
+  \textbf{Objetivo:} Ejecutar una comparación empírica masiva entre los
+  dos estándares de la industria (LIME y SHAP).
+\item
+  \textbf{Aporte:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Demostración empírica de las ventajas teóricas de SHAP en
+    estabilidad y fidelidad.
+  \item
+    Identificación de la fragilidad estocástica de LIME: al muestrear
+    aleatoriamente perturbaciones locales, LIME exhibe alta variabilidad
+    en los coeficientes asignados.
+  \item
+    LIME compensa esta limitación mediante un menor coste computacional
+    y una mayor parsimonia en sus explicaciones.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Artículo C: Dinámica de Escalabilidad y
+Resistencia}\label{artuxedculo-c-dinuxe1mica-de-escalabilidad-y-resistencia}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Listo para envío a \emph{Tecnología en Marcha}
+  (Edición Especial IA, Zenodo v0.12.0 DOI:
+  \texttt{10.5281/zenodo.23165763}).
+\item
+  \textbf{Objetivo:} Analizar cómo se comportan los explicadores cuando
+  varía el tamaño de muestra del conjunto de datos y la profundidad de
+  los modelos.
+\item
+  \textbf{Aporte:} Cuantificación del punto de degradación de los
+  sustitutos locales. Se demuestra que incrementar el tamaño del
+  conjunto de datos de fondo mejora la estabilidad de KernelSHAP a costa
+  de un crecimiento cuadrático en el tiempo de procesamiento.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Artículo D: Benchmark Empírico Aplicado (UCI Adult
+Income)}\label{artuxedculo-d-benchmark-empuxedrico-aplicado-uci-adult-income}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Listo para envío a \emph{Tecnología en Marcha}
+  (Edición Especial IA).
+\item
+  \textbf{Objetivo:} Aplicar el protocolo FOM-7 sobre un caso de estudio
+  de alta relevancia social y económica (clasificación de ingresos
+  tabulares \emph{UCI Adult Income}).
+\item
+  \textbf{Aporte:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Evaluación sobre 300 celdas planificadas
+    (\(5 \text{ modelos} \times 4 \text{ métodos} \times 5 \text{ semillas} \times 3 \text{ tamaños}\)),
+    obteniendo 275 celdas calificadas tras la auditoría FOM-7.
+  \item
+    Comparación de 5 familias de modelos predictivos: Logistic
+    Regression, Random Forest, XGBoost, SVM (RBF) y MLP.
+  \item
+    Confirmación de que las explicaciones estructurales (Anchors) y
+    contrafactuales (DiCE) deben evaluarse en dimensiones distintas a la
+    simple atribución de características.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Artículo E: Fronteras de Pareto y Gobernanza de
+XAI}\label{artuxedculo-e-fronteras-de-pareto-y-gobernanza-de-xai}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Enviado a \emph{Computación y Sistemas (CIC-IPN)}
+  (2026-10-04, Subm. \#6783).
+\item
+  \textbf{Objetivo:} Resolver el problema de selección de explicadores
+  mediante optimización multiobjetivo y análisis de frontera de
+  eficiencia (Pareto).
+\item
+  \textbf{Aporte:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Demostración de que ningún método domina simultáneamente en todas
+    las métricas.
+  \item
+    Formulación de criterios de gobernanza:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \textbf{Entornos de Alta Severidad (Auditoría Médica/Legal):}
+      Selección obligatoria de \textbf{SHAP} debido a su consistencia
+      axiomática y alta estabilidad.
+    \item
+      \textbf{Entornos de Tiempo Real / Producción de Alta Velocidad:}
+      Selección recomendada de \textbf{LIME} o \textbf{TreeSHAP} para
+      equilibrar coste y latencia.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Artículo F: Alineación Semántica y Evaluación por
+Humanos/LLM}\label{artuxedculo-f-alineaciuxf3n-semuxe1ntica-y-evaluaciuxf3n-por-humanosllm}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} En desarrollo inicial (\emph{Journal of Computer
+  Sciences Institute}).
+\item
+  \textbf{Objetivo:} Conectar las métricas computacionales objetivas con
+  la percepción humana de explicabilidad y la evaluación mediante
+  Modelos de Lenguaje (LLM-as-a-Judge).
+\item
+  \textbf{Aporte:} Protocolo de validación cruzada para verificar si los
+  rankings matemáticos de fidelidad y estabilidad se traducen en una
+  mejor comprensión y confianza por parte de los usuarios finales.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Síntesis y Relevancia para la Defensa de
+Tesis}\label{suxedntesis-y-relevancia-para-la-defensa-de-tesis}
+
+La narrativa unificada de esta tesis doctoral demuestra que la
+evaluación de XAI no es una búsqueda de ``el mejor método único'', sino
+la construcción de un \textbf{sistema de perfiles explicativos
+trazables}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Problema de Investigación:} La falta de rigor y la
+  contradicción entre explicadores agnósticos.
+\item
+  \textbf{Solución Metodológica:} El protocolo \textbf{FOM-7} como marco
+  de gobernanza y control de varianza.
+\item
+  \textbf{Evidencia Empírica (Papeles B, C, D):} Cuantificación precisa
+  del comportamiento de LIME, SHAP, Anchors y DiCE.
+\item
+  \textbf{Aplicación Práctica (Papeles E, F):} Guía de selección basada
+  en fronteras de Pareto y alineación con las necesidades del usuario.
+\end{enumerate}
+
+Este trabajo transforma la explicabilidad en una evidencia científica
+reproducible, defendible y auditable.
+
+\end{document}

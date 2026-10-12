@@ -1,0 +1,340 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\section{La Historia Detrás de la Tesis: De Cajas Negras a Explicaciones
+Confiables}\label{la-historia-detruxe1s-de-la-tesis-de-cajas-negras-a-explicaciones-confiables}
+
+\emph{Una narrativa sencilla sobre Inteligencia Artificial Explicable
+(XAI), pensada para no expertos y útil como estructura de la defensa
+doctoral.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Acto 1: La Pregunta Inicial --- El Robot Mago y la Caja
+Negra}\label{acto-1-la-pregunta-inicial-el-robot-mago-y-la-caja-negra}
+
+Imagina que en tu escuela contratan a un robot superinteligente para
+tomar decisiones importantes. Por ejemplo: - Quién entra al equipo de
+fútbol. - Quién recibe una beca de estudios. - Quién necesita ayuda
+extra en matemáticas.
+
+El robot analiza miles de datos en un segundo y anuncia su veredicto:
+\textbf{``Aceptado''} o \textbf{``Rechazado''}.
+
+Cuando le preguntas al robot: \emph{«Oye, ¿por qué me rechazaste?»}, el
+robot no responde nada. Se queda en silencio. Su cerebro es un laberinto
+gigante de millones de números que nadie puede leer a simple vista.
+
+En el mundo real de la tecnología, a estos modelos de Inteligencia
+Artificial los llamamos \textbf{``Cajas Negras''}. Se usan en hospitales
+para detectar enfermedades, en bancos para dar préstamos y en sistemas
+legales.
+
+Pero surge un problema grave: \textbf{no podemos ni debemos confiar a
+ciegas en un robot mago si no sabemos cómo toma sus decisiones.} ¿Qué
+pasa si el robot está cometiendo un error? ¿O si está discriminando a
+alguien por una razón equivocada?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Acto 2: El Dilema --- ¿Quién Explica al
+Explicador?}\label{acto-2-el-dilema-quiuxe9n-explica-al-explicador}
+
+Para resolver este problema, los científicos inventaron a los
+\textbf{``Detectives de IA''} (en ciencia los llamamos \emph{métodos de
+explicabilidad post-hoc}, como LIME, SHAP, Anchors o DiCE).
+
+El trabajo de un detective de IA es mirar a la caja negra por fuera,
+hacerle preguntas rápidas y decirle a las personas en español sencillo:
+\textgreater{} \emph{«El robot te rechazó la beca por tus notas en
+historia, no por tu edad».}
+
+¡Parecía la solución perfecta! Pero pronto los científicos descubrieron
+un nuevo dilema: \textbf{los detectives a veces se contradicen entre
+sí.}
+
+Si le pides una explicación al detective \textbf{LIME}, te dice una
+cosa. Si le pides la explicación al detective \textbf{SHAP} sobre la
+misma persona, ¡te dice algo diferente!
+
+Aquí nace la \textbf{motivación central de mi Tesis de Doctorado}:
+\textgreater{} \emph{Si las herramientas que nos explican la IA tampoco
+son perfectas y se contradicen\ldots{} ¿cómo sabemos cuál dice la
+verdad? ¿Quién evalúa a los evaluadores?}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Acto 3: Las 6 Piezas del Rompecabezas (Los Artículos A al
+F)}\label{acto-3-las-6-piezas-del-rompecabezas-los-artuxedculos-a-al-f}
+
+Para resolver este rompecabezas, organizamos nuestra investigación en
+seis etapas conectadas entre sí, como los capítulos de una historia de
+detectives:
+
+\begin{verbatim}
+[Mago Caja Negra] ──> [Detectives XAI] ──> [¿En quién confiar?]
+                                                   │
+  ┌────────────────────────────────────────────────┴────────────────────────────────┐
+  │                                                                                 │
+  ▼                                                                                 ▼
+[Papel A: El Reglamento] ──> [Papel B: El Duelo] ──> [Papel C: Resistencia] ──> [Papel D: Caso Real]
+  (Protocolo FOM-7)          (LIME vs SHAP)          (Escalabilidad)           (UCI Adult)
+                                                                                    │
+  ┌─────────────────────────────────────────────────────────────────────────────────┘
+  │
+  ▼
+[Papel E: La Balanza] ──> [Papel F: Juicio Humano] ──> [¡Transparencia Defendible!]
+  (Trade-offs)              (Alineación con personas)
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{1. Papel A: El Reglamento para los Detectives (Protocolo
+FOM-7)}\label{papel-a-el-reglamento-para-los-detectives-protocolo-fom-7}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Publicado en \emph{Revista de Investigación
+  Multidisciplinaria Iberoamericana (RIMI)} (2026, DOI:
+  10.69850/rimi.vi3.307).
+\item
+  \textbf{La idea simple:} Antes de poner a trabajar a los detectives,
+  necesitamos un reglamento oficial de 7 pasos para asegurarnos de que
+  las pruebas sean válidas. Lo llamamos el protocolo \textbf{FOM-7}.
+\item
+  \textbf{Lo que descubrimos:} Creamos una forma justa de medir 5
+  propiedades clave:
+
+  \begin{enumerate}
+  \def\labelenumi{\arabic{enumi}.}
+  \tightlist
+  \item
+    \textbf{Fidelidad:} ¿La explicación dice la verdad sobre lo que hizo
+    la IA?
+  \item
+    \textbf{Estabilidad:} Si le preguntamos dos veces lo mismo,
+    ¿mantiene su respuesta o cambia de opinión?
+  \item
+    \textbf{Parsimonia:} ¿La explicación es corta y fácil de entender?
+  \item
+    \textbf{Coste:} ¿Cuánto tiempo y cálculo le toma al detective
+    responder?
+  \item
+    \textbf{Brecha de fidelidad:} ¿Qué tanto se equivoca al simplificar
+    el problema?
+  \end{enumerate}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{2. Papel B: El Gran Duelo --- LIME vs SHAP a
+Escala}\label{papel-b-el-gran-duelo-lime-vs-shap-a-escala}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Enviado a \emph{CLEI Electronic Journal (CLEIej)}
+  (2026-10-04, Subm. \#1196).
+\item
+  \textbf{La idea simple:} Pusimos a competir frente a frente a los dos
+  detectives más famosos del mundo en cientos de situaciones diferentes.
+\item
+  \textbf{Lo que descubrimos:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{SHAP} es como \emph{Sherlock Holmes}: es extremadamente
+    cuidadoso, nunca cambia de opinión (muy estable) y da respuestas muy
+    precisas, pero es muy lento y costoso.
+  \item
+    \textbf{LIME} es como un \emph{detective veloz}: responde rapidísimo
+    y da explicaciones muy breves, pero si el viento sopla (pequeños
+    cambios en los datos), a veces cambia un poco su versión.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{3. Papel C: La Prueba de Resistencia y
+Escalabilidad}\label{papel-c-la-prueba-de-resistencia-y-escalabilidad}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Listo para envío a \emph{Tecnología en Marcha}
+  (Edición Especial IA, borrador de 15 pág., Zenodo v0.12.0).
+\item
+  \textbf{La idea simple:} ¿Qué pasa cuando el problema se vuelve 10
+  veces más grande o los datos tienen ruido? ¿Los detectives resisten la
+  presión?
+\item
+  \textbf{Lo que descubrimos:} Evaluamos cómo se comportan los
+  explicadores cuando aumentamos el tamaño de la muestra y la
+  complejidad de los modelos. Identificamos los puntos exactos donde las
+  explicaciones dejan de ser confiables si no se controlan los
+  parámetros.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{4. Papel D: El Examen en el Mundo Real (Benchmark UCI
+Adult)}\label{papel-d-el-examen-en-el-mundo-real-benchmark-uci-adult}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Listo para envío a \emph{Tecnología en Marcha}
+  (Edición Especial IA, solicitud de cuenta pendiente).
+\item
+  \textbf{La idea simple:} Vamos a probar a todos los detectives en un
+  caso real importante: predecir los ingresos de las personas con el
+  conjunto de datos \emph{UCI Adult Income}.
+\item
+  \textbf{Lo que descubrimos:} Evaluamos 5 familias de modelos (árboles,
+  redes neuronales, regresión logística, etc.) cruzados con 4 tipos de
+  explicadores. Demostramos en la práctica cómo se aplican las 7 puertas
+  del protocolo FOM-7 para obtener evidencia auditable en lugar de
+  suposiciones.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{5. Papel E: La Balanza de las Decisiones (Trade-offs y
+Gobernanza)}\label{papel-e-la-balanza-de-las-decisiones-trade-offs-y-gobernanza}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} Enviado a \emph{Computación y Sistemas (CIC-IPN)}
+  (2026-10-04, Subm. \#6783).
+\item
+  \textbf{La idea simple:} Ningún detective es perfecto en todo. Elegir
+  un explicador es como elegir un vehículo: un auto deportivo es veloz
+  pero caro; una bicicleta es barata pero lenta.
+\item
+  \textbf{Lo que descubrimos:} Construimos la ``Frontera de Selección''.
+  Le enseñamos a las organizaciones y auditores cómo elegir la mejor
+  herramienta según su necesidad:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si estás en un \textbf{hospital} o un \textbf{juicio}, usa
+    \textbf{SHAP} (máxima estabilidad y fidelidad).
+  \item
+    Si estás en una \textbf{app móvil} que necesita responder en
+    milisegundos, usa \textbf{LIME} (rapidez y brevedad).
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{6. Papel F: ¿Los Humanos y los Robots Entienden lo
+Mismo?}\label{papel-f-los-humanos-y-los-robots-entienden-lo-mismo}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Estado:} En desarrollo inicial (\emph{Journal of Computer
+  Sciences Institute}).
+\item
+  \textbf{La idea simple:} Al final del día, las explicaciones son para
+  personas de carne y hueso. ¿Realmente los humanos entienden lo mismo
+  que las métricas matemáticas?
+\item
+  \textbf{Lo que exploramos:} Diseñamos un plan para comparar si los
+  juicios de las personas (y de modelos de lenguaje usados como jueces)
+  coinciden con las mediciones computacionales del benchmark.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Acto 4: El Gran Final --- La Narrativa para la Defensa
+Doctoral}\label{acto-4-el-gran-final-la-narrativa-para-la-defensa-doctoral}
+
+Esta historia une todo el trabajo de investigación en un mensaje claro y
+motivador para la presentación de la tesis:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{El Problema:} La Inteligencia Artificial es poderosa pero
+  opaca. Necesitamos explicaciones.
+\item
+  \textbf{La Complicación:} Las herramientas de explicación existen,
+  pero sin evaluación rigurosa pueden dar falsas ilusiones de
+  transparencia.
+\item
+  \textbf{La Solución (FOM-7):} Creamos un protocolo estandarizado de 7
+  puertas para auditar las explicaciones de forma reproducible.
+\item
+  \textbf{La Evidencia (Papeles A-E):} Probamos, comparamos y medimos
+  los límites reales de herramientas como LIME, SHAP, Anchors y DiCE.
+\item
+  \textbf{El Impacto (Papel F y Capítulos):} Le damos a la sociedad y a
+  los científicos un mapa claro para pasar de la \textbf{confianza ciega
+  en los algoritmos} a una \textbf{supervisión transparente, responsable
+  y centrada en las personas}.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Nota: Este documento sirve como mapa narrativo conceptual para la
+presentación doctoral y para enriquecer la divulgación del trabajo de
+investigación, mantenido de manera independiente al capítulo de libro.}
+
+\end{document}
