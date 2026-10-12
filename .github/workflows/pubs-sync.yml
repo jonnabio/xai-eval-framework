@@ -30,6 +30,11 @@ jobs:
       - name: Verify Paper C against its result files and its registration
         run: python3 scripts/pubs/register_paper_c.py --check
 
+      # Paper F: the same check. paper_f.tex and Table 1 are what the build renders from
+      # the result files, and the registry block is current.
+      - name: Verify Paper F against its result files and its registration
+        run: python3 scripts/pubs/register_paper_f.py --check
+
       # Report-only: Paper B+C numbers that Paper A prints, found without the
       # registry (RCA-001, review F02). The submission gate runs it --strict.
       - name: Report numbers shared with the published Paper A

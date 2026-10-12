@@ -54,6 +54,7 @@ RES = ROOT / "outputs" / "analysis" / "paper_f"
 TECTONIC = ROOT / "tools" / "tectonic-portable" / (
     "tectonic.exe" if sys.platform == "win32" else "tectonic")
 MAX_PAGES = 8
+HEADER = "%% GENERATED from paper_f_template.tex by scripts/build_paper_f.py. Do not edit.\n"
 MAX_ABSTRACT = 800  # characters, spaces included (VENUE_JCSI.md)
 ADULT_MOST = 12     # "at least 12 of the 15 other datasets", the count printed in the text
 WORDS = ("zero one two three four five six seven eight nine ten eleven twelve thirteen "
@@ -109,6 +110,8 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
             * (1 + cfg["measures"]["stability_copies"]),
         }
         out["sum"] = {k: {"value": str(v)} for k, v in size.items()}
+        # The rows of Table 1, by dataset key (read by the claim registry, not by the text).
+        out["data"] = {r["key"]: r for r in read(RES / "datasets.csv")}
     if (RES / "power_simulation.csv").exists():
         out["pow"] = {f"{r['k_datasets']}_{r['true_rho_bar']}": r
                       for r in read(RES / "power_simulation.csv")}
@@ -213,7 +216,8 @@ def dataset_table() -> str:
     return "\n".join(lines)
 
 
-def render(final: bool) -> tuple[Path, int]:
+def render_text() -> str:
+    """The template with every placeholder filled; nothing is written."""
     template = (F / "paper_f_template.tex").read_text(encoding="utf-8")
     data = tables()
     problems: list[str] = []
@@ -249,6 +253,11 @@ def render(final: bool) -> tuple[Path, int]:
     problems += [f"unresolved: {t}" for t in re.findall(r"<<[^>]*>>", out)]
     if problems:
         sys.exit("render failed:\n" + "\n".join(sorted(set(problems))[:20]))
+    return out
+
+
+def render(final: bool) -> tuple[Path, int]:
+    out = render_text()
     GEN.mkdir(exist_ok=True)
     (GEN / "tab_datasets.tex").write_text(dataset_table(), encoding="utf-8", newline="\n")
     body = out.split("\\begin{document}", 1)[1]
@@ -257,9 +266,8 @@ def render(final: bool) -> tuple[Path, int]:
         + body.count("\\paperfarchive") * (0 if "zenodo.org" in out or "doi.org/10.5281" in out else 1)
     if final and pending:
         sys.exit(f"--final: {pending} pending marks remain")
-    header = "%% GENERATED from paper_f_template.tex by scripts/build_paper_f.py. Do not edit.\n"
     target = F / "paper_f.tex"
-    target.write_text(header + out, encoding="utf-8", newline="\n")
+    target.write_text(HEADER + out, encoding="utf-8", newline="\n")
     return target, pending
 
 

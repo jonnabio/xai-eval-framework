@@ -746,4 +746,33 @@ def resolve(expr: str) -> float:
             raise MissingArtifact(f"paper_c {table}[{key}].{column}: {len(rows)} row(s) with a value")
         return float(rows[0][column]) * (100.0 if scale == ["x100"] else 1.0)
 
+    if kind == "paper_f":
+        # Paper F (rankings of explanation methods across datasets): one value of the
+        # tables that docs/reports/paper_f/scripts/build_paper_f.py reads from
+        # outputs/analysis/paper_f/, addressed as the placeholders of
+        # paper_f_template.tex address it.
+        #   paper_f:<alias>:<key>:<column>[:x100]
+        alias, key, column, *scale = args
+        try:
+            value = float(_paper_f_tables()[alias][key][column])
+        except (KeyError, ValueError) as exc:
+            raise MissingArtifact(f"paper_f {alias}[{key}].{column}: {exc!r}") from exc
+        return value * (100.0 if scale == ["x100"] else 1.0)
+
     raise MissingArtifact(f"unknown source expression: {expr}")
+
+
+_PAPER_F_TABLES: dict | None = None
+
+
+def _paper_f_tables() -> dict:
+    """The tables of the Paper F build, read once. The build uses the standard library only."""
+    global _PAPER_F_TABLES
+    if _PAPER_F_TABLES is None:
+        import importlib.util
+        path = ROOT / "docs" / "reports" / "paper_f" / "scripts" / "build_paper_f.py"
+        spec = importlib.util.spec_from_file_location("build_paper_f", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _PAPER_F_TABLES = module.tables()
+    return _PAPER_F_TABLES
