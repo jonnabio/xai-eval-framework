@@ -78,7 +78,7 @@ Of 24 pairwise orders found on the Adult dataset,
 12 hold on all 15 other datasets, but that of
 Anchors and DiCE on cost holds on 7. The method
 ranked first is the same on 11 to
-15 of the datasets; the order below it transfers less.
+15 of the 16 datasets.
 
 \medskip
 \textit{Keywords}: explainable artificial intelligence; LIME; SHAP; benchmark;
@@ -274,7 +274,7 @@ methods are then ranked in each dataset.
 The agreement between datasets is the mean Spearman correlation between the rankings of
 all 120 pairs of datasets, which is Kendall's coefficient of concordance
 $W$ corrected for the number of datasets $k$, $(kW-1)/(k-1)$. It is reported with a 95\%
-percentile bootstrap interval over datasets (10,000 resamples). The null hypothesis is
+percentile bootstrap interval over datasets (10,000 resamples; a dataset drawn twice is not paired with itself). The null hypothesis is
 that the rankings of different datasets are unrelated. It is tested with a one-sided
 permutation test: the four ranks are permuted independently inside each dataset, which
 makes the 24 possible orders equally likely in every dataset, 100,000 times. The $p$
@@ -308,9 +308,10 @@ which the pair is ordered as on Adult, with an exact binomial interval; the larg
 change of each method between two datasets; and the share of the variance of the
 1,280 run means that belongs to the method, to the dataset and to their
 interaction, with the seeds as replicates. The interaction is tested by permuting the
-method labels inside each block of dataset, classifier and seed (10,000 permutations).
+method labels inside each block of dataset, classifier and seed, after the means of the
+method and of the method by classifier are removed (10,000 permutations).
 
-\section{Results}
+\section{Selected results}
 
 %% SKELETON of 2026-10-11, written before the analysis was run. Every number is a
 %% placeholder read from outputs/analysis/paper_f/results/; the sentence printed for each
@@ -319,9 +320,9 @@ method labels inside each block of dataset, classifier and seed (10,000 permutat
 The run produced 1,280 runs and 256,000 explained
 instances in five complete seeds. A method returned no explanation, or
 exceeded the time limit, for 1,425 instances
-(0.56\%): 1,326 of DiCE,
-99 of Anchors, 0 of LIME and
-0 of SHAP. Three conditions
+(0.56\%). By method they are 1,326 for DiCE,
+99 for Anchors, 0 for LIME and
+0 for SHAP. Three conditions
 hold 90\% of them: DiCE on
 the random forest for Amazon\_employee\_access (770 of
 1,000 instances), DiCE on
@@ -349,13 +350,14 @@ the order of the methods generalises: it is shared between datasets and the inte
 For cost ($\bar{\rho}=$~0.87),
 the order of the methods generalises: it is shared between datasets and the interval lies above 0.5.
 
-The agreement between seeds inside a dataset is 0.95,
-0.97, 1.00 and
-0.98 for the four measures in the same order. On the
+The agreement between seeds inside a dataset is 0.948,
+0.973, 0.995 and
+0.975 for the four measures in the same order. On the
 instances that all four methods explained, the agreement between datasets is
 0.67, 0.85,
 0.84 and 0.87.
-The decision differs from the one above for zero of the four measures.
+The number of measures for which the decision differs from the one above is
+zero.
 
 Computed for each classifier alone, the agreement between datasets is, in the order
 faithfulness gap, stability, sparsity and cost: 0.73,
@@ -397,7 +399,7 @@ permutation $p$ of the interaction is $<$0.001,
 $<$0.001, $<$0.001 and
 $<$0.001.
 
-\section{Discussion and conclusions}
+\section{Result discussion and conclusions}
 
 The hypothesis is supported on each of the four measures: the order of the methods agrees
 between datasets more than chance. For stability, sparsity and cost the interval of the
@@ -408,7 +410,8 @@ order of undetermined strength. We report that outcome as the rule gives it.
 
 The agreement between datasets, from 0.67 to
 0.88, is below the agreement between seeds on every
-measure, which is 0.95 or more. Changing the dataset therefore
+measure, which runs from 0.948 to
+0.995. Changing the dataset therefore
 alters the order more than repeating the study on the same dataset does, and since the
 agreement between seeds is a conservative reference, the difference is not produced by
 the comparison. The interaction of method and dataset is significant on every measure.
@@ -417,12 +420,14 @@ first: SHAP has the largest faithfulness gap on 13 of the
 16 datasets and the highest stability on
 14, LIME is the fastest on
 15, and DiCE or Anchors gives the sparsest explanation on
-all. Below the first place the order moves. On the faithfulness gap LIME and Anchors each
-range from rank 1 to rank 4, and
-which of Anchors and DiCE is slower changes from one dataset to the next. For images,
-metric results on one dataset did not necessarily hold on
+all. The last place is as regular on two measures: DiCE is the least stable on every
+dataset and SHAP uses the most features on 14. The
+irregular part is specific. On the faithfulness gap LIME and Anchors each range from rank
+1 to rank 4, and which of Anchors
+and DiCE is slower changes from one dataset to the next (Table~\ref{tab:adult}). For
+images, metric results on one dataset did not necessarily hold on
 others~\cite{gevaert2024evaluating}; for these four methods on tabular data they mostly
-do, and the exceptions are found in the middle of the order.
+do.
 
 No method is first on all measures. The order on sparsity is close to the reverse of the
 order on faithfulness and stability (Table~\ref{tab:primary}), so a choice between the
@@ -435,7 +440,8 @@ even where the order can.
 categorical variable counts as several features. Anchors and DiCE are compared with LIME
 and SHAP through the features they name, not through their native output; they name few
 features, and the faithfulness gap masks only the features an explanation names, so part
-of their low gap reflects a short explanation. Each method has one configuration, and
+of their low gap may reflect a short explanation. Each method has one configuration; DiCE
+uses random search, which may account for part of its low stability, and
 with it the kernel variant of SHAP returns at most 10 non-zero attributions while the
 tree variant returns one for every feature, which affects the sparsity and stability of
 SHAP. The failures are concentrated in three conditions of DiCE; the analysis of the
@@ -445,17 +451,21 @@ independent than their number suggests; in a comparison made after the results w
 seen, these four agree with each other on the faithfulness gap more than the other pairs
 of datasets do, so that estimate is probably favourable. With four methods a ranking
 takes few values, and the value 0.5 of the rule is a convention. The datasets are binary
-classification tasks from one repository, and cost is wall time on one machine.
+classification tasks from one repository, and cost is wall time on one machine. Two
+analyses depart from the plan, as its log records: the variance shares are a balanced
+decomposition of sums of squares and not the mixed model named there, and cost relative
+to the prediction time was not computed.
 
 The conclusions are:
 \begin{enumerate}
 \setlength{\itemsep}{0pt}
 \item The order of LIME, SHAP, Anchors and DiCE found on one tabular dataset is largely
-a property of the methods: it agrees across 16 datasets on
+a property of the methods as configured here: it agrees across 16 datasets on
 stability, sparsity and cost, and on the faithfulness gap with a strength that this
 study does not determine.
-\item What transfers best is the first place on a measure. The order below it, and above
-all the order of Anchors and DiCE, should not be taken from a single dataset.
+\item The method ranked first on a measure is the same on most datasets. The order of
+LIME and Anchors, and above all that of Anchors and DiCE, changes between datasets and
+should not be taken from a single one.
 \item The order on one measure does not transfer to another measure: SHAP, ranked
 first on faithfulness and stability, is ranked last on sparsity.
 \end{enumerate}
@@ -476,8 +486,8 @@ double-blind review.
 \fi
 
 %% The journal requires this declaration, with the name of the tool and the reason for
-%% its use. Text approved by the author "for now" on 2026-10-05; the author confirms it
-%% before submission, and it is not changed without the author's approval.
+%% its use. Text approved by the author on 2026-10-05 and confirmed for submission on
+%% 2026-10-12; it is not changed without the author's approval.
 \section*{Declaration on the use of generative AI}
 The author used the AI tool Claude (Anthropic), under the author's direction, to help
 write the analysis code, edit the English text and format the references. The research

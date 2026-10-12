@@ -166,6 +166,13 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
     if (res / "rank_change.csv").exists():
         change = read(res / "rank_change.csv")
         out["chg"] = {f"{r['measure']}_{r['explainer']}": r for r in change}
+        # On how many datasets a method is ranked last, counted from ranks.csv.
+        for r in read(res / "ranks.csv"):
+            worst = max(float(r[e]) for e in METHODS)
+            for e in METHODS:
+                row = out["chg"][f"{r['measure']}_{e}"]
+                row["times_last"] = str(int(row.get("times_last", 0))
+                                        + (float(r[e]) == worst and worst == len(METHODS)))
         for m in {r["measure"] for r in change}:
             part = [r for r in change if r["measure"] == m]
             out["chg"][m] = {
