@@ -20,6 +20,7 @@
        adult   .../results/pairs_vs_adult.csv                    <measure>_<method>-<method>; all
        fam     .../results/posthoc_defect_family.csv             <kept>_<measure>; <measure>; all
        desc    .../results/posthoc_descriptives.csv              <metric>_<key>
+       proto   .../results/posthoc_protocol.csv                  <metric>_<key>
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
    (lower case, capitalised); u1, u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
@@ -66,18 +67,21 @@ INPUT = re.compile(r"<<input:([^:<>]+):([^<>]+)>>")
 STRATA = {"numeric": "numeric", "mixed": "mixed", "categorical": "categorical"}
 # The sentence printed for each decision of the rule. Written on 2026-10-11, before the
 # analysis was run; the keys are the strings paper_f_analyze.py writes to primary.csv.
+# Reworded on 2026-10-12 (plan section 12, Codex review): the same four classes and the
+# same assignment; "generalises" is printed as the class the rule assigns, and an
+# undetermined class is said to be uncertainty about the threshold, not about the estimate.
 OUTCOME = {
     "no evidence that the order is shared":
         "there is no evidence that the order of the methods is shared between datasets",
     "the order generalises":
-        "the order of the methods generalises: it is shared between datasets and the "
-        "interval lies above 0.5",
+        "the order of the methods is shared between datasets and the interval lies above "
+        "0.5, the class the rule calls generalising",
     "the order is shared only weakly":
         "the order of the methods is shared between datasets only weakly: the interval "
         "lies below 0.5",
     "shared, strength not determined":
-        "the order of the methods is shared between datasets, with a strength that is not "
-        "determined: the interval contains 0.5",
+        "the order of the methods is shared between datasets and the interval contains "
+        "0.5, so the rule leaves its class undetermined",
 }
 TERMS = {"explainer": "method", "dataset": "dataset", "explainer x dataset": "interaction",
          "explainer x dataset x model": "threeway"}
@@ -175,6 +179,10 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
         # Descriptive counts made after the results (plan section 12, 2026-10-12).
         out["desc"] = {f"{r['metric']}_{r['key']}": r
                        for r in read(res / "posthoc_descriptives.csv")}
+    if (res / "posthoc_protocol.csv").exists():
+        # Counts and the audit of resumed jobs (plan section 12, 2026-10-12, Codex review).
+        out["proto"] = {f"{r['metric']}_{r['key']}": r
+                        for r in read(res / "posthoc_protocol.csv")}
     if (res / "variance.csv").exists():
         out["var"] = {f"{r['measure']}_{TERMS[r['term']]}": r for r in read(res / "variance.csv")
                       if r["analysis"] == "mixed model (balanced)" and r["term"] in TERMS}

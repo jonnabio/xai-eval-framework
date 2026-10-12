@@ -10,6 +10,11 @@ Every number below is read from a result file, named in each section. This repor
 interprets them; it adds no test. Two descriptive summaries that the plan does not list
 are marked "not planned".
 
+**Scope, added 2026-10-12 after three reviews.** The paper is framed as agreement between
+rankings under fixed settings and one evaluation protocol based on the features an
+explanation names. It does not rank explanation quality. Sections 1 and 3 below were
+written on 2026-10-11, before the reviews; read them with sections 9a to 9c.
+
 ## 1. Answer to the question
 
 **Question:** does the order of four explanation methods, found on one tabular dataset,
@@ -209,6 +214,27 @@ F04, F07). Descriptive; no test.
   price of the two search methods), and the faithfulness gap grows with the number of
   features named. Sections 1 and 3 of this report were written before these counts and
   should be read with them.
+
+## 9c. Counts and audit made after the results: the protocol
+
+Added 2026-10-12 (`posthoc_protocol.csv`, `audit_resume.csv`; plan section 12; Codex
+review F07, F08, F10, F11). Descriptive; no test.
+
+- Anchors rules that name more features than the gap masks: 18% of the explained
+  instances; more than five: 10%. There the features used are chosen by column index.
+- DiCE faster than Anchors, of 16 datasets: 8 with the planned mean (failures take the
+  worst value), 9 with the mean of successful instances, 14 with their median.
+- Median difference between Anchors and DiCE over the datasets: 0.05 in the faithfulness
+  gap and 0.05 in sparsity, against a median range of the four methods of 0.13 and 0.54.
+  LIME and Anchors: 0.06 in the gap, 0.14 in stability (range 0.60). LIME and SHAP: 0.02
+  in the gap.
+- Median cost ratio: 1.9 between Anchors and DiCE, 7.2 between LIME and SHAP, 246 between
+  the slowest and the fastest method.
+- Restarts: by the file times of the run's working directory, no LIME or SHAP job was
+  stopped and started again (the time on disk of each exceeds the time of its rows by
+  0.4 s at most); 15 Anchors and 7 DiCE jobs were, which changes nothing for them since
+  their draws depend on the seed and the instance only. This audit is a dated record: it
+  cannot be repeated from the archive.
 
 ## 10. Reported, not ranked (`secondary.csv`)
 
