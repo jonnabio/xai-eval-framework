@@ -7,7 +7,8 @@ Reads outputs/analysis/paper_f/results/ (written by scripts/paper_f_analyze.py) 
 to docs/reports/paper_f/:
 
     generated/tab_primary.tex   mean rank of each method per measure, the agreement between
-                                datasets, its interval, the corrected p, the ceiling
+                                datasets, its interval, the corrected p, the agreement
+                                between seeds
     generated/tab_adult.tex     for each pair of methods, the share of the other datasets
                                 where the pair is ordered as on Adult
     figures/fig1.pdf, .png      rank of each method on each dataset, one panel per measure
@@ -50,12 +51,12 @@ def primary_table(results: Path) -> str:
     lines = [r"\begin{table*}[t]", r"\centering",
              r"\caption{Mean rank of each method over the datasets (1 = best) and agreement of "
              r"the rankings between datasets: mean rank correlation $\bar{\rho}$, its 95\% "
-             r"bootstrap interval, the Holm-corrected permutation $p$, and the ceiling given by "
-             r"the agreement between seeds inside a dataset.}",
+             r"bootstrap interval, the Holm-corrected permutation $p$, and the agreement "
+             r"between seeds inside a dataset.}",
              r"\label{tab:primary}", r"\small",
              r"\begin{tabular}{@{}lrrrrrcrr@{}}", r"\toprule",
              "Measure & " + " & ".join(n for _, n in METHODS)
-             + r" & $\bar{\rho}$ & 95\% interval & $p$ & Ceiling \\", r"\midrule"]
+             + r" & $\bar{\rho}$ & 95\% interval & $p$ & Seeds \\", r"\midrule"]
     for key, label in MEASURES:
         r = t.loc[key]
         ranks = " & ".join(f"{r[f'mean_rank_{m}']:.2f}" for m, _ in METHODS)

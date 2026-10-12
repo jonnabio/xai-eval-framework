@@ -14,14 +14,16 @@
 %% made by defining \fullversion before this file.
 %%
 %% DRAFT of 2026-10-05: introduction and methods follow ANALYSIS_PLAN.md (version 2).
-%% The experiment has not been run. Every result is a visible "[pending]" mark; no
-%% number of the results, discussion or conclusions exists yet.
+%% 2026-10-11: the Results section is a skeleton wired to the analysis files, written
+%% before the analysis was run. No number of the results, discussion or conclusions is
+%% typed by hand: each is a placeholder or a visible "[pending]" mark.
 \documentclass[10pt,a4paper,twocolumn]{article}
 \usepackage[top=25mm,bottom=25mm,left=20mm,right=20mm,columnsep=10mm]{geometry}
 \usepackage{fontspec}
 \setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
   ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{array}
@@ -82,17 +84,29 @@ jonnabio@gmail.com (J. Herrera-V\'asquez). ORCID:
 
 \section{Introduction}
 
-A model that decides on credit, hiring or medical risk is often too complex to be read
-directly, and post-hoc explanation methods are used to say which inputs drove a
-prediction. LIME fits a local linear model around the instance~\cite{ribeiro2016why},
-SHAP distributes the prediction among the features with Shapley
-values~\cite{lundberg2017unified}, Anchors returns a rule that keeps the
-prediction with high probability~\cite{ribeiro2018anchors}, and DiCE returns
-counterfactual instances that change it~\cite{mothilal2020dice}. Surveys of the field
-describe these methods and list the evaluation of explanations among its open
-problems~\cite{longo2024manifesto,mersha2024survey}, also for tabular
-data~\cite{obrienquinn2024tabular,santana2026tabular}. A practitioner has to choose
-among the methods, and comparative studies are the usual guide.
+A model that decides on credit or medical risk is often an ensemble of trees or a neural
+network, too complex to be read directly~\cite{cerneviciene2024finance}. Those who decide
+with such a model and those affected by its decisions need to know which inputs drove a
+prediction, and they do not need the same explanation~\cite{kim2024stakeholder}. Post-hoc
+explanation methods answer in three forms: LIME~\cite{ribeiro2016why} and
+SHAP~\cite{lundberg2017unified} assign a weight to every feature, Anchors returns a rule
+that keeps the prediction with high probability~\cite{ribeiro2018anchors}, and DiCE
+returns counterfactual instances that change it~\cite{mothilal2020dice}. The methods
+often disagree on the same prediction, and practitioners resolve the disagreement with
+ad hoc heuristics~\cite{krishna2022disagreement}. Comparative studies, which score the
+methods on properties such as faithfulness, stability, sparsity and cost, are therefore
+the usual guide to a choice. Surveys list the evaluation of explanations among the open
+problems of the field~\cite{longo2024manifesto,mersha2024survey}, also for tabular
+data~\cite{obrienquinn2024tabular,santana2026tabular}.
+
+The product of a comparative study is an order: on a given measure, one method is better
+than another. A reader who adopts the method ranked first applies it to other data, and
+so relies on an assumption the study seldom tests: that the order is a property of the
+methods and not of the dataset on which they were compared. A large benchmark makes a
+related criticism of current studies, which examine few methods and metrics, ignore the
+model architecture and the nature of the input data, and yield unreliable
+rankings~\cite{klein2024maze}. If the order changes from one dataset to the next, a
+result obtained on a single benchmark says little about the choice a practitioner faces.
 
 \subsection{Related work}
 
@@ -105,23 +119,21 @@ appear~\cite{bello2025strength,sithakoul2024beexai,pereira2026local}. Where a gr
 truth for the explanation can be built, methods differ clearly in
 fidelity~\cite{mironicolau2024fidelity}.
 
-The methods compared here have known weaknesses. SHAP and LIME depend strongly on the
-model and on collinear features~\cite{salih2024perspective}, they can assign importance
-to features that a model with known rules does not use~\cite{hooshyar2024problems}, and
-Shapley values have been criticised as a basis for
-explanations~\cite{huang2024failings}. Different methods can explain the same
-prediction differently, and measures of their agreement have been
-proposed~\cite{parashar2026agreement,gao2026uncertainty}. Rule-based and counterfactual
-explanations for tabular data are active lines of
+The methods compared here have documented weaknesses: SHAP and LIME depend on the model
+and on collinear features~\cite{salih2024perspective} and can credit features that a
+model with known rules does not use~\cite{hooshyar2024problems}, Shapley values are
+criticised as a basis for explanations~\cite{huang2024failings}, and different methods
+explain the same prediction
+differently~\cite{parashar2026agreement,gao2026uncertainty}. Rule-based and
+counterfactual explanations remain active lines of
 work~\cite{tekin2026fuzzy,redelmeier2024mcce}. Applied studies compare the methods on
 one task: three methods on five datasets of different types in this
 journal~\cite{kuszewska2026comparative}, four importance measures on one medical
 dataset~\cite{biesaga2026comparison}, and LIME and SHAP on the prediction of software
 issues~\cite{schulte2024studying}.
 
-A comparison made on one dataset leaves a question open: would the order of the methods
-be the same on another? For attribution maps of images the answer was negative: metric
-results on one dataset did not necessarily hold on
+Whether an order found on one dataset holds on another has been examined for images: for
+attribution maps, metric results on one dataset did not necessarily hold on
 others~\cite{gevaert2024evaluating}. A recent benchmark of tabular classifiers
 curates a representative collection of datasets~\cite{erickson2025tabarena}, and
 tabular data are heterogeneous in feature types, cardinality and
@@ -179,9 +191,7 @@ The four explanation methods are also used with one configuration for all datase
 no tuning: LIME with 1,000 samples, 10 features and a kernel width of 3; SHAP with 50
 background rows, in its exact tree variant for the two tree models and its kernel variant
 for the other two; Anchors with a precision threshold of 0.95; and DiCE with random
-search for one counterfactual. Explanations are computed on the encoded features. An
-Anchors rule is read as the set of features it uses, and a counterfactual as the features
-it changes with the size of each change.
+search for one counterfactual. Explanations are computed on the encoded features.
 
 \subsection{Research scenario}
 
@@ -209,22 +219,33 @@ In total the design has <<sum:fits:value:int>> fitted classifiers
 requires 10 further explanations of every instance, so the design calls for
 <<sum:explanations:value:int>> explanations. The seeds are run one after another, and a
 seed enters the analysis only when all its <<sum:runs_seed:value:d>> runs are complete, so
-the analysed data are balanced whatever the number of seeds. \pending{number of complete
-seeds analysed, and the reason if fewer than five} The analysis is run once, after the
-last seed.
+the analysed data are balanced whatever the number of seeds. The analysis below uses
+<<run:all:seeds:w>> complete seeds. It is run once, after the last seed.
 
 \subsection{Measures}
 
-Four measures are defined for all four methods and are used to rank them.
-\textit{Faithfulness gap}: the absolute change of the predicted probability when the
-features named by the explanation, up to the top 20\% of all features, are replaced by
-their training mean or mode; higher is better. \textit{Stability}: the mean Jaccard
-index between the five top features of the explanation and
-those of the explanations of 10 perturbed copies of the instance, where numeric features
-receive Gaussian noise of 0.05 standard deviations; higher is better. \textit{Sparsity}:
-the share of features the explanation does not use; higher is better. \textit{Cost}: the
-time to produce one explanation; lower is better. A failed instance takes the worst value
-observed for its dataset and classifier, so that failures cannot improve a mean.
+The four methods return different objects, so each explanation of an instance $x$ with
+$d$ encoded features is first reduced to a vector of non-negative weights
+$w\in\mathbb{R}^{d}$: the absolute coefficients of LIME, the absolute Shapley values of
+SHAP, $w_j=1$ for the features of the Anchors rule, and $w_j=|x'_j-x_j|$ for the
+counterfactual $x'$ of DiCE; every other weight is zero. Let $U=\{j: w_j>0\}$ be the
+features the explanation uses and $T_k$ the $k$ features of $U$ with the largest weights.
+Four measures are defined for all four methods and are used to rank them. With $f$ the
+predicted probability of the positive class, the \textit{faithfulness gap} is
+\begin{equation}
+G=\left|f(x)-f(\tilde{x})\right|,\qquad m=\max(1,\lceil 0.2\,d\rceil),
+\end{equation}
+where $\tilde{x}$ is $x$ with the features of $T_m$ replaced by their training mean
+(numeric) or mode (categorical). \textit{Stability} is
+\begin{equation}
+S=\frac{1}{10}\sum_{c=1}^{10}\frac{|T_5(x)\cap T_5(x^{(c)})|}{|T_5(x)\cup T_5(x^{(c)})|},
+\end{equation}
+where $x^{(c)}$ is a copy of $x$ whose numeric features receive Gaussian noise of 0.05
+standard deviations; a copy that cannot be explained counts as 0. \textit{Sparsity} is
+$1-|U|/d$, and \textit{cost} is the time to produce one explanation. Higher is better for
+$G$, $S$ and sparsity, lower for cost. A failed instance takes the worst value observed
+for its dataset and classifier, so that failures cannot improve a mean; the analysis is
+repeated on the instances that all four methods explained.
 
 \subsection{Statistical analysis}
 
@@ -233,9 +254,8 @@ The unit of analysis is the dataset: the hypothesis is about datasets, and the
 Instances, classifiers and seeds are not counted as independent evidence; they make the
 ranking of each dataset less noisy. For each dataset, method and measure, the mean over
 the instances of a run is taken first, and then the mean of the
-<<sum:runs_dataset:value:d>> runs (four classifiers, <<sum:seeds:value:w>> seeds), which
-rest on <<sum:inst_dataset:value:int>> explained instances. The four methods are then
-ranked in each dataset.
+<<sum:runs_dataset:value:d>> runs (four classifiers, <<sum:seeds:value:w>> seeds). The four
+methods are then ranked in each dataset.
 
 The agreement between datasets is the mean Spearman correlation between the rankings of
 all <<sum:pairs:value:d>> pairs of datasets, which is Kendall's coefficient of concordance
@@ -261,16 +281,15 @@ seed, so the value is a conservative reference and not a strict upper bound.
 The decision rule was fixed in advance. With a corrected $p$ below 0.05, the order is
 said to generalise if the interval lies above 0.5, to be shared only weakly if it lies
 below 0.5, and to be of undetermined strength otherwise. The number of datasets was checked
-by a simulation made before the experiment (20,000 simulated studies for each case, four
-methods). With sixteen datasets the test rejects in <<pow:16_0.0:power:pct1>>\% of the
-studies when the true correlation is 0, close to its nominal level of 5\%, in
-<<pow:16_0.2:power:pct>>\% when it is 0.2 and in more than 99.9\% when it is 0.5; with
-four datasets it rejects in <<pow:4_0.5:power:pct>>\% when it is 0.5. With sixteen
-datasets, the estimate of a true correlation of 0.5 falls between
+by a simulation made before the experiment (20,000 simulated studies for each case). With
+sixteen datasets the test rejects in <<pow:16_0.0:power:pct1>>\% of the studies when the
+true correlation is 0, in <<pow:16_0.2:power:pct>>\% when it is 0.2 and in more than
+99.9\% when it is 0.5, and the estimate of a true correlation of 0.5 falls between
 <<pow:16_0.5:rho_bar_hat_p2_5:u2>> and <<pow:16_0.5:rho_bar_hat_p97_5:u2>> in 95\% of the
 studies, which is why the rule has an outcome of undetermined strength.
 
-Three further analyses are reported: for each pair of methods, the share of datasets in
+Four further analyses are reported: the agreement between datasets for each
+classifier alone; for each pair of methods, the share of datasets in
 which the pair is ordered as on Adult, with an exact binomial interval; the largest rank
 change of each method between two datasets; and the share of the variance of the
 <<sum:runs:value:int>> run means that belongs to the method, to the dataset and to their
@@ -279,11 +298,84 @@ method labels inside each block of dataset, classifier and seed (10,000 permutat
 
 \section{Results}
 
-\pending{The experiment has not been run. This section will hold: Table 2, mean rank of
-each method per measure with the mean rank correlation, its interval, the corrected p,
-the agreement between seeds and the decision; Figure 1, the rank of each method on each dataset, one
-panel per measure; Table 3, agreement with the order found on Adult for each pair of
-methods; one paragraph on failures; one paragraph on the variance shares.}
+%% SKELETON of 2026-10-11, written before the analysis was run. Every number is a
+%% placeholder read from outputs/analysis/paper_f/results/; the sentence printed for each
+%% decision of the rule is fixed in scripts/build_paper_f.py (OUTCOME). The pending marks
+%% are the sentences that can only be written with the results in view.
+The run produced <<run:all:runs:int>> runs and <<run:all:instances:int>> explained
+instances in <<run:all:seeds:w>> complete seeds. A method returned no explanation, or
+exceeded the time limit, for <<run:all:failed:int>> instances
+(<<run:all:failure_rate:pct2>>\%): <<fail:dice:failures:int>> of DiCE,
+<<fail:anchors:failures:int>> of Anchors, <<fail:lime:failures:int>> of LIME and
+<<fail:shap:failures:int>> of SHAP. Three conditions
+hold <<fail:top:share:pct>>\% of them: <<fail:top1:explainer:txt>> on
+<<fail:top1:model:txt>> for <<fail:top1:dataset:txt>> (<<fail:top1:failures:int>> of
+<<fail:top1:instances:int>> instances), <<fail:top2:explainer:txt>> on
+<<fail:top2:model:txt>> for <<fail:top2:dataset:txt>> (<<fail:top2:failures:int>>) and
+<<fail:top3:explainer:txt>> on <<fail:top3:model:txt>> for <<fail:top3:dataset:txt>>
+(<<fail:top3:failures:int>>).
+
+<<input:generated/tab_primary.tex:Table 2, mean rank of each method and agreement between datasets>>
+
+\begin{figure*}[t]
+\centering
+<<input:figures/fig1.pdf:Figure 1>>
+\caption{Rank of each method (1 = best) on each dataset, one panel per measure. Adult is
+the first dataset; the others are in alphabetical order.}
+\label{fig:ranks}
+\end{figure*}
+
+Table~\ref{tab:primary} gives the mean rank of each method and the agreement of the
+rankings between datasets, and Figure~\ref{fig:ranks} shows the rank of each method on
+each dataset. The decision rule gives the following. For the faithfulness gap
+($\bar{\rho}=$~<<prim:gap:mean_rank_corr:u2>>), <<prim:gap:decision:outcome>>. For
+stability ($\bar{\rho}=$~<<prim:stability:mean_rank_corr:u2>>),
+<<prim:stability:decision:outcome>>. For sparsity
+($\bar{\rho}=$~<<prim:sparsity:mean_rank_corr:u2>>), <<prim:sparsity:decision:outcome>>.
+For cost ($\bar{\rho}=$~<<prim:cost_ms:mean_rank_corr:u2>>),
+<<prim:cost_ms:decision:outcome>>.
+
+The agreement between seeds inside a dataset is <<prim:gap:ceiling_seeds:u2>>,
+<<prim:stability:ceiling_seeds:u2>>, <<prim:sparsity:ceiling_seeds:u2>> and
+<<prim:cost_ms:ceiling_seeds:u2>> for the four measures in the same order. On the
+instances that all four methods explained, the agreement between datasets is
+<<sens:gap:mean_rank_corr:u2>>, <<sens:stability:mean_rank_corr:u2>>,
+<<sens:sparsity:mean_rank_corr:u2>> and <<sens:cost_ms:mean_rank_corr:u2>>.
+The decision differs from the one above for <<cmp:all:changed:w>> of the four measures.
+
+Computed for each classifier alone, the agreement between datasets is, in the order
+faithfulness gap, stability, sparsity and cost: <<mod:logreg_gap:mean_rank_corr:u2>>,
+<<mod:logreg_stability:mean_rank_corr:u2>>, <<mod:logreg_sparsity:mean_rank_corr:u2>> and
+<<mod:logreg_cost_ms:mean_rank_corr:u2>> for logistic regression;
+<<mod:rf_gap:mean_rank_corr:u2>>, <<mod:rf_stability:mean_rank_corr:u2>>,
+<<mod:rf_sparsity:mean_rank_corr:u2>> and <<mod:rf_cost_ms:mean_rank_corr:u2>> for the
+random forest; <<mod:xgb_gap:mean_rank_corr:u2>>, <<mod:xgb_stability:mean_rank_corr:u2>>,
+<<mod:xgb_sparsity:mean_rank_corr:u2>> and <<mod:xgb_cost_ms:mean_rank_corr:u2>> for
+XGBoost; and <<mod:mlp_gap:mean_rank_corr:u2>>, <<mod:mlp_stability:mean_rank_corr:u2>>,
+<<mod:mlp_sparsity:mean_rank_corr:u2>> and <<mod:mlp_cost_ms:mean_rank_corr:u2>> for the
+multilayer perceptron.
+
+<<input:generated/tab_adult.tex:Table 3, agreement with the order found on Adult>>
+
+Table~\ref{tab:adult} counts, for each pair of methods, the datasets in which the pair is
+in the same order as on Adult. \pending{reading of Table 3, one sentence} Between two
+datasets the rank of a method changes by up to <<chg:gap:largest:d>>,
+<<chg:stability:largest:d>>, <<chg:sparsity:largest:d>> and <<chg:cost_ms:largest:d>>
+positions on the four measures, and <<chg:gap:first:d>>, <<chg:stability:first:d>>,
+<<chg:sparsity:first:d>> and <<chg:cost_ms:first:d>> of the four methods are ranked first
+on at least one dataset.
+
+Of the variance of the <<sum:runs:value:int>> run means, the method accounts for
+<<var:gap_method:share:pct>>\%, <<var:stability_method:share:pct>>\%,
+<<var:sparsity_method:share:pct>>\% and <<var:cost_ms_method:share:pct>>\% (faithfulness
+gap, stability, sparsity, cost), the dataset for <<var:gap_dataset:share:pct>>\%,
+<<var:stability_dataset:share:pct>>\%, <<var:sparsity_dataset:share:pct>>\% and
+<<var:cost_ms_dataset:share:pct>>\%, and the interaction of method and dataset for
+<<var:gap_interaction:share:pct>>\%, <<var:stability_interaction:share:pct>>\%,
+<<var:sparsity_interaction:share:pct>>\% and <<var:cost_ms_interaction:share:pct>>\%. The
+permutation $p$ of the interaction is <<var:gap_interaction:p_perm:p>>,
+<<var:stability_interaction:p_perm:p>>, <<var:sparsity_interaction:p_perm:p>> and
+<<var:cost_ms_interaction:p_perm:p>>.
 
 \section{Discussion and conclusions}
 
@@ -303,13 +395,12 @@ machine.}
 
 \section*{Data and code availability}
 \iffull
-All datasets are public and are identified by their OpenML identifier in the archive.
-The plan, the code, the per-instance results and the scripts that produce every table
-and figure are available at \url{https://github.com/jonnabio/xai-eval-framework},
-archived at \paperfarchive.
+The datasets are public (OpenML). The plan, the code, the per-instance results and the
+generators of every table and figure are at
+\url{https://github.com/jonnabio/xai-eval-framework}, archived at \paperfarchive.
 \else
-All datasets are public. The plan, the code, the per-instance results and the scripts
-that produce every table and figure are in a public archive whose address is omitted for
+The datasets are public. The plan, the code, the per-instance results and the generators
+of every table and figure are in a public archive whose address is omitted for
 double-blind review.
 \fi
 

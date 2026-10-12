@@ -73,7 +73,7 @@ note; the README belongs to lane `paper-d` and is not yet corrected.
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted 2026-10-06 (reported by the author); submission number not recorded. Fourth draft, 15 Word pages. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763); release `paper-c-tm-2026-10-05` |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Submitted through the journal's author account, reported by the author on 2026-10-06; date and submission number not recorded. The email of 2026-10-03 was not a valid submission. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* (CIC-IPN) | Submitted; under review | Submitted 2026-10-04; submission 6783 |
-| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-10 20:19: 1,271 of 1,280 conditions, seeds 42, 123, 456 and 789 complete and checked, seed 101112 at 247 of 256; estimated end in the night of 2026-10-10 to 2026-10-11); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* (Lublin University of Technology) | **Experiment running** (started 2026-10-05; on 2026-10-11 08:15: 1,279 of 1,280 conditions, seeds 42, 123, 456 and 789 complete and checked, seed 101112 at 255 of 256, its last job at 156 of 200 instances; estimated end 2026-10-11 near midday); draft with introduction and methods, no result yet | Title: "How Dataset-Dependent Are Tabular Explainability Benchmarks?"; plan version 2 (16 datasets × 4 models × 4 explainers); to be received by the end of November 2026 for the issue of 30 March 2027 |
 
 **Paper B+C history:** The combined 32-page manuscript was submitted to TMLR on
 2026-09-30 (submission 12779) and desk-rejected on 2026-10-02, then submitted to
@@ -82,6 +82,233 @@ desk-rejected on 2026-10-04. It is no longer under review. On 2026-10-04 the aut
 decided to split it: Paper B is the paired SHAP-LIME study now submitted separately to
 CLEIej, and Paper C is being developed separately around LLM-judge reliability and the
 taxonomy. The combined manuscript is not counted as a current paper submission.
+
+## Session Handoff - 2026-10-11 20:00 (Paper F: run complete, analysis run once, results report)
+
+This is the latest handoff (lane `paper-f`, owner `claude-2026-10-11-paper-f`, branch
+`paper/f-external-validity`, role Data Scientist). The one below it stays valid for the
+manuscript and the rules; its "Current State" of the run is superseded.
+
+- **Completed**:
+  - **The run is complete**: 1,280 of 1,280 conditions, 256,000 rows; the last job ended
+    on 2026-10-11 11:22. Last raw snapshot `3d01a842a` (1,280 jobs, checked against the
+    run folder by SHA-256).
+  - **Seed 101112 checked** as the other four: 256 job files, every job at 200 instances,
+    no duplicate, the four methods on the same instances; 284 failed rows (0.55%).
+    Whole run: 1,425 failed rows (0.56%), 826.9 job-hours.
+  - **The analysis was run once** (`scripts/paper_f_analyze.py`); result files committed
+    before any interpretation (`b7b8d576b`, `outputs/analysis/paper_f/results/`).
+  - **Primary result** (agreement of the method orders between the 16 datasets, 95%
+    interval, decision; Holm p below 0.001 on all four): faithfulness gap 0.67 (0.49 to
+    0.85), shared, strength not determined; stability 0.88 (0.79 to 0.95), sparsity 0.79
+    (0.66 to 0.92) and cost 0.87 (0.82 to 0.91), the order generalises. Agreement
+    between seeds: 0.95 to 0.995. The complete-case check gives the same four decisions.
+  - **Results report**: `docs/reports/paper_f/RESULTS_REPORT.md` (every analysis, the
+    limits, and what is not planned and only descriptive).
+  - Tables 2 and 3 and Figure 1 generated; draft built: 7 pages of 8, 7 pending marks.
+    22 Paper F tests pass.
+- **Current State**:
+  - The scheduled task `PaperF-chain-ensure` still exists and does nothing; the author
+    has not yet said to remove it. `origin/main` is not merged into the branch.
+  - Pending marks left for the Scientific Editor: two sentences of the abstract, the
+    reading of Table 3, Discussion, sources of error, three conclusions, Zenodo DOI.
+  - Pull request #45 is open and carries this session's commits.
+- **Next Steps**:
+  1. Claim the lane. The author merges pull request #45 and says whether the scheduled
+     task may be removed.
+  2. `git merge origin/main` on the branch (no conflict in the trial of 2026-10-10).
+  3. Scientific Editor, new session: write the pending sentences from
+     `RESULTS_REPORT.md` (sections 1, 3, 6 and 9); keep within 8 pages.
+  4. Claim registry for Paper F, Zenodo version, the journal's Word template; to be
+     received by the journal by the end of November 2026.
+- **Blockers/Issues**:
+  - The faithfulness-gap decision turns on an interval end of 0.4875 against the fixed
+    0.5; the rule is applied as written and the paper must say so.
+  - The four software-defect datasets agree with each other more than the rest on the
+    faithfulness gap (0.90 against 0.66; descriptive, not planned).
+  - That the DiCE `UserConfigValidationException` means "no counterfactual" is still
+    not checked in the library code.
+  - The blockers of the handoff below (page budget, the uncited sentence) stand.
+
+## Session Handoff - 2026-10-11 08:20 (Paper F: one job from the end; manuscript ready for the analysis)
+
+This is the latest handoff. It closes the session that began on 2026-10-09 (lane
+`paper-f`, owner `claude-2026-10-09-paper-f`, branch `paper/f-external-validity`). The
+handoffs of this session below it stay valid for their detail: the seed checks
+(2026-10-09 20:45 and 2026-10-10 20:30) and the CIFIE findings (2026-10-10 21:30). The
+handoff of 2026-10-08 08:30 remains the reference for the design and the rules of the run.
+
+- **Completed**:
+  - **Run watched and saved.** Five raw data snapshots, the last of 2026-10-11 06:55
+    (`outputs/analysis/paper_f/raw/`: 1,279 finished jobs, 255,800 rows, checked against
+    the manifest). At 08:15 no job had finished since.
+  - **Seeds 42, 123, 456 and 789 checked**: 256 job files each, every job at 200
+    instances, no duplicate instance, the four methods on the same instances, counts
+    equal to the manifest. Completeness, failures and timing only.
+  - **Pull requests #43 and #44 merged by the author** (2026-10-10). The assistant's
+    permission system refuses `gh pr merge` even on the author's request.
+  - **Results section written as a skeleton before any result exists** (author's
+    go-ahead of 2026-10-11): every number is a placeholder read from
+    `outputs/analysis/paper_f/results/`; the sentence for each of the four outcomes of
+    the decision rule is fixed in `docs/reports/paper_f/scripts/build_paper_f.py`
+    (`OUTCOME`). Placeholders cover the run size, the failures and the three conditions
+    that hold most of them, the primary result of each measure, the agreement between
+    seeds, the complete-case check, the agreement for each classifier, the rank changes
+    and the variance shares.
+  - **One addition to the analysis script, before the run ended:** the sensitivity
+    check of plan section 3 (primary analysis on the instances that all four methods
+    explained) was missing from `scripts/paper_f_analyze.py`; it is now computed last
+    (`primary_complete_cases.csv`), with a test. Logged in `ANALYSIS_PLAN.md`, section
+    12, with a deviation found at the same time: the variance shares are a balanced
+    decomposition of sums of squares, not the linear mixed model the plan names.
+  - **Introduction rewritten, then shortened** (author's requests): two paragraphs of
+    opening, compressed related work. **Four references added**, each from its DOI
+    record with its abstract read: Černevičienė and Kabašinskas 2024, Kim et al. 2024,
+    Krishna et al. 2022 (arXiv record; the TMLR version has no DOI), Klein et al. 2024.
+    33 cited, 82% from 2024 or later, all with DOI and marked as checked.
+  - **Methods:** each explanation is reduced to a weight vector (the reduction of an
+    Anchors rule and of a counterfactual is stated); faithfulness gap and stability are
+    numbered equations, checked against `scripts/paper_f_lib.py`; the design counts are
+    stated once and the power simulation takes two sentences.
+  - **Build:** a table that does not exist yet takes its number and label, so the draft
+    builds before the results. `submission/paper_f_{blind,full}.pdf`: 6 pages, 91 pending
+    marks (local files, not committed). 22 Paper F tests pass; `verify_claims.py` and
+    `verify_sync.py` pass.
+  - **CIFIE chapter, at the author's request, read-only:** findings and the author's
+    decisions are in the section of 2026-10-10 21:30 below. `chapter/cifie-sync-2026-09`
+    was fast-forwarded to `main` and pushed. `.aceconfig` and `.ace/roles/roles.md` now
+    state the chapter's limit of 9,000 words.
+- **Current State**:
+  - **The run is one job from the end and unattended.** At 2026-10-11 08:15: 1,279 of
+    1,280 conditions, 255,956 rows. The last job, DiCE on the random forest for QSAR
+    biodegradation, seed 101112, is at 156 of 200 instances (dashboard: ends about
+    11:13). One launcher, no line with a failed job in its log, scheduled task
+    `PaperF-chain-ensure` last result 0 at 08:08, no `_STOP` file, 5.8 GB free.
+  - Failures: 1,424 of 255,956 rows (0.56%): 1,212 DiCE no counterfactual, 113 DiCE
+    time limit, 99 Anchors time limit.
+  - **Seed 101112 is not checked** (one job short). **No analysis has been run and no
+    ranking has been looked at.** `outputs/analysis/paper_f/results/` does not exist.
+  - The manuscript source is `docs/reports/paper_f/paper_f_template.tex`; `paper_f.tex`
+    is generated. Abstract, one sentence on Table 3, Discussion and conclusions are
+    still pending marks to be written with the results in view.
+  - The branch is ahead of `main` by the commits made since pull request #44, in a new
+    pull request (number in `gh pr list`); `main` is 23 commits ahead of the branch (the
+    CIFIE work and the two merges), none touching a Paper F file. The lane lock is
+    released.
+  - The CIFIE chapter is parked by the author ("finished for now").
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
+     `paper/f-external-validity`; stop if it fails. The author merges the open pull
+     request.
+  2. `.venv\Scripts\python.exe scripts\paper_f_monitor.py --once --no-colour`. If it does
+     not show 1,280 of 1,280 with no job at work, wait; do not start anything by hand.
+  3. When it does: `.venv\Scripts\python.exe scripts/paper_f_snapshot.py`, commit and
+     push; check seed 101112 as the other four (256 files, 200 instances each, no
+     duplicate, failures by condition, manifest).
+  4. Ask the author before removing the scheduled task `PaperF-chain-ensure`. Then
+     `git merge origin/main` on the branch (about 210 CIFIE files; a trial showed no
+     conflict).
+  5. **The analysis, once:** `.venv\Scripts\python.exe scripts/paper_f_analyze.py`, then
+     `scripts/paper_f_report.py`, then
+     `docs/reports/paper_f/scripts/build_paper_f.py`. Commit the result files before
+     writing any interpretation.
+  6. Write the pending sentences (abstract within 800 characters, Table 3, Discussion,
+     sources of error, three conclusions) and measure the pages against the limit of 8.
+  7. Then: claim registry for Paper F, Zenodo version, the journal's Word template; to
+     be received by the journal by the end of November 2026.
+  8. Still asked of the author: submission numbers of Papers C and D and the date of
+     Paper D's submission.
+- **Blockers/Issues**:
+  - **Page budget.** The draft is 6 pages with Table 2, Table 3 and Figure 1 still to
+    come, plus the Discussion; the limit is 8. The related work and the per-classifier
+    sentence are the first places to trim.
+  - **The sentence listing the properties a comparative study scores has no citation.**
+    The standard survey (Nauta et al. 2023, DOI 10.1145/3583558, record verified) would
+    bring the list to 79% recent; it needs one more reference from 2024 or later with it.
+  - The new references were checked on their records and abstracts, not on full texts.
+  - The assistant cannot merge pull requests; `main` has no branch protection (the
+    author agreed to set it; steps were given on 2026-10-10).
+  - CIFIE, parked: the package sent to the editor differs from the chapter text the
+    author chose (`392b2fc8c`) and prints numbers no artifact backs; the thesis figure
+    generator also writes chapter figures. See the section below.
+  - The Gmail, Google Calendar, Google Drive and Notion connectors were not authorized.
+- **Notes**:
+  - Rules of the run until it ends: never start a launcher by hand; do not edit
+    `paper_f_config.toml` or `scripts/paper_f_lib.py`; do not switch branch; use
+    `.venv\Scripts\python.exe`. The lane lock goes stale after 12 hours.
+  - The launcher logs are in `outputs/analysis/paper_f/runs/`.
+  - `build_paper_f.py` placeholders: `<<alias:key:column:format>>` and
+    `<<input:path:label>>`; aliases and formats are listed in its docstring.
+  - `verify_references.py --mark` rewrites the `checked` date of every entry; the dates
+    of entries not fetched again were put back by hand to 2026-10-05.
+  - To merge a pull request, the author runs, from `C:\Users\jonna\Github\xai-eval-framework`:
+    `gh pr merge <n> --merge`.
+
+## CIFIE chapter: findings of 2026-10-10 21:30, decisions open for the author
+
+Written by the Paper F session (owner `claude-2026-10-09-paper-f`) at the author's request
+to check the failed `fragments` check. Read-only on the chapter: no chapter, thesis,
+script or registry file was edited. It supersedes the "Blockers/Issues: None" line of the
+CIFIE handoff of 2026-10-10 on `main`.
+
+- **The check is green again.** Commit `392b2fc8c` (2026-10-10 20:48, pushed straight to
+  `main`) rewrote the 13 manuscript files; `pubs-sync` passes on it and on `e0a927875`.
+  Pull request #44 (Paper F) is merged.
+- **There are now three texts of the chapter, and they disagree**:
+  1. the text of 2026-10-07 and before (`5747e8450`);
+  2. the text of 2026-10-10 20:03 (`3c0a1b446`, 10 sections), which fails the check;
+  3. the text of `392b2fc8c` (11 sections), which passes. It equals no earlier commit:
+     it is a new text, not a restoration of text 1.
+- **The submission package on `main` is text 2, not the source.** The four files in
+  `final/submission_package/01_capitulo/` were built at 20:03 and not rebuilt. The
+  `.docx` carries every literal the check refused, with the same counts as text 2, and
+  none of them is in the source now. The CIFIE handoff says this package was "submitted
+  for first editorial revision".
+- **What the package prints that no registered claim backs** (found by reading
+  `capitulo_cifie_xai_fom7_color.docx`): an AUC for each model (0.852, 0.841, 0.917,
+  0.891), one of them a decision tree; fidelity by model for KernelSHAP (0.942, 0.938,
+  0.929) and LIME (0.912, 0.854); a latency of 1,180 ms; Anchors at 97.4% precision and
+  22.5% coverage; "N=15 experimental blocks", p<0.001; "AMD Ryzen 9 5900X, 64 GB". The
+  strings "Ryzen" and "1,180" appear nowhere in `thesis/`, `docs/reports/`, `pub/`,
+  `src/`, `configs/` or `experiments/`. Whether any of these numbers is true was not
+  established; none is traceable. The values that matched unpublished paper results
+  (0.85, 0.80, 0.05, 0.01, 0.75, 0.10, 0.001) are thresholds and worked examples in the
+  package text, not results of Papers B to F.
+- **Lane separation was not kept** (ADR-0021): the 21 commits of 2026-10-05 to
+  2026-10-10 were made on `thesis/rca-001-phase-2`, not on a `chapter/cifie-*` branch,
+  and reached `main` by a direct merge and a direct push, without a pull request.
+  `check_lane.py --range 6ff63331b..88b059e19` fails on 11 of them (lane paths mixed
+  with shared paths). `ba418a927` changed thesis files:
+  `scripts/generate_spanish_thesis_figures.py` now writes every figure to the thesis
+  folder and to the chapter folder, in colour or in black and white according to a
+  flag, and it rewrote three figures under `thesis/assets/figures/`. `main` has no
+  branch protection, so nothing refuses a direct push.
+- **Done here**: `chapter/cifie-sync-2026-09` fast-forwarded to `origin/main`
+  (`e0a927875`) and pushed, so the next chapter session has its own branch.
+- **Author's decisions (2026-10-10, after reading the points below)**:
+  1. The file sent to CIFIE / TintAzul is the package of 20:03 (text 2).
+  2. **The chapter is text 3** (`392b2fc8c`). The package is to be rebuilt from it.
+  3. **Nothing is done on the chapter, the thesis generator or the package until the
+     Paper F run has ended.**
+  4. Branch protection on `main`: agreed; the author sets it on GitHub (steps given in
+     the conversation).
+  5. **The chapter has a limit of 9,000 words.** `.aceconfig` and `.ace/roles/roles.md`
+     are corrected.
+  Still open: whether a corrected file is sent to the editor after the rebuild, and
+  whether the three thesis figures of `ba418a927` are the wanted ones.
+- **The points as they were put to the author** (nothing below was started):
+  1. Which file was really sent to CIFIE / TintAzul, and whether a corrected file must
+     follow it.
+  2. Which text is the chapter: text 3 as it stands, or text 2 with every number either
+     traced to an artifact and registered, or removed.
+  3. Then, in the chapter lane (`../xai-chapter`, branch `chapter/cifie-*`): rebuild the
+     package from the chosen text and check the `.docx` again.
+  4. Separate the thesis figure generator from the chapter (shared script: a `pubs/*`
+     branch in the main folder, after the Paper F run ends), and say whether the three
+     thesis figures of `ba418a927` are the wanted ones.
+  5. Branch protection on `main` (pull request and the three checks required).
+  6. The CIFIE handoff states a limit of 9,000 words; `.aceconfig` says the chapter has
+     no word limit. One of the two is out of date.
 
 ## Session Handoff - 2026-10-10 20:30 (Paper F: 1,271 of 1,280, four seeds complete and checked, snapshot)
 
