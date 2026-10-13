@@ -12,7 +12,7 @@ Desde la versión de la tesis que usted revisó se han completado tres estudios
 nuevos y se han añadido controles al estudio de los jueces basados en modelos
 de lenguaje. Los cuatro trabajos están enviados a revistas. Este documento
 describe cómo se han incorporado a la tesis, qué cambia en cada capítulo y qué
-no cambia, y las decisiones que se someten a su criterio.
+no cambia, y las decisiones de diseño acordadas con usted.
 
 El criterio seguido es el que usted destacó en su última nota: separar lo que se
 planificó de lo que se descubrió después. Por eso los estudios nuevos no se
@@ -116,20 +116,21 @@ la lectura del Capítulo 5, y la tesis ahora los declara.
   archivos de la tesis. La introducción y los Capítulos 1 y 2 no tenían ninguna
   cifra sin registrar; los apéndices tenían diez, todas resueltas.
 
-# Decisiones que se someten a su criterio
+# Decisiones de diseño acordadas
 
-1. **Capítulo propio para los estudios de seguimiento.** La alternativa es
+Las cuatro decisiones siguientes se acordaron con usted el 12 de octubre de
+2026 y son las que aplica el texto.
+
+1. **Capítulo propio para los estudios de seguimiento.** La alternativa era
    repartir su diseño en el Capítulo 3 y sus resultados en el Capítulo 4. Se
    descartó porque mezcla resultados posteriores con los confirmativos.
-2. **Ningún objetivo específico nuevo.** La alternativa es un objetivo
+2. **Ningún objetivo específico nuevo.** La alternativa era un objetivo
    exploratorio OE7, redactado como OE6. Se descartó porque un objetivo se
-   formula antes de su resultado, pero es una decisión que le corresponde
-   valorar.
+   formula antes de su resultado.
 3. **Nombres de los estudios:** Estudio de Fiabilidad ante el Error, Estudio de
    Concordancia entre Explicadores y Estudio de Transferencia entre Conjuntos
    de Datos.
 4. **Extensión.** El capítulo nuevo resume cada estudio en una o dos páginas.
-   Puede ampliarse si lo considera necesario.
 
 # Verificación realizada
 

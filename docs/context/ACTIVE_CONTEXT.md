@@ -18,9 +18,9 @@ as Chapter 7. No objective, hypothesis or proposition changed. Plan:
 `docs/planning/thesis_followup_studies_plan_2026-10-12.md`. Record for the tutor, in
 Spanish: `docs/review/tesis_cambios_para_tutor_2026-10-12.md` and `.docx`.
 
-**Decided by the author (2026-10-12):** the four points of that record stand as applied:
+**Decided (2026-10-12), by the author and agreed by the tutor (reported by the author):**
 a chapter of its own, no new objective, the three study names, the present length. The
-record still puts them to the tutor; no reply from the tutor is recorded yet.
+record states them as agreed.
 
 Standing task **Task 3 / RCA-001 Phase 2**:
 
@@ -71,8 +71,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` at `327bc5c07` (pull request #56, the context split). The thesis branch carries
-  the work of 2026-10-12 on top of it, in a pull request to `main`.
+- `main` at `1062a1dd9` (pull request #57, the follow-up chapter), merged by the author
+  on 2026-10-12. The thesis branch is level with it, plus the record of the tutor's
+  agreement in a further pull request.
 - Nothing is running: no task, no process.
 - Verifiers at the last check (2026-10-12): `verify_claims.py` 1,387 claims, 1,728
   sites, 38 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
@@ -155,13 +156,12 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
     artifact now disclosed); final pass done (statement sweep rows 1 to 16, ADR-0012
     greps, full render read from `word/document.xml`).
   - Record for the tutor written, with a Word copy.
-- **Current state**: all of it is on `thesis/rca-001-phase-2`, pushed, in a pull request
-  to `main`. The author sends the record to the tutor.
+- **Current state**: merged to `main` (pull request #57). The tutor agreed to the four
+  design decisions; the record for the tutor states them as agreed.
 - **Next steps**:
-  1. Author: merge the pull request; send the record and the rendered thesis to the
-     tutor; refresh the table of contents in Word.
-  2. Apply whatever the tutor decides on the four points of the record.
-  3. Then Task 3 step 2 (macros and the CI build), if the author wants it before
-     deposit.
+  1. Author: read Chapter 6 and the record; send the record and the rendered thesis to
+     the tutor; refresh the table of contents in Word.
+  2. Before deposit: the journals' prior-publication policies (point 6 above).
+  3. Task 3 step 2 (macros and the CI build), if the author wants it before deposit.
 - **Blockers**: none.
 
