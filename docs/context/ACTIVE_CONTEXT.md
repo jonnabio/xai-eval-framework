@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-13, session end, by `claude-2026-10-12-thesis-review`.
+**Last updated:** 2026-10-13, by `claude-2026-10-13-paper-f-editor`.
 
 ## Current objective
 
@@ -54,7 +54,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Through the author account, reported 2026-10-06; date and number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* | Under review | Submitted 2026-10-04; submission 6783. Zenodo 0.8.0 |
-| **F** | *Journal of Computer Sciences Institute* | Under review | Submitted 2026-10-12; submission 10503; 8 pages. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027 |
+| **F** | *Journal of Computer Sciences Institute* | Format corrections asked by the editor before review (2026-10-13); revised files built, **not yet sent back** | Submitted 2026-10-12; submission 10503; 8 pages. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Editor's message and what was done: `docs/reports/paper_f/README.md`, section 8 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
   revision.** Record every decision of a journal in this table and in the paper's README.
@@ -75,10 +75,10 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything of the session: pull requests #56 to #59, merged by the
-  author on 2026-10-12 and 13, and the session-end handoffs #60 and #61, merged by the
-  assistant on 2026-10-13. The thesis branch `thesis/rca-001-phase-2` is level with
-  `main`. No pull request is open.
+- `main` holds everything up to pull request #62 (Paper F, the editor's format
+  corrections, merged 2026-10-13) and the handoff that follows it. The branches
+  `thesis/rca-001-phase-2` and `paper/f-external-validity` are level with `main`. No
+  pull request is open.
 - The lane lock of the main folder is free.
 - Nothing is running: no task, no process.
 - Verifiers at the last check (2026-10-13): `verify_claims.py` 1,387 claims, 1,728
@@ -91,6 +91,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Open with the author
 
+0. **Paper F: send the revised files to the editor** by reply to her message:
+   `docs/reports/paper_f/submission/revision_2026-10-13/herrera-vasquez.docx` and `.pdf`.
+   Then tell the session the date, to record it.
 1. Submission numbers of Papers C and D, and the date of Paper D's submission.
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
@@ -146,79 +149,54 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-13, SESSION END (thesis closed for the tutor: papers, equations, figures, tables)
+## Latest handoff - 2026-10-13 (Paper F: the editor's format corrections before review)
 
-Session of 2026-10-12 and 13, lane `thesis` (branch `thesis/rca-001-phase-2`, owner
-`claude-2026-10-12-thesis-review`), with shared files in separate commits. The steps are
-in archive `2026-10-12.md` and `2026-10-13.md`.
+Session of 2026-10-13, lane `paper-f` (branch `paper/f-external-validity`, owner
+`claude-2026-10-13-paper-f-editor`); this file on `pubs/context-2026-10-13-paper-f`.
 
 - **Completed**:
-  - **Context file split** (pull request #56): this file holds the state only; history
-    in `docs/context/archive/`; standard `.ace/standards/context.md`; CI check.
-  - **Every paper reflected in the thesis** (#57, ADR-0023): new Chapter 6 with the
-    three follow-up studies (D, E, F) and the later controls of the inter-judge study
-    (C); conclusions are Chapter 7; no objective, hypothesis or proposition changed.
-    79 paper claims mirrored by `scripts/pubs/register_thesis_followup.py`.
-  - **The three points open before deposit**: figures restored; coverage sweep finished,
-    every thesis source under `[coverage]`; final pass (statement sweep rows 1 to 16).
-  - **The tutor agreed** to the four design decisions (reported by the author); the
-    record for the tutor states them as agreed (#58).
-  - **Equations** (#58): numbered and cited; author's standing rule.
-  - **Figures** (#58, #59): the seven of Chapter 4 regenerated and four captions brought
-    level with them; method colours of the papers; five figures in Chapter 6; seventeen
-    more in Chapters 1 to 7, ten of them shared with the book chapter; stability against
-    cost as median and interquartile range; English copies kept and regenerated.
-  - **Tables** (#59): all cited; one gained its caption and number.
-  - **Rule and check**: every equation, figure and table of a manuscript is numbered and
-    cited; a figure prints only what its generator computes
-    (`.ace/standards/documentation.md`, `.aceconfig`, `scripts/pubs/check_equations.py`).
+  - The editor of *Journal of Computer Sciences Institute* (Beata Pańczyk) asked three
+    format changes before sending submission 10503 to review: no index "a" for a single
+    author; a hard space after single letters, so none ends a line; references in the
+    form of the template's examples (no "pp.", no "vol.", the year in brackets).
+  - All three made in `docs/reports/paper_f/scripts/build_paper_f_docx.py`
+    (`hard_spaces`, `jcsi_reference`, the title block). `paper_f.tex`, `references.bib`,
+    the results and the claim registry are unchanged; no new Zenodo version is needed.
+  - Revised files: `docs/reports/paper_f/submission/revision_2026-10-13/`
+    (`herrera-vasquez.docx` and `.pdf`, and the blind copy), 8 pages in Word. Against the
+    file sent, the only paragraphs whose text differs, hard spaces apart, are the author
+    line, the affiliation and the 33 references.
+  - The four files sent on 2026-10-12 are kept in `submission/sent_2026-10-12/`.
+  - Pull request #62 merged into `main`.
 - **Current State**:
-  - `main` and the thesis branch are level; nothing is uncommitted; no task runs; the
-    lane lock is released.
-  - The thesis renders to Word with seven chapters, 29 figures, 45 tables, 19 equations
-    and no unresolved reference. `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is
-    the render of the merged text.
-  - The record for the tutor (`docs/review/tesis_cambios_para_tutor_2026-10-12.docx`)
-    lists every change of the session. It has not been sent.
-  - Papers: A published; B, C, D, E, F under review. None was touched.
+  - The author has the revised files and a draft reply; **they are not yet sent**.
+  - `submission/herrera-vasquez.docx` and `.pdf` are still the files sent on 2026-10-12
+    (the Word file was open in Word, so the build wrote to the dated folder);
+    `submission/paper_f_blind.*` are already the revised ones. `submission/` is local
+    only (ignored by git).
+  - The thesis is as the handoff before this one left it (archive `2026-10-13.md`).
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>` for the lane of the
      task; stop if it fails.
-  2. Author: read Chapter 6 and the new figures and captions (the Spanish text is the
-     assistant's); send the record and the rendered thesis to the tutor; refresh the
-     table of contents in Word.
-  3. Apply what the tutor answers.
-  4. Before deposit: points 4 and 6 of "Open with the author" (licence of the book
-     chapter; prior-publication policy of each journal).
-  5. If wanted before deposit: Task 3 step 2 (registry values as macros and inline
-     values; CI build of every output).
+  2. Author: send the two revised files to the editor; then record the date in the
+     table above and in the Paper F README.
+  3. If the editor asks more: change the builder, not the Word file, and build with Word
+     closed.
+  4. Thesis: the steps of the earlier handoff stand (send the record and the thesis to
+     the tutor, table of contents in Word, licence of the book chapter, journals'
+     prior-publication policies).
 - **Blockers/Issues**:
-  - None blocks the thesis.
-  - Not confirmed: the licence of the book chapter for the ten shared figures.
-  - To know in the chapter lane: `scripts/generate_cifie_equation_figures.py` no longer
-    prints 97.4% and 22.5% in figure `d11`, and the chapter's committed images are older
-    than their scripts; both show at the chapter's next rebuild. The chapter package is
-    still to be rebuilt from `392b2fc8c`.
-  - Paper E's four figures are PDF only and were not opened in the figure review.
+  - None.
+  - Two points told to the author, not changed: reference 16 (a Springer chapter) has no
+    volume, since the DOI record gives none; a middle initial ("M. T. Ribeiro") can
+    still end a line, as the hard space is set after words of one letter only.
 - **Notes**:
-  - Thesis figures, regenerate with the project environment (`.venv\Scripts\python.exe`):
-    `scripts/generate_thesis_supplementary_figures.py` and
-    `scripts/generate_spanish_thesis_figures.py` (Chapter 4),
-    `scripts/generate_thesis_followup_figures.py` (Chapter 6),
-    `scripts/generate_thesis_extra_figures.py` (the rest),
-    `scripts/generate_thesis_supplementary_figures_en.py` (English copies).
-  - **`generate_spanish_thesis_figures.py` also writes the book-chapter folders**, which
-    belong to the chapter lane: from the thesis lane, redirect `CIFIE_EXP` and
-    `CIFIE_BW` or discard those files; never commit them here.
-  - Method colours in every figure: SHAP `#c0392b`, LIME `#1b6ca8`, Anchors `#2e8b57`,
-    DiCE `#6c3483`.
-  - Render: close the thesis in Word, then `powershell -File thesis/render.ps1`. The
-    "Unknown command clean" line is harmless. Check the result in `word/document.xml`.
-  - Commit messages: write them to a file with the Write tool and use `git commit -F`;
-    PowerShell `Set-Content -Encoding utf8` puts a byte-order mark in the message, and
-    PowerShell rewrites of UTF-8 files corrupt the accents.
-  - `.ace/` is ignored by git: add a new file there with `git add -f`.
-  - `gh pr merge` was refused to the assistant on 2026-10-12, when the author merged #56
-    to #59 by hand, and accepted on 2026-10-13 for the two handoff pull requests, after
-    the author's instruction to merge pending work: try once, and give the author the
-    command if refused.
+  - Run Paper F scripts with `.venv\Scripts\python.exe`. To build into another folder
+    while a Word file is open: import the builder, set its `OUT`, call `main()`.
+  - A file open in Word blocks a branch switch that has to replace it (the thesis Word
+    file did at the start of this session); if the copy on disk equals the target
+    version, staging it lets the switch or fast-forward go on.
+  - Commit messages: write them to a file and use `git commit -F`. `.ace/` is ignored by
+    git: add a new file there with `git add -f`.
+  - Thesis figure generators, method colours and the render steps: archive
+    `2026-10-13.md`, the handoff "SESSION END (thesis closed for the tutor ...)".
