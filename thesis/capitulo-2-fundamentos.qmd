@@ -151,6 +151,15 @@ no comparar solamente valores métricos, sino interpretar esos valores según el
 tipo de acceso que cada explicador tiene al modelo [@arrieta2019a;
 @linardatos2020].
 
+La @fig-local-global ilustra la diferencia de alcance que se describe a
+continuación.
+
+![Alcance local y alcance global de una explicación. A la izquierda, la
+aproximación local describe el comportamiento del modelo alrededor de una
+instancia; a la derecha, un resumen global agrega la importancia de las
+características sobre una población. Ilustración esquemática con datos
+simulados. Fuente: elaboración propia.](assets/figures/fig_d3_local_global_es.png){#fig-local-global width=95%}
+
 Otra distinción histórica relevante es la diferencia entre explicaciones
 locales y globales [@arrieta2019a; @linardatos2020]. Una explicación local
 describe el comportamiento del modelo alrededor de una instancia o decisión
@@ -209,6 +218,16 @@ escenario donde los objetos explicativos son plurales, los criterios son
 multidimensionales y las conclusiones deben ser rastreables [@doshi-velez2017;
 @hedstrom2023; @nauta2023].
 
+La @fig-modelos-posthoc sintetiza ese desplazamiento: de los modelos
+interpretables por diseño a las cajas negras, y de estas a la explicación
+post-hoc, agnóstica o específica del modelo.
+
+![Del modelo interpretable por diseño a la explicación post-hoc. La
+explicación post-hoc es una aproximación sometida a prueba, no una
+transparencia recuperada; los cuatro métodos evaluados en esta tesis son
+agnósticos al modelo. Fuente: elaboración propia a partir de @rudin2022 y
+@marcinkevics2023.](assets/figures/fig_d2_modelos_es.png){#fig-modelos-posthoc width=95%}
+
 ## Distinciones conceptuales fundamentales
 
 La literatura XAI utiliza con frecuencia términos cercanos como
@@ -230,6 +249,13 @@ observable del modelo, a una estructura causal del dominio, a la aceptabilidad
 humana de la narrativa o a la consistencia con una métrica. El valor de estas
 distinciones es evitar que un resultado empírico local se transforme en una
 afirmación teórica excesiva [@doshi-velez2017; @lipton2018].
+
+La @fig-conceptos resume las tres nociones que este apartado distingue y lo
+que ninguna de ellas garantiza por sí sola.
+
+![Transparencia, interpretabilidad y explicabilidad: tres nociones
+distintas, con lo que cada una no garantiza. Fuente: elaboración propia a
+partir de @lipton2018 y @linardatos2020.](assets/figures/fig_d1_conceptos_es.png){#fig-conceptos width=90%}
 
 La primera distinción separa interpretabilidad y explicabilidad. La
 interpretabilidad se asocia con la posibilidad de comprender la estructura o
@@ -365,6 +391,18 @@ sostiene y qué límites conserva.
 
 ## Métodos de explicación evaluados en esta tesis
 
+Los cuatro métodos evaluados no producen el mismo tipo de objeto. La
+@fig-objetos-explicativos muestra un mismo caso explicado como atribución, como
+regla, como contrafactual y mediante ejemplos: cada forma responde a una
+pregunta distinta, y por eso una métrica diseñada para atribuciones no mide lo
+que una regla o un contrafactual pretenden ofrecer.
+
+![Un mismo caso explicado mediante cuatro objetos explicativos:
+atribución (LIME, SHAP), regla (Anchors), contrafactual (DiCE) y ejemplos
+similares. El caso, los valores y las explicaciones son ilustrativos; no son
+resultados del estudio. Fuente: elaboración propia a partir de @ribeiro2016,
+@lundberg2017, @ribeiro2018 y @mothilal2020.](assets/figures/fig_d4_objetos_explicativos_es.png){#fig-objetos-explicativos width=95%}
+
 ### LIME: sustitutos locales, muestreo e inestabilidad
 
 LIME propone explicar predicciones individuales aproximando localmente el modelo
@@ -414,6 +452,17 @@ otra ejecución razonable produciría una narrativa distinta [@burger2023;
 agnóstico con alta utilidad comunicativa, pero que requiere controles de
 estabilidad, trazabilidad de parámetros y delimitación estricta del alcance
 local.
+
+La @fig-lime-geometria representa las dos ideas de este apartado: el sustituto
+lineal ajustado en un vecindario ponderado y el riesgo de que las perturbaciones
+caigan fuera de la distribución de los datos.
+
+![Geometría de LIME. A la izquierda, el núcleo de proximidad pondera las
+muestras perturbadas y el sustituto lineal aproxima la frontera del modelo
+cerca de la instancia. A la derecha, una perturbación independiente de
+características correlacionadas puede producir casos fuera de la
+distribución. Ilustración esquemática con datos simulados. Fuente:
+elaboración propia a partir de @ribeiro2016.](assets/figures/fig_d9_lime_geometria_es.png){#fig-lime-geometria width=95%}
 
 ### SHAP: valores de Shapley y atribución aditiva
 
@@ -492,6 +541,15 @@ SHAP, el objeto central es una asignación de contribuciones; en LIME, una
 aproximación local; en Anchors, una regla; en DiCE, una alternativa
 contrafactual. Esta heterogeneidad exige métricas diferenciadas y afirmaciones
 cuidadosamente acotadas [@guidotti2018; @nauta2023].
+
+La @fig-shap-coaliciones resume los tres elementos del cálculo: las coaliciones
+de características, la ponderación de cada tamaño de coalición y la
+descomposición aditiva de la predicción.
+
+![Elementos de SHAP: retículo de coaliciones, núcleo de ponderación según
+el tamaño de la coalición y descomposición aditiva de la predicción desde el
+valor base. Ilustración esquemática; los valores no son resultados del
+estudio. Fuente: elaboración propia a partir de @lundberg2017.](assets/figures/fig_d10_shap_coaliciones_es.png){#fig-shap-coaliciones width=95%}
 
 ### Anchors: reglas de alta precisión y límites de cobertura
 
@@ -595,6 +653,19 @@ puede registrar la distancia entre validez para el modelo y accionabilidad para
 la persona, y esa distancia es justamente una de las brechas que una revisión
 doctoral debe hacer visible [@langer2021; @karimi2022].
 
+La @fig-anchors-dice contrasta los dos objetos que no son atribuciones: la
+regla de Anchors, que delimita una región donde la predicción se mantiene, y los
+contrafactuales de DiCE, que proponen cambios para cruzar la frontera de
+decisión.
+
+![Anchors y DiCE. A la izquierda, una regla delimita una región del espacio
+de características en la que la predicción se mantiene con alta precisión, a
+costa de cubrir solo una parte de los casos. A la derecha, los
+contrafactuales buscan cambios próximos y diversos que alteren la predicción,
+sin modificar las variables declaradas inmutables. Ilustración esquemática
+con datos simulados. Fuente: elaboración propia a partir de @ribeiro2018 y
+@mothilal2020.](assets/figures/fig_d11_anchors_dice_es.png){#fig-anchors-dice width=95%}
+
 ## Marcos y protocolos de evaluación XAI
 
 La última década ha producido, junto a los toolkits ya citados, un conjunto
@@ -639,6 +710,14 @@ de interpretabilidad se insertan en practicas de depuración, validación y
 comunicación que no se reducen a una puntuación única [@kaur2020]. Por ello,
 FOM-7 debe afirmar con precisión que produce evidencia functionally-grounded y
 no evidencia application-grounded.
+
+La @fig-niveles-evaluacion sitúa el nivel en que opera esta tesis: la
+evaluación funcionalmente fundamentada, que gana control y reproducibilidad a
+costa de realismo.
+
+![Niveles de evaluación de la explicabilidad y posición de FOM-7. Ningún
+nivel domina en todos los casos: cada uno responde a preguntas distintas.
+Fuente: adaptada de @doshi-velez2017.](assets/figures/fig_d6_niveles_evaluacion_es.png){#fig-niveles-evaluacion width=85%}
 
 Quantus responde a la necesidad de evaluar explicaciones mediante un toolkit
 que agrupa métricas y facilita comparaciones sistemáticas [@hedstrom2023].
@@ -981,8 +1060,8 @@ no como un único eje de optimización [@carvalho2019; @nauta2023]. FOM-7 adopta
 esta lectura y la convierte en una regla de reporte: cada resultado debe
 mantener unido método, métrica, constructo, condición experimental y claim.
 
-La siguiente matriz resume esta alineación entre métodos, objetos explicativos y
-constructos de evaluación. Su función no es sustituir el análisis empírico, sino
+La @tbl-metodos-constructos resume esta alineación entre métodos, objetos
+explicativos y constructos de evaluación. Su función no es sustituir el análisis empírico, sino
 hacer explícita la razón por la cual FOM-7 evalúa perfiles y no rankings
 absolutos.
 
@@ -992,6 +1071,8 @@ absolutos.
 | SHAP | Atribución aditiva de características | Consistencia atributiva, coste, estabilidad, sensibilidad al conjunto de referencia | Coste elevado, supuestos sobre ausencia/presencia de variables, lectura causal indebida | Válido como perfil de atribución bajo variante y referencia especificadas |
 | Anchors | Regla local de alta precisión | Precisión, cobertura, complejidad de regla, reproducibilidad | Reglas demasiado estrechas, cobertura limitada, comparación difícil con atribuciones | Válido como evidencia condicional cuando precisión y cobertura se reportan juntas |
 | DiCE | Conjunto de contrafactuales diversos | Validez, proximidad, diversidad, factibilidad, accionabilidad | Cambios imposibles, recourse no garantizado, confundir cambio de etiqueta con acción real | Válido como evidencia contrafactual bajo restricciones de factibilidad explicitadas |
+
+: Métodos evaluados, objeto explicativo que produce cada uno, constructos alineados y riesgos de evaluación. {#tbl-metodos-constructos}
 
 La matriz también muestra que la comparación entre métodos es necesariamente
 asimétrica. LIME y SHAP pueden compararse parcialmente en términos de

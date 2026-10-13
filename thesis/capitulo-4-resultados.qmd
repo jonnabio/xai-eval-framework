@@ -452,6 +452,15 @@ calificadas (semillas y tamaños de muestra agregados); los valores de celda
 en el Apéndice C y no deben leerse como resúmenes por modelo. Las diferencias
 más notables son:
 
+La @fig-coste-por-modelo muestra el coste mediano de SHAP y de LIME en cada
+familia de modelos. La diferencia entre familias es mayor que la diferencia
+entre métodos, y el orden se invierte en XGBoost.
+
+![Coste mediano por instancia de SHAP y LIME según la familia de modelos,
+en escala logarítmica, sobre las celdas pareadas. LIME es más rápido en
+cuatro de las cinco familias; en XGBoost, la variante de SHAP para árboles
+es más rápida que LIME. Fuente: elaboración propia.](assets/figures/fig_coste_por_modelo_es.png){#fig-coste-por-modelo width=80%}
+
 **XGBoost** presenta el perfil calidad-coste más favorable para SHAP: fidelidad
 0.759 con un coste medio de 21 ms (mediana 18 ms). Esto se debe al uso de
 TreeSHAP [@lundberg2017], que calcula valores exactos de Shapley aprovechando la

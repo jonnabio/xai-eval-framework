@@ -7,7 +7,8 @@ OpenML como fuente primaria y UCI como respaldo. La versión experimental usada
 en la tesis contiene 48,842 instancias, 14 características originales y una
 variable binaria de predicción (`>50K` frente a `<=50K`). La partición canónica
 usa `test_size = 0.20`, estratificación por etiqueta y `random_state = 42`,
-produciendo 39,032 instancias de entrenamiento y 9,758 de prueba.
+produciendo 39,032 instancias de entrenamiento y 9,758 de prueba. La
+@tbl-appendix-dataset-schema describe el esquema de variables.
 
 | Grupo | Características | Tratamiento |
 |:--|:--|:--|
@@ -28,7 +29,8 @@ entre explicadores.
 
 Los modelos se entrenan en EXP1 y se reutilizan en EXP2 sin reentrenamiento. Los
 artefactos principales se encuentran en `experiments/exp1_adult/models/`, con
-métricas en `metrics.json` por familia de modelo.
+métricas en `metrics.json` por familia de modelo. La @tbl-appendix-models
+resume cada modelo, su justificación y la ubicación de su artefacto.
 
 | Modelo | Rol metodológico | Artefacto principal | Métricas de entrenamiento/prueba |
 |:--|:--|:--|:--|
@@ -49,7 +51,8 @@ estos artefactos.
 Las configuraciones declarativas de EXP2 se almacenan en
 `configs/experiments/exp2_scaled/`. El manifiesto `manifest.yaml` define las 300
 celdas del diseño factorial y cada YAML por celda fija modelo, explicador,
-semilla y tamaño de muestra.
+semilla y tamaño de muestra. La @tbl-appendix-explainers recoge la
+configuración de cada explicador.
 
 | Explicador | Configuración efectiva | Implementación | Caveat |
 |:--|:--|:--|:--|
@@ -74,7 +77,7 @@ modelo RF con semilla 42 y $N = 100$ como condición de referencia.
 
 **LIME — sensibilidad a `num_samples`.** Se varía el número de muestras de
 perturbación local ($\{500, 1000, 2000\}$) manteniendo `kernel_width = 3.0` y
-`num_features = 10` constantes.
+`num_features = 10` constantes (@tbl-appendix-lime-sensitivity).
 
 | `num_samples` | Fidelidad (media) | Estabilidad (media) | Coste (ms) | Parsimonia |
 |:--|--:|--:|--:|--:|
@@ -185,7 +188,8 @@ explícito, no como un valor predeterminado.
 
 Las tablas inferenciales usadas en el Capítulo 4 se generan desde
 `scripts/run_exp2_statistical_analysis.py` y se exportan a
-`outputs/analysis/paper_a_exp2_stats/`.
+`outputs/analysis/paper_a_exp2_stats/`. La @tbl-appendix-stat-outputs enumera
+esas salidas.
 
 | Archivo | Contenido | Uso en tesis |
 |:--|:--|:--|
@@ -200,7 +204,10 @@ Las tablas inferenciales usadas en el Capítulo 4 se generan desde
 : Salidas estadísticas principales y uso en la tesis. {#tbl-appendix-stat-outputs}
 
 Las secciones siguientes reproducen las tablas completas de los análisis
-inferenciales para garantizar la auto-suficiencia documental de la tesis.
+inferenciales para garantizar la auto-suficiencia documental de la tesis: la
+prueba de Friedman (@tbl-appendix-friedman-full), las comparaciones de Nemenyi
+(@tbl-appendix-nemenyi-full) y el análisis pareado de Wilcoxon
+(@tbl-appendix-wilcoxon-full).
 
 ### D.1 Resultados completos de la prueba de Friedman
 
@@ -287,7 +294,8 @@ Zenodo `10.5281/zenodo.21538180`; el DOI de concepto
 anterior (`33fd952a01a752f6988f46ba79b18694838c3f8f`, DOI
 `10.5281/zenodo.19297724`, abril de 2026) se conserva por procedencia pero es
 anterior a la superposición de recuperación de SHAP y no reproduce las cifras
-del Capítulo 4. Los archivos principales de entorno son:
+del Capítulo 4. Los archivos principales de entorno se listan en la
+@tbl-appendix-environment:
 
 | Archivo | Función |
 |:--|:--|
@@ -312,7 +320,7 @@ La reproducción mínima sigue esta secuencia:
 EXP4 (diseñado en §-@sec-exp4-diseno, Capítulo 3; resultados en
 §-@sec-exp4-fiabilidad, Capítulo 5) cuantifica la fiabilidad inter-juez de
 evaluadores LLM sobre siete dimensiones semánticas. Los artefactos del estudio
-se encuentran en las rutas siguientes y sostienen las Tablas -@tbl-exp4-icc y
+se listan en la @tbl-appendix-llm y sostienen las Tablas -@tbl-exp4-icc y
 -@tbl-exp4-icc-c2 del Capítulo 5.
 
 | Artefacto | Contenido | Uso en la tesis |
@@ -343,7 +351,7 @@ Los estudios de seguimiento del Capítulo 6 (§-@sec-seguimiento) tienen cada un
 su plan de análisis, su código y sus archivos de resultados en el repositorio.
 Los nombres de las carpetas son identificadores históricos del repositorio. Cada
 cifra del Capítulo 6 se vuelve a derivar de estos archivos en la verificación
-automática de afirmaciones.
+automática de afirmaciones. La @tbl-appendix-seguimiento los localiza.
 
 | Estudio | Plan de análisis | Código de análisis | Resultados | Archivo Zenodo |
 |:--|:--|:--|:--|:--|

@@ -187,6 +187,15 @@ La unidad inferencial primaria del Estudio Pareado LIME–SHAP es la **celda
 pareada** $(g, s, n)$: las 75 tuplas para las que existen artefactos
 calificados de SHAP y LIME con coordenadas idénticas.
 
+La @fig-unidades-analisis distingue las unidades que intervienen en el análisis
+y la prueba que se aplica sobre cada una.
+
+![Unidades de análisis del benchmark primario. Las ejecuciones son la
+unidad de observación; la inferencia se hace sobre los 15 bloques (pruebas
+de Friedman y Nemenyi, y seguimiento dirigido SHAP–LIME) o sobre las 75
+celdas pareadas (prueba de Wilcoxon). Las instancias explicadas dentro de
+una ejecución no son unidad de inferencia. Fuente: elaboración propia.](assets/figures/fig_unidades_analisis_es.png){#fig-unidades-analisis width=95%}
+
 ## Protocolo de muestreo de instancias y configuración de explicadores {#sec-muestreo}
 
 ### Muestreo estratificado por cuadrante de error
@@ -299,6 +308,9 @@ registrado en `ExplainerWrapper` bajo restricciones de recursos gestionadas por
 
 ### Resumen de métricas primarias
 
+La @tbl-metrics reúne las cinco métricas con su símbolo, su unidad y su
+dirección.
+
 | Métrica | Símbolo | Unidad | Dirección |
 |:--------|:-------:|:------:|:---------:|
 | Fidelidad | $F$ | score | $\uparrow$ |
@@ -321,6 +333,14 @@ análisis no equivalentes entre ejecuciones. Las siete puertas son
 **secuenciales**: cada puerta debe ser satisfecha antes de proceder a la
 siguiente, y un fallo en cualquier puerta degrada los outputs afectados a
 estatus descriptivo.
+
+El protocolo responde a un problema que la @fig-cadena-evidencia hace explícito:
+entre la salida de un explicador y una afirmación publicada median varios
+eslabones, y cada uno tiene un modo de fallo característico.
+
+![Cadena de evidencia de una afirmación sobre explicaciones y fallo típico
+de cada eslabón. FOM-7 controla cada eslabón antes de admitir una conclusión.
+Fuente: elaboración propia.](assets/figures/fig_d7_cadena_evidencia_es.png){#fig-cadena-evidencia width=95%}
 
 **Puerta 1 — Congelación del protocolo.** Bloqueo de versiones de código,
 archivos de configuración YAML, factores del diseño y plan de inferencia
@@ -361,11 +381,14 @@ inferenciales se emiten únicamente cuando todas las puertas previas están
 satisfechas y son trazables a artefactos fuente específicos. Cualquier
 afirmación no trazable se presenta como descriptiva.
 
-El flujo compacto del protocolo se resume en la @eq-flujo-fom7:
+La @fig-fom7-traza resume el flujo del protocolo: las siete puertas en orden, el
+artefacto que produce cada una y, como ejemplo, la traza de una afirmación del
+Capítulo 4 desde el diseño congelado hasta su reporte.
 
-$$\text{Congelación} \to \text{Ejecución} \to \text{Auditoría} \to
-\text{Armonización} \to \text{Exportación} \to \text{Perfilado} \to
-\text{Reporte}$$ {#eq-flujo-fom7}
+![Puertas del protocolo FOM-7, artefacto de salida de cada una y traza de
+una afirmación publicada. Las puertas son secuenciales: si una falla, los
+resultados afectados se tratan como evidencia descriptiva y no sostienen
+afirmaciones inferenciales. Fuente: elaboración propia.](assets/figures/fig_d8_fom7_traza_es.png){#fig-fom7-traza width=95%}
 
 La Tabla -@tbl-fom7-gates resume la función de gobierno de cada puerta. La
 tabla explicita qué entra, qué sale y qué modo de fallo queda controlado, de
@@ -390,7 +413,8 @@ metodológica.
 
 El análisis de cobertura se realizó directamente sobre el árbol de resultados
 comprometidos (`experiments/exp2_scaled/results/`), verificando la presencia
-y el tamaño no nulo de cada `results.json` en las 300 celdas del diseño.
+y el tamaño no nulo de cada `results.json` en las 300 celdas del diseño. La
+@tbl-coverage reporta el resultado por método.
 
 | Cohorte | Planificadas | Presentes | Analizables | Cobertura |
 |:--------|------------:|----------:|------------:|----------:|
@@ -605,6 +629,9 @@ de análisis distintas [@demsar2006]. {#tbl-stat-plan}
 
 ### Resumen del plan estadístico por hipótesis
 
+La @tbl-hypo-plan asocia cada hipótesis con su prueba, el número de unidades
+sobre las que se aplica y el diseño.
+
 | Hipótesis | Test | $n$ | Diseño |
 |:----------|:----:|:---:|:-------|
 | H1 (fidelidad) | Friedman + Nemenyi; seguimiento dirigido SHAP–LIME | 15 bloques | 4 métodos × 15 bloques; contraste dirigido sobre las mismas medias de bloque |
@@ -618,7 +645,8 @@ de análisis distintas [@demsar2006]. {#tbl-stat-plan}
 
 La interpretación de los resultados se acota mediante cinco familias de amenazas.
 Estas amenazas no invalidan el diseño, pero delimitan qué tipo de afirmación
-puede sostenerse a partir del benchmark.
+puede sostenerse a partir del benchmark. La @tbl-validity-threats indica, para
+cada familia, el control aplicado y el riesgo residual.
 
 | Familia | Amenaza principal | Control aplicado | Riesgo residual |
 |:--|:--|:--|:--|
