@@ -1,7 +1,8 @@
 # 23. The Thesis Reports the Later Studies in a Follow-up Chapter
 
 Date: 2026-10-12
-Status: Accepted (author's instruction of 2026-10-12; D2 open to the tutor's view)
+Status: Accepted. The author confirmed the four points on 2026-10-12: a chapter of its
+own, no new objective, the three study names, and the length of the chapter.
 
 ## Context
 

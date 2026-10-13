@@ -18,8 +18,9 @@ as Chapter 7. No objective, hypothesis or proposition changed. Plan:
 `docs/planning/thesis_followup_studies_plan_2026-10-12.md`. Record for the tutor, in
 Spanish: `docs/review/tesis_cambios_para_tutor_2026-10-12.md` and `.docx`.
 
-**Waiting for:** the tutor's view of that record (section "Decisiones que se someten a
-su criterio": own chapter, no new objective, study names, length).
+**Decided by the author (2026-10-12):** the four points of that record stand as applied:
+a chapter of its own, no new objective, the three study names, the present length. The
+record still puts them to the tutor; no reply from the tutor is recorded yet.
 
 Standing task **Task 3 / RCA-001 Phase 2**:
 
