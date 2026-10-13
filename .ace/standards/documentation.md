@@ -187,6 +187,29 @@ External: [Documentation](https://example.com)
 
 ---
 
+## Manuscripts: Equations
+
+Author rule of 2026-10-12, for the thesis and for every paper or chapter written or
+revised from that date. A submitted manuscript is not reopened for it; the rule applies
+at its next revision.
+
+- **Every displayed equation is numbered.** In Quarto, a label after the equation:
+  `$$ ... $$ {#eq-nombre}`. In LaTeX, an `equation` or `align` environment with a
+  `\label`, never `\[ ... \]` or a starred environment.
+- **Every numbered equation is cited in the text**, at least once, by a generated
+  reference (`@eq-nombre`, `\eqref{...}`), in the sentence that introduces it or the
+  one that uses it.
+- **No equation number is typed by hand.** The same holds for tables, figures and
+  sections.
+- **A label names what the equation defines** (`eq-fidelidad`, `eq-friedman`), not its
+  position.
+- Worked arithmetic shown as a displayed equation is numbered and cited like a
+  definition; if it does not deserve a number, write it inline.
+
+Check for the thesis: `python scripts/pubs/check_equations.py` (CI, `pubs-sync`).
+
+---
+
 ## API Documentation
 
 ### Endpoint Documentation

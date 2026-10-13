@@ -67,10 +67,11 @@ análisis de cada claim.
 La prueba de Friedman para bloques $(g, n)$ sobre la métrica de fidelidad
 arrojó una estadística $\chi^2_F = 42.12$ con $k - 1 = 3$ grados de libertad
 sobre $n = 15$ bloques completos. El valor crítico para $\alpha = 0.05$ es
-$\chi^2_{crit}(3) = 7.815$, de modo que el margen de seguridad inferencial es:
+$\chi^2_{crit}(3) = 7.815$, de modo que el margen de seguridad inferencial es el de la
+@eq-margen-fidelidad:
 
 $$\text{Margen} = \frac{\chi^2_F - \chi^2_{crit}}{\chi^2_{crit}} \times 100 =
-\frac{42.12 - 7.815}{7.815} \times 100 = 439\%$$
+\frac{42.12 - 7.815}{7.815} \times 100 = 439\%$$ {#eq-margen-fidelidad}
 
 Este resultado rechaza $H_{0,1}$ con una holgura de más de cinco veces el
 umbral crítico, lo que ofrece evidencia fuerte de diferencias sistemáticas
@@ -114,9 +115,10 @@ a esta operacionalización y no constituye por sí solo una prueba irrestricta d
 corrección de las atribuciones.
 
 **Localización post-hoc (Nemenyi):** La diferencia crítica para comparaciones
-pareadas con $\alpha = 0.05$, $k = 4$ y $n = 15$ es:
+pareadas con $\alpha = 0.05$, $k = 4$ y $n = 15$, definida en la
+@eq-diferencia-critica, se calcula en la @eq-diferencia-critica-calculo:
 
-$$CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} = 2.569 \times \sqrt{\frac{4 \times 5}{6 \times 15}} = 2.569 \times 0.4714 = 1.211$$
+$$CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} = 2.569 \times \sqrt{\frac{4 \times 5}{6 \times 15}} = 2.569 \times 0.4714 = 1.211$$ {#eq-diferencia-critica-calculo}
 
 Donde $q_\alpha = 2.569$ es el valor crítico de la distribución de Nemenyi para
 $k=4$ con $\alpha = 0.05$ [@demsar2006]. Tres de las seis diferencias en rangos
@@ -161,9 +163,9 @@ presenta más adelante conserva otra unidad: 75 celdas $(g,s,n)$ emparejadas.
 ### H2: Diferencias entre métodos en estabilidad
 
 La prueba de Friedman para estabilidad arrojó $\chi^2_F = 40.68$ con $n = 15$
-bloques completos, lo que implica un margen de seguridad de:
+bloques completos, lo que implica el margen de seguridad de la @eq-margen-estabilidad:
 
-$$\text{Margen} = \frac{40.68 - 7.815}{7.815} \times 100 = 421\%$$
+$$\text{Margen} = \frac{40.68 - 7.815}{7.815} \times 100 = 421\%$$ {#eq-margen-estabilidad}
 
 $H_{0,2}$ se rechaza con la misma holgura que $H_{0,1}$. Sin embargo, el
 ordenamiento de los métodos en estabilidad difiere sustancialmente del
@@ -530,32 +532,35 @@ lectura mono-métrica de la calidad
 explicativa.](assets/figures/fig_correlacion_metricas_es.png){#fig-correlacion-metricas width=85%}
 
 ![Cobertura analítica EXP2 por modelo y método. La figura muestra cuántas de
-las 15 celdas planificadas por combinación superan la auditoría de integridad
-FOM-7.](assets/figures/fig_cobertura_exp2_es.png){#fig-cobertura-exp2 width=85%}
+las 15 celdas planificadas por combinación son analizables tras la auditoría de
+integridad FOM-7 y la superposición de recuperación documentada (275
+ejecuciones en total, las mismas de la
+@tbl-coverage-method).](assets/figures/fig_cobertura_exp2_es.png){#fig-cobertura-exp2 width=85%}
 
 ![Diagrama de diferencia crítica de Nemenyi para fidelidad (izquierda) y
 estabilidad (derecha). El eje horizontal muestra los rangos medios; las barras
 horizontales gruesas conectan métodos no significativamente distintos (diferencia
-< DC = 1.211, k=4, n=15, α=0.05). En fidelidad, SHAP y LIME forman un grupo
-indistinguible entre sí, al igual que Anchors y DiCE; ambos grupos son
-mutuamente distintos. En estabilidad, el reordenamiento es notable: SHAP y DiCE
-forman el grupo estable, mientras LIME y Anchors son indistinguibles entre sí
-pero claramente inferiores.](assets/figures/fig_cd_diagram_es.png){#fig-cd-diagram width=95%}
+< DC = 1.211, k=4, n=15, α=0.05). En fidelidad, las barras se encadenan: SHAP y
+LIME no se distinguen entre sí, tampoco LIME y Anchors, ni Anchors y DiCE; sí
+se distinguen SHAP de Anchors y de DiCE, y LIME de DiCE, como recoge la
+@tbl-nemenyi-fidelity. En estabilidad, el reordenamiento es notable: SHAP y
+DiCE forman el grupo estable, mientras LIME y Anchors son indistinguibles entre
+sí pero claramente inferiores.](assets/figures/fig_cd_diagram_es.png){#fig-cd-diagram width=95%}
 
 ![Distribución de fidelidad (izquierda) y estabilidad (derecha) por método
 sobre los 15 bloques $(g, n)$ del diseño factorial. Cada punto representa un
 bloque; la caja muestra el rango intercuartílico; la línea interna, la mediana.
 Para fidelidad, las cajas de SHAP y LIME no se solapan con las de Anchors y
-DiCE. Para estabilidad, la caja de LIME colapsa casi en cero (mediana ≈ 0.014),
+DiCE. Para estabilidad, la caja de LIME colapsa casi en cero (media ≈ 0.014),
 confirmando que la inestabilidad afecta a todos los bloques del
 benchmark y no a un subconjunto de modelos.](assets/figures/fig_boxplots_metricas_es.png){#fig-boxplots-metricas width=95%}
 
 ![Diferencias pareadas $d_i = \text{SHAP} - \text{LIME}$ para fidelidad
 (izquierda) y estabilidad (derecha) sobre las 75 celdas $(g, s, n)$ del
-análisis pareado. Las barras azules indican ventaja de SHAP; las rojas, ventaja
+análisis pareado. Las barras rojas indican ventaja de SHAP; las azules, ventaja
 de LIME. Para fidelidad, las 75/75 diferencias son positivas (media = +0.248;
 $d_z = 4.82$); para estabilidad, las 75/75 diferencias también son positivas
-(media = +0.718; $d_z = 3.00$). La ausencia de barras rojas confirma que la
+(media = +0.718; $d_z = 3.00$). La ausencia de barras azules confirma que la
 ventaja de SHAP no es un artefacto de valores
 atípicos.](assets/figures/fig_diferencias_pareadas_es.png){#fig-diferencias-pareadas width=95%}
 
@@ -564,8 +569,8 @@ mejor desempeño). Fidelidad y estabilidad se normalizan directamente; parsimoni
 y eficiencia de coste se invierten para que el exterior represente en todos los
 ejes la posición más favorable. Ningún método domina en todos los ejes
 simultáneamente: SHAP lidera en fidelidad, estabilidad y brecha de fidelidad;
-LIME en parsimonia y eficiencia de coste; DiCE es intermedio en estabilidad
-pero muy bajo en fidelidad. Este patrón valida la necesidad del enfoque
+DiCE en parsimonia y LIME en eficiencia de coste; DiCE es además intermedio en
+estabilidad pero muy bajo en fidelidad. Este patrón valida la necesidad del enfoque
 multi-métrico de FOM-7.](assets/figures/fig_radar_metodos_es.png){#fig-radar-metodos width=70%}
 
 ## Discusión {#sec-discusion}

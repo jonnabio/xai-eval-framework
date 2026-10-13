@@ -2,7 +2,8 @@
 
 Date: 2026-10-12
 Status: Accepted. The author confirmed the four points on 2026-10-12: a chapter of its
-own, no new objective, the three study names, and the length of the chapter.
+own, no new objective, the three study names, and the length of the chapter. The tutor
+agreed to them (reported by the author, 2026-10-12).
 
 ## Context
 

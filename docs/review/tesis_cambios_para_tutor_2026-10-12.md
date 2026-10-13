@@ -12,7 +12,7 @@ Desde la versión de la tesis que usted revisó se han completado tres estudios
 nuevos y se han añadido controles al estudio de los jueces basados en modelos
 de lenguaje. Los cuatro trabajos están enviados a revistas. Este documento
 describe cómo se han incorporado a la tesis, qué cambia en cada capítulo y qué
-no cambia, y las decisiones que se someten a su criterio.
+no cambia, y las decisiones de diseño acordadas con usted.
 
 El criterio seguido es el que usted destacó en su última nota: separar lo que se
 planificó de lo que se descubrió después. Por eso los estudios nuevos no se
@@ -107,6 +107,30 @@ la lectura del Capítulo 5, y la tesis ahora los declara.
   libro. Los datos eran los mismos, pero una etiqueta de la matriz de
   correlación no se leía. Se han restaurado las versiones en color y se ha
   corregido el generador para que no vuelva a ocurrir.
+- **Revisión de las siete figuras del Capítulo 4.** Todas se han vuelto a
+  generar a partir de los datos actuales y coinciden en sus valores con las
+  anteriores. La revisión de cada figura frente a su pie y a las tablas encontró
+  cuatro discrepancias, ya corregidas; ninguna altera un resultado:
+    - *Diagrama de diferencia crítica.* La figura y su pie omitían que LIME y
+      Anchors tampoco se distinguen en fidelidad (diferencia de rangos de 1.200
+      frente a una diferencia crítica de 1.211), como ya indicaba la tabla de
+      Nemenyi del mismo capítulo. La figura muestra ahora los tres grupos
+      encadenados y el pie lo describe. Los rangos y los grupos se calculan
+      desde los datos, no se escriben a mano.
+    - *Perfil multidimensional.* El pie atribuía a LIME el liderazgo en
+      parsimonia; la figura y las tablas muestran que corresponde a DiCE.
+    - *Distribución por método.* El pie llamaba «mediana» al valor 0.014 de la
+      estabilidad de LIME, que es la media.
+    - *Cobertura analítica.* La figura contaba el inventario sin la
+      superposición de recuperación y mostraba SHAP sobre SVM como 14 de 15; la
+      tabla de cobertura reporta 75 de 75. La figura cuenta ahora las 275
+      ejecuciones analizadas.
+- **Colores de los métodos.** Las figuras de la tesis adoptan la misma
+  convención que las de los artículos enviados (SHAP en rojo, LIME en azul,
+  Anchors en verde, DiCE en morado), que antes estaba invertida para SHAP y
+  LIME.
+- **Ecuaciones.** Las 20 ecuaciones destacadas de los Capítulos 3 y 4 están
+  ahora numeradas y cada una se cita en el texto.
 - **Apéndice B:** una referencia a la «Tabla 3.1» estaba escrita a mano; ahora
   es una referencia cruzada generada.
 - **Apéndice C:** la tabla de sensibilidad de KernelSHAP al conjunto de
@@ -116,20 +140,21 @@ la lectura del Capítulo 5, y la tesis ahora los declara.
   archivos de la tesis. La introducción y los Capítulos 1 y 2 no tenían ninguna
   cifra sin registrar; los apéndices tenían diez, todas resueltas.
 
-# Decisiones que se someten a su criterio
+# Decisiones de diseño acordadas
 
-1. **Capítulo propio para los estudios de seguimiento.** La alternativa es
+Las cuatro decisiones siguientes se acordaron con usted el 12 de octubre de
+2026 y son las que aplica el texto.
+
+1. **Capítulo propio para los estudios de seguimiento.** La alternativa era
    repartir su diseño en el Capítulo 3 y sus resultados en el Capítulo 4. Se
    descartó porque mezcla resultados posteriores con los confirmativos.
-2. **Ningún objetivo específico nuevo.** La alternativa es un objetivo
+2. **Ningún objetivo específico nuevo.** La alternativa era un objetivo
    exploratorio OE7, redactado como OE6. Se descartó porque un objetivo se
-   formula antes de su resultado, pero es una decisión que le corresponde
-   valorar.
+   formula antes de su resultado.
 3. **Nombres de los estudios:** Estudio de Fiabilidad ante el Error, Estudio de
    Concordancia entre Explicadores y Estudio de Transferencia entre Conjuntos
    de Datos.
 4. **Extensión.** El capítulo nuevo resume cada estudio en una o dos páginas.
-   Puede ampliarse si lo considera necesario.
 
 # Verificación realizada
 

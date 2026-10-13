@@ -29,10 +29,10 @@ METHOD_LABELS = {
     "dice": "DiCE",
 }
 COLORS_COLOR = {
-    "shap": "#1f77b4",
-    "lime": "#ff7f0e",
-    "anchors": "#2ca02c",
-    "dice": "#d62728",
+    "shap": "#c0392b",
+    "lime": "#1b6ca8",
+    "anchors": "#2e8b57",
+    "dice": "#6c3483",
 }
 MARKERS_BW = {
     "shap": ("o", "#1a1a1a", "#1a1a1a"),
@@ -188,14 +188,17 @@ def figure_metric_correlation(is_bw: bool = False) -> None:
 
 
 def figure_coverage(is_bw: bool = False) -> None:
-    inv = pd.read_csv(STATS / "exp2_run_inventory.csv")
-    inv["analizable"] = inv["status"].isin(["ok_instance", "ok_aggregated"])
+    # The analysable runs are those of the run-level table: the audited inventory plus the
+    # documented recovery overlay (275 runs). Until 2026-10-12 this figure counted the
+    # inventory alone (274) and showed SVM-SHAP as 14/15, against Table tbl-coverage-method
+    # of the thesis, which reports SHAP as 75 of 75.
+    runs = pd.read_csv(STATS / "exp2_run_level_metrics.csv")
     pivot = (
-        inv.pivot_table(
+        runs.pivot_table(
             index="model",
             columns="method",
-            values="analizable",
-            aggfunc="sum",
+            values="seed",
+            aggfunc="size",
             fill_value=0,
         )
         .reindex(index=["logreg", "rf", "xgb", "svm", "mlp"], columns=METHOD_ORDER)
@@ -222,7 +225,7 @@ def figure_coverage(is_bw: bool = False) -> None:
     ax.text(
         0.0,
         -0.18,
-        "Fuente: exp2_run_inventory.csv. Una celda analizable supera la auditoría de integridad FOM-7.",
+        "Fuente: exp2_run_level_metrics.csv (inventario auditado y superposición de recuperación).",
         transform=ax.transAxes,
         fontsize=8,
         color="#555555",
