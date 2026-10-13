@@ -1,6 +1,7 @@
 # Paper F — External Validity of XAI Benchmark Conclusions
 
 **Title (chosen by the author, 2026-10-05):** *How Dataset-Dependent Are Tabular Explainability Benchmarks?*  
+**Status (2026-10-13): FORMAT CORRECTIONS ASKED BY THE EDITOR BEFORE REVIEW**, three points, none on the content (message and what was done: section 8). Revised files built in `submission/revision_2026-10-13/`: `herrera-vasquez.docx` (SHA-256 `c7056af454791cf2...`) and `herrera-vasquez.pdf` (`91736ff35ef7a673...`), 8 pages. The files sent on 2026-10-12 are kept in `submission/sent_2026-10-12/`. Not yet sent back by the author. No text, number, figure or analysis changed, so no new Zenodo version is needed.  
 **Status (2026-10-12): SUBMITTED** to *Journal of Computer Sciences Institute*, **submission 10503** (https://ph.pollub.pl/index.php/jcsi/dashboard/mySubmissions?workflowSubmissionId=10503), confirmed by the journal's message that the author passed on that day. Files of the submission folder at that time, built from commit `334fb753c`: `herrera-vasquez.docx` (SHA-256 `67470c68a1d95276...`) and `herrera-vasquez.pdf` (`f97b864a518d4d39...`), 8 pages. **The author confirmed on 2026-10-12 that these two files, and no other, were uploaded**; the folder's files were not changed after their build (same write times; the PDF's hash checked again at the end of the session). The paper cites Zenodo 0.15.0, https://doi.org/10.5281/zenodo.23325483. **Do not rebuild or change the text unless a revision is requested**; the earlier status lines and sections 2, 3 and 5 below are history.  
 **Status (2026-10-03):** Analytical framework initiated. Pre-analysis framework and methodological appraisal established prior to dataset commitment or experimental execution. No empirical results have been generated.  
 **Status (2026-10-05):** Unchanged. Lane set up in the main folder (section 7). No venue is selected and the datasets B, C and D are not chosen. Section 4 below describes the other papers as of 2026-10-03; since then Paper B+C was split into Paper B (*CLEI Electronic Journal*) and Paper C (*Tecnología en Marcha*). The current status of every paper is in `docs/context/ACTIVE_CONTEXT.md`.  
@@ -179,3 +180,46 @@ Paper F is lane `paper-f` of `scripts/pubs/lanes.toml` (ADR-0021, amendment of 2
    date from 2024 or later. `build_paper_f.py --final` must not pass while any of the
    three fails. State on 2026-10-05: the draft cites 22 works, 3 of them from 2024 or
    later, and several entries have no DOI, so the reference list has to be rebuilt.
+
+## 8. Editor's format corrections before review (2026-10-13)
+
+Message of the editor, Beata Pańczyk, passed on by the author on 2026-10-13:
+
+> Dear Jonathan,
+>
+> Thank you very much for sending the article. Before I submit it for review, I have just a few minor comments:
+> 1. Please remove the index 'a' next to the author's name and affiliation (there is only one author).
+> 2. Remove any single letters at the end of lines using a hard space.
+> 3. In the references, please correct the formatting of certain entries (as in the examples from the JCSI template) – for example, remove the abbreviations 'pp.' and 'vol.', state the year correctly, etc.
+>
+> Please attach the revised docx and pdf files as attachments when replying to this email.
+>
+> Regards, Beata Pańczyk
+
+What was done, all of it in `scripts/build_paper_f_docx.py` (the Word files only; `paper_f.tex`,
+`references.bib`, the results and the claim registry are unchanged):
+
+1. **Index.** The author line is the name and the asterisk of the corresponding author; the
+   affiliation has no letter before it.
+2. **Hard spaces.** `hard_spaces()` puts a non-breaking space after every word of one letter
+   (also a symbol of one letter set as an equation) in the whole document: 146 places. Checked
+   in the PDF printed by Word: no line of text ends in a single letter (the only hit is the
+   column heading *p* of Table 2, alone in its cell).
+3. **References.** `jcsi_reference()` rewrites the entries of the BibTeX style in the form of
+   the template's examples and stops the build if "pp.", "Vol.", "in:" or a year outside
+   brackets is left:
+   - a conference paper, "in: Name, 2016, pp. 1135–1144" becomes "Name (2016) 1135–1144",
+     with "In " before the name unless it begins with "Proceedings", as in the template
+     (9 entries; in one of them "Vol. 32, 2018" becomes "32 (2018)");
+   - volume and issue, "57 (8) (2024)" becomes "57(8) (2024)" (9 entries);
+   - the entry with an issue and no volume, "(RIMI) (3) (2026)" becomes "(RIMI) 3 (2026)";
+   - every entry ends with a full stop (33 entries).
+
+Checks: 8 pages in Word for both files; against the file sent, the only paragraphs whose text
+differs, hard spaces apart, are the author line, the affiliation and the 33 references.
+
+The file `herrera-vasquez.docx` of `submission/` was open in Word during the build, so the
+revised files were written to `submission/revision_2026-10-13/` (author file and blind copy).
+`submission/herrera-vasquez.docx` and `.pdf` are still the files sent; the blind copy in
+`submission/` is already the revised one. A plain run of the builder, with Word closed, brings
+`submission/` level.
