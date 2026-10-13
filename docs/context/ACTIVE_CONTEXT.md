@@ -75,9 +75,10 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` at `239d012e1` (pull request #59) plus the session-end update of this file.
-  Pull requests #56 to #59 were merged by the author on 2026-10-12 and 13. The thesis
-  branch `thesis/rca-001-phase-2` is level with `main`.
+- `main` holds everything of the session: pull requests #56 to #59, merged by the
+  author on 2026-10-12 and 13, and the session-end handoffs #60 and #61, merged by the
+  assistant on 2026-10-13. The thesis branch `thesis/rca-001-phase-2` is level with
+  `main`. No pull request is open.
 - The lane lock of the main folder is free.
 - Nothing is running: no task, no process.
 - Verifiers at the last check (2026-10-13): `verify_claims.py` 1,387 claims, 1,728
@@ -217,5 +218,7 @@ in archive `2026-10-12.md` and `2026-10-13.md`.
     PowerShell `Set-Content -Encoding utf8` puts a byte-order mark in the message, and
     PowerShell rewrites of UTF-8 files corrupt the accents.
   - `.ace/` is ignored by git: add a new file there with `git add -f`.
-  - `gh pr merge` was refused to the assistant on 2026-10-12; the author merged #56 to
-    #59 by hand.
+  - `gh pr merge` was refused to the assistant on 2026-10-12, when the author merged #56
+    to #59 by hand, and accepted on 2026-10-13 for the two handoff pull requests, after
+    the author's instruction to merge pending work: try once, and give the author the
+    command if refused.
