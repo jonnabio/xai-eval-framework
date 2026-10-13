@@ -128,8 +128,31 @@ def reference_list() -> list[tuple[str, str]]:
                       r", \\url{\1}", text)
         if "\\newblock" in text or "\\href" in text:
             sys.exit(f"reference {key}: a form this script does not convert:\n{text}")
-        items.append((key, text))
+        items.append((key, jcsi_reference(key, text)))
     return items
+
+
+def jcsi_reference(key: str, text: str) -> str:
+    """An entry of elsarticle-num in the form of the template's examples.
+
+    The template writes the year in brackets after the source and the pages after it, with
+    no "pp." and no "vol.": "Appl. Opt. 51(27) (2012) 6673-6682", "In 7th International
+    Workshop on Science Gateways (2015) 34-39"; an entry ends with a full stop. (Asked by
+    the editor on 2026-10-13.)
+    """
+    def source(m: re.Match) -> str:
+        name, volume, year, pages = m.groups()
+        lead = "" if name.startswith("Proceedings") else "In "
+        return (f", {lead}{name}" + (f" {volume}" if volume else "") + f" ({year})"
+                + (f" {pages}" if pages else "") + ",")
+    text = re.sub(r", in: (.+?)(?:, Vol\.~(\d+))?, (\d{4})(?:, pp\. ([\d\-]+))?,(?= \\url)",
+                  source, text)
+    text = re.sub(r"(\d)~\((\d+)\) \((\d{4})\)", r"\1(\2) (\3)", text)    # 57 (8) (2024)
+    text = re.sub(r"~\((\d+)\) \((\d{4})\)", r" \1 (\2)", text)           # an issue, no volume
+    text = text.rstrip().rstrip(".") + "."
+    if re.search(r"\bpp\.|\b[Vv]ol\.|\bin: |\d[~ ]\(\d+\) \(|, \d{4},", text):
+        sys.exit(f"reference {key}: not in the form of the template:\n{text}")
+    return text
 
 
 def cite_text(keys: list[str], number: dict[str, int]) -> str:
@@ -337,6 +360,39 @@ def convert_body(pandoc_doc: str, template_doc: str) -> tuple[str, int]:
     return xml, equations
 
 
+def hard_spaces(xml: str) -> str:
+    """A hard space after every word of one letter, so that none ends a line.
+
+    Asked by the editor on 2026-10-13. A word of one letter is a letter (a symbol set as an
+    equation counts) with a space, a bracket or a quotation mark before it and a space after
+    it; the initial of a name, followed by its full stop, is not one. The paragraph is read
+    as a whole, because the letter and its space can be in different runs.
+    """
+    def paragraph(m: re.Match) -> str:
+        parts = re.split(r"(<m:oMath>.*?</m:oMath>|<w:t(?: [^>]*)?>[^<]*</w:t>)", m.group(0),
+                         flags=re.DOTALL)
+        texts = []                               # (index in parts, text, can be changed)
+        for i, part in enumerate(parts):
+            if part.startswith("<m:oMath>"):
+                texts.append((i, "".join(re.findall(r"<m:t[^>]*>([^<]*)</m:t>", part)), False))
+            elif part.startswith("<w:t"):
+                texts.append((i, re.sub(r"<[^>]+>", "", part), True))
+        whole = "".join(t for _, t, _ in texts)
+        # An entity (&amp;, &lt;) never holds a lone letter between spaces, so the escaped
+        # text is searched as it is.
+        spots = {s.end() - 1
+                 for s in re.finditer("(?<![^\\s(\\[“‘\"])[^\\W\\d_] ", whole)}
+        pos = 0
+        for i, t, editable in texts:
+            if editable:
+                new = "".join(" " if pos + k in spots else c for k, c in enumerate(t))
+                if new != t:
+                    parts[i] = '<w:t xml:space="preserve">' + new + "</w:t>"
+            pos += len(t)
+        return "".join(parts)
+    return re.sub(r"<w:p[ >].*?</w:p>", paragraph, xml, flags=re.DOTALL)
+
+
 def scale_figure(xml: str, png: Path) -> str:
     """Set the figure to the width of the text, keeping its proportions."""
     import struct
@@ -382,12 +438,12 @@ def title_block(template_doc: str, tex: str, full: bool) -> str:
                          flags=re.DOTALL).group(1)
     keywords = " ".join(re.search(r"\\textit\{Keywords\}:(.*?)\\medskip", tex,
                                   flags=re.DOTALL).group(1).split())
-    sup = '<w:vertAlign w:val="superscript"/>'
     base = '<w:vertAlign w:val="baseline"/>'
     out = [para("Papertitle", r(title), "<w:suppressAutoHyphens/>")]
     if full:
-        out.append(para("Authors", r(AUTHOR) + r("a,", sup) + r("*")))
-        out.append(para("Affilation", r("a") + r(" " + AFFILIATION, base)))
+        # One author: no index letter before the affiliation (editor, 2026-10-13).
+        out.append(para("Authors", r(AUTHOR) + r("*")))
+        out.append(para("Affilation", r(AFFILIATION, base)))
     else:
         out.append(para("Authors", r(BLIND_AUTHOR)))
     out.append(abstract_head)
@@ -464,7 +520,7 @@ def assemble(full: bool, tex: str, refs: list[tuple[str, str]]) -> Path:
                             re.search(r"<w:headerReference [^>]*/>", final_sect).group(0))
         head = merge_namespaces(template_doc, pandoc_doc)
         head = head[:head.index("<w:body>") + len("<w:body>")]
-        document = head + block + body + final_sect + "</w:body></w:document>"
+        document = head + hard_spaces(block + body) + final_sect + "</w:body></w:document>"
 
         # Relationships and media of the template's sample text that the body no longer uses.
         kept = []
