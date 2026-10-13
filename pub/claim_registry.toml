@@ -1157,6 +1157,7 @@ appears_in = [
   { file = "docs/reports/paper_b/paper_b_cleiej.tex", text = "8047.6" },
   { file = "thesis/capitulo-4-resultados.qmd", text = "8047.6" },
   { file = "thesis/capitulo-4-resultados.qmd", text = "8,048" },
+  { file = "thesis/apendices.qmd", text = "8{,}047.6" },
 ]
 
 [[claim]]
@@ -1167,6 +1168,7 @@ tolerance = 1.0
 appears_in = [
   { file = "thesis/capitulo-4-resultados.qmd", text = "17856.6" },
   { file = "thesis/capitulo-4-resultados.qmd", text = "17,857" },
+  { file = "thesis/apendices.qmd", text = "17{,}856.6" },
 ]
 
 [[claim]]
@@ -2166,6 +2168,11 @@ files = [
   # Follow-up chapter (ADR-0023), added 2026-10-12. Every result it prints is a paper
   # claim mirrored by scripts/pubs/register_thesis_followup.py.
   "thesis/estudios-de-seguimiento.qmd",
+  # Coverage sweep of 2026-10-12: the last thesis files not yet swept.
+  "thesis/introduccion.qmd",
+  "thesis/capitulo-1-marco-teorico.qmd",
+  "thesis/capitulo-2-fundamentos.qmd",
+  "thesis/apendices.qmd",
   # CIFIE book chapter (lane chapter/cifie-*), added 2026-09-27
   "publications/book_chapters/2026_cifie_xai_fom7/manuscript/01_resumen_palabras_clave.md",
   "publications/book_chapters/2026_cifie_xai_fom7/manuscript/02_introduccion.md",
@@ -2260,6 +2267,10 @@ structural = [
   # one explanation in seconds (1,200). And two display bounds: p is printed as
   # "<0.001" and the simulated power at a true correlation of 0.5 as "more than 99.9%".
   "0.65", "1000", "10000", "100000", "20000", "1200", "0.001", "99.9",
+  # Appendix sweep (2026-10-12). The strictest Anchors tau probed in Apendice C, a
+  # protocol setting; the Holm threshold alpha/1 written with three decimals; and the
+  # mantissa of the bound "p < 2.2e-16", the smallest p the software prints.
+  "0.99", "0.050", "2.2",
 ]
 
 # ---------------------------------------------------------------------------
@@ -2298,6 +2309,48 @@ id = "appendixC.shap_reference_probe_k100"
 text = "614,820"
 reason = "same probe at k=100; see appendixC.shap_reference_probe"
 files = ["thesis/capitulo-4-resultados.qmd", "thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe.fidelity_k25"
+text = "0.921"
+reason = "cell of the same probe (Table of Apendice C); see appendixC.shap_reference_probe"
+files = ["thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe.stability_k25"
+text = "0.728"
+reason = "cell of the same probe (Table of Apendice C); see appendixC.shap_reference_probe"
+files = ["thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe.fidelity_k50"
+text = "0.928"
+reason = "cell of the same probe (Table of Apendice C); see appendixC.shap_reference_probe"
+files = ["thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe.stability_k50"
+text = "0.731"
+reason = "cell of the same probe (Table of Apendice C); see appendixC.shap_reference_probe"
+files = ["thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe.cost_k50"
+text = "159,059"
+reason = "cell of the same probe (Table of Apendice C); see appendixC.shap_reference_probe"
+files = ["thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe.fidelity_k100"
+text = "0.929"
+reason = "cell of the same probe (Table of Apendice C); see appendixC.shap_reference_probe"
+files = ["thesis/apendices.qmd"]
+
+[[unbacked]]
+id = "appendixC.shap_reference_probe.stability_k100"
+text = "0.730"
+reason = "cell of the same probe (Table of Apendice C); see appendixC.shap_reference_probe"
+files = ["thesis/apendices.qmd"]
 
 # ---------------------------------------------------------------------------
 # Retired values -- the regression guard proper. Each was removed by the
