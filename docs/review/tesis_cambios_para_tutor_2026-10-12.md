@@ -125,6 +125,18 @@ la lectura del Capítulo 5, y la tesis ahora los declara.
       superposición de recuperación y mostraba SHAP sobre SVM como 14 de 15; la
       tabla de cobertura reporta 75 de 75. La figura cuenta ahora las 275
       ejecuciones analizadas.
+- **Figura de estabilidad y coste.** Mostraba la media con una desviación
+  estándar a cada lado; como el coste varía en órdenes de magnitud entre
+  familias de modelos, la desviación superaba a la media y la barra se salía del
+  eje logarítmico. Muestra ahora la mediana de los 15 bloques y el rango
+  intercuartílico, y el pie lo indica.
+- **Figuras citadas en el texto.** Cinco de las siete figuras del Capítulo 4 no
+  se citaban desde el texto; ahora se citan todas.
+- **Cinco figuras nuevas en el Capítulo 6**, una o dos por estudio de
+  seguimiento, en español y generadas desde los archivos de resultados de cada
+  estudio: diferencia de calidad entre errores y aciertos; estabilidad según el
+  margen de predicción; solapamiento entre SHAP y LIME; rango de cada método en
+  los 16 conjuntos de datos; y acuerdo entre jueces en el control positivo.
 - **Colores de los métodos.** Las figuras de la tesis adoptan la misma
   convención que las de los artículos enviados (SHAP en rojo, LIME en azul,
   Anchors en verde, DiCE en morado), que antes estaba invertida para SHAP y

@@ -139,50 +139,37 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-12 (every paper reflected in the thesis; open points closed)
+## Latest handoff - 2026-10-13 (thesis figures: Chapter 6 figures, review, proposal)
 
 - **Completed** (lane `thesis`, owner `claude-2026-10-12-thesis-review`):
-  - Context file split and its standard (pull request #56, merged by the author).
-  - Plan and ADR-0023. New Chapter 6 with the three follow-up studies and the later
-    inter-judge controls; pointers and renumbering in the other chapters; Appendix G;
-    one mirrored sentence in the Resumen and Abstract.
-  - `scripts/pubs/register_thesis_followup.py`: 79 paper claims mirrored for the
-    chapter; CI step added.
-  - Two scope statements added to Chapters 3 and 5 from the later review of the judge
-    prompts: the primary condition of cohort 2 did not hide the label effectively, and
-    Anchors and DiCE were scored in a rendering that is not their own.
-  - The three points open before deposit: figures restored; coverage sweep finished
-    (ten literals in the appendices, a typed table number fixed, a probe without
-    artifact now disclosed); final pass done (statement sweep rows 1 to 16, ADR-0012
-    greps, full render read from `word/document.xml`).
-  - Record for the tutor written, with a Word copy.
-  - **Equations (author rule, 2026-10-12):** the 20 displayed equations of the thesis
-    (17 in Chapter 3, 3 in Chapter 4) are labelled and each is cited in the text;
-    numbers are generated. Rule in `.ace/standards/documentation.md` ("Manuscripts:
-    Equations") and `.aceconfig`; `scripts/pubs/check_equations.py` runs in CI. It
-    applies to every manuscript from now on; a submitted paper takes it at its next
-    revision. The tracked Word file of the thesis was rebuilt later the same day with
-    the numbers and the reviewed figures.
-  - **Figure review (2026-10-12).** The seven thesis figures (all in Chapter 4) were
-    regenerated from the current data; values unchanged. Four figure-versus-text defects
-    fixed: the CD diagram and its caption left out the LIME-Anchors group in fidelity
-    (ranks and groups are now computed in
-    `scripts/generate_thesis_supplementary_figures.py`, no longer typed); the radar
-    caption gave LIME the lead in parsimony (it is DiCE); the boxplot caption called
-    the LIME stability mean a median; the coverage figure counted the inventory (274)
-    and not the analysed runs (275). Method colours now follow the submitted papers
-    (SHAP red, LIME blue, Anchors green, DiCE purple; palette of Paper F). **Paper
-    figures were not touched** (papers are submitted): Paper B's two figures were read
-    against the thesis and agree in values; C, D and F were read; E's are PDF only and
-    were not opened. Not done: the unused English figures in `thesis/assets/figures`
-    keep the old palette; the book-chapter figures take the new palette at their next
-    rebuild (same generator); Chapter 6 has no figure.
-- **Current state**: merged to `main` (pull request #57). The tutor agreed to the four
-  design decisions; the record for the tutor states them as agreed.
-- **Next steps**:
-  1. Author: read Chapter 6 and the record; send the record and the rendered thesis to
-     the tutor; refresh the table of contents in Word.
-  2. Before deposit: the journals' prior-publication policies (point 6 above).
-  3. Task 3 step 2 (macros and the CI build), if the author wants it before deposit.
+  - Pull requests #57 and #58 merged by the author on 2026-10-12: follow-up chapter,
+    equations numbered and cited, figures of Chapter 4 reviewed, the tutor's agreement
+    recorded. Detail: archive `2026-10-12.md`.
+  - **Five Spanish figures in Chapter 6**, drawn from the result files of each study by
+    `scripts/generate_thesis_followup_figures.py` (no value printed as a label).
+  - **Stability-against-cost figure** now shows the median of the 15 blocks with the
+    interquartile range (author's decision); caption rewritten.
+  - **Every figure is cited in the text** (five of Chapter 4 were not).
+    `check_equations.py` now enforces label and citation for figures too; `--tables`
+    lists the 19 of 44 tables no text cites by reference (reported, not enforced).
+  - Record for the tutor updated. Thesis rendered: 12 figures, no unresolved reference.
+- **Rules for thesis figures** (2026-10-12 and 13):
+  - Method colours: SHAP `#c0392b`, LIME `#1b6ca8`, Anchors `#2e8b57`, DiCE `#6c3483`,
+    as in the submitted papers.
+  - A figure prints nothing its generator does not compute from a result file.
+  - Run the Chapter 4 generators for the thesis folder only: both also write the
+    book-chapter folders, which belong to the chapter lane.
+- **Open with the author** (proposal: `docs/review/thesis-figure-review_2026-10-13.md`):
+  1. Reuse of book-chapter figures in Chapters 2 and 3: recommended for `d8`, `d7`,
+     `d6`, `d4`; not for `d12`; `d9` to `d11` only after edits. The author checks the
+     publication licence of the book chapter first.
+  2. Seven new figures proposed (taxonomy axes, judge reliability, thesis map, units of
+     analysis, cost by model family, selection guide, timeline).
+  3. Whether to cite the 19 uncited tables and enforce it.
+  4. The four unused English figures in `thesis/assets/figures` (`*_en.png`): delete or
+     keep.
+- **Next steps**: the author answers the four points; then implement the chosen
+  figures; the remaining items of the previous handoff stand (send the record and the
+  thesis to the tutor, table of contents in Word, journals' prior-publication policies).
 - **Blockers**: none.
 
