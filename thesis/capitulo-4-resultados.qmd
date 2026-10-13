@@ -67,10 +67,11 @@ análisis de cada claim.
 La prueba de Friedman para bloques $(g, n)$ sobre la métrica de fidelidad
 arrojó una estadística $\chi^2_F = 42.12$ con $k - 1 = 3$ grados de libertad
 sobre $n = 15$ bloques completos. El valor crítico para $\alpha = 0.05$ es
-$\chi^2_{crit}(3) = 7.815$, de modo que el margen de seguridad inferencial es:
+$\chi^2_{crit}(3) = 7.815$, de modo que el margen de seguridad inferencial es el de la
+@eq-margen-fidelidad:
 
 $$\text{Margen} = \frac{\chi^2_F - \chi^2_{crit}}{\chi^2_{crit}} \times 100 =
-\frac{42.12 - 7.815}{7.815} \times 100 = 439\%$$
+\frac{42.12 - 7.815}{7.815} \times 100 = 439\%$$ {#eq-margen-fidelidad}
 
 Este resultado rechaza $H_{0,1}$ con una holgura de más de cinco veces el
 umbral crítico, lo que ofrece evidencia fuerte de diferencias sistemáticas
@@ -114,9 +115,10 @@ a esta operacionalización y no constituye por sí solo una prueba irrestricta d
 corrección de las atribuciones.
 
 **Localización post-hoc (Nemenyi):** La diferencia crítica para comparaciones
-pareadas con $\alpha = 0.05$, $k = 4$ y $n = 15$ es:
+pareadas con $\alpha = 0.05$, $k = 4$ y $n = 15$, definida en la
+@eq-diferencia-critica, se calcula en la @eq-diferencia-critica-calculo:
 
-$$CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} = 2.569 \times \sqrt{\frac{4 \times 5}{6 \times 15}} = 2.569 \times 0.4714 = 1.211$$
+$$CD = q_\alpha \sqrt{\frac{k(k+1)}{6n}} = 2.569 \times \sqrt{\frac{4 \times 5}{6 \times 15}} = 2.569 \times 0.4714 = 1.211$$ {#eq-diferencia-critica-calculo}
 
 Donde $q_\alpha = 2.569$ es el valor crítico de la distribución de Nemenyi para
 $k=4$ con $\alpha = 0.05$ [@demsar2006]. Tres de las seis diferencias en rangos
@@ -161,9 +163,9 @@ presenta más adelante conserva otra unidad: 75 celdas $(g,s,n)$ emparejadas.
 ### H2: Diferencias entre métodos en estabilidad
 
 La prueba de Friedman para estabilidad arrojó $\chi^2_F = 40.68$ con $n = 15$
-bloques completos, lo que implica un margen de seguridad de:
+bloques completos, lo que implica el margen de seguridad de la @eq-margen-estabilidad:
 
-$$\text{Margen} = \frac{40.68 - 7.815}{7.815} \times 100 = 421\%$$
+$$\text{Margen} = \frac{40.68 - 7.815}{7.815} \times 100 = 421\%$$ {#eq-margen-estabilidad}
 
 $H_{0,2}$ se rechaza con la misma holgura que $H_{0,1}$. Sin embargo, el
 ordenamiento de los métodos en estabilidad difiere sustancialmente del

@@ -119,10 +119,10 @@ faltantes (`"?"` $\to$ `NaN`), (iii) unificación de etiquetas de objetivo
 (`">50K."` $\to$ 1, `"<=50K."` $\to$ 0), (iv) eliminación de duplicados
 exactos, y (v) ordenamiento determinista de columnas.
 
-La partición sigue el esquema estratificado:
+La partición sigue el esquema estratificado de la @eq-particion:
 
 $$\text{train\_test\_split}\!\left(\text{test\_size} = 0.20,\;
-\text{stratify} = y,\; \text{random\_state} = s\right)$$
+\text{stratify} = y,\; \text{random\_state} = s\right)$$ {#eq-particion}
 
 Para la semilla canónica $s = 42$, la partición produce 39,032 instancias
 de entrenamiento y 9,758 de prueba.
@@ -146,9 +146,9 @@ los métodos explicadores:
 ## Diseño factorial del benchmark primario (EXP2)
 
 El benchmark primario adopta una estructura factorial cruzada de cuatro
-factores:
+factores (@eq-diseno-factorial):
 
-$$\mathcal{D} = g \times k \times s \times n$$
+$$\mathcal{D} = g \times k \times s \times n$$ {#eq-diseno-factorial}
 
 donde:
 
@@ -160,9 +160,9 @@ donde:
   (5 niveles),
 - $n \in \{50,\, 100,\, 200\}$ — instancias por cuadrante de error (3 niveles).
 
-El tamaño del diseño planificado es:
+El tamaño del diseño planificado es el de la @eq-tamano-diseno:
 
-$$|\mathcal{D}| = 5 \times 4 \times 5 \times 3 = 300 \text{ ejecuciones}$$
+$$|\mathcal{D}| = 5 \times 4 \times 5 \times 3 = 300 \text{ ejecuciones}$$ {#eq-tamano-diseno}
 
 Cada celda $(g, k, s, n)$ produce un artefacto de resultado independiente.
 La variación en $s$ sirve para estimar la reproducibilidad del protocolo. La
@@ -194,10 +194,10 @@ calificados de SHAP y LIME con coordenadas idénticas.
 Las instancias para cada ejecución se seleccionan mediante muestreo
 estratificado por cuadrante de error de predicción: Verdaderos Positivos (VP),
 Verdaderos Negativos (VN), Falsos Positivos (FP) y Falsos Negativos (FN), con
-objetivo de $n$ instancias por cuadrante:
+objetivo de $n$ instancias por cuadrante (@eq-muestreo):
 
 $$\mathcal{I}_{g,s,n} = \text{StratSample}\!\left(\mathcal{I}_{\text{test}},\;
-\text{strata} = \{\text{VP, VN, FP, FN}\},\; n_{\text{per\_strata}} = n\right)$$
+\text{strata} = \{\text{VP, VN, FP, FN}\},\; n_{\text{per\_strata}} = n\right)$$ {#eq-muestreo}
 
 El tamaño nominal por ejecución es $4n$, sujeto a la disponibilidad de
 instancias en cada cuadrante. El rango observado es de 27 a 800 instancias por
@@ -243,9 +243,10 @@ controladas [@carvalho2019; @tomsett2020; @nauta2023].
 ### Fidelidad
 
 La fidelidad cuantifica la alineación entre las importancias del explicador y
-el efecto predictivo real bajo enmascaramiento individual de características:
+el efecto predictivo real bajo enmascaramiento individual de características
+(@eq-fidelidad):
 
-$$F = \text{corr}\!\left(|w_i|,\;\bigl|f(x) - f(x_{-i})\bigr|\right)$$
+$$F = \text{corr}\!\left(|w_i|,\;\bigl|f(x) - f(x_{-i})\bigr|\right)$$ {#eq-fidelidad}
 
 donde $x_{-i}$ sustituye, de manera independiente, la característica
 transformada $i$ por su media en el conjunto de entrenamiento. Este operador es
@@ -260,10 +261,10 @@ explicación. Dirección: $\uparrow$. Implementación: `src/metrics/fidelity.py`
 
 La estabilidad mide la consistencia de las explicaciones bajo $T = 15$
 perturbaciones gaussianas $x^{(t)} = x + \varepsilon^{(t)}$,
-$\varepsilon^{(t)} \sim \mathcal{N}(0, \sigma^2\mathbf{I})$, $\sigma = 0.1$:
+$\varepsilon^{(t)} \sim \mathcal{N}(0, \sigma^2\mathbf{I})$, $\sigma = 0.1$ (@eq-estabilidad):
 
 $$S = \frac{2}{T(T-1)} \sum_{a < b}
-\cos\!\left(e^{(a)},\, e^{(b)}\right)$$
+\cos\!\left(e^{(a)},\, e^{(b)}\right)$$ {#eq-estabilidad}
 
 Con $T = 15$ se forman $\binom{15}{2} = 105$ pares por instancia.
 Dirección: $\uparrow$. Implementación: `src/metrics/stability.py`.
@@ -271,9 +272,10 @@ Dirección: $\uparrow$. Implementación: `src/metrics/stability.py`.
 ### Parsimonia
 
 La parsimonia cuantifica la proporción de características activas
-($|w_i| > \tau_s = 10^{-4}$) sobre el total de características transformadas:
+($|w_i| > \tau_s = 10^{-4}$) sobre el total de características transformadas
+(@eq-parsimonia):
 
-$$P = \frac{\#\{i : |w_i| > \tau_s\}}{|\mathcal{F}|}$$
+$$P = \frac{\#\{i : |w_i| > \tau_s\}}{|\mathcal{F}|}$$ {#eq-parsimonia}
 
 Un valor bajo indica mayor concisión. Dirección: $\downarrow$.
 Implementación: `src/metrics/sparsity.py`.
@@ -281,9 +283,10 @@ Implementación: `src/metrics/sparsity.py`.
 ### Brecha de fidelidad
 
 La brecha de fidelidad cuantifica el cambio en la salida del modelo al
-enmascarar las $k = 5$ características de mayor importancia:
+enmascarar las $k = 5$ características de mayor importancia
+(@eq-brecha-fidelidad):
 
-$$\Delta_k = \left|f(x) - f\!\left(x_{\text{mask-top-}k}\right)\right|$$
+$$\Delta_k = \left|f(x) - f\!\left(x_{\text{mask-top-}k}\right)\right|$$ {#eq-brecha-fidelidad}
 
 donde $f(\cdot)$ devuelve la probabilidad de la clase positiva.
 Dirección: $\uparrow$. Implementación: `src/metrics/faithfulness.py`.
@@ -358,11 +361,11 @@ inferenciales se emiten únicamente cuando todas las puertas previas están
 satisfechas y son trazables a artefactos fuente específicos. Cualquier
 afirmación no trazable se presenta como descriptiva.
 
-El flujo compacto del protocolo es:
+El flujo compacto del protocolo se resume en la @eq-flujo-fom7:
 
 $$\text{Congelación} \to \text{Ejecución} \to \text{Auditoría} \to
 \text{Armonización} \to \text{Exportación} \to \text{Perfilado} \to
-\text{Reporte}$$
+\text{Reporte}$$ {#eq-flujo-fom7}
 
 La Tabla -@tbl-fom7-gates resume la función de gobierno de cada puerta. La
 tabla explicita qué entra, qué sale y qué modo de fallo queda controlado, de
@@ -431,9 +434,9 @@ garantiza la ejecutabilidad y validez del test de Friedman [@demsar2006].
 de cobertura, algunos bloques de Anchors se estiman con $r < 5$ semillas. En
 el caso más desfavorable (bloques `logreg`-Anchors y `mlp`-Anchors,
 $r \approx 2.3$ semillas por $(g, n)$), la varianza del estimador de bloque
-se infla según:
+se infla según la @eq-varianza-bloque:
 
-$$\text{Var}\!\left(\hat{\mu}_{g,k,n}\right) = \frac{\sigma^2_{g,k,n}}{r}$$
+$$\text{Var}\!\left(\hat{\mu}_{g,k,n}\right) = \frac{\sigma^2_{g,k,n}}{r}$$ {#eq-varianza-bloque}
 
 Con $r = 5$ planificados versus $r \approx 2.3$ observados, el error estándar
 se infla por un factor de $\sqrt{5/2.3} \approx 1.47$ (incremento del 47%).
@@ -443,17 +446,17 @@ el test de Friedman es un procedimiento de rangos, robusto a la inflación de
 varianza en bloques individuales; (ii) los estadísticos de Friedman del
 estudio omnibus superan $\chi^2 = 30.44$ en todas las métricas, muy por
 encima del umbral crítico $\chi^2_{0.05,3} = 7.81$; (iii) el margen de seguridad para
-la métrica con menor estadístico (Coste) es:
+la métrica con menor estadístico (Coste) es el de la @eq-margen-coste:
 
-$$\text{Margen} = \frac{30.44 - 7.81}{7.81} \times 100\% = 290\%$$
+$$\text{Margen} = \frac{30.44 - 7.81}{7.81} \times 100\% = 290\%$$ {#eq-margen-coste}
 
 Para acotar el margen de forma explícita se aplica una prueba de esfuerzo
 deliberadamente severa sobre la métrica menos favorable: se divide por dos el
 estadístico observado de Coste, una degradación que excede con holgura la
-inflación de varianza calculada de 1.47. El resultado sigue siendo significativo:
+inflación de varianza calculada de 1.47. El resultado sigue siendo significativo (@eq-prueba-esfuerzo):
 
 $$\chi^2_{\text{estrés}} = \frac{30.44}{2} = 15.22 \;\Rightarrow\;
-p = P\!\left(\chi^2_3 > 15.22\right) = 0.0016 < 0.05$$
+p = P\!\left(\chi^2_3 > 15.22\right) = 0.0016 < 0.05$$ {#eq-prueba-esfuerzo}
 
 Conviene precisar qué operación es esta y qué no es. Dividir el estadístico por
 dos no equivale a una reducción del poder del 50%: es una degradación directa de
@@ -511,10 +514,11 @@ cada bloque $b$:
 
 Cada observación de método dentro de un bloque es primero la media de sus
 semillas calificadas. Si $y_{g,k,s,n,m}$ es la métrica $m$ para el modelo $g$,
-el método $k$, la semilla $s$ y el tamaño $n$, entonces
+el método $k$, la semilla $s$ y el tamaño $n$, entonces la media de bloque es la de la
+@eq-media-bloque:
 
 $$\bar y_{g,k,n,m} = \frac{1}{r_{g,k,n}}
-\sum_{s \in \mathcal{S}_{g,k,n}} y_{g,k,s,n,m},$$
+\sum_{s \in \mathcal{S}_{g,k,n}} y_{g,k,s,n,m},$$ {#eq-media-bloque}
 
 donde $\mathcal{S}_{g,k,n}$ contiene únicamente semillas calificadas y
 $r_{g,k,n}=|\mathcal{S}_{g,k,n}|$. SHAP y LIME aportan cinco semillas en cada
@@ -522,14 +526,17 @@ bloque; Anchors y DiCE aportan entre una y cinco según la cobertura documentada
 Las semillas reducen la incertidumbre de la puntuación del bloque, pero no se
 tratan como 75 bloques Friedman independientes.
 
+Sobre esas medias de bloque, el estadístico de Friedman se calcula a partir de
+los rangos medios de los $k$ métodos en los $B$ bloques (@eq-friedman):
+
 $$\chi^2_F = \frac{12B}{k(k+1)} \sum_{j=1}^{k}
-\left(\bar{r}_j - \frac{k+1}{2}\right)^2$$
+\left(\bar{r}_j - \frac{k+1}{2}\right)^2$$ {#eq-friedman}
 
 donde $\bar{r}_j = \frac{1}{B}\sum_{b=1}^B r_{bj}$. Bajo $H_0$,
 $\chi^2_F \sim \chi^2_{k-1}$ asintóticamente para $B \geq 10$
-[@demsar2006]. El tamaño del efecto se reporta mediante la $W$ de Kendall:
+[@demsar2006]. El tamaño del efecto se reporta mediante la $W$ de Kendall (@eq-kendall-w):
 
-$$W = \frac{\chi^2_F}{B(k-1)}$$
+$$W = \frac{\chi^2_F}{B(k-1)}$$ {#eq-kendall-w}
 
 donde $W = 1$ indica concordancia perfecta entre bloques.
 
@@ -537,10 +544,10 @@ donde $W = 1$ indica concordancia perfecta entre bloques.
 
 Cuando Friedman rechaza $H_0$, se aplica la prueba post-hoc de Nemenyi
 [@nemenyi1963]. La diferencia crítica al nivel $\alpha = 0.05$ con $k = 4$
-y $B = 15$ es:
+y $B = 15$ es la de la @eq-diferencia-critica:
 
 $$\text{CD} = q_\alpha \sqrt{\frac{k(k+1)}{6B}} \approx 2.569 \times
-\sqrt{\frac{4 \times 5}{6 \times 15}} \approx 1.211 \text{ rangos}$$
+\sqrt{\frac{4 \times 5}{6 \times 15}} \approx 1.211 \text{ rangos}$$ {#eq-diferencia-critica}
 
 Dos métodos se consideran significativamente distintos si
 $|\bar{r}_i - \bar{r}_j| > \text{CD}$.
@@ -573,9 +580,9 @@ $d_i = y_{\text{SHAP},i} - y_{\text{LIME},i}$ en dos conjuntos:
 - **Wilcoxon-75**: 75 celdas completas (análisis de sensibilidad que incluye
   SVM y MLP con KernelSHAP).
 
-El tamaño del efecto se reporta como $d_z$ de Cohen [@lakens2013]:
+El tamaño del efecto se reporta como $d_z$ de Cohen [@lakens2013], definido en la @eq-dz:
 
-$$d_z = \frac{\bar{d}}{s_d}$$
+$$d_z = \frac{\bar{d}}{s_d}$$ {#eq-dz}
 
 con interpretación convencional: pequeño ($0.2 \leq d_z < 0.5$), mediano
 ($0.5 \leq d_z < 0.8$), grande ($d_z \geq 0.8$).
