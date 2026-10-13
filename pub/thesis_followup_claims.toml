@@ -1,0 +1,97 @@
+# Paper claims that the follow-up chapter of the thesis prints (ADR-0023).
+#
+# Read by scripts/pubs/register_thesis_followup.py, which mirrors each claim listed here
+# (same resolver, same value, same printed literal) into the generated block
+# `thesis_followup` of pub/claim_registry.toml, with the thesis file as its site.
+# To print a further paper value in the chapter: add its claim id here and run the script.
+
+file = "thesis/estudios-de-seguimiento.qmd"
+
+claims = [
+  # Estudio de Fiabilidad ante el Error
+  "paper_d.data.analysed_total.int",
+  "paper_d.sens.instances_in_train.int",
+  "paper_d.rq1.shap.stability.median.s3",
+  "paper_d.rq1.shap.stability.dz.s2",
+  "paper_d.rq1.lime.stability.median.s3",
+  "paper_d.rq1.lime.stability.dz.s2",
+  "paper_d.rq1.anchors.stability.median.s3",
+  "paper_d.rq1.anchors.stability.dz.s2",
+  "paper_d.rq1.dice.stability.median.s3",
+  "paper_d.rq1.dice.stability.dz.s2",
+  "paper_d.rq4.shap.stability.b_raw.s3",
+  "paper_d.rq4.shap.stability.b_adj.s3",
+  "paper_d.rq4.lime.stability.b_raw.s3",
+  "paper_d.rq4.lime.stability.b_adj.s3",
+  "paper_d.rq4.anchors.stability.b_raw.s3",
+  "paper_d.rq4.anchors.stability.b_adj.s3",
+  "paper_d.rq4.dice.stability.b_raw.s3",
+  "paper_d.rq4.dice.stability.b_adj.s3",
+  "paper_d.rq4.shap.stability.margin_median_mis.u2",
+  "paper_d.rq4.shap.stability.margin_median_cor.u2",
+  "paper_d.sens.heldout.shap.stability.median.s3",
+  "paper_d.sens.heldout.dice.stability.median.s3",
+  "paper_d.ext.shap.stability.median.s3",
+
+  # Estudio de Concordancia entre Explicadores
+  "paper_e.analysis_pairing_diagnostics_sum_matched_ids.int",
+  "paper_e.analysis_group_agreement_summary_dataset_exp2_adult_model_all_metric_top5_jaccard_n_instances.int",
+  "paper_e.analysis_group_agreement_summary_dataset_german_credit_model_all_metric_top5_jaccard_n_instances.int",
+  "paper_e.analysis_group_agreement_summary_dataset_exp2_adult_model_all_metric_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.analysis_group_agreement_summary_dataset_german_credit_model_all_metric_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.analysis_group_agreement_summary_dataset_breast_cancer_model_all_metric_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_review2_permutation_summary_dataset_exp2_adult_model_all_other_instance_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_review2_permutation_summary_dataset_german_credit_model_all_other_instance_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_review2_permutation_summary_dataset_breast_cancer_model_all_other_instance_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_review2_permutation_summary_dataset_exp2_adult_model_all_instance_specific_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_ceiling_summary_dataset_exp2_adult_model_all_pair_lime_lime_metric_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_ceiling_summary_dataset_exp2_adult_model_all_pair_shap_shap_metric_top5_jaccard_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_sign_contribution_summary_dataset_exp2_adult_model_all_predicted_class_all_contribution_estimate_mean_of_run_means.f3",
+  "paper_e.posthoc_sign_contribution_summary_dataset_breast_cancer_model_all_predicted_class_all_contribution_estimate_mean_of_run_means.f3",
+
+  # Estudio de Transferencia entre Conjuntos de Datos
+  "paper_f.run.all.runs.int",
+  "paper_f.run.all.instances.int",
+  "paper_f.run.all.failed.int",
+  "paper_f.run.all.failure_rate.pct2",
+  "paper_f.prim.gap.mean_rank_lime.u2",
+  "paper_f.prim.gap.mean_rank_shap.u2",
+  "paper_f.prim.gap.mean_rank_anchors.u2",
+  "paper_f.prim.gap.mean_rank_dice.u2",
+  "paper_f.prim.gap.mean_rank_corr.u2",
+  "paper_f.prim.gap.ci_low.u2",
+  "paper_f.prim.gap.ci_high.u2",
+  "paper_f.prim.gap.ceiling_seeds.u3",
+  "paper_f.prim.stability.mean_rank_lime.u2",
+  "paper_f.prim.stability.mean_rank_shap.u2",
+  "paper_f.prim.stability.mean_rank_anchors.u2",
+  "paper_f.prim.stability.mean_rank_dice.u2",
+  "paper_f.prim.stability.mean_rank_corr.u2",
+  "paper_f.prim.stability.ci_low.u2",
+  "paper_f.prim.stability.ci_high.u2",
+  "paper_f.prim.stability.ceiling_seeds.u3",
+  "paper_f.prim.sparsity.mean_rank_lime.u2",
+  "paper_f.prim.sparsity.mean_rank_shap.u2",
+  "paper_f.prim.sparsity.mean_rank_anchors.u2",
+  "paper_f.prim.sparsity.mean_rank_dice.u2",
+  "paper_f.prim.sparsity.mean_rank_corr.u2",
+  "paper_f.prim.sparsity.ci_low.u2",
+  "paper_f.prim.sparsity.ci_high.u2",
+  "paper_f.prim.sparsity.ceiling_seeds.u3",
+  "paper_f.prim.cost_ms.mean_rank_lime.u2",
+  "paper_f.prim.cost_ms.mean_rank_shap.u2",
+  "paper_f.prim.cost_ms.mean_rank_anchors.u2",
+  "paper_f.prim.cost_ms.mean_rank_dice.u2",
+  "paper_f.prim.cost_ms.mean_rank_corr.u2",
+  "paper_f.prim.cost_ms.ci_low.u2",
+  "paper_f.prim.cost_ms.ci_high.u2",
+  "paper_f.prim.cost_ms.ceiling_seeds.u3",
+
+  # Controles posteriores del Estudio de Fiabilidad Inter-juez
+  "paper_c.rel.primary3.shap_lime_nonzero.completeness.icc_1_1.u2",
+  "paper_c.rsum.shap.icc_max_any.value.u2",
+  "paper_c.pci.original.shap_lime_nonzero.completeness.icc_1_1.u2",
+  "paper_c.pci.original+truncated.shap_lime_nonzero.completeness.icc_1_1.u2",
+  "paper_c.rel.primary1.all.audit_usefulness.icc_1_1.u2",
+  "paper_c.rel.clean.all.audit_usefulness.icc_1_1.u2",
+]

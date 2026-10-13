@@ -1,0 +1,341 @@
+# Estudios de seguimiento: alcance de validez de las conclusiones {#sec-seguimiento}
+
+Los capítulos anteriores responden a las hipótesis y proposiciones fijadas en el
+plan confirmativo. Este capítulo reúne cuatro trabajos realizados después de ese
+plan. Tres son estudios nuevos y el cuarto añade controles al Estudio de
+Fiabilidad Inter-juez. Todos atienden a la cláusula final del objetivo general:
+delimitar el alcance de validez de la evidencia obtenida. Cada uno examina un
+eje sobre el cual una conclusión del benchmark podría no sostenerse: que la
+predicción explicada sea errónea, que se cambie de explicador para la misma
+instancia, que se cambie de conjunto de datos, y que el juez semántico acuerde
+sobre algo distinto de la calidad de la explicación.
+
+## Estatuto de estos estudios {#sec-seg-estatuto}
+
+El estatuto de estos trabajos es distinto del de H1–H3 y P1, y se declara aquí
+antes de reportar ningún resultado, por la misma razón que el Capítulo 1 lo
+hace para P2.
+
+- **Son posteriores.** Ninguno forma parte del plan inferencial congelado en la
+  puerta 1 del protocolo FOM-7. Se formularon después de conocer los resultados
+  de los estudios principales.
+- **No añaden objetivos ni hipótesis a la tesis.** No se enuncia para ellos
+  ningún objetivo específico nuevo, porque un objetivo se formula antes de su
+  resultado. Se adscriben al objetivo general.
+- **Cada uno tuvo su propio plan.** El plan de análisis de cada estudio se
+  registró en el repositorio antes de calcular sus resultados. Los análisis
+  añadidos después de ver resultados se señalan como *post hoc* en el texto.
+- **No modifican la resolución de las hipótesis.** El resultado de H1, H2, H3,
+  P1 y P2 es el reportado en los capítulos anteriores. Lo que estos estudios
+  cambian es la extensión con que esos resultados pueden generalizarse.
+
+| Estudio | Pregunta que responde | Eje de validez | Datos |
+|:--------|:----------------------|:---------------|:------|
+| **Estudio de Fiabilidad ante el Error** | ¿Son menos fiables las explicaciones cuando el modelo se equivoca? | Corrección de la predicción | Reanálisis de las ejecuciones del benchmark primario |
+| **Estudio de Concordancia entre Explicadores** | ¿Cuánto coinciden SHAP y LIME al explicar la misma instancia? | Elección del explicador | Benchmark primario y EXP3, con una cohorte nueva de LIME |
+| **Estudio de Transferencia entre Conjuntos de Datos** | ¿Se mantiene el orden de los métodos al cambiar de conjunto de datos? | Conjunto de datos | Experimento nuevo sobre 16 conjuntos de datos |
+| **Controles posteriores del Estudio de Fiabilidad Inter-juez** | ¿Sobre qué acuerdan los jueces cuando acuerdan? | Instrumento semántico | Segunda cohorte de EXP4 |
+
+: Estudios de seguimiento, pregunta y eje de validez que examina cada uno. {#tbl-seg-estudios}
+
+## Estudio de Fiabilidad ante el Error {#sec-seg-error}
+
+**Pregunta.** Una explicación se consulta sobre todo cuando la predicción está
+en duda. Las métricas del Capítulo 4, en cambio, son promedios sobre todas las
+instancias. Este estudio pregunta si la calidad de la explicación difiere entre
+las instancias bien clasificadas y las mal clasificadas.
+
+**Diseño.** Es un reanálisis de las ejecuciones del benchmark primario, cuyo
+muestreo por cuadrante de error (§-@sec-muestreo) deja representadas en
+proporción similar las predicciones correctas y las erróneas. De las 299
+ejecuciones se analizaron 265, que contienen 122,529 instancias explicadas. La
+unidad de inferencia es la ejecución: para cada una se calcula la diferencia
+$\Delta$ entre la media de la métrica en las instancias mal clasificadas y en
+las bien clasificadas, de modo que un valor negativo indica menor calidad en
+los errores. El contraste es una prueba de Wilcoxon bilateral por explicador y
+métrica, con corrección de Holm sobre las doce pruebas [@wilcoxon1945] y tamaño
+de efecto $d_z$ [@lakens2013]. Como los errores se concentran cerca de la
+frontera de decisión, un segundo análisis ajusta por el margen de predicción
+$|\hat{p} - 0.5|$ mediante una regresión con efectos fijos de ejecución y
+errores estándar agrupados por ejecución. German Credit sirve de contraste
+externo descriptivo.
+
+**Resultados.** La estabilidad fue menor en las instancias mal clasificadas para
+los cuatro explicadores (@tbl-seg-error). El déficit fue grande para SHAP, en
+las 65 ejecuciones, y para DiCE, en 67 de 68. Para LIME fue consistente pero
+pequeño, porque su estabilidad en estos datos es cercana a cero. La fidelidad
+cambió poco y en sentidos opuestos según el explicador. De las doce pruebas,
+nueve fueron significativas y tres alcanzaron además el criterio de relevancia
+práctica fijado en el plan: la estabilidad de SHAP, y la estabilidad y la
+fidelidad de DiCE.
+
+| Explicador | Ejecuciones | Mediana de $\Delta$ | $d_z$ | $\beta$ sin margen | $\beta$ con margen |
+|:-----------|:-----------:|:-------------------:|:-----:|:------------------:|:------------------:|
+| SHAP | 65 | $-0.076$ | $-1.36$ | $-0.146$ | $-0.042$ |
+| LIME | 75 | $-0.003$ | $-1.06$ | $-0.008$ | $-0.003$ |
+| Anchors | 57 | $0.000$ | $-0.28$ | $-0.030$ | $-0.025$ |
+| DiCE | 68 | $-0.210$ | $-2.15$ | $-0.191$ | $-0.014$ |
+
+: Estabilidad en instancias mal clasificadas frente a bien clasificadas (UCI
+Adult). $\Delta$: diferencia por ejecución, mal clasificadas menos bien
+clasificadas; las cuatro diferencias son significativas tras la corrección de
+Holm. $\beta$: coeficiente de la clasificación errónea en la regresión con
+efectos fijos de ejecución, sin y con el margen de predicción, sobre las 223
+ejecuciones cuyo modelo almacenado reproduce las predicciones registradas.
+{#tbl-seg-error}
+
+El ajuste por el margen separa dos causas. Los errores están más cerca de la
+frontera: en las ejecuciones de SHAP, la mediana del margen es 0.18 en los
+errores frente a 0.43 en los aciertos. Con el margen controlado, el déficit de
+DiCE casi desaparece ($-0.014$): cerca de la frontera un contrafactual requiere
+un cambio pequeño, que varía más bajo ruido, sea correcta o no la predicción.
+El déficit de SHAP se reduce pero permanece ($-0.042$). A igual margen, además,
+las características que SHAP sitúa primero sostienen una parte menor de una
+predicción errónea.
+
+Una comprobación se añadió *post hoc*. Parte de las instancias explicadas
+pertenece a los datos de entrenamiento de los modelos (70,788 de las
+analizadas). Sobre las instancias fuera de entrenamiento, el déficit de
+estabilidad se mantiene: la mediana es $-0.068$ para SHAP y $-0.212$ para DiCE.
+
+**Límites.** El patrón depende de la familia de modelos. El contraste externo
+no reproduce el déficit de estabilidad de SHAP: en German Credit, la estabilidad
+de SHAP fue mayor en los errores en cuatro de seis ejecuciones (mediana
+$+0.025$), y la causa de esa inversión no se conoce. El contraste externo
+dispone de seis ejecuciones por explicador y solo de modelos de árboles. Las
+métricas son las *proxies* del Capítulo 3: que un usuario resulte engañado por
+la explicación de una predicción errónea no se ha medido.
+
+**Consecuencia.** Los promedios del Capítulo 4 describen mejor las explicaciones
+de las predicciones correctas que las de las erróneas. Una auditoría que use
+estos métodos debería reportar la calidad de la explicación por separado para
+aciertos y errores, y comprobar la estabilidad de la explicación concreta que
+se emplee para impugnar o justificar una decisión.
+
+## Estudio de Concordancia entre Explicadores {#sec-seg-concordancia}
+
+**Pregunta.** El Estudio Pareado LIME–SHAP compara los dos métodos por sus
+métricas de calidad. No dice si, para una misma predicción, ambos señalan las
+mismas características. Este estudio mide esa concordancia instancia por
+instancia.
+
+**Diseño.** SHAP y LIME explicaron las mismas instancias de los mismos modelos
+en tres conjuntos de datos: Adult, German Credit y Breast Cancer Wisconsin. Para
+los dos últimos se produjo una cohorte nueva de LIME sobre exactamente las
+instancias almacenadas en las ejecuciones de SHAP de EXP3. El resultado son
+31,411 explicaciones pareadas en 86 ejecuciones. La medida primaria es el
+solapamiento de Jaccard entre las cinco características de mayor peso absoluto
+de cada método, $J_5$. Cada medida se promedia primero dentro de la ejecución,
+y los intervalos remuestrean semillas, no instancias. El plan no preveía
+pruebas de hipótesis y no se reporta ningún valor $p$.
+
+**Resultados.** La concordancia es parcial (@tbl-seg-concordancia). En Adult y
+en German Credit, los dos métodos comparten de media menos de tres de sus cinco
+características principales.
+
+| Conjunto de datos | Pares | $J_5$ entre SHAP y LIME | $J_5$ entre instancias distintas |
+|:------------------|:-----:|:-----------------------:|:--------------------------------:|
+| Adult | 29,667 | 0.393 | 0.203 |
+| German Credit | 1,060 | 0.387 | 0.287 |
+| Breast Cancer | 684 | 0.714 | 0.648 |
+
+: Solapamiento medio de las cinco características principales de SHAP y LIME
+para la misma instancia, y solapamiento entre la lista de SHAP de una instancia
+y la lista de LIME de otra instancia de la misma ejecución (referencia de
+permutación, *post hoc*). {#tbl-seg-concordancia}
+
+Tres análisis *post hoc* precisan la lectura de esa cifra.
+
+- **Una parte del solapamiento no depende de la instancia.** La lista de SHAP
+  de una instancia y la lista de LIME de otra instancia distinta ya se solapan
+  de forma apreciable (última columna). La parte propia de la instancia es
+  0.191 en Adult y menor en los otros dos conjuntos. El solapamiento alto de
+  Breast Cancer refleja sobre todo un orden de las características común a
+  casi todas las instancias.
+- **Ningún método se reproduce por completo a sí mismo.** Al repetir la
+  explicación con otro estado aleatorio, el solapamiento entre las dos
+  repeticiones en Adult fue 0.690 para LIME y 0.782 para SHAP. La concordancia
+  entre métodos quedó por debajo de esa autoconcordancia en todos los modelos
+  probados. El desacuerdo entre métodos es, por tanto, real, pero una
+  comparación que ignore la repetibilidad de cada uno lo sobrestima.
+- **Los signos requieren la misma magnitud.** LIME sin discretización devuelve
+  pendientes locales, y SHAP devuelve contribuciones respecto de una referencia.
+  Convertidas las pendientes en contribuciones, los signos de las
+  características compartidas coinciden entre 0.945 y 0.990 de los casos, un
+  nivel que también alcanza una dirección fija por característica.
+
+La concordancia varió con el modelo y con el conjunto de datos, y no fue
+sistemáticamente menor en las instancias mal clasificadas.
+
+**Límites.** Tres conjuntos de datos tabulares y una configuración por
+explicador; LIME se usó con ancho de kernel 3.0, el mismo del benchmark
+primario. Cinco semillas en Adult y tres en los otros dos conjuntos, de modo
+que los intervalos describen la dispersión entre semillas. El experimento de
+autoconcordancia usó una submuestra. Las ejecuciones de SHAP sobre SVM están
+incompletas y esa familia aporta menos pares.
+
+**Consecuencia.** SHAP y LIME no son intercambiables a nivel de instancia. Una
+explicación mostrada a un usuario debe nombrar el explicador que la produjo, y
+un informe de concordancia entre explicadores debe indicar el modelo, el
+conjunto de datos, la configuración y la repetibilidad de cada método.
+
+## Estudio de Transferencia entre Conjuntos de Datos {#sec-seg-transferencia}
+
+**Pregunta.** La limitación de validez externa declarada en el Capítulo 3 es que
+el benchmark opera sobre un solo conjunto de datos, con una extensión parcial a
+otros dos (EXP3). Este estudio pregunta si el orden de los cuatro métodos,
+obtenido en un conjunto de datos tabular, se mantiene en otros.
+
+**Diseño.** Es un experimento nuevo, con protocolo propio. Dieciséis conjuntos
+de datos públicos, tabulares y de clasificación binaria, se eligieron con una
+regla fijada antes de calcular ninguna explicación. Sobre cada uno se entrenaron
+cuatro clasificadores (regresión logística, bosque aleatorio, XGBoost y
+perceptrón multicapa) y se aplicaron los cuatro métodos con una única
+configuración, sin ajuste por conjunto de datos, con cinco semillas y 200
+instancias por ejecución. El diseño factorial completo comprende 1,280
+ejecuciones y 256,000 instancias explicadas; dentro de cada bloque, los cuatro
+métodos explican las mismas instancias del mismo clasificador.
+
+Los métodos se ordenan en cuatro medidas definidas sobre las características que
+una explicación nombra: una brecha de fidelidad por enmascaramiento, la
+estabilidad, la parsimonia y el coste. Sus definiciones operativas no son las
+del Capítulo 3 —la estabilidad, por ejemplo, es aquí el solapamiento de las
+cinco características principales bajo ruido—, de modo que este estudio no
+replica las cifras del Capítulo 4. La unidad de análisis es el conjunto de
+datos. La concordancia entre conjuntos de datos es la correlación de rangos
+media entre los órdenes de todos los pares de conjuntos, con intervalo
+*bootstrap* y prueba de permutación corregida por Holm. La regla de decisión se
+fijó de antemano: el orden «generaliza» si el intervalo queda por encima de
+0.5.
+
+**Resultados.** El orden de los métodos coincide entre conjuntos de datos mucho
+más de lo esperable por azar en las cuatro medidas (@tbl-seg-transferencia;
+$p < 0.001$ en todas).
+
+| Medida | LIME | SHAP | Anchors | DiCE | Concordancia [IC 95 %] | Entre semillas |
+|:-------|:----:|:----:|:-------:|:----:|:----------------------:|:--------------:|
+| Brecha de fidelidad | 2.12 | 1.19 | 3.06 | 3.62 | 0.67 [0.49, 0.85] | 0.948 |
+| Estabilidad | 2.06 | 1.12 | 2.81 | 4.00 | 0.88 [0.79, 0.95] | 0.973 |
+| Parsimonia | 2.97 | 3.91 | 1.69 | 1.44 | 0.79 [0.66, 0.92] | 0.995 |
+| Coste | 1.06 | 1.94 | 3.50 | 3.50 | 0.87 [0.82, 0.91] | 0.975 |
+
+: Rango medio de cada método en los 16 conjuntos de datos (1 = mejor),
+concordancia de los órdenes entre conjuntos de datos y concordancia entre
+semillas dentro de un mismo conjunto. {#tbl-seg-transferencia}
+
+Según la regla fijada, el orden generaliza en estabilidad, parsimonia y coste.
+En la brecha de fidelidad el orden es compartido, pero su fuerza queda
+indeterminada, porque el intervalo alcanza un valor inferior a 0.5. En todas las
+medidas, la concordancia entre conjuntos de datos es menor que la concordancia
+entre semillas: el conjunto de datos sí desplaza el orden, y lo desplaza más en
+las posiciones intermedias y bajas que en la primera.
+
+Tomando Adult como referencia, de las 24 comparaciones entre pares de métodos,
+12 conservan su orden en los otros 15 conjuntos de datos y 21 lo conservan en al
+menos 12. Las tres débiles son todas entre Anchors y DiCE; en coste, ese par
+mantiene el orden de Adult en 7 de 15 conjuntos. SHAP ocupa la primera posición
+en la brecha de fidelidad en 13 de los 16 conjuntos y en estabilidad en 14.
+
+**Límites.** Tres límites condicionan la lectura, y los tres se establecieron
+tras revisar los resultados.
+
+- Buena parte de la concordancia se sigue del formato de salida y de la
+  configuración de cada método —el número de características que nombra, el
+  algoritmo, los parámetros fijados—, no de una propiedad de las explicaciones.
+- Las medidas son *proxies* comunes que descartan lo propio de cada salida: el
+  signo de una atribución, la regla como condición suficiente y la dirección
+  del cambio que propone un contrafactual.
+- Fallaron 1,425 de las instancias (0.56 %), casi todas de DiCE; repetir el
+  análisis sobre las instancias que los cuatro métodos explicaron conduce a
+  las mismas cuatro decisiones.
+
+En consecuencia, el resultado describe la concordancia de órdenes bajo un
+protocolo de evaluación fijo. No constituye un ordenamiento de la calidad de
+las explicaciones en general.
+
+**Consecuencia.** El orden relativo observado en el benchmark primario no es
+una particularidad de Adult: bajo un protocolo común, la posición de SHAP y de
+LIME respecto de Anchors y DiCE se mantiene en la mayoría de los conjuntos de
+datos. No se transfiere, en cambio, el orden entre Anchors y DiCE, ni la
+magnitud de las diferencias. La limitación de validez externa se reduce para el
+orden de los métodos y permanece para los valores absolutos y para los dominios
+no tabulares.
+
+## Controles posteriores del Estudio de Fiabilidad Inter-juez {#sec-seg-jueces}
+
+El Capítulo 5 reporta que los jueces basados en modelos de lenguaje no alcanzan
+la fiabilidad aceptable en ninguna de las dos cohortes (§-@sec-exp4-fiabilidad).
+Tras ese resultado se hicieron tres análisis sobre la segunda cohorte, cada uno
+anotado con su fecha antes de calcularlo. Preguntan sobre qué recae el acuerdo
+que sí existe.
+
+**Dos precisiones sobre el diseño original.** La revisión posterior del
+material entregado a los jueces encontró dos hechos que acotan la lectura del
+Capítulo 5.
+
+- En las tres condiciones de la segunda cohorte, el registro de cada caso
+  contenía las métricas técnicas de la explicación y el resultado de la
+  predicción, que junto con la predicción permite deducir la etiqueta
+  verdadera. La condición llamada «con la etiqueta oculta» no la ocultaba, por
+  tanto, de forma efectiva. Se añadió una condición *limpia*, sin métricas, sin
+  resultado y sin etiqueta, con una llamada por juez.
+- El formato común con que el benchmark presenta las explicaciones es una lista
+  de diez características con un peso. Para SHAP y LIME, esa lista contiene las
+  atribuciones del método. Para Anchors y DiCE no contiene la explicación en su
+  forma propia: la regla aparece sin umbrales y el contrafactual sin dirección
+  ni valor nuevo. El análisis principal de estos controles se restringe por
+  ello a los casos de SHAP y LIME.
+
+**El acuerdo recae sobre el método.** Hasta el 67 % de la varianza de las
+puntuaciones se sitúa entre métodos explicadores. Dentro de un método, donde un
+usuario querría que el juez distinguiera una explicación mejor de una peor, el
+acuerdo es bajo: entre los casos de SHAP y LIME con algún peso no nulo, el
+ICC(1,1) más alto es 0.41, y entre los casos de SHAP ninguno supera 0.22,
+porque los casos reciben casi la misma puntuación.
+
+**Control positivo.** Los 79 casos de SHAP y LIME con peso no nulo se puntuaron
+de nuevo en dos versiones degradadas de forma conocida. Cuando se eliminaron
+siete de los diez elementos, los tres jueces redujeron la Completitud y su ICC
+subió de 0.18 a 0.60: los jueces sí acuerdan cuando la diferencia es visible en
+la forma del texto. Cuando los pesos se asignaron a características
+equivocadas, lo que deja intacta la forma y vuelve erróneo el contenido, solo
+uno de los tres jueces redujo la Plausibilidad semántica, y el acuerdo no
+aumentó.
+
+**Efecto del contenido de la consigna.** Con las métricas técnicas en la
+consigna, uno de los jueces nombró una métrica en el 80 % de sus respuestas. Sin
+ellas, ese juez puntuó más alto, y el acuerdo en Utilidad para auditoría bajó
+de 0.66 a 0.42, comparando en ambos casos una sola llamada por juez. Lo que se
+incluye en la consigna pasa a formar parte de lo que se mide.
+
+**Consecuencia.** Estos controles refuerzan y precisan el resultado negativo de
+P2, sin modificarlo. Los jueces de esta clase acuerdan sobre el método y sobre
+la forma visible de una explicación, no sobre si es correcta. El gradiente
+entre dimensiones descrito en el Capítulo 5 debe leerse con esta precisión: una
+dimensión con mayor acuerdo no es por ello una dimensión mejor medida. Los
+límites son los del estudio original —no hay puntuaciones humanas y los dos
+paneles son modelos pequeños—, a los que se añade que la condición limpia y el
+control disponen de una sola llamada por juez.
+
+## Qué cambia y qué no cambia en las conclusiones {#sec-seg-sintesis}
+
+Los cuatro trabajos apuntan en la misma dirección: precisan el alcance de las
+conclusiones sin alterar su contenido.
+
+| Conclusión de los estudios principales | Qué añade el seguimiento | Estado |
+|:---|:---|:---|
+| SHAP presenta el mejor perfil de fidelidad y estabilidad en Adult | La posición de SHAP se mantiene en la mayoría de 16 conjuntos de datos bajo un protocolo común; la estabilidad de sus explicaciones es menor en las predicciones erróneas | Se mantiene, con dos precisiones |
+| LIME es la alternativa de menor coste | LIME es el método de menor coste en 15 de los 16 conjuntos de datos | Se mantiene |
+| SHAP y LIME difieren en calidad y coste (H3) | Además, para la misma instancia nombran características en parte distintas, y ninguno se reproduce por completo a sí mismo | Se mantiene y se amplía |
+| Anchors y DiCE atienden objetivos distintos | Su orden relativo no se transfiere entre conjuntos de datos, y las medidas comunes descartan lo propio de sus salidas | Se mantiene; refuerza la cautela |
+| Los jueces LLM no alcanzan fiabilidad aceptable (P2) | El acuerdo existente recae sobre el método y la forma, no sobre la corrección | Se mantiene y se precisa |
+
+: Efecto de los estudios de seguimiento sobre las conclusiones de los estudios
+principales. {#tbl-seg-sintesis}
+
+Tres recomendaciones de reporte se desprenden de este capítulo y se incorporan
+a las conclusiones: reportar la calidad de la explicación por separado para
+predicciones correctas e incorrectas; acompañar toda comparación entre
+explicadores de la repetibilidad de cada uno; y declarar el protocolo —
+configuración, medidas y conjuntos de datos— del que depende un orden entre
+métodos antes de tratarlo como propiedad de los métodos.

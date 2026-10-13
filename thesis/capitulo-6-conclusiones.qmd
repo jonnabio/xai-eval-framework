@@ -55,6 +55,38 @@ siguiente:
 
 : Cierre de objetivos específicos. {#tbl-objetivos}
 
+### Aportes de los estudios de seguimiento {#sec-concl-seguimiento}
+
+Los estudios de seguimiento del Capítulo 6 no resuelven ninguna hipótesis ni
+cierran ningún objetivo específico: atienden a la cláusula del objetivo general
+que exige delimitar el alcance de validez de la evidencia. Su efecto sobre cada
+conclusión se resume en @tbl-seg-sintesis. En conjunto establecen cuatro
+precisiones:
+
+- **Ante el error.** Los promedios del benchmark describen mejor las
+  explicaciones de las predicciones correctas que las de las erróneas: la
+  estabilidad es menor en las instancias mal clasificadas para los cuatro
+  explicadores, y en SHAP ese déficit no se explica por la cercanía a la
+  frontera de decisión (§-@sec-seg-error).
+- **Ante el cambio de explicador.** SHAP y LIME no son intercambiables a nivel
+  de instancia, y ninguno se reproduce por completo a sí mismo al repetirse
+  (§-@sec-seg-concordancia).
+- **Ante el cambio de conjunto de datos.** El orden de los métodos se conserva
+  en la mayoría de 16 conjuntos de datos tabulares bajo un protocolo común,
+  salvo el orden entre Anchors y DiCE; ese resultado describe el protocolo de
+  evaluación y no la calidad de las explicaciones en general
+  (§-@sec-seg-transferencia).
+- **Ante el instrumento semántico.** El acuerdo que los jueces LLM alcanzan
+  recae sobre el método y la forma visible de la explicación, no sobre su
+  corrección (§-@sec-seg-jueces).
+
+De ellas se siguen tres recomendaciones de reporte, que complementan los
+criterios de selección de §-@sec-contribuciones sin sustituirlos: reportar la
+calidad de la explicación por separado para predicciones correctas e
+incorrectas; acompañar toda comparación entre explicadores de la repetibilidad
+de cada uno; y declarar el protocolo del que depende un orden entre métodos
+antes de tratarlo como propiedad de los métodos.
+
 ## Contribuciones científicas {#sec-contribuciones}
 
 
@@ -210,7 +242,11 @@ datos UCI Adult Income, que es tabular, binario y de tamaño moderado (48,842
 instancias). La extensión de los hallazgos a datos de imagen, texto o series
 temporales requiere redefinir las operacionalizaciones de fidelidad y
 estabilidad, que en este benchmark son específicas de la estructura de
-características tabulares.
+características tabulares. Dentro del dominio tabular, el Estudio de
+Transferencia entre Conjuntos de Datos (§-@sec-seg-transferencia) reduce esta
+limitación para el orden de los métodos, que se conserva en la mayoría de 16
+conjuntos de datos, pero no para las magnitudes reportadas en el Capítulo 4,
+porque emplea un protocolo y unas definiciones operativas propios.
 
 **Operacionalizaciones métricas específicas.** Fidelidad y estabilidad se
 operacionalizan aquí mediante enmascaramiento de características y
@@ -244,7 +280,7 @@ evidencia que sería necesaria para extender las conclusiones.
 
 | Afirmación | Soportada para | No soportada para | Validación futura requerida |
 |:---|:---|:---|:---|
-| SHAP supera a LIME en fidelidad (efecto muy grande, $d_z=4.82$) | UCI Adult Income; clasificación tabular binaria; cinco modelos ML convencionales; métricas de fidelidad por enmascaramiento de características | Dominios de imagen, texto, series temporales; datasets tabulares adicionales para la comparación específica SHAP-LIME; otras operacionalizaciones de fidelidad (ROAR, pixel-flipping) | **Validación parcial completada (EXP3):** el ordenamiento SHAP $>$ Anchors en fidelidad fue replicado en Breast Cancer Wisconsin y German Credit (12/12 combinaciones pareadas; véase §-@sec-exp3-nota). La extensión posterior incorporó LIME en esos dos datasets, pero no instrumentó estabilidad de SHAP; por tanto, el contraste pareado SHAP-LIME completo fuera de Adult permanece pendiente. |
+| SHAP supera a LIME en fidelidad (efecto muy grande, $d_z=4.82$) | UCI Adult Income; clasificación tabular binaria; cinco modelos ML convencionales; métricas de fidelidad por enmascaramiento de características | Dominios de imagen, texto, series temporales; datasets tabulares adicionales para la comparación específica SHAP-LIME; otras operacionalizaciones de fidelidad (ROAR, pixel-flipping) | **Validación parcial completada (EXP3):** el ordenamiento SHAP $>$ Anchors en fidelidad fue replicado en Breast Cancer Wisconsin y German Credit (12/12 combinaciones pareadas; véase §-@sec-exp3-nota). La extensión posterior incorporó LIME en esos dos datasets, pero no instrumentó estabilidad de SHAP; por tanto, el contraste pareado SHAP-LIME completo fuera de Adult permanece pendiente. **Seguimiento (§-@sec-seg-transferencia):** bajo un protocolo común, el par LIME–SHAP conserva el orden de Adult en 13 de los otros 15 conjuntos de datos en la brecha de fidelidad y en estabilidad; ese estudio no replica las magnitudes de este benchmark. |
 | La inestabilidad de LIME es casi total en la condición medida (CV=86%, media≈0.014) | UCI Adult Income; espacio preprocesado de 103 dimensiones predominantemente binario; estabilidad definida como similitud coseno bajo perturbación gaussiana; configuración `num_samples=1000`, `kernel_width=3.0` | Otros espacios de características o datasets —§-@sec-exp3-nota mide 0.748–0.927 en Breast Cancer y German Credit bajo la misma configuración—; otros anchos de kernel (`kernel_width=10.0` produce 0.664, Apéndice C); otras definiciones de estabilidad (distancia Lipschitz local, varianza de pesos) | Interacción entre `kernel_width` y la dimensionalidad del espacio de características; estabilidad bajo esquemas de perturbación no gaussianos; instrumentación de la estabilidad de SHAP en los datasets de EXP3 para obtener el contraste pareado completo |
 | FOM-7 produce resultados reproducibles (CV<3% en fidelidad en el subgrupo replicado RF/$N=100$; CV agrupado 11.4% SHAP y 12.0% LIME sobre el conjunto completo, frente al umbral del 15% de P1) | Entorno controlado; cinco semillas definidas; modelos congelados en EXP1 | Otros entornos computacionales sin control de recursos; modelos re-entrenados entre ejecuciones; datasets con alta varianza de instancias | Replicación independiente con infraestructura distinta; publicación de resultados en Zenodo con instrucciones verificadas |
 | Los criterios prescriptivos de selección son válidos (Contextos A-D) | Condiciones del benchmark descritas; modelos y métricas definidas | Dominios regulados con restricciones normativas propias; preferencias de usuarios finales; criterios de comprehensibilidad | Estudios human-centered en dominios específicos (crédito, salud, justicia) con usuarios expertos |
@@ -353,7 +389,12 @@ existe un contraste pareado SHAP-LIME completo de estabilidad fuera de UCI Adult
 Income. La extensión prioritaria es completar esa instrumentación y ampliar el
 diseño a más modelos y datasets, de modo que los hallazgos centrales de esta
 tesis —$d_z = 4.82$ en fidelidad y $d_z = 3.00$ en estabilidad— sean verificables
-fuera del contexto Adult. Una segunda dirección es la validación en dominios
+fuera del contexto Adult. El Estudio de Transferencia entre Conjuntos de Datos
+(§-@sec-seg-transferencia) avanza en esta línea para el orden de los métodos
+sobre 16 conjuntos de datos, con medidas definidas sobre las características
+que la explicación nombra; queda pendiente repetirlo con las
+operacionalizaciones del Capítulo 3 y con medidas propias de las reglas y de
+los contrafactuales. Una segunda dirección es la validación en dominios
 regulados (crédito, salud, justicia) con restricciones normativas explícitas
 (EU AI Act, GDPR Art. 22), donde la elección del método explicador tiene
 consecuencias legales directas.
@@ -412,6 +453,16 @@ antes de admitir el método como evidencia. Esta es la afirmación de mayor
 impacto práctico de la tesis: no es un argumento teórico contra LIME, sino la
 especificación empírica de qué debe verificarse antes de usarlo en el tipo de
 despliegue que la regulación exige evaluar.
+
+Los estudios de seguimiento refuerzan esta lectura desde cuatro ángulos. La
+calidad promedio de un explicador no describe por igual las predicciones
+correctas y las erróneas; dos explicadores pueden nombrar características
+distintas para la misma predicción; un orden entre métodos depende del
+protocolo con que se obtiene, aunque en buena parte se conserve entre conjuntos
+de datos; y un juez automático puede acordar sobre la forma de una explicación
+sin advertir que su contenido es erróneo. En los cuatro casos la conclusión es
+la misma que para la estabilidad de LIME: lo que se afirma de un método
+explicador debe ir acompañado de las condiciones en que se midió.
 
 El camino hacia la excelencia en evaluación XAI no pasa por proponer una métrica
 adicional ni por declarar un método dominante universal. Pasa por construir la

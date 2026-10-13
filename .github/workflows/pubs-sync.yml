@@ -40,6 +40,12 @@ jobs:
       - name: Verify Paper F against its result files and its registration
         run: python3 scripts/pubs/register_paper_f.py --check
 
+      # Thesis follow-up chapter (ADR-0023): its registry block is what the script writes
+      # from the paper claims listed in pub/thesis_followup_claims.toml, so a paper value
+      # that changes fails here until the chapter prints the new one.
+      - name: Verify the thesis follow-up chapter against the paper claims it mirrors
+        run: python3 scripts/pubs/register_thesis_followup.py --check
+
       # Report-only: Paper B+C numbers that Paper A prints, found without the
       # registry (RCA-001, review F02). The submission gate runs it --strict.
       - name: Report numbers shared with the published Paper A
