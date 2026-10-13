@@ -137,6 +137,31 @@ la lectura del Capítulo 5, y la tesis ahora los declara.
   estudio: diferencia de calidad entre errores y aciertos; estabilidad según el
   margen de predicción; solapamiento entre SHAP y LIME; rango de cada método en
   los 16 conjuntos de datos; y acuerdo entre jueces en el control positivo.
+- **Diecisiete figuras nuevas en el resto de la tesis.** Los Capítulos 1, 2, 3,
+  5 y 7 no tenían ninguna figura. Se añaden:
+    - *Capítulo 1:* mapa de la tesis (estudios, objetivos, hipótesis, capítulos y
+      estatuto).
+    - *Capítulo 2:* ocho figuras conceptuales (las tres nociones de
+      transparencia, interpretabilidad y explicabilidad; del modelo interpretable
+      a la explicación post-hoc; alcance local y global; un mismo caso explicado
+      mediante cuatro objetos; niveles de evaluación; y un esquema por método
+      para LIME, SHAP, y Anchors y DiCE). Proceden del capítulo de libro del
+      autor y se marcan como ilustraciones esquemáticas.
+    - *Capítulo 3:* cadena de evidencia; puertas de FOM-7 con la traza de una
+      afirmación (sustituye a la cadena de flechas que figuraba como ecuación); y
+      unidades de análisis (300 ejecuciones, 75 celdas pareadas, 15 bloques).
+    - *Capítulo 4:* coste por familia de modelos para SHAP y LIME.
+    - *Capítulo 5:* los cuatro ejes de la taxonomía con las métricas del
+      benchmark; y fiabilidad inter-juez por dimensión en las dos cohortes frente
+      al umbral.
+    - *Capítulo 6:* secuencia de la evidencia, con lo que cubre el plan congelado
+      y lo posterior.
+    - *Capítulo 7:* guía de selección de métodos, con la condición que verificar
+      en cada caso.
+- **Tablas citadas en el texto.** Dieciocho tablas no se citaban por referencia
+  y una del Capítulo 2 no tenía pie ni número; ahora las 45 tablas están
+  numeradas y citadas. La verificación automática exige ya número y cita para
+  ecuaciones, figuras y tablas.
 - **Colores de los métodos.** Las figuras de la tesis adoptan la misma
   convención que las de los artículos enviados (SHAP en rojo, LIME en azul,
   Anchors en verde, DiCE en morado), que antes estaba invertida para SHAP y

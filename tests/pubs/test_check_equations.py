@@ -49,5 +49,13 @@ def test_a_figure_needs_a_label_and_a_citation(tmp_path):
     assert any("labels no figure" in p for p in run(tmp_path, a="Véase la @fig-dos.\n"))
 
 
+def test_a_table_needs_a_labelled_caption_and_a_citation(tmp_path):
+    table = "| a | b |\n|---|---|\n| 1 | 2 |\n\n"
+    caption = ": Pie de\ntabla. {#tbl-uno}\n"
+    assert run(tmp_path, a="La @tbl-uno resume.\n\n" + table + caption) == []
+    assert any("never cited" in p for p in run(tmp_path, a=table + caption))
+    assert any("without a caption" in p for p in run(tmp_path, a=table + "Texto.\n"))
+
+
 def test_code_blocks_are_not_read(tmp_path):
     assert run(tmp_path, a="```\n$$x = 1$$\n```\n") == []

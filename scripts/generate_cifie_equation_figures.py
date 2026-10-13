@@ -403,7 +403,10 @@ def generate_d11_anchors_dice(is_bw: bool = False) -> None:
              fontweight="bold", color=c_teal if not is_bw else INK, ha="center",
              bbox=dict(boxstyle="round,pad=0.2", facecolor=WHITE, edgecolor=c_teal if not is_bw else INK, lw=0.7))
 
-    axa.text(50, 22.5, "Precisión $\\text{prec}(A) = 97.4\\%$\nCobertura $\\text{cov}(A) = 22.5\\%$",
+    # Until 2026-10-13 this label printed a precision of 97.4% and a coverage of 22.5%,
+    # values no result of the project backs (chapter review of 2026-10-10). The figure is
+    # a schematic: it now names the two quantities without numbers.
+    axa.text(50, 22.5, "Precisión $\\text{prec}(A)$ alta dentro de la regla\nCobertura $\\text{cov}(A)$: parte de los casos",
              fontsize=6.0, ha="center", style="italic", color=DARK,
              bbox=dict(boxstyle="round,pad=0.2", facecolor=WHITE, edgecolor="none", alpha=0.85))
 

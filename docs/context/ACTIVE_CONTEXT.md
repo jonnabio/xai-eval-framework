@@ -139,37 +139,47 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-13 (thesis figures: Chapter 6 figures, review, proposal)
+## Latest handoff - 2026-10-13 (thesis figures and tables: 29 figures, all cited)
 
 - **Completed** (lane `thesis`, owner `claude-2026-10-12-thesis-review`):
-  - Pull requests #57 and #58 merged by the author on 2026-10-12: follow-up chapter,
-    equations numbered and cited, figures of Chapter 4 reviewed, the tutor's agreement
-    recorded. Detail: archive `2026-10-12.md`.
-  - **Five Spanish figures in Chapter 6**, drawn from the result files of each study by
-    `scripts/generate_thesis_followup_figures.py` (no value printed as a label).
-  - **Stability-against-cost figure** now shows the median of the 15 blocks with the
-    interquartile range (author's decision); caption rewritten.
-  - **Every figure is cited in the text** (five of Chapter 4 were not).
-    `check_equations.py` now enforces label and citation for figures too; `--tables`
-    lists the 19 of 44 tables no text cites by reference (reported, not enforced).
-  - Record for the tutor updated. Thesis rendered: 12 figures, no unresolved reference.
-- **Rules for thesis figures** (2026-10-12 and 13):
-  - Method colours: SHAP `#c0392b`, LIME `#1b6ca8`, Anchors `#2e8b57`, DiCE `#6c3483`,
-    as in the submitted papers.
-  - A figure prints nothing its generator does not compute from a result file.
-  - Run the Chapter 4 generators for the thesis folder only: both also write the
-    book-chapter folders, which belong to the chapter lane.
-- **Open with the author** (proposal: `docs/review/thesis-figure-review_2026-10-13.md`):
-  1. Reuse of book-chapter figures in Chapters 2 and 3: recommended for `d8`, `d7`,
-     `d6`, `d4`; not for `d12`; `d9` to `d11` only after edits. The author checks the
-     publication licence of the book chapter first.
-  2. Seven new figures proposed (taxonomy axes, judge reliability, thesis map, units of
-     analysis, cost by model family, selection guide, timeline).
-  3. Whether to cite the 19 uncited tables and enforce it.
-  4. The four unused English figures in `thesis/assets/figures` (`*_en.png`): delete or
-     keep.
-- **Next steps**: the author answers the four points; then implement the chosen
-  figures; the remaining items of the previous handoff stand (send the record and the
-  thesis to the tutor, table of contents in Word, journals' prior-publication policies).
+  - Pull requests #57 and #58 merged by the author on 2026-10-12. Detail: archive
+    `2026-10-12.md`.
+  - **Chapter 6:** five Spanish figures from the result files of each study
+    (`scripts/generate_thesis_followup_figures.py`), plus the sequence of the evidence.
+  - **Chapter 4:** stability against cost as median and interquartile range; cost by
+    model family; every figure cited.
+  - **Chapters 1, 2, 3, 5 and 7**, which had no figure: map of the thesis; eight concept
+    figures and two FOM-7 figures shared with the book chapter (`d1`, `d2`, `d3`, `d4`,
+    `d6`, `d7`, `d8`, `d9`, `d10`, `d11`; not `d5`, not `d12`); units of analysis;
+    taxonomy axes; judge reliability in both cohorts; selection guide. Generator:
+    `scripts/generate_thesis_extra_figures.py`. The arrow chain that was Equation 3.9
+    is replaced by the FOM-7 figure, so the thesis has 19 equations.
+  - **Tables:** the 18 never cited now are; one table of Chapter 2 gained its caption and
+    number (`tbl-metodos-constructos`).
+  - **Check:** `scripts/pubs/check_equations.py` enforces number and citation for
+    equations, figures and tables (19, 29 and 45). Rule in
+    `.ace/standards/documentation.md` ("Manuscripts: Figures and Tables") and `.aceconfig`.
+  - **English figures kept** for presentations (author's decision), now produced from
+    the Spanish generator by `scripts/generate_thesis_supplementary_figures_en.py`.
+  - Record for the tutor updated; review and what was done:
+    `docs/review/thesis-figure-review_2026-10-13.md`. Thesis rendered: 29 figures, no
+    unresolved reference.
+- **Rules for thesis figures:**
+  - Method colours: SHAP `#c0392b`, LIME `#1b6ca8`, Anchors `#2e8b57`, DiCE `#6c3483`.
+  - A figure prints nothing its generator does not compute from a result file; a
+    schematic says that it is one.
+  - `generate_spanish_thesis_figures.py` and the two `generate_cifie_*_figures.py` also
+    write the book-chapter folders (chapter lane): from the thesis lane run them with
+    those outputs redirected, as `generate_thesis_extra_figures.py` does.
+- **Changed in a shared script, to know in the chapter lane:**
+  `generate_cifie_equation_figures.py` no longer prints 97.4% and 22.5% in `d11` (values
+  without a source); the chapter's committed images are older than the scripts and
+  change at its next rebuild.
+- **Open with the author:**
+  1. The publication licence of the book chapter, for the ten shared figures, before
+     deposit.
+  2. Read the new figures and their captions; the Spanish text is the assistant's.
+- **Next steps**: merge the pull request; then the items that stand from before (send
+  the record and the thesis to the tutor, table of contents in Word, journals'
+  prior-publication policies).
 - **Blockers**: none.
-

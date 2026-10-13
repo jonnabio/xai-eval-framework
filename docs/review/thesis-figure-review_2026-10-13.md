@@ -1,8 +1,9 @@
 # Thesis figure review: where a figure would help the reader
 
 **Date:** 2026-10-13. **Role:** Scientific Editor. **Scope:** `thesis/*.qmd` after the
-follow-up chapter. **Status:** proposal for the author; section 1 is done, section 2 is
-not started.
+follow-up chapter. **Status:** carried out on 2026-10-13 on the author's decision: the reuse of
+section 2A as each verdict says, the seven figures of section 2B, and the citation of every
+table. See section 4.
 
 ## 1. State after this review
 
@@ -50,6 +51,33 @@ thesis lane; nothing is copied by hand from the chapter folder.
 | 7 | Timeline of the evidence: EXP1 to EXP4, the frozen plan, the follow-up studies | Ch. 3 opening, or Ch. 6 §Estatuto | Shows planned against later work in one line. |
 
 Suggested order: A (`d8`, `d7`, `d6`, `d4`), then B1, B2, B4, B3, B5, B6, B7.
+
+## 4. What was done (2026-10-13)
+
+| Chapter | Figures now | Added |
+|---|---|---|
+| 1 | 1 | Map of the thesis |
+| 2 | 8 | From the book chapter: `d1`, `d2`, `d3`, `d4`, `d6`, `d9`, `d10`, `d11` |
+| 3 | 3 | `d7`, `d8` (in place of the arrow chain that was Equation 3.9), units of analysis |
+| 4 | 8 | Cost by model family |
+| 5 | 2 | Taxonomy axes; judge reliability in both cohorts |
+| 6 | 6 | Sequence of the evidence |
+| 7 | 1 | Selection guide |
+
+- 29 figures, 45 tables and 19 equations, each with a number and a citation in the
+  text; `scripts/pubs/check_equations.py` enforces the three in CI.
+- Generator: `scripts/generate_thesis_extra_figures.py`. The shared figures are drawn by
+  the book chapter's generators with their output sent to the thesis folder only.
+- `d11` no longer prints 97.4% and 22.5% (edit in
+  `scripts/generate_cifie_equation_figures.py`; the chapter's own files take it at its
+  next rebuild). `d10` already had its Spanish label in the script; the chapter's
+  committed image was older than the script.
+- `d5` and `d12` were not used, as the verdicts say.
+- One table of Chapter 2 had no caption or number; it is now `tbl-metodos-constructos`.
+- The four English figures are kept and are now produced from the Spanish generator.
+
+Still for the author: the publication licence of the book chapter, before deposit, for
+the ten shared figures.
 
 ## 3. Not recommended
 

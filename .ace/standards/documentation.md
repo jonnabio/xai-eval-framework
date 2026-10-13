@@ -208,6 +208,25 @@ at its next revision.
 
 Check for the thesis: `python scripts/pubs/check_equations.py` (CI, `pubs-sync`).
 
+## Manuscripts: Figures and Tables
+
+Author rule of 2026-10-13, same scope as the rule on equations.
+
+- **Every figure and every table has a caption, a generated number and at least one
+  citation in the text** (`@fig-nombre`, `@tbl-nombre`; in LaTeX `\ref`). "La tabla
+  siguiente" is not a citation.
+- **A figure prints nothing its generator does not compute from a result file.** Ranks,
+  groups, thresholds and counts are computed, not typed into the script. A schematic
+  figure says that it is one and carries no number that could be read as a result.
+- **A caption states what the figure shows and is checked against it**: the statistic
+  (mean or median), what the bars are, which method leads on which axis.
+- **Method colours are the same in every document of the author**: SHAP `#c0392b`, LIME
+  `#1b6ca8`, Anchors `#2e8b57`, DiCE `#6c3483`.
+- **Versions of a figure in another language come from the same generator**, never from
+  a second copy of the code.
+
+The check above enforces the first point for the thesis.
+
 ---
 
 ## API Documentation
