@@ -148,22 +148,32 @@ validez de la evidencia obtenida.
 
 ### Nomenclatura de los estudios
 
-La investigación se articula en cuatro estudios, cuya denominación se emplea de
-forma uniforme en el resto del documento. Los objetivos 1 y 4 —formalización del
-protocolo FOM-7 y caracterización de su reproducibilidad— son transversales a los
-dos estudios empíricos y no se adscriben a uno solo de ellos.
+La investigación se articula en cuatro estudios principales y tres estudios de
+seguimiento, cuya denominación se emplea de forma uniforme en el resto del
+documento. Los objetivos 1 y 4 —formalización del protocolo FOM-7 y
+caracterización de su reproducibilidad— son transversales a los dos estudios
+empíricos principales y no se adscriben a uno solo de ellos.
 
 | Estudio | Pregunta que responde | Objetivo | Capítulos |
 |:--------|:----------------------|:--------:|:---------:|
 | **Estudio Omnibus Multimétrico** | ¿Difieren SHAP, LIME, Anchors y DiCE en las cinco métricas de calidad sobre el diseño factorial completo? | OE2 | 3 y 4 |
 | **Estudio Pareado LIME–SHAP** | ¿Cómo se comporta la relación calidad-coste entre LIME y SHAP sobre celdas coincidentes de modelo, semilla y tamaño de muestra? | OE3 | 3 y 4 |
 | **Estudio Taxonómico** | ¿Qué estructura conceptual organiza el espacio de métricas de evaluación XAI y qué brechas de constructo revela? | OE5 | 5 |
-| **Estudio de Fiabilidad Inter-juez** | ¿Alcanzan los evaluadores semánticos basados en LLM la convergencia inter-juez necesaria para sostener afirmaciones confirmativas? | OE6 | 3 y 5 |
+| **Estudio de Fiabilidad Inter-juez** | ¿Alcanzan los evaluadores semánticos basados en LLM la convergencia inter-juez necesaria para sostener afirmaciones confirmativas? | OE6 | 3, 5 y 6 |
+| **Estudio de Fiabilidad ante el Error** (seguimiento) | ¿Son menos fiables las explicaciones cuando el modelo se equivoca? | Objetivo general | 6 |
+| **Estudio de Concordancia entre Explicadores** (seguimiento) | ¿Cuánto coinciden SHAP y LIME al explicar la misma instancia? | Objetivo general | 6 |
+| **Estudio de Transferencia entre Conjuntos de Datos** (seguimiento) | ¿Se mantiene el orden de los métodos al cambiar de conjunto de datos? | Objetivo general | 6 |
 
-: Nomenclatura, alcance y trazabilidad de los cuatro estudios. {#tbl-estudios}
+: Nomenclatura, alcance y trazabilidad de los estudios. {#tbl-estudios}
 
 Estos nombres sustituyen a las letras identificadoras (Estudios A, B y C)
 empleadas en versiones previas del documento.
+
+Los tres estudios de seguimiento se realizaron después del plan confirmativo y
+no añaden objetivos específicos ni hipótesis: se adscriben a la cláusula final
+del objetivo general, que exige delimitar el alcance de validez de la evidencia
+obtenida. Su estatuto se declara en §-@sec-seg-estatuto, y ninguno modifica la
+resolución de H1–H3, P1 o P2.
 
 ### Hipótesis o proposiciones de trabajo
 
@@ -232,7 +242,7 @@ precisamente el modo de fallo que la puerta 7 está diseñada para impedir. En
 consecuencia, el resultado de P2 —cualquiera que sea— no modifica las
 conclusiones confirmativas del Estudio Omnibus Multimétrico ni del Estudio
 Pareado LIME–SHAP, y se reporta como evidencia de calibración del instrumento
-semántico (Capítulos 3, 5 y 6).
+semántico (Capítulos 3, 5, 6 y 7).
 
 ## Metodología general de la investigación
 
@@ -362,7 +372,7 @@ Las siete puertas secuenciales son:
    trazables a artefactos fuente.
 
 Este capítulo ha establecido el problema doctoral, la pregunta de investigación,
-los objetivos, las hipótesis y el diseño general que articula los tres estudios.
+los objetivos, las hipótesis y el diseño general que articula los estudios.
 La consecuencia metodológica es que la tesis no puede limitarse a comparar
 promedios de métodos XAI: debe justificar qué constructos se miden, bajo qué
 condiciones y con qué alcance inferencial. El siguiente capítulo desarrolla ese
