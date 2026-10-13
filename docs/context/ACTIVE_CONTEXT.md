@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-12, by session `claude-2026-10-12-thesis-review`.
+**Last updated:** 2026-10-13, session end, by `claude-2026-10-12-thesis-review`.
 
 ## Current objective
 
@@ -17,6 +17,10 @@ new Chapter 6, `thesis/estudios-de-seguimiento.qmd`, reports the three later stu
 as Chapter 7. No objective, hypothesis or proposition changed. Plan:
 `docs/planning/thesis_followup_studies_plan_2026-10-12.md`. Record for the tutor, in
 Spanish: `docs/review/tesis_cambios_para_tutor_2026-10-12.md` and `.docx`.
+
+Since 2026-10-13 the thesis has **29 figures, 45 tables and 19 equations**, each
+numbered and cited in the text (`scripts/pubs/check_equations.py`, in CI). What was
+added and why: `docs/review/thesis-figure-review_2026-10-13.md`.
 
 **Decided (2026-10-12), by the author and agreed by the tutor (reported by the author):**
 a chapter of its own, no new objective, the three study names, the present length. The
@@ -71,14 +75,16 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` at `1062a1dd9` (pull request #57, the follow-up chapter), merged by the author
-  on 2026-10-12. The thesis branch is level with it, plus the record of the tutor's
-  agreement in a further pull request.
+- `main` at `239d012e1` (pull request #59) plus the session-end update of this file.
+  Pull requests #56 to #59 were merged by the author on 2026-10-12 and 13. The thesis
+  branch `thesis/rca-001-phase-2` is level with `main`.
+- The lane lock of the main folder is free.
 - Nothing is running: no task, no process.
-- Verifiers at the last check (2026-10-12): `verify_claims.py` 1,387 claims, 1,728
+- Verifiers at the last check (2026-10-13): `verify_claims.py` 1,387 claims, 1,728
   sites, 38 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
-  `register_thesis_followup.py --check`, `register_paper_c.py --check` and
-  `register_paper_f.py --check` pass.
+  `register_thesis_followup.py --check`, `register_paper_c.py --check`,
+  `register_paper_f.py --check`, `check_equations.py` and `check_active_context.py`
+  pass; `pytest tests/pubs` 47 passed.
 - The thesis renders to Word with seven chapters and no unresolved reference
   (`thesis/render.ps1`; `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is tracked).
 
@@ -87,9 +93,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 1. Submission numbers of Papers C and D, and the date of Paper D's submission.
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
-4. Thesis figures: **closed 2026-10-12.** Commit `ba418a927` had replaced three Chapter 4
-   figures with the black-and-white print versions of the book chapter; the colour
-   files are restored and the generator no longer writes the B/W pass to the thesis.
+4. **The publication licence of the book chapter**: whether it allows the ten figures
+   the thesis now shares with it (`fig_d1` to `fig_d4`, `fig_d6` to `fig_d11`). Not
+   confirmed by the author; to check before deposit.
 5. Branch protection on `main` (pull request and the checks required): agreed on
    2026-10-10, set by the author on GitHub; not confirmed as done.
 6. **Before deposit:** the prior-publication policy of each journal with a paper under
@@ -139,47 +145,77 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-13 (thesis figures and tables: 29 figures, all cited)
+## Latest handoff - 2026-10-13, SESSION END (thesis closed for the tutor: papers, equations, figures, tables)
 
-- **Completed** (lane `thesis`, owner `claude-2026-10-12-thesis-review`):
-  - Pull requests #57 and #58 merged by the author on 2026-10-12. Detail: archive
-    `2026-10-12.md`.
-  - **Chapter 6:** five Spanish figures from the result files of each study
-    (`scripts/generate_thesis_followup_figures.py`), plus the sequence of the evidence.
-  - **Chapter 4:** stability against cost as median and interquartile range; cost by
-    model family; every figure cited.
-  - **Chapters 1, 2, 3, 5 and 7**, which had no figure: map of the thesis; eight concept
-    figures and two FOM-7 figures shared with the book chapter (`d1`, `d2`, `d3`, `d4`,
-    `d6`, `d7`, `d8`, `d9`, `d10`, `d11`; not `d5`, not `d12`); units of analysis;
-    taxonomy axes; judge reliability in both cohorts; selection guide. Generator:
-    `scripts/generate_thesis_extra_figures.py`. The arrow chain that was Equation 3.9
-    is replaced by the FOM-7 figure, so the thesis has 19 equations.
-  - **Tables:** the 18 never cited now are; one table of Chapter 2 gained its caption and
-    number (`tbl-metodos-constructos`).
-  - **Check:** `scripts/pubs/check_equations.py` enforces number and citation for
-    equations, figures and tables (19, 29 and 45). Rule in
-    `.ace/standards/documentation.md` ("Manuscripts: Figures and Tables") and `.aceconfig`.
-  - **English figures kept** for presentations (author's decision), now produced from
-    the Spanish generator by `scripts/generate_thesis_supplementary_figures_en.py`.
-  - Record for the tutor updated; review and what was done:
-    `docs/review/thesis-figure-review_2026-10-13.md`. Thesis rendered: 29 figures, no
-    unresolved reference.
-- **Rules for thesis figures:**
-  - Method colours: SHAP `#c0392b`, LIME `#1b6ca8`, Anchors `#2e8b57`, DiCE `#6c3483`.
-  - A figure prints nothing its generator does not compute from a result file; a
-    schematic says that it is one.
-  - `generate_spanish_thesis_figures.py` and the two `generate_cifie_*_figures.py` also
-    write the book-chapter folders (chapter lane): from the thesis lane run them with
-    those outputs redirected, as `generate_thesis_extra_figures.py` does.
-- **Changed in a shared script, to know in the chapter lane:**
-  `generate_cifie_equation_figures.py` no longer prints 97.4% and 22.5% in `d11` (values
-  without a source); the chapter's committed images are older than the scripts and
-  change at its next rebuild.
-- **Open with the author:**
-  1. The publication licence of the book chapter, for the ten shared figures, before
-     deposit.
-  2. Read the new figures and their captions; the Spanish text is the assistant's.
-- **Next steps**: merge the pull request; then the items that stand from before (send
-  the record and the thesis to the tutor, table of contents in Word, journals'
-  prior-publication policies).
-- **Blockers**: none.
+Session of 2026-10-12 and 13, lane `thesis` (branch `thesis/rca-001-phase-2`, owner
+`claude-2026-10-12-thesis-review`), with shared files in separate commits. The steps are
+in archive `2026-10-12.md` and `2026-10-13.md`.
+
+- **Completed**:
+  - **Context file split** (pull request #56): this file holds the state only; history
+    in `docs/context/archive/`; standard `.ace/standards/context.md`; CI check.
+  - **Every paper reflected in the thesis** (#57, ADR-0023): new Chapter 6 with the
+    three follow-up studies (D, E, F) and the later controls of the inter-judge study
+    (C); conclusions are Chapter 7; no objective, hypothesis or proposition changed.
+    79 paper claims mirrored by `scripts/pubs/register_thesis_followup.py`.
+  - **The three points open before deposit**: figures restored; coverage sweep finished,
+    every thesis source under `[coverage]`; final pass (statement sweep rows 1 to 16).
+  - **The tutor agreed** to the four design decisions (reported by the author); the
+    record for the tutor states them as agreed (#58).
+  - **Equations** (#58): numbered and cited; author's standing rule.
+  - **Figures** (#58, #59): the seven of Chapter 4 regenerated and four captions brought
+    level with them; method colours of the papers; five figures in Chapter 6; seventeen
+    more in Chapters 1 to 7, ten of them shared with the book chapter; stability against
+    cost as median and interquartile range; English copies kept and regenerated.
+  - **Tables** (#59): all cited; one gained its caption and number.
+  - **Rule and check**: every equation, figure and table of a manuscript is numbered and
+    cited; a figure prints only what its generator computes
+    (`.ace/standards/documentation.md`, `.aceconfig`, `scripts/pubs/check_equations.py`).
+- **Current State**:
+  - `main` and the thesis branch are level; nothing is uncommitted; no task runs; the
+    lane lock is released.
+  - The thesis renders to Word with seven chapters, 29 figures, 45 tables, 19 equations
+    and no unresolved reference. `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is
+    the render of the merged text.
+  - The record for the tutor (`docs/review/tesis_cambios_para_tutor_2026-10-12.docx`)
+    lists every change of the session. It has not been sent.
+  - Papers: A published; B, C, D, E, F under review. None was touched.
+- **Next Steps**:
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` for the lane of the
+     task; stop if it fails.
+  2. Author: read Chapter 6 and the new figures and captions (the Spanish text is the
+     assistant's); send the record and the rendered thesis to the tutor; refresh the
+     table of contents in Word.
+  3. Apply what the tutor answers.
+  4. Before deposit: points 4 and 6 of "Open with the author" (licence of the book
+     chapter; prior-publication policy of each journal).
+  5. If wanted before deposit: Task 3 step 2 (registry values as macros and inline
+     values; CI build of every output).
+- **Blockers/Issues**:
+  - None blocks the thesis.
+  - Not confirmed: the licence of the book chapter for the ten shared figures.
+  - To know in the chapter lane: `scripts/generate_cifie_equation_figures.py` no longer
+    prints 97.4% and 22.5% in figure `d11`, and the chapter's committed images are older
+    than their scripts; both show at the chapter's next rebuild. The chapter package is
+    still to be rebuilt from `392b2fc8c`.
+  - Paper E's four figures are PDF only and were not opened in the figure review.
+- **Notes**:
+  - Thesis figures, regenerate with the project environment (`.venv\Scripts\python.exe`):
+    `scripts/generate_thesis_supplementary_figures.py` and
+    `scripts/generate_spanish_thesis_figures.py` (Chapter 4),
+    `scripts/generate_thesis_followup_figures.py` (Chapter 6),
+    `scripts/generate_thesis_extra_figures.py` (the rest),
+    `scripts/generate_thesis_supplementary_figures_en.py` (English copies).
+  - **`generate_spanish_thesis_figures.py` also writes the book-chapter folders**, which
+    belong to the chapter lane: from the thesis lane, redirect `CIFIE_EXP` and
+    `CIFIE_BW` or discard those files; never commit them here.
+  - Method colours in every figure: SHAP `#c0392b`, LIME `#1b6ca8`, Anchors `#2e8b57`,
+    DiCE `#6c3483`.
+  - Render: close the thesis in Word, then `powershell -File thesis/render.ps1`. The
+    "Unknown command clean" line is harmless. Check the result in `word/document.xml`.
+  - Commit messages: write them to a file with the Write tool and use `git commit -F`;
+    PowerShell `Set-Content -Encoding utf8` puts a byte-order mark in the message, and
+    PowerShell rewrites of UTF-8 files corrupt the accents.
+  - `.ace/` is ignored by git: add a new file there with `git add -f`.
+  - `gh pr merge` was refused to the assistant on 2026-10-12; the author merged #56 to
+    #59 by hand.
