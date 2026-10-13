@@ -70,8 +70,10 @@ def setup() -> None:
 
 def save(fig: plt.Figure, filename: str, is_bw: bool = False) -> None:
     fig.tight_layout()
-    # Save to thesis folder
-    fig.savefig(OUT_THESIS / filename, bbox_inches="tight")
+    # The thesis takes the colour figures only: the default mode runs colour and then
+    # B/W, and the B/W pass used to overwrite the thesis files (found 2026-10-12).
+    if not is_bw:
+        fig.savefig(OUT_THESIS / filename, bbox_inches="tight")
     # Save to CIFIE chapter folders
     target_cifie = CIFIE_BW if is_bw else CIFIE_EXP
     fig.savefig(target_cifie / filename, bbox_inches="tight")
