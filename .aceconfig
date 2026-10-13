@@ -19,6 +19,7 @@ entry:
   standards:
     - .ace/standards/coding.md
     - .ace/standards/security.md
+    - .ace/standards/context.md
   roles: .ace/roles/roles.md
 
 # Critical rules (always in context - keep under 500 tokens)
@@ -26,7 +27,8 @@ core_rules:
   - "Never commit secrets, credentials, or API keys"
   - "All code must pass linting before commit"
   - "Follow patterns established in docs/adr/"
-  - "Update ACTIVE_CONTEXT.md after each session"
+  - "Update ACTIVE_CONTEXT.md after each session: state only, one handoff, at most 300 lines; the replaced handoff moves verbatim to docs/context/archive/ (.ace/standards/context.md)"
+  - "Read docs/context/archive/ (index first, then only the file needed) whenever the task needs history ACTIVE_CONTEXT.md does not give: rule CTX-3 of .ace/standards/context.md"
   - "Verify against .ace/standards/ before completing any task"
   - "Generate IMPLEMENTATION_PLAN.md before writing code"
   - "Every task follows BMAD: Analyze → Discuss → Plan → Execute → Verify"
@@ -144,6 +146,7 @@ hooks:
 # Context management
 context:
   active_context_path: docs/context/ACTIVE_CONTEXT.md
+  context_archive_path: docs/context/archive/
   planning_path: docs/planning/
   rca_path: docs/rca/
   max_context_files: 5
