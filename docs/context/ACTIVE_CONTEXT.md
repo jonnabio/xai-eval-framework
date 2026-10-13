@@ -156,11 +156,20 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
     artifact now disclosed); final pass done (statement sweep rows 1 to 16, ADR-0012
     greps, full render read from `word/document.xml`).
   - Record for the tutor written, with a Word copy.
+  - **Equations (author rule, 2026-10-12):** the 20 displayed equations of the thesis
+    (17 in Chapter 3, 3 in Chapter 4) are labelled and each is cited in the text;
+    numbers are generated. Rule in `.ace/standards/documentation.md` ("Manuscripts:
+    Equations") and `.aceconfig`; `scripts/pubs/check_equations.py` runs in CI. It
+    applies to every manuscript from now on; a submitted paper takes it at its next
+    revision. **The tracked Word file of the thesis does not have the numbers yet:**
+    it was open in Word during the render. Checked on a scratch render instead.
 - **Current state**: merged to `main` (pull request #57). The tutor agreed to the four
   design decisions; the record for the tutor states them as agreed.
 - **Next steps**:
-  1. Author: read Chapter 6 and the record; send the record and the rendered thesis to
-     the tutor; refresh the table of contents in Word.
+  1. Author: close the thesis in Word and run `thesis/render.ps1`, then commit
+     `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` (lane `thesis`); read Chapter 6
+     and the record; send the record and the rendered thesis to the tutor; refresh the
+     table of contents in Word.
   2. Before deposit: the journals' prior-publication policies (point 6 above).
   3. Task 3 step 2 (macros and the CI build), if the author wants it before deposit.
 - **Blockers**: none.

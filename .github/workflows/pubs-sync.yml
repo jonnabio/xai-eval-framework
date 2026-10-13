@@ -46,6 +46,11 @@ jobs:
       - name: Verify the thesis follow-up chapter against the paper claims it mirrors
         run: python3 scripts/pubs/register_thesis_followup.py --check
 
+      # Author rule of 2026-10-12: every displayed equation of the thesis has a label and
+      # is cited in the text (.ace/standards/documentation.md, Equations).
+      - name: Check that every thesis equation is numbered and cited
+        run: python3 scripts/pubs/check_equations.py
+
       # Report-only: Paper B+C numbers that Paper A prints, found without the
       # registry (RCA-001, review F02). The submission gate runs it --strict.
       - name: Report numbers shared with the published Paper A
