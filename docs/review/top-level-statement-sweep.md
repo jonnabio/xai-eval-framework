@@ -1,7 +1,7 @@
 # Top-level statement sweep
 
 **Status:** Living checklist. Not a dated report — update it in place.
-**Last swept:** 2026-09-27
+**Last swept:** 2026-10-12
 **Owner role:** Scientific Editor
 
 ---
@@ -63,7 +63,9 @@ would falsify it.
 | 11 | **P2** — semantic-judge reliability | ” | Ch.5 `sec-exp4-fiabilidad` |
 | 12 | **Resumen** | `pub/claims.toml` → `pub/fragments/thesis_resumen_es.qmd` | **any** of the above |
 | 13 | **Abstract** | `pub/claims.toml` → `pub/fragments/thesis_abstract_en.qmd` | **any** of the above; must mirror row 12 |
-| 14 | **`tbl-estudios`** — study nomenclature | `capitulo-1` | ADR-0012; any new or renamed study |
+| 14 | **`tbl-estudios`** — study nomenclature | `capitulo-1` | ADR-0012; ADR-0023; any new or renamed study |
+| 15 | **Status of the follow-up studies** — later than the plan, no objective or hypothesis added, no outcome of H1–H3, P1, P2 changed | `estudios-de-seguimiento` §`sec-seg-estatuto`; restated in `capitulo-1` under `tbl-estudios` | any edit that presents a follow-up result as confirmatory, or adds an objective |
+| 16 | **`tbl-seg-sintesis`** and the conclusions' `sec-concl-seguimiento` — what the follow-up adds to each conclusion | `estudios-de-seguimiento`, `capitulo-6-conclusiones` (renders as Chapter 7) | a revision of a follow-up study's paper that changes a result or its scope; Ch.4 conclusions |
 
 Rows 12 and 13 are the highest-risk: they restate every other row, are read first,
 and are the furthest from the evidence.
@@ -103,3 +105,4 @@ ICC(1,1) 0.321–0.601), each listed as a site on its claim.
 | 2026-09-02 | Rigor review of the Resumen, then of the objetivo general | 1–14 | Rows 12/13 rewritten (4 major + 3 minor findings); row 1 revised for scope, coverage and an undefined term. Rows 2–11, 14 consistent. |
 | 2026-09-27 | Tutor-feedback implementation: H1 follow-up, masking/OOD boundary and EXP4 interpretation | 1–14 | Consistent. H1 remains a global Friedman hypothesis; the new 15-block SHAP–LIME test is labelled review-motivated and does not replace the 75-cell H3 analysis. The Resumen/Abstract already scope results to the benchmark and validity conditions. P2 and OE6 remain negative/exploratory, and the EXP4 gradient does not authorize confirmatory use. Study names remain compliant with ADR-0012. |
 | 2026-09-27 | EXP4 cohort 2 (replication with a second judge panel, ADR-0017) added to Ch.3/5/6, Appendix F and the Resumen/Abstract | 1–14 | Consistent after edit. P2 and OE6 stay negative and are now marked replicated; every summary states the primary-condition ICC(1,1) < 0.75 in both cohorts (ADR-0017 amendment to ADR-0016). The Resumen/Abstract add one mirrored sentence on the replication and no new number; the 0.321–0.601 range stays scoped to the original cohort. The EXP4 sample is corrected in Ch.3 to 192 single-explanation cases from EXP2 and EXP3; 147 is the original cohort's complete-case subset. |
+| 2026-10-12 | Follow-up chapter added (ADR-0023): three later studies and the later controls of the inter-judge study; conclusions renumbered to Chapter 7 | 1–16 | Consistent after edit. Rows 1–11: no objective, hypothesis or proposition reworded; the general objective's closing clause (scope of validity) is what the follow-up studies answer to. Row 11: P2 stays negative; Ch.3 and Ch.5 now state that the primary condition of cohort 2 did not hide the label effectively, and point to the clean condition. Rows 12/13: one mirrored sentence added, no number, the misclassification result scoped to the primary benchmark because the external check did not reproduce it for SHAP. Row 14: three rows added, marked as follow-up and tied to the general objective. Rows 15/16 added. Every literal chapter number checked in the rendered DOCX; no unresolved reference. ADR-0012 greps clean. |

@@ -10,23 +10,35 @@
 
 ## Current objective
 
-**Thesis review** (author, 2026-10-12). With every paper published or under review, the
-open work of the project is the thesis. The folder is on the thesis lane
-(`thesis/rca-001-phase-2`). The scope and form of the review are not yet set by the
-author.
+**Close the thesis.** The tutor's note of 2026-10-12 asks for no change. On the author's
+instruction of the same day, every paper is now reflected in the thesis (ADR-0023): a
+new Chapter 6, `thesis/estudios-de-seguimiento.qmd`, reports the three later studies
+(D, E, F) and the later controls of the inter-judge study (C); the conclusions render
+as Chapter 7. No objective, hypothesis or proposition changed. Plan:
+`docs/planning/thesis_followup_studies_plan_2026-10-12.md`. Record for the tutor, in
+Spanish: `docs/review/tesis_cambios_para_tutor_2026-10-12.md` and `.docx`.
 
-Standing thesis task, not finished: **Task 3 / RCA-001 Phase 2**, make each published
-number exist in one place.
+**Waiting for:** the tutor's view of that record (section "Decisiones que se someten a
+su criterio": own chapter, no new objective, study names, length).
 
-1. Coverage sweep, one file at a time. Enforced under `[coverage]` in
-   `pub/claim_registry.toml`: chapters 3, 4, 5 and 6. Remaining: `apendices.qmd`, then
-   `capitulo-1`, `capitulo-2`, `introduccion` and Paper A. Workflow: add the file on a
-   `pubs/*` branch, triage with `verify_claims.py --coverage-report`, register or
-   declare structural.
-2. Then emit the registry values as LaTeX macros and Quarto inline values, and add a CI
-   job that builds every output and fails on undefined references and crossref warnings.
+Standing task **Task 3 / RCA-001 Phase 2**:
 
-Detail: archive `2026-09-04.md`, `2026-09-06.md` and `undated-state-sections.md`.
+1. Coverage sweep of the thesis: **done 2026-10-12**; every thesis source is under
+   `[coverage]`. Not swept: Paper A (published; its file is not under coverage).
+2. Not started: emit the registry values as LaTeX macros and Quarto inline values, and
+   a CI job that builds every output and fails on undefined references and crossref
+   warnings. Detail: archive `2026-09-04.md`, `2026-09-06.md`.
+
+**Rules of the follow-up chapter** (ADR-0023):
+
+- It prints only values registered for the papers. To print another one, add its claim
+  id to `pub/thesis_followup_claims.toml` and run
+  `python scripts/pubs/register_thesis_followup.py`; CI runs `--check`.
+- If a paper is revised and a value changes, that check fails until the chapter prints
+  the new value.
+- `capitulo-6-conclusiones.qmd` keeps its file name although it renders as Chapter 7.
+- New row 15 and 16 of `docs/review/top-level-statement-sweep.md` guard the status of
+  the follow-up studies and the table of what they add.
 
 ## Publication status
 
@@ -58,22 +70,30 @@ Detail: archive `2026-09-04.md`, `2026-09-06.md` and `undated-state-sections.md`
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` at `799720f70` (pull request #55) before this session's change; the thesis
-  branch was fast-forwarded to it and pushed on 2026-10-12.
+- `main` at `327bc5c07` (pull request #56, the context split). The thesis branch carries
+  the work of 2026-10-12 on top of it, in a pull request to `main`.
 - Nothing is running: no task, no process.
-- Verifiers at the last check (2026-10-12): `verify_claims.py` 1,308 claims, 33 files.
+- Verifiers at the last check (2026-10-12): `verify_claims.py` 1,387 claims, 1,728
+  sites, 38 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
+  `register_thesis_followup.py --check`, `register_paper_c.py --check` and
+  `register_paper_f.py --check` pass.
+- The thesis renders to Word with seven chapters and no unresolved reference
+  (`thesis/render.ps1`; `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is tracked).
 
 ## Open with the author
 
 1. Submission numbers of Papers C and D, and the date of Paper D's submission.
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
-4. Thesis figures: commit `ba418a927` (a chapter session) rewrote three figures under
-   `thesis/assets/figures/` and made `scripts/generate_spanish_thesis_figures.py` write
-   to both the thesis and the chapter. Whether those figures are the wanted ones is not
-   decided; the generator is to be separated on a `pubs/*` branch.
+4. Thesis figures: **closed 2026-10-12.** Commit `ba418a927` had replaced three Chapter 4
+   figures with the black-and-white print versions of the book chapter; the colour
+   files are restored and the generator no longer writes the B/W pass to the thesis.
 5. Branch protection on `main` (pull request and the checks required): agreed on
    2026-10-10, set by the author on GitHub; not confirmed as done.
+6. **Before deposit:** the prior-publication policy of each journal with a paper under
+   review (B, C, D, E, F), since the thesis now carries their results. Paper F's
+   comments to the editor state that the thesis is not deposited.
+7. The table of contents is refreshed by the author in Word after every render.
 
 ## Active constraints
 
@@ -117,21 +137,30 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-12 (thesis review mode; context file split)
+## Latest handoff - 2026-10-12 (every paper reflected in the thesis; open points closed)
 
-- **Completed**:
-  - Folder moved from the Paper F lane to the thesis lane. The stale lock of
-    `claude-2026-10-12-session-start` was released on the author's word.
-  - **This file was split.** Its 76 sections (5,284 lines, 375 KB) were moved verbatim
-    to `docs/context/archive/`, one file per day plus `undated-state-sections.md`, with
-    an index. This file was rewritten as state only. New standard
-    `.ace/standards/context.md` (loaded at every session start), a core rule in
-    `.aceconfig`, and `scripts/pubs/check_active_context.py` in CI.
-- **Current state**: branch `pubs/active-context-archive` holds the change; it reaches
-  `main` by pull request, then the thesis lane takes `main`.
+- **Completed** (lane `thesis`, owner `claude-2026-10-12-thesis-review`):
+  - Context file split and its standard (pull request #56, merged by the author).
+  - Plan and ADR-0023. New Chapter 6 with the three follow-up studies and the later
+    inter-judge controls; pointers and renumbering in the other chapters; Appendix G;
+    one mirrored sentence in the Resumen and Abstract.
+  - `scripts/pubs/register_thesis_followup.py`: 79 paper claims mirrored for the
+    chapter; CI step added.
+  - Two scope statements added to Chapters 3 and 5 from the later review of the judge
+    prompts: the primary condition of cohort 2 did not hide the label effectively, and
+    Anchors and DiCE were scored in a rendering that is not their own.
+  - The three points open before deposit: figures restored; coverage sweep finished
+    (ten literals in the appendices, a typed table number fixed, a probe without
+    artifact now disclosed); final pass done (statement sweep rows 1 to 16, ADR-0012
+    greps, full render read from `word/document.xml`).
+  - Record for the tutor written, with a Word copy.
+- **Current state**: all of it is on `thesis/rca-001-phase-2`, pushed, in a pull request
+  to `main`. The author sends the record to the tutor.
 - **Next steps**:
-  1. Merge the pull request; `git switch thesis/rca-001-phase-2`; `git merge main`;
-     claim the lane.
-  2. Begin the thesis review as the author directs. Review is the Scientific Advisor
-     role: read-only on the manuscript, findings to `docs/review/`.
+  1. Author: merge the pull request; send the record and the rendered thesis to the
+     tutor; refresh the table of contents in Word.
+  2. Apply whatever the tutor decides on the four points of the record.
+  3. Then Task 3 step 2 (macros and the CI build), if the author wants it before
+     deposit.
 - **Blockers**: none.
+
