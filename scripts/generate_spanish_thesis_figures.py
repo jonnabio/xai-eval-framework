@@ -82,19 +82,22 @@ def save(fig: plt.Figure, filename: str, is_bw: bool = False) -> None:
 
 def figure_stability_cost(is_bw: bool = False) -> None:
     df = pd.read_csv(STATS / "exp2_block_method_summary.csv")
-    grouped = (
-        df.groupby("method")[["stability", "cost", "fidelity"]]
-        .agg(["mean", "std"])
-        .reindex(METHOD_ORDER)
-    )
+    # Median and interquartile range over the 15 blocks. Until 2026-10-13 the figure showed
+    # the mean with one standard deviation each side; the cost of a method spans orders of
+    # magnitude between model families, so the deviation exceeded the mean and the bar ran
+    # off the logarithmic axis.
+    blocks = df.groupby("method")[["stability", "cost", "fidelity"]]
+    centre = blocks.median().reindex(METHOD_ORDER)
+    low = blocks.quantile(0.25).reindex(METHOD_ORDER)
+    high = blocks.quantile(0.75).reindex(METHOD_ORDER)
 
     fig, ax = plt.subplots(figsize=(7.2, 4.6))
     for method in METHOD_ORDER:
-        x = grouped.loc[method, ("cost", "mean")]
-        y = grouped.loc[method, ("stability", "mean")]
-        xerr = grouped.loc[method, ("cost", "std")]
-        yerr = grouped.loc[method, ("stability", "std")]
-        size = 110 + 240 * grouped.loc[method, ("fidelity", "mean")]
+        x = centre.loc[method, "cost"]
+        y = centre.loc[method, "stability"]
+        xerr = [[x - low.loc[method, "cost"]], [high.loc[method, "cost"] - x]]
+        yerr = [[y - low.loc[method, "stability"]], [high.loc[method, "stability"] - y]]
+        size = 110 + 240 * centre.loc[method, "fidelity"]
         
         if is_bw:
             fmt_str, m_face, m_edge = MARKERS_BW[method]
@@ -139,15 +142,16 @@ def figure_stability_cost(is_bw: bool = False) -> None:
         )
 
     ax.set_xscale("log")
-    ax.set_xlabel("Coste computacional medio por instancia (ms, escala log)")
-    ax.set_ylabel("Estabilidad media")
+    ax.set_xlabel("Coste computacional por instancia, mediana entre bloques (ms, escala log)")
+    ax.set_ylabel("Estabilidad, mediana entre bloques")
     ax.set_title("Relación entre estabilidad y coste por método")
     ax.grid(True, which="both", linestyle=":", linewidth=0.7, alpha=0.55)
     ax.legend(title="Método", loc="upper right")
     ax.text(
         0.01,
         -0.22,
-        "Fuente: exp2_block_method_summary.csv. Barras = desviación estándar entre bloques.",
+        "Fuente: exp2_block_method_summary.csv. Punto = mediana de los 15 bloques; barras = rango "
+        "intercuartílico;\ntamaño del punto = fidelidad mediana.",
         transform=ax.transAxes,
         fontsize=8,
         color="#555555",

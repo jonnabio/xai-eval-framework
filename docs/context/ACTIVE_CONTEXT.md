@@ -139,50 +139,47 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-12 (every paper reflected in the thesis; open points closed)
+## Latest handoff - 2026-10-13 (thesis figures and tables: 29 figures, all cited)
 
 - **Completed** (lane `thesis`, owner `claude-2026-10-12-thesis-review`):
-  - Context file split and its standard (pull request #56, merged by the author).
-  - Plan and ADR-0023. New Chapter 6 with the three follow-up studies and the later
-    inter-judge controls; pointers and renumbering in the other chapters; Appendix G;
-    one mirrored sentence in the Resumen and Abstract.
-  - `scripts/pubs/register_thesis_followup.py`: 79 paper claims mirrored for the
-    chapter; CI step added.
-  - Two scope statements added to Chapters 3 and 5 from the later review of the judge
-    prompts: the primary condition of cohort 2 did not hide the label effectively, and
-    Anchors and DiCE were scored in a rendering that is not their own.
-  - The three points open before deposit: figures restored; coverage sweep finished
-    (ten literals in the appendices, a typed table number fixed, a probe without
-    artifact now disclosed); final pass done (statement sweep rows 1 to 16, ADR-0012
-    greps, full render read from `word/document.xml`).
-  - Record for the tutor written, with a Word copy.
-  - **Equations (author rule, 2026-10-12):** the 20 displayed equations of the thesis
-    (17 in Chapter 3, 3 in Chapter 4) are labelled and each is cited in the text;
-    numbers are generated. Rule in `.ace/standards/documentation.md` ("Manuscripts:
-    Equations") and `.aceconfig`; `scripts/pubs/check_equations.py` runs in CI. It
-    applies to every manuscript from now on; a submitted paper takes it at its next
-    revision. The tracked Word file of the thesis was rebuilt later the same day with
-    the numbers and the reviewed figures.
-  - **Figure review (2026-10-12).** The seven thesis figures (all in Chapter 4) were
-    regenerated from the current data; values unchanged. Four figure-versus-text defects
-    fixed: the CD diagram and its caption left out the LIME-Anchors group in fidelity
-    (ranks and groups are now computed in
-    `scripts/generate_thesis_supplementary_figures.py`, no longer typed); the radar
-    caption gave LIME the lead in parsimony (it is DiCE); the boxplot caption called
-    the LIME stability mean a median; the coverage figure counted the inventory (274)
-    and not the analysed runs (275). Method colours now follow the submitted papers
-    (SHAP red, LIME blue, Anchors green, DiCE purple; palette of Paper F). **Paper
-    figures were not touched** (papers are submitted): Paper B's two figures were read
-    against the thesis and agree in values; C, D and F were read; E's are PDF only and
-    were not opened. Not done: the unused English figures in `thesis/assets/figures`
-    keep the old palette; the book-chapter figures take the new palette at their next
-    rebuild (same generator); Chapter 6 has no figure.
-- **Current state**: merged to `main` (pull request #57). The tutor agreed to the four
-  design decisions; the record for the tutor states them as agreed.
-- **Next steps**:
-  1. Author: read Chapter 6 and the record; send the record and the rendered thesis to
-     the tutor; refresh the table of contents in Word.
-  2. Before deposit: the journals' prior-publication policies (point 6 above).
-  3. Task 3 step 2 (macros and the CI build), if the author wants it before deposit.
+  - Pull requests #57 and #58 merged by the author on 2026-10-12. Detail: archive
+    `2026-10-12.md`.
+  - **Chapter 6:** five Spanish figures from the result files of each study
+    (`scripts/generate_thesis_followup_figures.py`), plus the sequence of the evidence.
+  - **Chapter 4:** stability against cost as median and interquartile range; cost by
+    model family; every figure cited.
+  - **Chapters 1, 2, 3, 5 and 7**, which had no figure: map of the thesis; eight concept
+    figures and two FOM-7 figures shared with the book chapter (`d1`, `d2`, `d3`, `d4`,
+    `d6`, `d7`, `d8`, `d9`, `d10`, `d11`; not `d5`, not `d12`); units of analysis;
+    taxonomy axes; judge reliability in both cohorts; selection guide. Generator:
+    `scripts/generate_thesis_extra_figures.py`. The arrow chain that was Equation 3.9
+    is replaced by the FOM-7 figure, so the thesis has 19 equations.
+  - **Tables:** the 18 never cited now are; one table of Chapter 2 gained its caption and
+    number (`tbl-metodos-constructos`).
+  - **Check:** `scripts/pubs/check_equations.py` enforces number and citation for
+    equations, figures and tables (19, 29 and 45). Rule in
+    `.ace/standards/documentation.md` ("Manuscripts: Figures and Tables") and `.aceconfig`.
+  - **English figures kept** for presentations (author's decision), now produced from
+    the Spanish generator by `scripts/generate_thesis_supplementary_figures_en.py`.
+  - Record for the tutor updated; review and what was done:
+    `docs/review/thesis-figure-review_2026-10-13.md`. Thesis rendered: 29 figures, no
+    unresolved reference.
+- **Rules for thesis figures:**
+  - Method colours: SHAP `#c0392b`, LIME `#1b6ca8`, Anchors `#2e8b57`, DiCE `#6c3483`.
+  - A figure prints nothing its generator does not compute from a result file; a
+    schematic says that it is one.
+  - `generate_spanish_thesis_figures.py` and the two `generate_cifie_*_figures.py` also
+    write the book-chapter folders (chapter lane): from the thesis lane run them with
+    those outputs redirected, as `generate_thesis_extra_figures.py` does.
+- **Changed in a shared script, to know in the chapter lane:**
+  `generate_cifie_equation_figures.py` no longer prints 97.4% and 22.5% in `d11` (values
+  without a source); the chapter's committed images are older than the scripts and
+  change at its next rebuild.
+- **Open with the author:**
+  1. The publication licence of the book chapter, for the ten shared figures, before
+     deposit.
+  2. Read the new figures and their captions; the Spanish text is the assistant's.
+- **Next steps**: merge the pull request; then the items that stand from before (send
+  the record and the thesis to the tutor, table of contents in Word, journals'
+  prior-publication policies).
 - **Blockers**: none.
-

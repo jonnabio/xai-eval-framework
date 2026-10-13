@@ -29,6 +29,16 @@ hace para P2.
   P1 y P2 es el reportado en los capítulos anteriores. Lo que estos estudios
   cambian es la extensión con que esos resultados pueden generalizarse.
 
+La @fig-secuencia-evidencia sitúa estos trabajos en el orden de realización de
+toda la evidencia de la tesis, y la @tbl-seg-estudios los presenta.
+
+![Secuencia de la evidencia de la tesis. Solo el benchmark primario
+(EXP2) se ejecutó bajo el plan inferencial congelado y sostiene las hipótesis
+confirmativas; la validación externa parcial, la taxonomía y el estudio de
+jueces son complementarios o exploratorios, y los estudios de seguimiento son
+posteriores. El orden no representa una escala temporal. Fuente: elaboración
+propia.](assets/figures/fig_secuencia_evidencia_es.png){#fig-secuencia-evidencia width=95%}
+
 | Estudio | Pregunta que responde | Eje de validez | Datos |
 |:--------|:----------------------|:---------------|:------|
 | **Estudio de Fiabilidad ante el Error** | ¿Son menos fiables las explicaciones cuando el modelo se equivoca? | Corrección de la predicción | Reanálisis de las ejecuciones del benchmark primario |
@@ -61,7 +71,7 @@ errores estándar agrupados por ejecución. German Credit sirve de contraste
 externo descriptivo.
 
 **Resultados.** La estabilidad fue menor en las instancias mal clasificadas para
-los cuatro explicadores (@tbl-seg-error). El déficit fue grande para SHAP, en
+los cuatro explicadores (@tbl-seg-error y @fig-seg-error). El déficit fue grande para SHAP, en
 las 65 ejecuciones, y para DiCE, en 67 de 68. Para LIME fue consistente pero
 pequeño, porque su estabilidad en estos datos es cercana a cero. La fidelidad
 cambió poco y en sentidos opuestos según el explicador. De las doce pruebas,
@@ -84,7 +94,15 @@ efectos fijos de ejecución, sin y con el margen de predicción, sobre las 223
 ejecuciones cuyo modelo almacenado reproduce las predicciones registradas.
 {#tbl-seg-error}
 
-El ajuste por el margen separa dos causas. Los errores están más cerca de la
+![Diferencia de calidad entre instancias mal clasificadas y bien clasificadas,
+por explicador y métrica (UCI Adult). Cada punto es la media por ejecución de la
+diferencia, con su intervalo del 95 %; el marcador relleno indica una diferencia
+significativa tras la corrección de Holm. Los valores negativos indican menor
+calidad en los errores. El panel central muestra el resultado principal: la
+estabilidad es menor en los errores para los cuatro
+explicadores.](assets/figures/fig_seg_error_es.png){#fig-seg-error width=95%}
+
+El ajuste por el margen separa dos causas (@fig-seg-margen). Los errores están más cerca de la
 frontera: en las ejecuciones de SHAP, la mediana del margen es 0.18 en los
 errores frente a 0.43 en los aciertos. Con el margen controlado, el déficit de
 DiCE casi desaparece ($-0.014$): cerca de la frontera un contrafactual requiere
@@ -92,6 +110,13 @@ un cambio pequeño, que varía más bajo ruido, sea correcta o no la predicción
 El déficit de SHAP se reduce pero permanece ($-0.042$). A igual margen, además,
 las características que SHAP sitúa primero sostienen una parte menor de una
 predicción errónea.
+
+![Estabilidad media según el margen de predicción, para instancias bien y mal
+clasificadas (UCI Adult). En SHAP, la línea de las instancias mal clasificadas
+queda por debajo en todos los intervalos de margen: el déficit no se debe solo a
+la cercanía a la frontera. En DiCE, las dos líneas coinciden hasta márgenes
+altos: a igual margen, el déficit casi
+desaparece.](assets/figures/fig_seg_margen_es.png){#fig-seg-margen width=95%}
 
 Una comprobación se añadió *post hoc*. Parte de las instancias explicadas
 pertenece a los datos de entrenamiento de los modelos (70,788 de las
@@ -144,7 +169,15 @@ para la misma instancia, y solapamiento entre la lista de SHAP de una instancia
 y la lista de LIME de otra instancia de la misma ejecución (referencia de
 permutación, *post hoc*). {#tbl-seg-concordancia}
 
-Tres análisis *post hoc* precisan la lectura de esa cifra.
+![Solapamiento de las cinco características principales de SHAP y LIME, por
+conjunto de datos y modelo. El punto relleno compara las dos explicaciones de la
+misma instancia; el punto hueco, la lista de SHAP de una instancia con la lista
+de LIME de otra instancia de la misma ejecución. La barra gris entre ambos es la
+parte del solapamiento propia de la instancia: amplia en Adult, pequeña en
+Breast Cancer.](assets/figures/fig_seg_concordancia_es.png){#fig-seg-concordancia width=90%}
+
+Tres análisis *post hoc* precisan la lectura de esa cifra; el primero se
+aprecia en la @fig-seg-concordancia.
 
 - **Una parte del solapamiento no depende de la instancia.** La lista de SHAP
   de una instancia y la lista de LIME de otra instancia distinta ya se solapan
@@ -231,6 +264,13 @@ medidas, la concordancia entre conjuntos de datos es menor que la concordancia
 entre semillas: el conjunto de datos sí desplaza el orden, y lo desplaza más en
 las posiciones intermedias y bajas que en la primera.
 
+![Rango de cada método en cada uno de los 16 conjuntos de datos, por medida (1 =
+mejor). Adult, a la izquierda, es el conjunto de referencia. Las líneas de SHAP
+y LIME rara vez se cruzan con las de Anchors y DiCE; las de Anchors y DiCE se
+cruzan entre sí con frecuencia en la brecha de fidelidad, la parsimonia y el
+coste.](assets/figures/fig_seg_transferencia_es.png){#fig-seg-transferencia width=95%}
+
+La @fig-seg-transferencia muestra dónde se conserva el orden y dónde no.
 Tomando Adult como referencia, de las 24 comparaciones entre pares de métodos,
 12 conservan su orden en los otros 15 conjuntos de datos y 21 lo conservan en al
 menos 12. Las tres débiles son todas entre Anchors y DiCE; en coste, ese par
@@ -301,7 +341,15 @@ subió de 0.18 a 0.60: los jueces sí acuerdan cuando la diferencia es visible e
 la forma del texto. Cuando los pesos se asignaron a características
 equivocadas, lo que deja intacta la forma y vuelve erróneo el contenido, solo
 uno de los tres jueces redujo la Plausibilidad semántica, y el acuerdo no
-aumentó.
+aumentó (@fig-seg-jueces).
+
+![Acuerdo entre los tres jueces en el control positivo, para los casos de SHAP y
+LIME con algún peso no nulo. Se compara el ICC(1,1) sobre los textos
+almacenados con el obtenido al añadir cada versión degradada. Truncar el texto
+eleva el acuerdo en Completitud; reasignar los pesos a características
+equivocadas no eleva el acuerdo en ninguna de las dos dimensiones. Ningún valor
+alcanza el umbral de fiabilidad
+aceptable.](assets/figures/fig_seg_jueces_es.png){#fig-seg-jueces width=85%}
 
 **Efecto del contenido de la consigna.** Con las métricas técnicas en la
 consigna, uno de los jueces nombró una métrica en el 80 % de sus respuestas. Sin

@@ -452,6 +452,15 @@ calificadas (semillas y tamaños de muestra agregados); los valores de celda
 en el Apéndice C y no deben leerse como resúmenes por modelo. Las diferencias
 más notables son:
 
+La @fig-coste-por-modelo muestra el coste mediano de SHAP y de LIME en cada
+familia de modelos. La diferencia entre familias es mayor que la diferencia
+entre métodos, y el orden se invierte en XGBoost.
+
+![Coste mediano por instancia de SHAP y LIME según la familia de modelos,
+en escala logarítmica, sobre las celdas pareadas. LIME es más rápido en
+cuatro de las cinco familias; en XGBoost, la variante de SHAP para árboles
+es más rápida que LIME. Fuente: elaboración propia.](assets/figures/fig_coste_por_modelo_es.png){#fig-coste-por-modelo width=80%}
+
 **XGBoost** presenta el perfil calidad-coste más favorable para SHAP: fidelidad
 0.759 con un coste medio de 21 ms (mediana 18 ms). Esto se debe al uso de
 TreeSHAP [@lundberg2017], que calcula valores exactos de Shapley aprovechando la
@@ -520,11 +529,21 @@ Las tablas inferenciales son la evidencia primaria del capítulo. Las figuras
 siguientes se incluyen como apoyo visual para inspeccionar patrones
 multimétricos y relaciones entre constructos. No sustituyen las pruebas
 estadísticas, pero ayudan a detectar si los resultados tabulares son coherentes
-con la estructura global de los datos.
+con la estructura global de los datos. La @fig-cobertura-exp2 muestra la
+cobertura de artefactos que condiciona todos los análisis. La @fig-cd-diagram y
+la @fig-boxplots-metricas acompañan a H1 y H2: la primera resume la
+localización de Nemenyi y la segunda, la distribución por bloques de la que
+proceden los rangos. La @fig-diferencias-pareadas acompaña a H3. La
+@fig-estabilidad-coste, la @fig-correlacion-metricas y la @fig-radar-metodos
+resumen la relación entre métricas que sustenta el perfil multidimensional de
+§-@sec-perfiles.
 
-![Relación entre estabilidad y coste por método. La figura muestra la relación
-entre consistencia explicativa y coste computacional bajo las condiciones del
-banco de pruebas.](assets/figures/fig_estabilidad_coste_es.png){#fig-estabilidad-coste width=85%}
+![Relación entre estabilidad y coste por método. Cada punto es la mediana de los
+15 bloques y las barras, el rango intercuartílico; el tamaño del punto es
+proporcional a la fidelidad mediana. El coste se muestra en escala logarítmica
+porque varía en órdenes de magnitud entre familias de modelos. SHAP combina la
+mayor estabilidad con un coste intermedio; LIME es el más rápido, con una
+estabilidad cercana a cero, como la de Anchors.](assets/figures/fig_estabilidad_coste_es.png){#fig-estabilidad-coste width=85%}
 
 ![Correlación entre métricas del banco de pruebas. La matriz permite inspeccionar
 relaciones empíricas entre constructos y refuerza la necesidad de evitar una
