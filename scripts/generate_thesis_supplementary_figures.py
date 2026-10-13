@@ -15,6 +15,7 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 import matplotlib.patches as mpatches
 import numpy as np
 import pandas as pd
@@ -31,10 +32,10 @@ METHOD_LABELS = {
     "dice": "DiCE",
 }
 COLORS = {
-    "shap": "#1f77b4",
-    "lime": "#ff7f0e",
-    "anchors": "#2ca02c",
-    "dice": "#d62728",
+    "shap": "#c0392b",
+    "lime": "#1b6ca8",
+    "anchors": "#2e8b57",
+    "dice": "#6c3483",
 }
 METRIC_LABELS_ES = {
     "fidelity": "Fidelidad",
@@ -72,22 +73,37 @@ def save(fig: plt.Figure, filename: str) -> None:
 # ---------------------------------------------------------------------------
 # Figure 1: Critical difference diagram
 # ---------------------------------------------------------------------------
-FRIEDMAN_RANKS = {
-    "fidelity": {"shap": 1.0, "lime": 2.0, "anchors": 3.2, "dice": 3.8},
-    "stability": {"shap": 1.0, "dice": 2.0, "lime": 3.4, "anchors": 3.6},
-}
-# Groups where |Ri - Rj| < CD=1.211 (not significantly different)
-CD_GROUPS = {
-    "fidelity": [
-        ["shap", "lime"],        # |1.0-2.0|=1.0 < 1.211
-        ["anchors", "dice"],     # |3.2-3.8|=0.6 < 1.211
-    ],
-    "stability": [
-        ["shap", "dice"],        # |1.0-2.0|=1.0 < 1.211
-        ["lime", "anchors"],     # |3.4-3.6|=0.2 < 1.211
-    ],
-}
-CD_VALUE = 1.211
+# Until 2026-10-12 the mean ranks, the groups and the critical difference were typed
+# here. The typed groups left out LIME-Anchors in fidelity (|2.0 - 3.2| = 1.2 < 1.211),
+# which Table tbl-nemenyi-fidelity of the thesis reports as not significant. They are now
+# computed from the block table, so the figure cannot disagree with the analysis.
+Q_ALPHA_NEMENYI_K4 = 2.569  # studentised-range quantile / sqrt(2), k = 4, alpha = 0.05
+
+
+def friedman_ranks(metric: str) -> tuple[dict[str, float], int]:
+    """Mean rank of each method over the complete blocks (1 = best), and the block count."""
+    df = pd.read_csv(STATS / "exp2_block_method_summary.csv")
+    table = df.pivot_table(index=["model", "n"], columns="method", values=metric).dropna()
+    ranks = table.rank(axis=1, ascending=False).mean()
+    return {m: float(ranks[m]) for m in METHOD_ORDER}, len(table)
+
+
+def critical_difference(k: int, blocks: int) -> float:
+    return Q_ALPHA_NEMENYI_K4 * float(np.sqrt(k * (k + 1) / (6.0 * blocks)))
+
+
+def cd_groups(ranks: dict[str, float], cd: float) -> list[list[str]]:
+    """Maximal runs of methods, in rank order, whose extreme ranks differ by less than CD."""
+    order = sorted(ranks, key=ranks.get)
+    groups: list[list[str]] = []
+    for i in range(len(order)):
+        j = i
+        while j + 1 < len(order) and ranks[order[j + 1]] - ranks[order[i]] < cd:
+            j += 1
+        run = order[i:j + 1]
+        if len(run) > 1 and not any(set(run) <= set(g) for g in groups):
+            groups.append(run)
+    return groups
 
 
 def figure_cd_diagram() -> None:
@@ -97,30 +113,31 @@ def figure_cd_diagram() -> None:
     fig, axes = plt.subplots(1, 2, figsize=(10, 3.2))
 
     for ax, metric in zip(axes, metrics):
-        ranks = FRIEDMAN_RANKS[metric]
-        groups = CD_GROUPS[metric]
+        ranks, blocks = friedman_ranks(metric)
+        cd_value = critical_difference(len(ranks), blocks)
+        groups = cd_groups(ranks, cd_value)
 
         # Sort methods by rank for left-to-right display
         sorted_methods = sorted(ranks.keys(), key=lambda m: ranks[m])
 
         # Horizontal axis = rank value (1 to 4)
         ax.set_xlim(0.5, 4.5)
-        ax.set_ylim(-0.8, 1.4)
+        ax.set_ylim(-1.0, 1.6)
         ax.invert_xaxis()  # Convention: best rank on left
 
         # Draw CD bar at top
         cd_start = 1.0
-        cd_end = 1.0 + CD_VALUE
+        cd_end = 1.0 + cd_value
         ax.annotate(
             "",
-            xy=(cd_end, 1.2),
-            xytext=(cd_start, 1.2),
+            xy=(cd_end, 1.38),
+            xytext=(cd_start, 1.38),
             arrowprops=dict(arrowstyle="<->", color="black", lw=1.5),
         )
         ax.text(
             (cd_start + cd_end) / 2,
-            1.32,
-            f"DC = {CD_VALUE}",
+            1.42,
+            f"DC = {cd_value:.3f}",
             ha="center",
             va="bottom",
             fontsize=8.5,
@@ -129,13 +146,19 @@ def figure_cd_diagram() -> None:
 
         # Draw method ticks and labels
         y_method = 0.85
+        previous_rank, raised = None, False
         for method in sorted_methods:
             r = ranks[method]
             color = COLORS[method]
+            # Two methods with close ranks: the second label goes one line higher and its
+            # number one line lower, so that neither overlaps.
+            raised = previous_rank is not None and r - previous_rank < 0.45 and not raised
+            previous_rank = r
+            lift = 0.24 if raised else 0.0
             ax.plot(r, y_method, "o", color=color, markersize=9, zorder=5)
             ax.text(
                 r,
-                y_method + 0.22,
+                y_method + 0.18 + lift,
                 METHOD_LABELS[method],
                 ha="center",
                 va="bottom",
@@ -145,19 +168,21 @@ def figure_cd_diagram() -> None:
             )
             ax.text(
                 r,
-                y_method - 0.22,
+                y_method - 0.18 - lift,
                 f"{r:.1f}",
                 ha="center",
                 va="top",
                 fontsize=8,
                 color="#444444",
+                zorder=6,
+                bbox=dict(facecolor="white", edgecolor="none", pad=1.0),
             )
 
         # Draw vertical axis line
         ax.axhline(y=y_method, xmin=0.05, xmax=0.95, color="#888888", lw=0.8, ls="--")
 
         # Draw non-significant groups (horizontal thick bars)
-        bar_y_positions = [-0.15, -0.45]
+        bar_y_positions = [-0.15, -0.45, -0.75]
         for idx, group in enumerate(groups):
             group_ranks = sorted([ranks[m] for m in group])
             y_bar = bar_y_positions[idx % len(bar_y_positions)]
@@ -187,21 +212,19 @@ def figure_cd_diagram() -> None:
         ax.spines[["top", "right", "left"]].set_visible(False)
         ax.grid(axis="x", ls=":", alpha=0.4)
 
-        # Note on non-significant groups
-        ax.text(
-            0.02,
-            -0.16,
-            "Las barras horizontales gruesas conectan métodos no significativamente distintos (p > 0.05).",
-            transform=ax.transAxes,
-            fontsize=7.5,
-            color="#555555",
-            va="top",
-        )
-
     fig.suptitle(
-        "Diagrama de diferencia crítica (Nemenyi, k=4, n=15, α=0.05)",
+        f"Diagrama de diferencia crítica (Nemenyi, k={len(ranks)}, n={blocks}, α=0.05)",
         fontsize=12,
         y=1.02,
+    )
+    fig.text(
+        0.5,
+        -0.04,
+        "Fuente: exp2_block_method_summary.csv. Las barras horizontales gruesas conectan "
+        "métodos no significativamente distintos (diferencia de rangos < DC).",
+        ha="center",
+        fontsize=7.5,
+        color="#555555",
     )
     save(fig, "fig_cd_diagram_es.png")
 
@@ -308,12 +331,20 @@ def figure_paired_differences() -> None:
         positive = diffs >= 0
         negative = ~positive
 
-        ax.bar(x[positive], diffs[positive], color="#1f77b4", alpha=0.80, width=1.0, label="SHAP > LIME")
-        ax.bar(x[negative], diffs[negative], color="#d62728", alpha=0.80, width=1.0, label="LIME > SHAP")
+        ax.bar(x[positive], diffs[positive], color=COLORS["shap"], alpha=0.80, width=1.0)
+        ax.bar(x[negative], diffs[negative], color=COLORS["lime"], alpha=0.80, width=1.0)
         ax.axhline(0, color="black", lw=0.8)
 
         mean_diff = np.mean(diffs)
-        ax.axhline(mean_diff, color="#333333", lw=1.4, ls="--", label=f"Media = {mean_diff:.3f}")
+        mean_line = ax.axhline(mean_diff, color="#333333", lw=1.4, ls="--")
+        # Explicit handles: with no negative difference the second bar set is empty and
+        # the legend used to show its entry in the colour of the first.
+        handles = [
+            mean_line,
+            Patch(facecolor=COLORS["shap"], alpha=0.80, label="SHAP > LIME"),
+            Patch(facecolor=COLORS["lime"], alpha=0.80, label="LIME > SHAP"),
+        ]
+        labels = [f"Media = {mean_diff:.3f}", "SHAP > LIME", "LIME > SHAP"]
 
         n_pos = positive.sum()
         n_neg = negative.sum()
@@ -324,7 +355,7 @@ def figure_paired_differences() -> None:
         )
         ax.set_xlabel("Celda pareada (ordenada por diferencia decreciente)")
         ax.set_ylabel(f"$d_i$ = SHAP$-$LIME ({label_es})")
-        ax.legend(fontsize=8, loc="upper right")
+        ax.legend(handles, labels, fontsize=8, loc="upper right")
         ax.grid(axis="y", ls=":", alpha=0.4)
         ax.spines[["top", "right"]].set_visible(False)
 
@@ -335,8 +366,8 @@ def figure_paired_differences() -> None:
     )
     axes[0].text(
         0.0,
-        -0.16,
-        "Fuente: paired_cells_shap_lime_all_models.csv. Azul = SHAP superior; rojo = LIME superior.",
+        -0.24,
+        "Fuente: paired_cells_shap_lime_all_models.csv. Rojo = SHAP superior; azul = LIME superior.",
         transform=axes[0].transAxes,
         fontsize=7.5,
         color="#555555",
@@ -393,6 +424,7 @@ def figure_radar() -> None:
     # Gridlines and labels
     ax.set_xticks(angles[:-1])
     ax.set_xticklabels(labels, fontsize=9)
+    ax.tick_params(axis="x", pad=14)
     ax.set_yticks([0.25, 0.50, 0.75, 1.0])
     ax.set_yticklabels(["0.25", "0.50", "0.75", "1.00"], fontsize=7, color="#666666")
     ax.set_ylim(0, 1.05)
@@ -406,7 +438,7 @@ def figure_radar() -> None:
 
     ax.text(
         0.5,
-        -0.09,
+        -0.17,
         "Fuente: exp2_block_method_summary.csv. Parsimonia y eficiencia están invertidas (mayor radio = mejor).",
         transform=ax.transAxes,
         ha="center",

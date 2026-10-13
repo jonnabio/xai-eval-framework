@@ -161,15 +161,27 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
     numbers are generated. Rule in `.ace/standards/documentation.md` ("Manuscripts:
     Equations") and `.aceconfig`; `scripts/pubs/check_equations.py` runs in CI. It
     applies to every manuscript from now on; a submitted paper takes it at its next
-    revision. **The tracked Word file of the thesis does not have the numbers yet:**
-    it was open in Word during the render. Checked on a scratch render instead.
+    revision. The tracked Word file of the thesis was rebuilt later the same day with
+    the numbers and the reviewed figures.
+  - **Figure review (2026-10-12).** The seven thesis figures (all in Chapter 4) were
+    regenerated from the current data; values unchanged. Four figure-versus-text defects
+    fixed: the CD diagram and its caption left out the LIME-Anchors group in fidelity
+    (ranks and groups are now computed in
+    `scripts/generate_thesis_supplementary_figures.py`, no longer typed); the radar
+    caption gave LIME the lead in parsimony (it is DiCE); the boxplot caption called
+    the LIME stability mean a median; the coverage figure counted the inventory (274)
+    and not the analysed runs (275). Method colours now follow the submitted papers
+    (SHAP red, LIME blue, Anchors green, DiCE purple; palette of Paper F). **Paper
+    figures were not touched** (papers are submitted): Paper B's two figures were read
+    against the thesis and agree in values; C, D and F were read; E's are PDF only and
+    were not opened. Not done: the unused English figures in `thesis/assets/figures`
+    keep the old palette; the book-chapter figures take the new palette at their next
+    rebuild (same generator); Chapter 6 has no figure.
 - **Current state**: merged to `main` (pull request #57). The tutor agreed to the four
   design decisions; the record for the tutor states them as agreed.
 - **Next steps**:
-  1. Author: close the thesis in Word and run `thesis/render.ps1`, then commit
-     `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` (lane `thesis`); read Chapter 6
-     and the record; send the record and the rendered thesis to the tutor; refresh the
-     table of contents in Word.
+  1. Author: read Chapter 6 and the record; send the record and the rendered thesis to
+     the tutor; refresh the table of contents in Word.
   2. Before deposit: the journals' prior-publication policies (point 6 above).
   3. Task 3 step 2 (macros and the CI build), if the author wants it before deposit.
 - **Blockers**: none.

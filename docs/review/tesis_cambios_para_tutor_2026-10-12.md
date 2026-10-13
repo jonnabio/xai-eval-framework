@@ -107,6 +107,30 @@ la lectura del Capítulo 5, y la tesis ahora los declara.
   libro. Los datos eran los mismos, pero una etiqueta de la matriz de
   correlación no se leía. Se han restaurado las versiones en color y se ha
   corregido el generador para que no vuelva a ocurrir.
+- **Revisión de las siete figuras del Capítulo 4.** Todas se han vuelto a
+  generar a partir de los datos actuales y coinciden en sus valores con las
+  anteriores. La revisión de cada figura frente a su pie y a las tablas encontró
+  cuatro discrepancias, ya corregidas; ninguna altera un resultado:
+    - *Diagrama de diferencia crítica.* La figura y su pie omitían que LIME y
+      Anchors tampoco se distinguen en fidelidad (diferencia de rangos de 1.200
+      frente a una diferencia crítica de 1.211), como ya indicaba la tabla de
+      Nemenyi del mismo capítulo. La figura muestra ahora los tres grupos
+      encadenados y el pie lo describe. Los rangos y los grupos se calculan
+      desde los datos, no se escriben a mano.
+    - *Perfil multidimensional.* El pie atribuía a LIME el liderazgo en
+      parsimonia; la figura y las tablas muestran que corresponde a DiCE.
+    - *Distribución por método.* El pie llamaba «mediana» al valor 0.014 de la
+      estabilidad de LIME, que es la media.
+    - *Cobertura analítica.* La figura contaba el inventario sin la
+      superposición de recuperación y mostraba SHAP sobre SVM como 14 de 15; la
+      tabla de cobertura reporta 75 de 75. La figura cuenta ahora las 275
+      ejecuciones analizadas.
+- **Colores de los métodos.** Las figuras de la tesis adoptan la misma
+  convención que las de los artículos enviados (SHAP en rojo, LIME en azul,
+  Anchors en verde, DiCE en morado), que antes estaba invertida para SHAP y
+  LIME.
+- **Ecuaciones.** Las 20 ecuaciones destacadas de los Capítulos 3 y 4 están
+  ahora numeradas y cada una se cita en el texto.
 - **Apéndice B:** una referencia a la «Tabla 3.1» estaba escrita a mano; ahora
   es una referencia cruzada generada.
 - **Apéndice C:** la tabla de sensibilidad de KernelSHAP al conjunto de
