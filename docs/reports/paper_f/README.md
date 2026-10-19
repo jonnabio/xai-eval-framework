@@ -253,4 +253,4 @@ What was done (plan log, entry of 2026-10-19):
 No result of the planned analysis changed. 8 pages in Word; the editor's format
 corrections of 2026-10-13 are kept (same builder). Files to send:
 `submission/revision_2026-10-19/` (author file and PDF, blind copy, and
-`response_reviewer_A.docx`, from `response_reviewer_A_2026-10-19.md`). **Not yet sent.**
+`response_reviewer_A.docx`, from `response_reviewer_A_2026-10-19.md`). **Sent to the journal on 2026-10-19** (author).
