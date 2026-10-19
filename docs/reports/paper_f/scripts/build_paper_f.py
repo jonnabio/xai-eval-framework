@@ -21,6 +21,7 @@
        fam     .../results/posthoc_defect_family.csv             <kept>_<measure>; <measure>; all
        desc    .../results/posthoc_descriptives.csv              <metric>_<key>
        proto   .../results/posthoc_protocol.csv                  <metric>_<key>
+       type    .../results/posthoc_type.csv                      <metric>_<key>
 
    Formats: d integer; int integer with thousands separator; w, W integer as a word
    (lower case, capitalised); u1, u2, u3 decimals; pct, pct1, pct2 percentage with no, one and
@@ -179,6 +180,9 @@ def tables() -> dict[str, dict[str, dict[str, str]]]:
         # Descriptive counts made after the results (plan section 12, 2026-10-12).
         out["desc"] = {f"{r['metric']}_{r['key']}": r
                        for r in read(res / "posthoc_descriptives.csv")}
+    if (res / "posthoc_type.csv").exists():
+        # The order by the type of features (plan section 12, 2026-10-19, Reviewer A).
+        out["type"] = {f"{r['metric']}_{r['key']}": r for r in read(res / "posthoc_type.csv")}
     if (res / "posthoc_protocol.csv").exists():
         # Counts and the audit of resumed jobs (plan section 12, 2026-10-12, Codex review).
         out["proto"] = {f"{r['metric']}_{r['key']}": r

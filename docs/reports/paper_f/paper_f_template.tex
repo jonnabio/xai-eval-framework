@@ -276,7 +276,10 @@ where $x^{(c)}$ is a copy of $x$ whose numeric features receive Gaussian noise o
 standard deviations; a copy that cannot be explained counts as 0. Each copy is explained
 with new random draws, so $S$ also counts the randomness of the method itself; a dataset
 without numeric features receives no noise, and with $d\le 5$ a method that names every
-feature scores 1. \textit{Sparsity} is
+feature scores 1. The value 5, fixed in the plan before the run, is the number of encoded
+features of the smallest dataset, so $T_5$ is defined on every dataset; it lies between the
+features named by Anchors and DiCE (about <<desc:features_used_anchors:value:d>>) and the 10
+of LIME. \textit{Sparsity} is
 $1-|U|/d$, and \textit{cost} is the time to produce one explanation. The methods are
 ranked with the larger $G$, $S$ and sparsity and the lower cost first. A larger $G$ means
 a greater response of the classifier to this masking and is not by itself evidence of a
@@ -452,6 +455,21 @@ the times of the job files, <<proto:jobs_flagged_resumed_lime:value:w>> of the
 <<proto:jobs_audited_lime:value:d>> LIME jobs was stopped and started again, so the
 draws of LIME were not changed by a restart.
 
+In a comparison made after the results were seen, the pairs that change order depend on
+the type of features (Table~\ref{tab:datasets}). SHAP has the largest faithfulness gap on
+<<type:shap_first_gap_numeric:value:w>> of the <<type:datasets_numeric:value:w>> numeric
+datasets and on <<type:shap_first_gap_mixed:value:w>> of the
+<<type:datasets_mixed:value:w>> mixed ones, and LIME is more stable than Anchors on
+<<type:lime_above_anchors_stability_numeric:value:w>> and
+<<type:lime_above_anchors_stability_mixed:value:w>>; on sparsity the order is the same on
+<<type:modal_order_sparsity_mixed:value:w>> of the <<type:datasets_mixed:value:w>> mixed
+datasets, while Anchors precedes
+DiCE on <<type:anchors_above_dice_sparsity_numeric:value:w>> numeric ones. The agreement
+between a numeric and a mixed dataset, <<type:between_types_gap:value:u2>>,
+<<type:between_types_stability:value:u2>>, <<type:between_types_sparsity:value:u2>> and
+<<type:between_types_cost_ms:value:u2>>, is close to the overall one; the size of a dataset
+shows no consistent pattern.
+
 Of the variance of the <<sum:runs:value:int>> run means, the method accounts for
 <<var:gap_method:share:pct>>\%, <<var:stability_method:share:pct>>\%,
 <<var:sparsity_method:share:pct>>\% and <<var:cost_ms_method:share:pct>>\% (faithfulness
@@ -524,7 +542,7 @@ should not be assumed to transfer, even where the order does.
 categorical variable counts as several features. Anchors and DiCE are compared with LIME
 and SHAP through the features they name, not through their native output, so the
 faithfulness gap and the stability measure depend on how many features a method names,
-and on the column order where the features of a rule are tied. The masked inputs of the
+on the size of $T_5$, and on the column order where the features of a rule are tied. The masked inputs of the
 gap can lie outside the data. The rankings average four classifiers with equal weight
 and describe that mixture, not a given model.
 Each method has one configuration, and the orders described above as following from it
@@ -537,8 +555,9 @@ reported above, the decisions do not change. With four methods a ranking
 takes few values, and the value 0.5 of the rule is a convention. The datasets are binary
 classification tasks from one repository; <<sum:numeric_only:value:w>> of the
 <<sum:datasets:value:w>> have only numeric features and <<sum:categorical_only:value:w>>
-only categorical ones. Cost is wall time on one machine. Two analyses depart from the
-plan, as its log records: the variance shares are a balanced decomposition of sums of
+only categorical ones. Cost is wall time on one machine. Two analyses differ from the
+plan, as its log records before the analysis was run, and neither enters the decision
+rule: the variance shares are a balanced decomposition of sums of
 squares and not the mixed model named there, and cost relative to the prediction time
 was not computed. The aligned-rank check of the interaction, the matrix of dataset pairs,
 the frontier of cost and faithfulness, the secondary measures and the failure rate of
@@ -560,14 +579,18 @@ methods that are close in value; it should not be taken from a single dataset.
 \item The order on one measure does not transfer to another, and the opposition between
 sparsity and the faithfulness gap is partly a consequence of their definitions. A ranking
 should be read together with the protocol that produced it.
+\item The type of features does not change the order of the methods but moves the
+comparisons that vary: on mixed data the gap and stability of LIME, SHAP and Anchors, where
+one-hot columns and noise on numeric features only act; on numeric data the sparsity of
+Anchors and DiCE.
 \end{enumerate}
 Further research should validate the common measures against measures native to each
 output, such as the precision and coverage of a rule and the validity and proximity of a
 counterfactual; measure the faithfulness gap at an equal number of masked features, with
 masking that keeps categories valid; test whether the result holds for multiclass and
 regression tasks, for datasets from other repositories and with configurations tuned for
-each dataset; and examine which properties of a dataset go with a change of order, a
-question this design does not answer.
+each dataset; and test the effect of the type of features with more datasets of each
+type.
 
 \section*{Data and code availability}
 \iffull
