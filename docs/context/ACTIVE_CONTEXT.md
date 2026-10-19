@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-13, by `claude-2026-10-13-paper-f-editor`.
+**Last updated:** 2026-10-19, by `claude-2026-10-19-paper-f-revision`.
 
 ## Current objective
 
@@ -54,7 +54,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Through the author account, reported 2026-10-06; date and number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* | Under review | Submitted 2026-10-04; submission 6783. Zenodo 0.8.0 |
-| **F** | *Journal of Computer Sciences Institute* | Format corrections asked by the editor before review (2026-10-13); revised files built, **not yet sent back** | Submitted 2026-10-12; submission 10503; 8 pages. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Editor's message and what was done: `docs/reports/paper_f/README.md`, section 8 |
+| **F** | *Journal of Computer Sciences Institute* | **Revision submitted 2026-10-19** for Reviewer A (minor revisions required); awaiting the editor | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
   revision.** Record every decision of a journal in this table and in the paper's README.
@@ -91,9 +91,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Open with the author
 
-0. **Paper F: send the revised files to the editor** by reply to her message:
-   `docs/reports/paper_f/submission/revision_2026-10-13/herrera-vasquez.docx` and `.pdf`.
-   Then tell the session the date, to record it.
+0. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
 1. Submission numbers of Papers C and D, and the date of Paper D's submission.
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
@@ -149,54 +147,30 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-13 (Paper F: the editor's format corrections before review)
+## Latest handoff - 2026-10-19 (Paper F: Reviewer A, revisions required)
 
-Session of 2026-10-13, lane `paper-f` (branch `paper/f-external-validity`, owner
-`claude-2026-10-13-paper-f-editor`); this file on `pubs/context-2026-10-13-paper-f`.
+Session of 2026-10-19, lane `paper-f` (branch `paper/f-external-validity`, owner
+`claude-2026-10-19-paper-f-revision`); shared files in separate commits on the same branch.
 
 - **Completed**:
-  - The editor of *Journal of Computer Sciences Institute* (Beata Pańczyk) asked three
-    format changes before sending submission 10503 to review: no index "a" for a single
-    author; a hard space after single letters, so none ends a line; references in the
-    form of the template's examples (no "pp.", no "vol.", the year in brackets).
-  - All three made in `docs/reports/paper_f/scripts/build_paper_f_docx.py`
-    (`hard_spaces`, `jcsi_reference`, the title block). `paper_f.tex`, `references.bib`,
-    the results and the claim registry are unchanged; no new Zenodo version is needed.
-  - Revised files: `docs/reports/paper_f/submission/revision_2026-10-13/`
-    (`herrera-vasquez.docx` and `.pdf`, and the blind copy), 8 pages in Word. Against the
-    file sent, the only paragraphs whose text differs, hard spaces apart, are the author
-    line, the affiliation and the 33 references.
-  - The four files sent on 2026-10-12 are kept in `submission/sent_2026-10-12/`.
-  - Pull request #62 merged into `main`.
+  - Reviewer A of JCSI 10503: "Corrections are required", two comments: why $T_5$ in
+    Eq. (2); conclusions by the type of dataset, and "two analyses conducted differently".
+  - $T_5$ explained after Eq. (2) and added to the sources of error.
+  - Post hoc comparison by type of features: `scripts/paper_f_posthoc_type.py`,
+    `results/posthoc_type.csv`, test; a results paragraph and a fourth conclusion. The two
+    departures from the plan stated as recorded before the analysis and outside the rule.
+  - Plan log entry 2026-10-19; registry regenerated (123 Paper F claims); Paper F README
+    section 9; response letter `docs/reports/paper_f/response_reviewer_A_2026-10-19.md`.
+  - 8 pages in Word; the editor's format corrections kept.
 - **Current State**:
-  - The author has the revised files and a draft reply; **they are not yet sent**.
-  - `submission/herrera-vasquez.docx` and `.pdf` are still the files sent on 2026-10-12
-    (the Word file was open in Word, so the build wrote to the dated folder);
-    `submission/paper_f_blind.*` are already the revised ones. `submission/` is local
-    only (ignored by git).
-  - The thesis is as the handoff before this one left it (archive `2026-10-13.md`).
+  - Files in `submission/revision_2026-10-19/` (local only), **submitted 2026-10-19** (author).
+  - Verifiers pass (`verify_claims.py` 1,391 claims), `register_paper_f.py --check`,
+    `register_thesis_followup.py --check` (no thesis value changed), Paper F tests 37.
 - **Next Steps**:
-  1. `python scripts/pubs/check_lane.py claim --owner <session name>` for the lane of the
-     task; stop if it fails.
-  2. Author: send the two revised files to the editor; then record the date in the
-     table above and in the Paper F README.
-  3. If the editor asks more: change the builder, not the Word file, and build with Word
-     closed.
-  4. Thesis: the steps of the earlier handoff stand (send the record and the thesis to
-     the tutor, table of contents in Word, licence of the book chapter, journals'
-     prior-publication policies).
-- **Blockers/Issues**:
-  - None.
-  - Two points told to the author, not changed: reference 16 (a Springer chapter) has no
-    volume, since the DOI record gives none; a middle initial ("M. T. Ribeiro") can
-    still end a line, as the hard space is set after words of one letter only.
-- **Notes**:
-  - Run Paper F scripts with `.venv\Scripts\python.exe`. To build into another folder
-    while a Word file is open: import the builder, set its `OUT`, call `main()`.
-  - A file open in Word blocks a branch switch that has to replace it (the thesis Word
-    file did at the start of this session); if the copy on disk equals the target
-    version, staging it lets the switch or fast-forward go on.
-  - Commit messages: write them to a file and use `git commit -F`. `.ace/` is ignored by
-    git: add a new file there with `git add -f`.
-  - Thesis figure generators, method colours and the render steps: archive
-    `2026-10-13.md`, the handoff "SESSION END (thesis closed for the tutor ...)".
+  1. Wait for the editor's decision on JCSI 10503; record it here and in the README.
+  2. Pull request of `paper/f-external-validity` into `main`.
+  3. Thesis: the follow-up chapter prints no new value; nothing to change unless the
+     author wants the dataset-type result there (would need ADR-0023 registration).
+- **Blockers/Issues**: none.
+- **Notes**: in Git Bash, never start a command with `cat > file` without a heredoc: it
+  waits on stdin and blocks the whole background task.
