@@ -223,3 +223,34 @@ revised files were written to `submission/revision_2026-10-13/` (author file and
 `submission/herrera-vasquez.docx` and `.pdf` are still the files sent; the blind copy in
 `submission/` is already the revised one. A plain run of the builder, with Word closed, brings
 `submission/` level.
+
+The revised files of 2026-10-13 were sent to the editor the same day (author, 2026-10-19).
+
+## 9. Reviewer A: revisions required (2026-10-19)
+
+Review form of Reviewer A (completed 2026-10-19 10:24), passed on by the author:
+"Corrections are required"; every criterion of the form answered "Yes"; purpose of
+publishing "medium, needed publication". Two comments:
+
+1. Why $T_5$, rather than another value, in Eq. (2) for stability.
+2. No conclusion takes the type of dataset into account; "two of the analyses were
+   conducted differently"; generalisations by the type of data are suggested.
+
+What was done (plan log, entry of 2026-10-19):
+
+1. **$T_5$.** One sentence after Eq. (2): fixed in the plan, the encoded size of the
+   smallest dataset, between the features named by Anchors and DiCE and the 10 of LIME.
+   The size of $T_5$ is added to the sources of error. No check at another k: the stored
+   rows hold the score, not the feature sets.
+2. **Type of dataset.** `scripts/paper_f_posthoc_type.py` (output
+   `results/posthoc_type.csv`, test `tests/analysis/test_paper_f_posthoc_type.py`)
+   compares the nine numeric and six mixed datasets. A results paragraph and a fourth
+   conclusion, labelled as after the results; further research now asks for more datasets
+   of each type.
+3. **"Two analyses".** Read as the two departures from the plan; the sentence now says
+   they were recorded before the analysis and do not enter the decision rule.
+
+No result of the planned analysis changed. 8 pages in Word; the editor's format
+corrections of 2026-10-13 are kept (same builder). Files to send:
+`submission/revision_2026-10-19/` (author file and PDF, blind copy, and
+`response_reviewer_A.docx`, from `response_reviewer_A_2026-10-19.md`). **Not yet sent.**
