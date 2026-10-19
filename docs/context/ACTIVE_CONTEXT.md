@@ -54,7 +54,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Through the author account, reported 2026-10-06; date and number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* | Under review | Submitted 2026-10-04; submission 6783. Zenodo 0.8.0 |
-| **F** | *Journal of Computer Sciences Institute* | **Revisions required** (Reviewer A, 2026-10-19, minor); revised files and response built, **not yet sent** | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
+| **F** | *Journal of Computer Sciences Institute* | **Revision submitted 2026-10-19** for Reviewer A (minor revisions required); awaiting the editor | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
   revision.** Record every decision of a journal in this table and in the paper's README.
@@ -91,9 +91,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Open with the author
 
-0. **Paper F: send the revision for Reviewer A** to the editor: the files in
-   `docs/reports/paper_f/submission/revision_2026-10-19/` (manuscript `.docx` and `.pdf`,
-   blind copy, `response_reviewer_A.docx`). Then tell the session the date, to record it.
+0. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
 1. Submission numbers of Papers C and D, and the date of Paper D's submission.
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
@@ -165,11 +163,11 @@ Session of 2026-10-19, lane `paper-f` (branch `paper/f-external-validity`, owner
     section 9; response letter `docs/reports/paper_f/response_reviewer_A_2026-10-19.md`.
   - 8 pages in Word; the editor's format corrections kept.
 - **Current State**:
-  - Files to send in `submission/revision_2026-10-19/` (local only). Not yet sent.
+  - Files in `submission/revision_2026-10-19/` (local only), **submitted 2026-10-19** (author).
   - Verifiers pass (`verify_claims.py` 1,391 claims), `register_paper_f.py --check`,
     `register_thesis_followup.py --check` (no thesis value changed), Paper F tests 37.
 - **Next Steps**:
-  1. Author: send the revision; record the date here and in the README.
+  1. Wait for the editor's decision on JCSI 10503; record it here and in the README.
   2. Pull request of `paper/f-external-validity` into `main`.
   3. Thesis: the follow-up chapter prints no new value; nothing to change unless the
      author wants the dataset-type result there (would need ADR-0023 registration).
