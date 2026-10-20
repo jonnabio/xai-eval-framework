@@ -75,17 +75,17 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to pull request #62 (Paper F, the editor's format
-  corrections, merged 2026-10-13) and the handoff that follows it. The branches
-  `thesis/rca-001-phase-2` and `paper/f-external-validity` are level with `main`. No
-  pull request is open.
+- `main` holds everything up to pull request #64 (Paper F, revision for Reviewer A,
+  merged 2026-10-19) and the session-end handoff that follows it. `paper/f-external-validity`
+  is level with `main`; `thesis/rca-001-phase-2` is behind `main` (Paper F and context
+  commits only) and takes `main` when the thesis lane resumes. No pull request is open.
 - The lane lock of the main folder is free.
 - Nothing is running: no task, no process.
-- Verifiers at the last check (2026-10-13): `verify_claims.py` 1,387 claims, 1,728
+- Verifiers at the last check (2026-10-19): `verify_claims.py` 1,391 claims, 1,732
   sites, 38 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
-  `register_thesis_followup.py --check`, `register_paper_c.py --check`,
-  `register_paper_f.py --check`, `check_equations.py` and `check_active_context.py`
-  pass; `pytest tests/pubs` 47 passed.
+  `register_thesis_followup.py --check`, `register_paper_f.py --check`,
+  `check_equations.py` and `check_active_context.py` pass; `pytest tests/pubs` 47 passed,
+  Paper F tests 37 passed.
 - The thesis renders to Word with seven chapters and no unresolved reference
   (`thesis/render.ps1`; `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is tracked).
 
@@ -147,30 +147,48 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-19 (Paper F: Reviewer A, revisions required)
+## Latest handoff - 2026-10-19, SESSION END (Paper F: revision for Reviewer A submitted)
 
 Session of 2026-10-19, lane `paper-f` (branch `paper/f-external-validity`, owner
 `claude-2026-10-19-paper-f-revision`); shared files in separate commits on the same branch.
 
 - **Completed**:
-  - Reviewer A of JCSI 10503: "Corrections are required", two comments: why $T_5$ in
-    Eq. (2); conclusions by the type of dataset, and "two analyses conducted differently".
-  - $T_5$ explained after Eq. (2) and added to the sources of error.
-  - Post hoc comparison by type of features: `scripts/paper_f_posthoc_type.py`,
-    `results/posthoc_type.csv`, test; a results paragraph and a fourth conclusion. The two
-    departures from the plan stated as recorded before the analysis and outside the rule.
-  - Plan log entry 2026-10-19; registry regenerated (123 Paper F claims); Paper F README
-    section 9; response letter `docs/reports/paper_f/response_reviewer_A_2026-10-19.md`.
-  - 8 pages in Word; the editor's format corrections kept.
+  - Recorded: the editor's format corrections of 2026-10-13 were sent the same day.
+  - Reviewer A of JCSI 10503 (2026-10-19, "Corrections are required", minor) answered:
+    1. Why $T_5$ in Eq. (2): one sentence after it (fixed in the plan; encoded size of the
+       smallest dataset; between the features named by Anchors/DiCE and LIME's 10), and
+       the size of $T_5$ added to the sources of error.
+    2. Type of dataset: `scripts/paper_f_posthoc_type.py` -> `results/posthoc_type.csv`,
+       test `tests/analysis/test_paper_f_posthoc_type.py`; a results paragraph and a
+       fourth conclusion, labelled as made after the results (numeric 9, mixed 6).
+    3. "Two analyses conducted differently": the sentence on the two departures from the
+       plan now says they were logged before the analysis and do not enter the rule.
+  - Plan log entry 2026-10-19; registry regenerated (Paper F 123 claims); README section 9;
+    response letter `docs/reports/paper_f/response_reviewer_A_2026-10-19.md`.
+  - 8 pages in Word; editor's format corrections kept. Revision **submitted to the journal
+    on 2026-10-19** (author). Pull request #64 merged.
 - **Current State**:
-  - Files in `submission/revision_2026-10-19/` (local only), **submitted 2026-10-19** (author).
-  - Verifiers pass (`verify_claims.py` 1,391 claims), `register_paper_f.py --check`,
-    `register_thesis_followup.py --check` (no thesis value changed), Paper F tests 37.
+  - Paper F: revision submitted, awaiting the editor. Files sent are in
+    `docs/reports/paper_f/submission/revision_2026-10-19/` (local only, ignored by git).
+  - No result of the planned analysis changed; the thesis follow-up chapter prints no new
+    value and its check passes.
 - **Next Steps**:
-  1. Wait for the editor's decision on JCSI 10503; record it here and in the README.
-  2. Pull request of `paper/f-external-validity` into `main`.
-  3. Thesis: the follow-up chapter prints no new value; nothing to change unless the
-     author wants the dataset-type result there (would need ADR-0023 registration).
-- **Blockers/Issues**: none.
-- **Notes**: in Git Bash, never start a command with `cat > file` without a heredoc: it
-  waits on stdin and blocks the whole background task.
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` for the task's lane;
+     stop if it fails.
+  2. Paper F: when the editor answers, record the decision in the table above and in the
+     README; change the text only for what is asked (template, then `build_paper_f.py
+     --final`, `register_paper_f.py`, `build_paper_f_docx.py` with Word closed).
+  3. Thesis lane: take `main` into `thesis/rca-001-phase-2`; the open items of
+     "Open with the author" stand.
+- **Blockers/Issues**:
+  - None blocking. Pending with the author: items 1 to 7 of "Open with the author".
+  - Not done for Reviewer A: a check of stability at another k (would need the copies
+    explained again); stated as a limitation.
+  - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
+    Paper F, not investigated.
+- **Notes**:
+  - Run Paper F scripts with `.venv\Scripts\python.exe`; the full LaTeX PDF is 9 pages
+    while Word gives 8 — the Word count is the binding one.
+  - Response letter to Word: Quarto's pandoc, `"C:/Program Files/Quarto/bin/tools/pandoc.exe"`.
+  - In Git Bash never start a command with `cat > file` without a heredoc: it waits on
+    stdin and blocks the task.
