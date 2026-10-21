@@ -7,6 +7,11 @@ five-step submission).
 **Status: SUBMITTED on 2026-10-04, submission 1196** (see "Submission record" below). Do not
 rebuild the PDFs or change the manuscript unless the journal requests a revision.
 
+**2026-10-21, author decision: withdraw** submission 1196, because of the length of the
+journal's review queue, and submit Paper B to *Computers and Informatics* instead
+(`ci_journal/CI_SUBMISSION.md`). Withdrawal confirmed by the journal: not yet. The files of
+this edition are kept unchanged.
+
 Before submission: reviewed by the Scientific Editor role on 2026-10-04
 (`docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`), one major defect corrected;
 that review was not independent of the drafting session. The author then revised the text and
