@@ -79,26 +79,27 @@ copyright agreement 17770, similarity report form 17771, cover letter 17772 (sam
 - References in Vancouver form; same 38 entries, same DOIs and links (checked by script).
 - No result, sentence of analysis or claim changed.
 
-## 4. Before submission (open)
+## 4. Before submission
 
-1. **Withdrawal from CLEIEJ.** The journal forbids concurrent submission, and the cover letter
-   states that the earlier submission was withdrawn. Ask CLEIEJ to withdraw submission 1196 and
-   wait for the confirmation; record it in `../CLEIEJ_SUBMISSION.md`.
-2. **Reference rule (essential, author rule of 2026-10-05).** For a manuscript not yet submitted,
-   every reference carries its DOI URL and is verified, and at least 80% date from 2024 or later.
-   This edition, like the CLEIEJ one, has **7 of 38 (18%)** from 2024 or later, and 5 entries
-   without any link (Lundberg 2017, Hooker 2019, Adebayo 2018, Kohavi 1996, Holm 1979). Meeting
-   the rule means replacing or adding about 30 references, each verified against its source, and
-   rewriting the sentences that cite them. Author decision needed.
-3. **Similarity report.** The text of the CLEIEJ edition is public (GitHub repository, Zenodo
-   0.9.0 `10.5281/zenodo.23147228`), and Sections 2 and 3 share wording with the RIMI article.
-   A report run against the web may match the author's own archive above the 3% single-source
-   limit. The cover letter discloses the archive; the editors decide after reading the report.
-4. **Cover letter:** review the text, set the date. It says "an earlier version was submitted to
-   another journal and has been withdrawn" (true only after item 1).
+1. Done 2026-10-21: CLEIEJ withdrawal of submission 1196 confirmed by the editor (reported by
+   the author).
+2. Reference rule: author decision of 2026-10-21, the reference list stays as in the CLEIEJ
+   edition for this paper (7 of 38 from 2024 or later; 5 entries without a link). Not to be
+   reopened for this edition.
+3. **Similarity report (open).** The journal's form (journal-file 17771) asks for a full-text
+   originality report in PDF with *Exclude quotes: OFF*, *Exclude bibliography: ON*,
+   *Exclude matches: OFF*; at most 20% overall and 3% from any one source. It names no tool;
+   the three settings are those of Turnitin and iThenticate. The text of the CLEIEJ edition is
+   public (GitHub, Zenodo 0.9.0) and Sections 2 and 3 share wording with the RIMI article, so a
+   web-wide check may match the author's own archive; the cover letter discloses it.
+4. Done 2026-10-21: cover letter approved by the author. Set the date on the day of submission.
 5. Sign the copyright agreement.
 6. The running head on the title page ("SHAP versus LIME on a paired tabular benchmark") is a
    proposal.
+
+The masked copy is the manuscript itself (`submission/paper_b_ci_manuscript.docx`); the journal
+reviews masked, so there is no separate unmasked manuscript. Upload: manuscript, title page,
+cover letter, signed copyright agreement, similarity report PDF.
 
 ## Submission record
 

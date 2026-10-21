@@ -9,7 +9,7 @@ rebuild the PDFs or change the manuscript unless the journal requests a revision
 
 **2026-10-21, author decision: withdraw** submission 1196, because of the length of the
 journal's review queue, and submit Paper B to *Computers and Informatics* instead
-(`ci_journal/CI_SUBMISSION.md`). Withdrawal confirmed by the journal: not yet. The files of
+(`ci_journal/CI_SUBMISSION.md`). Withdrawal confirmed by the editor (reported by the author on 2026-10-21). The files of
 this edition are kept unchanged.
 
 Before submission: reviewed by the Scientific Editor role on 2026-10-04
