@@ -5,9 +5,20 @@ Open access, CC BY-NC 4.0. Writing rules: <https://dergipark.org.tr/en/pub/aair/
 (read 2026-10-21). Price policy: "No fee is charged from the author or institution under any
 name."
 
-**Status: READY, NOT SUBMITTED** (2026-10-21). Still to do: the three reviewer nominations,
-the author's signature on the copyright form, the similarity report and the submission
-itself (section 4).
+**Status: SUBMITTED on 2026-10-22** (reported by the author; submission number not yet
+recorded). Do not rebuild or edit unless the journal asks for a revision.
+
+## 0. Submission record
+
+| | |
+|---|---|
+| Date | 2026-10-22 (cover letter dated "Oct 22nd, 2026") |
+| Submission number | Not yet recorded |
+| Manuscript | `submission/paper_e_aair_manuscript.docx`, 14 pages, as committed |
+| Cover letter | `submission/paper_e_aair_cover_letter.docx`, as edited and sent by the author: the reviewer section and the paragraph on the withdrawal from CyS were removed by the author |
+| Copyright form | Signed by the author (signed PDF kept locally, untracked) |
+| Similarity report | intihal.net: 1% overall, nine sources each under 1%, none on the topic; two are guidelines of the *International Journal of Thermodynamics*, whose text the AAIR template reuses. Settings: minimum match of 9 words, citations and references excluded. PDF kept locally (`submission/Similarity_Report.pdf`, untracked) |
+| Form fields | Ethical statement (no ethics approval required: public data, no participants), supporting institution (none), thanks (not applicable), and a note to the editor that discloses the CyS withdrawal, the Zenodo archive, the RIMI cohort article and the companion manuscripts, and the Turkish title; drafted in the session of 2026-10-21/22, final text as entered by the author |
 
 Paper E was withdrawn from *Computación y Sistemas* (submission 6783), as reported by the
 author on 2026-10-21; see `../README.md`. The CyS edition (`../paper_e_template.tex`,

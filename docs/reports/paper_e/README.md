@@ -1,8 +1,9 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status: WITHDRAWN from *Computación y Sistemas* (reported by the author on
-2026-10-21); being prepared for *Advances in Artificial Intelligence Research* (AAIR,
-DergiPark) in [`aair_journal/`](aair_journal/).** The plan is
+**Status: SUBMITTED on 2026-10-22 to *Advances in Artificial Intelligence Research*
+(AAIR, DergiPark); number not yet recorded. Record: [`aair_journal/AAIR_SUBMISSION.md`](aair_journal/AAIR_SUBMISSION.md).
+Withdrawn from *Computación y Sistemas* (reported by the author on 2026-10-21).** Do not
+rebuild or edit unless AAIR asks for a revision. The plan is
 `docs/planning/paper_e_aair_plan_2026-10-21.md`. The CyS edition below (`submission/`,
 `paper_e_template.tex`, `paper_e.tex`, `tables/`, `figures/`) is kept unchanged as the
 record of that submission. Never rebuild or edit it.
