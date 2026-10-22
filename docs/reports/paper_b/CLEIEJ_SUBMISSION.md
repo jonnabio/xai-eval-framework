@@ -7,6 +7,11 @@ five-step submission).
 **Status: SUBMITTED on 2026-10-04, submission 1196** (see "Submission record" below). Do not
 rebuild the PDFs or change the manuscript unless the journal requests a revision.
 
+**2026-10-21, author decision: withdraw** submission 1196, because of the length of the
+journal's review queue, and submit Paper B to *Computers and Informatics* instead
+(`ci_journal/CI_SUBMISSION.md`). Withdrawal confirmed by the editor (reported by the author on 2026-10-21). The files of
+this edition are kept unchanged.
+
 Before submission: reviewed by the Scientific Editor role on 2026-10-04
 (`docs/review/scientific-review_paper_b_cleiej_2026-10-04.md`), one major defect corrected;
 that review was not independent of the drafting session. The author then revised the text and
@@ -22,7 +27,7 @@ confirmed the title. Decision record: ADR-0022.
 | Acknowledged by | Esteban Clua, by email from the journal system |
 | File sent | `paper_b_cleiej.pdf`, 12 pages, source at commit `c72a17e88` |
 | Comments for the editor | The text of section 3 |
-| Decision | Pending |
+| Decision | Withdrawn by the author, 2026-10-21; confirmed by the editor |
 
 ## 1. Journal requirements, checked 2026-10-04
 
