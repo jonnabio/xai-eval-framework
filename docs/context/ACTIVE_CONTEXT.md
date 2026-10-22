@@ -75,9 +75,8 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to pull request #68 (handoff of the Paper B submission).
-  Open: #69 (`paper/e-aair`, Paper E AAIR edition, checks green) and the PR of
-  `pubs/paper-e-aair-registry` (its registry and this handoff), to merge in that order.
+- `main` holds everything up to pull requests #69 (Paper E AAIR edition, lane) and #70
+  (its registry and this handoff), merged 2026-10-22 in that order.
   `paper/b-computers-informatics` and `paper/f-external-validity` hold nothing that is not
   on `main`; `thesis/rca-001-phase-2` is behind `main` and takes `main` when the thesis
   lane resumes.
@@ -152,41 +151,54 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 
 ## Latest handoff - 2026-10-22, SESSION END (Paper E withdrawn from CyS; submitted to AAIR)
 
-Session of 2026-10-21, lane `paper-e` (branch `paper/e-aair`, owner
-`claude-2026-10-21-paper-e`); shared files on `pubs/paper-e-aair-registry`.
+Session of 2026-10-21/22, lane `paper-e` (branch `paper/e-aair`, owners
+`claude-2026-10-21-paper-e` and `claude-2026-10-22-paper-e`); shared files on
+`pubs/paper-e-aair-registry`.
 
 - **Completed**:
-  - Author decision: Paper E withdrawn from *Computación y Sistemas* (submission 6783;
-    review would not start for over a year); the editor confirmed it. Recorded in
-    `docs/reports/paper_e/README.md`; the CyS edition is unchanged.
-  - New venue *Advances in Artificial Intelligence Research* (AAIR, DergiPark, no fee).
-    Plan approved: `docs/planning/paper_e_aair_plan_2026-10-21.md`. The writing-rules page
-    and the template file disagree; the author chose the template (Option T) with the
-    page's limits.
-  - Author decisions for this paper: the 2024+ reference rule waived (it applies to future
-    papers); Turkish title by translation, with a note in the letter that the author does
-    not speak Turkish; reviewers to be added later; Zenodo 0.8.0 kept (no new release).
-  - New edition in `docs/reports/paper_e/aair_journal/`: source
-    `paper_e_aair_template.tex`, builder `scripts/build_paper_e_aair_docx.py` (imports the
-    CyS resolver; registers `paper_e_aair.tex`), manuscript 14 pages, 10 figures and
-    tables, 25 references, abstract 249 words; cover letter and copyright form filled in.
-    Record: `aair_journal/AAIR_SUBMISSION.md`.
-  - Registry: generated `paper_e_aair` block (507 claims), the new file under `[coverage]`
-    and `[exclusivity]`. Verifiers and `tests/pubs` pass on a clean tree.
+  - Paper E withdrawn from *Computación y Sistemas* (submission 6783; review would not start
+    for over a year; editor confirmed). Recorded in `docs/reports/paper_e/README.md`; the
+    CyS edition is unchanged and kept as evidence.
+  - AAIR (*Advances in Artificial Intelligence Research*, DergiPark, no fee) chosen by the
+    author. Guidelines analysed; plan approved: `docs/planning/paper_e_aair_plan_2026-10-21.md`.
+    The writing-rules page and the template file disagree; the author chose the template
+    (Option T) with the page's limits.
+  - Author decisions for Paper E: 2024+ reference rule waived (future papers keep it);
+    Turkish title by translation, the author does not speak Turkish; Zenodo 0.8.0 kept
+    (citation sound, no new release); no blind version (the journal asks for none).
+  - AAIR edition in `docs/reports/paper_e/aair_journal/`: source `paper_e_aair_template.tex`,
+    builder `scripts/build_paper_e_aair_docx.py`, manuscript .docx (14 pages, 10 floats,
+    25 references, abstract 249 words), cover letter, copyright form; record
+    `AAIR_SUBMISSION.md`.
+  - Registry: generated `paper_e_aair` block (507 claims); `paper_e_aair.tex` under
+    `[coverage]` and `[exclusivity]`. All verifiers, registration checks and `tests/pubs`
+    (47) passed on a clean tree.
+  - Similarity report (intihal.net) read: 1%, nine unrelated sources each under 1%.
+  - Form texts drafted: ethical statement, supporting institution, thanks, note to editor.
+  - **Paper E submitted to AAIR on 2026-10-22** (author); cover letter as sent committed.
+  - Paper D submission date confirmed by the author: 2026-10-03.
+  - Publication table now carries each paper's title.
 - **Current State**:
-  - **Paper E submitted to AAIR on 2026-10-22** (author); number not recorded. Similarity
-    report 1%. Submission record in `aair_journal/AAIR_SUBMISSION.md` (lane, PR #69).
-  - PR #69 (lane) and #70 (registry and this file) open; the assistant may not merge.
-    Nothing running; lane lock released.
+  - Papers B, C, D, E submitted; F revision submitted; A published. No submission numbers
+    for B (C&I), C, D, E (AAIR).
+  - PRs #69 (lane) and #70 (registry, context) merged at session end, #69 first (if a merge
+    was refused, the commands are in Next Steps).
+  - Nothing running; lane lock released.
 - **Next Steps**:
-  1. Author: merge PR #69, then #70.
-  2. Record the AAIR submission number in `AAIR_SUBMISSION.md`, the paper README and the
-     table above.
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
+  2. If #69 or #70 is still open: `gh pr merge 69 --squash`, then `gh pr merge 70 --merge`.
+  3. Record submission numbers (B, C, D, E) when the author gives them.
+  4. Paper F: record the JCSI editor's decision when it arrives.
+  5. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
 - **Blockers/Issues**:
   - Uncommitted moves of Paper B's CLEIEJ files into `docs/reports/paper_b/CLEIEJ_DEPRECATED/`
-    were in the main folder, made by another session or the author; left untouched. Until
-    they are committed with the registry paths updated, `verify_claims.py` fails in that
-    folder (83 "file not found" for `paper_b_cleiej.tex`).
+    are in the main folder (another session or the author); left untouched. Until they are
+    committed with the registry paths updated, `verify_claims.py` fails in that folder
+    (83 "file not found" for `paper_b_cleiej.tex`). Needs the author's decision.
+  - The AAIR cover letter as sent omits the CyS withdrawal paragraph; the withdrawal is
+    disclosed only if the author kept it in the note to the editor.
+  - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
+    investigated.
 - **Notes**:
   - AAIR build: `.venv\Scripts\python.exe docs/reports/paper_e/aair_journal/scripts/build_paper_e_aair_docx.py`
     (Quarto and Word; journal files in `aair_journal/journal_files/`, ignored). Close the
@@ -194,3 +206,5 @@ Session of 2026-10-21, lane `paper-e` (branch `paper/e-aair`, owner
     stay last in the registry, so the AAIR block sits after the CyS Paper E block.
   - Word waits on a dialog when it updates the copyright form's web-linked logo field; the
     builder does not update fields there.
+  - Signed forms and similarity reports stay untracked (public repository).
+  - `check_lane.py --staged` needs a claim even for commits of shared files.
