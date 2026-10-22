@@ -5,7 +5,9 @@
 No. 1 of 30 June 2026 has three articles). Guidelines: https://dergipark.org.tr/en/pub/ci/writing-rules.
 Submit at https://dergipark.org.tr/en/journal/3364/submission/step/manuscript/new.
 
-**Status (2026-10-21): prepared, NOT submitted.** The author decided on 2026-10-21 to withdraw
+**Status: SUBMITTED on 2026-10-21** (author; submission number not yet recorded). Do not rebuild or edit unless the journal asks for a revision.
+
+Prepared 2026-10-21. The author decided on 2026-10-21 to withdraw
 Paper B from the *CLEI Electronic Journal* (submission 1196) because of the length of its queue,
 and to submit it here. The CLEIEJ edition (`../paper_b_cleiej.tex` and its PDFs) is kept
 unchanged; see `../CLEIEJ_SUBMISSION.md`.
@@ -109,7 +111,10 @@ cover letter, signed copyright agreement; the similarity report is made by the s
 
 | Item | Value |
 |---|---|
-| Date | — |
-| Submission | — |
-| Files sent | — |
-| Decision | — |
+| Date | 2026-10-21 (author, in session; to be confirmed) |
+| Submission | Number not recorded |
+| Files sent | `submission/paper_b_ci_manuscript.docx` (masked, full text for intihal.net), `paper_b_ci_title_page.docx`, `paper_b_ci_cover_letter.docx`, signed copyright agreement |
+| Similarity | intihal.net 1%, every source under 1% (section 4) |
+| Optional fields | Ethical statement: public anonymised datasets, no participants, no approval required; original and not under consideration elsewhere. Supporting institution: none, no external funding. Thanks: left empty (advised, to keep the review masked: the person thanked co-authored reference [10]); the acknowledgment is on the title page |
+| Note to the editor | CLEIEJ 1196 withdrawn and confirmed; relation to the RIMI article (ref. [10]); other manuscripts on the same runs report none of these results; public archive on the title page; similarity 1% |
+| Decision | Pending |

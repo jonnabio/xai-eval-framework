@@ -27,7 +27,7 @@ confirmed the title. Decision record: ADR-0022.
 | Acknowledged by | Esteban Clua, by email from the journal system |
 | File sent | `paper_b_cleiej.pdf`, 12 pages, source at commit `c72a17e88` |
 | Comments for the editor | The text of section 3 |
-| Decision | Pending |
+| Decision | Withdrawn by the author, 2026-10-21; confirmed by the editor |
 
 ## 1. Journal requirements, checked 2026-10-04
 
