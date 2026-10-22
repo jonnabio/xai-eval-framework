@@ -102,7 +102,7 @@ since it is true: there is no earlier AAIR submission.
   - `paper_e_aair.tex`: the text of this edition, changed only in form, read by the
     builder;
   - `scripts/build_paper_e_aair_docx.py`;
-  - `journal_files/`: the three files exactly as downloaded on 2026-10-21;
+  - `journal_files/`: the three files as downloaded on 2026-10-21, kept local and not redistributed (as for Paper B);
   - `submission/`: manuscript .docx and .pdf, cover letter, copyright form.
 - **Not modified:** `paper_e_template.tex`, `paper_e.tex`, `tables/`, `figures/`,
   `submission/paper_e_blind.pdf`, `submission/paper_e_full.pdf`, `cys.*`, `template/`.
