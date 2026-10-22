@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-19, by `claude-2026-10-19-paper-f-revision`.
+**Last updated:** 2026-10-21, by `claude-2026-10-21-session`.
 
 ## Current objective
 
@@ -50,7 +50,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | Paper | Venue | Status | Record |
 |---|---|---|---|
 | **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
-| **B** | *CLEI Electronic Journal* | Under review | Submitted 2026-10-04; submission 1196; 12 pages |
+| **B** | *Computers and Informatics* (C&I, DergiPark) | **Submitted 2026-10-21** | Number not recorded. Masked Word edition `docs/reports/paper_b/ci_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *CLEI Electronic Journal* (submission 1196 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `ci_journal/CI_SUBMISSION.md`, `CLEIEJ_SUBMISSION.md` |
 | **C** | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Tecnología en Marcha*, AI special issue | Submitted | Through the author account, reported 2026-10-06; date and number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Computación y Sistemas* | Under review | Submitted 2026-10-04; submission 6783. Zenodo 0.8.0 |
@@ -75,24 +75,23 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to pull request #64 (Paper F, revision for Reviewer A,
-  merged 2026-10-19) and the session-end handoff that follows it. `paper/f-external-validity`
-  is level with `main`; `thesis/rca-001-phase-2` is behind `main` (Paper F and context
-  commits only) and takes `main` when the thesis lane resumes. No pull request is open.
+- `main` holds everything up to pull requests #66 (registry: Paper B C&I edition) and
+  #67 (Paper B C&I edition), merged 2026-10-21, and this handoff. `paper/b-computers-informatics`
+  and `paper/f-external-validity` hold nothing that is not on `main`; `thesis/rca-001-phase-2`
+  is behind `main` and takes `main` when the thesis lane resumes. No pull request is open.
 - The lane lock of the main folder is free.
 - Nothing is running: no task, no process.
-- Verifiers at the last check (2026-10-19): `verify_claims.py` 1,391 claims, 1,732
-  sites, 38 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
-  `register_thesis_followup.py --check`, `register_paper_f.py --check`,
-  `check_equations.py` and `check_active_context.py` pass; `pytest tests/pubs` 47 passed,
-  Paper F tests 37 passed.
+- Verifiers at the last check (2026-10-21): `verify_claims.py` 1,391 claims, 1,808
+  sites, 39 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
+  `scan_shared_literals.py --strict`, `check_equations.py` and `check_active_context.py`
+  pass; `pytest tests/pubs` 47 passed.
 - The thesis renders to Word with seven chapters and no unresolved reference
   (`thesis/render.ps1`; `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is tracked).
 
 ## Open with the author
 
 0. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
-1. Submission numbers of Papers C and D, and the date of Paper D's submission.
+1. Submission numbers of Papers B (C&I), C and D, and the date of Paper D's submission.
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
 4. **The publication licence of the book chapter**: whether it allows the ten figures
@@ -101,7 +100,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 5. Branch protection on `main` (pull request and the checks required): agreed on
    2026-10-10, set by the author on GitHub; not confirmed as done.
 6. **Before deposit:** the prior-publication policy of each journal with a paper under
-   review (B, C, D, E, F), since the thesis now carries their results. Paper F's
+   review (B at C&I, C, D, E, F), since the thesis now carries their results. Paper F's
    comments to the editor state that the thesis is not deposited.
 7. The table of contents is refreshed by the author in Word after every render.
 
@@ -147,48 +146,52 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-19, SESSION END (Paper F: revision for Reviewer A submitted)
+## Latest handoff - 2026-10-21, SESSION END (Paper B withdrawn from CLEIEJ, submitted to C&I)
 
-Session of 2026-10-19, lane `paper-f` (branch `paper/f-external-validity`, owner
-`claude-2026-10-19-paper-f-revision`); shared files in separate commits on the same branch.
+Session of 2026-10-21, lane `paper-b` (branch `paper/b-computers-informatics`, owner
+`claude-2026-10-21-session`); shared files on `pubs/paper-b-ci-registry` and
+`pubs/context-2026-10-21`.
 
 - **Completed**:
-  - Recorded: the editor's format corrections of 2026-10-13 were sent the same day.
-  - Reviewer A of JCSI 10503 (2026-10-19, "Corrections are required", minor) answered:
-    1. Why $T_5$ in Eq. (2): one sentence after it (fixed in the plan; encoded size of the
-       smallest dataset; between the features named by Anchors/DiCE and LIME's 10), and
-       the size of $T_5$ added to the sources of error.
-    2. Type of dataset: `scripts/paper_f_posthoc_type.py` -> `results/posthoc_type.csv`,
-       test `tests/analysis/test_paper_f_posthoc_type.py`; a results paragraph and a
-       fourth conclusion, labelled as made after the results (numeric 9, mixed 6).
-    3. "Two analyses conducted differently": the sentence on the two departures from the
-       plan now says they were logged before the analysis and do not enter the rule.
-  - Plan log entry 2026-10-19; registry regenerated (Paper F 123 claims); README section 9;
-    response letter `docs/reports/paper_f/response_reviewer_A_2026-10-19.md`.
-  - 8 pages in Word; editor's format corrections kept. Revision **submitted to the journal
-    on 2026-10-19** (author). Pull request #64 merged.
+  - Author decision: Paper B withdrawn from CLEIEJ (submission 1196, long queue); the editor
+    confirmed the withdrawal. Recorded in `docs/reports/paper_b/CLEIEJ_SUBMISSION.md`; the
+    CLEIEJ files are unchanged.
+  - Journal rules of *Computers and Informatics* reviewed (guidelines, template, forms, price
+    and ethics pages, two articles of Vol. 6 No. 1) and tabulated in
+    `docs/reports/paper_b/ci_journal/CI_SUBMISSION.md`.
+  - New edition `ci_journal/paper_b_ci.tex`: CLEIEJ text changed in form only (masked, Eq. (n)
+    citations, competing-interests section, Vancouver references, same 38 entries and links).
+  - `ci_journal/scripts/build_paper_b_ci_docx.py` writes the masked manuscript (14 pages),
+    title page and cover letter into the journal's Word templates; fails on author data in the
+    manuscript.
+  - Registry: the edition mirrors every CLEIEJ registration (84 sites), is under `[coverage]`
+    and in `scan_shared_literals.py` (PR #66). Lane work PR #67. Both merged.
+  - intihal.net similarity report: 1% overall, every source under 1%.
+  - Author's answers recorded: reference list kept as in CLEIEJ (author decision, not to be
+    reopened for this paper); cover letter approved; optional fields and note to the editor
+    advised; Paper B **submitted 2026-10-21**.
 - **Current State**:
-  - Paper F: revision submitted, awaiting the editor. Files sent are in
-    `docs/reports/paper_f/submission/revision_2026-10-19/` (local only, ignored by git).
-  - No result of the planned analysis changed; the thesis follow-up chapter prints no new
-    value and its check passes.
+  - Paper B under submission at C&I; no number recorded. Files sent are in
+    `ci_journal/submission/`. The intihal report PDF and the signed cover letter there are
+    the author's, left untracked (signature; public repository).
+  - Nothing running; lane lock released; no pull request open.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>` for the task's lane;
      stop if it fails.
-  2. Paper F: when the editor answers, record the decision in the table above and in the
-     README; change the text only for what is asked (template, then `build_paper_f.py
-     --final`, `register_paper_f.py`, `build_paper_f_docx.py` with Word closed).
-  3. Thesis lane: take `main` into `thesis/rca-001-phase-2`; the open items of
-     "Open with the author" stand.
+  2. Record the C&I submission number (and confirm the date) in `CI_SUBMISSION.md` and the
+     table above.
+  3. Paper F: when the JCSI editor answers, record the decision; change only what is asked.
+  4. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
 - **Blockers/Issues**:
   - None blocking. Pending with the author: items 1 to 7 of "Open with the author".
-  - Not done for Reviewer A: a check of stability at another k (would need the copies
-    explained again); stated as a limitation.
+  - Paper B's references do not meet the 2024+ rule (7 of 38); accepted by the author for
+    this paper only.
   - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
-    Paper F, not investigated.
+    investigated.
 - **Notes**:
-  - Run Paper F scripts with `.venv\Scripts\python.exe`; the full LaTeX PDF is 9 pages
-    while Word gives 8 — the Word count is the binding one.
-  - Response letter to Word: Quarto's pandoc, `"C:/Program Files/Quarto/bin/tools/pandoc.exe"`.
-  - In Git Bash never start a command with `cat > file` without a heredoc: it waits on
-    stdin and blocks the task.
+  - C&I builds: `.venv\Scripts\python.exe docs/reports/paper_b/ci_journal/scripts/build_paper_b_ci_docx.py`
+    (needs Quarto; Word for the PDFs). The journal's files are in `ci_journal/journal_files/`
+    (ignored; download addresses in `CI_SUBMISSION.md`).
+  - C&I's similarity report is made by the submission system (intihal.net) from the
+    full-text upload of step 3; limits 20% overall, 3% per source.
+  - `gh pr merge` worked for the assistant this session.
