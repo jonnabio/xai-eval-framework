@@ -1,10 +1,20 @@
 # Paper E — do explainers agree on which features matter?
 
-**Status: SUBMITTED on 2026-10-04 to *Computación y Sistemas* (CIC-IPN, Mexico), in
-English, as submission 6783.** See "Submission record" below. Do not rebuild
-`submission/` or change the analysis unless the journal asks for a revision.
+**Status: SUBMITTED on 2026-10-22 to *Advances in Artificial Intelligence Research*
+(AAIR, DergiPark); number not yet recorded. Record: [`aair_journal/AAIR_SUBMISSION.md`](aair_journal/AAIR_SUBMISSION.md).
+Withdrawn from *Computación y Sistemas* (reported by the author on 2026-10-21).** Do not
+rebuild or edit unless AAIR asks for a revision. The plan is
+`docs/planning/paper_e_aair_plan_2026-10-21.md`. The CyS edition below (`submission/`,
+`paper_e_template.tex`, `paper_e.tex`, `tables/`, `figures/`) is kept unchanged as the
+record of that submission. Never rebuild or edit it.
 
-## Submission record
+## Withdrawal from Computación y Sistemas
+
+The author withdrew submission 6783 after the editor said that peer review would not
+start for over a year, which the PhD timeline can't wait for. The editor confirmed the
+withdrawal; the author holds that confirmation, and it isn't stored in the repository.
+
+## Submission record (Computación y Sistemas, withdrawn)
 
 | | |
 |---|---|
