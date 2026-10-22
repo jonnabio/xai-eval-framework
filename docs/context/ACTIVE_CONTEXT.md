@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-21, by `claude-2026-10-21-paper-e`.
+**Last updated:** 2026-10-22, by `claude-2026-10-21-paper-e`.
 
 ## Current objective
 
@@ -47,14 +47,14 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Publication status
 
-| Paper | Venue | Status | Record |
-|---|---|---|---|
-| **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
-| **B** | *Computers and Informatics* (C&I, DergiPark) | **Submitted 2026-10-21** | Number not recorded. Masked Word edition `docs/reports/paper_b/ci_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *CLEI Electronic Journal* (submission 1196 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `ci_journal/CI_SUBMISSION.md`, `CLEIEJ_SUBMISSION.md` |
-| **C** | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
-| **D** | *Tecnología en Marcha*, AI special issue | Submitted | Through the author account, reported 2026-10-06; date and number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
-| **E** | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Ready, not submitted** (2026-10-21) | Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. AAIR edition `docs/reports/paper_e/aair_journal/` (14 pages); record `AAIR_SUBMISSION.md`. Zenodo 0.8.0 |
-| **F** | *Journal of Computer Sciences Institute* | **Revision submitted 2026-10-19** for Reviewer A (minor revisions required); awaiting the editor | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
+| Paper | Title | Venue | Status | Record |
+|---|---|---|---|---|
+| **A** | *A framework for rigorous evaluation of model-agnostic explainability methods: multi-metric statistical benchmarking, operational protocol, and reproducibility* | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
+| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Submitted 2026-10-21** | Number not recorded. Masked Word edition `docs/reports/paper_b/ci_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *CLEI Electronic Journal* (submission 1196 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `ci_journal/CI_SUBMISSION.md`, `CLEIEJ_SUBMISSION.md` |
+| **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
+| **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | Submitted | Through the author account, reported 2026-10-06; date and number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
+| **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
+| **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Revision submitted 2026-10-19** for Reviewer A (minor revisions required); awaiting the editor | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
   revision.** Record every decision of a journal in this table and in the paper's README.
@@ -93,9 +93,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 ## Open with the author
 
 0. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
-0. **Paper E (AAIR):** merge #69 and the registry PR; three reviewer nominations,
-   signatures, similarity report and submission.
-1. Submission numbers of Papers B (C&I), C and D, and the date of Paper D's submission.
+0. **Paper E (AAIR):** submitted 2026-10-22; record the submission number. Merge #69,
+   then #70.
+1. Submission numbers of Papers B (C&I), C, D and E (AAIR), and the date of Paper D's submission.
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
 4. **The publication licence of the book chapter**: whether it allows the ten figures
@@ -150,7 +150,7 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-21, SESSION END (Paper E withdrawn from CyS; AAIR edition ready)
+## Latest handoff - 2026-10-22, SESSION END (Paper E withdrawn from CyS; submitted to AAIR)
 
 Session of 2026-10-21, lane `paper-e` (branch `paper/e-aair`, owner
 `claude-2026-10-21-paper-e`); shared files on `pubs/paper-e-aair-registry`.
@@ -174,13 +174,14 @@ Session of 2026-10-21, lane `paper-e` (branch `paper/e-aair`, owner
   - Registry: generated `paper_e_aair` block (507 claims), the new file under `[coverage]`
     and `[exclusivity]`. Verifiers and `tests/pubs` pass on a clean tree.
 - **Current State**:
-  - PR #69 (lane) open, checks green; the assistant may not merge. PR of
-    `pubs/paper-e-aair-registry` to be merged after #69.
-  - Paper E not yet submitted to AAIR. Nothing running.
+  - **Paper E submitted to AAIR on 2026-10-22** (author); number not recorded. Similarity
+    report 1%. Submission record in `aair_journal/AAIR_SUBMISSION.md` (lane, PR #69).
+  - PR #69 (lane) and #70 (registry and this file) open; the assistant may not merge.
+    Nothing running; lane lock released.
 - **Next Steps**:
-  1. Author: merge PR #69, then the registry PR.
-  2. Author: reviewer nominations, signatures, similarity report, submission; then record
-     the date and number in `AAIR_SUBMISSION.md`, the paper README and the table above.
+  1. Author: merge PR #69, then #70.
+  2. Record the AAIR submission number in `AAIR_SUBMISSION.md`, the paper README and the
+     table above.
 - **Blockers/Issues**:
   - Uncommitted moves of Paper B's CLEIEJ files into `docs/reports/paper_b/CLEIEJ_DEPRECATED/`
     were in the main folder, made by another session or the author; left untouched. Until
