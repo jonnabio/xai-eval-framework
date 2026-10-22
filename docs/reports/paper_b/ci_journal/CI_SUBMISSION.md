@@ -37,7 +37,7 @@ Vol. 6 No. 1 (2026), read to settle what the template leaves open.
 | Title page | Separate file: name, institution, city, country, e-mail, ORCID of each author | `paper_b_ci_title_page.docx`, with the acknowledgment, data availability and competing interests |
 | Cover letter | Significance, novelty, problem, fit with the journal; not the abstract | `paper_b_ci_cover_letter.docx` (draft, section 4) |
 | Copyright agreement | Signed by the corresponding author, uploaded at submission | `journal_files/copyright_agreement.pdf`, to sign |
-| Similarity report | intihal.net report made by the submission system from the full text of step 3; at most 20% overall and 3% from one source | Made at submission (section 4) |
+| Similarity report | intihal.net report made by the submission system from the full text of step 3; at most 20% overall and 3% from one source | 1% overall, every source under 1% (section 4) |
 | Ethics | Ethics committee approval if applicable | Not applicable: public datasets, no participants |
 | Competing interests | Disclosed | Unnumbered section in the manuscript and on the title page |
 
@@ -86,13 +86,16 @@ copyright agreement 17770, similarity report form 17771, cover letter 17772 (sam
 2. Reference rule: author decision of 2026-10-21, the reference list stays as in the CLEIEJ
    edition for this paper (7 of 38 from 2024 or later; 5 entries without a link). Not to be
    reopened for this edition.
-3. **Similarity report: made by the submission system** (author, 2026-10-21). The journal uses
-   intihal.net: the full-text file uploaded in step 3 of the DergiPark form is sent to it, the
-   author is e-mailed when the report is ready, and can then finish the submission or return to
-   step 3 and upload a new file. Every report is forwarded to the editor. Upload only the masked
-   manuscript as the full text. Check the report against the limits (20% overall, 3% from one
-   source) before the last step; the likely large sources are the author's own public archive
-   (GitHub, Zenodo 0.9.0) and the RIMI article.
+3. Done 2026-10-21: **similarity report** by intihal.net, made by the submission system from the
+   masked manuscript (report shared by the author, "Intihal Proje Detaylari.pdf"). Settings:
+   minimum match of 9 words, citations and bibliography excluded. Document: 14 pages, 5,937
+   words, 35,625 characters. **Similarity index 1%** (limit 20%); eight primary sources, each
+   **under 1%** (limit 3%), none of them related to this work: breast-cancer image segmentation
+   (A. Tekerek), personality prediction in social media (Elsevier), fraud detection in review
+   platforms (ITU), Russian loanwords (dissertation), multivariate group differences (Bayesian),
+   one source without a title, hip abductor activity (Wiley), energy efficiency and mortgage
+   default (Springer). No match with the author's archive or the RIMI article is listed. Within
+   the journal's limits; no revision needed.
 4. Done 2026-10-21: cover letter approved by the author. Set the date on the day of submission.
 5. Sign the copyright agreement.
 6. The running head on the title page ("SHAP versus LIME on a paired tabular benchmark") is a
