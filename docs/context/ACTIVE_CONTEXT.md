@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-21, by `claude-2026-10-21-session`.
+**Last updated:** 2026-10-22, by `claude-2026-10-21-paper-e`.
 
 ## Current objective
 
@@ -47,14 +47,14 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Publication status
 
-| Paper | Venue | Status | Record |
-|---|---|---|---|
-| **A** | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
-| **B** | *Computers and Informatics* (C&I, DergiPark) | **Submitted 2026-10-21** | Number not recorded. Masked Word edition `docs/reports/paper_b/ci_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *CLEI Electronic Journal* (submission 1196 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `ci_journal/CI_SUBMISSION.md`, `CLEIEJ_SUBMISSION.md` |
-| **C** | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
-| **D** | *Tecnología en Marcha*, AI special issue | Submitted | Through the author account, reported 2026-10-06; date and number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
-| **E** | *Computación y Sistemas* | Under review | Submitted 2026-10-04; submission 6783. Zenodo 0.8.0 |
-| **F** | *Journal of Computer Sciences Institute* | **Revision submitted 2026-10-19** for Reviewer A (minor revisions required); awaiting the editor | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
+| Paper | Title | Venue | Status | Record |
+|---|---|---|---|---|
+| **A** | *A framework for rigorous evaluation of model-agnostic explainability methods: multi-metric statistical benchmarking, operational protocol, and reproducibility* | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
+| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Submitted 2026-10-21** | Number not recorded. Masked Word edition `docs/reports/paper_b/ci_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *CLEI Electronic Journal* (submission 1196 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `ci_journal/CI_SUBMISSION.md`, `CLEIEJ_SUBMISSION.md` |
+| **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
+| **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
+| **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
+| **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Revision submitted 2026-10-19** for Reviewer A (minor revisions required); awaiting the editor | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
   revision.** Record every decision of a journal in this table and in the paper's README.
@@ -75,10 +75,11 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to pull requests #66 (registry: Paper B C&I edition) and
-  #67 (Paper B C&I edition), merged 2026-10-21, and this handoff. `paper/b-computers-informatics`
-  and `paper/f-external-validity` hold nothing that is not on `main`; `thesis/rca-001-phase-2`
-  is behind `main` and takes `main` when the thesis lane resumes. No pull request is open.
+- `main` holds everything up to pull requests #69 (Paper E AAIR edition, lane) and #70
+  (its registry and this handoff), merged 2026-10-22 in that order.
+  `paper/b-computers-informatics` and `paper/f-external-validity` hold nothing that is not
+  on `main`; `thesis/rca-001-phase-2` is behind `main` and takes `main` when the thesis
+  lane resumes.
 - The lane lock of the main folder is free.
 - Nothing is running: no task, no process.
 - Verifiers at the last check (2026-10-21): `verify_claims.py` 1,391 claims, 1,808
@@ -91,7 +92,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 ## Open with the author
 
 0. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
-1. Submission numbers of Papers B (C&I), C and D, and the date of Paper D's submission.
+0. **Paper E (AAIR):** submitted 2026-10-22; record the submission number. Merge #69,
+   then #70.
+1. Submission numbers of Papers B (C&I), C, D and E (AAIR).
 2. The final text of Paper F's comments to the editor (not shown to the session).
 3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
 4. **The publication licence of the book chapter**: whether it allows the ten figures
@@ -146,52 +149,62 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-21, SESSION END (Paper B withdrawn from CLEIEJ, submitted to C&I)
+## Latest handoff - 2026-10-22, SESSION END (Paper E withdrawn from CyS; submitted to AAIR)
 
-Session of 2026-10-21, lane `paper-b` (branch `paper/b-computers-informatics`, owner
-`claude-2026-10-21-session`); shared files on `pubs/paper-b-ci-registry` and
-`pubs/context-2026-10-21`.
+Session of 2026-10-21/22, lane `paper-e` (branch `paper/e-aair`, owners
+`claude-2026-10-21-paper-e` and `claude-2026-10-22-paper-e`); shared files on
+`pubs/paper-e-aair-registry`.
 
 - **Completed**:
-  - Author decision: Paper B withdrawn from CLEIEJ (submission 1196, long queue); the editor
-    confirmed the withdrawal. Recorded in `docs/reports/paper_b/CLEIEJ_SUBMISSION.md`; the
-    CLEIEJ files are unchanged.
-  - Journal rules of *Computers and Informatics* reviewed (guidelines, template, forms, price
-    and ethics pages, two articles of Vol. 6 No. 1) and tabulated in
-    `docs/reports/paper_b/ci_journal/CI_SUBMISSION.md`.
-  - New edition `ci_journal/paper_b_ci.tex`: CLEIEJ text changed in form only (masked, Eq. (n)
-    citations, competing-interests section, Vancouver references, same 38 entries and links).
-  - `ci_journal/scripts/build_paper_b_ci_docx.py` writes the masked manuscript (14 pages),
-    title page and cover letter into the journal's Word templates; fails on author data in the
-    manuscript.
-  - Registry: the edition mirrors every CLEIEJ registration (84 sites), is under `[coverage]`
-    and in `scan_shared_literals.py` (PR #66). Lane work PR #67. Both merged.
-  - intihal.net similarity report: 1% overall, every source under 1%.
-  - Author's answers recorded: reference list kept as in CLEIEJ (author decision, not to be
-    reopened for this paper); cover letter approved; optional fields and note to the editor
-    advised; Paper B **submitted 2026-10-21**.
+  - Paper E withdrawn from *Computación y Sistemas* (submission 6783; review would not start
+    for over a year; editor confirmed). Recorded in `docs/reports/paper_e/README.md`; the
+    CyS edition is unchanged and kept as evidence.
+  - AAIR (*Advances in Artificial Intelligence Research*, DergiPark, no fee) chosen by the
+    author. Guidelines analysed; plan approved: `docs/planning/paper_e_aair_plan_2026-10-21.md`.
+    The writing-rules page and the template file disagree; the author chose the template
+    (Option T) with the page's limits.
+  - Author decisions for Paper E: 2024+ reference rule waived (future papers keep it);
+    Turkish title by translation, the author does not speak Turkish; Zenodo 0.8.0 kept
+    (citation sound, no new release); no blind version (the journal asks for none).
+  - AAIR edition in `docs/reports/paper_e/aair_journal/`: source `paper_e_aair_template.tex`,
+    builder `scripts/build_paper_e_aair_docx.py`, manuscript .docx (14 pages, 10 floats,
+    25 references, abstract 249 words), cover letter, copyright form; record
+    `AAIR_SUBMISSION.md`.
+  - Registry: generated `paper_e_aair` block (507 claims); `paper_e_aair.tex` under
+    `[coverage]` and `[exclusivity]`. All verifiers, registration checks and `tests/pubs`
+    (47) passed on a clean tree.
+  - Similarity report (intihal.net) read: 1%, nine unrelated sources each under 1%.
+  - Form texts drafted: ethical statement, supporting institution, thanks, note to editor.
+  - **Paper E submitted to AAIR on 2026-10-22** (author); cover letter as sent committed.
+  - Paper D submission date confirmed by the author: 2026-10-03.
+  - Publication table now carries each paper's title.
 - **Current State**:
-  - Paper B under submission at C&I; no number recorded. Files sent are in
-    `ci_journal/submission/`. The intihal report PDF and the signed cover letter there are
-    the author's, left untracked (signature; public repository).
-  - Nothing running; lane lock released; no pull request open.
+  - Papers B, C, D, E submitted; F revision submitted; A published. No submission numbers
+    for B (C&I), C, D, E (AAIR).
+  - PRs #69 (lane) and #70 (registry, context) merged at session end, #69 first (if a merge
+    was refused, the commands are in Next Steps).
+  - Nothing running; lane lock released.
 - **Next Steps**:
-  1. `python scripts/pubs/check_lane.py claim --owner <session name>` for the task's lane;
-     stop if it fails.
-  2. Record the C&I submission number (and confirm the date) in `CI_SUBMISSION.md` and the
-     table above.
-  3. Paper F: when the JCSI editor answers, record the decision; change only what is asked.
-  4. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
+  2. If #69 or #70 is still open: `gh pr merge 69 --squash`, then `gh pr merge 70 --merge`.
+  3. Record submission numbers (B, C, D, E) when the author gives them.
+  4. Paper F: record the JCSI editor's decision when it arrives.
+  5. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
 - **Blockers/Issues**:
-  - None blocking. Pending with the author: items 1 to 7 of "Open with the author".
-  - Paper B's references do not meet the 2024+ rule (7 of 38); accepted by the author for
-    this paper only.
+  - Uncommitted moves of Paper B's CLEIEJ files into `docs/reports/paper_b/CLEIEJ_DEPRECATED/`
+    are in the main folder (another session or the author); left untouched. Until they are
+    committed with the registry paths updated, `verify_claims.py` fails in that folder
+    (83 "file not found" for `paper_b_cleiej.tex`). Needs the author's decision.
+  - The AAIR cover letter as sent omits the CyS withdrawal paragraph; the withdrawal is
+    disclosed only if the author kept it in the note to the editor.
   - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
     investigated.
 - **Notes**:
-  - C&I builds: `.venv\Scripts\python.exe docs/reports/paper_b/ci_journal/scripts/build_paper_b_ci_docx.py`
-    (needs Quarto; Word for the PDFs). The journal's files are in `ci_journal/journal_files/`
-    (ignored; download addresses in `CI_SUBMISSION.md`).
-  - C&I's similarity report is made by the submission system (intihal.net) from the
-    full-text upload of step 3; limits 20% overall, 3% per source.
-  - `gh pr merge` worked for the assistant this session.
+  - AAIR build: `.venv\Scripts\python.exe docs/reports/paper_e/aair_journal/scripts/build_paper_e_aair_docx.py`
+    (Quarto and Word; journal files in `aair_journal/journal_files/`, ignored). Close the
+    .docx files in Word first. Then `register_paper_c.py --check`: the Paper C block must
+    stay last in the registry, so the AAIR block sits after the CyS Paper E block.
+  - Word waits on a dialog when it updates the copyright form's web-linked logo field; the
+    builder does not update fields there.
+  - Signed forms and similarity reports stay untracked (public repository).
+  - `check_lane.py --staged` needs a claim even for commits of shared files.
