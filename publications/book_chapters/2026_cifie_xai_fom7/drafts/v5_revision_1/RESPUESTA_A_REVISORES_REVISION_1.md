@@ -1,15 +1,9 @@
 # Carta de Respuesta a los Comentarios Editoriales (Revisión 1)
 
-**Obra:** Capítulo de Libro: *Protocolo FOM-7 para la Evaluación y Auditoría de Explicaciones Post-hoc en Aprendizaje Automático*  
-**Colección / Editorial:** CIFIE / Editorial Tintazul (2026)  
-**Editora Académica:** Dra. Irene Arostegui  
-**Autor:** Jonathan Herrera-Vásquez  
-**Fecha de Respuesta:** 24 de octubre de 2026  
-**Rama de Trabajo:** `chapter/cifie-revision-1`  
-**Documentos Modificados:** `publications/book_chapters/2026_cifie_xai_fom7/manuscript/` (Secciones 02, 06, 07, 10 y 11) y `tables/` (Tablas 1 y 2).  
-**Entregables Compilados:**  
-- **Versión a Color (Digital):** [`capitulo_cifie_xai_fom7_Revision_1_Atendido.docx`](file:///d:/Github/xai-eval-framework/publications/book_chapters/2026_cifie_xai_fom7/drafts/v5_revision_1/capitulo_cifie_xai_fom7_Revision_1_Atendido.docx)  
-- **Versión Monocromática (Impresión):** [`capitulo_cifie_xai_fom7_Revision_1_Atendido_bn.docx`](file:///d:/Github/xai-eval-framework/publications/book_chapters/2026_cifie_xai_fom7/drafts/v5_revision_1/capitulo_cifie_xai_fom7_Revision_1_Atendido_bn.docx)  
+**Capítulo:** *De la explicación a la evidencia: fundamentos, aplicaciones y evaluación auditable de la inteligencia artificial explicable*  
+**Autor:** Jonathan Herrera-Vásquez (Universidad Americana de Europa)  
+**Editora Académica:** Dra. Irene Arostegui (Colección CIFIE / Editorial Tintazul)  
+**Fecha:** 24 de octubre de 2026  
 
 ---
 
