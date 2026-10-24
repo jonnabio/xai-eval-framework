@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-22, by `claude-2026-10-21-paper-e`.
+**Last updated:** 2026-10-24, by `gemini-2026-10-24-cifie`.
 
 ## Current objective
 
@@ -61,11 +61,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - The combined Paper B+C was desk-rejected by TMLR (2026-10-02) and by *Inteligencia
   Artificial* (2026-10-04), then split into B and C (ADR-0022). It is not a current
   submission.
-- **CIFIE/FOM-7 chapter:** a package was sent for first editorial revision on
-  2026-10-10. The chapter text is `392b2fc8c` (11 sections, 8,772 words); the package
-  sent was built from an earlier text and prints numbers no registered claim backs. The
-  package is to be rebuilt from `392b2fc8c` in the chapter lane (`../xai-chapter`,
-  `chapter/cifie-*`). Limit 9,000 words. Detail: archive `2026-10-10.md`.
+- **CIFIE/FOM-7 chapter:** Editorial Revision 1 received 2026-10-23 (editor Dra. Irene Arostegui, 5 comments); fully attended on 2026-10-24 (commit `b40556cc2` on `main`). Built clean in color and B/W (~8,203 words, limit 9,000 words); formal response letter in md/docx/pdf (Option A, single author Jonathan Herrera-Vásquez). Ready for dispatch to the editor. Detail: `publications/book_chapters/2026_cifie_xai_fom7/drafts/v5_revision_1/`.
 - Revision routes, known limits of each submitted paper and the Zenodo release route:
   the paper's README and archive `2026-10-12.md` (Paper F), `2026-10-05.md` (C),
   `2026-10-04.md` (B, E), `2026-10-03.md` (D).
@@ -75,14 +71,13 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to pull requests #69 (Paper E AAIR edition, lane) and #70
-  (its registry and this handoff), merged 2026-10-22 in that order.
-  `paper/b-computers-informatics` and `paper/f-external-validity` hold nothing that is not
-  on `main`; `thesis/rca-001-phase-2` is behind `main` and takes `main` when the thesis
-  lane resumes.
+- `main` holds everything up to commit `b40556cc2` (CIFIE Revision 1 attended, merged
+  2026-10-24). `chapter/cifie-revision-1`, `paper/b-computers-informatics`, and
+  `paper/f-external-validity` hold nothing that is not on `main`; `thesis/rca-001-phase-2`
+  is behind `main` and takes `main` when the thesis lane resumes.
 - The lane lock of the main folder is free.
 - Nothing is running: no task, no process.
-- Verifiers at the last check (2026-10-21): `verify_claims.py` 1,391 claims, 1,808
+- Verifiers at the last check (2026-10-24): `verify_claims.py` 1,391 claims, 1,808
   sites, 39 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
   `scan_shared_literals.py --strict`, `check_equations.py` and `check_active_context.py`
   pass; `pytest tests/pubs` 47 passed.
@@ -91,12 +86,12 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Open with the author
 
-0. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
-0. **Paper E (AAIR):** submitted 2026-10-22; record the submission number. Merge #69,
-   then #70.
-1. Submission numbers of Papers B (C&I), C, D and E (AAIR).
-2. The final text of Paper F's comments to the editor (not shown to the session).
-3. CIFIE: whether a corrected file goes to the editor after the package is rebuilt.
+0. **CIFIE/FOM-7 chapter:** Revision 1 attended; author to dispatch the package
+   (`capitulo_cifie_xai_fom7_Revision_1_Atendido.docx`, `_bn.docx`,
+   `RESPUESTA_A_REVISORES_REVISION_1.pdf`) to editor Dra. Irene Arostegui.
+1. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
+2. Submission numbers of Papers B (C&I), C, D and E (AAIR).
+3. The final text of Paper F's comments to the editor (not shown to the session).
 4. **The publication licence of the book chapter**: whether it allows the ten figures
    the thesis now shares with it (`fig_d1` to `fig_d4`, `fig_d6` to `fig_d11`). Not
    confirmed by the author; to check before deposit.
@@ -149,62 +144,39 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
   and do not touch files another session left uncommitted without the author's word.
 
-## Latest handoff - 2026-10-22, SESSION END (Paper E withdrawn from CyS; submitted to AAIR)
+## Latest handoff - 2026-10-24, SESSION END (CIFIE Book Chapter Revision 1 Attended and Merged)
 
-Session of 2026-10-21/22, lane `paper-e` (branch `paper/e-aair`, owners
-`claude-2026-10-21-paper-e` and `claude-2026-10-22-paper-e`); shared files on
-`pubs/paper-e-aair-registry`.
+Session of 2026-10-24, lane `chapter` (branch `chapter/cifie-revision-1`, owner `gemini-2026-10-24-cifie`).
 
 - **Completed**:
-  - Paper E withdrawn from *Computación y Sistemas* (submission 6783; review would not start
-    for over a year; editor confirmed). Recorded in `docs/reports/paper_e/README.md`; the
-    CyS edition is unchanged and kept as evidence.
-  - AAIR (*Advances in Artificial Intelligence Research*, DergiPark, no fee) chosen by the
-    author. Guidelines analysed; plan approved: `docs/planning/paper_e_aair_plan_2026-10-21.md`.
-    The writing-rules page and the template file disagree; the author chose the template
-    (Option T) with the page's limits.
-  - Author decisions for Paper E: 2024+ reference rule waived (future papers keep it);
-    Turkish title by translation, the author does not speak Turkish; Zenodo 0.8.0 kept
-    (citation sound, no new release); no blind version (the journal asks for none).
-  - AAIR edition in `docs/reports/paper_e/aair_journal/`: source `paper_e_aair_template.tex`,
-    builder `scripts/build_paper_e_aair_docx.py`, manuscript .docx (14 pages, 10 floats,
-    25 references, abstract 249 words), cover letter, copyright form; record
-    `AAIR_SUBMISSION.md`.
-  - Registry: generated `paper_e_aair` block (507 claims); `paper_e_aair.tex` under
-    `[coverage]` and `[exclusivity]`. All verifiers, registration checks and `tests/pubs`
-    (47) passed on a clean tree.
-  - Similarity report (intihal.net) read: 1%, nine unrelated sources each under 1%.
-  - Form texts drafted: ethical statement, supporting institution, thanks, note to editor.
-  - **Paper E submitted to AAIR on 2026-10-22** (author); cover letter as sent committed.
-  - Paper D submission date confirmed by the author: 2026-10-03.
-  - Publication table now carries each paper's title.
+  - Editorial Revision 1 of CIFIE/FOM-7 book chapter (`publications/book_chapters/2026_cifie_xai_fom7/drafts/v5_revision_1/capitulo_cifie_xai_fom7_Revision_1.docx`) from editor Dra. Irene Arostegui (Colección CIFIE / Editorial Tintazul) systematically reviewed and all 5 comments fully addressed:
+    - **C44**: Mapped FOM-7 7-gate lifecycle to empirical metrics in Table 1 across operational, statistical, and agreement tiers (`06_protocolo_fom7.md`, `07_diseno_empirico.md`, `table_metrics.md`).
+    - **C50**: Qualified absolute reproducibility claims with 4-layer control framework (seeds, environment, pinned deps, deterministic SHAP/LIME sampling) (`07_diseno_empirico.md`).
+    - **C54**: Demarcated provenance of RIMI 2026 / PhD thesis empirical baseline vs original chapter contributions (`02_introduccion.md`, `table_results_summary.md`).
+    - **C69**: Calibrated epistemic modesty; purged "certificar/certificación", reframing FOM-7 as technical acceptance criteria under Level 3 functional evaluation (`11_conclusiones.md`).
+    - **C71**: Restructured Section 10 into explicit limitations axes followed by mirrored future agenda (`10_limitaciones_trabajo_futuro.md`).
+  - Incorporated author's edit in Section 10 heading (*«Alcance y limitaciones del estudio»*).
+  - Recompiled both digital color and monochrome print Word manuscripts via `pandoc`:
+    - `capitulo_cifie_xai_fom7_Revision_1_Atendido.docx` (8,203 words).
+    - `capitulo_cifie_xai_fom7_Revision_1_Atendido_bn.docx` (8,203 words).
+  - Drafted formal response letter to the editor (`RESPUESTA_A_REVISORES_REVISION_1.md`) using Option A clean academic header, single-author first-person impersonal tone (Jonathan Herrera-Vásquez), and detailed comment-by-comment remediation tables.
+  - Built professional Word and PDF editions of the response letter via `build_letter.py` (python-docx + Word COM) with left-aligned headers and blockquotes avoiding unjustified whitespace stretching:
+    - `RESPUESTA_A_REVISORES_REVISION_1.docx`
+    - `RESPUESTA_A_REVISORES_REVISION_1.pdf`
+  - Verified numerical integrity (`verify_claims.py`: 1,391 claims, 1,808 sites; `verify_sync.py`: clean).
+  - Merged work from `chapter/cifie-revision-1` into `main` (commit `b40556cc2`) and pushed to `origin`.
 - **Current State**:
-  - Papers B, C, D, E submitted; F revision submitted; A published. No submission numbers
-    for B (C&I), C, D, E (AAIR).
-  - PRs #69 (lane) and #70 (registry, context) merged at session end, #69 first (if a merge
-    was refused, the commands are in Next Steps).
-  - Nothing running; lane lock released.
+  - `main` branch updated to commit `b40556cc2` containing all CIFIE Revision 1 remediations, recompiled manuscripts, and response letters.
+  - All chapter artifacts in `publications/book_chapters/2026_cifie_xai_fom7/drafts/v5_revision_1/` are complete, formatted, and ready for delivery to Dra. Irene Arostegui.
+  - Working tree clean of lane changes; lane lock released.
 - **Next Steps**:
-  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
-  2. If #69 or #70 is still open: `gh pr merge 69 --squash`, then `gh pr merge 70 --merge`.
-  3. Record submission numbers (B, C, D, E) when the author gives them.
-  4. Paper F: record the JCSI editor's decision when it arrives.
-  5. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
+  1. Author sends submission package (`capitulo_cifie_xai_fom7_Revision_1_Atendido.docx`, `_bn.docx`, `RESPUESTA_A_REVISORES_REVISION_1.pdf`) to Dra. Irene Arostegui.
+  2. Record submission numbers for Papers B (C&I), C, D, and E (AAIR) when assigned.
+  3. Paper F: await JCSI editorial decision on Reviewer A revision.
+  4. Thesis lane: rebase/merge `main` into `thesis/rca-001-phase-2` and address open author items.
 - **Blockers/Issues**:
-  - Uncommitted moves of Paper B's CLEIEJ files into `docs/reports/paper_b/CLEIEJ_DEPRECATED/`
-    are in the main folder (another session or the author); left untouched. Until they are
-    committed with the registry paths updated, `verify_claims.py` fails in that folder
-    (83 "file not found" for `paper_b_cleiej.tex`). Needs the author's decision.
-  - The AAIR cover letter as sent omits the CyS withdrawal paragraph; the withdrawal is
-    disclosed only if the author kept it in the note to the editor.
-  - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
-    investigated.
+  - None blocking. Keep Word closed when recompiling docx manuscripts or building response letter to avoid Windows file lock errors (`EACCES`/`permission denied`).
 - **Notes**:
-  - AAIR build: `.venv\Scripts\python.exe docs/reports/paper_e/aair_journal/scripts/build_paper_e_aair_docx.py`
-    (Quarto and Word; journal files in `aair_journal/journal_files/`, ignored). Close the
-    .docx files in Word first. Then `register_paper_c.py --check`: the Paper C block must
-    stay last in the registry, so the AAIR block sits after the CyS Paper E block.
-  - Word waits on a dialog when it updates the copyright form's web-linked logo field; the
-    builder does not update fields there.
-  - Signed forms and similarity reports stay untracked (public repository).
-  - `check_lane.py --staged` needs a claim even for commits of shared files.
+  - Recompile command for CIFIE chapter:
+    `pandoc --citeproc --bibliography=publications/book_chapters/2026_cifie_xai_fom7/drafts/v4_final_submission/capitulo_cifie.bib --csl=publications/book_chapters/2026_cifie_xai_fom7/drafts/v4_final_submission/apa.csl --reference-doc=publications/book_chapters/2026_cifie_xai_fom7/drafts/v4_final_submission/custom_template.docx ...`
+  - Response letter builder script: `python C:/Users/jonna/.gemini/antigravity-ide/brain/e09777f1-a95d-432c-ab9c-9538b759a455/scratch/build_letter.py` (converts markdown to docx with custom styling and exports PDF via Word COM).

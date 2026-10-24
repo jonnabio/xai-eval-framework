@@ -7,6 +7,7 @@ Read this index, pick the file by date and title, and read only that file
 
 | File | Sections |
 |---|---|
+| [2026-10-22.md](2026-10-22.md) | Latest handoff - 2026-10-22, SESSION END (Paper E withdrawn from CyS; submitted to AAIR) |
 | [2026-10-21.md](2026-10-21.md) | Latest handoff - 2026-10-21, SESSION END (Paper B withdrawn from CLEIEJ, submitted to C&I) |
 | [2026-10-19.md](2026-10-19.md) | Latest handoff - 2026-10-19, SESSION END (Paper F: revision for Reviewer A submitted) |
 | [2026-10-13.md](2026-10-13.md) | Latest handoff - 2026-10-13 (Paper F: the editor's format corrections before review)<br>Latest handoff - 2026-10-13, SESSION END (thesis closed for the tutor: papers, equations, figures, tables)<br>Latest handoff - 2026-10-13 (thesis figures and tables: 29 figures, all cited) |
