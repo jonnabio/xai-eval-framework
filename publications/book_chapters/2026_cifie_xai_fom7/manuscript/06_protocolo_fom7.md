@@ -33,6 +33,15 @@ El flujo es: congelar, ejecutar, auditar, armonizar, inferir, perfilar reproduci
 
 **Puerta 7, reporte trazable.** Cada afirmación se vincula con resultados, tablas, scripts, configuración y límites; sin esa traza, se presenta como descriptiva. Las conclusiones conservan el contexto EXP2 y no generalizan más allá del benchmark.
 
+## Correspondencia metodológica y niveles de comprobación
+
+Para evitar que el lector asuma que todos los componentes del marco se someten al mismo grado de contrastación experimental, el protocolo delimita tres niveles de comprobación:
+
+1. **Evaluación experimental directa en el benchmark:** Las compuertas que evalúan propiedades intrínsecas de las salidas se contrastan empíricamente mediante las métricas tabulares primarias: fidelidad ($F$ y $\Delta_k$), estabilidad ($S$), parsimonia ($P$) y coste computacional ($C$).
+2. **Evaluación mediante indicadores operacionales específicos por objeto:** Para métodos no basados en atribuciones lineales continuas, como Anchors (reglas) y DiCE (contrafactuales), la validez y cobertura se auditan mediante la tasa de generación factible y la cobertura empírica dentro del inventario calificado de celdas.
+3. **Componentes metodológicos reservados para auditorías ampliadas:** Las compuertas de consistencia inter-método (concordancia entre jerarquías explicativas) y de equidad en la explicación (paridad de fidelidad entre subgrupos demográficos) forman parte del diseño integral de gobernanza, pero no se someten a contrastes estadísticos formales de hipótesis en el benchmark factorial de este capítulo.
+
 ## Límites explícitos
 
 FOM-7 ofrece evidencia funcional comparativa y trazable bajo condiciones controladas; no demuestra utilidad humana, causalidad ni superioridad universal. No sustituye estudios con usuarios, auditorías regulatorias o evaluación en despliegue: establece una base reproducible para esas extensiones.
+

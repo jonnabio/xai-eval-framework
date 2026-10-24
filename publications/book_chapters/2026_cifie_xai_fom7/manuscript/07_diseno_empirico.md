@@ -31,7 +31,10 @@ Se comparan cinco familias predictivas: regresión logística, bosque aleatorio,
 
 **Configuración de explicadores.** Las configuraciones se congelan por ejecución: TreeSHAP para bosque aleatorio y XGBoost, KernelSHAP para los demás; LIME tabular con parámetros fijos; Anchors con umbral de precisión de 0.95; DiCE genera contrafactuales de la clase opuesta. Se comparan estas implementaciones registradas, no etiquetas abstractas; las conclusiones conservan sus límites.
 
-**Métricas primarias.** La Tabla 1 define fidelidad, estabilidad, parsimonia, brecha de fidelidad y coste computacional.
+**Entorno de ejecución y control de reproducibilidad.** Los experimentos se ejecutaron en Python 3 sobre una estación AMD Ryzen 9 5900X (12 núcleos, 24 hilos) con 64 GB de RAM. Para favorecer y controlar la reproducibilidad experimental —reconociendo metodológicamente que la fijación de una semilla no la garantiza por sí sola sin un control exhaustivo del software, dependencias y arquitectura subyacente— se articularon cuatro mecanismos complementarios: (a) un protocolo determinista multillave de cinco semillas (42, 123, 456, 789, 999) para medir y acotar la varianza estocástica entre corridas; (b) congelación estricta de versiones de bibliotecas en entornos virtuales aislados; (c) ajuste determinista de preprocesadores exclusivamente sobre datos de entrenamiento sin filtración; y (d) disponibilidad pública de código ejecutable, tablas crudas y artefactos auditables con identificadores persistentes.
+
+
+**Métricas primarias y correspondencia con FOM-7.** La Tabla 1 define fidelidad ($F$), estabilidad ($S$), parsimonia ($P$), brecha de fidelidad ($\Delta_k$) y coste computacional ($C$). Estas cinco métricas primarias operacionalizan de forma directa las compuertas $G_1$, $G_2$, $G_3$ y $G_5$. Por su parte, la compuerta $G_4$ (validez y cobertura) se evalúa mediante indicadores específicos de objeto: la cobertura empírica de reglas para Anchors y la tasa de generación factible para DiCE dentro del inventario calificado de celdas (Figura 8). Finalmente, las compuertas $G_6$ (consistencia inter-método) y $G_7$ (equidad en la explicación) constituyen componentes formales del marco de gobernanza no sometidos a contrastes de hipótesis en este benchmark factorial, manteniéndose delimitadas para evitar equiparar su nivel de comprobación empírica con el de las métricas primarias.
 
 <!-- TABLA: table_metrics.md -->
 
@@ -40,3 +43,4 @@ Las métricas se calculan por instancia y se promedian por ejecución; la infere
 **Unidad de análisis.** La jerarquía distingue métricas por instancia, medias por ejecución (modelo, método, semilla y tamaño) y bloques modelo-tamaño $(g,n)$. Las pruebas globales usan 15 bloques completos y promedian las semillas calificadas dentro de cada bloque; ni instancias ni semillas se tratan como bloques independientes.
 
 **Plan inferencial.** Las diferencias globales se evalúan con Friedman y, tras rechazar la hipótesis nula, con comparaciones post hoc de Nemenyi sobre bloques completos (Friedman, 1937; Demšar, 2006; Nemenyi, 1963). Los coeficientes de variación describen la reproducibilidad entre semillas. El objetivo es identificar diferencias defendibles bajo este diseño de Adult Income, no establecer un ranking universal.
+

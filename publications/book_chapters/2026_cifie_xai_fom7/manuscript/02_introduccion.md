@@ -52,3 +52,16 @@ FOM-7 y el caso Adult/tabular como demostración de una evaluación funcionalmen
 fundamentada. El caso no establece un ranking universal de explicadores. Su función
 es mostrar cómo la trazabilidad y el control del diseño permiten distinguir una
 salida plausible de una afirmación empírica defendible.
+
+## Delimitación de aportaciones y procedencia de resultados
+
+Para garantizar la debida transparencia académica y precisar la novedad de esta obra respecto de investigaciones previas de los autores, se delimitan tres planos de contribución:
+
+1. **Resultados empíricos antecedentes:** Los contrastes inferenciales globales de las hipótesis H1 (diferencias de fidelidad) y H2 (diferencias de estabilidad) proceden de Herrera-Vásquez y Herrero-Uceda (2026), publicados en *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI); la evaluación de reproducibilidad inter-semilla (P1) y las medidas de parsimonia y coste proceden del repositorio experimental de la tesis doctoral de Herrera-Vásquez (2026).
+2. **Resultados reanalizados e integrados en este capítulo:** La convergencia simultánea de los cuatro métodos (LIME, SHAP, Anchors y DiCE) bajo un prisma analítico común que contrasta objetos explicativos heterogéneos (sustitutos locales, atribuciones aditivas, reglas y contrafactuales) que en los trabajos previos se abordaban de forma aislada.
+3. **Aportaciones originales inéditas presentadas por primera vez en esta obra:**
+   - La formalización conceptual completa y secuencial del **Protocolo FOM-7 de siete compuertas** como estándar metodológico de aseguramiento de calidad y trazabilidad de evidencia en XAI.
+   - La estructuración de las directrices desde la **perspectiva de la ingeniería de datos y la observabilidad de software**, formulando analogías de pipelines y arneses de pruebas computacionales.
+   - El análisis multidimensional de **perfiles de compromiso operativo (*trade-offs*)** entre fidelidad, estabilidad, parsimonia y coste computacional para la selección justificada de métodos en producción.
+   - La articulación de criterios de evaluación técnica orientados al cumplimiento de marcos regulatorios emergentes (Ley de Inteligencia Artificial de la UE y marco NIST AI RMF).
+
