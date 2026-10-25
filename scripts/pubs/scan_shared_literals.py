@@ -45,7 +45,7 @@ PAPER_BC = [
     ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia.tex",
     ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia_appendix.tex",
     ROOT / "pub" / "fragments" / "paper_b_abstract_en.tex",
-    ROOT / "docs" / "reports" / "paper_b" / "paper_b_cleiej.tex",
+    ROOT / "docs" / "reports" / "paper_b" / "CLEIEJ_DEPRECATED" / "paper_b_cleiej.tex",
     ROOT / "docs" / "reports" / "paper_b" / "ci_journal" / "paper_b_ci.tex",
 ]
 
