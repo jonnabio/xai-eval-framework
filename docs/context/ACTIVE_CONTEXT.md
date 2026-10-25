@@ -71,7 +71,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to pull request #71 (Paper F: amendments accepted, merged
+- `main` holds everything up to pull request #73 (Paper B: CLEIEJ edition archived, merged
   2026-10-25) and this handoff. `chapter/cifie-revision-1`, `paper/b-computers-informatics`, and
   `paper/f-external-validity` hold nothing that is not on `main`; `thesis/rca-001-phase-2`
   is behind `main` and takes `main` when the thesis lane resumes.
@@ -158,9 +158,11 @@ Session of 2026-10-25, lane `paper-f` (branch `paper/f-external-validity`, owner
   - Recorded in `docs/reports/paper_f/README.md`, section 10 (PR #71, merged).
 - **Current State**:
   - Paper F awaits publication; nothing to change unless the journal asks.
-  - Uncommitted Paper B changes of another session remain in the main folder (CLEIEJ files
-    deleted, `CLEIEJ_DEPRECATED/` and two files under `ci_journal/submission/` untracked);
-    not touched.
+  - Paper B's withdrawn CLEIEJ edition moved unchanged to `docs/reports/paper_b/CLEIEJ_DEPRECATED/`
+    (PR #73); registry (84 sites), `verify_sync.py`, `scan_shared_literals.py` follow. The
+    signed C&I cover letter and the intihal report are git-ignored (author's files).
+  - Working tree clean; main folder on `thesis/rca-001-phase-2`, level with `main`. Branches
+    whose work is all on `main` are still listed locally (deletion left to the author).
   - Nothing running; lane lock released.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
@@ -168,4 +170,4 @@ Session of 2026-10-25, lane `paper-f` (branch `paper/f-external-validity`, owner
   2. Paper F: record proofs or publication when the journal sends them.
   3. CIFIE: the author dispatches the Revision 1 package (item 0 above).
   4. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
-- **Blockers/Issues**: none. The Paper B working-tree changes need the author's word.
+- **Blockers/Issues**: none.
