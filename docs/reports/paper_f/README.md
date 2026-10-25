@@ -269,6 +269,11 @@ author; the $T_5$ sentence after Eq. (2); the paragraph and fourth conclusion on
 of dataset; the sentence on the two departures from the plan; the format corrections of
 2026-10-13 (same builder). 8 pages in Word.
 
-Files to upload under "Revisions": `submission/final_2026-10-25/herrera-vasquez.docx` and
-`.pdf` (with author details); `response_reviewer_A.docx` of 2026-10-19 is copied there in
-case the form asks for it. Not yet uploaded (author).
+Files prepared in `submission/final_2026-10-25/`, renamed by the author to mark the final
+version: `herrera-vasquez-final.docx` and `herrera-vasquez-final.pdf` (with author details);
+`response_reviewer_A.docx` of 2026-10-19 is kept there.
+
+**Final version submitted 2026-10-25** (author): added under "Revisions" as
+`herrera-vasquez-final.pdf` (file no. 47982) and `herrera-vasquez-final.docx` (file
+no. 47981), and the editor told of it the same day. Awaiting publication; target issue
+30 March 2027. Do not rebuild unless the journal asks.
