@@ -9,8 +9,8 @@ Submit at https://dergipark.org.tr/en/journal/3364/submission/step/manuscript/ne
 
 Prepared 2026-10-21. The author decided on 2026-10-21 to withdraw
 Paper B from the *CLEI Electronic Journal* (submission 1196) because of the length of its queue,
-and to submit it here. The CLEIEJ edition (`../paper_b_cleiej.tex` and its PDFs) is kept
-unchanged; see `../CLEIEJ_SUBMISSION.md`.
+and to submit it here. The CLEIEJ edition (`../CLEIEJ_DEPRECATED/paper_b_cleiej.tex` and its PDFs) is kept
+unchanged; see `../CLEIEJ_DEPRECATED/CLEIEJ_SUBMISSION.md`.
 
 ## 1. Journal requirements, checked 2026-10-21
 
@@ -47,7 +47,7 @@ Vol. 6 No. 1 (2026), read to settle what the template leaves open.
 
 | File | Role |
 |---|---|
-| `paper_b_ci.tex` | Text of this edition: a copy of `../paper_b_cleiej.tex` changed only in form (masked review, Eq. (n) citations, competing-interests section, Vancouver references). Not compiled; read by the builder |
+| `paper_b_ci.tex` | Text of this edition: a copy of `../CLEIEJ_DEPRECATED/paper_b_cleiej.tex` changed only in form (masked review, Eq. (n) citations, competing-interests section, Vancouver references). Not compiled; read by the builder |
 | `scripts/build_paper_b_ci_docx.py` | Writes the three Word files into the journal's templates and prints PDFs with Word |
 | `submission/paper_b_ci_manuscript.docx` | **The manuscript to upload** (masked) |
 | `submission/paper_b_ci_title_page.docx` | **Title page to upload** |

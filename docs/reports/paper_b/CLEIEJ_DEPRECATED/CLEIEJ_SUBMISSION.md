@@ -1,5 +1,11 @@
 # Paper B — submission sheet: *CLEI Electronic Journal*
 
+> **Archived 2026-10-25.** Paper B was withdrawn from CLEIEJ and submitted to *Computers and
+> Informatics* (`../ci_journal/CI_SUBMISSION.md`). The CLEIEJ files were moved unchanged to
+> this folder; their relative paths (`figures/`, `../../../pub/fragments/`) still point to the
+> old place, so to rebuild them copy them back to `docs/reports/paper_b/` first. The PDFs are the
+> files as sent.
+
 **Journal:** *CLEI Electronic Journal* (CLEIej), Centro Latinoamericano de Estudios en
 Informática. ISSN 0717-5000. Submit at https://www.clei.org/cleiej (register, then the
 five-step submission).
@@ -66,7 +72,7 @@ Published examples (Vol. 29 No. 4, 2026) run from 14 to 31 pages.
 | `pub/claims.toml` (`[papers.paper_b]`) | Abstract and keywords; generated into `pub/fragments/` |
 
 Build, from the repository root:
-`tools/tectonic-portable/tectonic docs/reports/paper_b/paper_b_cleiej.tex`.
+`tools/tectonic-portable/tectonic docs/reports/paper_b/CLEIEJ_DEPRECATED/paper_b_cleiej.tex`.
 Then run `verify_claims.py`, `verify_sync.py`, `scan_shared_literals.py --strict` and
 `verify_exp4_reconstruction.py` from `scripts/pubs/`.
 
@@ -140,11 +146,11 @@ Paper B is kept there.
   Paired Tabular Benchmark" (review finding F02). The earlier title was "LIME versus SHAP under
   Matched Conditions: A Paired Comparison on Tabular Models"; the Zenodo 0.9.0 archive and the
   GitHub release carry the earlier title.
-- **Double-blind build:** `tectonic docs/reports/paper_b/paper_b_cleiej_blind.tex`. After every
+- **Double-blind build:** `tectonic docs/reports/paper_b/CLEIEJ_DEPRECATED/paper_b_cleiej_blind.tex`. After every
   edit, check it with:
 
   ```bash
-  pdftotext docs/reports/paper_b/paper_b_cleiej_blind.pdf - | grep -i -E "jonnabio|github|zenodo|UNADE|Universidad Americana|Canc.n|Jonathan|Acknowledg|by the author"
+  pdftotext docs/reports/paper_b/CLEIEJ_DEPRECATED/paper_b_cleiej_blind.pdf - | grep -i -E "jonnabio|github|zenodo|UNADE|Universidad Americana|Canc.n|Jonathan|Acknowledg|by the author"
   ```
 
   Expected output: nothing. Reference [10] names its authors as any citation does, and the
