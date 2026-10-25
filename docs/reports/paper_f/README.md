@@ -254,3 +254,21 @@ No result of the planned analysis changed. 8 pages in Word; the editor's format
 corrections of 2026-10-13 are kept (same builder). Files to send:
 `submission/revision_2026-10-19/` (author file and PDF, blind copy, and
 `response_reviewer_A.docx`, from `response_reviewer_A_2026-10-19.md`). **Sent to the journal on 2026-10-19** (author).
+
+## 10. Amendments accepted; final version requested (2026-10-25)
+
+Message of the editor, Beata Pańczyk, passed on by the author on 2026-10-25: the reviewer
+has accepted the amendments; the final version of the article, with the author's details
+and affiliation, is to be added under "Revisions" in the submission system.
+
+What was done: no change to any source. `build_paper_f.py` and `build_paper_f_docx.py`
+were run again; `paper_f.tex` is unchanged and the text of `herrera-vasquez.docx` is
+identical, paragraph for paragraph, to the file of `submission/revision_2026-10-19/`.
+Checked in the file: the author line, affiliation, e-mail and ORCID of the corresponding
+author; the $T_5$ sentence after Eq. (2); the paragraph and fourth conclusion on the type
+of dataset; the sentence on the two departures from the plan; the format corrections of
+2026-10-13 (same builder). 8 pages in Word.
+
+Files to upload under "Revisions": `submission/final_2026-10-25/herrera-vasquez.docx` and
+`.pdf` (with author details); `response_reviewer_A.docx` of 2026-10-19 is copied there in
+case the form asks for it. Not yet uploaded (author).
