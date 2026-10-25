@@ -141,33 +141,60 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Single-author papers** are written impersonally; references carry a verified DOI
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once,
-  t## Latest handoff - 2026-10-25, SESSION END (Paper F: amendments accepted, final version submitted)
+  t## Latest handoff - 2026-10-25, SESSION END (Paper F final version submitted; Paper B CLEIEJ archived; repo in sync)
 
-Session of 2026-10-25, lane `paper-f` (branch `paper/f-external-validity`, owner
-`claude-2026-10-25-paper-f`); shared files on `pubs/context-2026-10-25`.
+Session of 2026-10-25, owner `claude-2026-10-25-paper-f`. Lanes: `paper-f`
+(`paper/f-external-validity`), `paper-b` (`paper/b-computers-informatics`), shared files on
+`pubs/context-2026-10-25`, `-25b`, `-25c`. Pull requests #71 to #75, all merged.
 
 - **Completed**:
-  - Editor of JCSI (Beata Pańczyk), 2026-10-25: the reviewer accepted the amendments;
-    final version with author details and affiliation requested under "Revisions".
-  - Paper F rebuilt from unchanged sources; `herrera-vasquez.docx` text identical to the
-    revision of 2026-10-19; author block (name, affiliation, e-mail, ORCID), the answers to
-    Reviewer A and the format corrections of 2026-10-13 checked; 8 pages in Word.
-  - Files in `docs/reports/paper_f/submission/final_2026-10-25/` (git-ignored), renamed by
-    the author `herrera-vasquez-final.docx` / `.pdf`; uploaded as files 47981 and 47982 and
-    the editor told, 2026-10-25 (author).
-  - Recorded in `docs/reports/paper_f/README.md`, section 10 (PR #71, merged).
+  - **Paper F (JCSI 10503).** Editor (Beata Pańczyk), 2026-10-25: the reviewer accepted the
+    amendments; final version with author details requested under "Revisions". Rebuilt from
+    unchanged sources; Word text identical to the revision of 2026-10-19; author block (name,
+    affiliation, e-mail, ORCID), answers to Reviewer A and format corrections of 2026-10-13
+    checked; 8 pages in Word. Author renamed and uploaded `herrera-vasquez-final.pdf` (file
+    47982) and `.docx` (47981) and told the editor: **final version submitted 2026-10-25**.
+    Recorded in `docs/reports/paper_f/README.md`, section 10 (PR #71) and the table above.
+  - **Paper B.** The withdrawn CLEIEJ edition (left moved but uncommitted by another session)
+    committed as git renames into `docs/reports/paper_b/CLEIEJ_DEPRECATED/`; C&I record paths
+    fixed; archive note added to its `CLEIEJ_SUBMISSION.md`; signed cover letter and intihal
+    report git-ignored (`ci_journal/.gitignore`). Shared commit: registry (84 sites),
+    `verify_sync.py`, `scan_shared_literals.py`, `docs/guides/PUBLICATION_SYNC_PIPELINE.md`
+    (PR #73).
+  - Context: 2026-10-24 handoff archived verbatim (`archive/2026-10-24.md`, index row);
+    this handoff (PRs #72, #74, #75).
 - **Current State**:
-  - Paper F awaits publication; nothing to change unless the journal asks.
-  - Paper B's withdrawn CLEIEJ edition moved unchanged to `docs/reports/paper_b/CLEIEJ_DEPRECATED/`
-    (PR #73); registry (84 sites), `verify_sync.py`, `scan_shared_literals.py` follow. The
-    signed C&I cover letter and the intihal report are git-ignored (author's files).
-  - Working tree clean; main folder on `thesis/rca-001-phase-2`, level with `main`. Branches
-    whose work is all on `main` are still listed locally (deletion left to the author).
-  - Nothing running; lane lock released.
+  - Paper F awaits publication (target issue 30 March 2027); nothing to change unless asked.
+    Final files in `docs/reports/paper_f/submission/final_2026-10-25/` (git-ignored).
+  - Verifiers 2026-10-25: `verify_claims.py` 1,898 claims, 2,315 sites, 40 files fully
+    registered; `verify_sync.py`, `scan_shared_literals.py --strict`,
+    `verify_exp4_reconstruction.py`, `check_active_context.py` pass; `pytest tests/pubs` 47
+    passed; CI green on every PR.
+  - Main folder on `thesis/rca-001-phase-2`, level with `main`; tree clean; no PR open;
+    nothing running; lane lock free.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
-     The lane follows the branch checked out: switch branch before claiming.
-  2. Paper F: record proofs or publication when the journal sends them.
-  3. CIFIE: the author dispatches the Revision 1 package (item 0 above).
-  4. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
-- **Blockers/Issues**: none.
+     The lane follows the checked-out branch: switch branch before claiming.
+  2. Optional, author: delete stale branches (all their work is on `main`; the assistant was
+     refused permission): local branches other than `main`, `thesis/rca-001-phase-2`,
+     `results/exp4-cohort2`; remote `chapter/cifie-revision-1`,
+     `paper/b-computers-informatics`, `pubs/context-2026-10-25b`, `pubs/context-2026-10-25c`.
+  3. Paper F: record proofs or publication when JCSI sends them.
+  4. CIFIE: author dispatches the Revision 1 package (item 0 above).
+  5. Thesis lane: items of "Open with the author".
+- **Blockers/Issues**:
+  - None blocking. Pending with the author: items 0 to 7 of "Open with the author".
+  - The archived CLEIEJ `.tex` files do not rebuild in `CLEIEJ_DEPRECATED/` (relative paths
+    to `figures/` and `pub/fragments/`); copy them back to `docs/reports/paper_b/` first.
+  - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
+    investigated.
+- **Notes**:
+  - Paper F builds: `.venv\Scripts\python.exe docs/reports/paper_f/scripts/build_paper_f.py`
+    then `build_paper_f_docx.py` (Word closed). The 9-page warning is the LaTeX preview
+    PDF, not the file sent; the Word file is the page count that counts (8).
+  - Commit with explicit paths (`git commit -- <paths>`), never `-a`: the lane guard refuses
+    commits that mix lanes, and other sessions may leave files in the tree.
+  - Lane and shared commits can travel in one PR as separate commits;
+    `check_lane.py --range origin/main..HEAD` checks them as CI does.
+  - The auto-mode classifier refuses branch deletion and `rm -r` of untracked folders; give
+    the author the command.
