@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-24, by `gemini-2026-10-24-cifie`.
+**Last updated:** 2026-10-25, by `claude-2026-10-25-paper-f`.
 
 ## Current objective
 
@@ -54,7 +54,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
-| **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Revision submitted 2026-10-19** for Reviewer A (minor revisions required); awaiting the editor | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Review and what was done: `docs/reports/paper_f/README.md`, section 9 |
+| **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Accepted by the reviewer; final version submitted 2026-10-25** (editor's request of the same day); awaiting publication | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Final files: `herrera-vasquez-final.pdf` (no. 47982) and `.docx` (no. 47981), in `submission/final_2026-10-25/`. Review and what was done: `docs/reports/paper_f/README.md`, sections 9 and 10 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
   revision.** Record every decision of a journal in this table and in the paper's README.
@@ -71,8 +71,8 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
   (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to commit `b40556cc2` (CIFIE Revision 1 attended, merged
-  2026-10-24). `chapter/cifie-revision-1`, `paper/b-computers-informatics`, and
+- `main` holds everything up to pull request #71 (Paper F: amendments accepted, merged
+  2026-10-25) and this handoff. `chapter/cifie-revision-1`, `paper/b-computers-informatics`, and
   `paper/f-external-validity` hold nothing that is not on `main`; `thesis/rca-001-phase-2`
   is behind `main` and takes `main` when the thesis lane resumes.
 - The lane lock of the main folder is free.
@@ -89,7 +89,8 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 0. **CIFIE/FOM-7 chapter:** Revision 1 attended; author to dispatch the package
    (`capitulo_cifie_xai_fom7_Revision_1_Atendido.docx`, `_bn.docx`,
    `RESPUESTA_A_REVISORES_REVISION_1.pdf`) to editor Dra. Irene Arostegui.
-1. **Paper F:** revision for Reviewer A submitted 2026-10-19; wait for the editor.
+1. **Paper F:** final version submitted 2026-10-25; wait for the journal (proofs or
+   publication, target issue 30 March 2027).
 2. Submission numbers of Papers B (C&I), C, D and E (AAIR).
 3. The final text of Paper F's comments to the editor (not shown to the session).
 4. **The publication licence of the book chapter**: whether it allows the ten figures
@@ -140,43 +141,31 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
 - **Single-author papers** are written impersonally; references carry a verified DOI
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once,
-  then give the author the exact command.
-- **Other reviewers (Codex) work in the same folder.** Read `git status` after a claim
-  and do not touch files another session left uncommitted without the author's word.
+  t## Latest handoff - 2026-10-25, SESSION END (Paper F: amendments accepted, final version submitted)
 
-## Latest handoff - 2026-10-24, SESSION END (CIFIE Book Chapter Revision 1 Attended and Merged)
-
-Session of 2026-10-24, lane `chapter` (branch `chapter/cifie-revision-1`, owner `gemini-2026-10-24-cifie`).
+Session of 2026-10-25, lane `paper-f` (branch `paper/f-external-validity`, owner
+`claude-2026-10-25-paper-f`); shared files on `pubs/context-2026-10-25`.
 
 - **Completed**:
-  - Editorial Revision 1 of CIFIE/FOM-7 book chapter (`publications/book_chapters/2026_cifie_xai_fom7/drafts/v5_revision_1/capitulo_cifie_xai_fom7_Revision_1.docx`) from editor Dra. Irene Arostegui (Colección CIFIE / Editorial Tintazul) systematically reviewed and all 5 comments fully addressed:
-    - **C44**: Mapped FOM-7 7-gate lifecycle to empirical metrics in Table 1 across operational, statistical, and agreement tiers (`06_protocolo_fom7.md`, `07_diseno_empirico.md`, `table_metrics.md`).
-    - **C50**: Qualified absolute reproducibility claims with 4-layer control framework (seeds, environment, pinned deps, deterministic SHAP/LIME sampling) (`07_diseno_empirico.md`).
-    - **C54**: Demarcated provenance of RIMI 2026 / PhD thesis empirical baseline vs original chapter contributions (`02_introduccion.md`, `table_results_summary.md`).
-    - **C69**: Calibrated epistemic modesty; purged "certificar/certificación", reframing FOM-7 as technical acceptance criteria under Level 3 functional evaluation (`11_conclusiones.md`).
-    - **C71**: Restructured Section 10 into explicit limitations axes followed by mirrored future agenda (`10_limitaciones_trabajo_futuro.md`).
-  - Incorporated author's edit in Section 10 heading (*«Alcance y limitaciones del estudio»*).
-  - Recompiled both digital color and monochrome print Word manuscripts via `pandoc`:
-    - `capitulo_cifie_xai_fom7_Revision_1_Atendido.docx` (8,203 words).
-    - `capitulo_cifie_xai_fom7_Revision_1_Atendido_bn.docx` (8,203 words).
-  - Drafted formal response letter to the editor (`RESPUESTA_A_REVISORES_REVISION_1.md`) using Option A clean academic header, single-author first-person impersonal tone (Jonathan Herrera-Vásquez), and detailed comment-by-comment remediation tables.
-  - Built professional Word and PDF editions of the response letter via `build_letter.py` (python-docx + Word COM) with left-aligned headers and blockquotes avoiding unjustified whitespace stretching:
-    - `RESPUESTA_A_REVISORES_REVISION_1.docx`
-    - `RESPUESTA_A_REVISORES_REVISION_1.pdf`
-  - Verified numerical integrity (`verify_claims.py`: 1,391 claims, 1,808 sites; `verify_sync.py`: clean).
-  - Merged work from `chapter/cifie-revision-1` into `main` (commit `b40556cc2`) and pushed to `origin`.
+  - Editor of JCSI (Beata Pańczyk), 2026-10-25: the reviewer accepted the amendments;
+    final version with author details and affiliation requested under "Revisions".
+  - Paper F rebuilt from unchanged sources; `herrera-vasquez.docx` text identical to the
+    revision of 2026-10-19; author block (name, affiliation, e-mail, ORCID), the answers to
+    Reviewer A and the format corrections of 2026-10-13 checked; 8 pages in Word.
+  - Files in `docs/reports/paper_f/submission/final_2026-10-25/` (git-ignored), renamed by
+    the author `herrera-vasquez-final.docx` / `.pdf`; uploaded as files 47981 and 47982 and
+    the editor told, 2026-10-25 (author).
+  - Recorded in `docs/reports/paper_f/README.md`, section 10 (PR #71, merged).
 - **Current State**:
-  - `main` branch updated to commit `b40556cc2` containing all CIFIE Revision 1 remediations, recompiled manuscripts, and response letters.
-  - All chapter artifacts in `publications/book_chapters/2026_cifie_xai_fom7/drafts/v5_revision_1/` are complete, formatted, and ready for delivery to Dra. Irene Arostegui.
-  - Working tree clean of lane changes; lane lock released.
+  - Paper F awaits publication; nothing to change unless the journal asks.
+  - Uncommitted Paper B changes of another session remain in the main folder (CLEIEJ files
+    deleted, `CLEIEJ_DEPRECATED/` and two files under `ci_journal/submission/` untracked);
+    not touched.
+  - Nothing running; lane lock released.
 - **Next Steps**:
-  1. Author sends submission package (`capitulo_cifie_xai_fom7_Revision_1_Atendido.docx`, `_bn.docx`, `RESPUESTA_A_REVISORES_REVISION_1.pdf`) to Dra. Irene Arostegui.
-  2. Record submission numbers for Papers B (C&I), C, D, and E (AAIR) when assigned.
-  3. Paper F: await JCSI editorial decision on Reviewer A revision.
-  4. Thesis lane: rebase/merge `main` into `thesis/rca-001-phase-2` and address open author items.
-- **Blockers/Issues**:
-  - None blocking. Keep Word closed when recompiling docx manuscripts or building response letter to avoid Windows file lock errors (`EACCES`/`permission denied`).
-- **Notes**:
-  - Recompile command for CIFIE chapter:
-    `pandoc --citeproc --bibliography=publications/book_chapters/2026_cifie_xai_fom7/drafts/v4_final_submission/capitulo_cifie.bib --csl=publications/book_chapters/2026_cifie_xai_fom7/drafts/v4_final_submission/apa.csl --reference-doc=publications/book_chapters/2026_cifie_xai_fom7/drafts/v4_final_submission/custom_template.docx ...`
-  - Response letter builder script: `python C:/Users/jonna/.gemini/antigravity-ide/brain/e09777f1-a95d-432c-ab9c-9538b759a455/scratch/build_letter.py` (converts markdown to docx with custom styling and exports PDF via Word COM).
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
+     The lane follows the branch checked out: switch branch before claiming.
+  2. Paper F: record proofs or publication when the journal sends them.
+  3. CIFIE: the author dispatches the Revision 1 package (item 0 above).
+  4. Thesis lane: take `main` into `thesis/rca-001-phase-2`; items of "Open with the author".
+- **Blockers/Issues**: none. The Paper B working-tree changes need the author's word.
