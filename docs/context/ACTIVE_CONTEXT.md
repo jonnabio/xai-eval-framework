@@ -171,17 +171,14 @@ Session of 2026-10-25, owner `claude-2026-10-25-paper-f`. Lanes: `paper-f`
     `verify_exp4_reconstruction.py`, `check_active_context.py` pass; `pytest tests/pubs` 47
     passed; CI green on every PR.
   - Main folder on `thesis/rca-001-phase-2`, level with `main`; tree clean; no PR open;
-    nothing running; lane lock free.
+    nothing running; lane lock free. Branches: `main`, `thesis/rca-001-phase-2`,
+    `results/exp4-cohort2` only.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
      The lane follows the checked-out branch: switch branch before claiming.
-  2. Optional, author: delete stale branches (all their work is on `main`; the assistant was
-     refused permission): local branches other than `main`, `thesis/rca-001-phase-2`,
-     `results/exp4-cohort2`; remote `chapter/cifie-revision-1`,
-     `paper/b-computers-informatics`, `pubs/context-2026-10-25b`, `pubs/context-2026-10-25c`.
-  3. Paper F: record proofs or publication when JCSI sends them.
-  4. CIFIE: author dispatches the Revision 1 package (item 0 above).
-  5. Thesis lane: items of "Open with the author".
+  2. Paper F: record proofs or publication when JCSI sends them.
+  3. CIFIE: author dispatches the Revision 1 package (item 0 above).
+  4. Thesis lane: items of "Open with the author".
 - **Blockers/Issues**:
   - None blocking. Pending with the author: items 0 to 7 of "Open with the author".
   - The archived CLEIEJ `.tex` files do not rebuild in `CLEIEJ_DEPRECATED/` (relative paths
@@ -196,5 +193,6 @@ Session of 2026-10-25, owner `claude-2026-10-25-paper-f`. Lanes: `paper-f`
     commits that mix lanes, and other sessions may leave files in the tree.
   - Lane and shared commits can travel in one PR as separate commits;
     `check_lane.py --range origin/main..HEAD` checks them as CI does.
-  - The auto-mode classifier refuses branch deletion and `rm -r` of untracked folders; give
-    the author the command.
+  - Branches cleaned 2026-10-25 (author's instruction): only `main`, `thesis/rca-001-phase-2`
+    and `results/exp4-cohort2` remain. Delete a branch once its work is on `main`; the
+    auto-mode classifier allows it when the author asks explicitly.
