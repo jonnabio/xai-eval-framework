@@ -34,7 +34,7 @@ def main() -> int:
 
     papers = {
         "paper_a": ROOT / "docs" / "reports" / "paper_a" / "paper_a_prototype_jmlr.tex",
-        "paper_b": ROOT / "docs" / "reports" / "paper_b" / "paper_b_cleiej.tex",
+        "paper_b": ROOT / "docs" / "reports" / "paper_b" / "CLEIEJ_DEPRECATED" / "paper_b_cleiej.tex",
         "paper_bc": ROOT / "docs" / "reports" / "paper_bc" / "paper_bc_iberamia.tex",
         # Paper C is rendered from a template with placeholders, so it cannot \input
         # its abstract; its fragments are compared with the manuscript text below.
