@@ -68,8 +68,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Repository state
 
-- Main folder `xai-eval-framework`: thesis lane. Other folders: `../xai-exp4`
-  (`results/exp4-cohort2`), `../xai-eval-framework-main-status` (`main`, read only).
+- Main folder `xai-eval-framework`: thesis lane; the only working tree. `../xai-exp4` and
+  `../xai-eval-framework-main-status` were removed on 2026-10-25 (nothing unique; EXP4 lane
+  closed, see `lanes.toml`).
   Lanes and the paths they own: `scripts/pubs/lanes.toml`.
 - `main` holds everything up to pull request #73 (Paper B: CLEIEJ edition archived, merged
   2026-10-25) and this handoff. `chapter/cifie-revision-1`, `paper/b-computers-informatics`, and
@@ -171,8 +172,8 @@ Session of 2026-10-25, owner `claude-2026-10-25-paper-f`. Lanes: `paper-f`
     `verify_exp4_reconstruction.py`, `check_active_context.py` pass; `pytest tests/pubs` 47
     passed; CI green on every PR.
   - Main folder on `thesis/rca-001-phase-2`, level with `main`; tree clean; no PR open;
-    nothing running; lane lock free. Branches: `main`, `thesis/rca-001-phase-2`,
-    `results/exp4-cohort2` only.
+    nothing running; lane lock free. Branches: `main` and
+    `thesis/rca-001-phase-2` only; one worktree.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
      The lane follows the checked-out branch: switch branch before claiming.
@@ -193,6 +194,6 @@ Session of 2026-10-25, owner `claude-2026-10-25-paper-f`. Lanes: `paper-f`
     commits that mix lanes, and other sessions may leave files in the tree.
   - Lane and shared commits can travel in one PR as separate commits;
     `check_lane.py --range origin/main..HEAD` checks them as CI does.
-  - Branches cleaned 2026-10-25 (author's instruction): only `main`, `thesis/rca-001-phase-2`
-    and `results/exp4-cohort2` remain. Delete a branch once its work is on `main`; the
+  - Branches cleaned 2026-10-25 (author's instruction): only `main` and
+    `thesis/rca-001-phase-2` remain; worktrees `../xai-exp4` and `../xai-eval-framework-main-status` removed. Delete a branch once its work is on `main`; the
     auto-mode classifier allows it when the author asks explicitly.
