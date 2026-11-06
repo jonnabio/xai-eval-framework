@@ -173,3 +173,39 @@ substantially, possibly their ordering.
 **Status:** reported to the author 2026-11-06. Needs an RCA (RCA-004) on a shared branch,
 because Paper A (published), the thesis and Papers D/E draw on the same cohort, and a
 decision on how the RF cells enter Paper B.
+
+**F7e. The January RF cannot be rebuilt.** Retraining the repository's `RandomForestTrainer`
+defaults (100 trees, `max_depth` None, `random_state` 42) on today's Adult training split does
+not reproduce the January instance sets either (0 to 88 instances shared out of 200 to 800).
+The model is lost.
+
+## F8. INCIDENT: in 60 of the 75 EXP2 cells, most evaluation instances were training data
+
+`load_adult(random_state=…)` splits the data with the seed it is given
+(`train_test_split(X, y, test_size=0.2, random_state=random_state, stratify=y)`,
+`src/data_loading/adult.py` line 588), and the EXP2 runner passes **each run's seed**
+(`random_state=self.config.random_seed`, `src/experiment/runner.py`). The models were trained
+once, on the seed-42 split. So for seeds 123, 456, 789 and 999, the "test" set the instances
+are drawn from is a different 20%, about 80% of it inside the model's training set:
+
+| Split seed | Test rows | In the seed-42 training split |
+|---|---|---|
+| 42 | 9,758 | 0 (0.0%) |
+| 123 | 9,758 | 7,779 (79.7%) |
+| 456 | 9,758 | 7,848 (80.4%) |
+| 789 | 9,758 | 7,829 (80.2%) |
+| 999 | 9,758 | 7,795 (79.9%) |
+
+Confirmation that the models were trained on the seed-42 split: accuracy on the seed-123
+"test" set is higher for the models that fit their training data (RF 0.8047 → 0.8227; XGBoost
+0.8699 → 0.8802), while logistic regression is unchanged (0.8490 → 0.8488).
+
+Consequences: the confusion-matrix strata of 60 of the 75 cells (seeds ≠ 42) are computed
+mostly on training points. Fewer errors are available there, and the explained instances are
+partly memorized. The feature means used for masking also change with the seed. This affects
+every analysis built on the EXP2 cohort (Paper A, published; Papers B, D and E; the thesis),
+**Paper D above all**, whose subject is misclassified instances. It is part of RCA-004.
+
+The B2 cohort removes it by design: one fixed split per dataset (`random_state` 42) shared by
+model training, preprocessing and every seed; the seeds vary only the instance draw and the
+explainers' randomness.
