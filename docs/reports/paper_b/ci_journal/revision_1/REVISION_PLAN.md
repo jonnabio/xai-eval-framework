@@ -20,6 +20,20 @@ benchmark.
 
 ## 2. Decisions for the author (needed before WP2)
 
+**Taken by the author on 2026-11-06:**
+
+| ID | Decision |
+|---|---|
+| D-1 | **Pending.** Author asked what "re-time only" means (answered in session: it also needs new runs, and D-2/D-3 already require a new cohort). Awaiting confirmation of (a) |
+| D-2 | **Anchors and DiCE** both added to the main benchmark |
+| D-3 | **LIME reference kernel width = library default** $0.75\sqrt{M}$; 3.0 becomes one point of the sweep |
+| D-4 | **Add datasets, and manage the overlap risk** (see WP3: datasets used by no other paper) |
+| D-5 | **Model calls + CPU time + theoretical complexity; FLOPs for logreg and the MLP only**, with the reason stated |
+| D-6 | **Apply the reference rule** (verified DOI on every entry, ≥80% from 2024 or later) |
+| D-7 | **One cloud VM of a fixed type** for every run that is timed (provider and type: Q-3) |
+
+Options as proposed:
+
 | ID | Decision | Options | Recommendation |
 |---|---|---|---|
 | D-1 | Cohort | (a) **new single-host cohort B2** (new instance-sampling seeds; the trained models are reused); (b) keep the EXP2 cohort and re-time only | **(a)**. (b) leaves R2-6, R1-1 and X-1 open and cannot add Anchors/DiCE (X-2) |
@@ -40,6 +54,13 @@ benchmark.
 2. Settle X-4: load `experiments/exp1_adult/models/preprocessor.joblib` and report the number
    of transformed features (103 or 108).
 3. Q-1, Q-2 answered by the author.
+4. **Cloud VM (D-7).** One fixed, non-burstable, compute-optimised instance type, chosen by the
+   author's provider (Q-3). The VM is provisioned by the author: it is billed to the author's
+   account. Every run that is timed runs there, and the instance type, `lscpu`, RAM, OS image,
+   kernel and Python freeze are written into the cohort manifest. Timing runs one process with
+   one thread; the quality pass may use the other cores of the same VM. The pilot (WP2.1) runs
+   on the VM itself; a short local pilot may come first, to size the instance.
+5. Verify the WP3 candidate datasets (OpenML id, licence, binary target, rows, feature types).
 
 ### WP1. Problem statement and contributions (R1-1, R2-8)
 
@@ -59,6 +80,7 @@ under which latency and stability budget. State three contributions that need no
   (SHAP, LIME, Anchors, DiCE) × 5 **new** seeds × confusion-matrix-stratified instances. The
   instance count per cell is fixed after the pilot (target ≥100 per cell; stability on a fixed
   sub-sample if KernelSHAP-SVM does not fit).
+- **Host:** the cloud VM of D-7, for both passes.
 - **Two passes, separated:**
   - *Quality pass:* fidelity, faithfulness gap, stability, sparsity. Host-independent, so it may
     use parallel workers on the host.
@@ -80,13 +102,44 @@ under which latency and stability budget. State three contributions that need no
   `results.json` per run, host spec). It never overwrites EXP2 (RCA-002 cohort rule applied by
   analogy).
 
-### WP3. Symmetric cross-dataset extension (R1-6, R2-5)
+### WP3. Symmetric, extended cross-dataset study (R1-6, R2-5; D-4)
 
-Same protocol as WP2 on Breast Cancer and German Credit: every model, four explainers, **SHAP
-stability included**, same host. The two datasets need logreg, SVM and MLP models trained with
-the EXP3 split and seeds, alongside the existing RF and XGBoost. Table 4/5 of the current paper
-are replaced by one table of all endpoints × explainer × dataset × model, with paired
-differences.
+Same protocol as WP2: every model, four explainers, **SHAP stability included**, same VM.
+Tables 4 and 5 of the current paper are replaced by one table of all endpoints × explainer ×
+dataset × model, with paired differences.
+
+**Overlap with the other papers (the D-4 risk).** Dataset use found on 2026-11-06:
+
+| Paper | Datasets |
+|---|---|
+| F (accepted, JCSI) | 16 OpenML sets: phoneme, qsar-biodeg, ozone-level-8hr, MagicTelescope, electricity, default-of-credit-card-clients, **credit-g (German Credit)**, churn, compas-two-years, **adult**, bank-marketing, Amazon_employee_access, pc4, pc3, jm1, kc1 |
+| E (AAIR) | Adult, German Credit, Breast Cancer |
+| D (Tecnología en Marcha) | Adult, German Credit (validation) |
+
+Rules adopted:
+
+1. The **added datasets are used by no other paper**: none of the 16 of Paper F, nor Adult,
+   German Credit or Breast Cancer.
+2. They are chosen **to answer a question Paper F does not ask**: whether LIME's stability
+   collapse follows the *one-hot encoding* or the *dimension*. That is the confound the current
+   paper admits it cannot separate (lines 628-635) and that R2-3 attacks. A 2 × 2 design:
+
+   | | low dimension | high dimension |
+   |---|---|---|
+   | numeric only | e.g., `diabetes` (Pima, 8 features) | e.g., `spambase` (57 features) |
+   | categorical, one-hot | e.g., `kr-vs-kp` (36 binary/categorical) | e.g., `mushroom` (22 categorical, ~117 one-hot columns) |
+
+   Candidates; OpenML ids, licences, class balance and binary target to be verified in WP0
+   before any run. A mixed-type set (e.g., `australian`) is an optional fifth.
+3. **Breast Cancer and German Credit stay**, rerun in the new cohort with every model. They
+   give the reviewers continuity with the version they read. Their numbers come from new runs
+   and new models, so no registered value of Papers D, E or F is printed (X-2,
+   `verify_claims.py` enforces it).
+4. The paper states its scope against Paper F's question (does a *ranking of four methods* hold
+   across datasets?) in its own words. It does not cite F for numbers. F is not yet published,
+   and a citation would weaken the masking.
+5. Seeds: 3 per cell on the cross-dataset sets (5 on Adult), to fit the budget fixed by the
+   pilot.
 
 ### WP4. Validity of the stability and sparsity measurements (R1-3, R2-3, R2-4)
 

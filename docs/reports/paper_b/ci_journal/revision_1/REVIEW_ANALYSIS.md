@@ -73,3 +73,4 @@ DergiPark** (Q-2). The items below come from the general comment and the ratings
 - **Q-2.** Whether Reviewer 1's "major and minor comments" are in an attached file on DergiPark
   (look under the reviewer's evaluation for a downloadable file). If so, add it to this folder.
   The plan will add its items as R1-12 onwards.
+- **Q-3.** Cloud provider and instance type for the fixed VM (D-7), and who provisions it.
