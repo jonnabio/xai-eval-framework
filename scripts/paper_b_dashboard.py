@@ -155,7 +155,7 @@ def _ago(t) -> str:
 def render_text(s: dict) -> str:
     o = s["orchestrator"]
     host = o.get("host") or {}
-    L = [f"Paper B rev. 1, cohort B2 — {time.strftime('%Y-%m-%d %H:%M:%S')}"]
+    L = [f"Paper B rev. 1, cohort B2 - {time.strftime('%Y-%m-%d %H:%M:%S')}"]
     for w in s["warnings"]:
         L.append(f"  !! {w}")
     L.append(f"Orchestrator: {'RUNNING' if o.get('alive') else 'not running'}"

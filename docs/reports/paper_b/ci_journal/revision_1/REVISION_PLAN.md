@@ -24,7 +24,7 @@ benchmark.
 
 | ID | Decision |
 |---|---|
-| D-1 | **Re-time only, the shortest run** (author, 2026-11-06, after the consequences below were stated). The Adult quality numbers of SHAP, Anchors and DiCE stay those of the EXP2 cohort; every explainer is re-timed on one host. LIME's quality is re-measured on the 75 cells at the default width, because D-3 requires it and LIME is cheap. See "Consequences of D-1" below |
+| D-1 | **Fresh cohort B2 on this laptop** (author, 2026-11-06, replacing "re-time only"). Reason: the EXP2 audit (`WP0_FINDINGS.md` F7, F8) found the RF model of the SHAP/LIME runs lost, a 1 s timing artifact from 2026-03-23, truncated SVM SHAP runs, and evaluation instances that were training data in 60 of 75 cells. Re-timing could not repair any of these. Design: `experiments/exp_b_rev1/cohort.toml`; implementation: `RUNS_IMPLEMENTATION_PLAN.md`; operation: `RUNBOOK.md`. The section "Consequences of D-1" below applied to re-time only and is superseded |
 | D-2 | **Anchors and DiCE** both added to the main benchmark |
 | D-3 | **LIME reference kernel width = library default** $0.75\sqrt{M}$; 3.0 becomes one point of the sweep |
 | D-4 | **Add datasets, and manage the overlap risk** (see WP3: datasets used by no other paper) |
@@ -32,7 +32,7 @@ benchmark.
 | D-6 | **Apply the reference rule** (verified DOI on every entry, ≥80% from 2024 or later) |
 | D-7 | **This laptop as the single recorded host** (author, 2026-11-06; OpenRouter rents no VMs). AMD Ryzen 5 4600H, 6 cores / 12 threads, 31.4 GB, Windows 11 Home 10.0.26300. Every timed run happens here, idle, on mains power, under a fixed power plan; full spec in the cohort manifest. Where the plan says "VM", read this host |
 
-**Consequences of D-1, accepted with the decision (2026-11-06).**
+**Consequences of D-1 as first decided (re-time only), superseded the same day by the fresh cohort.**
 
 - **Risk kept open:** R2-6 and X-1. The SHAP quality numbers on Adult come from the cohort of
   Paper A (published), and C&I's policy calls reuse "with or without citation" self-plagiarism.

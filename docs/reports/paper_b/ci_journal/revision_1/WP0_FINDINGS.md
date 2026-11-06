@@ -209,3 +209,12 @@ every analysis built on the EXP2 cohort (Paper A, published; Papers B, D and E; 
 The B2 cohort removes it by design: one fixed split per dataset (`random_state` 42) shared by
 model training, preprocessing and every seed; the seeds vary only the instance draw and the
 explainers' randomness.
+
+## F9. DiCE was configured for 5 counterfactuals but always produced 1
+
+The EXP2 configs set `num_counterfactuals: 5` for DiCE. `src/xai/dice_wrapper.py` ignores it
+and calls `generate_counterfactuals(..., total_CFs=1)`. The attribution is |x − counterfactual|
+for that single counterfactual. Any text reporting five counterfactuals (Paper A, the thesis)
+describes a setting that did not run; RCA-004 checks. Cohort B2 states 1, which is what runs.
+
+Also: the Anchors wrapper hard-codes `threshold=0.95`, the same value the configs give.
