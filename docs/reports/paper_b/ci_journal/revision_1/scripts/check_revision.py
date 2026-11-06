@@ -11,7 +11,9 @@ Checks:
 3. Each entry has a valid status. REMEDIATED needs Changes (existing C-ids) and Where;
    EXPLAINED needs a Response; a REMEDIATED item also needs a Response.
 4. Each change of CHANGELOG.md has a unique ID and names existing items (or `none`).
-5. --final: no item PENDING, and every change except C-000 is cited by some answer or
+5. A GENERAL item (an assessment without pointers) must be REMEDIATED: its answer names at
+   least one concrete place that was revised (author rule, 2026-11-06).
+6. --final: no item PENDING, no [DRAFT] placeholder, and every change except C-000 is cited by some answer or
    marked `none`.
 
 Exit code 0 when everything holds (PENDING items are reported, and fail only with --final).
@@ -44,7 +46,7 @@ def parse_response(text: str) -> dict[str, dict]:
     for i in range(1, len(blocks), 2):
         rid, body = blocks[i], blocks[i + 1]
         fields = {}
-        for key in ("Status", "Changes", "Plan", "Response", "Where"):
+        for key in ("Type", "Status", "Changes", "Plan", "Response", "Where"):
             m = re.search(rf"^- \*\*{key}:\*\*[ \t]*(.*?)(?=^- \*\*|\Z|^### |^## )", body,
                           flags=re.M | re.S)
             fields[key.lower()] = (m.group(1).strip() if m else "")
@@ -140,6 +142,11 @@ def main(argv=None) -> int:
                 errors.append(f"{rid}: REMEDIATED without a response text")
         if st == "EXPLAINED" and not f["response"]:
             errors.append(f"{rid}: EXPLAINED without a response text")
+        if f.get("type", "").startswith("GENERAL") and st == "EXPLAINED":
+            errors.append(f"{rid}: a GENERAL comment must name at least one place that was "
+                          "revised (REMEDIATED with a change), not only an explanation")
+        if a.final and "[DRAFT" in f["response"]:
+            errors.append(f"{rid}: response still contains a [DRAFT] placeholder")
     pending = [r for r, f in resp.items() if f["status"].startswith("PENDING")]
     if a.final:
         errors += [f"{r}: still PENDING" for r in pending]

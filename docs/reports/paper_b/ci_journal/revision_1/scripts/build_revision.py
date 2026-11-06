@@ -40,6 +40,9 @@ WORK = BUILD / "_latex"
 SUBMITTED = CI / "paper_b_ci.tex"
 REVISED = REV / "manuscript" / "paper_b_ci_rev1.tex"
 NAME = "paper_b_ci_rev1"
+# Page budget of the manuscript in the journal's Word template. The journal sets no length
+# limit (writing rules, last updated 2025-02-22); its published articles run 7 to 17 pages.
+PAGE_BUDGET = 17
 SUBMITTED_DOCX = CI / "submission" / "paper_b_ci_manuscript.docx"   # frozen; text-check only
 REV_ABSTRACT = ROOT / "pub" / "fragments" / "paper_b_rev1_abstract_en.tex"
 REV_KEYWORDS = ROOT / "pub" / "fragments" / "paper_b_rev1_keywords_en.tex"
@@ -164,10 +167,10 @@ def response_markdown() -> str:
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
     keep = []
     for line in text.splitlines():
-        if re.match(r"^- \*\*(Status|Changes|Plan):\*\*", line):
+        if re.match(r"^- \*\*(Status|Changes|Plan|Type):\*\*", line):
             continue
         keep.append(line.replace("- **Response:**", "**Response.**")
-                    .replace("- **Where:**", "**Where in the manuscript.**"))
+                    .replace("- **Where:**", "**Changes in the manuscript:**"))
     return "\n".join(keep)
 
 
@@ -250,6 +253,14 @@ def main(argv=None) -> int:
         print("response letter:", builder.word_pass(letter, "Response to the reviewers", ""))
         outputs.append(letter.with_suffix(".pdf"))
     builder.check_masked(BUILD / f"{NAME}_manuscript.docx")
+
+    if not a.no_word:
+        pages = pdf_pages(BUILD / f"{NAME}_manuscript.pdf")
+        flag = "within" if pages <= PAGE_BUDGET else "OVER"
+        report.append(f"- Length: {pages} pages in the journal template; budget {PAGE_BUDGET} "
+                      f"({flag})")
+        if pages > PAGE_BUDGET:
+            print(f"WARNING: the manuscript has {pages} pages, over the budget of {PAGE_BUDGET}")
 
     # 5. Tracking status and manifest.
     import io

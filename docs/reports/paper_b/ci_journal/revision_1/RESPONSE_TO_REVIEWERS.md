@@ -2,11 +2,27 @@
 
 Manuscript 2067810, *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark*, *Computers and Informatics*. Major revision of 2026-11-06.
 
+<!-- RESPONSE GUIDELINES (author, 2026-11-06)
+1. Every item gets an answer that moves the review forward: never a question back to the
+   reviewer or the editor.
+2. GENERAL comments (marked "- **Type:** GENERAL" below: an assessment or a rating without a
+   pointer to specific passages). Answer politely; note, without complaint, that the comment
+   is general; then name AT LEAST ONE concrete place the authors identified against it, and
+   state that it was revised. Pattern:
+     "We thank the reviewer for this assessment. As the comment concerns the manuscript as a
+      whole, we reviewed every section against it and identified the following places where
+      <aspect> could be improved: (1) <section/table: what was weak>, ... We revised each of
+      them: <what changed>."
+   Each named place must be a real change, listed in CHANGELOG.md and in Changes / Where.
+3. "Where" is the location of OUR change in the revised manuscript (section, table, figure,
+   page). It is rendered as "Changes in the manuscript:", a statement, not a question.
+-->
 <!-- TRACKING FORMAT (read by scripts/check_revision.py; the lines marked [internal]
 are removed when the letter is rendered for the journal):
   - **Status:** PENDING | REMEDIATED | EXPLAINED            [internal]
   - **Changes:** C-### ids from CHANGELOG.md                [internal]
   - **Plan:** work package of REVISION_PLAN.md              [internal]
+  - **Type:** GENERAL, for an assessment without specific pointers  [internal]
   - **Response:** the answer, written for the reviewer
   - **Where:** section, table or figure of the revised manuscript
 A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -->
@@ -119,30 +135,33 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Organization of the manuscript: Poor (Poor organization of ideas and supporting points)
 
+- **Type:** GENERAL
 - **Status:** PENDING
 - **Changes:** 
 - **Plan:** WP7
-- **Response:** 
+- **Response:** We thank the reviewer for this assessment. As the comment concerns the manuscript as a whole, we reviewed every section against it and identified the following places where organization could be improved: (1) [place: what was weak]. We revised each of them: [what changed]. [DRAFT: complete with the C-### changes]
 - **Where:** 
 
 ### R1-9
 
 > Drawing and Building Upon Relevant Literature: Poor (Provides a poor summary of the major points in the relevant literature)
 
+- **Type:** GENERAL
 - **Status:** PENDING
 - **Changes:** 
 - **Plan:** WP8, D-6
-- **Response:** 
+- **Response:** We thank the reviewer for this assessment. As the comment concerns the manuscript as a whole, we reviewed every section against it and identified the following places where the use of the literature could be improved: (1) [place: what was weak]. We revised each of them: [what changed]. [DRAFT: complete with the C-### changes]
 - **Where:** 
 
 ### R1-10
 
 > [...] ensure that the conclusions are fully supported by the reported evidence. (Conclusion: Fair conclusion without sufficient justification from evidence presented)
 
+- **Type:** GENERAL
 - **Status:** PENDING
 - **Changes:** 
 - **Plan:** WP7
-- **Response:** 
+- **Response:** We thank the reviewer for this assessment. As the comment concerns the manuscript as a whole, we reviewed every section against it and identified the following places where the support of the conclusions by the evidence could be improved: (1) [place: what was weak]. We revised each of them: [what changed]. [DRAFT: complete with the C-### changes]
 - **Where:** 
 
 ### R1-11
@@ -545,8 +564,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Statement of the Problem or Purpose: Poor; Relevance and importance of the Topic: Fair (Marginally relevant to the mission and purpose of the journal); Contribution to the Field: Poor (Does not provide original contributions to the literature)
 
+- **Type:** GENERAL
 - **Status:** PENDING
 - **Changes:** 
 - **Plan:** WP1, WP7
-- **Response:** 
+- **Response:** We thank the reviewer for this assessment. As the comment concerns the manuscript as a whole, we reviewed every section against it and identified the following places where the statement of the problem, the relevance to the journal and the contribution could be improved: (1) [place: what was weak]. We revised each of them: [what changed]. [DRAFT: complete with the C-### changes]
 - **Where:** 
