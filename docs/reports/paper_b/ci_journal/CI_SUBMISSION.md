@@ -5,7 +5,7 @@
 No. 1 of 30 June 2026 has three articles). Guidelines: https://dergipark.org.tr/en/pub/ci/writing-rules.
 Submit at https://dergipark.org.tr/en/journal/3364/submission/step/manuscript/new.
 
-**Status: SUBMITTED on 2026-10-21** (author; submission number not yet recorded). Do not rebuild or edit unless the journal asks for a revision.
+**Status: MAJOR REVISION requested 2026-11-06** (submission **2067810**, submitted 2026-10-21). Decision, item analysis and plan: `revision_1/` (`DECISION_LETTER.md`, `REVIEW_ANALYSIS.md`, `REVISION_PLAN.md`).
 
 Prepared 2026-10-21. The author decided on 2026-10-21 to withdraw
 Paper B from the *CLEI Electronic Journal* (submission 1196) because of the length of its queue,
@@ -112,9 +112,9 @@ cover letter, signed copyright agreement; the similarity report is made by the s
 | Item | Value |
 |---|---|
 | Date | 2026-10-21 (author, in session; to be confirmed) |
-| Submission | Number not recorded |
+| Submission | 2067810 |
 | Files sent | `submission/paper_b_ci_manuscript.docx` (masked, full text for intihal.net), `paper_b_ci_title_page.docx`, `paper_b_ci_cover_letter.docx`, signed copyright agreement |
 | Similarity | intihal.net 1%, every source under 1% (section 4) |
 | Optional fields | Ethical statement: public anonymised datasets, no participants, no approval required; original and not under consideration elsewhere. Supporting institution: none, no external funding. Thanks: left empty (advised, to keep the review masked: the person thanked co-authored reference [10]); the acknowledgment is on the title page |
 | Note to the editor | CLEIEJ 1196 withdrawn and confirmed; relation to the RIMI article (ref. [10]); other manuscripts on the same runs report none of these results; public archive on the title page; similarity 1% |
-| Decision | Pending |
+| Decision | **Major Revision**, 2026-11-06 (Prof. Dr. Mehmet Tekerek, Editor in Chief; two reviewers). Editorial requirement: at least one state-of-the-art explainer (Anchors or DiCE) in the main benchmark. See `revision_1/` |
