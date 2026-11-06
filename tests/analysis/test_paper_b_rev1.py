@@ -262,8 +262,11 @@ def test_cohort_config_is_complete():
     assert cfg["resources"]["worker_cap_gb"] > cfg["resources"]["default_peak_gb"]
 
 
-def test_config_hash_ignores_line_endings(tmp_path):
-    a, b = tmp_path / "a.toml", tmp_path / "b.toml"
-    a.write_bytes(b"[x]\ny = 1\n")
-    b.write_bytes(b"[x]\r\ny = 1\r\n")
-    assert lib.config_hash(a) == lib.config_hash(b)
+def test_config_hash_covers_design_only(tmp_path):
+    a, b, c, d = (tmp_path / f"{n}.toml" for n in "abcd")
+    a.write_bytes(b"[x]\ny = 1\n[sync]\nevery_minutes = 15\n")
+    b.write_bytes(b"# comment\r\n[x]\r\ny = 1\r\n[sync]\r\nevery_minutes = 5\r\n")
+    c.write_bytes(b"[x]\ny = 1\n[resources]\nmax_workers = 2\n")
+    d.write_bytes(b"[x]\ny = 2\n")
+    assert lib.config_hash(a) == lib.config_hash(b) == lib.config_hash(c)
+    assert lib.config_hash(a) != lib.config_hash(d)

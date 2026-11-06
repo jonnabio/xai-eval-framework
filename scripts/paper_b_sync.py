@@ -6,6 +6,13 @@ the checked-out branch.
     python scripts/paper_b_sync.py --loop     every [sync].every_minutes (Ctrl+C to leave)
     python scripts/paper_b_sync.py --no-push  commit locally only
 
+    Stop a loop started in the background: create outputs/paper_b_rev1_live/_STOP_SYNC
+    (it makes one last snapshot within a minute, then exits).
+
+The loop also pushes the committed state of the lane branches in [sync].also_push
+(default paper/b-ci-revision-1), never forced, so committed work reaches GitHub within
+every_minutes. Uncommitted files are never touched.
+
 The live files (outputs/paper_b_rev1_live/, git-ignored) are copied into a commit on the
 runs branch ([sync].branch, default paper/b-rev1-runs) under [sync].results_prefix, with
 git plumbing: a temporary index, `hash-object`, `update-index`, `write-tree`, `commit-tree`
@@ -143,16 +150,17 @@ def once(cfg: dict, do_push: bool) -> int:
         print("no change since the last snapshot", flush=True)
     if not do_push:
         return 0
+    rc = push_lanes(sc)
     head = git("rev-parse", f"refs/heads/{sc['branch']}")
     last = (lib.read_json(lib.STATE / "sync.json", {}) or {}).get("last_pushed")
     if head == last:
-        return 0
+        return rc
     for attempt in range(4):
         ok, out = push(sc["branch"], sc["remote"])
         if ok:
             write_state(last_pushed=head, last_push_time=time.time(), last_error=None)
             print(f"pushed {head[:10]} to {sc['remote']}/{sc['branch']}", flush=True)
-            return 0
+            return rc
         if "non-fast-forward" in out or "rejected" in out:
             write_state(last_error=f"push rejected (remote moved; nothing overwritten): {out}",
                         last_error_time=time.time())
@@ -162,6 +170,32 @@ def once(cfg: dict, do_push: bool) -> int:
     write_state(last_error=f"push failed: {out}", last_error_time=time.time())
     print(f"push FAILED after retries: {out}", flush=True)
     return 1
+
+
+def push_lanes(sc: dict) -> int:
+    """Push the committed state of each lane branch in [sync].also_push (never forced).
+    Uncommitted work is not touched: only commits travel."""
+    rc = 0
+    for br in sc.get("also_push", []):
+        if not ref_exists(f"refs/heads/{br}"):
+            continue
+        local = git("rev-parse", f"refs/heads/{br}")
+        remote_ref = f"refs/remotes/{sc['remote']}/{br}"
+        if ref_exists(remote_ref) and git("rev-parse", remote_ref) == local:
+            continue                                   # nothing new
+        ok, out = push(br, sc["remote"])
+        if ok:
+            write_state(**{f"lane_{br}": {"pushed": local, "time": time.time()}})
+            print(f"pushed lane {br} at {local[:10]}", flush=True)
+        else:
+            rc = 1
+            write_state(last_error=f"lane push {br} refused (nothing overwritten): {out}",
+                        last_error_time=time.time())
+            print(f"lane push REFUSED for {br}: {out}", flush=True)
+    return rc
+
+
+STOP_SYNC = lib.LIVE / "_STOP_SYNC"
 
 
 def main(argv=None) -> int:
@@ -177,12 +211,24 @@ def main(argv=None) -> int:
     write_state(loop_pid=os.getpid(), loop_started=time.time())
     try:
         while True:
-            once(cfg, args.push)
-            write_state(loop_heartbeat=time.time())
-            time.sleep(every)
+            print(time.strftime("%Y-%m-%d %H:%M:%S"), "snapshot", flush=True)
+            once(lib.config(), args.push)
+            write_state(loop_heartbeat=time.time(), loop_pid=os.getpid())
+            t_next = time.time() + every
+            while time.time() < t_next:              # wake each minute: stop file, heartbeat
+                if STOP_SYNC.exists():
+                    print(f"{STOP_SYNC} found: one last snapshot, then leaving", flush=True)
+                    STOP_SYNC.unlink(missing_ok=True)
+                    rc = once(lib.config(), args.push)
+                    write_state(loop_pid=None, loop_stopped=time.time())
+                    return rc
+                time.sleep(60)
+                write_state(loop_heartbeat=time.time())
     except KeyboardInterrupt:
         print("leaving; one last snapshot", flush=True)
-        return once(cfg, args.push)
+        rc = once(lib.config(), args.push)
+        write_state(loop_pid=None, loop_stopped=time.time())
+        return rc
 
 
 if __name__ == "__main__":

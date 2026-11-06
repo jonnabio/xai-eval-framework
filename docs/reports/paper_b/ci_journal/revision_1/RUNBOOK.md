@@ -26,7 +26,7 @@ Open three windows:
 | Window | Command | Role |
 |---|---|---|
 | 1 | `py scripts\paper_b_run.py preflight` then `py scripts\paper_b_run.py launch` | The quality pass |
-| 2 | `py scripts\paper_b_sync.py --loop` | Saves to GitHub every 15 min (branch `paper/b-rev1-runs`) |
+| 2 | `py scripts\paper_b_sync.py --loop` (already running in the background since 2026-11-06; see §9) | Every 15 min: saves the results to `paper/b-rev1-runs` and pushes the commits of `paper/b-ci-revision-1` |
 | 3 | `py scripts\paper_b_dashboard.py` | Open http://127.0.0.1:8765 in a browser |
 
 Order of the passes: `prepare` (once) → `pilot` → `pilot-timing` → `launch` → `launch-timing`.
@@ -94,3 +94,24 @@ old while the sync runs.
 | `paper/b-ci-revision-1` | Code, configuration, frozen models, documents, manuscript |
 | `paper/b-rev1-runs` | Results only, saved automatically every 15 minutes |
 | `main` | Reached only through pull requests that the author merges |
+
+## 9. The background save loop
+
+Since 2026-11-06 the save loop runs as a hidden background process, started with:
+
+```powershell
+Start-Process -WindowStyle Hidden -FilePath .venv\Scripts\python.exe `
+  -ArgumentList "scripts\paper_b_sync.py","--loop" `
+  -RedirectStandardOutput outputs\paper_b_rev1_live\_logs\sync.log `
+  -RedirectStandardError outputs\paper_b_rev1_live\_logs\sync.err.log
+```
+
+Every 15 minutes it (1) copies the live results to `paper/b-rev1-runs` and pushes it, and
+(2) pushes any new commits of `paper/b-ci-revision-1`. Pushes are never forced; only
+committed work travels. The dashboard shows the last push.
+
+- **Is it running?** The dashboard's "GitHub sync" tile, or `outputs\paper_b_rev1_live\_state\sync.json`
+  (`loop_heartbeat` is refreshed every minute).
+- **Stop it:** create the empty file `outputs\paper_b_rev1_live\_STOP_SYNC`. Within a minute it
+  makes one last save and exits.
+- **After a restart of Windows** it is not running: start it again with the command above.

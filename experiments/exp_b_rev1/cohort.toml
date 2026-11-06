@@ -1,6 +1,7 @@
 # Cohort B2: Paper B revision 1 (C&I 2067810). The whole design in one file.
 #
-# Every result row records the SHA-256 of this file; the analysis refuses rows of
+# Every result row records the SHA-256 of the DESIGN in this file (every table except
+# [resources] and [sync], which are operational); the analysis refuses rows of
 # different hashes within one cohort. Change it only before the full runs start, or
 # start a new cohort. Plan: docs/reports/paper_b/ci_journal/revision_1/REVISION_PLAN.md
 # and RUNS_IMPLEMENTATION_PLAN.md.
@@ -170,4 +171,7 @@ branch = "paper/b-rev1-runs"
 remote = "origin"
 every_minutes = 15
 results_prefix = "experiments/exp_b_rev1/results"
+# Lane branches the loop also pushes (commits only, never forced), so committed work
+# never waits more than every_minutes to reach GitHub.
+also_push = ["paper/b-ci-revision-1"]
 max_file_mb = 50

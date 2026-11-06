@@ -70,10 +70,18 @@ def sha256_file(path: Path, chunk: int = 1 << 20) -> str:
     return h.hexdigest()
 
 
+OPERATIONAL_TABLES = ("resources", "sync")
+
+
 def config_hash(path: Path = CONFIG_PATH) -> str:
-    """SHA-256 of the config with line endings normalised: git's CRLF conversion on
-    checkout must not make the same design look like a different cohort."""
-    return sha256_bytes(path.read_bytes().replace(b"\r\n", b"\n"))
+    """SHA-256 of the experimental design: every table of the config except the
+    operational ones (resource limits, sync), in canonical JSON. Changing a limit or the
+    push schedule therefore does not split a cohort, and neither does git's CRLF
+    conversion or a comment; any change to the design does."""
+    with open(path, "rb") as fh:
+        cfg = tomllib.load(fh)
+    design = {k: v for k, v in cfg.items() if k not in OPERATIONAL_TABLES}
+    return sha256_bytes(json.dumps(design, sort_keys=True, separators=(",", ":")).encode())
 
 
 def git_commit() -> str | None:
