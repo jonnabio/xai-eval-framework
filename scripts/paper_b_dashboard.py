@@ -107,8 +107,12 @@ def gather() -> dict:
     out["sync"] = lib.read_json(lib.STATE / "sync.json", {}) or {}
     out["preflight"] = lib.read_json(lib.STATE / "preflight.json", {}) or {}
     bench = list(lib.read_jsonl(lib.STATE / "bench.jsonl"))
-    out["bench"] = {"first": bench[0]["bench_ms"] if bench else None,
-                    "last": bench[-1]["bench_ms"] if bench else None, "n": len(bench)}
+    # Compare like with like: the first and last benchmark taken with the same number
+    # of workers running (parallel load slows it without any heat).
+    same = [b for b in bench if bench and b.get("workers") == bench[-1].get("workers")]
+    out["bench"] = {"first": same[0]["bench_ms"] if same else None,
+                    "last": same[-1]["bench_ms"] if same else None, "n": len(same),
+                    "workers": bench[-1].get("workers") if bench else None}
     out["warnings"] = warnings(out)
     return out
 
