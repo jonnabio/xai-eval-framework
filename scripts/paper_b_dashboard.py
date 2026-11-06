@@ -217,7 +217,7 @@ def render_html(s: dict) -> str:
     q, pl = s["passes"]["quality"]["total"], s["passes"]["pilot"]["total"]
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="refresh" content="10"><title>B2 run monitor</title><style>
+<title>B2 run monitor</title><style>
 :root{{--bg:#fbfbf9;--fg:#1d1d1b;--mut:#6b6b66;--line:#e3e2dc;--acc:#2f6f5e;--bad:#b3261e;--warn:#fff4d6}}
 @media (prefers-color-scheme:dark){{:root{{--bg:#161615;--fg:#ecebe6;--mut:#a3a29c;--line:#34332f;--acc:#6fbfa6;--bad:#ff8a80;--warn:#3a3218}}}}
 body{{background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,sans-serif;margin:0;padding:16px;max-width:1100px}}
@@ -227,8 +227,21 @@ table{{border-collapse:collapse;width:100%}} td,th{{border-bottom:1px solid var(
 .kpi{{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}}
 .kpi div{{border:1px solid var(--line);border-radius:8px;padding:8px}} .kpi b{{display:block;font-size:20px}}
 .warn{{background:var(--warn);border-radius:8px;padding:6px 10px}} .bad{{color:var(--bad);font-weight:600}}
-.scroll{{overflow-x:auto}}</style></head><body>
-<h1>Paper B revision 1 — cohort B2</h1><div class="mut">{time.strftime('%Y-%m-%d %H:%M:%S')} · refreshes every 10 s · read-only</div>
+.scroll{{overflow-x:auto}}
+.hb{{display:flex;flex-wrap:wrap;gap:14px;align-items:center;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:10px 0;position:sticky;top:0;background:var(--bg);z-index:2}}
+.hb span.item{{display:flex;align-items:center;gap:6px;white-space:nowrap}}
+.dot{{width:11px;height:11px;border-radius:50%;background:var(--mut);display:inline-block}}
+.dot.ok{{background:#2e9e6a;animation:pulse 1.2s ease-in-out infinite}} .dot.slow{{background:#d9a21b}} .dot.dead{{background:var(--bad)}} .dot.idle{{background:var(--mut)}}
+@keyframes pulse{{0%{{box-shadow:0 0 0 0 rgba(46,158,106,.6)}}70%{{box-shadow:0 0 0 7px rgba(46,158,106,0)}}100%{{box-shadow:0 0 0 0 rgba(46,158,106,0)}}}}
+@media (prefers-reduced-motion:reduce){{.dot.ok{{animation:none}}}}
+</style></head><body>
+<h1>Paper B revision 1 — cohort B2</h1><div class="mut">{time.strftime('%Y-%m-%d %H:%M:%S')} · heartbeat every 2 s · full refresh every 30 s · read-only</div>
+<div class="hb" id="hb" aria-live="polite">
+<span class="item"><span class="dot" id="d-orch"></span><b>Orchestrator</b> <span id="t-orch">…</span></span>
+<span class="item"><span class="dot" id="d-timing"></span><b>Timing pass</b> <span id="t-timing">…</span></span>
+<span class="item"><span class="dot" id="d-sync"></span><b>Save loop</b> <span id="t-sync">…</span></span>
+<span class="item"><span class="dot" id="d-page"></span><b>This page</b> <span id="t-page">…</span></span>
+</div>
 {f'<h2>Warnings</h2><ul class="warn">{warn}</ul>' if warn else ''}
 <div class="kpi" style="margin-top:12px">
 <div>Orchestrator<b>{'running' if o.get('alive') else 'stopped'}</b><small>{e(str(o.get('mode', '-')))} · {len(o.get('workers', []))}/{o.get('max_workers', '-')} workers · queue {o.get('queue', '-')}</small></div>
@@ -242,7 +255,61 @@ table{{border-collapse:collapse;width:100%}} td,th{{border-bottom:1px solid var(
 <h2>Workers</h2><div class="scroll"><table><tr><th>pid</th><th>job</th><th>instance</th><th>on it</th><th>RSS</th><th>peak</th></tr>{workers}</table></div>
 <h2>Progress by dataset and explainer</h2><div class="scroll"><table><tr><th>pass</th><th>dataset</th><th>explainer</th><th>jobs</th><th>rows</th><th>failed</th></tr>{''.join(rows)}</table></div>
 <h2>Jobs failed for good</h2><ul>{fails}</ul>
+<script>
+// Heartbeat: poll a cheap endpoint every 2 s, tick the ages every second.
+// Green pulsing = beating; amber = late; red = stopped; grey = not started.
+let hb = null, fetchedAt = 0, fails = 0;
+const LIMITS = {{orch: [10, 60], timing: [15, 300], sync: [90, 1200]}};
+function age(t) {{ return t ? Math.max(0, Date.now() / 1000 - t) : null; }}
+function fmt(a) {{ return a === null ? 'never' : a < 120 ? a.toFixed(0) + ' s ago' : a < 7200 ? (a / 60).toFixed(0) + ' min ago' : (a / 3600).toFixed(1) + ' h ago'; }}
+function paint(key, t, alive, label) {{
+  const d = document.getElementById('d-' + key), x = document.getElementById('t-' + key);
+  const a = age(t);
+  let cls = 'idle';
+  if (t) {{ const [ok, slow] = LIMITS[key]; cls = (!alive || a > slow) ? 'dead' : a > ok ? 'slow' : 'ok'; }}
+  d.className = 'dot ' + cls;
+  x.textContent = (t ? fmt(a) : 'not started') + (label ? ' · ' + label : '') + (t && !alive ? ' · process gone' : '');
+}}
+function render() {{
+  if (hb) {{
+    paint('orch', hb.orch.updated, hb.orch.alive, hb.orch.label);
+    paint('timing', hb.timing.updated, hb.timing.alive, hb.timing.label);
+    paint('sync', hb.sync.heartbeat, hb.sync.alive, hb.sync.label);
+  }}
+  const pa = (Date.now() - fetchedAt) / 1000;
+  document.getElementById('d-page').className = 'dot ' + (fails ? 'dead' : pa < 6 ? 'ok' : 'slow');
+  document.getElementById('t-page').textContent = fails ? 'dashboard server not answering' : 'heartbeat ' + pa.toFixed(0) + ' s ago';
+}}
+async function poll() {{
+  try {{ const r = await fetch('/api/heartbeat', {{cache: 'no-store'}}); hb = await r.json(); fetchedAt = Date.now(); fails = 0; }}
+  catch (e) {{ fails += 1; }}
+  render();
+}}
+poll(); setInterval(poll, 2000); setInterval(render, 1000);
+setTimeout(() => location.reload(), 30000);
+</script>
 </body></html>"""
+
+
+def heartbeat() -> dict:
+    """Cheap liveness data for the heartbeat bar (no scan of the result files)."""
+    o = lib.read_json(lib.STATE / "orchestrator.json", {}) or {}
+    t = lib.read_json(lib.STATE / "timing.json", {}) or {}
+    g = lib.read_json(lib.STATE / "timing_gate.json", {}) or {}
+    sy = lib.read_json(lib.STATE / "sync.json", {}) or {}
+    t_upd = max(t.get("updated") or 0, g.get("time") or 0) or None
+    gate = ("waiting: " + g.get("reason", "")) if g.get("waiting") else ("measuring" if g else "")
+    return {
+        "now": time.time(),
+        "orch": {"updated": o.get("updated"), "alive": _alive(o.get("pid")),
+                 "label": (f"{o.get('mode', '')} · {len(o.get('workers', []))} workers · "
+                           f"queue {o.get('queue', '-')}") if o else ""},
+        "timing": {"updated": t_upd if t.get("pid") else None, "alive": _alive(t.get("pid")),
+                   "label": gate},
+        "sync": {"heartbeat": sy.get("loop_heartbeat") if sy.get("loop_pid") else None,
+                 "alive": _alive(sy.get("loop_pid")),
+                 "label": f"last push {_ago(sy.get('last_push_time'))}"},
+    }
 
 
 def write_status_md() -> None:
@@ -256,6 +323,15 @@ def write_status_md() -> None:
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
+            if self.path.startswith("/api/heartbeat"):
+                body, ctype = json.dumps(heartbeat()).encode(), "application/json"
+                self.send_response(200)
+                self.send_header("Content-Type", ctype)
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+                return
             s = gather()
             if self.path.startswith("/api/state"):
                 body, ctype = json.dumps(s, default=str).encode(), "application/json"
