@@ -123,7 +123,8 @@ earlier ID is given and only what is new is stated.
 
 ## 6. Item count
 
-Editor 3; Reviewer 1 general 11 + detailed 30 (15 major, 15 minor); Reviewer 2 8. **52 items**,
+Editor 3; Reviewer 1 general 11 + detailed 30 (15 major, 15 minor); Reviewer 2 9 (R2-1a and R2-1b
+are separate). **53 items** (corrected 2026-11-06 from 52),
 answered one by one in the response letter (WP9). Every detailed item maps to a work package;
 three are new beyond the first analysis: R1-M9 (runtime reversal), R1-M12 (common valid
 instances), R1-M13 (masking across models).
