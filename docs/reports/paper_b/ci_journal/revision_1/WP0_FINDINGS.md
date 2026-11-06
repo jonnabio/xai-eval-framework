@@ -116,3 +116,60 @@ similar dimension**; the rows contrast dimension within each encoding.
 
 One EXP2 Anchors run (RF, seed 123, N=100) took 27,199 s (7.5 h) for 400 instances, stability
 included. The Anchors timing sub-sample of WP2-T has to be small. The pilot sets its size.
+
+## F7. INCIDENT: provenance of the EXP2 cohort (found 2026-11-06 while building WP2-T)
+
+Evidence: `provenance/` (audit scripts, `provenance_audit.csv` with one row per EXP2 run). The
+audit regenerates each cell's instance set with today's code and models and compares it with
+the set stored by each run. The TP/TN/FP/FN strata depend on the model's predictions, so an
+identical set means the model predicts identically on the test split.
+
+**F7a. The random-forest model changed during EXP2, and the model of the SHAP/LIME RF runs is
+not in git.**
+
+| Model | Runs | Instance set identical to today's |
+|---|---|---|
+| logreg, mlp, svm, xgb | all, January–April | 100% of runs |
+| rf, January–February | 50 (all 15 SHAP, all 15 LIME, 11 Anchors, 10 DiCE... of which 34 in Jan) | 0 runs; median 7.5% of instances shared |
+| rf, April | 10 (4 Anchors, 5 DiCE, +1) | 7 identical, the rest ≥ 99% |
+
+- Today's `experiments/exp1_adult/models/rf.joblib` (blob `27080c5e7`) is byte-identical to the
+  only version of `rf_model.pkl` git ever held (commit `354f2f86b`, 2026-01-04: 50 trees,
+  `max_depth` 15, `class_weight='balanced_subsample'`, 56,053 leaves, accuracy 0.8047). Before
+  2026-04-13, `rf.joblib` in git was a text pointer to that file. **It does not reproduce the
+  January runs.** The RF used by the 30 SHAP/LIME RF runs was therefore a model that was never
+  committed, presumably trained or held on a worker. A second RF configuration (100 trees,
+  `rf/metadata.json`, trained 2026-04-07) also exists; its model file is not in git either.
+- Consequences:
+  1. The RF quality numbers of SHAP and LIME (Paper B; Paper A; thesis) come from an
+     unrecoverable model. They are internally paired: SHAP and LIME saw identical instance sets
+     in all 15 RF cells, hence the same model.
+  2. **RF Anchors and DiCE mix two models** (21 runs on the old RF, 9 on today's). A SHAP-vs-
+     Anchors/DiCE comparison on RF crosses models for those 9 cells.
+  3. **D-1 cannot be applied to RF as decided:** re-timing today's RF times a different forest
+     from the one whose quality is reported. The runtime reversal between RF and XGBoost
+     (R1-M9) rests on the size of a forest whose size is unknown.
+
+**F7b. A one-second timing artifact in runs made from 2026-03-23 on.** `ResourceGuard.run_guarded`
+(added to the runner in `8dbe946f0`, 2026-03-23) wraps every timed explanation. Its memory
+monitor sleeps 1 s per check, and `join()` waits for the sleep. Measured today: XGB TreeSHAP
+1.7 ms direct, 1,001.7 ms through the guard; RF LIME 16.9 ms vs 1,001.2 ms. In the artifacts,
+25 of the 31 runs made after 2026-03-23 have a minimum cost ≥ 990 ms. Among SHAP/LIME runs the
+affected one is `mlp_shap` seed 42, N=200 (2026-04-05, minimum 1,000 ms). `svm_shap` seed 789,
+N=50 (2026-04-13) is also after the change, but its costs (≥ 110 s) dwarf the artifact. Most
+April Anchors/DiCE runs are affected.
+
+**F7c. SVM SHAP runs are truncated.** In 10 of the 15 SVM cells, SHAP explained only 27 to 199
+instances, a subset of LIME's 200 to 800. The paired cell means then compare different instance
+sets. The paper's "realized counts from 27 to 800" refers to this, but the pairing is not
+instance-level there.
+
+**F7d. Timing on this host is far below the EXP2 medians**, even for runs without the guard
+(direct, one thread): RF LIME 16.9 ms (EXP2 median 335.6), XGB TreeSHAP 1.6 ms (18.1), logreg
+KernelSHAP 120 ms, SVM LIME 1,555 ms. The EXP2 medians include the hosts, concurrent workers on
+the same machine and, after 23 March, the guard. Re-timing will change the cost results
+substantially, possibly their ordering.
+
+**Status:** reported to the author 2026-11-06. Needs an RCA (RCA-004) on a shared branch,
+because Paper A (published), the thesis and Papers D/E draw on the same cohort, and a
+decision on how the RF cells enter Paper B.
