@@ -260,3 +260,10 @@ def test_cohort_config_is_complete():
     assert set(cfg["explainers"]) >= {"shap", "lime", "lime_full", "anchors", "dice"}
     assert cfg["cohort"]["split_seed"] == 42
     assert cfg["resources"]["worker_cap_gb"] > cfg["resources"]["default_peak_gb"]
+
+
+def test_config_hash_ignores_line_endings(tmp_path):
+    a, b = tmp_path / "a.toml", tmp_path / "b.toml"
+    a.write_bytes(b"[x]\ny = 1\n")
+    b.write_bytes(b"[x]\r\ny = 1\r\n")
+    assert lib.config_hash(a) == lib.config_hash(b)

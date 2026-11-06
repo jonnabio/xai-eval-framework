@@ -74,7 +74,9 @@ def cmd_preflight(args) -> int:
     if snap["disk_free_gb"] < res["disk_min_gb"]:
         problems.append(f"disk free {snap['disk_free_gb']:.1f} GB < {res['disk_min_gb']} GB")
     if snap["ram_available_gb"] < res["ram_reserve_gb"] + res["default_peak_gb"]:
-        problems.append(f"RAM available {snap['ram_available_gb']:.1f} GB is too low to start")
+        problems.append(f"RAM available {snap['ram_available_gb']:.1f} GB is too low to start "
+                        f"(needs {res['ram_reserve_gb'] + res['default_peak_gb']:.0f} GB): close "
+                        "a browser or other large programs (RUNBOOK.md, section 4)")
     notes.append(f"logical CPUs {snap['logical_cpus']}; workers will be "
                  f"{min(res['max_workers'], max(1, (snap['logical_cpus'] or 2) - 2))}")
     r = subprocess.run(["git", "ls-remote", "--heads", cfg["sync"]["remote"]], cwd=lib.ROOT,
@@ -90,11 +92,9 @@ def cmd_preflight(args) -> int:
                          f"{int(ac[0].split(':')[-1].strip(), 16) // 60} min idle: the runner "
                          "blocks sleep while it runs, but setting 'Never' on AC is safer "
                          "(RUNBOOK.md)")
-    others = [p.info for p in psutil.process_iter(["pid", "name", "cmdline"])
-              if p.info["cmdline"] and any("paper_b_run.py" in c for c in p.info["cmdline"])
-              and p.info["pid"] != os.getpid()]
+    others = running_runner_pids()
     if others:
-        problems.append(f"another paper_b_run.py is running: pids {[o['pid'] for o in others]}")
+        problems.append(f"another paper_b_run.py is running: pids {others}")
     if not lib.MANIFEST.exists():
         notes.append("models not frozen yet: run `prepare`")
     for n in notes:
@@ -387,14 +387,37 @@ def cmd_timing(args) -> int:
     return 0
 
 
-def count_quality_workers() -> int:
+def _runner_procs(subcommands: tuple[str, ...] | None = None) -> list[int]:
+    """PIDs of Python processes executing this script (optionally with one of the given
+    subcommands), excluding this process and its ancestors (shells, the venv launcher)."""
     import psutil
-    n = 0
-    for p in psutil.process_iter(["cmdline"]):
+    me = psutil.Process()
+    skip = {me.pid} | {p.pid for p in me.parents()}
+    pids = []
+    for p in psutil.process_iter(["pid", "name", "cmdline"]):
         cl = p.info.get("cmdline") or []
-        if any(c.endswith("paper_b_run.py") for c in cl) and "job" in cl:
-            n += 1
-    return n
+        if p.info["pid"] in skip or not cl or "python" not in (p.info.get("name") or "").lower():
+            continue
+        idx = next((i for i, c in enumerate(cl) if c.endswith("paper_b_run.py")), None)
+        if idx is None:
+            continue
+        sub = cl[idx + 1] if idx + 1 < len(cl) else ""
+        if subcommands is None or sub in subcommands:
+            pids.append(p.info["pid"])
+    return pids
+
+
+def running_runner_pids() -> list[int]:
+    return _runner_procs()
+
+
+def count_quality_workers() -> int:
+    """Quality workers running; a venv launcher and its interpreter count once."""
+    import psutil
+    pids = set(_runner_procs(("job",)))
+    roots = {p for p in pids
+             if not any(a.pid in pids for a in psutil.Process(p).parents())} if pids else set()
+    return len(roots)
 
 
 # ==========================================================================

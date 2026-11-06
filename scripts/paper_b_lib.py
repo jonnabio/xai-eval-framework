@@ -71,7 +71,9 @@ def sha256_file(path: Path, chunk: int = 1 << 20) -> str:
 
 
 def config_hash(path: Path = CONFIG_PATH) -> str:
-    return sha256_file(path)
+    """SHA-256 of the config with line endings normalised: git's CRLF conversion on
+    checkout must not make the same design look like a different cohort."""
+    return sha256_bytes(path.read_bytes().replace(b"\r\n", b"\n"))
 
 
 def git_commit() -> str | None:
