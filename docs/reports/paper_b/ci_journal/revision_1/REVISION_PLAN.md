@@ -162,11 +162,13 @@ Rules adopted:
 
    | | low dimension | high dimension |
    |---|---|---|
-   | numeric only | e.g., `diabetes` (Pima, 8 features) | e.g., `spambase` (57 features) |
-   | categorical, one-hot | e.g., `kr-vs-kp` (36 binary/categorical) | e.g., `mushroom` (22 categorical, ~117 one-hot columns) |
+   | numeric only | `diabetes` (OpenML 37; 8 features) | `spambase` (OpenML 44; 57 features) |
+   | categorical, one-hot | `PhishingWebsites` (OpenML 4534; 68 columns) | `connect-4` (OpenML 40668; 126 columns; win vs not-win) |
 
-   Candidates; OpenML ids, licences, class balance and binary target to be verified in WP0
-   before any run. A mixed-type set (e.g., `australian`) is an optional fifth.
+   Verified 2026-11-06 (`WP0_FINDINGS.md`, F5). Mushroom was dropped as separable and replaced
+   by connect-4 (author). kr-vs-kp is replaced by PhishingWebsites as proposed, because it
+   leaves too few errors; the pilot confirms the error counts. A mixed-type set
+   (`australian`) is an optional fifth.
 3. **Breast Cancer and German Credit stay**, rerun in the new cohort with every model. They
    give the reviewers continuity with the version they read. Their numbers come from new runs
    and new models, so no registered value of Papers D, E or F is printed (X-2,

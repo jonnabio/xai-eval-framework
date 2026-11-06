@@ -80,6 +80,38 @@ the author:
 
 The pilot (WP2.1) gives each model's error counts on these datasets before the choice.
 
+**Resolved 2026-11-06 (author: option 2).** Screening with 3-fold cross-validation on the
+one-hot data (logistic regression and a 100-tree random forest; errors pooled over folds):
+
+| Dataset | One-hot columns | Rows | LogReg acc / FP / FN | RF acc / FP / FN | Verdict |
+|---|---|---|---|---|---|
+| mushroom | 117 | 8,124 | 1.000 / 3 / 0 | 1.000 / 0 / 0 | **Separable; dropped** |
+| kr-vs-kp | 73 | 3,196 | 0.964 / 64 / 52 | 0.990 / 12 / 19 | Thin: about 10 RF errors in a test split |
+| **connect-4**, win vs not-win (20,000-row sample) | **126** | 67,557 | 0.792 / 2,569 / 1,597 | 0.838 / 2,214 / 1,020 | **Replacement for mushroom** |
+| splice, N vs boundary | 287 | 3,190 | 0.938 / 89 / 110 | 0.971 / 23 / 68 | Possible; small and binarized |
+| **PhishingWebsites** | **68** | 11,055 | 0.940 / 378 / 290 | 0.968 / 216 / 138 | **Proposed replacement for kr-vs-kp** |
+
+- **connect-4** (OpenML 40668, all 42 features categorical; classes 2 = 44,473, 1 = 16,635,
+  0 = 6,449) is binarized as class 2 vs the rest (66.1% positive). This is a stated deviation:
+  the protocol is binary. At 126 columns it is the closest categorical match to Adult's 108.
+  Training uses a stratified subsample if the SVM needs it (to be stated).
+- Neither connect-4 nor PhishingWebsites appears in any manuscript, thesis file, registry or
+  Paper F list (searched 2026-11-06). Paper F's planning notes (`docs/reports/paper_f/
+  ANALYSIS_PLAN.md`, version 2.1) show that Spambase, Chess (kr-vs-kp) and Mushroom were
+  candidates for F and were **rejected** as too easy (AUC above 0.98); none reached F's results.
+- Spambase is also near the ceiling (F's rule). It keeps errors (about 5%), so it stays in the
+  numeric-high cell; its realized FP/FN counts are reported.
+
+Resulting design (dimension × encoding, with Adult as the mixed case at 108):
+
+| | Lower dimension | Higher dimension |
+|---|---|---|
+| Numeric | diabetes, 8 | spambase, 57 |
+| Categorical (one-hot) | PhishingWebsites, 68 | connect-4, 126 |
+
+Spambase (57 numeric) against PhishingWebsites (68 categorical) contrasts the **encoding at a
+similar dimension**; the rows contrast dimension within each encoding.
+
 ## F6. Run cost reference from EXP2
 
 One EXP2 Anchors run (RF, seed 123, N=100) took 27,199 s (7.5 h) for 400 instances, stability
