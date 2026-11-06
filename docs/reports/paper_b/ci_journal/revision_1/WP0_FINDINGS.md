@@ -130,8 +130,8 @@ not in git.**
 | Model | Runs | Instance set identical to today's |
 |---|---|---|
 | logreg, mlp, svm, xgb | all, January–April | 100% of runs |
-| rf, January–February | 50 (all 15 SHAP, all 15 LIME, 11 Anchors, 10 DiCE... of which 34 in Jan) | 0 runs; median 7.5% of instances shared |
-| rf, April | 10 (4 Anchors, 5 DiCE, +1) | 7 identical, the rest ≥ 99% |
+| rf, January–February | 50 runs with stored instances (34 in January, 16 in February): all 15 SHAP, all 15 LIME, and the old-model Anchors/DiCE runs | 0 runs; median 7.5% of instances shared |
+| rf, April | 10 runs, Anchors and DiCE only | 7 identical, the rest ≥ 99% |
 
 - Today's `experiments/exp1_adult/models/rf.joblib` (blob `27080c5e7`) is byte-identical to the
   only version of `rf_model.pkl` git ever held (commit `354f2f86b`, 2026-01-04: 50 trees,
