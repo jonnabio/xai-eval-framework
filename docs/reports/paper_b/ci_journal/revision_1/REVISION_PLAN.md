@@ -24,13 +24,29 @@ benchmark.
 
 | ID | Decision |
 |---|---|
-| D-1 | **Pending.** Author asked what "re-time only" means (answered in session: it also needs new runs, and D-2/D-3 already require a new cohort). Awaiting confirmation of (a) |
+| D-1 | **Re-time only, the shortest run** (author, 2026-11-06, after the consequences below were stated). The Adult quality numbers of SHAP, Anchors and DiCE stay those of the EXP2 cohort; every explainer is re-timed on one host. LIME's quality is re-measured on the 75 cells at the default width, because D-3 requires it and LIME is cheap. See "Consequences of D-1" below |
 | D-2 | **Anchors and DiCE** both added to the main benchmark |
 | D-3 | **LIME reference kernel width = library default** $0.75\sqrt{M}$; 3.0 becomes one point of the sweep |
 | D-4 | **Add datasets, and manage the overlap risk** (see WP3: datasets used by no other paper) |
 | D-5 | **Model calls + CPU time + theoretical complexity; FLOPs for logreg and the MLP only**, with the reason stated |
 | D-6 | **Apply the reference rule** (verified DOI on every entry, ≥80% from 2024 or later) |
-| D-7 | **One cloud VM of a fixed type** for every run that is timed (provider and type: Q-3) |
+| D-7 | **One cloud VM of a fixed type** for every run that is timed. **Open:** the provider named (OpenRouter) rents no VMs (Q-3). Fallback, if no compute provider is at hand by 2026-11-09: this laptop as the single recorded host |
+
+**Consequences of D-1, accepted with the decision (2026-11-06).**
+
+- **Risk kept open:** R2-6 and X-1. The SHAP quality numbers on Adult come from the cohort of
+  Paper A (published), and C&I's policy calls reuse "with or without citation" self-plagiarism.
+  Mitigation: (1) the paper reports its own levels and analyses (hierarchical, model-level),
+  not those printed in Paper A; (2) the text states plainly that the Adult runs are the
+  released EXP2 cohort, re-analysed, and that every cost number and every LIME number on Adult
+  is new; (3) `verify_claims.py` lists every value shared with Paper A
+  (`scan_shared_literals.py --strict`), and the response letter to R2-6 names them. The
+  editor may still judge it reuse.
+- **ED-1 (Anchors/DiCE)** uses the EXP2 Anchors (57/75) and DiCE (68/75) runs, re-timed. Any
+  value that coincides with a Paper D claim fails the exclusivity check (X-2); such values are
+  replaced by a statistic Paper D does not report (e.g., paired cell-level differences against
+  SHAP), never forced through.
+- **R1-M1 (novelty):** carried by the new evidence, not by the 45 → 75 extension.
 
 Options as proposed:
 
@@ -73,6 +89,26 @@ under which latency and stability budget. State three contributions that need no
 3. conditional findings that tell a practitioner when SHAP or LIME is preferable.
 
 [10] is cited once, in Methods, for the metric definitions. No "earlier study on this cohort".
+
+### WP2 under D-1: re-timing and LIME at the default width (replaces the cohort below)
+
+- **WP2-T, re-timing (R2-1, R1-5, R1-M8):** the 75 Adult cells × SHAP, LIME, Anchors, DiCE,
+  on the single host. A fixed sub-sample of instances per cell, the same for all four
+  explainers (pairs run in the same session); one process, one thread, warm-up dropped, *r*
+  repeats. Measured per explanation: wall time, CPU time, model calls, rows evaluated. Quality
+  is not recomputed except for LIME.
+- **WP2-L, LIME at the default width (D-3):** LIME on all 75 cells with
+  `kernel_width` = $0.75\sqrt{M}$, all other settings as EXP2, full instance sets, quality
+  endpoints included. Cheap (EXP2 LIME runs took minutes each), so it may run in parallel
+  workers; the timing comes from WP2-T. It becomes the **reference LIME** of the paper. The
+  3.0 runs (EXP2) are kept as one point of the sweep.
+- **WP2b, runtime reversal (R1-M9):** RF and XGBoost trained on Adult at matched grids of
+  `n_estimators` ∈ {50, 100, 200} × `max_depth` ∈ {4, 6, 8, None}; TreeSHAP and LIME cost on a
+  fixed instance set; cost against total leaves and depth; the SHAP code path recorded. Answers
+  whether the reversal follows tree size (architecture) or implementation.
+
+The section below is the full-cohort design, kept for reference. Under D-1 only its
+instruments (cost, host record, configurations) apply.
 
 ### WP2. New main cohort B2 (ED-1, R1-4, R1-5, R2-1, R2-3, R2-6)
 
@@ -156,7 +192,23 @@ On the B2 cohort (a sub-grid where the cost is high):
    need no ceiling (share of |attribution| in the top-k, normalized entropy). They are computed
    for every explainer. H2 is reported as **descriptive** (see WP6).
 
-### WP5. Configuration sweep and Pareto fronts (R2-2, R1-4, R2-3)
+5. **Zero vectors (R1-m6):** count all-zero attribution vectors per explainer and width. Report
+   stability with zero vectors excluded and flagged next to the current convention (scikit-learn
+   gives cosine 0 when a vector is all zero).
+
+### WP4b. Masking sensitivity on all models (R1-M13, R1-m13)
+
+The four masking schemes of current §4.7 applied to all five models, with explanations from
+WP2-L (LIME) and from the SHAP runs that WP2-T regenerates on its sub-sample, so no stored EXP2
+explanation is needed. The grouping rule of "grouped mean replacement" is stated and its groups
+are listed.
+
+### WP5. Configuration sweep and Pareto fronts (R2-2, R1-4, R2-3, R1-M4, R1-M5, R1-M11, R1-M12)
+
+Additions from Reviewer 1's detailed report: **3 seeds** (R1-M11); **KernelSHAP on the two
+tree models too**, so implementation and model family separate (R1-M4); every point evaluated
+on the **common set of valid instances**, with the share of degenerate explanations reported
+(R1-M12); report whether the sign of each SHAP–LIME difference holds over the grid (R1-M5).
 
 - LIME: `kernel_width` ∈ {0.75, 1.5, 3, 5, default, 10, 15} × `num_samples` ∈ {250, 500, 1000,
   2000, 5000}.
@@ -229,6 +281,24 @@ Paper E and F results are not cited for numbers (X-2).
   text against Paper A is checked first with the local similarity check, if available.
 - Record the decision and the dates in `CI_SUBMISSION.md`, `docs/context/ACTIVE_CONTEXT.md`
   (publication table, via a `pubs/*` commit) and the archive.
+
+## 4a. Schedule to the deadline (30 November 2026)
+
+| Dates | Work | Gate at the end |
+|---|---|---|
+| Nov 6–9 | WP0: venv 3.11, host fixed (Q-3), X-4 and R1-m5/m6/m7 read from the code, datasets verified, model-call counter and stability controls coded and tested | Pilot runs on the host |
+| Nov 9–10 | WP2.1 pilot: time per explanation for each model × explainer × dataset | **Budget table; scope trimmed if needed** |
+| Nov 10–18 | Runs in this order (most essential first): WP2-T, WP2-L, WP4, WP5, WP3, WP2b, WP4b | Every artifact committed and registered |
+| Nov 9–20 | Text in parallel: WP1, WP8 (references), the methods parts of WP7, the design and model tables | |
+| Nov 18–23 | WP6 statistics; figures from committed generators | Verifiers pass |
+| Nov 23–27 | WP7 results and discussion; abstract; WP9 response letter (52 items) | Author review |
+| Nov 28–29 | Build, masking and metadata check, highlighted-changes copy | Package ready |
+| Nov 30 | Upload | |
+
+**Trim order** if the pilot shows the runs do not fit: (1) the fourth new dataset; (2) MLP and
+SVM on the new datasets; (3) WP2b down to one depth grid. Asking the editor for an extension
+before the deadline is the alternative (the letter invites it); it has to be decided by
+**2026-11-10**, after the pilot.
 
 ## 4. Sequence and dependencies
 
