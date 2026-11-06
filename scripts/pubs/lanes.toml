@@ -25,7 +25,15 @@ owns = ["docs/reports/paper_a/**"]
 name = "paper-b"
 branches = ["paper/b-*"]
 folder = "xai-eval-framework"  # main folder, author decision 2026-10-04 (ADR-0022)
-owns = ["docs/reports/paper_b/**"]
+# Revision 1 for C&I (2026-11-06): the new runs, their analysis and their code are the
+# lane's own, as for Papers D, E and F. src/ stays untouched: the EXP2 runs depend on it.
+owns = [
+  "docs/reports/paper_b/**",
+  "experiments/exp_b_rev1/**",
+  "outputs/analysis/paper_b_rev1/**",
+  "scripts/paper_b_*",
+  "tests/analysis/test_paper_b_*",
+]
 
 [[lane]]
 name = "paper-bc"
