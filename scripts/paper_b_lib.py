@@ -354,6 +354,13 @@ def expected_peak_gb(peaks: dict, model: str, explainer: str, dataset: str,
     return default_gb
 
 
+def stuck_at_startup(beat_seen: bool, born: float, now: float, limit_s: float) -> bool:
+    """A worker is stuck at start-up only if it has NEVER reported a heartbeat within the
+    limit. A worker that reported one and then removed it is finishing, not stuck (a false
+    kill at job end was seen in the pilot, 2026-11-06)."""
+    return (not beat_seen) and (now - born > limit_s)
+
+
 def quiet_gate(other_cpu_percent: float, idle_s: float | None, ac_power: bool | None,
                max_other_cpu: float, require_idle_s: float | None,
                quality_workers_running: int) -> tuple[bool, str]:

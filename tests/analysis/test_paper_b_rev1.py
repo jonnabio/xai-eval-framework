@@ -270,3 +270,10 @@ def test_config_hash_covers_design_only(tmp_path):
     d.write_bytes(b"[x]\ny = 2\n")
     assert lib.config_hash(a) == lib.config_hash(b) == lib.config_hash(c)
     assert lib.config_hash(a) != lib.config_hash(d)
+
+
+def test_stuck_at_startup_only_without_any_heartbeat():
+    assert lib.stuck_at_startup(False, born=0, now=2000, limit_s=1800)
+    assert not lib.stuck_at_startup(False, born=0, now=100, limit_s=1800)
+    # A job that reported heartbeats and removed its file at the end is finishing, not stuck.
+    assert not lib.stuck_at_startup(True, born=0, now=5000, limit_s=1800)

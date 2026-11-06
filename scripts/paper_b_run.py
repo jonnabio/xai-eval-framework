@@ -522,8 +522,12 @@ class Governor:
         # Heartbeats: per-instance time limit and stuck start-up.
         for job, w in list(self.running.items()):
             beat = lib.read_json(self.stem(job).with_suffix(".heartbeat"))
+            if beat:
+                w["beat_seen"] = True
             w["instance"] = beat.get("instance") if beat else None
             w["instance_started"] = beat.get("started") if beat else None
+            if w["proc"].poll() is not None or self.stem(job).with_suffix(".done").exists():
+                continue                      # finishing or finished: never killed here
             if beat and now - beat["started"] > self.res["instance_time_limit_s"]:
                 self.kill(job, f"instance {beat['instance']} over "
                                f"{self.res['instance_time_limit_s']} s")
@@ -531,7 +535,8 @@ class Governor:
                     "instance_id": beat["instance"], "failed": 1,
                     "fail_reason": f"time limit of {self.res['instance_time_limit_s']} s"})
                 self.queue.insert(0, job)        # resumes after the failed instance
-            elif not beat and now - w["born"] > self.res["job_start_limit_s"]:
+            elif lib.stuck_at_startup(w.get("beat_seen", False), w["born"], now,
+                                      self.res["job_start_limit_s"]):
                 self.kill(job, f"no first instance after {self.res['job_start_limit_s']} s")
                 self.retry(job, "stuck at start-up")
         # Finished processes.
