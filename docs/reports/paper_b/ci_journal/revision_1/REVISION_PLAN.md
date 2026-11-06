@@ -30,7 +30,7 @@ benchmark.
 | D-4 | **Add datasets, and manage the overlap risk** (see WP3: datasets used by no other paper) |
 | D-5 | **Model calls + CPU time + theoretical complexity; FLOPs for logreg and the MLP only**, with the reason stated |
 | D-6 | **Apply the reference rule** (verified DOI on every entry, ≥80% from 2024 or later) |
-| D-7 | **One cloud VM of a fixed type** for every run that is timed. **Open:** the provider named (OpenRouter) rents no VMs (Q-3). Fallback, if no compute provider is at hand by 2026-11-09: this laptop as the single recorded host |
+| D-7 | **This laptop as the single recorded host** (author, 2026-11-06; OpenRouter rents no VMs). AMD Ryzen 5 4600H, 6 cores / 12 threads, 31.4 GB, Windows 11 Home 10.0.26300. Every timed run happens here, idle, on mains power, under a fixed power plan; full spec in the cohort manifest. Where the plan says "VM", read this host |
 
 **Consequences of D-1, accepted with the decision (2026-11-06).**
 

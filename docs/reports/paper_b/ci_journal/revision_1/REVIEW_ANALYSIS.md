@@ -119,8 +119,7 @@ earlier ID is given and only what is new is stated.
   `REVIEWER1_DETAILED_REPORT.md`, analysed in §2b (30 items).
 - **Q-3.** Cloud provider: the author answered "OpenRouter" (2026-11-06). **Open:** OpenRouter
   is a routing service for LLM APIs; it rents no virtual machines, so it cannot host the runs.
-  Re-asked: a compute provider (AWS, GCP, Azure, Hetzner…), or the laptop as the single
-  recorded host.
+  Re-asked; **answered 2026-11-06: this laptop** is the single recorded host (D-7).
 
 ## 6. Item count
 
