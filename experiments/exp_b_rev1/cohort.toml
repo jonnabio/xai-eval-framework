@@ -24,7 +24,7 @@ other = [11, 22, 33]
 # instances is taken whole; the realised counts are recorded.
 per_stratum = 25
 # Stability is computed on the first k instances of each stratum (the cost driver).
-stability_per_stratum = 5
+stability_per_stratum = 3          # scenario B, approved by the author 2026-11-06 (was 5)
 
 [metrics]
 stability_T = 15
@@ -113,7 +113,7 @@ method = "shap"
 n_background_samples = 50
 # KernelSHAP budget: "auto" is the library default (2M + 2048). May be set per model
 # after the pilot (kernel_nsamples_by_model), with the reason recorded in the plan.
-kernel_nsamples = "auto"
+kernel_nsamples = 500             # scenario A, approved by the author 2026-11-06 (was "auto" = 2M+2048)
 kernel_nsamples_by_model = {}
 
 [explainers.lime]
@@ -173,5 +173,5 @@ every_minutes = 15
 results_prefix = "experiments/exp_b_rev1/results"
 # Lane branches the loop also pushes (commits only, never forced), so committed work
 # never waits more than every_minutes to reach GitHub.
-also_push = ["paper/b-ci-revision-1"]
+also_push = []                  # 2026-11-06: the author continues on another laptop; this host only saves runs
 max_file_mb = 50

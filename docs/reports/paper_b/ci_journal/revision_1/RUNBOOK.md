@@ -107,7 +107,11 @@ Start-Process -WindowStyle Hidden -FilePath .venv\Scripts\python.exe `
 ```
 
 Every 15 minutes it (1) copies the live results to `paper/b-rev1-runs` and pushes it, and
-(2) pushes any new commits of `paper/b-ci-revision-1`. Pushes are never forced; only
+(2) pushes any new commits of `paper/b-ci-revision-1`.
+**Since the full run started (2026-11-06) step (2) is off** (`also_push = []`): the author
+continues the revision on another laptop, so this host pushes only `paper/b-rev1-runs` and
+never competes for `paper/b-ci-revision-1`. Edits made elsewhere to the code or `cohort.toml`
+do not reach the running experiment on this host. Pushes are never forced; only
 committed work travels. The dashboard shows the last push.
 
 - **Is it running?** The dashboard's "GitHub sync" tile, or `outputs\paper_b_rev1_live\_state\sync.json`
