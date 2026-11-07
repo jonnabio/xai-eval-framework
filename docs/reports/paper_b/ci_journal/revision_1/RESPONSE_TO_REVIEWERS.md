@@ -148,7 +148,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 - **Type:** GENERAL
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-002
+- **Changes:** C-002, C-027
 - **Plan:** WP8, D-6
 - **Response:** We thank the reviewer for this assessment. As the comment concerns the literature review as a whole, we checked it against recent work and identified the following places where it could be improved: (1) recent empirical comparisons of SHAP and LIME were missing; (2) recent benchmarks and toolkits for explanation evaluation were not discussed; (3) work on the sensitivity of LIME to its hyperparameters and on the validity of perturbation-based stability measures was not used. We revised each of them: §2 adds a paragraph on comparisons and benchmarks published from 2024 on, and positions the study against them. §3.3–3.4 cite the work on hyperparameter sensitivity and perturbation validity that motivates the new controls. [R: number of references, share from 2024 on.]
 - **Where:** Section 2

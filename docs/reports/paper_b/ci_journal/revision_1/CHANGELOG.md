@@ -44,3 +44,4 @@ figure, file) · **Change** (what and why, one sentence) · **Commit** (filled a
 | C-024 | 2026-11-06 | R2-7 | Build | P-24: The masking check also covers the comparison file and the Word metadata (done in the build). drafted (D-D) | — |
 | C-025 | 2026-11-06 | R2-6, R1-M1 | §3.1 | D-A: one sentence discloses that an earlier analysis was replaced and why (training overlap, unrecoverable model, mixed hosts); no earlier number is used | — |
 | C-026 | 2026-11-06 | none | Keywords | Keywords revised for the four-explainer scope (journal: 3 to 5) | — |
+| C-027 | 2026-11-06 | R1-9 | §2, §3.2, References | WP8 (part): related-work paragraph on recent SHAP/LIME comparisons, benchmarks, Shapley estimation, LIME sampling and limits of attribution; 15 recent references and 4 dataset sources added, each verified against Crossref/DataCite/PMC (REFERENCE_AUDIT.md). The 80% rule awaits the author's choice (options A-C) | — |

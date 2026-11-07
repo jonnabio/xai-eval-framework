@@ -127,16 +127,30 @@ robustness to small input changes~\cite{alvarezmelis2018robustness} and
 sparsity, standardized in toolkits and
 benchmarks~\cite{hedstrom2023quantus,agarwal2022openxai}. Removal-based
 scores depend on the removal scheme~\cite{rong2022consistent,zheng2025ffidelity}, attributions
-can pass perturbation tests and fail sanity checks~\cite{adebayo2018sanity}, LIME and SHAP can be manipulated~\cite{slack2020fooling},
+can pass perturbation tests and fail sanity checks~\cite{adebayo2018sanity}, LIME and SHAP can be manipulated~\cite{slack2020fooling,baniecki2024adversarial},
 and Shapley attributions are hard to read as importance when features are
-dependent~\cite{kumar2020problems}. [REF: WP8 adds a paragraph on empirical
-comparisons of SHAP and LIME and on explanation benchmarks published from
-2024 on (verified DOIs), and positions this study against them: what they
-compared, under which pairing and configuration, and how cost was
-reported.] [REF: work on the sensitivity of LIME to its kernel width and
-sample size, and on the validity of perturbation-based stability measures
-for encoded features, which motivates the controls of
-Section~\ref{sec:validity_controls}.]
+dependent~\cite{kumar2020problems,huang2024failings}; feature attribution has
+provable limits as a basis for inferring model
+behavior~\cite{bilodeau2024impossibility},
+and attribution methods can mark features with no relation to the target as
+important~\cite{clark2024xaitris}.
+
+Recent work compares SHAP and LIME in applied settings, among them
+education~\cite{hooshyar2024problems}, software
+engineering~\cite{schulte2024studying} and mixed-type tabular
+models~\cite{lazar2026beyond}, and across tabular and image
+classifiers~\cite{ababneh2026faithfulness}; their respective strengths are
+reviewed in~\cite{salih2025perspective,mersha2024survey}. Guidelines and
+open benchmarks for functionally grounded evaluation on tabular data are
+emerging~\cite{velmurugan2025guidelines,moiseev2025benchmark}. Estimators of
+Shapley values differ in accuracy and
+cost~\cite{olsen2024comparative}, LIME's neighborhood sampling can be
+redesigned to raise its fidelity~\cite{saadatfar2024uslime}, and
+counterfactual explainers can disagree on the same
+instance~\cite{brughmans2024disagreement}. This study adds a comparison in
+which the four explainers are paired on the same instances, their
+configuration is varied, the validity of the stability measurement is
+tested, and cost is counted in model evaluations as well as in time.
 
 % -----------------------------------------------------------------------
 \section{Materials and Methods}
@@ -200,7 +214,9 @@ Adult~\cite{kohavi1996scaling,becker1996adult} is the primary dataset. Six
 further binary datasets were chosen so that feature dimension crosses
 feature type: Breast Cancer~\cite{wolberg1993breast} and German
 Credit~\cite{hofmann1994statlog} from the UCI repository~\cite{dua2019uci}, and Diabetes, Spambase,
-Phishing and Connect-4 [REF: dataset citations] in a $2 \times 2$ of
+Phishing and
+Connect-4~\cite{smith1988adap,hopkins1999spambase,mohammad2012phishing,tromp1995connect4}
+in a $2 \times 2$ of
 numeric or categorical features and lower or higher dimension. For
 Connect-4, a win is the positive class and the two other outcomes the
 negative class.
@@ -785,6 +801,110 @@ of Mathematical Statistics. 1963;34(2):598--611.
 Kerby DS. The simple difference formula: An approach to teaching
 nonparametric correlation. Comprehensive Psychology. 2014;3:11.IT.3.1.
 \url{https://doi.org/10.2466/11.IT.3.1}
+
+% --- Added in revision 1 (WP8, 2026-11-06). Every entry checked against Crossref or
+% DataCite (title, authors, venue, volume, pages, DOI); PubMed Central for Smith 1988.
+
+\bibitem{hooshyar2024problems}
+Hooshyar D, Yang Y. Problems with SHAP and LIME in interpretable AI for
+education: A comparative study of post-hoc explanations and neural-symbolic
+rule extraction. IEEE Access. 2024;12:137472--137490.
+\url{https://doi.org/10.1109/ACCESS.2024.3463948}
+
+\bibitem{schulte2024studying}
+Schulte L, Ledel B, Herbold S. Studying the explanations for the automated
+prediction of bug and non-bug issues using LIME and SHAP. Empirical Software
+Engineering. 2024;29(4):93. \url{https://doi.org/10.1007/s10664-024-10469-1}
+
+\bibitem{lazar2026beyond}
+Lazar A, Pokhrel P, Das S. Beyond accuracy: A comprehensive comparative study
+of gradient boosting versus tabular deep learning and explainability techniques
+for mixed-type tabular data models using SHAP and LIME. International Journal
+on Artificial Intelligence Tools. 2026;35(2):2640003.
+\url{https://doi.org/10.1142/S0218213026400038}
+
+\bibitem{ababneh2026faithfulness}
+Ababneh M, Aljarrah A. Faithfulness and stability of black box explanations
+for tabular and image classifiers. Big Data and Cognitive Computing.
+2026;10(11):362. \url{https://doi.org/10.3390/bdcc10110362}
+
+\bibitem{salih2025perspective}
+Salih AM, Raisi-Estabragh Z, Galazzo IB, Radeva P, Petersen SE, Lekadir K, et
+al. A perspective on explainable artificial intelligence methods: SHAP and
+LIME. Advanced Intelligent Systems. 2025;7(1):2400304.
+\url{https://doi.org/10.1002/aisy.202400304}
+
+\bibitem{mersha2024survey}
+Mersha M, Lam K, Wood J, AlShami AK, Kalita J. Explainable artificial
+intelligence: A survey of needs, techniques, applications, and future
+direction. Neurocomputing. 2024;599:128111.
+\url{https://doi.org/10.1016/j.neucom.2024.128111}
+
+\bibitem{velmurugan2025guidelines}
+Velmurugan M, Ouyang C, Xu Y, Sindhgatta R, Wickramanayake B, Moreira C.
+Developing guidelines for functionally-grounded evaluation of explainable
+artificial intelligence using tabular data. Engineering Applications of
+Artificial Intelligence. 2025;141:109772.
+\url{https://doi.org/10.1016/j.engappai.2024.109772}
+
+\bibitem{moiseev2025benchmark}
+Moiseev I, Balabaeva K, Kovalchuk S. Open and extensible benchmark for
+explainable artificial intelligence methods. Algorithms. 2025;18(2):85.
+\url{https://doi.org/10.3390/a18020085}
+
+\bibitem{olsen2024comparative}
+Olsen LHB, Glad IK, Jullum M, Aas K. A comparative study of methods for
+estimating model-agnostic Shapley value explanations. Data Mining and
+Knowledge Discovery. 2024;38(4):1782--1829.
+\url{https://doi.org/10.1007/s10618-024-01016-z}
+
+\bibitem{saadatfar2024uslime}
+Saadatfar H, Kiani-Zadegan Z, Ghahremani-Nezhad B. US-LIME: Increasing
+fidelity in LIME using uncertainty sampling on tabular data. Neurocomputing.
+2024;597:127969. \url{https://doi.org/10.1016/j.neucom.2024.127969}
+
+\bibitem{brughmans2024disagreement}
+Brughmans D, Melis L, Martens D. Disagreement amongst counterfactual
+explanations: How transparency can be misleading. TOP. 2024;32(3):429--462.
+\url{https://doi.org/10.1007/s11750-024-00670-2}
+
+\bibitem{baniecki2024adversarial}
+Baniecki H, Biecek P. Adversarial attacks and defenses in explainable
+artificial intelligence: A survey. Information Fusion. 2024;107:102303.
+\url{https://doi.org/10.1016/j.inffus.2024.102303}
+
+\bibitem{huang2024failings}
+Huang X, Marques-Silva J. On the failings of Shapley values for
+explainability. International Journal of Approximate Reasoning.
+2024;171:109112. \url{https://doi.org/10.1016/j.ijar.2023.109112}
+
+\bibitem{bilodeau2024impossibility}
+Bilodeau B, Jaques N, Koh PW, Kim B. Impossibility theorems for feature
+attribution. Proceedings of the National Academy of Sciences.
+2024;121(2):e2304406120. \url{https://doi.org/10.1073/pnas.2304406120}
+
+\bibitem{clark2024xaitris}
+Clark B, Wilming R, Haufe S. XAI-TRIS: Non-linear image benchmarks to quantify
+false positive post-hoc attribution of feature importance. Machine Learning.
+2024;113(9):6871--6910. \url{https://doi.org/10.1007/s10994-024-06574-3}
+
+\bibitem{smith1988adap}
+Smith JW, Everhart JE, Dickson WC, Knowler WC, Johannes RS. Using the ADAP
+learning algorithm to forecast the onset of diabetes mellitus. In: Proceedings
+of the Annual Symposium on Computer Application in Medical Care; 1988.
+p. 261--265.
+
+\bibitem{hopkins1999spambase}
+Hopkins M, Reeber E. Spambase [dataset]. UCI Machine
+Learning Repository; 1999. \url{https://doi.org/10.24432/C53G6X}
+
+\bibitem{mohammad2012phishing}
+Mohammad R, McCluskey L. Phishing websites [dataset]. UCI Machine Learning
+Repository; 2012. \url{https://doi.org/10.24432/C51W2X}
+
+\bibitem{tromp1995connect4}
+Tromp J. Connect-4 [dataset]. UCI Machine Learning Repository; 1995.
+\url{https://doi.org/10.24432/C59P43}
 
 \end{thebibliography}
 
