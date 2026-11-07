@@ -277,3 +277,82 @@ def test_stuck_at_startup_only_without_any_heartbeat():
     assert not lib.stuck_at_startup(False, born=0, now=100, limit_s=1800)
     # A job that reported heartbeats and removed its file at the end is finishing, not stuck.
     assert not lib.stuck_at_startup(True, born=0, now=5000, limit_s=1800)
+
+
+# ---------------------------------------------------------------- analysis (WP6)
+import paper_b_analyze as an  # noqa: E402
+
+
+def test_holm_matches_hand_computation_and_keeps_order():
+    adj = an.holm([0.01, 0.04, 0.03, float("nan")])
+    assert adj[0] == pytest.approx(0.03)
+    assert adj[2] == pytest.approx(0.06)
+    assert adj[1] == pytest.approx(0.06)          # monotone: max(0.04*1, 0.06)
+    assert np.isnan(adj[3])
+
+
+def test_hodges_lehmann_and_rank_biserial():
+    assert an.hodges_lehmann(np.array([1.0, 2.0, 3.0])) == pytest.approx(2.0)
+    assert an.rank_biserial(np.array([1.0, 2.0, 3.0])) == pytest.approx(1.0)
+    assert an.rank_biserial(np.array([-1.0, -2.0])) == pytest.approx(-1.0)
+    # ranks of |d| = 1,2,3,4 -> R+ = 2+4 = 6, R- = 1+3 = 4 -> (6-4)/10
+    assert an.rank_biserial(np.array([-1.0, 2.0, -3.0, 4.0])) == pytest.approx(0.2)
+    assert an.rank_biserial(np.array([0.0, 0.0])) != an.rank_biserial(np.array([0.0, 0.0]))
+
+
+def test_nemenyi_cd_and_dz():
+    assert an.nemenyi_cd(4, 25) == pytest.approx(2.569 * (4 * 5 / 150) ** 0.5)
+    with pytest.raises(ValueError):
+        an.nemenyi_cd(9, 10)
+    assert an.d_z(np.array([1.0, 1.0])) != an.d_z(np.array([1.0, 1.0]))   # SD 0 -> NaN
+
+
+def _synthetic(effect: float, seed: int = 0):
+    import pandas as pd
+    rng = np.random.default_rng(seed)
+    recs = []
+    for m in ["logreg", "rf", "xgb", "svm", "mlp"]:
+        for s in [11, 22, 33, 44, 55]:
+            for i in range(20):
+                base = rng.normal(0.5, 0.1)
+                for e in ["shap", "lime_full", "lime", "anchors", "dice"]:
+                    shift = effect if e == "shap" else 0.0
+                    recs.append({"dataset": "adult", "model": m, "seed": s, "explainer": e,
+                                 "instance_id": i, "stability": base + shift + rng.normal(0, .05),
+                                 "fidelity": base + shift + rng.normal(0, .05),
+                                 "faithfulness_gap": base + shift + rng.normal(0, .05),
+                                 "sparsity": rng.uniform(), "all_zero": False,
+                                 "stability_zero_vectors": 0})
+    return pd.DataFrame(recs)
+
+
+def test_primary_effects_recover_a_known_effect_and_holm_family():
+    import pandas as pd
+    q = _synthetic(0.2)
+    df = an.primary_effects(q, pd.DataFrame())
+    conf = df[df.confirmatory]
+    assert len(conf) == 9                          # 3 endpoints x 3 contrasts, no timing yet
+    assert conf["estimate"].between(0.17, 0.23).all()
+    assert (conf["ci_lo"] > 0).all() and (conf["p_holm"] < 1e-6).all()
+    assert (conf["cells_positive"] == 25).all()
+    assert (conf["method"] == "mixedlm").all()     # never a silent fallback
+    assert conf["var_model"].notna().all()
+    assert df[~df.confirmatory]["p_holm"].isna().all()
+    fr = an.friedman(q)
+    assert set(fr["endpoint"]) == {"stability", "fidelity", "faithfulness_gap"}
+    assert (fr["rank_shap"] == 1.0).all()
+
+
+def test_primary_effects_null_effect_is_not_significant():
+    import pandas as pd
+    df = an.primary_effects(_synthetic(0.0, seed=3), pd.DataFrame())
+    conf = df[df.confirmatory]
+    assert (conf["p_holm"] > 0.01).all()
+    assert ((conf["ci_lo"] < 0) & (conf["ci_hi"] > 0)).mean() >= 0.8
+
+
+def test_cluster_bootstrap_resamples_whole_clusters():
+    import pandas as pd
+    df = pd.DataFrame({"c": ["a"] * 10 + ["b"] * 10, "v": [0.0] * 10 + [1.0] * 10})
+    lo, hi = an.cluster_bootstrap_ci(df, "v", "c", reps=2000)
+    assert lo == pytest.approx(0.0) and hi == pytest.approx(1.0)
