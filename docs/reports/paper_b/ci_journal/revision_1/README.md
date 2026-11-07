@@ -30,6 +30,7 @@ of them changed.
 | `paper_b_ci_rev1_response.docx` / `.pdf` | The response letter (internal tracking lines removed) |
 | `paper_b_ci_rev1_preview.pdf` | LaTeX rendering of the revised source |
 | `BUILD_MANIFEST.md` | Date, commit, hashes, pages, tracking status of the last build |
+| `supplement/paper_b_ci_rev1_supplement.docx` / `.pdf` / `.md` | The supplementary file for the reviewers (D-B), independent of the paper: design, data, models, fingerprints, environment; result sections [R] until the analysis fills them. Rendered by `scripts/build_supplement.py` |
 | `drafts/paper_b_ci_rev1_response_DRAFT.docx` / `.pdf` | **Proposal, not approved**: every comment with its elaborated draft answer (PROPOSAL Part C) and the P-changes that implement it. Rendered by `scripts/build_drafts.py` |
 | `drafts/paper_b_ci_rev1_proposed_changes_DRAFT.docx` / `.pdf` | **Proposal, not approved**: length plan, changes P-01..P-24, decisions D-A..D-E (PROPOSAL Parts A, B, D) |
 

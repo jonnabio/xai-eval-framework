@@ -44,8 +44,9 @@ NAME = "paper_b_ci_rev1"
 # limit (writing rules, last updated 2025-02-22); its published articles run 7 to 17 pages.
 PAGE_BUDGET = 12                     # author decision D-C, 2026-11-06: aim 12 pages
 SUBMITTED_DOCX = CI / "submission" / "paper_b_ci_manuscript.docx"   # frozen; text-check only
-REV_ABSTRACT = ROOT / "pub" / "fragments" / "paper_b_rev1_abstract_en.tex"
-REV_KEYWORDS = ROOT / "pub" / "fragments" / "paper_b_rev1_keywords_en.tex"
+# Kept in the lane's own folder (pub/ is a shared path).
+REV_ABSTRACT = REV / "manuscript" / "abstract_rev1.tex"
+REV_KEYWORDS = REV / "manuscript" / "keywords_rev1.tex"
 
 
 def load(path: Path, name: str):
