@@ -31,6 +31,7 @@ characterization.
 | moiseev2025benchmark | 2025 | Algorithms | open XAI benchmark |
 | olsen2024comparative | 2024 | Data Min. Knowl. Discov. | Shapley estimators, accuracy and cost |
 | saadatfar2024uslime | 2024 | Neurocomputing | LIME neighborhood sampling |
+| kapoor2024reforms | 2024 | Science Advances | reporting the computing environment (§1, C-032) |
 | brughmans2024disagreement | 2024 | TOP | counterfactual disagreement |
 | baniecki2024adversarial | 2024 | Information Fusion | manipulation of explanations |
 | huang2024failings | 2024 | Int. J. Approx. Reasoning | limits of Shapley values |
@@ -82,6 +83,8 @@ statistical methods 8.
 - **B.** Keep the list as it is (36% overall, 63% of literature) and explain in the response
   that foundational definitions and data sources are cited where they are used.
 - **C.** Literal 80% overall (≈ 130 references). Not compatible with 12 pages.
+
+**Addition (2026-11-07, C-032):** kapoor2024reforms (REFORMS), DOI checked on Crossref (Science Advances 10(18):eadk3452, 19 authors). Result: **53 references, 23 from 2024 on; literature 27, 23 recent (85%)**.
 
 ## Length
 
