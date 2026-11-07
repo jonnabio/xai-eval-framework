@@ -351,6 +351,43 @@ def admission_decision(available_gb: float, expected_peak_gb: float, running: in
     return True, "ok"
 
 
+def plan_admissions(candidates, available_gb: float, running: int, max_workers: int,
+                    reserve_gb: float, pause_below_gb: float, ac_power: bool | None,
+                    disk_free_gb: float, disk_pause_gb: float, stop_requested: bool):
+    """Which queued jobs to start now, in queue order: ([jobs], reason shown when waiting).
+
+    `candidates` is [(job, expected_peak_gb, must_run_alone)]. A job that does not fit the
+    RAM reserve is passed over, not waited for, so smaller jobs behind it still start
+    (strict FIFO stalled the run at 3 of 6 workers while other programs held the memory,
+    2026-11-07). A passed-over job starts alone once none of ours is running, if it leaves
+    at least `pause_below_gb`; the worker cap and the kill-newest rule still guard it. Any
+    other refusal (stop, worker limit, battery, disk, RAM below the pause floor) ends the
+    scan. A job that must run alone starts only when nothing runs, and nothing joins it."""
+    start, reason = [], "ok"
+    for job, peak, alone in candidates:
+        ok, why = admission_decision(available_gb, peak, running, max_workers, reserve_gb,
+                                     pause_below_gb, ac_power, disk_free_gb, disk_pause_gb,
+                                     stop_requested)
+        ram_only = not ok and "minus expected peak" in why
+        if not ok and not ram_only:
+            return start, (why if not start else reason)
+        if alone and running:
+            reason = reason if reason != "ok" else "a job that must run alone waits for the others"
+            continue
+        if ram_only:
+            if running == 0 and available_gb - peak >= pause_below_gb:
+                start.append(job)                     # alone, nothing else of ours running
+                return start, f"{why}; started alone"
+            reason = reason if reason != "ok" else f"{why} (smaller jobs go first)"
+            continue
+        start.append(job)
+        available_gb -= peak                          # account for it before the next one
+        running += 1
+        if alone:
+            break
+    return start, reason
+
+
 def expected_peak_gb(peaks: dict, model: str, explainer: str, dataset: str,
                      default_gb: float) -> float:
     """95th percentile of recorded peaks for this job type, else the default.

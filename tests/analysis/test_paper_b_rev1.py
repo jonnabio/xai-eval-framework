@@ -500,3 +500,42 @@ def test_throttling_check_uses_medians_not_single_readings():
     s["bench"] = dict(dash.bench_summary(slow), workers=6)
     assert any("Throttling" in w for w in dash.warnings(s))
     assert dash.bench_summary([])["first"] is None
+
+# ---------------------------------------------------------------- admission backfill (2026-11-07)
+def _plan(cands, avail, running=0, maxw=6, stop=False, ac=True, disk=300.0):
+    return lib.plan_admissions(cands, avail, running, maxw, reserve_gb=6.0, pause_below_gb=3.0,
+                               ac_power=ac, disk_free_gb=disk, disk_pause_gb=5.0,
+                               stop_requested=stop)
+
+
+def test_admission_passes_over_a_job_that_does_not_fit():
+    big, s1, s2 = ("adult", "mlp", 33, "anchors"), ("a", "svm", 33, "shap"), ("b", "rf", 33, "dice")
+    start, why = _plan([(big, 4.9, False), (s1, 0.4, False), (s2, 0.4, False)], 8.6, running=3)
+    assert start == [s1, s2] and "smaller jobs go first" in why          # no head-of-line stall
+
+
+def test_admission_starts_a_large_job_alone_when_nothing_runs():
+    big, s1 = ("adult", "mlp", 33, "anchors"), ("a", "svm", 33, "shap")
+    start, why = _plan([(big, 4.9, False), (s1, 0.4, False)], 8.6, running=0)
+    assert start == [big] and "started alone" in why                     # nothing joins it
+    start, _ = _plan([(big, 6.0, False)], 8.6, running=0)
+    assert start == []                                                   # would leave < 3 GB
+
+
+def test_admission_hard_refusals_still_stop_the_scan():
+    s1, s2 = ("a", "svm", 33, "shap"), ("b", "rf", 33, "dice")
+    assert _plan([(s1, 0.4, False)], 20.0, stop=True)[0] == []
+    assert _plan([(s1, 0.4, False)], 20.0, ac=False)[0] == []
+    assert _plan([(s1, 0.4, False)], 20.0, disk=1.0)[0] == []
+    assert _plan([(s1, 0.4, False)], 2.0)[0] == []                       # below the pause floor
+    assert _plan([(s1, 0.4, False), (s2, 0.4, False)], 20.0, running=5) == ([s1], "ok")
+    start, _ = _plan([(s1, 0.4, False), (s2, 0.4, False)], 20.0, running=1, maxw=2)
+    assert start == [s1]
+
+
+def test_admission_job_that_must_run_alone():
+    lone, s1 = ("connect4", "mlp", 22, "anchors"), ("a", "svm", 33, "shap")
+    start, _ = _plan([(lone, 2.0, True), (s1, 0.4, False)], 20.0, running=2)
+    assert start == [s1]                                                 # it waits, others go
+    start, _ = _plan([(lone, 2.0, True), (s1, 0.4, False)], 20.0, running=0)
+    assert start == [lone]                                               # nothing joins it

@@ -585,26 +585,19 @@ class Governor:
                 self.retry(job, f"exit code {code}")
         # Admission.
         stop = self.stopping or lib.STOP.exists()
-        while self.queue:
-            job = self.queue[0]
-            if self.stem(job).with_suffix(".done").exists():
-                self.queue.pop(0)
-                continue
-            if job in self.alone and self.running:
-                self.reason = "next job must run alone (it exceeded memory before)"
-                break
-            d, m, _s, e = job
-            peak = lib.expected_peak_gb(self.peaks, m, e, d, self.res["default_peak_gb"])
-            ok, self.reason = lib.admission_decision(
-                snap["ram_available_gb"], peak, len(self.running), self.max_workers,
-                self.res["ram_reserve_gb"], self.res["pause_admission_below_gb"],
-                snap["ac_power"], snap["disk_free_gb"], self.res["disk_pause_gb"], stop)
-            if not ok:
-                break
-            self.start(self.queue.pop(0))
-            snap["ram_available_gb"] -= peak      # account for it before the next decision
-            if job in self.alone:
-                break
+        self.queue = [j for j in self.queue if not self.stem(j).with_suffix(".done").exists()]
+        cands = [(j, lib.expected_peak_gb(self.peaks, j[1], j[3], j[0],
+                                          self.res["default_peak_gb"]), j in self.alone)
+                 for j in self.queue if j not in self.running]
+        to_start, self.reason = lib.plan_admissions(
+            cands, snap["ram_available_gb"], len(self.running), self.max_workers,
+            self.res["ram_reserve_gb"], self.res["pause_admission_below_gb"],
+            snap["ac_power"], snap["disk_free_gb"], self.res["disk_pause_gb"], stop)
+        peaks = {j: p for j, p, _a in cands}
+        for job in to_start:
+            self.queue.remove(job)
+            self.start(job)
+            snap["ram_available_gb"] -= peaks[job]
         if now - self.last_bench > 600:
             self.last_bench = now
             lib.append_jsonl(lib.STATE / "bench.jsonl", {"time": now, "bench_ms": lib.microbenchmark(),
