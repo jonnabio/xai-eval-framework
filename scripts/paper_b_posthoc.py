@@ -81,8 +81,11 @@ def mask_groups(names, dataset: str) -> list[list[int]]:
     out = [list(v) for v in groups.values()]
     idx = {str(n): j for j, n in enumerate(names)}
     for grp in EXTRA_GROUPS.get(dataset, []):
+        # a member is a plain column (education-num) or a one-hot group by its prefix
+        # (education -> education_*)
         js = [idx[g] for g in grp if g in idx]
-        # merge with any one-hot group that contains a member
+        for g in grp:
+            js += groups.get(g, [])
         merged = set(js)
         for g in out:
             if merged & set(g):
