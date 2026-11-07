@@ -61,7 +61,15 @@ Now: **61 references, 22 from 2024 on (36%).**
 Applied literally, the rule needs ≈ 4 recent entries per old one: with 26 entries that cannot
 be recent, about 130 references (≈ 4 pages), which breaks the 12-page budget (D-C).
 
-**Options for the author:**
+**Decision (author, 2026-11-06): option A**, applied in CHANGELOG C-028. Nine entries removed
+(Slack 2020, Kumar 2020, Rong 2022, Ali 2023, Hooker 2019, Doshi-Velez 2017, Jacovi 2020,
+Wilming 2022 and 2023, the last two replaced by Clark 2024 in §5). Result: **52 references,
+22 from 2024 on (42%); literature 26 entries, 22 recent (85%)**; older literature kept:
+Adebayo 2018, Agarwal 2022, Hedström 2023, Nauta 2023 (each cited for a point no recent
+verified entry covers). Exempt (26): definitions 9 (6 methods, 3 metrics), datasets 9,
+statistical methods 8.
+
+**Options for the author (as proposed):**
 
 - **A (recommended).** Apply the rule to the *literature* category and exempt definitions,
   datasets and statistical methods (stated in the response to R1-9). To reach 80% there,

@@ -61,7 +61,7 @@ rule and DiCE~\cite{mothilal2020dice} a counterfactual. They also differ in
 how faithfully the explanation tracks the model, how stable it is under
 small changes of the input, and how much computation it needs. Theory does
 not settle the choice across model families and
-configurations~\cite{retzlaff2024posthoc,ali2023trustworthy,longo2024manifesto}, and the
+configurations~\cite{retzlaff2024posthoc,longo2024manifesto}, and the
 empirical guidance is weaker than the popularity of the methods suggests:
 evaluations use different metric families, and the ranking of explainers
 often depends as much on the metric and the configuration as on the
@@ -122,14 +122,14 @@ precision~\cite{ribeiro2018anchors}; DiCE searches for a counterfactual
 instance with the opposite prediction~\cite{mothilal2020dice}.
 
 Quantitative evaluation relies on proxy metrics: faithfulness under feature
-removal~\cite{bhatt2020evaluating,samek2017evaluating,hooker2019benchmark},
+removal~\cite{bhatt2020evaluating,samek2017evaluating},
 robustness to small input changes~\cite{alvarezmelis2018robustness} and
 sparsity, standardized in toolkits and
 benchmarks~\cite{hedstrom2023quantus,agarwal2022openxai}. Removal-based
-scores depend on the removal scheme~\cite{rong2022consistent,zheng2025ffidelity}, attributions
-can pass perturbation tests and fail sanity checks~\cite{adebayo2018sanity}, LIME and SHAP can be manipulated~\cite{slack2020fooling,baniecki2024adversarial},
+scores depend on the removal scheme~\cite{zheng2025ffidelity}, attributions
+can pass perturbation tests and fail sanity checks~\cite{adebayo2018sanity}, LIME and SHAP can be manipulated~\cite{baniecki2024adversarial},
 and Shapley attributions are hard to read as importance when features are
-dependent~\cite{kumar2020problems,huang2024failings}; feature attribution has
+dependent~\cite{huang2024failings}; feature attribution has
 provable limits as a basis for inferring model
 behavior~\cite{bilodeau2024impossibility},
 and attribution methods can mark features with no relation to the target as
@@ -532,9 +532,9 @@ reversed.]
 
 The endpoints compare explainers under a protocol; they do not establish
 that an explanation is correct, which needs ground truth or
-human-centered evaluation~\cite{haufe2026formalization,doshivelez2017rigorous,jacovi2020faithfulness},
+human-centered evaluation~\cite{haufe2026formalization},
 and attribution methods can mark suppressor variables as important when
-features are dependent~\cite{wilming2022scrutinizing,wilming2023theoretical}.
+features are dependent~\cite{clark2024xaitris}.
 Anchors and DiCE vectors encode which features an explanation uses, not
 signed contributions. Cost was measured on one host; times scale with the
 hardware, rows evaluated do not. The study covers tabular binary
@@ -590,12 +590,6 @@ M\"{u}ller H, et al. Post-hoc vs ante-hoc explanations: xAI design guidelines
 for data scientists. Cognitive Systems Research. 2024;86:101243.
 \url{https://doi.org/10.1016/j.cogsys.2024.101243}
 
-\bibitem{ali2023trustworthy}
-Ali S, Abuhmed T, El-Sappagh S, Muhammad K, Alonso-Moral JM, Confalonieri R,
-et al. Explainable Artificial Intelligence (XAI): What we know and what is
-left to attain Trustworthy Artificial Intelligence. Information Fusion.
-2023;99:101805. \url{https://doi.org/10.1016/j.inffus.2023.101805}
-
 \bibitem{nauta2023anecdotal}
 Nauta M, Trienes J, Pathak S, Nguyen E, Peters M, Schmitt Y, et al. From
 anecdotal evidence to quantitative evaluation methods: A systematic review on
@@ -645,11 +639,6 @@ visualization of what a deep neural network has learned. IEEE Transactions on
 Neural Networks and Learning Systems. 2017;28(11):2660--2673.
 \url{https://doi.org/10.1109/TNNLS.2016.2599820}
 
-\bibitem{hooker2019benchmark}
-Hooker S, Erhan D, Kindermans PJ, Kim B. A benchmark for interpretability
-methods in deep neural networks. In: Advances in Neural Information
-Processing Systems 32; 2019. p. 9737--9748.
-
 \bibitem{alvarezmelis2018robustness}
 Alvarez-Melis D, Jaakkola TS. On the robustness of interpretability methods.
 In: ICML Workshop on Human Interpretability in Machine Learning (WHI 2018);
@@ -671,24 +660,6 @@ Track; 2022. \url{https://openreview.net/forum?id=MU2495w47rz}
 Adebayo J, Gilmer J, Muelly M, Goodfellow I, Hardt M, Kim B. Sanity checks
 for saliency maps. In: Advances in Neural Information Processing Systems 31;
 2018. p. 9525--9536.
-
-\bibitem{rong2022consistent}
-Rong Y, Leemann T, Borisov V, Kasneci G, Kasneci E. A consistent and
-efficient evaluation strategy for attribution methods. In: Proceedings of the
-39th International Conference on Machine Learning; 2022. p. 18770--18795.
-\url{https://proceedings.mlr.press/v162/rong22a.html}
-
-\bibitem{slack2020fooling}
-Slack D, Hilgard S, Jia E, Singh S, Lakkaraju H. Fooling LIME and SHAP:
-Adversarial attacks on post hoc explanation methods. In: Proceedings of the
-AAAI/ACM Conference on AI, Ethics, and Society; 2020. p. 180--186.
-\url{https://doi.org/10.1145/3375627.3375830}
-
-\bibitem{kumar2020problems}
-Kumar IE, Venkatasubramanian S, Scheidegger C, Friedler SA. Problems with
-Shapley-value-based explanations as feature importance measures. In:
-Proceedings of the 37th International Conference on Machine Learning; 2020.
-p. 5491--5500. \url{https://arxiv.org/abs/2002.11097}
 
 \bibitem{kohavi1996scaling}
 Kohavi R. Scaling up the accuracy of Naive-Bayes classifiers: A
@@ -757,28 +728,6 @@ Repository; 1994. \url{https://doi.org/10.24432/C5NC77}
 Haufe S, Wilming R, Clark B, Zhumagambetov R, Boubekki A, Martin J, et al.
 Explainable AI needs formalization. npj Artificial Intelligence. 2026;2:42.
 \url{https://doi.org/10.1038/s44387-026-00095-1}
-
-\bibitem{doshivelez2017rigorous}
-Doshi-Velez F, Kim B. Towards a rigorous science of interpretable machine
-learning [Preprint]. arXiv:1702.08608; 2017.
-\url{https://arxiv.org/abs/1702.08608}
-
-\bibitem{wilming2022scrutinizing}
-Wilming R, Budding C, M\"{u}ller KR, Haufe S. Scrutinizing XAI using linear
-ground-truth data with suppressor variables. Machine Learning.
-2022;111(5):1903--1923. \url{https://doi.org/10.1007/s10994-022-06167-y}
-
-\bibitem{wilming2023theoretical}
-Wilming R, Kieslich L, Clark B, Haufe S. Theoretical behavior of XAI methods
-in the presence of suppressor variables. In: Proceedings of the 40th
-International Conference on Machine Learning; 2023. p. 37091--37107.
-\url{https://proceedings.mlr.press/v202/wilming23a.html}
-
-\bibitem{jacovi2020faithfulness}
-Jacovi A, Goldberg Y. Towards faithfully interpretable NLP systems: How
-should we define and evaluate faithfulness? In: Proceedings of the 58th
-Annual Meeting of the Association for Computational Linguistics; 2020.
-p. 4198--4205. \url{https://doi.org/10.18653/v1/2020.acl-main.386}
 
 % --- Added in revision 1 (P-11). WP8 verifies every entry and DOI before submission.
 
