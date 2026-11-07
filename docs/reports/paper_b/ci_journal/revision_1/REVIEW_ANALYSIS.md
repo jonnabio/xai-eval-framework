@@ -18,8 +18,8 @@ Each concern is split into atomic, checkable items. Columns:
 | ID | Request | Verdict | Kind | Evidence in the repository | Plan |
 |---|---|---|---|---|---|
 | ED-1 | The **main benchmark** must include at least one state-of-the-art explainer (e.g., Anchors or DiCE), or justify why not | Valid | X | Anchors and DiCE were run on the same 75 Adult cells (`experiments/exp2_scaled/results/*_anchors`, `*_dice`; 57/75 and 68/75 artifact-qualified) and scored on the same five metrics. The manuscript only *cites* their omnibus result (lines 352-369) and uses Anchors in the cross-dataset table. Using those runs directly would restate the results of Paper A (C&I policy, X-1) and overlaps Paper D (X-2), so they enter through the new cohort | WP2, WP3 |
-| ED-2 | Point-by-point response letter | — | P | — | WP9 |
-| ED-3 | Revision deadline: "contact the editorial office before the deadline" | — | P | **30 November 2026** (author, from DergiPark) | Q-1 |
+| ED-2 | Point-by-point response letter | — | P | — | no answer (author, 2026-11-07: the letter itself fulfils it) |
+| ED-3 | Revision deadline: "contact the editorial office before the deadline" | — | P | **30 November 2026** (author, from DergiPark) | no answer (author, 2026-11-07: procedural) |
 
 ## 2. Reviewer 1
 

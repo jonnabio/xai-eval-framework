@@ -2,6 +2,8 @@
 
 Manuscript 2067810, *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark*, *Computers and Informatics*. Major revision of 2026-11-06.
 
+Each comment is quoted in full, followed by the answer. Where one sentence of a reviewer raises several points, the sentence is quoted in full under each of them and the point answered there is shown in bold.
+
 
 
 
@@ -14,60 +16,53 @@ Manuscript 2067810, *When Does SHAP Outperform LIME? Model- and Configuration-De
 **Response.** We thank the editor for this requirement, which strengthened the study. Both Anchors and DiCE are now part of the main benchmark, under the same paired protocol as SHAP and LIME: the same models, the same test instances, the same seeds, the same metrics and the same host. The research questions are stated as paired contrasts of SHAP against each of the other three explainers (§3.1). Anchors and DiCE produce explanations of different kinds (a rule; a counterfactual), so §3.3 explains how each is turned into a feature-attribution vector and which metrics are comparable across the four methods. The four-explainer results are in Table 2 (§4.1) and across the seven datasets in Table 4 (§4.5). [R: one sentence on the main finding for Anchors and DiCE.]
 **Changes in the manuscript:** Section 3.3; Section 4.1, Table 2
 
-### ED-2
 
-> Please submit your revised manuscript and a point-by-point response letter.
-
-**Response.** This letter answers every point of the editor and both reviewers individually, quoting each comment and stating where the manuscript changed. A second copy of the manuscript with every change marked is provided.
-**Changes in the manuscript:** 
-
-### ED-3
-
-> If you need additional time, please contact the editorial office before the deadline.
-
-**Response.** The revision is submitted within the deadline of 30 November 2026.
-**Changes in the manuscript:** 
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
 
 ## Reviewer 1: general assessment
 
 ### R1-1
 
-> In particular, the authors should more clearly establish the novelty of the study relative to previously published work [...] (Contribution to the Field: Fair)
+> In particular, **the authors should more clearly establish the novelty of the study relative to previously published work**, account for potential statistical dependencies among experimental configurations, and strengthen the validity of the perturbation-based stability evaluation.
+>
+> 4. Contribution to the Field: Fair (Provides marginal original contributions to the literature)
 
 **Response.** We thank the reviewer for raising this point, which the revision takes seriously. The previous version presented the study as an extension of an earlier comparison; the revised manuscript stands on its own evidence. All results come from a new experimental cohort run for this study (§3), with four explainers instead of two, seven datasets instead of one main dataset, configuration sensitivity instead of a single setting, controls that test the validity of the stability measure, and cost measured on one host with hardware-independent counts. The contributions are restated in §1 accordingly, and §5 states in one paragraph what was known before and what this study adds. Details under R1-M1.
 **Changes in the manuscript:** Section 1; Section 5
 
 ### R1-2
 
-> [...] account for potential statistical dependencies among experimental configurations [...]
+> In particular, the authors should more clearly establish the novelty of the study relative to previously published work, **account for potential statistical dependencies among experimental configurations**, and strengthen the validity of the perturbation-based stability evaluation.
 
 **Response.** Addressed in detail under R1-M2 and R1-M3. In brief: the design no longer nests sample sizes, the seeds no longer change the data split, and the analysis models the remaining hierarchy explicitly (mixed model, cluster bootstrap over models).
 **Changes in the manuscript:** Section 3.5
 
 ### R1-3
 
-> [...] and strengthen the validity of the perturbation-based stability evaluation.
+> In particular, the authors should more clearly establish the novelty of the study relative to previously published work, account for potential statistical dependencies among experimental configurations, and **strengthen the validity of the perturbation-based stability evaluation**.
 
 **Response.** Addressed under R1-M6 and R1-M7: a no-noise control, perturbations that respect categorical constraints, rank-based stability, and an explicit treatment of all-zero vectors (§3.4, §4.4).
 **Changes in the manuscript:** Section 3.4; Section 4.4
 
 ### R1-4
 
-> Furthermore, the fairness of the explainer configurations [...] require[s] additional investigation.
+> Furthermore, **the fairness of the explainer configurations**, reliability of computational cost measurements, and generalizability of the cross-dataset findings require additional investigation.
 
 **Response.** Addressed under R1-M4 and R1-M5: LIME now uses the library's default kernel width and is evaluated with and without its feature budget. KernelSHAP is also run on the tree models to separate the implementation from the model family. A sensitivity analysis covers the main hyperparameters of both methods (§3.3, §4.3).
 **Changes in the manuscript:** Section 3.3
 
 ### R1-5
 
-> [...] reliability of computational cost measurements [...] require[s] additional investigation.
+> Furthermore, the fairness of the explainer configurations, **reliability of computational cost measurements**, and generalizability of the cross-dataset findings require additional investigation.
 
 **Response.** Addressed under R1-M8: every cost measurement was repeated on one recorded host under controlled conditions, and complemented by hardware-independent counts (§3.6, §4.2).
 **Changes in the manuscript:** Section 3.6; Section 4.2, Table 3
 
 ### R1-6
 
-> [...] and generalizability of the cross-dataset findings require additional investigation.
+> Furthermore, the fairness of the explainer configurations, reliability of computational cost measurements, and **generalizability of the cross-dataset findings** require additional investigation.
 
 **Response.** Addressed under R1-M10: the cross-dataset study now covers six further datasets with all models and all four explainers, SHAP stability included. The datasets were chosen to separate dimensionality from categorical encoding (§3.2, §4.5).
 **Changes in the manuscript:** Section 4.5, Table 4
@@ -81,28 +76,30 @@ Manuscript 2067810, *When Does SHAP Outperform LIME? Model- and Configuration-De
 
 ### R1-8
 
-> Organization of the manuscript: Poor (Poor organization of ideas and supporting points)
+> 5. Organization of the manuscript: Poor
 
 **Response.** We thank the reviewer for this assessment. As the comment concerns the manuscript as a whole, we reviewed every section against it and identified the following places where the organization could be improved: (1) Results mixed our evidence with a summary of an earlier study (former §4.1), which interrupted the line of argument; (2) the cross-dataset results, the kernel-width probe and the masking probe read as separate appendices of the main analysis; (3) limitations were spread over several sections; (4) Results had no element showing how the design fitted together. We revised each of them: the earlier-study section was removed (former Section 4.1); Results now follow one sequence, main benchmark → cost → configuration sensitivity → validity of the measurements → other datasets (§4); limitations are gathered in one subsection (§5); and a design table opens the methods (Table 1).
 **Changes in the manuscript:** Section 1; former Section 4.1 (removed); Section 3.1 and Table 1 (design); Section 4 (one sequence: main benchmark, cost, configuration sensitivity, validity of the measurements, other datasets); Section 5.3 (limitations in one place)
 
 ### R1-9
 
-> Drawing and Building Upon Relevant Literature: Poor (Provides a poor summary of the major points in the relevant literature)
+> 6. Drawing and Building Upon Relevant Literature: Poor
 
 **Response.** We thank the reviewer for this assessment. As the comment concerns the literature review as a whole, we checked it against recent work and identified the following places where it could be improved: (1) recent empirical comparisons of SHAP and LIME were missing; (2) recent benchmarks and toolkits for explanation evaluation were not discussed; (3) work on the sensitivity of LIME to its hyperparameters and on the validity of perturbation-based stability measures was not used. We revised each of them: §2 adds a paragraph on comparisons and benchmarks published from 2024 on, and positions the study against them. §3.3–3.4 cite the work on hyperparameter sensitivity and perturbation validity that motivates the new controls. Older entries whose point is now made by recent work were replaced. Of the 52 references, the 26 that cite the literature are 85% from 2024 or later; the other 26 are cited for a definition (the explainers, the models and the metrics), a dataset source or a statistical method, at the place where it is used.
 **Changes in the manuscript:** Section 2
 
 ### R1-10
 
-> [...] ensure that the conclusions are fully supported by the reported evidence. (Conclusion: Fair conclusion without sufficient justification from evidence presented)
+> I encourage the authors to address the major and minor comments comprehensively, provide additional experimental validation where necessary, and **ensure that the conclusions are fully supported by the reported evidence**.
+>
+> 9. Conclusion: Fair (Fair conclusion without sufficient justification from evidence presented)
 
 **Response.** We thank the reviewer for this assessment. We re-examined each conclusion against the evidence and identified the following places where it was not sufficiently supported: (1) the stability conclusion rested on one kernel width and a perturbation scheme whose validity was not tested; (2) the sparsity conclusion was a consequence of LIME's feature budget; (3) the recommendations generalized beyond the models and datasets tested. We revised each of them: the stability conclusion now rests on the sensitivity analysis and the validity controls (§4.3–4.4); sparsity is reported descriptively (§3.1); every claim in §5 is labelled confirmatory or exploratory and bounded by what was tested (Table 5); and the conclusions (§6) restate only those results.
 **Changes in the manuscript:** Section 5, Table 5; Section 6
 
 ### R1-11
 
-> I encourage the authors to address the major and minor comments comprehensively, provide additional experimental validation where necessary [...]
+> I encourage the authors to **address the major and minor comments comprehensively, provide additional experimental validation where necessary**, and ensure that the conclusions are fully supported by the reported evidence.
 
 **Response.** Each major and minor comment of the detailed report is answered individually below.
 **Changes in the manuscript:** 
@@ -323,18 +320,23 @@ Manuscript 2067810, *When Does SHAP Outperform LIME? Model- and Configuration-De
 **Response.** Each result is labelled confirmatory (the main paired benchmark) or exploratory (sensitivity, validity controls, other datasets) in §4, in Table 5 and in the conclusions.
 **Changes in the manuscript:** Section 5, Table 5; Section 6; Abstract
 
+
+```{=openxml}
+<w:p><w:r><w:br w:type="page"/></w:r></w:p>
+```
+
 ## Reviewer 2
 
 ### R2-1a
 
-> First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment, [...]
+> First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
 **Response.** We agree with the reviewer, and the earlier timings have been replaced. All cost measurements of the revision come from one recorded host, under the controlled protocol described under R1-M8 (§3.6). Every paired comparison ran on that host in the same session.
 **Changes in the manuscript:** Section 3.6; Section 4.2, Table 3
 
 ### R2-1b
 
-> [...] and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
+> First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment, and **supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic**.
 
 **Response.** Next to time, the revision reports for each explanation the number of calls to the model and the number of rows the model evaluated. These counts do not depend on the hardware. Table 3 adds the theoretical complexity of each explainer. FLOPs are reported for logistic regression and the MLP, where they are well defined per prediction. For tree ensembles and the RBF-SVM a per-prediction FLOP count is not comparable across model types, so model calls and rows evaluated are the hardware-independent measure there (§4.2).
 **Changes in the manuscript:** Section 4.2, Table 3

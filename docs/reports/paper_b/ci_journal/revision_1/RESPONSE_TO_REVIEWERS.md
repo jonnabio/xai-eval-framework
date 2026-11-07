@@ -2,6 +2,8 @@
 
 Manuscript 2067810, *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark*, *Computers and Informatics*. Major revision of 2026-11-06.
 
+Each comment is quoted in full, followed by the answer. Where one sentence of a reviewer raises several points, the sentence is quoted in full under each of them and the point answered there is shown in bold.
+
 <!-- RESPONSE GUIDELINES (author, 2026-11-06)
 1. Every item gets an answer that moves the review forward: never a question back to the
    reviewer or the editor.
@@ -39,31 +41,13 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 - **Response:** We thank the editor for this requirement, which strengthened the study. Both Anchors and DiCE are now part of the main benchmark, under the same paired protocol as SHAP and LIME: the same models, the same test instances, the same seeds, the same metrics and the same host. The research questions are stated as paired contrasts of SHAP against each of the other three explainers (§3.1). Anchors and DiCE produce explanations of different kinds (a rule; a counterfactual), so §3.3 explains how each is turned into a feature-attribution vector and which metrics are comparable across the four methods. The four-explainer results are in Table 2 (§4.1) and across the seven datasets in Table 4 (§4.5). [R: one sentence on the main finding for Anchors and DiCE.]
 - **Where:** Section 3.3; Section 4.1, Table 2
 
-### ED-2
-
-> Please submit your revised manuscript and a point-by-point response letter.
-
-- **Status:** EXPLAINED
-- **Changes:** 
-- **Plan:** WP9
-- **Response:** This letter answers every point of the editor and both reviewers individually, quoting each comment and stating where the manuscript changed. A second copy of the manuscript with every change marked is provided.
-- **Where:** 
-
-### ED-3
-
-> If you need additional time, please contact the editorial office before the deadline.
-
-- **Status:** EXPLAINED
-- **Changes:** 
-- **Plan:** Q-1
-- **Response:** The revision is submitted within the deadline of 30 November 2026.
-- **Where:** 
-
 ## Reviewer 1: general assessment
 
 ### R1-1
 
-> In particular, the authors should more clearly establish the novelty of the study relative to previously published work [...] (Contribution to the Field: Fair)
+> In particular, **the authors should more clearly establish the novelty of the study relative to previously published work**, account for potential statistical dependencies among experimental configurations, and strengthen the validity of the perturbation-based stability evaluation.
+>
+> 4. Contribution to the Field: Fair (Provides marginal original contributions to the literature)
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
 - **Changes:** C-001, C-020
@@ -73,7 +57,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-2
 
-> [...] account for potential statistical dependencies among experimental configurations [...]
+> In particular, the authors should more clearly establish the novelty of the study relative to previously published work, **account for potential statistical dependencies among experimental configurations**, and strengthen the validity of the perturbation-based stability evaluation.
 
 - **Status:** REMEDIATED
 - **Changes:** C-011
@@ -83,7 +67,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-3
 
-> [...] and strengthen the validity of the perturbation-based stability evaluation.
+> In particular, the authors should more clearly establish the novelty of the study relative to previously published work, account for potential statistical dependencies among experimental configurations, and **strengthen the validity of the perturbation-based stability evaluation**.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
 - **Changes:** C-009, C-018
@@ -93,7 +77,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-4
 
-> Furthermore, the fairness of the explainer configurations [...] require[s] additional investigation.
+> Furthermore, **the fairness of the explainer configurations**, reliability of computational cost measurements, and generalizability of the cross-dataset findings require additional investigation.
 
 - **Status:** REMEDIATED
 - **Changes:** C-008
@@ -103,7 +87,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-5
 
-> [...] reliability of computational cost measurements [...] require[s] additional investigation.
+> Furthermore, the fairness of the explainer configurations, **reliability of computational cost measurements**, and generalizability of the cross-dataset findings require additional investigation.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
 - **Changes:** C-010, C-014
@@ -113,7 +97,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-6
 
-> [...] and generalizability of the cross-dataset findings require additional investigation.
+> Furthermore, the fairness of the explainer configurations, reliability of computational cost measurements, and **generalizability of the cross-dataset findings** require additional investigation.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
 - **Changes:** C-017
@@ -133,7 +117,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-8
 
-> Organization of the manuscript: Poor (Poor organization of ideas and supporting points)
+> 5. Organization of the manuscript: Poor
 
 - **Type:** GENERAL
 - **Status:** REMEDIATED
@@ -144,7 +128,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-9
 
-> Drawing and Building Upon Relevant Literature: Poor (Provides a poor summary of the major points in the relevant literature)
+> 6. Drawing and Building Upon Relevant Literature: Poor
 
 - **Type:** GENERAL
 - **Status:** PENDING (text and list done; waits for the author's reading of the 15 recent abstracts, REFERENCE_AUDIT.md)
@@ -155,7 +139,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-10
 
-> [...] ensure that the conclusions are fully supported by the reported evidence. (Conclusion: Fair conclusion without sufficient justification from evidence presented)
+> I encourage the authors to address the major and minor comments comprehensively, provide additional experimental validation where necessary, and **ensure that the conclusions are fully supported by the reported evidence**.
+>
+> 9. Conclusion: Fair (Fair conclusion without sufficient justification from evidence presented)
 
 - **Type:** GENERAL
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
@@ -166,7 +152,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R1-11
 
-> I encourage the authors to address the major and minor comments comprehensively, provide additional experimental validation where necessary [...]
+> I encourage the authors to **address the major and minor comments comprehensively, provide additional experimental validation where necessary**, and ensure that the conclusions are fully supported by the reported evidence.
 
 - **Status:** EXPLAINED
 - **Changes:** 
@@ -484,7 +470,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R2-1a
 
-> First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment, [...]
+> First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
 - **Changes:** C-010, C-014
@@ -494,7 +480,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 ### R2-1b
 
-> [...] and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
+> First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment, and **supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic**.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
 - **Changes:** C-014

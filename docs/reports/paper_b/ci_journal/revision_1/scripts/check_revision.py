@@ -34,7 +34,9 @@ STATUSES = {"PENDING", "REMEDIATED", "EXPLAINED"}
 
 def analysis_ids(text: str) -> list[str]:
     out = []
-    for i in re.findall(rf"^\| ({ID_RE}) \|", text, flags=re.M):
+    for i, row in re.findall(rf"^\| ({ID_RE}) \|(.*)$", text, flags=re.M):
+        if "no answer (author" in row:  # procedural, answered by the letter itself
+            continue
         if i not in out:
             out.append(i)
     return out

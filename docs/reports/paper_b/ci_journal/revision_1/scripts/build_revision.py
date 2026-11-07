@@ -162,6 +162,9 @@ def count_revisions(docx: Path) -> str:
     return f"{xml.count('<w:ins ')} insertions, {xml.count('<w:del ')} deletions (Word revisions)"
 
 
+PAGE_BREAK = '```{=openxml}\n<w:p><w:r><w:br w:type="page"/></w:r></w:p>\n```'
+
+
 def response_markdown() -> str:
     """The letter as sent: internal tracking lines and HTML comments removed."""
     text = (REV / "RESPONSE_TO_REVIEWERS.md").read_text(encoding="utf-8")
@@ -170,6 +173,8 @@ def response_markdown() -> str:
     for line in text.splitlines():
         if re.match(r"^- \*\*(Status|Changes|Plan|Type):\*\*", line):
             continue
+        if line in ("## Reviewer 1: general assessment", "## Reviewer 2"):
+            keep += ["", PAGE_BREAK, ""]  # each party starts on a new page
         keep.append(line.replace("- **Response:**", "**Response.**")
                     .replace("- **Where:**", "**Changes in the manuscript:**"))
     return "\n".join(keep)
