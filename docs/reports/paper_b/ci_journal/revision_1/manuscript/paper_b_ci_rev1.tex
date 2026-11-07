@@ -68,22 +68,27 @@ evaluations use different metric families, and the ranking of explainers
 often depends as much on the metric and the configuration as on the
 methods~\cite{nauta2023anecdotal,canha2025benchmark,pawlicki2024metrics}.
 
-Two gaps follow. Comparisons in which all explainers see the same model,
-the same instances and the same seed, so that a difference can be
-attributed to the explainer, are scarce: published SHAP--LIME comparisons
-are often case studies in a single
-domain~\cite{hooshyar2024problems,schulte2024studying}. Results are also
-usually reported for one configuration, although the hyperparameters that
-build LIME's neighborhood~\cite{saadatfar2024uslime} or bound KernelSHAP's
-sampling~\cite{olsen2024comparative} can change the outcome. Cost,
-finally, transfers to another deployment only when it is measured on a
+Two gaps follow. The first is \emph{control}. Comparisons in which all
+explainers see the same model, the same instances, the same seed and the
+same host, so that a difference can be attributed to the explainer, are
+scarce: published SHAP--LIME comparisons are often case studies in a single
+domain~\cite{hooshyar2024problems,schulte2024studying}. Cost needs the same
+control: it transfers to another deployment only when it is measured on a
 stated host, as item 2c of the REFORMS checklist for machine-learning-based
 science recommends~\cite{kapoor2024reforms}, and when it is also counted in a
 unit that does not depend on that host, such as the number of model calls.
+The second gap is \emph{configuration}. Results are usually reported for one
+configuration, although the hyperparameters that build LIME's
+neighborhood~\cite{saadatfar2024uslime} or bound KernelSHAP's
+sampling~\cite{olsen2024comparative} can change the outcome. Without
+control and without more than one configuration, a recommendation cannot
+state the conditions under which it holds.
 
-This paper addresses these gaps with three contributions:
+This paper addresses the two gaps with three contributions. The first closes
+the gap in control, the second the gap in configuration, and the third
+states what the results support once both are closed:
 \begin{enumerate}
-\item \textbf{A paired benchmark of four explainers} (SHAP, LIME, Anchors and
+\item \textbf{A controlled, paired benchmark of four explainers} (SHAP, LIME, Anchors and
 DiCE) on five model families, with every run on one recorded host, and cost
 reported as CPU time and as the number of model evaluations, a measure that
 does not depend on the hardware (Sections~\ref{sec:main}
