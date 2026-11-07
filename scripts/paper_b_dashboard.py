@@ -110,11 +110,25 @@ def gather() -> dict:
     # Compare like with like: the first and last benchmark taken with the same number
     # of workers running (parallel load slows it without any heat).
     same = [b for b in bench if bench and b.get("workers") == bench[-1].get("workers")]
-    out["bench"] = {"first": same[0]["bench_ms"] if same else None,
-                    "last": same[-1]["bench_ms"] if same else None, "n": len(same),
-                    "workers": bench[-1].get("workers") if bench else None}
+    out["bench"] = bench_summary([b["bench_ms"] for b in same])
+    out["bench"]["workers"] = bench[-1].get("workers") if bench else None
     out["warnings"] = warnings(out)
     return out
+
+
+BENCH_WINDOW = 6     # readings per median (one reading every 10 minutes)
+
+
+def bench_summary(ms: list[float]) -> dict:
+    """Median of the first and of the last BENCH_WINDOW readings. Under parallel load one
+    reading swings by ±30% (31-52 ms at 6 workers, 2026-11-07), so single readings raised
+    false throttling alarms; medians over an hour do not."""
+    import statistics
+    if not ms:
+        return {"first": None, "last": None, "n": 0}
+    k = min(BENCH_WINDOW, len(ms))
+    return {"first": round(statistics.median(ms[:k]), 2),
+            "last": round(statistics.median(ms[-k:]), 2), "n": len(ms)}
 
 
 def warnings(s: dict) -> list[str]:
@@ -131,9 +145,9 @@ def warnings(s: dict) -> list[str]:
     if host.get("disk_free_gb") is not None and host["disk_free_gb"] < 10:
         w.append(f"Low disk: {host['disk_free_gb']:.1f} GB free.")
     b = s["bench"]
-    if b["first"] and b["last"] and b["last"] > 1.15 * b["first"]:
-        w.append(f"Throttling suspected: the micro-benchmark is {b['last'] / b['first']:.2f}x "
-                 "its first value (heat or power plan).")
+    if b["first"] and b["last"] and b["n"] >= 2 * BENCH_WINDOW and b["last"] > 1.15 * b["first"]:
+        w.append(f"Throttling suspected: the micro-benchmark median is "
+                 f"{b['last'] / b['first']:.2f}x its first-hour median (heat or power plan).")
     sy = s["sync"]
     lp = sy.get("last_push_time")
     if (o.get("alive") or s["timing"]["state"].get("pid")) and (not lp or s["now"] - lp > 1800):

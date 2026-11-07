@@ -484,3 +484,19 @@ def test_compressed_logs_are_deterministic_and_collected(tmp_path):
     assert gzip.decompress(first) == log.read_bytes()
     files, _ = sync.collect(live, max_mb=50)
     assert ("_logs/a.log.gz" in {d for _, d in files})
+
+
+# ---------------------------------------------------------------- dashboard throttling check
+def test_throttling_check_uses_medians_not_single_readings():
+    import paper_b_dashboard as dash
+    noisy = [32.4, 36.4, 33.5, 36.8, 52.1, 34.5, 34.3, 32.0, 31.3, 42.3, 33.8, 43.8]  # 6 workers
+    b = dash.bench_summary(noisy)
+    assert b["n"] == 12 and b["last"] <= 1.15 * b["first"]       # noise alone: no alarm
+    zero = {"total": {"rows": 0, "failed": 0}}
+    s = {"orchestrator": {}, "sync": {}, "timing": {"state": {}}, "now": 0,
+         "passes": {"pilot": zero, "quality": zero}, "bench": dict(b, workers=6)}
+    assert not any("Throttling" in w for w in dash.warnings(s))
+    slow = noisy[:6] + [v * 1.4 for v in noisy[6:]]               # a real 40% slowdown
+    s["bench"] = dict(dash.bench_summary(slow), workers=6)
+    assert any("Throttling" in w for w in dash.warnings(s))
+    assert dash.bench_summary([])["first"] is None
