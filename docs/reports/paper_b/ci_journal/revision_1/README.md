@@ -30,6 +30,8 @@ of them changed.
 | `paper_b_ci_rev1_response.docx` / `.pdf` | The response letter (internal tracking lines removed) |
 | `paper_b_ci_rev1_preview.pdf` | LaTeX rendering of the revised source |
 | `BUILD_MANIFEST.md` | Date, commit, hashes, pages, tracking status of the last build |
+| `drafts/paper_b_ci_rev1_response_DRAFT.docx` / `.pdf` | **Proposal, not approved**: every comment with its elaborated draft answer (PROPOSAL Part C) and the P-changes that implement it. Rendered by `scripts/build_drafts.py` |
+| `drafts/paper_b_ci_rev1_proposed_changes_DRAFT.docx` / `.pdf` | **Proposal, not approved**: length plan, changes P-01..P-24, decisions D-A..D-E (PROPOSAL Parts A, B, D) |
 
 The comparison baseline is the submitted source rebuilt with the same pipeline; the build
 verifies that its text equals the submitted `.docx` before comparing, so only real edits are
