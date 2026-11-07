@@ -291,14 +291,14 @@ The journal's writing rules (https://dergipark.org.tr/en/pub/ci/writing-rules, l
 maximum; font and spacing come from the Word template. Its published articles run 7 to 17
 pages (`../CI_SUBMISSION.md` §1). The submitted manuscript has 14 pages.
 
-**Page budget: 17 pages** in the journal template, checked by `scripts/build_revision.py`
+**Page budget: 12 pages** (author decision D-C, 2026-11-06; was 17, then 14 proposed) in the journal template, checked by `scripts/build_revision.py`
 (it warns above the budget and records the length in `build/BUILD_MANIFEST.md`). The
 revision adds Anchors and DiCE, five datasets, the configuration sweep and the stability
 controls. To stay within budget:
 - one consolidated main-results table (four explainers × endpoints) instead of several;
 - the Pareto fronts as one multi-panel figure;
-- per-dataset and per-configuration detail in a compact appendix after the references
-  (tables only), which counts toward the budget but keeps the narrative short;
+- per-dataset and per-configuration detail in the **supplementary file** (D-B), a document
+  independent of the paper that lets the reviewers confirm every result;
 - the context section on the earlier study is removed (R2-6), and the masking section is
   merged into the stability-validity section.
 
