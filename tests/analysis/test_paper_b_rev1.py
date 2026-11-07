@@ -361,9 +361,45 @@ def test_cluster_bootstrap_resamples_whole_clusters():
 # ---------------------------------------------------------------- auxiliary studies (WP2b, WP4, WP5)
 def test_onehot_groups_split_numeric_and_categorical():
     names = ["age", "hours-per-week", "sex_F", "sex_M", "race_A", "race_B", "race_C"]
-    num, groups = lib.onehot_groups(names)
+    X = np.array([[0.3, -1.2, 1, 0, 1, 0, 0], [-0.5, 0.4, 0, 1, 0, 1, 0],
+                  [1.1, 0.9, 1, 0, 0, 0, 1]], float)
+    num, groups = lib.onehot_groups(names, X)
     assert num == [0, 1]
     assert groups == {"sex": [2, 3], "race": [4, 5, 6]}
+
+
+def test_onehot_groups_underscores_and_shared_numeric_prefixes():
+    """R1-m13: names and categories with underscores (Phishing, German Credit) and numeric
+    columns sharing a prefix (Spambase) were mis-grouped by a first-underscore split."""
+    names = ["word_freq_make", "word_freq_all",                       # numeric, shared prefix
+             "having_IP_Address_-1", "having_IP_Address_1",           # underscores in the name
+             "credit_amount",                                         # numeric, prefix 'credit'
+             "credit_history_all_paid", "credit_history_critical",    # underscore in a category
+             "a_x", "a_y", "a_b_x", "a_b_y"]                          # features 'a' and 'a_b'
+    X = np.array([[0.2, -0.1, 1, 0, 0.7, 1, 0, 1, 0, 0, 1],
+                  [-0.4, 1.3, 0, 1, -1.1, 0, 1, 0, 1, 1, 0],
+                  [0.9, 0.0, 1, 0, 0.2, 1, 0, 1, 0, 1, 0]], float)
+    num, groups = lib.onehot_groups(names, X)
+    assert num == [0, 1, 4]
+    assert groups == {"having_IP_Address": [2, 3], "credit_history": [5, 6],
+                      "a": [7, 8], "a_b": [9, 10]}
+
+
+def test_onehot_groups_on_the_cohort_datasets():
+    """The frozen cohort encodings: groups equal the source categorical features."""
+    expected = {"adult": 8, "breast_cancer": 0, "diabetes": 0, "spambase": 0, "connect4": 42,
+                "german_credit": 13, "phishing": 30}
+    for d, n in expected.items():
+        try:
+            data = lib.load_dataset(d)
+        except FileNotFoundError:
+            pytest.skip(f"{d} not prepared on this machine")
+        num, groups = lib.onehot_groups(data["feature_names"], data["X_train"])
+        assert len(groups) == n, (d, sorted(groups))
+        X = data["X_train"]
+        for idx in groups.values():
+            assert np.all(X[:, idx].sum(axis=1) == 1)
+        assert len(num) + sum(map(len, groups.values())) == X.shape[1]
 
 
 def test_valid_perturbation_keeps_one_hot_rows_valid():
@@ -423,9 +459,9 @@ def test_posthoc_measures():
 
 def test_grouped_masking_masks_whole_groups():
     names = ["age", "education-num", "education_A", "education_B", "sex_F", "sex_M"]
-    groups = ph.mask_groups(names, "adult")
-    assert sorted(map(sorted, groups)) == [[1, 2, 3], [4, 5]]   # education pair merged
     X = np.array([[1.0, 2.0, 1, 0, 1, 0], [3.0, 4.0, 0, 1, 0, 1]])
+    groups = ph.mask_groups(names, "adult", X)
+    assert sorted(map(sorted, groups)) == [[1, 2, 3], [4, 5]]   # education pair merged
     mean = X.mean(0)
     z = ph.masked(X[0], [1], "grouped_mean", X, mean, groups, np.random.default_rng(0))
     assert np.allclose(z[[1, 2, 3]], mean[[1, 2, 3]]) and z[0] == 1.0 and z[4] == 1.0

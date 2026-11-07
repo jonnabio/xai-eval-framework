@@ -76,8 +76,8 @@ def concentration(w, k: int = K) -> tuple[float, float]:
     return float(top), ent
 
 
-def mask_groups(names, dataset: str) -> list[list[int]]:
-    _num, groups = lib.onehot_groups(names)
+def mask_groups(names, dataset: str, X_train) -> list[list[int]]:
+    _num, groups = lib.onehot_groups(names, X_train)
     out = [list(v) for v in groups.values()]
     idx = {str(n): j for j, n in enumerate(names)}
     for grp in EXTRA_GROUPS.get(dataset, []):
@@ -119,7 +119,7 @@ def run(root: Path, out: Path, dataset: str) -> int:
     data = lib.load_dataset(dataset)
     Xtr, Xte = data["X_train"], data["X_test"]
     mean = Xtr.mean(axis=0)
-    groups = mask_groups(data["feature_names"], dataset)
+    groups = mask_groups(data["feature_names"], dataset, Xtr)
     for mdir in sorted((root / "quality" / dataset).glob("*")):
         model_name = mdir.name
         model, _ = lib.load_model_checked(dataset, model_name)

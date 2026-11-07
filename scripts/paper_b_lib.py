@@ -706,16 +706,35 @@ def first_per_stratum(instances, k: int) -> set[int]:
     return keep
 
 
-def onehot_groups(feature_names) -> tuple[list[int], dict[str, list[int]]]:
-    """Numeric column indices and one-hot groups {prefix: [indices]} from encoded names
-    `<feature>_<category>`: a prefix shared by two or more columns is a one-hot group."""
-    from collections import defaultdict
-    by = defaultdict(list)
-    for j, n in enumerate(map(str, feature_names)):
-        by[n.split("_", 1)[0] if "_" in n else n].append(j)
-    groups = {k: v for k, v in by.items() if len(v) > 1}
-    in_group = {j for v in groups.values() for j in v}
-    numeric = [j for j in range(len(feature_names)) if j not in in_group]
+def onehot_groups(feature_names, X_train) -> tuple[list[int], dict[str, list[int]]]:
+    """Numeric column indices and one-hot groups {feature: [indices]}.
+
+    The encoders name a one-hot column `<feature>_<category>`, but feature names and
+    categories may themselves contain underscores (Phishing `having_IP_Address_1`, German
+    Credit `checking_status_<0`) and numeric names may share a prefix (Spambase
+    `word_freq_*`), so the name alone cannot tell. A prefix p (cut at an underscore) is a
+    one-hot group when the columns named `p_*` are two or more, take only the values 0 and 1
+    in the training data, and every training row has exactly one 1 among them. Prefixes are
+    tried longest first and a column joins one group only, so nested feature names (`a` and
+    `a_b`) separate. Standardized numeric columns never qualify.
+    """
+    import numpy as np
+    names = [str(n) for n in feature_names]
+    X = np.asarray(X_train, dtype=float)
+    if X.ndim != 2 or X.shape[1] != len(names):
+        raise ValueError(f"X_train has {X.shape[-1]} columns for {len(names)} names")
+    binary = np.all((X == 0) | (X == 1), axis=0)
+    prefixes = {n[:i] for j, n in enumerate(names) if binary[j]
+                for i, ch in enumerate(n) if ch == "_" and i > 0}
+    groups: dict[str, list[int]] = {}
+    in_group: set[int] = set()
+    for p in sorted(prefixes, key=lambda s: (-len(s), s)):          # longest first
+        idx = [j for j, n in enumerate(names) if n.startswith(p + "_") and j not in in_group]
+        if len(idx) >= 2 and binary[idx].all() and np.all(X[:, idx].sum(axis=1) == 1):
+            groups[p] = idx
+            in_group.update(idx)
+    groups = dict(sorted(groups.items(), key=lambda kv: kv[1][0]))  # in column order
+    numeric = [j for j in range(len(names)) if j not in in_group]
     return numeric, groups
 
 
@@ -730,7 +749,7 @@ class ValidStabilityMetric:
                  p_resample: float = 0.1):
         import numpy as np
         self.n_iterations, self.sigma, self.p = n_iterations, perturbation_std, p_resample
-        self.numeric, self.groups = onehot_groups(feature_names)
+        self.numeric, self.groups = onehot_groups(feature_names, X_train)
         self.marginals = {}
         for g, idx in self.groups.items():
             counts = (np.asarray(X_train)[:, idx] > 0.5).sum(0).astype(float)
