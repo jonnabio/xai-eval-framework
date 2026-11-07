@@ -81,8 +81,10 @@ Each run checks the model file against these hashes before it starts.
 | Adult | Logistic regression | `c06174920a8dfa75` | `18b42fcbbcf14068` |
 | Adult | MLP | `329f273fa5d5688a` | `18b42fcbbcf14068` |
 | Adult | Random forest | `a2dd7551756486ea` | `18b42fcbbcf14068` |
+| Adult | rf_d6 | `48e5d53de3368649` | `18b42fcbbcf14068` |
 | Adult | SVM (RBF) | `2b0a0c6b236bd11d` | `18b42fcbbcf14068` |
 | Adult | XGBoost | `6fa7994e30549e68` | `18b42fcbbcf14068` |
+| Adult | xgb_d15 | `deef8fd516743635` | `18b42fcbbcf14068` |
 | Breast Cancer | Logistic regression | `571aaf8bb37da91f` | `765348e4109f0b13` |
 | Breast Cancer | MLP | `9e7838f9c2a4616e` | `765348e4109f0b13` |
 | Breast Cancer | Random forest | `ece4da48e4fcc84d` | `765348e4109f0b13` |
