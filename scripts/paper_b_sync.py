@@ -60,11 +60,37 @@ def ref_exists(ref: str, cwd: Path | None = None) -> bool:
                           capture_output=True).returncode == 0
 
 
+def compress_logs(live: Path) -> Path:
+    """Write a gzip copy of every log to _logs_gz/ (only when the log changed). The copies are
+    deterministic (no timestamp in the header), so an unchanged log keeps the same blob. The
+    logs are mostly repeated library warnings: compressed they are a few hundred kB."""
+    import gzip
+    src, dst = live / "_logs", live / "_logs_gz"
+    dst.mkdir(exist_ok=True)
+    for p in sorted(src.glob("*")):
+        if not p.is_file() or p.name.startswith("."):
+            continue
+        out = dst / (p.name + ".gz")
+        if out.exists() and out.stat().st_mtime >= p.stat().st_mtime:
+            continue
+        tmp = out.with_name("." + out.name + ".tmp")
+        with open(p, "rb") as fin, open(tmp, "wb") as raw, \
+                gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as gz:
+            while chunk := fin.read(1 << 20):
+                gz.write(chunk)
+        os.replace(tmp, out)
+    return dst
+
+
 def collect(live: Path, max_mb: float) -> tuple[list[tuple[Path, str]], list[str]]:
     """(file, path in the commit) for every live file to save; and the skipped ones."""
     files, skipped = [], []
+    try:
+        compress_logs(live)
+    except OSError as exc:                       # a log in use must never stop a save
+        print(f"log compression skipped this cycle: {exc}", flush=True)
     for base, prefix in ((live / "results", "results"), (live / "pilot", "pilot"),
-                         (live / "_state", "_state")):
+                         (live / "_state", "_state"), (live / "_logs_gz", "_logs")):
         if not base.exists():
             continue
         for p in sorted(base.rglob("*")):

@@ -431,3 +431,20 @@ def test_grouped_masking_masks_whole_groups():
     assert np.allclose(z[[1, 2, 3]], mean[[1, 2, 3]]) and z[0] == 1.0 and z[4] == 1.0
     z = ph.masked(X[0], [1], "mean", X, mean, groups, np.random.default_rng(0))
     assert z[2] == 1.0                                          # ungrouped: one column only
+
+
+def test_compressed_logs_are_deterministic_and_collected(tmp_path):
+    import gzip
+    import os
+    live = tmp_path
+    (live / "_logs").mkdir()
+    log = live / "_logs" / "a.log"
+    log.write_text("warning\n" * 1000, encoding="utf-8")
+    out = sync.compress_logs(live) / "a.log.gz"
+    first = out.read_bytes()
+    os.utime(log, (out.stat().st_mtime + 5, out.stat().st_mtime + 5))   # "changed" log
+    sync.compress_logs(live)
+    assert out.read_bytes() == first                                   # same bytes, same blob
+    assert gzip.decompress(first) == log.read_bytes()
+    files, _ = sync.collect(live, max_mb=50)
+    assert ("_logs/a.log.gz" in {d for _, d in files})
