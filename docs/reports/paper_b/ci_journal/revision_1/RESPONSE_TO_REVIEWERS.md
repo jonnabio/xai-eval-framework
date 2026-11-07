@@ -442,20 +442,22 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The methodological relevance of including Anchors in the cross-dataset analysis should be clarified in relation to the manuscript's primary SHAP–LIME research questions.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-008, C-017
+- **Status:** REMEDIATED
+- **Changes:** C-008, C-017, C-030
 - **Plan:** WP7
-- **Response:** Anchors, and DiCE too, are now part of the main benchmark at the editor's request (ED-1). §3.3 states their role: reference explainers of other kinds (a rule, a counterfactual), against which the SHAP–LIME differences can be read.
+- **Response:** We thank the reviewer. Anchors, and DiCE too, are now part of the main benchmark at the editor's request (ED-1), on every dataset. §3.3 now states their role: the research questions remain about SHAP and LIME, and Anchors (a rule) and DiCE (a counterfactual) are reference explainers of other kinds, which show whether a SHAP–LIME difference is specific to the pair or shared by explainers in general.
 - **Where:** Section 3.3; Section 4.5, Table 4
 
 ### R1-m13
 
 > The grouped masking procedure should be described in greater detail, particularly regarding the identification and treatment of correlated or related features.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
+- **Status:** PENDING (rule stated; waits for the grouping fix in the code, see the note below, and for the results of cohort B2)
 - **Changes:** C-018
 - **Plan:** WP4b, WP7
-- **Response:** §4.4 now describes how related features were identified (the one-hot columns of one categorical variable, and pairs that encode the same information, such as education and education-num [R: rule to be read from the masking script and stated exactly]) and how a group is masked (all its columns replaced together).
+- **Response:** §4.4 now describes how related features were identified and how a group is masked. A group is (1) all one-hot columns of one categorical input variable, and (2) on Adult, the categorical education and its numeric code education-num, merged into one group because they encode the same information. When any feature of a group is among the top-k features, the whole group is replaced by its training means.
+<!-- Internal note, 2026-11-06: `paper_b_lib.onehot_groups` infers the groups from the text before the first underscore of each encoded name. Checked on the real names: right for Adult, Connect-4, Breast Cancer and Diabetes, wrong for Spambase (57 numeric features taken as 3 groups, e.g. 48 `word_freq_*`), Phishing (e.g. `having_IP_Address` merged with `having_At_Symbol`) and German Credit (`credit_amount` merged with `credit_history_*`). It feeds the grouped masking (WP4b) and the valid one-hot noise control (`controls_onehot`); the main quality pass does not use it. To be fixed (groups taken from the encoder's input columns) and tested before either study runs. -->
+
 - **Where:** Section 4.4
 
 ### R1-m14

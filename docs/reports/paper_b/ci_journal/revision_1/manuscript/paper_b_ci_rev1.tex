@@ -169,18 +169,22 @@ hosts, so no number from it is used here.
 
 For each endpoint $Y$ and each instance, the paired difference is
 $\Delta_X = Y_{\mathrm{SHAP}} - Y_X$ for $X \in \{\mathrm{LIME},
-\mathrm{Anchors}, \mathrm{DiCE}\}$. Three directional hypotheses are tested,
-and sparsity is reported descriptively:
+\mathrm{Anchors}, \mathrm{DiCE}\}$. Three hypotheses state an expected
+direction; each is tested two-sided, and a difference is read in the stated
+direction only when its interval excludes zero on that side. Sparsity is
+reported descriptively:
 \begin{itemize}
 \item \textbf{H1 (stability).} SHAP is more stable than $X$:
 $\Delta_X(S) > 0$.
 \item \textbf{H2 (cost).} SHAP is more expensive than $X$:
-$\Delta_X(C) > 0$, in CPU time and in model evaluations.
+$\Delta_X(C) > 0$, tested in CPU time; the rows passed to the model are
+reported alongside, without a test.
 \item \textbf{H3 (faithfulness).} SHAP is more faithful than $X$:
 $\Delta_X(F) > 0$ and $\Delta_X(G) > 0$.
-\item \textbf{Sparsity (descriptive).} LIME's sparsity is fixed by its
-feature budget and Anchors returns few features by construction, so a test
-of sparsity would test a configuration, not a method.
+\item \textbf{Sparsity (descriptive).} With its 10-feature budget LIME's
+sparsity is set by the user, and Anchors returns few features by
+construction, so a test of sparsity would test a configuration, not a
+method.
 \end{itemize}
 
 \begin{table}[htb]
@@ -254,6 +258,10 @@ the features of the anchor with 1 and the others with 0.
 \item \textbf{DiCE:} one counterfactual of the opposite class (random
 search); the attribution of feature $j$ is $|x_j - x'_j|$.
 \end{itemize}
+Anchors (a rule) and DiCE (a counterfactual) enter as reference explainers
+of other kinds: the research questions remain about SHAP and LIME, and the
+two references show whether a SHAP--LIME difference is specific to the pair
+or shared by explainers in general.
 These settings are the libraries' defaults where defaults exist, so that a
 practitioner's first run is what is measured. KernelSHAP's budget is set
 explicitly because the default ($2M + 2048$ coalitions) made the SVM the
@@ -273,14 +281,17 @@ definitions~\cite{alvarezmelis2018robustness,bhatt2020evaluating,samek2017evalua
 \begin{enumerate}
 \item \textbf{Stability} $S$: the mean cosine similarity over all pairs of
 $T = 15$ explanations of perturbed copies $x + \varepsilon^{(a)}$,
-$\varepsilon^{(a)} \sim \mathcal{N}(0, \sigma^2 I)$, $\sigma = 0.1$,
-Eq.~(\ref{eq:stability}):
+$\varepsilon^{(a)} \sim \mathcal{N}(0, \sigma^2 I)$, $\sigma = 0.1$, added to
+every encoded feature (scaled numeric and one-hot columns alike), with $S$
+computed on 3 instances per stratum, Eq.~(\ref{eq:stability}):
 \begin{equation}
 S = \frac{2}{T(T-1)}\sum_{1 \le a<b \le T}\cos\!\left(e^{(a)},e^{(b)}\right).
 \label{eq:stability}
 \end{equation}
 The cosine with an all-zero vector is set to 0; such vectors are counted
-and $S$ is also reported without them.
+and $S$ is also reported without them. Noise on one-hot columns leaves the
+data manifold; Section~\ref{sec:validity_controls} repeats $S$ with
+category-preserving perturbations and without noise.
 \item \textbf{Fidelity} $F$: the Pearson correlation, across the $M$
 features, between $|e_j(x)|$ and the prediction change
 $|f(x) - f(\tilde{x}^{(j)})|$ when feature $j$ alone is masked,
@@ -310,16 +321,20 @@ instance-level differences $\Delta_{gsi}$ of model $g$, seed $s$ and
 instance $i$ are fitted by a linear mixed model
 $\Delta_{gsi} = \mu + u_g + v_{gs} + \epsilon_{gsi}$, with random intercepts
 for the model and for the seed within the model~\cite{bates2015lme4}; $\mu$
-is the effect, reported with its 95\% confidence interval. Because five
-models are few clusters, the interval is checked by a cluster bootstrap
-that resamples models~\cite{field2007bootstrap}. Next to the standardized
-paired difference $d_z$ of the cell means~\cite{lakens2013calculating}, the
-Hodges--Lehmann estimate~\cite{hodges1963estimates} and the matched-pairs
-rank-biserial correlation~\cite{kerby2014simple}, the effect size of the Wilcoxon signed-rank test~\cite{wilcoxon1945individual}, are reported. The
-confirmatory family is three endpoints (stability, faithfulness as $F$ and
-$G$, cost) times three contrasts; $p$-values are Holm-corrected over the
-twelve tests~\cite{holm1979simple}. The four explainers are ranked on cell
-means by the Friedman test with the Nemenyi critical
+is the effect, reported with its 95\% confidence interval and two-sided
+Wald $p$-value; if the model cannot be fitted, a $t$-test on the cell means
+is used and the case is reported. Because five models are few clusters, the
+interval is checked by a cluster bootstrap that resamples
+models~\cite{field2007bootstrap}. Only instances valid for both explainers
+of a contrast enter it. On the cell-mean differences, the standardized
+paired difference $d_z$~\cite{lakens2013calculating}, the Hodges--Lehmann
+estimate~\cite{hodges1963estimates} and the matched-pairs rank-biserial
+correlation~\cite{kerby2014simple}, the effect size of the Wilcoxon
+signed-rank test~\cite{wilcoxon1945individual}, are reported. The
+confirmatory family is four endpoints ($S$, $F$, $G$ and CPU time) times
+three contrasts; $p$-values are Holm-corrected over these twelve
+tests~\cite{holm1979simple}. The four explainers are ranked on the cell means
+of $S$, $F$ and $G$ by the Friedman test with the Nemenyi critical
 difference~\cite{demsar2006statistical}. The sweep, the controls and the six
 further datasets are exploratory and are reported without tests.
 
@@ -426,7 +441,11 @@ DiCE & all & iterative search & [R] & [R] \\
 The sweep varied, on Adult for every model and three seeds, LIME's kernel
 width and number of samples, and KernelSHAP's budget and background size;
 KernelSHAP was also run on the two tree ensembles, to separate the method
-from the TreeSHAP implementation. [R: Figure~1 placeholder: Pareto fronts of
+from the TreeSHAP implementation. The grid crosses LIME kernel widths of
+0.75, 1.5, 3, 5, 10 and 15 and the default $0.75\sqrt{M}$ with 250 to 5,000
+samples, KernelSHAP budgets of 100 to 1,000 coalitions and the default with
+10 to 100 background rows, and TreeSHAP with 10 to 100 background rows; each
+cell has one instance per stratum, with stability on each. [R: Figure~1 placeholder: Pareto fronts of
 stability, fidelity and cost per model, one panel per model, computed on the
 instances valid under every configuration.] [R: whether the sign of each
 SHAP--LIME difference holds over the grid; the share of degenerate
