@@ -297,14 +297,16 @@ Manuscript 2067810, *When Does SHAP Outperform LIME? Model- and Configuration-De
 
 > The methodological relevance of including Anchors in the cross-dataset analysis should be clarified in relation to the manuscript's primary SHAP–LIME research questions.
 
-**Response.** Anchors, and DiCE too, are now part of the main benchmark at the editor's request (ED-1). §3.3 states their role: reference explainers of other kinds (a rule, a counterfactual), against which the SHAP–LIME differences can be read.
+**Response.** We thank the reviewer. Anchors, and DiCE too, are now part of the main benchmark at the editor's request (ED-1), on every dataset. §3.3 now states their role: the research questions remain about SHAP and LIME, and Anchors (a rule) and DiCE (a counterfactual) are reference explainers of other kinds, which show whether a SHAP–LIME difference is specific to the pair or shared by explainers in general.
 **Changes in the manuscript:** Section 3.3; Section 4.5, Table 4
 
 ### R1-m13
 
 > The grouped masking procedure should be described in greater detail, particularly regarding the identification and treatment of correlated or related features.
 
-**Response.** §4.4 now describes how related features were identified (the one-hot columns of one categorical variable, and pairs that encode the same information, such as education and education-num [R: rule to be read from the masking script and stated exactly]) and how a group is masked (all its columns replaced together).
+**Response.** §4.4 now describes how related features were identified and how a group is masked. A group is (1) all one-hot columns of one categorical input variable, and (2) on Adult, the categorical education and its numeric code education-num, merged into one group because they encode the same information. When any feature of a group is among the top-k features, the whole group is replaced by its training means.
+
+
 **Changes in the manuscript:** Section 4.4
 
 ### R1-m14
