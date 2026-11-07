@@ -479,6 +479,9 @@ class Governor:
         cmd = [sys.executable, str(Path(__file__).resolve()), "job", "--dataset", d,
                "--model", m, "--seed", str(s), "--explainer", e, "--root", str(self.root),
                *self.extra]
+        # A heartbeat left by a killed worker would make the new one look over its time limit
+        # before it writes its own (it was killed again at once, in a loop: 2026-11-07).
+        self.stem(job).with_suffix(".heartbeat").unlink(missing_ok=True)
         logf = open(lib.LOGS / f"{d}_{m}_{s}_{e}.log", "a", encoding="utf-8")
         flags = subprocess.CREATE_NEW_PROCESS_GROUP if sys.platform == "win32" else 0
         proc = subprocess.Popen(cmd, stdout=logf, stderr=subprocess.STDOUT, cwd=lib.ROOT,
@@ -543,6 +546,8 @@ class Governor:
         # Heartbeats: per-instance time limit and stuck start-up.
         for job, w in list(self.running.items()):
             beat = lib.read_json(self.stem(job).with_suffix(".heartbeat"))
+            if beat and beat.get("started", 0) < w["born"] - 1:
+                beat = None                   # written by an earlier, killed worker
             if beat:
                 w["beat_seen"] = True
             w["instance"] = beat.get("instance") if beat else None
@@ -609,7 +614,8 @@ class Governor:
 
     def append_failed_instance(self, job, why):
         beat = lib.read_json(self.stem(job).with_suffix(".heartbeat"))
-        if beat:
+        w = self.running.get(job)
+        if beat and (not w or beat.get("started", 0) >= w["born"] - 1):
             lib.append_jsonl(self.stem(job).with_suffix(".jsonl"),
                              {"instance_id": beat["instance"], "failed": 1, "fail_reason": why})
 
