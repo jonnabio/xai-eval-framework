@@ -403,3 +403,31 @@ def test_study_configs_are_isolated_from_the_main_cohort():
     assert main[0] == "paper_b_rev1_live"            # VARIANT empty -> first token is LIVE
     assert sweep[:2] == ["sweep", "paper_b_rev1_sweep_live"]
     assert sweep[2] != main[1]
+
+
+# ---------------------------------------------------------------- post-hoc controls (WP4)
+import paper_b_posthoc as ph  # noqa: E402
+
+
+def test_posthoc_measures():
+    a, b = np.array([3.0, 2.0, 1.0, 0.0]), np.array([3.0, 1.0, 2.0, 0.0])
+    assert ph.cosine(a, np.zeros(4)) == 0.0                     # main-protocol convention
+    assert ph.topk_jaccard(a, a, k=2) == 1.0
+    assert ph.topk_jaccard(a, b, k=2) == pytest.approx(1 / 3)
+    assert ph.spearman_abs(a, a) == pytest.approx(1.0)
+    top, ent = ph.concentration(np.array([1.0, 0, 0, 0]), k=1)
+    assert top == 1.0 and ent == pytest.approx(0.0)
+    top, ent = ph.concentration(np.ones(4), k=2)
+    assert top == pytest.approx(0.5) and ent == pytest.approx(1.0)
+
+
+def test_grouped_masking_masks_whole_groups():
+    names = ["age", "education-num", "education_A", "education_B", "sex_F", "sex_M"]
+    groups = ph.mask_groups(names, "adult")
+    assert sorted(map(sorted, groups)) == [[1, 2, 3], [4, 5]]   # education pair merged
+    X = np.array([[1.0, 2.0, 1, 0, 1, 0], [3.0, 4.0, 0, 1, 0, 1]])
+    mean = X.mean(0)
+    z = ph.masked(X[0], [1], "grouped_mean", X, mean, groups, np.random.default_rng(0))
+    assert np.allclose(z[[1, 2, 3]], mean[[1, 2, 3]]) and z[0] == 1.0 and z[4] == 1.0
+    z = ph.masked(X[0], [1], "mean", X, mean, groups, np.random.default_rng(0))
+    assert z[2] == 1.0                                          # ungrouped: one column only
