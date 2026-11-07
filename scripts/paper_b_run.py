@@ -120,8 +120,17 @@ def cmd_prepare(args) -> int:
     models = args.models or list(cfg["models"])
     manifest = lib.read_manifest()
     for d in datasets:
-        log(f"dataset {d}: preparing")
-        summary = lib.prepare_dataset(d, cfg)
+        cached = lib.DATA_DIR / f"{d}.npz"
+        if getattr(args, "keep_data", False) and cached.exists():
+            log(f"dataset {d}: kept as prepared (--keep-data)")
+            dd = lib.load_dataset(d)
+            summary = {"sha256": lib.sha256_file(cached), "n_train": len(dd["y_train"]),
+                       "n_test": len(dd["y_test"]), "n_features": dd["X_train"].shape[1],
+                       "positive_rate": float(np.mean(np.concatenate([dd["y_train"],
+                                                                      dd["y_test"]])))}
+        else:
+            log(f"dataset {d}: preparing")
+            summary = lib.prepare_dataset(d, cfg)
         log(f"dataset {d}: {summary['n_train']} train / {summary['n_test']} test rows, "
             f"{summary['n_features']} features, positive rate {summary['positive_rate']:.3f}")
         data = lib.load_dataset(d)
@@ -205,9 +214,12 @@ def cmd_job(args) -> int:
     n_ok = n_fail = 0
     t_job = time.time()
     store, digits = mc.get("store_vectors", True), mc.get("vector_digits", 6)
+    # WP4 controls: the same instance selection as the main cohort, but only its stability
+    # subset is computed (optional; the main configuration does not set it).
+    only_stab = bool(cfg["sampling"].get("stability_only", False))
     for _, row in inst.iterrows():
         iid = int(row["original_index"])
-        if iid in have:
+        if iid in have or (only_stab and iid not in stab_ids):
             continue
         if lib.STOP.exists() and not args.ignore_stop:
             log("stop file: leaving after the last finished instance")
@@ -243,8 +255,16 @@ def cmd_job(args) -> int:
                     _vecs.append(v)
                     return {"feature_importance": v}
 
-                sm = StabilityMetric(n_iterations=mc["stability_T"],
-                                     perturbation_std=mc["stability_sigma"])
+                noise = mc.get("stability_noise", "gaussian_all")
+                if noise == "gaussian_all":                       # the main protocol
+                    sm = StabilityMetric(n_iterations=mc["stability_T"],
+                                         perturbation_std=mc["stability_sigma"])
+                elif noise == "onehot_valid":                     # WP4 control (b)
+                    sm = lib.ValidStabilityMetric(
+                        mc["stability_T"], mc["stability_sigma"], data["X_train"],
+                        data["feature_names"], mc.get("onehot_resample_p", 0.1))
+                else:
+                    raise ValueError(f"unknown stability_noise {noise!r}")
                 sres = sm.compute(None, model=model, data=x, explainer_func=efunc)
                 rec["stability"] = float(sres["cosine_similarity_mean"])
                 rec["stability_zero_vectors"] = int(sum(
@@ -261,7 +281,8 @@ def cmd_job(args) -> int:
     beat.unlink(missing_ok=True)
     if lib.STOP.exists() and not args.ignore_stop:
         return 0
-    remaining = {int(i) for i in inst["original_index"]} - lib.done_keys(out)
+    wanted = {int(i) for i in stab_ids} if only_stab else {int(i) for i in inst["original_index"]}
+    remaining = wanted - lib.done_keys(out)
     if remaining:
         log(f"{len(remaining)} instances still missing; not marking done")
         return 1
@@ -734,6 +755,8 @@ def main(argv=None) -> int:
     p.add_argument("--datasets", nargs="*")
     p.add_argument("--models", nargs="*")
     p.add_argument("--force", action="store_true", help="retrain frozen models (never mid-cohort)")
+    p.add_argument("--keep-data", action="store_true",
+                   help="use the prepared dataset files as they are (safe while a run reads them)")
     for name in ("job", "timing"):
         p = sub.add_parser(name)
         p.add_argument("--dataset", required=True)

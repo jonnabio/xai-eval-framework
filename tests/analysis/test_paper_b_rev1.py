@@ -356,3 +356,50 @@ def test_cluster_bootstrap_resamples_whole_clusters():
     df = pd.DataFrame({"c": ["a"] * 10 + ["b"] * 10, "v": [0.0] * 10 + [1.0] * 10})
     lo, hi = an.cluster_bootstrap_ci(df, "v", "c", reps=2000)
     assert lo == pytest.approx(0.0) and hi == pytest.approx(1.0)
+
+
+# ---------------------------------------------------------------- auxiliary studies (WP2b, WP4, WP5)
+def test_onehot_groups_split_numeric_and_categorical():
+    names = ["age", "hours-per-week", "sex_F", "sex_M", "race_A", "race_B", "race_C"]
+    num, groups = lib.onehot_groups(names)
+    assert num == [0, 1]
+    assert groups == {"sex": [2, 3], "race": [4, 5, 6]}
+
+
+def test_valid_perturbation_keeps_one_hot_rows_valid():
+    names = ["age", "sex_F", "sex_M", "race_A", "race_B", "race_C"]
+    X = np.array([[0.1, 1, 0, 1, 0, 0], [0.3, 0, 1, 0, 1, 0], [0.2, 0, 1, 0, 0, 1]], float)
+    m = lib.ValidStabilityMetric(5, 0.1, X, names, p_resample=1.0)
+    np.random.seed(0)
+    for _ in range(50):
+        z = m.perturb(X[0])
+        assert z[1:3].sum() == 1 and z[3:6].sum() == 1          # exactly one category each
+        assert set(np.unique(z[1:])) <= {0.0, 1.0}
+    out = m.compute(None, model=None, data=X[0],
+                    explainer_func=lambda _m, d: {"feature_importance": d[0]})
+    assert 0 < out["cosine_similarity_mean"] <= 1 and out["n_iterations"] == 5
+
+
+def test_explainer_model_restriction_and_main_job_count_unchanged():
+    cfg = lib.config(lib.MAIN_CONFIG)
+    assert len(lib.all_quality_jobs(cfg)) == 575
+    c = {"datasets": {"adult": {}}, "seeds": {"adult": [1], "other": [1]},
+         "models": {"rf": {}, "svm": {}},
+         "explainers": {"a": {}, "t": {"models": ["rf"]}}}
+    assert sorted(lib.all_quality_jobs(c)) == [("adult", "rf", 1, "a"), ("adult", "rf", 1, "t"),
+                                               ("adult", "svm", 1, "a")]
+
+
+def test_study_configs_are_isolated_from_the_main_cohort():
+    code = ("import sys; sys.path.insert(0, 'scripts'); import paper_b_lib as l; "
+            "print(l.VARIANT, l.LIVE.name, l.config_hash())")
+    main = subprocess.run([sys.executable, "-c", code], cwd=ROOT, capture_output=True, text=True,
+                          env={k: v for k, v in __import__("os").environ.items()
+                               if k != "PAPER_B_CONFIG"}).stdout.split()
+    env = dict(__import__("os").environ,
+               PAPER_B_CONFIG=str(ROOT / "experiments/exp_b_rev1/studies/sweep.toml"))
+    sweep = subprocess.run([sys.executable, "-c", code], cwd=ROOT, capture_output=True, text=True,
+                           env=env).stdout.split()
+    assert main[0] == "paper_b_rev1_live"            # VARIANT empty -> first token is LIVE
+    assert sweep[:2] == ["sweep", "paper_b_rev1_sweep_live"]
+    assert sweep[2] != main[1]

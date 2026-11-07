@@ -26,11 +26,19 @@ from typing import Any, Iterable, Iterator
 
 ROOT = Path(__file__).resolve().parents[1]
 COHORT_DIR = ROOT / "experiments" / "exp_b_rev1"
-CONFIG_PATH = COHORT_DIR / "cohort.toml"
+MAIN_CONFIG = COHORT_DIR / "cohort.toml"
+# Auxiliary studies (sweep, controls, matched ensembles) run the same machinery on their own
+# configuration file: PAPER_B_CONFIG=<file>. Each gets its own live folder (results, state,
+# logs, stop file), so it can never mix with or disturb the main cohort.
+_CFG_ENV = os.environ.get("PAPER_B_CONFIG", "").strip()
+CONFIG_PATH = Path(_CFG_ENV).resolve() if _CFG_ENV else MAIN_CONFIG
+VARIANT = "" if CONFIG_PATH == MAIN_CONFIG.resolve() or CONFIG_PATH == MAIN_CONFIG \
+    else CONFIG_PATH.stem
 MODELS_DIR = COHORT_DIR / "models"
 MANIFEST = MODELS_DIR / "MANIFEST.csv"
 DATA_DIR = ROOT / "data" / "paper_b_rev1"          # git-ignored (/data/*)
-LIVE = ROOT / "outputs" / "paper_b_rev1_live"       # git-ignored (outputs/*)
+LIVE = ROOT / "outputs" / (f"paper_b_rev1_{VARIANT}_live" if VARIANT
+                           else "paper_b_rev1_live")  # git-ignored (outputs/*)
 RESULTS = LIVE / "results"                          # quality and timing rows
 STATE = LIVE / "_state"                             # orchestrator, timing, sync, peaks
 LOGS = LIVE / "_logs"
@@ -104,6 +112,9 @@ def all_quality_jobs(cfg: dict, datasets=None, models=None, explainers=None,
         for m in models or cfg["models"]:
             for s in seeds or seeds_for(cfg, d):
                 for e in explainers or cfg["explainers"]:
+                    only = cfg["explainers"].get(e, {}).get("models")   # optional restriction
+                    if only and m not in only:
+                        continue
                     jobs.append((d, m, int(s), e))
     return jobs
 
@@ -625,7 +636,11 @@ def build_explainer(variant: str, cfg: dict, model_name: str, model, data: dict,
     method = spec["method"]
     if method == "shap":
         from src.xai.shap_tabular import SHAPTabularWrapper
-        tree = model_name in ("rf", "xgb")
+        # TreeSHAP for tree ensembles unless the variant forces KernelSHAP (WP5: separates the
+        # method from the TreeSHAP implementation). Matched-size ensembles of WP2b ("rf_*",
+        # "xgb_*") are tree models too.
+        tree = (model_name in ("rf", "xgb") or model_name.startswith(("rf_", "xgb_"))) \
+            and spec.get("algorithm", "auto") != "kernel"
         kwargs = {}
         if not tree:
             ns = spec.get("kernel_nsamples_by_model", {}).get(model_name,
@@ -689,6 +704,63 @@ def first_per_stratum(instances, k: int) -> set[int]:
         sub = instances[instances["quadrant"] == q]
         keep.update(int(i) for i in sub["original_index"].head(k))
     return keep
+
+
+def onehot_groups(feature_names) -> tuple[list[int], dict[str, list[int]]]:
+    """Numeric column indices and one-hot groups {prefix: [indices]} from encoded names
+    `<feature>_<category>`: a prefix shared by two or more columns is a one-hot group."""
+    from collections import defaultdict
+    by = defaultdict(list)
+    for j, n in enumerate(map(str, feature_names)):
+        by[n.split("_", 1)[0] if "_" in n else n].append(j)
+    groups = {k: v for k, v in by.items() if len(v) > 1}
+    in_group = {j for v in groups.values() for j in v}
+    numeric = [j for j in range(len(feature_names)) if j not in in_group]
+    return numeric, groups
+
+
+class ValidStabilityMetric:
+    """Stability with perturbations that keep the encoded instance valid (WP4, control b):
+    Gaussian noise (sigma) on the numeric columns only; each one-hot group is resampled from
+    the training marginals with probability `p_resample`, else kept. Same output and the same
+    cosine computation as src.metrics.stability.StabilityMetric; uses np.random (seeded by the
+    caller per instance, as the main protocol)."""
+
+    def __init__(self, n_iterations: int, perturbation_std: float, X_train, feature_names,
+                 p_resample: float = 0.1):
+        import numpy as np
+        self.n_iterations, self.sigma, self.p = n_iterations, perturbation_std, p_resample
+        self.numeric, self.groups = onehot_groups(feature_names)
+        self.marginals = {}
+        for g, idx in self.groups.items():
+            counts = (np.asarray(X_train)[:, idx] > 0.5).sum(0).astype(float)
+            self.marginals[g] = counts / counts.sum() if counts.sum() else \
+                np.full(len(idx), 1.0 / len(idx))
+
+    def perturb(self, x):
+        import numpy as np
+        z = np.array(x, dtype=float).copy()
+        z[self.numeric] += np.random.normal(0, self.sigma, size=len(self.numeric))
+        for g, idx in self.groups.items():
+            if np.random.random_sample() < self.p:
+                k = np.random.choice(len(idx), p=self.marginals[g])
+                z[idx] = 0.0
+                z[idx[k]] = 1.0
+        return z
+
+    def compute(self, _w, model=None, data=None, explainer_func=None) -> dict:
+        import numpy as np
+        from sklearn.metrics.pairwise import cosine_similarity
+        x = np.array(data, dtype=float)
+        x = x[0] if x.ndim > 1 else x
+        vecs = []
+        for _ in range(self.n_iterations):
+            v = explainer_func(model, self.perturb(x).reshape(1, -1))["feature_importance"]
+            v = np.asarray(v, dtype=float)
+            vecs.append(v[0] if v.ndim > 1 else v)
+        sims = cosine_similarity(np.array(vecs))[np.triu_indices(self.n_iterations, k=1)]
+        return {"cosine_similarity_mean": float(np.mean(sims)),
+                "cosine_similarity_std": float(np.std(sims)), "n_iterations": self.n_iterations}
 
 
 def round_vec(v, digits: int) -> list[float]:
