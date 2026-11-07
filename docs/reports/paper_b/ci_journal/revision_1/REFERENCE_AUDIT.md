@@ -84,7 +84,7 @@ statistical methods 8.
   that foundational definitions and data sources are cited where they are used.
 - **C.** Literal 80% overall (≈ 130 references). Not compatible with 12 pages.
 
-**Addition (2026-11-07, C-032):** kapoor2024reforms (REFORMS), DOI checked on Crossref (Science Advances 10(18):eadk3452, 19 authors); full text read 2026-11-07: item 2c (Computing environment) asks authors to report hardware (CPU, RAM, disk), software (OS, language, package versions) and the time taken. It supports the "stated host" claim only; the host-independent units are this paper's own argument (§3.6). Result: **53 references, 23 from 2024 on; literature 27, 23 recent (85%)**.
+**Addition (2026-11-07, C-032):** kapoor2024reforms (REFORMS), DOI checked on Crossref (Science Advances 10(18):eadk3452, 19 authors); full text read 2026-11-07: item 2c (Computing environment) asks authors to report hardware (CPU, RAM, disk), software (OS, language, package versions) and the time taken. It supports the "stated host" claim only; the host-independent unit (model calls) is this paper's own argument (§3.6). Result: **53 references, 23 from 2024 on; literature 27, 23 recent (85%)**.
 
 ## Length
 
