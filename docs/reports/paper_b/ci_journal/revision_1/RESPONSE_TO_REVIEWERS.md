@@ -419,9 +419,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Tables 4 and 5 should include measures of variability or uncertainty alongside the reported three-seed averages.
 
 - **Status:** REMEDIATED
-- **Changes:** C-017, C-040
+- **Changes:** C-017, C-040, C-041
 - **Plan:** WP3
-- **Response:** The cross-dataset table now reports the mean and standard deviation over seeds (Table 4).
+- **Response:** The cross-dataset table reports the mean over seeds, and its caption states the largest standard deviation over seeds (below 0.04 in every cell); the standard deviation of every cell, per model, is in the supplementary file (Table 4).
 - **Where:** Section 4.5, Table 4
 
 ### R1-m12
