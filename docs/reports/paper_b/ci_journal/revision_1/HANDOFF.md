@@ -35,3 +35,12 @@ Two checks for the experiment laptop before the final analysis:
 
 When the results are final, push them on `paper/b-rev1-runs` and say so here; the
 documentation laptop then fills every [R] marker and runs `check_revision.py --final`.
+
+## 2026-11-07, answer from the experiment laptop (2fd1cb7f9)
+
+Both checks are closed. (1) `stability_zero_vectors_mean` is a count per stability instance
+out of 15 perturbed explanations, not a share: 2.7% (LIME) and 3.0% (LIME full) of the
+perturbed vectors on Adult are all-zero; `quality_checks.csv` now has
+`stability_zero_vector_share`. (2) The analysis counted finished jobs in the local live
+folder instead of `--root`; it now counts in the analysed root (test added). Still pending:
+the cohort B2 results only.
