@@ -7,7 +7,7 @@ Checked on 2026-11-08 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (44 of 44) |
+| Every ledger change is in the manuscript at the place it names | yes (45 of 45) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -70,6 +70,7 @@ not answered).
 | C-041 | — | Table 4 | R1-m11 | done |
 | C-042 | — | §4.2, Table 2, Table 3, Table 5, §6, Abstract | ED-1, R1-5, R1-7, R1-M8, R1-m8, R2-1a, R2-1b, R2-6 | filled from the Adult timing cells; matched tree run [R] |
 | C-043 | — | §4.1, Table 5, §5, §5.1 | R1-6, R1-10, R1-M3, R1-M7, R1-M10, R1-M15 | filled; sweep and control parts of §5 and §5.1 [R] |
+| C-044 | — | §6 | none | done |
 
 ## Items not yet closed
 
