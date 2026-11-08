@@ -7,7 +7,7 @@ Checked on 2026-11-07 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (38 of 38) |
+| Every ledger change is in the manuscript at the place it names | yes (39 of 39) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -64,6 +64,7 @@ not answered).
 | C-035 | — | §6 | R1-10, R1-m15 | frame; values [R] |
 | C-036 | — | Abstract | R1-m1 | done |
 | C-037 | — | §4.2 | R1-M9 | done |
+| C-038 | — | §1, §3.1, §3.4, §3.5, §3.6, Table 2, §4.2, Table 3, §6, Abstract, `scripts/paper_b_analyze.py` | R1-5, R1-M8, R2-1a | done |
 
 ## Items not yet closed
 

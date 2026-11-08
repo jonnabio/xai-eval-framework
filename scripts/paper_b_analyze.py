@@ -218,7 +218,10 @@ def primary_effects(q: pd.DataFrame, t: pd.DataFrame) -> pd.DataFrame:
     rows = []
     endpoints = [(e, qa) for e in ENDPOINTS + DESCRIPTIVE]
     if not t.empty:
-        endpoints += [("cpu_ms", t[t.dataset == PRIMARY]), ("rows", t[t.dataset == PRIMARY])]
+        # Cost is tested in wall time (author, 2026-11-07): Windows advances process CPU time in
+        # 15.6 ms steps, too coarse for explainers that take a few ms. CPU time stays descriptive.
+        endpoints += [("wall_ms", t[t.dataset == PRIMARY]), ("cpu_ms", t[t.dataset == PRIMARY]),
+                      ("rows", t[t.dataset == PRIMARY])]
     for (ep, src), x in itertools.product(endpoints, CONTRASTS + SECONDARY):
         m = paired(src, ep, x)
         if m.empty:
@@ -227,7 +230,7 @@ def primary_effects(q: pd.DataFrame, t: pd.DataFrame) -> pd.DataFrame:
                                                  delta=("delta", "mean"))
         mm = mixed_model(m, "delta")
         lo_b, hi_b = cluster_bootstrap_ci(m, "delta", "model")
-        confirm = x in CONTRASTS and ep not in DESCRIPTIVE and ep != "rows"
+        confirm = x in CONTRASTS and ep not in DESCRIPTIVE and ep not in ("rows", "cpu_ms")
         rows.append({"endpoint": ep, "contrast": f"shap-{x}", "confirmatory": confirm,
                      "n_instances": len(m), "n_cells": len(cells),
                      "mean_shap": cells["a"].mean(), "mean_x": cells["b"].mean(),
