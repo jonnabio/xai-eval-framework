@@ -351,6 +351,55 @@ def admission_decision(available_gb: float, expected_peak_gb: float, running: in
     return True, "ok"
 
 
+def job_from_cmdline(cmd: list[str]) -> tuple | None:
+    """(dataset, model, seed, explainer) of a `paper_b_run.py job ...` command line."""
+    if not any(str(c).endswith("paper_b_run.py") for c in cmd) or "job" not in cmd:
+        return None
+    opt = {}
+    for k in ("--dataset", "--model", "--seed", "--explainer"):
+        if k in cmd and cmd.index(k) + 1 < len(cmd):
+            opt[k] = cmd[cmd.index(k) + 1]
+    if len(opt) != 4:
+        return None
+    try:
+        return opt["--dataset"], opt["--model"], int(opt["--seed"]), opt["--explainer"]
+    except ValueError:
+        return None
+
+
+def jobs_running_elsewhere(governor_pid: int) -> dict:
+    """{job: pid} of quality workers alive on this machine that are not descendants of this
+    governor: workers left by a governor that died keep running and writing their JSONL,
+    and a second copy of the job would write the same file (2026-11-07 18:36)."""
+    import psutil
+    try:
+        mine = {p.pid for p in psutil.Process(governor_pid).children(recursive=True)}
+    except (psutil.Error, ValueError):
+        mine = set()
+    out = {}
+    for p in psutil.process_iter(["pid", "cmdline"]):
+        try:
+            job = job_from_cmdline(p.info["cmdline"] or [])
+        except psutil.Error:
+            continue
+        if job and p.info["pid"] not in mine:
+            out.setdefault(job, p.info["pid"])
+    return out
+
+
+def reload_resources(current: dict, path: Path | None = None) -> tuple[dict, list[str]]:
+    """The [resources] table read again from the config (operational, outside the design
+    hash), so a limit can be tuned without restarting the run and losing the instances in
+    progress. A config that does not parse keeps the current limits. Returns the limits and
+    the changes as 'key: old -> new'."""
+    try:
+        new = dict(config(path or CONFIG_PATH)["resources"])
+    except Exception:                                  # mid-edit or invalid: keep running
+        return current, []
+    changed = [f"{k}: {current.get(k)} -> {v}" for k, v in new.items() if current.get(k) != v]
+    return new, changed
+
+
 def plan_admissions(candidates, available_gb: float, running: int, max_workers: int,
                     reserve_gb: float, pause_below_gb: float, ac_power: bool | None,
                     disk_free_gb: float, disk_pause_gb: float, stop_requested: bool):

@@ -539,3 +539,46 @@ def test_admission_job_that_must_run_alone():
     assert start == [s1]                                                 # it waits, others go
     start, _ = _plan([(lone, 2.0, True), (s1, 0.4, False)], 20.0, running=0)
     assert start == [lone]                                               # nothing joins it
+
+def test_resource_limits_reload_without_a_restart(tmp_path):
+    cfg = tmp_path / "c.toml"
+    cfg.write_text("[resources]\nram_reserve_gb = 6.0\nmax_workers = 6\n", encoding="utf-8")
+    res, changed = lib.reload_resources({}, cfg)
+    assert res["ram_reserve_gb"] == 6.0
+    cfg.write_text("[resources]\nram_reserve_gb = 3.5\nmax_workers = 6\n", encoding="utf-8")
+    res2, changed = lib.reload_resources(res, cfg)
+    assert res2["ram_reserve_gb"] == 3.5 and changed == ["ram_reserve_gb: 6.0 -> 3.5"]
+    cfg.write_bytes(b"\xef\xbb\xbf[resources]\nram_reserve_gb = 1.0\n")     # unreadable (BOM)
+    res3, changed = lib.reload_resources(res2, cfg)
+    assert res3 is res2 and changed == []                                   # limits kept
+
+
+def test_resource_limits_are_outside_the_design_hash(tmp_path):
+    a, b = tmp_path / "a.toml", tmp_path / "b.toml"
+    a.write_text("[cohort]\nsplit_seed = 1\n[resources]\nram_reserve_gb = 6.0\n", encoding="utf-8")
+    b.write_text("[cohort]\nsplit_seed = 1\n[resources]\nram_reserve_gb = 3.5\n", encoding="utf-8")
+    assert lib.config_hash(a) == lib.config_hash(b)
+
+def test_job_from_cmdline_parses_worker_commands():
+    cmd = ["python.exe", r"D:\x\scripts\paper_b_run.py", "job", "--dataset", "adult", "--model",
+           "svm", "--seed", "33", "--explainer", "anchors", "--root", "r"]
+    assert lib.job_from_cmdline(cmd) == ("adult", "svm", 33, "anchors")
+    assert lib.job_from_cmdline(["python.exe", "scripts\\paper_b_run.py", "launch"]) is None
+    assert lib.job_from_cmdline(["python.exe", "other.py", "job", "--dataset", "a"]) is None
+
+
+def test_a_worker_of_another_governor_is_not_started_twice():
+    import os
+    import subprocess as sp
+    child = sp.Popen([sys.executable, "-c", "import time; time.sleep(30)", "paper_b_run.py",
+                      "job", "--dataset", "zz_test", "--model", "svm", "--seed", "7",
+                      "--explainer", "anchors"])
+    try:
+        job = ("zz_test", "svm", 7, "anchors")
+        for _ in range(50):                                # the command line appears at once
+            if job in lib.jobs_running_elsewhere(-1):
+                break
+        assert job in lib.jobs_running_elsewhere(-1)        # not ours: seen as elsewhere
+        assert job not in lib.jobs_running_elsewhere(os.getpid())   # our own child: not
+    finally:
+        child.kill()

@@ -50,7 +50,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > 4. Contribution to the Field: Fair (Provides marginal original contributions to the literature)
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-001, C-020
+- **Changes:** C-001, C-020, C-033
 - **Plan:** WP1, WP2, WP7
 - **Response:** We thank the reviewer for raising this point, which the revision takes seriously. The previous version presented the study as an extension of an earlier comparison; the revised manuscript stands on its own evidence. All results come from a new experimental cohort run for this study (§3), with four explainers instead of two, seven datasets instead of one main dataset, configuration sensitivity instead of a single setting, controls that test the validity of the stability measure, and cost measured on one host with hardware-independent counts. The contributions are restated in §1 accordingly, and §5 states in one paragraph what was known before and what this study adds. Details under R1-M1.
 - **Where:** Section 1; Section 5
@@ -70,7 +70,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > In particular, the authors should more clearly establish the novelty of the study relative to previously published work, account for potential statistical dependencies among experimental configurations, and **strengthen the validity of the perturbation-based stability evaluation**.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-009, C-018
+- **Changes:** C-009, C-018, C-029
 - **Plan:** WP4
 - **Response:** Addressed under R1-M6 and R1-M7: a no-noise control, perturbations that respect categorical constraints, rank-based stability, and an explicit treatment of all-zero vectors (§3.4, §4.4).
 - **Where:** Section 3.4; Section 4.4
@@ -110,7 +110,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The statistical analysis and interpretation of effect sizes should also be strengthened.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-011, C-012
+- **Changes:** C-011, C-012, C-029
 - **Plan:** WP6
 - **Response:** Addressed under R1-M3 and R1-M14.
 - **Where:** Section 3.5; Section 4.1, Table 2
@@ -121,7 +121,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 - **Type:** GENERAL
 - **Status:** REMEDIATED
-- **Changes:** C-001, C-003, C-006, C-012, C-016, C-018
+- **Changes:** C-001, C-003, C-006, C-012, C-016, C-018, C-033
 - **Plan:** WP7
 - **Response:** We thank the reviewer for this assessment. As the comment concerns the manuscript as a whole, we reviewed every section against it and identified the following places where the organization could be improved: (1) Results mixed our evidence with a summary of an earlier study (former §4.1), which interrupted the line of argument; (2) the cross-dataset results, the kernel-width probe and the masking probe read as separate appendices of the main analysis; (3) limitations were spread over several sections; (4) Results had no element showing how the design fitted together. We revised each of them: the earlier-study section was removed (former Section 4.1); Results now follow one sequence, main benchmark → cost → configuration sensitivity → validity of the measurements → other datasets (§4); limitations are gathered in one subsection (§5); and a design table opens the methods (Table 1).
 - **Where:** Section 1; former Section 4.1 (removed); Section 3.1 and Table 1 (design); Section 4 (one sequence: main benchmark, cost, configuration sensitivity, validity of the measurements, other datasets); Section 5.3 (limitations in one place)
@@ -132,10 +132,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 - **Type:** GENERAL
 - **Status:** PENDING (text and list done; waits for the author's reading of the 15 recent abstracts, REFERENCE_AUDIT.md)
-- **Changes:** C-002, C-027, C-028
+- **Changes:** C-002, C-027, C-028, C-031, C-032
 - **Plan:** WP8, D-6 (option A)
-- **Response:** We thank the reviewer for this assessment. As the comment concerns the literature review as a whole, we checked it against recent work and identified the following places where it could be improved: (1) recent empirical comparisons of SHAP and LIME were missing; (2) recent benchmarks and toolkits for explanation evaluation were not discussed; (3) work on the sensitivity of LIME to its hyperparameters and on the validity of perturbation-based stability measures was not used. We revised each of them: §2 adds a paragraph on comparisons and benchmarks published from 2024 on, and positions the study against them. §3.3–3.4 cite the work on hyperparameter sensitivity and perturbation validity that motivates the new controls. Older entries whose point is now made by recent work were replaced. Of the 52 references, the 26 that cite the literature are 85% from 2024 or later; the other 26 are cited for a definition (the explainers, the models and the metrics), a dataset source or a statistical method, at the place where it is used.
-- **Where:** Section 2
+- **Response:** We thank the reviewer for this assessment. As the comment concerns the literature review as a whole, we checked it against recent work and identified the following places where it could be improved: (1) recent empirical comparisons of SHAP and LIME were missing; (2) recent benchmarks and toolkits for explanation evaluation were not discussed; (3) work on the sensitivity of LIME to its hyperparameters and on the validity of perturbation-based stability measures was not used. We revised each of them: §2 adds a paragraph on comparisons and benchmarks published from 2024 on, and positions the study against them. §1 and §2 cite the work on hyperparameter sensitivity and on the limits of perturbation-based measures that motivates the configuration sweep and the new controls, and §1 cites a recent reporting checklist for the computing environment behind the cost measurement. Older entries whose point is now made by recent work were replaced. Of the 53 references, the 27 that cite the literature are 85% from 2024 or later; the other 26 are cited for a definition (the explainers, the models and the metrics), a dataset source or a statistical method, at the place where it is used.
+- **Where:** Section 1; Section 2
 
 ### R1-10
 
@@ -145,7 +145,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 - **Type:** GENERAL
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-021
+- **Changes:** C-019, C-021, C-035
 - **Plan:** WP7
 - **Response:** We thank the reviewer for this assessment. We re-examined each conclusion against the evidence and identified the following places where it was not sufficiently supported: (1) the stability conclusion rested on one kernel width and a perturbation scheme whose validity was not tested; (2) the sparsity conclusion was a consequence of LIME's feature budget; (3) the recommendations generalized beyond the models and datasets tested. We revised each of them: the stability conclusion now rests on the sensitivity analysis and the validity controls (§4.3–4.4); sparsity is reported descriptively (§3.1); every claim in §5 is labelled confirmatory or exploratory and bounded by what was tested (Table 5); and the conclusions (§6) restate only those results.
 - **Where:** Section 5, Table 5; Section 6
@@ -167,9 +167,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The manuscript extends a previously published SHAP–LIME comparison from 45 to 75 matched configurations. The authors should clearly establish the scientific novelty of the present work and distinguish its original contributions from previously reported findings.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-001, C-003, C-020, C-025
+- **Changes:** C-001, C-003, C-020, C-025, C-033
 - **Plan:** WP1, WP7
-- **Response:** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work. Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. [R: one sentence on the finding that is new.]
+- **Response:** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work, which was replaced because an audit found training-test overlap, an unrecoverable model and timings from mixed hosts (§3.1). Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. [R: one sentence on the finding that is new.]
 - **Where:** Section 1; former Section 4.1; Section 5; Section 3.1
 
 ### R1-M2
@@ -187,7 +187,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The authors should demonstrate the robustness of the reported statistical significance and confidence intervals using an analytical approach that accounts for the hierarchical structure of the experimental design.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-011
+- **Changes:** C-011, C-029
 - **Plan:** WP6
 - **Response:** As suggested, the inference now accounts for the structure of the design. For each endpoint and contrast we fit a linear mixed model with random intercepts for model and for seed within model. A cluster bootstrap over models gives confidence intervals, and the number of models in which each difference has the same sign is reported. The exact sign test at the model level is also given; with five models it cannot go below p = 0.0625, and the text says so. The cell-level Wilcoxon test is kept as a description (§3.5, Table 2). [R: whether conclusions change under the hierarchical analysis.]
 - **Where:** Section 3.5
@@ -247,9 +247,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The reported reversal in runtime performance between XGBoost and random forests represents an important finding. However, additional controlled experiments are necessary to determine whether this behavior consistently reflects model architecture rather than implementation-specific or hardware-dependent effects.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-015
+- **Changes:** C-015, C-037
 - **Plan:** WP2b
-- **Response:** We agree this needed a controlled test. Random forests and gradient-boosted trees were trained on the same data at matched numbers of trees and depths. The cost of TreeSHAP and of LIME was measured on one host against the total number of leaves (§4.2). [R: whether the reversal follows tree size, i.e. architecture, or persists at matched size, i.e. implementation.]
+- **Response:** We agree this needed a controlled test, and §4.2 now poses the reversal the reviewer identified as the question the controlled run answers. Random forests and gradient-boosted trees were trained on the same data at matched numbers of trees and depths. The cost of TreeSHAP and of LIME was measured on one host against the total number of leaves (§4.2). [R: whether the reversal follows tree size, i.e. architecture, or persists at matched size, i.e. implementation.]
 - **Where:** Section 4.2
 
 ### R1-M10
@@ -277,10 +277,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The kernel-width experiments contain different numbers of valid explanations across configurations. The authors should address the potential influence of this variation on the comparative results and consider evaluating the metrics on a common set of valid instances.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-016
+- **Changes:** C-016, C-029
 - **Plan:** WP5
 - **Response:** We thank the reviewer for spotting this. Every configuration is now compared on the common set of instances for which all configurations gave a valid explanation. The share of degenerate explanations of each configuration is reported as an outcome in its own right (§4.3).
-- **Where:** Section 4.3, Fig. 1
+- **Where:** Section 3.4; Section 4.3, Fig. 1
 
 ### R1-M13
 
@@ -307,7 +307,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The practical recommendations regarding explainer selection appear broader than the experimental evidence supports. The authors should strengthen the empirical justification for these recommendations or explicitly restrict them to the evaluated models, datasets, configurations, and computational settings.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019
+- **Changes:** C-019, C-034
 - **Plan:** WP7
 - **Response:** The recommendations are now restricted to the models, datasets, configurations and host tested. §5 opens with a table that states, for each claim, the evidence, the condition and whether it is confirmatory or exploratory (Table 5).
 - **Where:** Section 5, Table 5
@@ -319,7 +319,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The abstract should clearly distinguish findings obtained from the primary Adult benchmark from those derived from the supplementary cross-dataset and sensitivity experiments.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-022
+- **Changes:** C-022, C-036
 - **Plan:** WP7
 - **Response:** The abstract now reports the primary benchmark first and then, marked as supplementary, the configuration, validity and cross-dataset results.
 - **Where:** Abstract
@@ -329,7 +329,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The mathematical notation and directional hypotheses associated with RQ1–RQ4 should be presented more explicitly and consistently.
 
 - **Status:** REMEDIATED
-- **Changes:** C-005
+- **Changes:** C-005, C-029
 - **Plan:** WP7
 - **Response:** The research questions now share one notation: the paired difference Δ = SHAP − X for each explainer X and endpoint. The direction of each hypothesis is stated explicitly. Sparsity is a descriptive question (R2-4) (§3.1).
 - **Where:** Section 3.1
@@ -438,11 +438,11 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The grouped masking procedure should be described in greater detail, particularly regarding the identification and treatment of correlated or related features.
 
-- **Status:** PENDING (rule stated; waits for the grouping fix in the code, see the note below, and for the results of cohort B2)
+- **Status:** PENDING (rule stated; the grouping fix is in the code; waits for the grouped-masking results of cohort B2)
 - **Changes:** C-018
 - **Plan:** WP4b, WP7
 - **Response:** §4.4 now describes how related features were identified and how a group is masked. A group is (1) all one-hot columns of one categorical input variable, and (2) on Adult, the categorical education and its numeric code education-num, merged into one group because they encode the same information. When any feature of a group is among the top-k features, the whole group is replaced by its training means.
-<!-- Internal note, 2026-11-06: `paper_b_lib.onehot_groups` infers the groups from the text before the first underscore of each encoded name. Checked on the real names: right for Adult, Connect-4, Breast Cancer and Diabetes, wrong for Spambase (57 numeric features taken as 3 groups, e.g. 48 `word_freq_*`), Phishing (e.g. `having_IP_Address` merged with `having_At_Symbol`) and German Credit (`credit_amount` merged with `credit_history_*`). It feeds the grouped masking (WP4b) and the valid one-hot noise control (`controls_onehot`); the main quality pass does not use it. To be fixed (groups taken from the encoder's input columns) and tested before either study runs. -->
+<!-- Internal note, 2026-11-06: `paper_b_lib.onehot_groups` infers the groups from the text before the first underscore of each encoded name. Checked on the real names: right for Adult, Connect-4, Breast Cancer and Diabetes, wrong for Spambase (57 numeric features taken as 3 groups, e.g. 48 `word_freq_*`), Phishing (e.g. `having_IP_Address` merged with `having_At_Symbol`) and German Credit (`credit_amount` merged with `credit_history_*`). It feeds the grouped masking (WP4b) and the valid one-hot noise control (`controls_onehot`); the main quality pass does not use it. To be fixed (groups taken from the encoder's input columns) and tested before either study runs. 2026-11-07: fixed on the other laptop in 28ad03dc1 ("one-hot groups checked against the training data"); the preview masking output computed before the fix is not used. -->
 
 - **Where:** Section 4.4
 
@@ -461,7 +461,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The discussion and conclusion should more clearly distinguish findings supported by the complete paired benchmark from exploratory observations derived from restricted experimental settings.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-021, C-022
+- **Changes:** C-019, C-021, C-022, C-035
 - **Plan:** WP7
 - **Response:** Each result is labelled confirmatory (the main paired benchmark) or exploratory (sensitivity, validity controls, other datasets) in §4, in Table 5 and in the conclusions.
 - **Where:** Section 5, Table 5; Section 6; Abstract
@@ -473,10 +473,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014
+- **Changes:** C-010, C-014, C-032
 - **Plan:** WP2
 - **Response:** We agree with the reviewer, and the earlier timings have been replaced. All cost measurements of the revision come from one recorded host, under the controlled protocol described under R1-M8 (§3.6). Every paired comparison ran on that host in the same session.
-- **Where:** Section 3.6; Section 4.2, Table 3
+- **Where:** Section 1; Section 3.6; Section 4.2, Table 3
 
 ### R2-1b
 
@@ -493,7 +493,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Second, evaluating both explainers at a single static hyperparameter configuration fails to capture the inherent trade-offs between stability, fidelity, and computational cost; therefore, the revision must include multi-objective Pareto optimal frontiers across varying sampling budgets and kernel widths.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-016
+- **Changes:** C-016, C-029
 - **Plan:** WP5
 - **Response:** As requested, the revision evaluates both explainers over a grid of sampling budgets and kernel widths (LIME), and sampling budgets and background sizes (KernelSHAP). For each model it reports the Pareto-optimal configurations for stability, fidelity and cost (§4.3, Fig. 1). [R: whether one method's front dominates.]
 - **Where:** Section 4.3, Fig. 1
@@ -513,7 +513,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Fourth, the hypothesis test for sparsity is statistically tautological since LIME's active-feature count is constrained by a hard code-level ceiling, making it mathematically inevitable to yield sparser explanations than unconstrained SHAP.
 
 - **Status:** REMEDIATED
-- **Changes:** C-005
+- **Changes:** C-005, C-029
 - **Plan:** WP6 (drop H2 test), WP4 (ceiling-free sparsity)
 - **Response:** We agree. With a 10-feature budget, LIME's sparsity follows from its configuration, and testing it as a hypothesis was not meaningful. The revision removes the sparsity hypothesis test (§3.1). Sparsity is reported descriptively and for LIME without the budget, together with measures that do not depend on a ceiling: the share of attribution mass in the top-k features and the normalized entropy (§4.1).
 - **Where:** Section 3.1
@@ -535,7 +535,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
 - **Changes:** C-003, C-012, C-020, C-025
 - **Plan:** WP2, WP3, WP7
-- **Response:** We agree, and the revision is self-contained. All results come from a new cohort run for this study. Every table reports the per-method levels it compares, and no number is taken from or referred to [10], which is now cited only for the definitions of the metrics (§3.4). [Decision D-A: whether to add one sentence on why the earlier cohort was replaced.]
+- **Response:** We agree, and the revision is self-contained. All results come from a new cohort run for this study. Every table reports the per-method levels it compares, and no number is taken from or referred to [10], which is now cited only for the definitions of the metrics (§3.4). An earlier analysis of the SHAP–LIME question was replaced in full: an audit found that in most of its cells the evaluation instances overlapped the training partition, that one model could not be recovered and that its timings mixed hosts. §3.1 states this in one sentence, and no number from that analysis is used.
 - **Where:** former Section 4.1; Section 4.1, Table 2; Section 5; Section 3.1
 
 ### R2-7
