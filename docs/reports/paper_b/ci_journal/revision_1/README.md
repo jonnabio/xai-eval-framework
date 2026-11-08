@@ -10,13 +10,18 @@ of them changed.
 | Path | What |
 |---|---|
 | `DECISION_LETTER.md`, `REVIEWER1_DETAILED_REPORT.md` | The decision and the reports, verbatim |
-| `REVIEW_ANALYSIS.md` | The 53 items (editor 3, reviewer 1: 41, reviewer 2: 9), each with verdict and work package |
+| `REVIEW_ANALYSIS.md` | The 53 items (editor 3, reviewer 1: 41, reviewer 2: 9), each with verdict and work package; ED-2 and ED-3 need no answer (author, 2026-11-07), so the letter answers 51 |
 | `REVISION_PLAN.md` | Decisions D-1 to D-7, work packages, schedule |
 | `WP0_FINDINGS.md`, `provenance/` | Facts from the code and the EXP2 audit (F1–F9; incident F7, F8) |
 | `RUNS_IMPLEMENTATION_PLAN.md`, `RUNBOOK.md`, `env/` | Cohort B2: how it runs, how to operate it, the host |
-| `manuscript/paper_b_ci_rev1.tex` | **The revised manuscript** (working copy; the only file edited) |
+| `manuscript/paper_b_ci_rev1.tex`, `abstract_rev1.tex`, `keywords_rev1.tex` | **The revised manuscript** (working copy), its abstract and keywords |
 | `CHANGELOG.md` | **Every change**, numbered C-###, with the items it answers, recorded in the commit that makes it |
 | `RESPONSE_TO_REVIEWERS.md` | **The answer to every item**: REMEDIATED (with its changes and location) or EXPLAINED |
+| `PROPOSAL_2026-11-06.md` | The approved proposal (D-E); Part E maps each P-change to its C-change and records later corrections |
+| `REFERENCE_AUDIT.md` | Every reference verified (DOI, metadata); the 80% rule, option A |
+| `CONSISTENCY_2026-11-07.md` | Manuscript, ledger, response and proposal checked against each other; every open item and what it waits for |
+| `HANDOFF.md` | Messages between the documentation laptop and the experiment laptop |
+| `results/` | The analysis of cohort B2 behind the values printed (`results/README.md`: source snapshot, scope) |
 | `scripts/check_revision.py` | Checks frozen files, completeness of the answers, ledger consistency (`--final` before submission) |
 | `scripts/build_revision.py` | Renders everything into `build/` |
 | `build/` | **The new PDFs**, apart from the submitted ones |
@@ -31,8 +36,8 @@ of them changed.
 | `paper_b_ci_rev1_preview.pdf` | LaTeX rendering of the revised source |
 | `BUILD_MANIFEST.md` | Date, commit, hashes, pages, tracking status of the last build |
 | `supplement/paper_b_ci_rev1_supplement.docx` / `.pdf` / `.md` | The supplementary file for the reviewers (D-B), independent of the paper: design, data, models, fingerprints, environment; result sections [R] until the analysis fills them. Rendered by `scripts/build_supplement.py` |
-| `drafts/paper_b_ci_rev1_response_DRAFT.docx` / `.pdf` | **Proposal, not approved**: every comment with its elaborated draft answer (PROPOSAL Part C) and the P-changes that implement it. Rendered by `scripts/build_drafts.py` |
-| `drafts/paper_b_ci_rev1_proposed_changes_DRAFT.docx` / `.pdf` | **Proposal, not approved**: length plan, changes P-01..P-24, decisions D-A..D-E (PROPOSAL Parts A, B, D) |
+| `drafts/paper_b_ci_rev1_response_DRAFT.docx` / `.pdf` | **Historical** (the proposal of 2026-11-06, approved; superseded by the letter and the ledger): every comment with its elaborated draft answer (PROPOSAL Part C) and the P-changes that implement it. Rendered by `scripts/build_drafts.py` |
+| `drafts/paper_b_ci_rev1_proposed_changes_DRAFT.docx` / `.pdf` | **Historical**, as above: length plan, changes P-01..P-24, decisions D-A..D-E (PROPOSAL Parts A, B, D) |
 
 The comparison baseline is the submitted source rebuilt with the same pipeline; the build
 verifies that its text equals the submitted `.docx` before comparing, so only real edits are
