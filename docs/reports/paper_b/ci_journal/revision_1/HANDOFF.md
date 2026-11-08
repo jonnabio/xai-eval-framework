@@ -44,3 +44,12 @@ perturbed vectors on Adult are all-zero; `quality_checks.csv` now has
 `stability_zero_vector_share`. (2) The analysis counted finished jobs in the local live
 folder instead of `--root`; it now counts in the analysed root (test added). Still pending:
 the cohort B2 results only.
+
+## 2026-11-07 (late), from the documentation laptop: cost tested in wall time (C-038)
+
+The first timing cells show Windows CPU time moving in 15.6 ms steps (SHAP 31.25 ms, LIME 0 or
+15.6 ms on logistic regression). Author's decision: H2 is tested in **wall-clock time**; CPU time
+and rows stay descriptive. Changed: the manuscript (§3.1, §3.4–3.6, Tables 2–3, §6, abstract) and
+`scripts/paper_b_analyze.py` (tests `wall_ms`; `cpu_ms` descriptive). **Nothing changes for the
+running timing pass**: it already records wall time for every repetition. Do not restart it.
+Pull `paper/b-ci-revision-1` (no rebase) before the final analysis.

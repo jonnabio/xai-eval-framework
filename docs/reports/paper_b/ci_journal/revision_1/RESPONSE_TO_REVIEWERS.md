@@ -90,7 +90,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Furthermore, the fairness of the explainer configurations, **reliability of computational cost measurements**, and generalizability of the cross-dataset findings require additional investigation.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014
+- **Changes:** C-010, C-014, C-038
 - **Plan:** WP2
 - **Response:** Addressed under R1-M8: every cost measurement was repeated on one recorded host under controlled conditions, and complemented by hardware-independent counts (§3.6, §4.2).
 - **Where:** Section 3.6; Section 4.2, Table 3
@@ -237,9 +237,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The computational cost comparisons are potentially confounded by heterogeneous execution environments. The authors should validate the principal latency findings using standardized hardware, software configurations, and repeated timing measurements.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014
+- **Changes:** C-010, C-014, C-038
 - **Plan:** WP2
-- **Response:** Every cost measurement was repeated on a single recorded host. The host's processor, memory, operating system and software versions are reported. Each explanation was timed in one process, single-threaded and pinned to one core, after a warm-up, three times. The explainers alternated per instance, so slow drift affected all of them equally. Timing paused whenever other activity on the host exceeded a threshold (§3.6). The paired cells of the earlier version ran on different hosts; that problem no longer arises.
+- **Response:** Every cost measurement was repeated on a single recorded host. The host's processor, memory, operating system and software versions are reported. Each explanation was timed in one process, single-threaded and pinned to one core, after a warm-up, three times. The explainers alternated per instance, so slow drift affected all of them equally. Timing paused whenever other activity on the host exceeded a threshold . The cost comparison is tested in wall-clock time, which on one pinned core of a quiet host measures the explainer's work at sub-millisecond resolution; CPU time, which Windows advances only in 15.6 ms steps, is reported alongside (§3.6). The paired cells of the earlier version ran on different hosts; that problem no longer arises.
 - **Where:** Section 3.6; Section 4.2, Table 3
 
 ### R1-M9
@@ -473,7 +473,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014, C-032
+- **Changes:** C-010, C-014, C-032, C-038
 - **Plan:** WP2
 - **Response:** We agree with the reviewer, and the earlier timings have been replaced. All cost measurements of the revision come from one recorded host, under the controlled protocol described under R1-M8 (§3.6). Every paired comparison ran on that host in the same session.
 - **Where:** Section 1; Section 3.6; Section 4.2, Table 3

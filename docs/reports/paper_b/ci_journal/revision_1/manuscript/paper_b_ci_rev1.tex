@@ -90,8 +90,8 @@ states what the results support once both are closed:
 \begin{enumerate}
 \item \textbf{A controlled, paired benchmark of four explainers} (SHAP, LIME, Anchors and
 DiCE) on five model families, with every run on one recorded host, and cost
-reported as CPU time and as the number of model evaluations, a measure that
-does not depend on the hardware (Sections~\ref{sec:main}
+reported as time on that host and as the number of model evaluations, a
+measure that does not depend on the hardware (Sections~\ref{sec:main}
 and~\ref{sec:cost}).
 \item \textbf{Configuration-aware results}: a sweep over the LIME kernel
 width and sample size and over the KernelSHAP budget and background, and
@@ -188,8 +188,8 @@ reported descriptively:
 \item \textbf{H1 (stability).} SHAP is more stable than $X$:
 $\Delta_X(S) > 0$.
 \item \textbf{H2 (cost).} SHAP is more expensive than $X$:
-$\Delta_X(C) > 0$, tested in CPU time; the rows passed to the model are
-reported alongside, without a test.
+$\Delta_X(C) > 0$, tested in wall-clock time; CPU time and the rows passed
+to the model are reported alongside, without a test.
 \item \textbf{H3 (faithfulness).} SHAP is more faithful than $X$:
 $\Delta_X(F) > 0$ and $\Delta_X(G) > 0$.
 \item \textbf{Sparsity (descriptive).} With its 10-feature budget LIME's
@@ -319,7 +319,8 @@ counted.
 features with the largest $|e_j(x)|$ are masked together.
 \item \textbf{Sparsity} $P$: the share of features with
 $|e_j(x)| > 10^{-4}$ (lower is sparser).
-\item \textbf{Cost} $C$: CPU time per explanation and the number of rows
+\item \textbf{Cost} $C$: wall-clock time per explanation on one pinned core,
+CPU time, and the number of rows
 the explainer passes to the model (Section~\ref{sec:cost_method}).
 \end{enumerate}
 
@@ -342,7 +343,7 @@ paired difference $d_z$~\cite{lakens2013calculating}, the Hodges--Lehmann
 estimate~\cite{hodges1963estimates} and the matched-pairs rank-biserial
 correlation~\cite{kerby2014simple}, the effect size of the Wilcoxon
 signed-rank test~\cite{wilcoxon1945individual}, are reported. The
-confirmatory family is four endpoints ($S$, $F$, $G$ and CPU time) times
+confirmatory family is four endpoints ($S$, $F$, $G$ and wall time) times
 three contrasts; $p$-values are Holm-corrected over these twelve
 tests~\cite{holm1979simple}. The four explainers are ranked on the cell means
 of $S$, $F$ and $G$ by the Friedman test with the Nemenyi critical
@@ -361,7 +362,11 @@ one process with one thread, pinned to one core, on mains power; the
 explainers interleaved per instance, after one warm-up explanation each;
 three repetitions, of which the median is used; and measurements paused
 while any other process used more than 10\% of a core or the machine was
-in use. A wrapper counts every row the explainer passes to the model.
+in use. Cost is tested in wall-clock time: Windows advances a process's CPU
+time in steps of 15.6~ms, too coarse for explanations that take a few
+milliseconds, whereas on one pinned core of a quiet host wall time measures
+the same work at sub-millisecond resolution. CPU time is reported
+alongside. A wrapper counts every row the explainer passes to the model.
 Rows evaluated, unlike time, transfer to other hardware: multiplied by the
 cost of one model evaluation they give the explainer's cost on any host.
 For logistic regression and the MLP, whose cost per row is known, this is
@@ -388,7 +393,7 @@ the supplementary file.
 \caption{Primary benchmark (Adult, 25 cells). Per-method mean levels and
 paired effects $\Delta_X = $ SHAP $- X$: mixed-model estimate with 95\% CI,
 Holm-adjusted $p$, standardized paired difference $d_z$, Hodges--Lehmann
-estimate (HL) and matched rank-biserial correlation $r_{rb}$. Cost: CPU
+estimate (HL) and matched rank-biserial correlation $r_{rb}$. Cost: wall-clock
 ms per explanation}
 \label{tab:paired_main}
 \begin{tabular}{llrrrrrrr}
@@ -417,7 +422,7 @@ Sparsity & all & [R] & [R] & \multicolumn{5}{l}{descriptive} \\
 \label{sec:cost}
 
 Table~\ref{tab:cost} gives the cost per explanation by model family.
-[R: CPU-time ordering by model family; the share of model time in the
+[R: wall-time ordering by model family; the share of model time in the
 explainer's time.] [R: rows evaluated per explanation: LIME 1,000; KernelSHAP
 about 25,000 (500 coalitions $\times$ 50 background rows); Anchors and DiCE as
 measured.] Whether TreeSHAP's cost relative to LIME reverses between
@@ -429,20 +434,20 @@ and whether it follows the size of the forest or the implementation].
 
 \begin{table}[htb]
 \centering
-\caption{Cost per explanation on Adult (one host, one core): median CPU time
-and rows evaluated by the model; theoretical complexity per explanation
+\caption{Cost per explanation on Adult (one host, one core): median wall time
+and CPU time, and rows evaluated by the model; theoretical complexity per explanation
 ($T$ trees, $L$ leaves, $D$ depth; $n_s$ samples or coalitions; $n_b$
 background rows). FLOPs for logistic regression and the MLP in the text}
 \label{tab:cost}
-\begin{tabular}{lllrr}
+\begin{tabular}{lllrrr}
 \toprule
-Explainer & Model & Complexity & CPU (ms) & Rows evaluated \\
+Explainer & Model & Complexity & Wall (ms) & CPU (ms) & Rows evaluated \\
 \midrule
-SHAP (Tree) & RF, XGB & $O(T L D^2)$, no model calls & [R] & 0 \\
-SHAP (Kernel) & logreg, SVM, MLP & $O(n_s n_b)$ rows & [R] & [R] \\
-LIME & all & $O(n_s)$ rows $+$ fit $O(n_s M^2)$ & [R] & [R] \\
-Anchors & all & adaptive (precision target) & [R] & [R] \\
-DiCE & all & iterative search & [R] & [R] \\
+SHAP (Tree) & RF, XGB & $O(T L D^2)$, no model calls & [R] & [R] & 0 \\
+SHAP (Kernel) & logreg, SVM, MLP & $O(n_s n_b)$ rows & [R] & [R] & [R] \\
+LIME & all & $O(n_s)$ rows $+$ fit $O(n_s M^2)$ & [R] & [R] & [R] \\
+Anchors & all & adaptive (precision target) & [R] & [R] & [R] \\
+DiCE & all & iterative search & [R] & [R] & [R] \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -584,7 +589,7 @@ sample size, or the KernelSHAP budget, at which the ordering changes;
 exploratory, Section~\ref{sec:sweep}] and [R: holds / does not hold] on the
 further datasets [R: which ones; exploratory, Table~\ref{tab:holds}]. It is
 paid for in cost: [R: SHAP's cost relative to LIME in model evaluations and
-CPU time, by model family, including whether the ordering differs between
+wall time, by model family, including whether the ordering differs between
 the random forest and XGBoost], so LIME is the better choice [R: for which models and latency
 budgets]. Against the two reference explainers, [R: whether the SHAP--LIME
 difference is specific to the pair or shared with Anchors and DiCE]. The
