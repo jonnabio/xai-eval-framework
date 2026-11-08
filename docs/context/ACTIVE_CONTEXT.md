@@ -189,10 +189,10 @@ requests #79 and #80 merged, and the one carrying this handoff.
 - **Blockers/Issues**:
   - Cohort B2 results (33 of the 34 open items). R1-9 waits for the author's reading of the
     15 recent abstracts (`REFERENCE_AUDIT.md`).
-  - Adult LIME: `stability_zero_vectors_mean` 0.88 (LIME) and 0.95 (LIME full) in the partial
-    analysis, 0 for every other explainer; to be explained before the stability comparison
-    is used. The analysis status reports 0 of 575 jobs finished although 115 cells have
-    results. Both are listed in `HANDOFF.md` for the experiment laptop.
+  - Closed by the experiment laptop (2fd1cb7f9, after the session's last merge): the Adult
+    LIME zero-vector figure (0.88, 0.95) is a count out of 15 perturbed explanations, i.e.
+    2.7% and 3.0% of vectors; the 0-of-575 job count was read from the wrong folder. Merge
+    `paper/b-ci-revision-1` into `main` (it carries that fix) when resuming if not merged.
   - Decision with the author: extension request by 10 November. The power plan of the
     experiment laptop ("ASUS Recommended") to be fixed before the timing pass.
   - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
