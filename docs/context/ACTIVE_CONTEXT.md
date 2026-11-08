@@ -163,6 +163,8 @@ requests #79 and #80 merged, and the one carrying this handoff.
     the title question, slots [R] (C-035). Abstract and §1: only model calls are
     host-independent, not CPU time (C-032, C-036). RF–XGBoost reversal posed as the tested
     question, credited to the reviewer in the letter (C-037).
+  - Quality results filled (C-040, PR after #85): Tables 2 (no p_Holm yet) and 4, §4.1, §4.5,
+    §6, abstract; analysis in `revision_1/results/`. Manuscript now 12 of 12 pages in Word.
   - Cost (H2) tested in wall-clock time, not CPU time: Windows CPU time moves in 15.6 ms
     steps, seen in the first timing cells (author's decision, C-038; analysis script updated;
     the running timing pass is unaffected). PR #84.
@@ -195,7 +197,7 @@ requests #79 and #80 merged, and the one carrying this handoff.
     15 recent abstracts (`REFERENCE_AUDIT.md`).
   - Closed by the experiment laptop (2fd1cb7f9, after the session's last merge): the Adult
     LIME zero-vector figure (0.88, 0.95) is a count out of 15 perturbed explanations, i.e.
-    2.7% and 3.0% of vectors; the 0-of-575 job count was read from the wrong folder. Merge
+    5.8% and 6.3% of vectors (the commit message's 2.7%/3.0% was wrong); the 0-of-575 job count was read from the wrong folder. Merge
     `paper/b-ci-revision-1` into `main` (it carries that fix) when resuming if not merged.
   - Decision with the author: extension request by 10 November. The timing pass runs under
     the "ASUS Recommended" power plan (recorded per cell; disclose, do not restart).
