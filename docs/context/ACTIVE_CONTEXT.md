@@ -6,9 +6,15 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-10-25, by `claude-2026-10-25-paper-f`.
+**Last updated:** 2026-11-07, by `claude-2026-11-07-paper-b-docs`.
 
 ## Current objective
+
+**Paper B, revision 1** (C&I 2067810, major revision of 2026-11-06, due
+**2026-11-30**; extension decision by 10 November, the author's): the text is done; the
+results of cohort B2 are the only input pending. Work folder
+`docs/reports/paper_b/ci_journal/revision_1/` (start with `HANDOFF.md`,
+`CONSISTENCY_2026-11-07.md`). The thesis objective below is unchanged.
 
 **Close the thesis.** The tutor's note of 2026-10-12 asks for no change. On the author's
 instruction of the same day, every paper is now reflected in the thesis (ADR-0023): a
@@ -68,20 +74,17 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 
 ## Repository state
 
-- Main folder `xai-eval-framework`: thesis lane; the only working tree. `../xai-exp4` and
-  `../xai-eval-framework-main-status` were removed on 2026-10-25 (nothing unique; EXP4 lane
-  closed, see `lanes.toml`).
-  Lanes and the paths they own: `scripts/pubs/lanes.toml`.
-- `main` holds everything up to pull request #73 (Paper B: CLEIEJ edition archived, merged
-  2026-10-25) and this handoff. `chapter/cifie-revision-1`, `paper/b-computers-informatics`, and
-  `paper/f-external-validity` hold nothing that is not on `main`; `thesis/rca-001-phase-2`
-  is behind `main` and takes `main` when the thesis lane resumes.
-- The lane lock of the main folder is free.
-- Nothing is running: no task, no process.
-- Verifiers at the last check (2026-10-24): `verify_claims.py` 1,391 claims, 1,808
-  sites, 39 files fully registered; `verify_sync.py`, `verify_exp4_reconstruction.py`,
-  `scan_shared_literals.py --strict`, `check_equations.py` and `check_active_context.py`
-  pass; `pytest tests/pubs` 47 passed.
+- Two laptops (author, 2026-11-06). **This one** (`C:\Users\jonna\Github`) edits documents
+  on `paper/b-ci-revision-1`; **the experiment laptop** (`D:\Github\xai-eval-framework`, Ryzen 5
+  4600H, the one recorded host) runs cohort B2 and pushes only `paper/b-rev1-runs`.
+- `main` holds everything up to pull request #80 and this handoff. `paper/b-ci-revision-1` is
+  level with `main` and stays open for the revision. `paper/b-rev1-runs` (snapshots of the
+  running cohort, not merged) is ahead of `main`; merge it once the results are final.
+  `thesis/rca-001-phase-2` is behind `main` and takes it when the thesis lane resumes.
+  `pubs/paper-b-rev1-lane` exists on GitHub only (not examined this session).
+- Lane lock of the main folder released at session end. Nothing runs on this laptop; the
+  cohort B2 quality pass runs on the experiment laptop (6 workers, sync loop every 15 min).
+- Lanes and the paths they own: `scripts/pubs/lanes.toml`.
 - The thesis renders to Word with seven chapters and no unresolved reference
   (`thesis/render.ps1`; `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is tracked).
 
@@ -92,7 +95,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
    `RESPUESTA_A_REVISORES_REVISION_1.pdf`) to editor Dra. Irene Arostegui.
 1. **Paper F:** final version submitted 2026-10-25; wait for the journal (proofs or
    publication, target issue 30 March 2027).
-2. Submission numbers of Papers B (C&I), C, D and E (AAIR).
+2. Submission numbers of Papers C, D and E (AAIR). Paper B (C&I) is 2067810.
 3. The final text of Paper F's comments to the editor (not shown to the session).
 4. **The publication licence of the book chapter**: whether it allows the ten figures
    the thesis now shares with it (`fig_d1` to `fig_d4`, `fig_d6` to `fig_d11`). Not
@@ -141,59 +144,66 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   the table of contents in Word after every render.
 - **Single-author papers** are written impersonally; references carry a verified DOI
   URL and at least 80% date from 2024 or later (`.aceconfig`).
-- **Permissions.** Pushing or merging `main` may be refused to the assistant: try once,
-  t## Latest handoff - 2026-10-25, SESSION END (Paper F final version submitted; Paper B CLEIEJ archived; repo in sync)
+- **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-Session of 2026-10-25, owner `claude-2026-10-25-paper-f`. Lanes: `paper-f`
-(`paper/f-external-validity`), `paper-b` (`paper/b-computers-informatics`), shared files on
-`pubs/context-2026-10-25`, `-25b`, `-25c`. Pull requests #71 to #75, all merged.
+## Latest handoff - 2026-11-07, SESSION END (Paper B revision 1: text complete, awaiting cohort B2 results)
+
+Session of 2026-11-06/07, owner `claude-2026-11-07-paper-b-docs` (documentation laptop).
+Lane `paper-b` (`paper/b-ci-revision-1`); shared files on `pubs/context-2026-11-07`. Pull
+requests #79 and #80 merged, and the one carrying this handoff.
 
 - **Completed**:
-  - **Paper F (JCSI 10503).** Editor (Beata Pańczyk), 2026-10-25: the reviewer accepted the
-    amendments; final version with author details requested under "Revisions". Rebuilt from
-    unchanged sources; Word text identical to the revision of 2026-10-19; author block (name,
-    affiliation, e-mail, ORCID), answers to Reviewer A and format corrections of 2026-10-13
-    checked; 8 pages in Word. Author renamed and uploaded `herrera-vasquez-final.pdf` (file
-    47982) and `.docx` (47981) and told the editor: **final version submitted 2026-10-25**.
-    Recorded in `docs/reports/paper_f/README.md`, section 10 (PR #71) and the table above.
-  - **Paper B.** The withdrawn CLEIEJ edition (left moved but uncommitted by another session)
-    committed as git renames into `docs/reports/paper_b/CLEIEJ_DEPRECATED/`; C&I record paths
-    fixed; archive note added to its `CLEIEJ_SUBMISSION.md`; signed cover letter and intihal
-    report git-ignored (`ci_journal/.gitignore`). Shared commit: registry (84 sites),
-    `verify_sync.py`, `scan_shared_literals.py`, `docs/guides/PUBLICATION_SYNC_PIPELINE.md`
-    (PR #73).
-  - Context: 2026-10-24 handoff archived verbatim (`archive/2026-10-24.md`, index row);
-    this handoff (PRs #72, #74, #75).
+  - MiKTeX installed (user install); `build_revision.py` runs on this laptop.
+  - References, option A (C-028): 53 references, literature 23 of 27 from 2024 on (85%).
+    Introduction cites verified sources for each claim (C-031); REFORMS added, DOI checked and
+    full text read, cited for item 2c only (C-032).
+  - Methods aligned with the code (C-029); role of Anchors and DiCE stated (C-030).
+  - Introduction: two gaps (control, configuration) mapped to the three contributions (C-033).
+  - Table 5: row "usefulness for people" removed (C-034). Conclusions open with the answer to
+    the title question, slots [R] (C-035). Abstract and §1: only model calls are
+    host-independent, not CPU time (C-032, C-036). RF–XGBoost reversal posed as the tested
+    question, credited to the reviewer in the letter (C-037).
+  - Response letter: ED-2 and ED-3 removed (no answer, author); every comment quoted in full;
+    the editor, Reviewer 1 and Reviewer 2 each start on a new page.
+  - Consistency pass: manuscript, ledger, response and proposal agree
+    (`CONSISTENCY_2026-11-07.md`; proposal Part E). Handoff note to the experiment laptop
+    (`revision_1/HANDOFF.md`).
+  - Partial analysis of the 18:21 snapshot (scratchpad, pinned packages, not committed):
+    on Adult SHAP leads on fidelity against all three (p_Holm < 1e-4) and on the faithfulness
+    gap against LIME and DiCE; stability against LIME not significant; on the six other
+    datasets full LIME is more stable than SHAP. Cost: no data yet.
 - **Current State**:
-  - Paper F awaits publication (target issue 30 March 2027); nothing to change unless asked.
-    Final files in `docs/reports/paper_f/submission/final_2026-10-25/` (git-ignored).
-  - Verifiers 2026-10-25: `verify_claims.py` 1,898 claims, 2,315 sites, 40 files fully
-    registered; `verify_sync.py`, `scan_shared_literals.py --strict`,
-    `verify_exp4_reconstruction.py`, `check_active_context.py` pass; `pytest tests/pubs` 47
-    passed; CI green on every PR.
-  - Main folder on `thesis/rca-001-phase-2`, level with `main`; tree clean; no PR open;
-    nothing running; lane lock free. Branches: `main` and
-    `thesis/rca-001-phase-2` only; one worktree.
+  - Manuscript 11 pages (budget 12), letter 15 pages; `check_revision.py`: 51 items, 17
+    closed (16 remediated, 1 explained), 34 pending; 38 changes (C-000 – C-037).
+  - Cohort B2: quality pass finishing on the experiment laptop (snapshot 20:53); timing pass,
+    sweep, validity controls, grouped masking and the matched RF–XGBoost run not started.
+  - Tree clean; all branches pushed; lock released.
 - **Next Steps**:
-  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; stop if it fails.
-     The lane follows the checked-out branch: switch branch before claiming.
-  2. Paper F: record proofs or publication when JCSI sends them.
-  3. CIFIE: author dispatches the Revision 1 package (item 0 above).
-  4. Thesis lane: items of "Open with the author".
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
+     `paper/b-ci-revision-1`; `git pull --no-rebase`.
+  2. Read `revision_1/HANDOFF.md`; check whether the experiment laptop answered it.
+  3. When results arrive on `paper/b-rev1-runs`: run `scripts/paper_b_analyze.py` on them,
+     fill every [R] marker (Tables 2–5, §4, §5, §6, abstract, response), regenerate
+     `CONSISTENCY_*.md`, then `check_revision.py --final` and `build_revision.py`.
+  4. The supplement (D-B), last, as the author asked.
 - **Blockers/Issues**:
-  - None blocking. Pending with the author: items 0 to 7 of "Open with the author".
-  - The archived CLEIEJ `.tex` files do not rebuild in `CLEIEJ_DEPRECATED/` (relative paths
-    to `figures/` and `pub/fragments/`); copy them back to `docs/reports/paper_b/` first.
+  - Cohort B2 results (33 of the 34 open items). R1-9 waits for the author's reading of the
+    15 recent abstracts (`REFERENCE_AUDIT.md`).
+  - Adult LIME: `stability_zero_vectors_mean` 0.88 (LIME) and 0.95 (LIME full) in the partial
+    analysis, 0 for every other explainer; to be explained before the stability comparison
+    is used. The analysis status reports 0 of 575 jobs finished although 115 cells have
+    results. Both are listed in `HANDOFF.md` for the experiment laptop.
+  - Decision with the author: extension request by 10 November. The power plan of the
+    experiment laptop ("ASUS Recommended") to be fixed before the timing pass.
   - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
     investigated.
 - **Notes**:
-  - Paper F builds: `.venv\Scripts\python.exe docs/reports/paper_f/scripts/build_paper_f.py`
-    then `build_paper_f_docx.py` (Word closed). The 9-page warning is the LaTeX preview
-    PDF, not the file sent; the Word file is the page count that counts (8).
-  - Commit with explicit paths (`git commit -- <paths>`), never `-a`: the lane guard refuses
-    commits that mix lanes, and other sessions may leave files in the tree.
-  - Lane and shared commits can travel in one PR as separate commits;
-    `check_lane.py --range origin/main..HEAD` checks them as CI does.
-  - Branches cleaned 2026-10-25 (author's instruction): only `main` and
-    `thesis/rca-001-phase-2` remain; worktrees `../xai-exp4` and `../xai-eval-framework-main-status` removed. Delete a branch once its work is on `main`; the
-    auto-mode classifier allows it when the author asks explicitly.
+  - Builds on this laptop: prepend `%LOCALAPPDATA%\Programs\MiKTeX\miktex\bin\x64` to PATH in
+    Git Bash; `.venv\Scripts\python.exe docs/reports/paper_b/ci_journal/revision_1/scripts/build_revision.py`.
+  - The build's citation check does not read `\cite[...]{...}`: name a locator in the prose.
+  - The analysis needs statsmodels and the pinned pandas/SciPy (`revision_1/env/
+    requirements-rev1-frozen.txt`); the project `.venv` has neither: use a throwaway venv.
+  - Internal notes in `RESPONSE_TO_REVIEWERS.md` must be HTML comments; every change gets a
+    C-row in `CHANGELOG.md` in the same commit and its C-id under each item it answers.
+  - After `main` is merged into the lane, pull with `--no-rebase`: a rebase drops the merge
+    commit and the lane guard refuses commits until `main` is merged again.
