@@ -249,7 +249,8 @@ Evaluation instances are drawn from the test split only, up to 25 from each
 confusion-matrix stratum; smaller strata are taken whole, and the realized
 counts are reported. Within a cell, all explainers see the same instances.
 In small strata, different seeds can draw the same instance; the overlap
-is measured and reported [R: overlap].
+is measured and reported: the mean Jaccard index of the instance sets of
+two seeds of the same dataset and model is 0.22 (maximum 0.69).
 
 \subsection{Explainers}
 \label{sec:explainers}
@@ -362,7 +363,9 @@ one process with one thread, pinned to one core, on mains power; the
 explainers interleaved per instance, after one warm-up explanation each;
 three repetitions, of which the median is used; and measurements paused
 while any other process used more than 10\% of a core or the machine was
-in use. Cost is tested in wall-clock time: Windows advances a process's CPU
+in use. Cost is tested in wall-clock time, the time elapsed between the
+start and the end of an explanation, read from the system's high-resolution
+performance counter: Windows advances a process's CPU
 time in steps of 15.6~ms, too coarse for explanations that take a few
 milliseconds, whereas on one pinned core of a quiet host wall time measures
 the same work at sub-millisecond resolution. CPU time is reported
@@ -381,11 +384,22 @@ also given in floating-point operations.
 \label{sec:main}
 
 Table~\ref{tab:paired_main} reports the effects on the 25 Adult cells.
-[R: per contrast, the direction and size of the stability and faithfulness
-effects, and in how many cells the sign holds.] [R: Friedman ranking of
-the four explainers per endpoint.] [R: share of all-zero vectors and of
-undefined fidelity per explainer, and whether excluding them changes any
-effect.] The distribution of the instance-level differences is shown in
+SHAP is the more faithful explainer: its fidelity exceeds that of each
+other explainer in all 25 cells ($\Delta_X$ from 0.38 to 0.65, $d_z \ge
+3.3$), and its faithfulness gap exceeds that of LIME and DiCE ($\Delta_X$ =
+0.13 and 0.31, intervals above zero). Against Anchors the gap is larger in
+every cell (0.16), but the interval of the mixed model includes zero
+($-0.01$ to $0.33$) because the effect varies between models. On stability
+SHAP is ahead of DiCE (0.34, in 24 of 25 cells); against LIME (0.18, in 19
+of 25 cells) and Anchors (0.10, in 19 of 25) the intervals include zero, so
+H1 is not supported for these two contrasts. The Friedman test ranks SHAP
+first on all three endpoints (mean rank 1.0 on fidelity and on the
+faithfulness gap, 1.5 on stability; $p < 10^{-8}$ each) and DiCE last
+(critical difference 0.94); on stability, Anchors (2.0) ranks ahead of
+LIME (2.8). All-zero vectors occur only for LIME (0.4\% of explanations;
+5.8\% of its perturbed explanations in the stability measure, 6.3\% with
+the full vector); fidelity is undefined for at most 0.1\% of the instances
+of any explainer. [R: whether excluding them changes any effect.] The distribution of the instance-level differences is shown in
 the supplementary file.
 
 \begin{table}[htb]
@@ -400,20 +414,20 @@ ms per explanation}
 \toprule
 Endpoint & $X$ & SHAP & $X$ & $\Delta_X$ [95\% CI] & $p_{\mathrm{Holm}}$ & $d_z$ & HL & $r_{rb}$ \\
 \midrule
-Stability & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
- & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
- & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
-Fidelity & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
- & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
- & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
-Faithf.\ gap & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
- & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
- & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
+Stability & LIME & 0.74 & 0.56 & 0.18 [$-$0.01, 0.37] & [R] & 0.89 & 0.18 & 0.77 \\
+ & Anchors & & 0.63 & 0.10 [$-$0.08, 0.28] & [R] & 0.45 & 0.15 & 0.40 \\
+ & DiCE & & 0.40 & 0.34 [0.14, 0.54] & [R] & 1.63 & 0.34 & 0.98 \\
+Fidelity & LIME & 0.83 & 0.45 & 0.38 [0.22, 0.54] & [R] & 3.29 & 0.40 & 1.00 \\
+ & Anchors & & 0.41 & 0.42 [0.25, 0.58] & [R] & 11.79 & 0.42 & 1.00 \\
+ & DiCE & & 0.18 & 0.65 [0.44, 0.86] & [R] & 5.83 & 0.67 & 1.00 \\
+Faithf.\ gap & LIME & 0.40 & 0.26 & 0.13 [0.05, 0.21] & [R] & 1.33 & 0.12 & 1.00 \\
+ & Anchors & & 0.23 & 0.16 [$-$0.01, 0.33] & [R] & 2.19 & 0.16 & 1.00 \\
+ & DiCE & & 0.08 & 0.31 [0.13, 0.50] & [R] & 4.48 & 0.29 & 1.00 \\
 Cost & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
  & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
  & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
 \midrule
-Sparsity & all & [R] & [R] & \multicolumn{5}{l}{descriptive} \\
+Sparsity & all & 0.22 & \multicolumn{6}{l}{LIME 0.98, Anchors 0.06, DiCE 0.02 (descriptive)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -489,26 +503,34 @@ variance.]
 \label{sec:cross}
 
 Table~\ref{tab:cross} reports the four explainers on the six further
-datasets, now including SHAP stability. [R: whether the Adult orderings
-hold across the $2 \times 2$ of dimension and feature type; where they
-change.]
+datasets, now including SHAP stability. SHAP keeps the highest fidelity
+on all six, ahead of the next explainer by 0.06 (Breast Cancer) to 0.31
+(Diabetes), and the largest faithfulness gap on all six (supplementary
+file). The stability ordering of Adult does not carry over: LIME with the
+full vector is more stable than SHAP on every further dataset, by 0.05
+(Diabetes) to 0.26 (Spambase), and Anchors is also more stable than SHAP on
+Phishing and Connect-4, the two datasets with categorical features in the
+$2 \times 2$. Neither the number of features nor their type reverses the
+orderings of SHAP and LIME: both hold in every cell of the $2 \times 2$.
 
 \begin{table}[htb]
 \centering
-\caption{Other datasets (exploratory): mean $\pm$ SD over 3 seeds, averaged
-over the five models (per model in the supplementary file)}
+\caption{Other datasets (exploratory): mean (SD) over 3 seeds, averaged
+over the five models (per model in the supplementary file); LIME with the
+full vector}
 \label{tab:cross}
+\small\setlength{\tabcolsep}{2.5pt}
 \begin{tabular}{lcccccccc}
 \toprule
  & \multicolumn{4}{c}{Stability} & \multicolumn{4}{c}{Fidelity} \\
 Dataset & SHAP & LIME & Anch. & DiCE & SHAP & LIME & Anch. & DiCE \\
 \midrule
-Breast Cancer & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
-German Credit & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
-Diabetes & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
-Spambase & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
-Phishing & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
-Connect-4 & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+Breast Cancer & 0.84 (0.01) & 0.99 (0.00) & 0.38 (0.03) & 0.25 (0.02) & 0.69 (0.01) & 0.50 (0.01) & 0.25 (0.01) & 0.15 (0.02) \\
+German Credit & 0.83 (0.01) & 0.94 (0.00) & 0.68 (0.02) & 0.30 (0.01) & 0.77 (0.01) & 0.44 (0.00) & 0.43 (0.01) & 0.18 (0.01) \\
+Diabetes & 0.95 (0.00) & 1.00 (0.00) & 0.82 (0.01) & 0.32 (0.01) & 0.80 (0.01) & 0.49 (0.01) & 0.37 (0.01) & 0.27 (0.03) \\
+Spambase & 0.69 (0.02) & 0.95 (0.01) & 0.30 (0.02) & 0.11 (0.01) & 0.64 (0.01) & 0.46 (0.01) & 0.24 (0.00) & 0.13 (0.01) \\
+Phishing & 0.75 (0.01) & 0.95 (0.00) & 0.89 (0.01) & 0.25 (0.01) & 0.70 (0.00) & 0.54 (0.00) & 0.51 (0.00) & 0.26 (0.01) \\
+Connect-4 & 0.70 (0.01) & 0.85 (0.01) & 0.71 (0.01) & 0.10 (0.01) & 0.80 (0.01) & 0.36 (0.00) & 0.49 (0.01) & 0.09 (0.01) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -581,18 +603,21 @@ classification with five model families and seven datasets.
 % -----------------------------------------------------------------------
 
 The title asks when SHAP outperforms LIME. On the primary benchmark,
-[R: the criteria among stability, fidelity and the faithfulness gap on which
-SHAP is ahead, with $d_z$ and the model families where this holds;
-confirmatory, Table~\ref{tab:paired_main}]. The advantage [R: holds across /
+SHAP is ahead on faithfulness: its fidelity exceeds that of LIME, Anchors
+and DiCE in every cell of all five model families ($d_z \ge 3.3$), and its
+faithfulness gap exceeds that of LIME and DiCE; on stability it is ahead
+only of DiCE (Table~\ref{tab:paired_main}). The advantage [R: holds across /
 narrows / reverses] over the configuration grid [R: the LIME kernel width or
 sample size, or the KernelSHAP budget, at which the ordering changes;
-exploratory, Section~\ref{sec:sweep}] and [R: holds / does not hold] on the
-further datasets [R: which ones; exploratory, Table~\ref{tab:holds}]. It is
+exploratory, Section~\ref{sec:sweep}] and, for fidelity and the
+faithfulness gap, holds on all six further datasets, where LIME is instead
+the more stable explainer (exploratory, Table~\ref{tab:cross}). It is
 paid for in cost: [R: SHAP's cost relative to LIME in model evaluations and
 wall time, by model family, including whether the ordering differs between
 the random forest and XGBoost], so LIME is the better choice [R: for which models and latency
-budgets]. Against the two reference explainers, [R: whether the SHAP--LIME
-difference is specific to the pair or shared with Anchors and DiCE]. The
+budgets]. The faithfulness advantage is not specific to the pair: SHAP holds it
+against Anchors and DiCE as well, and DiCE ranks last on every quality
+endpoint. The
 answer is therefore conditional: the choice of explainer depends on the
 model architecture, the configuration and the latency budget, and a ranking
 obtained under one configuration should not be transferred to another

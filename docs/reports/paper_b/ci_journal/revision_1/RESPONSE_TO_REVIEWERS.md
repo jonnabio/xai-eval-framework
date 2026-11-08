@@ -36,9 +36,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > In addition, as an editorial requirement, please ensure that the main benchmark includes at least one state-of-the-art explainer comparison (e.g., Anchors or DiCE), or provide a clear justification if this is not feasible.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-008, C-012
+- **Changes:** C-008, C-012, C-040
 - **Plan:** WP2, WP3
-- **Response:** We thank the editor for this requirement, which strengthened the study. Both Anchors and DiCE are now part of the main benchmark, under the same paired protocol as SHAP and LIME: the same models, the same test instances, the same seeds, the same metrics and the same host. The research questions are stated as paired contrasts of SHAP against each of the other three explainers (§3.1). Anchors and DiCE produce explanations of different kinds (a rule; a counterfactual), so §3.3 explains how each is turned into a feature-attribution vector and which metrics are comparable across the four methods. The four-explainer results are in Table 2 (§4.1) and across the seven datasets in Table 4 (§4.5). [R: one sentence on the main finding for Anchors and DiCE.]
+- **Response:** We thank the editor for this requirement, which strengthened the study. Both Anchors and DiCE are now part of the main benchmark, under the same paired protocol as SHAP and LIME: the same models, the same test instances, the same seeds, the same metrics and the same host. The research questions are stated as paired contrasts of SHAP against each of the other three explainers (§3.1). Anchors and DiCE produce explanations of different kinds (a rule; a counterfactual), so §3.3 explains how each is turned into a feature-attribution vector and which metrics are comparable across the four methods. The four-explainer results are in Table 2 (§4.1) and across the seven datasets in Table 4 (§4.5). SHAP's faithfulness advantage holds against Anchors and DiCE as well as LIME (fidelity higher in all 25 Adult cells against each); Anchors is not distinguishable from SHAP on stability, and DiCE ranks last on every quality endpoint (§4.1).
 - **Where:** Section 3.3; Section 4.1, Table 2
 
 ## Reviewer 1: general assessment
@@ -100,7 +100,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Furthermore, the fairness of the explainer configurations, reliability of computational cost measurements, and **generalizability of the cross-dataset findings** require additional investigation.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017
+- **Changes:** C-017, C-040
 - **Plan:** WP3
 - **Response:** Addressed under R1-M10: the cross-dataset study now covers six further datasets with all models and all four explainers, SHAP stability included. The datasets were chosen to separate dimensionality from categorical encoding (§3.2, §4.5).
 - **Where:** Section 4.5, Table 4
@@ -110,7 +110,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The statistical analysis and interpretation of effect sizes should also be strengthened.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-011, C-012, C-029
+- **Changes:** C-011, C-012, C-029, C-040
 - **Plan:** WP6
 - **Response:** Addressed under R1-M3 and R1-M14.
 - **Where:** Section 3.5; Section 4.1, Table 2
@@ -145,7 +145,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 - **Type:** GENERAL
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-021, C-035
+- **Changes:** C-019, C-021, C-035, C-040
 - **Plan:** WP7
 - **Response:** We thank the reviewer for this assessment. We re-examined each conclusion against the evidence and identified the following places where it was not sufficiently supported: (1) the stability conclusion rested on one kernel width and a perturbation scheme whose validity was not tested; (2) the sparsity conclusion was a consequence of LIME's feature budget; (3) the recommendations generalized beyond the models and datasets tested. We revised each of them: the stability conclusion now rests on the sensitivity analysis and the validity controls (§4.3–4.4); sparsity is reported descriptively (§3.1); every claim in §5 is labelled confirmatory or exploratory and bounded by what was tested (Table 5); and the conclusions (§6) restate only those results.
 - **Where:** Section 5, Table 5; Section 6
@@ -167,9 +167,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The manuscript extends a previously published SHAP–LIME comparison from 45 to 75 matched configurations. The authors should clearly establish the scientific novelty of the present work and distinguish its original contributions from previously reported findings.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-001, C-003, C-020, C-025, C-033
+- **Changes:** C-001, C-003, C-020, C-025, C-033, C-040
 - **Plan:** WP1, WP7
-- **Response:** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work, which was replaced because an audit found training-test overlap, an unrecoverable model and timings from mixed hosts (§3.1). Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. [R: one sentence on the finding that is new.]
+- **Response:** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work, which was replaced because an audit found training-test overlap, an unrecoverable model and timings from mixed hosts (§3.1). Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. The new finding is that SHAP's advantage lies in faithfulness, not in stability: on Adult its stability advantage over LIME is not significant, and on all six further datasets LIME with the full vector is the more stable explainer while SHAP keeps the highest fidelity (§4.1, §4.5).
 - **Where:** Section 1; former Section 4.1; Section 5; Section 3.1
 
 ### R1-M2
@@ -237,7 +237,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The computational cost comparisons are potentially confounded by heterogeneous execution environments. The authors should validate the principal latency findings using standardized hardware, software configurations, and repeated timing measurements.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014, C-038
+- **Changes:** C-010, C-014, C-038, C-039
 - **Plan:** WP2
 - **Response:** Every cost measurement was repeated on a single recorded host. The host's processor, memory, operating system and software versions are reported. Each explanation was timed in one process, single-threaded and pinned to one core, after a warm-up, three times. The explainers alternated per instance, so slow drift affected all of them equally. Timing paused whenever other activity on the host exceeded a threshold . The cost comparison is tested in wall-clock time, which on one pinned core of a quiet host measures the explainer's work at sub-millisecond resolution; CPU time, which Windows advances only in 15.6 ms steps, is reported alongside (§3.6). The paired cells of the earlier version ran on different hosts; that problem no longer arises.
 - **Where:** Section 3.6; Section 4.2, Table 3
@@ -257,7 +257,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The cross-dataset analysis does not include SHAP stability measurements. The authors should extend the evaluation to both explainers on the additional datasets or explicitly restrict their generalizability claims to the outcomes directly supported by the experiments.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017
+- **Changes:** C-017, C-040
 - **Plan:** WP3
 - **Response:** SHAP stability is now measured on every dataset, with all models and all four explainers, so the cross-dataset comparison is symmetric (§4.5, Table 4).
 - **Where:** Section 4.5, Table 4
@@ -297,7 +297,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The reported effect sizes, particularly the exceptionally large values for fidelity and stability, require further statistical justification. The authors should clarify their computation, examine the distributions of paired differences, and assess their robustness to potential dependence among configurations.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-011, C-012
+- **Changes:** C-011, C-012, C-040
 - **Plan:** WP6
 - **Response:** We agree that the very large d_z values needed explanation. §3.5 now defines d_z (mean paired difference over the standard deviation of the differences) and explains why it grows when paired differences vary little, as here. Robust effect sizes are reported next to it: the Hodges–Lehmann difference and the matched rank-biserial correlation. Effect sizes are also given at the model level, which is robust to the dependence between cells. The supplement shows the distribution of the paired differences per endpoint and model (§4.1). [R]
 - **Where:** Section 3.5; Section 4.1, Table 2
@@ -319,7 +319,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The abstract should clearly distinguish findings obtained from the primary Adult benchmark from those derived from the supplementary cross-dataset and sensitivity experiments.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-022, C-036
+- **Changes:** C-022, C-036, C-040
 - **Plan:** WP7
 - **Response:** The abstract now reports the primary benchmark first and then, marked as supplementary, the configuration, validity and cross-dataset results.
 - **Where:** Abstract
@@ -359,7 +359,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The procedure used to sample instances from the TP, TN, FP, and FN strata should be clarified, including whether evaluation instances overlap across configurations.
 
 - **Status:** REMEDIATED
-- **Changes:** C-007
+- **Changes:** C-007, C-040
 - **Plan:** WP0, WP6
 - **Response:** §3.2 now describes the sampling. Instances are drawn per confusion-matrix stratum from the test split only, with a fixed number per stratum, and every explainer explains the same instances. When a stratum has fewer instances, all are taken, and realized counts are reported. Draws for different seeds are independent. All seeds sample from the same fixed test split, so where a stratum is small they can share instances (in the smallest strata, all of them); this overlap is measured and reported.
 - **Where:** Section 3.2
@@ -389,7 +389,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Table 1 should present the statistical estimates, confidence intervals, adjusted p-values, and effect sizes using consistent notation and clearly defined column headings.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-012
+- **Changes:** C-012, C-040
 - **Plan:** WP7
 - **Response:** The main results table now uses one notation, with each column defined in the caption: estimate, 95% CI, Holm-adjusted p, d_z, Hodges–Lehmann difference, rank-biserial r.
 - **Where:** Section 4.1, Table 2
@@ -418,10 +418,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Tables 4 and 5 should include measures of variability or uncertainty alongside the reported three-seed averages.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017
+- **Status:** REMEDIATED
+- **Changes:** C-017, C-040
 - **Plan:** WP3
-- **Response:** The cross-dataset table now reports mean ± standard deviation over seeds.
+- **Response:** The cross-dataset table now reports the mean and standard deviation over seeds (Table 4).
 - **Where:** Section 4.5, Table 4
 
 ### R1-m12
@@ -461,7 +461,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The discussion and conclusion should more clearly distinguish findings supported by the complete paired benchmark from exploratory observations derived from restricted experimental settings.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-021, C-022, C-035
+- **Changes:** C-019, C-021, C-022, C-035, C-040
 - **Plan:** WP7
 - **Response:** Each result is labelled confirmatory (the main paired benchmark) or exploratory (sensitivity, validity controls, other datasets) in §4, in Table 5 and in the conclusions.
 - **Where:** Section 5, Table 5; Section 6; Abstract
@@ -473,7 +473,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014, C-032, C-038
+- **Changes:** C-010, C-014, C-032, C-038, C-039
 - **Plan:** WP2
 - **Response:** We agree with the reviewer, and the earlier timings have been replaced. All cost measurements of the revision come from one recorded host, under the controlled protocol described under R1-M8 (§3.6). Every paired comparison ran on that host in the same session.
 - **Where:** Section 1; Section 3.6; Section 4.2, Table 3
@@ -503,9 +503,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Third, the claim regarding LIME's near-zero stability on the Adult dataset is confounded by an improper hyperparameter choice, as the reference kernel width of 3.0 is severely restricted for a 103-dimensional one-hot-encoded feature space, leading to an artificial collapse of local neighborhood weights.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-008, C-016
+- **Changes:** C-008, C-016, C-040
 - **Plan:** WP2 (reference width), WP4, WP5
-- **Response:** We agree. The reference LIME configuration is now the library's default kernel width, 0.75√M. We also correct a figure the reviewer quotes: the Adult feature space has 108 transformed features, not 103 as the earlier text stated, so the default width is about 7.79. The value 3.0 remains one point of the sensitivity analysis, where its effect is shown (§4.3). [R: stability at the default width.]
+- **Response:** We agree. The reference LIME configuration is now the library's default kernel width, 0.75√M. We also correct a figure the reviewer quotes: the Adult feature space has 108 transformed features, not 103 as the earlier text stated, so the default width is about 7.79. The value 3.0 remains one point of the sensitivity analysis, where its effect is shown (§4.3). At the default width, LIME's stability on Adult is 0.56 with the full vector and 0.33 with the 10-feature budget, against 0.74 for SHAP; the difference between SHAP and LIME with the full vector is not significant (§4.1).
 - **Where:** Section 3.3; Section 4.3, Fig. 1
 
 ### R2-4
@@ -522,8 +522,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Fifth, in the cross-dataset extension, SHAP's stability was omitted without justification, leaving the multi-dataset validation incomplete and asymmetric.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017
+- **Status:** REMEDIATED
+- **Changes:** C-017, C-040
 - **Plan:** WP3
 - **Response:** Corrected: SHAP stability is now measured on every dataset (R1-M10).
 - **Where:** Section 4.5, Table 4
@@ -533,7 +533,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Sixth, the manuscript heavily relies on and reuses pre-computed execution cohorts and findings from reference [10], to the extent that basic summary statistics are omitted from the tables and redirected to the previous paper; the manuscript must become entirely self-contained and independently verifiable.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-003, C-012, C-020, C-025
+- **Changes:** C-003, C-012, C-020, C-025, C-040
 - **Plan:** WP2, WP3, WP7
 - **Response:** We agree, and the revision is self-contained. All results come from a new cohort run for this study. Every table reports the per-method levels it compares, and no number is taken from or referred to [10], which is now cited only for the definitions of the metrics (§3.4). An earlier analysis of the SHAP–LIME question was replaced in full: an audit found that in most of its cells the evaluation instances overlapped the training partition, that one model could not be recovered and that its timings mixed hosts. §3.1 states this in one sentence, and no number from that analysis is used.
 - **Where:** former Section 4.1; Section 4.1, Table 2; Section 5; Section 3.1

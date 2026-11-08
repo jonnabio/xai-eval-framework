@@ -53,3 +53,15 @@ and rows stay descriptive. Changed: the manuscript (§3.1, §3.4–3.6, Tables 2
 `scripts/paper_b_analyze.py` (tests `wall_ms`; `cpu_ms` descriptive). **Nothing changes for the
 running timing pass**: it already records wall time for every repetition. Do not restart it.
 Pull `paper/b-ci-revision-1` (no rebase) before the final analysis.
+
+## 2026-11-07 (late), correction and quality results
+
+Correction to the answer above: with `stability_T` = 15, a mean of 0.877 and 0.950 all-zero
+vectors per stability instance is **5.8% (LIME) and 6.3% (LIME full)**, not 2.7% and 3.0%; the
+`stability_zero_vector_share` column of the final analysis gives these values. The manuscript
+states 5.8% and 6.3% (§4.1).
+
+The quality results (575 of 575 jobs) are filled in the manuscript (C-040): Table 2 except
+p_Holm and the cost rows, Table 4, §4.1, §4.5, §3.2 (overlap), §6 and the abstract. p_Holm waits
+for the cost tests, which complete the family of 12. Still needed from this laptop's runs: the
+timing pass, then the sweep, the validity controls, the grouped masking and the matched run.
