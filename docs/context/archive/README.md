@@ -7,6 +7,7 @@ Read this index, pick the file by date and title, and read only that file
 
 | File | Sections |
 |---|---|
+| [2026-10-25.md](2026-10-25.md) | Latest handoff - 2026-10-25, SESSION END (Paper F final version submitted; Paper B CLEIEJ archived; repo in sync) |
 | [2026-10-24.md](2026-10-24.md) | Latest handoff - 2026-10-24, SESSION END (CIFIE Book Chapter Revision 1 Attended and Merged) |
 | [2026-10-22.md](2026-10-22.md) | Latest handoff - 2026-10-22, SESSION END (Paper E withdrawn from CyS; submitted to AAIR) |
 | [2026-10-21.md](2026-10-21.md) | Latest handoff - 2026-10-21, SESSION END (Paper B withdrawn from CLEIEJ, submitted to C&I) |
