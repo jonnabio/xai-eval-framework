@@ -454,6 +454,9 @@ class Governor:
         self.args, self.root, self.extra = args, root, extra
         self.cfg = lib.config()
         self.res = self.cfg["resources"]
+        # Read once: re-reading it every step crashed the governor when the config was
+        # briefly unreadable (a byte-order mark, 2026-11-07 18:34), orphaning its workers.
+        self.chash = lib.config_hash()
         cpus = psutil.cpu_count() or 2
         self.max_workers = max(1, min(args.workers or self.res["max_workers"], cpus - 2))
         self.queue = list(jobs)
@@ -529,6 +532,11 @@ class Governor:
     def step(self):
         snap = lib.host_snapshot()
         now = time.time()
+        # Limits tuned in the config apply without a restart (max_workers excepted: it is
+        # fixed at launch).
+        self.res, changed = lib.reload_resources(self.res)
+        for c in changed:
+            log(f"resource limit changed: {c}")
         # Measure workers; enforce the per-worker cap.
         for job, w in list(self.running.items()):
             gb = lib.process_tree_rss_gb(w["proc"].pid)
@@ -594,6 +602,12 @@ class Governor:
             self.res["ram_reserve_gb"], self.res["pause_admission_below_gb"],
             snap["ac_power"], snap["disk_free_gb"], self.res["disk_pause_gb"], stop)
         peaks = {j: p for j, p, _a in cands}
+        if to_start:
+            elsewhere = lib.jobs_running_elsewhere(os.getpid())
+            for job in [j for j in to_start if j in elsewhere]:
+                to_start.remove(job)
+                self.reason = (f"{'/'.join(map(str, job))} is still run by a worker of an "
+                               f"earlier governor (pid {elsewhere[job]}): not started twice")
         for job in to_start:
             self.queue.remove(job)
             self.start(job)
@@ -616,7 +630,7 @@ class Governor:
         lib.atomic_write_json(lib.STATE / "orchestrator.json", {
             "pid": os.getpid(), "mode": self.args.mode, "root": str(self.root),
             "started": self.started, "updated": time.time(), "max_workers": self.max_workers,
-            "cohort_sha256": lib.config_hash(), "stopping": self.stopping or lib.STOP.exists(),
+            "cohort_sha256": self.chash, "stopping": self.stopping or lib.STOP.exists(),
             "queue": len(self.queue), "finished_this_run": self.finished,
             "failed": {"/".join(map(str, k)): v for k, v in self.failed.items()},
             "admission": self.reason, "host": snap,
