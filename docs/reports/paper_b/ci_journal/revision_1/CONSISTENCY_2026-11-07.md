@@ -7,7 +7,7 @@ Checked on 2026-11-08 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (45 of 45) |
+| Every ledger change is in the manuscript at the place it names | yes (46 of 46) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -71,6 +71,7 @@ not answered).
 | C-042 | — | §4.2, Table 2, Table 3, Table 5, §6, Abstract | ED-1, R1-5, R1-7, R1-M8, R1-m8, R2-1a, R2-1b, R2-6 | filled from the Adult timing cells; matched tree run [R] |
 | C-043 | — | §4.1, Table 5, §5, §5.1 | R1-6, R1-10, R1-M3, R1-M7, R1-M10, R1-M15 | filled; sweep and control parts of §5 and §5.1 [R] |
 | C-044 | — | §6 | none | done |
+| C-045 | — | Supplement (S7–S13) | R1-M14 | built; S9 matched run, S10 and part of S11 [R] |
 
 ## Items not yet closed
 
@@ -101,7 +102,6 @@ Sources of the missing values:
 | R1-M11 | pending | S | §4.3 over seeds and models |
 | R1-M12 | pending | S | §4.3 on the common valid instances |
 | R1-M13 | pending | M | §4.4 masking schemes on all models |
-| R1-M14 | pending | A | distributions of the paired differences in the supplement (D-B, last) |
 | R1-M15 | pending | Q, S, V, T | Table 5 scope column and the recommendations in §5.1 |
 | R1-m1 | pending | Q, S, V, T | abstract values |
 | R1-m10 | pending | S | Figure 1 is generated from the sweep |
@@ -110,9 +110,9 @@ Sources of the missing values:
 | R2-2 | pending | S | §4.3 Pareto fronts, Figure 1 |
 | R2-3 | pending | S | §4.3 kernel-width results |
 
-Closed: ED-1, R1-2, R1-4, R1-5, R1-7, R1-8, R1-11, R1-M2, R1-M3, R1-M8, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-4, R2-5, R2-6, R2-7, R2-8 (28 items).
+Closed: ED-1, R1-2, R1-4, R1-5, R1-7, R1-8, R1-11, R1-M2, R1-M3, R1-M8, R1-M14, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-4, R2-5, R2-6, R2-7, R2-8 (29 items).
 
-Count of pending items by source: Q 6, T 7, S 14, V 7, M 2, X 1, A 2.
+Count of pending items by source: Q 6, T 7, S 14, V 7, M 2, X 1, A 1.
 
 ## Mandatory before submission
 

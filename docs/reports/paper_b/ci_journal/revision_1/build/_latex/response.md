@@ -201,7 +201,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > The reported effect sizes, particularly the exceptionally large values for fidelity and stability, require further statistical justification. The authors should clarify their computation, examine the distributions of paired differences, and assess their robustness to potential dependence among configurations.
 
-**Response.** We agree that the very large d_z values needed explanation. §3.5 now defines d_z (mean paired difference over the standard deviation of the differences) and explains why it grows when paired differences vary little, as here. Robust effect sizes are reported next to it: the Hodges–Lehmann difference and the matched rank-biserial correlation. Effect sizes are also given at the model level, which is robust to the dependence between cells. The supplement shows the distribution of the paired differences per endpoint and model (§4.1). [R]
+**Response.** We agree that the very large d_z values needed explanation. §3.5 now defines d_z (mean paired difference over the standard deviation of the differences) and explains why it grows when paired differences vary little, as here. Robust effect sizes are reported next to it: the Hodges–Lehmann difference and the matched rank-biserial correlation. Effect sizes are also given at the model level, which is robust to the dependence between cells. The supplement shows the distribution of the paired differences per endpoint and model, as quantiles and as Figure S1, with the variance components of each mixed model (§4.1; Supplement S8).
 **Changes in the manuscript:** Section 3.5; Section 4.1, Table 2
 
 ### R1-M15

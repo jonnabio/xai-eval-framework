@@ -51,6 +51,20 @@ marked (the submitted `.docx` carries invisible zero-width spaces from its own W
 .venv/Scripts/python.exe docs/reports/paper_b/ci_journal/revision_1/scripts/check_revision.py --final   # before upload
 ```
 
+## Supplementary file (D-B)
+
+`build/supplement/paper_b_ci_rev1_supplement.docx` and `.pdf`, built by
+`scripts/build_supplement.py` (S1–S6 from the design and the frozen models; S7–S13 from
+`results/`, by `scripts/supplement_results.py`). Needs the prepared datasets
+(`paper_b_run.py prepare`) and the analysis packages. After a new analysis:
+
+```bash
+python scripts/paper_b_analyze.py --root <runs>/results --out <analysis>
+python docs/reports/paper_b/ci_journal/revision_1/scripts/build_supplement.py     --analysis docs/reports/paper_b/ci_journal/revision_1/results     --rows <analysis>/rows.csv --timing-root <runs>/results
+```
+
+(copy the analysis CSVs into `results/` first; `rows.csv` is not committed).
+
 ## Mandatory before submission
 
 1. **Length review (author, 2026-11-08).** The manuscript is 13 pages after C-042 (only
