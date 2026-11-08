@@ -183,8 +183,9 @@ requests #79 and #80 merged, and the one carrying this handoff.
     3-25x LIME's wall time (19.5 s on SVM) but p_Holm 0.11; SHAP faster than Anchors in all
     cells; TreeSHAP ~LIME on RF, 1/9 of LIME on XGBoost. `revision_1/results/` regenerated
     (snapshot 992d20038, with cost.csv).
-  - `check_revision.py`: 51 items, 27 closed (26 remediated, 1 explained), 24 pending; 43
-    changes (C-000 – C-042). Manuscript 13 pages (references spill).
+  - `check_revision.py`: 51 items, 28 closed (27 remediated, 1 explained), 23 pending; 44
+    changes (C-000 – C-043; C-043, PR #94: §4.1 zero-vector exclusion, Table 5 rows, §5/§5.1
+    partial, R1-M3). Manuscript 13 pages (references spill).
   - **Mandatory before submission: the author's length review**, once every result is in; do
     not trim before then (author, 2026-11-08; listed in `revision_1/README.md`).
   - Asked the experiment laptop (HANDOFF.md): Anchors on XGBoost records 0 model calls
