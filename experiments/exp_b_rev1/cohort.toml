@@ -1,0 +1,177 @@
+# Cohort B2: Paper B revision 1 (C&I 2067810). The whole design in one file.
+#
+# Every result row records the SHA-256 of the DESIGN in this file (every table except
+# [resources] and [sync], which are operational); the analysis refuses rows of
+# different hashes within one cohort. Change it only before the full runs start, or
+# start a new cohort. Plan: docs/reports/paper_b/ci_journal/revision_1/REVISION_PLAN.md
+# and RUNS_IMPLEMENTATION_PLAN.md.
+
+[cohort]
+name = "B2"
+# One split per dataset, shared by preprocessing, model training and every seed (F8).
+split_seed = 42
+test_size = 0.2
+# Training rows are capped (stratified subsample of the training split) so that the
+# SVM fits in reasonable time on the large sets. The cap is reported in the paper.
+max_train_rows = 20000
+
+[seeds]
+adult = [11, 22, 33, 44, 55]
+other = [11, 22, 33]
+
+[sampling]
+# Instances per confusion-matrix stratum (TP, TN, FP, FN). A stratum with fewer
+# instances is taken whole; the realised counts are recorded.
+per_stratum = 25
+# Stability is computed on the first k instances of each stratum (the cost driver).
+stability_per_stratum = 3          # scenario B, approved by the author 2026-11-06 (was 5)
+
+[metrics]
+stability_T = 15
+stability_sigma = 0.1
+fidelity_top_k = 5
+sparsity_threshold = 1e-4
+# Store every attribution vector (rounded), the perturbed ones included, for the
+# post-hoc measures of WP4 (rank stability, top-k Jaccard, zero vectors, truncation).
+store_vectors = true
+vector_digits = 6
+
+# --------------------------------------------------------------------------------
+# Datasets. "src_*" loaders are the repository's (src/data_loading); "openml" ones
+# are prepared here: one-hot (categorical) + standard scaling (numeric), fitted on
+# the training split only.
+# --------------------------------------------------------------------------------
+[datasets.adult]
+loader = "src_adult"
+role = "main"
+
+[datasets.breast_cancer]
+loader = "src_tabular"
+role = "cross"
+
+[datasets.german_credit]
+loader = "src_tabular"
+role = "cross"
+
+[datasets.diabetes]
+loader = "openml"
+openml_id = 37
+positive = "tested_positive"
+role = "cross"
+cell = "numeric, lower dimension"
+
+[datasets.spambase]
+loader = "openml"
+openml_id = 44
+positive = "1"
+role = "cross"
+cell = "numeric, higher dimension"
+
+[datasets.phishing]
+loader = "openml"
+openml_id = 4534
+positive = "1"
+role = "cross"
+cell = "categorical, lower dimension"
+
+[datasets.connect4]
+loader = "openml"
+openml_id = 40668
+positive = "2"          # win; the other two classes (loss, draw) are the negative class
+role = "cross"
+cell = "categorical, higher dimension"
+
+# --------------------------------------------------------------------------------
+# Models: explicit hyperparameters (the repository trainers' settings; RF depth is
+# bounded so that the frozen file stays under the size limit).
+# --------------------------------------------------------------------------------
+[models.logreg]
+class = "sklearn.linear_model.LogisticRegression"
+params = { solver = "lbfgs", max_iter = 1000, random_state = 42 }
+
+[models.rf]
+class = "sklearn.ensemble.RandomForestClassifier"
+params = { n_estimators = 100, max_depth = 15, random_state = 42, n_jobs = 1 }
+
+[models.xgb]
+class = "xgboost.XGBClassifier"
+params = { n_estimators = 100, max_depth = 6, learning_rate = 0.1, objective = "binary:logistic", eval_metric = "logloss", random_state = 42, n_jobs = 1 }
+
+[models.svm]
+class = "sklearn.svm.SVC"
+params = { C = 1.0, kernel = "rbf", probability = true, random_state = 42 }
+
+[models.mlp]
+class = "sklearn.neural_network.MLPClassifier"
+params = { hidden_layer_sizes = [100], max_iter = 500, random_state = 42 }
+
+# --------------------------------------------------------------------------------
+# Explainers. Each key is one variant that appears as an explainer in the results.
+# --------------------------------------------------------------------------------
+[explainers.shap]
+method = "shap"
+n_background_samples = 50
+# KernelSHAP budget: "auto" is the library default (2M + 2048). May be set per model
+# after the pilot (kernel_nsamples_by_model), with the reason recorded in the plan.
+kernel_nsamples = 500             # scenario A, approved by the author 2026-11-06 (was "auto" = 2M+2048)
+kernel_nsamples_by_model = {}
+
+[explainers.lime]
+method = "lime"
+num_samples = 1000
+num_features = 10            # the EXP2 budget, for the budget-matched comparison
+kernel_width = "default"     # 0.75 * sqrt(M) (D-3)
+
+[explainers.lime_full]
+method = "lime"
+num_samples = 1000
+num_features = "all"         # no ceiling (R2-4, R1-M4)
+kernel_width = "default"
+
+[explainers.anchors]
+method = "anchors"
+threshold = 0.95             # the wrapper hard-codes 0.95 (src/xai/anchors_wrapper.py)
+
+[explainers.dice]
+method = "dice"
+# The wrapper always asks DiCE for one counterfactual (total_CFs=1,
+# src/xai/dice_wrapper.py). EXP2's configs said num_counterfactuals: 5, which the
+# wrapper never applied (WP0_FINDINGS F9). Stated here as what actually runs.
+num_counterfactuals = 1
+
+# --------------------------------------------------------------------------------
+# Resources (defaults for this host: 6 cores / 12 threads, 31.4 GB RAM).
+# --------------------------------------------------------------------------------
+[resources]
+max_workers = 6                 # also capped at logical CPUs - 2
+ram_reserve_gb = 6.0            # never admit a job that would leave less than this
+default_peak_gb = 3.0           # expected peak of a job type not yet measured
+worker_cap_gb = 8.0             # a worker above this is killed; its job runs again alone
+pause_admission_below_gb = 3.0
+kill_newest_below_gb = 1.5
+disk_min_gb = 10.0              # preflight
+disk_pause_gb = 5.0
+instance_time_limit_s = 3600    # a single instance over this is recorded as failed
+job_start_limit_s = 1800        # loading and set-up of a job over this: retried
+max_retries = 3
+below_normal_priority = true
+
+[timing]
+per_stratum = 5                 # 20 instances per cell
+repeats = 3
+warmup_per_explainer = 1
+max_other_cpu_percent = 10.0
+require_idle_minutes = 5
+gate_poll_s = 30
+cpu = 2                         # logical CPU the timing process is pinned to
+benchmark_every_instances = 1
+
+[sync]
+branch = "paper/b-rev1-runs"
+remote = "origin"
+every_minutes = 15
+results_prefix = "experiments/exp_b_rev1/results"
+# Lane branches the loop also pushes (commits only, never forced), so committed work
+# never waits more than every_minutes to reach GitHub.
+also_push = []                  # 2026-11-06: the author continues on another laptop; this host only saves runs
+max_file_mb = 50

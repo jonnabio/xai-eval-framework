@@ -1,0 +1,896 @@
+%% Paper B, REVISION 1 for C&I (submission 2067810, decision of 2026-11-06).
+%%
+%% Working copy of ../../paper_b_ci.tex as submitted on 2026-10-21 (that file and
+%% ../../submission/ stay frozen; hashes in ../SUBMITTED_SNAPSHOT.sha256). Every change
+%% made here is recorded in ../CHANGELOG.md with the reviewer items it answers, and
+%% ../scripts/build_revision.py renders it and a changes-marked PDF into ../build/.
+%% Paths below are relative to ci_journal/, where the build compiles it.
+%%
+%% DRAFT of 2026-11-06 (decision D-D): prepared by the assistant from the approved
+%% proposal (P-01..P-24, PROPOSAL_2026-11-06.md) for the author to edit. Text marked
+%% [R: ...] is filled from the results of cohort B2; [REF: ...] marks literature that the
+%% reference audit (WP8) supplies with verified DOIs. No number of the submitted version
+%% is reused.
+%%
+%% This file is not compiled for the journal (it accepts Word only):
+%% scripts/build_paper_b_ci_docx.py writes it into the journal template.
+\documentclass[11pt,a4paper]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{3em}
+\setlist{nosep,leftmargin=*}
+
+% The journal reviews masked (double-blind): the author, the affiliation,
+% the acknowledgments, the repository address and the archive DOI are on
+% the separate title page only.
+
+\title{When Does SHAP Outperform LIME? Model- and Configuration-Dependent
+Results from a Paired Tabular Benchmark}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+\input{revision_1/manuscript/abstract_rev1.tex}
+\end{abstract}
+
+% Keywords: revision_1/manuscript/keywords_rev1.tex; the builder puts them in
+% alphabetical order with a capital first letter, as the journal asks.
+
+% -----------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+% -----------------------------------------------------------------------
+
+A team that deploys a tabular classifier and must explain its predictions
+faces a concrete decision: which post-hoc explainer to use, for which model,
+under which latency budget. The candidates differ in the kind of explanation
+they return. LIME~\cite{ribeiro2016why} and SHAP~\cite{lundberg2017unified}
+return feature attributions, Anchors~\cite{ribeiro2018anchors} returns a
+rule and DiCE~\cite{mothilal2020dice} a counterfactual. They also differ in
+how faithfully the explanation tracks the model, how stable it is under
+small changes of the input, and how much computation it
+needs~\cite{velmurugan2025guidelines,ababneh2026faithfulness,olsen2024comparative}. Theory does
+not settle the choice across model families and
+configurations~\cite{retzlaff2024posthoc,longo2024manifesto}, and the
+empirical guidance is weaker than the popularity of the methods suggests:
+evaluations use different metric families, and the ranking of explainers
+often depends as much on the metric and the configuration as on the
+methods~\cite{nauta2023anecdotal,canha2025benchmark,pawlicki2024metrics}.
+
+Two gaps follow. The first is \emph{control}. Comparisons in which all
+explainers see the same model, the same instances, the same seed and the
+same host, so that a difference can be attributed to the explainer, are
+scarce: published SHAP--LIME comparisons are often case studies in a single
+domain~\cite{hooshyar2024problems,schulte2024studying}. Cost needs the same
+control: it transfers to another deployment only when it is measured on a
+stated host, as item 2c of the REFORMS checklist for machine-learning-based
+science recommends~\cite{kapoor2024reforms}, and when it is also counted in a
+unit that does not depend on that host, such as the number of model calls.
+The second gap is \emph{configuration}. Results are usually reported for one
+configuration, although the hyperparameters that build LIME's
+neighborhood~\cite{saadatfar2024uslime} or bound KernelSHAP's
+sampling~\cite{olsen2024comparative} can change the outcome. Without
+control and without more than one configuration, a recommendation cannot
+state the conditions under which it holds.
+
+This paper addresses the two gaps with three contributions. The first closes
+the gap in control, the second the gap in configuration, and the third
+states what the results support once both are closed:
+\begin{enumerate}
+\item \textbf{A controlled, paired benchmark of four explainers} (SHAP, LIME, Anchors and
+DiCE) on five model families, with every run on one recorded host, and cost
+reported as CPU time and as the number of model evaluations, a measure that
+does not depend on the hardware (Sections~\ref{sec:main}
+and~\ref{sec:cost}).
+\item \textbf{Configuration-aware results}: a sweep over the LIME kernel
+width and sample size and over the KernelSHAP budget and background, and
+controls that test whether the stability measurement itself is valid
+(Sections~\ref{sec:sweep} and~\ref{sec:validity_controls}).
+\item \textbf{Bounded recommendations}: every claim is labelled as
+confirmatory or exploratory and stated with the models, datasets and
+configurations under which it holds (Section~\ref{sec:discussion}).
+\end{enumerate}
+The paper makes ranking claims under a stated protocol. It does not claim
+that an explanation is correct for a task, and it does not test whether
+people decide better with any explainer.
+
+% -----------------------------------------------------------------------
+\section{Background and Related Work}
+\label{sec:background}
+% -----------------------------------------------------------------------
+
+LIME fits an interpretable surrogate $g$ to the model $f$ on perturbed
+samples around an instance $x$, weighted by a proximity kernel $\pi_x$, as
+in Eq.~(\ref{eq:lime}):
+\begin{equation}
+\xi(x) = \arg\min_{g \in G} \mathcal{L}(f, g, \pi_x) + \Omega(g),
+\label{eq:lime}
+\end{equation}
+where $G$ is the class of surrogates (sparse linear models here),
+$\mathcal{L}$ measures how poorly $g$ reproduces $f$ on the weighted
+samples and $\Omega(g)$ penalizes surrogate complexity~\cite{ribeiro2016why}.
+The kernel width, the number of samples and the feature budget shape the
+neighborhood, and the sampling makes the explanation stochastic. SHAP
+assigns additive attributions $f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i$ that
+satisfy local accuracy, missingness and consistency, where $\phi_0$ is the
+expected output over a background sample and $M$ the number of
+features~\cite{lundberg2017unified}. KernelSHAP estimates them by a
+weighted regression over sampled feature coalitions and applies to any
+model; TreeSHAP computes them from the structure of tree ensembles. Anchors
+searches for a rule that fixes the prediction with a target
+precision~\cite{ribeiro2018anchors}; DiCE searches for a counterfactual
+instance with the opposite prediction~\cite{mothilal2020dice}.
+
+Quantitative evaluation relies on proxy metrics: faithfulness under feature
+removal~\cite{bhatt2020evaluating,samek2017evaluating},
+robustness to small input changes~\cite{alvarezmelis2018robustness} and
+sparsity, standardized in toolkits and
+benchmarks~\cite{hedstrom2023quantus,agarwal2022openxai}. Removal-based
+scores depend on the removal scheme~\cite{zheng2025ffidelity}, attributions
+can pass perturbation tests and fail sanity checks~\cite{adebayo2018sanity}, LIME and SHAP can be manipulated~\cite{baniecki2024adversarial},
+and Shapley attributions are hard to read as importance when features are
+dependent~\cite{huang2024failings}; feature attribution has
+provable limits as a basis for inferring model
+behavior~\cite{bilodeau2024impossibility},
+and attribution methods can mark features with no relation to the target as
+important~\cite{clark2024xaitris}.
+
+Recent work compares SHAP and LIME in applied settings, among them
+education~\cite{hooshyar2024problems}, software
+engineering~\cite{schulte2024studying} and mixed-type tabular
+models~\cite{lazar2026beyond}, and across tabular and image
+classifiers~\cite{ababneh2026faithfulness}; their respective strengths are
+reviewed in~\cite{salih2025perspective,mersha2024survey}. Guidelines and
+open benchmarks for functionally grounded evaluation on tabular data are
+emerging~\cite{velmurugan2025guidelines,moiseev2025benchmark}. Estimators of
+Shapley values differ in accuracy and
+cost~\cite{olsen2024comparative}, LIME's neighborhood sampling can be
+redesigned to raise its fidelity~\cite{saadatfar2024uslime}, and
+counterfactual explainers can disagree on the same
+instance~\cite{brughmans2024disagreement}. This study adds a comparison in
+which the four explainers are paired on the same instances, their
+configuration is varied, the validity of the stability measurement is
+tested, and cost is counted in model evaluations as well as in time.
+
+% -----------------------------------------------------------------------
+\section{Materials and Methods}
+\label{sec:methods}
+% -----------------------------------------------------------------------
+
+\subsection{Design and Research Questions}
+\label{sec:rqs}
+
+All results come from one experimental cohort run for this study under the
+protocol below (Table~\ref{tab:design}). An earlier analysis of the
+SHAP--LIME question used runs collected on several hosts; an audit found that
+in most of its cells the evaluation instances overlapped the training
+partition, that one model could not be recovered and that its timings mixed
+hosts, so no number from it is used here.
+
+For each endpoint $Y$ and each instance, the paired difference is
+$\Delta_X = Y_{\mathrm{SHAP}} - Y_X$ for $X \in \{\mathrm{LIME},
+\mathrm{Anchors}, \mathrm{DiCE}\}$. Three hypotheses state an expected
+direction; each is tested two-sided, and a difference is read in the stated
+direction only when its interval excludes zero on that side. Sparsity is
+reported descriptively:
+\begin{itemize}
+\item \textbf{H1 (stability).} SHAP is more stable than $X$:
+$\Delta_X(S) > 0$.
+\item \textbf{H2 (cost).} SHAP is more expensive than $X$:
+$\Delta_X(C) > 0$, tested in CPU time; the rows passed to the model are
+reported alongside, without a test.
+\item \textbf{H3 (faithfulness).} SHAP is more faithful than $X$:
+$\Delta_X(F) > 0$ and $\Delta_X(G) > 0$.
+\item \textbf{Sparsity (descriptive).} With its 10-feature budget LIME's
+sparsity is set by the user, and Anchors returns few features by
+construction, so a test of sparsity would test a configuration, not a
+method.
+\end{itemize}
+
+\begin{table}[htb]
+\centering
+\caption{Design of the benchmark. The primary benchmark is confirmatory; the
+other parts are exploratory}
+\label{tab:design}
+\begin{tabularx}{\linewidth}{p{3.1cm} X}
+\toprule
+\textbf{Factor} & \textbf{Levels} \\
+\midrule
+Datasets & Adult (primary, 108 encoded features); Breast Cancer (30), German
+Credit (61), Diabetes (8), Spambase (57), Phishing (68), Connect-4 (126) \\
+Models & logistic regression, random forest, XGBoost, SVM (RBF), MLP \\
+Explainers & SHAP, LIME (full vector; 10-feature variant), Anchors, DiCE \\
+Seeds & Adult: 5; other datasets: 3 \\
+Instances & up to 25 per stratum (TP, TN, FP, FN) of the test split, per
+model and seed; stability on 3 per stratum \\
+Paired cells & Adult: 25 (model $\times$ seed); other datasets: 90 \\
+Timing subset & 5 instances per stratum, 3 repetitions, one host \\
+Sweep and controls & Section~\ref{sec:sweep} and
+Section~\ref{sec:validity_controls} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Data and Models}
+\label{sec:data}
+
+Adult~\cite{kohavi1996scaling,becker1996adult} is the primary dataset. Six
+further binary datasets were chosen so that feature dimension crosses
+feature type: Breast Cancer~\cite{wolberg1993breast} and German
+Credit~\cite{hofmann1994statlog} from the UCI repository~\cite{dua2019uci}, and Diabetes, Spambase,
+Phishing and
+Connect-4~\cite{smith1988adap,hopkins1999spambase,mohammad2012phishing,tromp1995connect4}
+in a $2 \times 2$ of
+numeric or categorical features and lower or higher dimension. For
+Connect-4, a win is the positive class and the two other outcomes the
+negative class.
+
+Each dataset has one fixed stratified split (80/20, seed 42), shared by
+preprocessing, model training and every seed. Numeric features are scaled
+and categorical features one-hot encoded, both fitted on the training
+split only. Training is capped at 20,000 rows (a stratified subsample) so
+that the SVM fits in reasonable time. The five
+models~\cite{breiman2001random,chen2016xgboost} are trained once per dataset
+with fixed hyperparameters (supplementary file) and frozen; every run checks
+the model file against its recorded hash. A seed therefore changes the
+evaluation instances and the explainers' randomness, never the model.
+Evaluation instances are drawn from the test split only, up to 25 from each
+confusion-matrix stratum; smaller strata are taken whole, and the realized
+counts are reported. Within a cell, all explainers see the same instances.
+In small strata, different seeds can draw the same instance; the overlap
+is measured and reported [R: overlap].
+
+\subsection{Explainers}
+\label{sec:explainers}
+
+All explainers receive the same encoded features and explain the predicted
+probability of the positive class:
+\begin{itemize}
+\item \textbf{SHAP:} TreeSHAP for the random forest and XGBoost;
+KernelSHAP for the other models, with 50 background rows and a budget of
+500 coalitions.
+\item \textbf{LIME:} 1,000 samples and the library's default kernel width,
+$0.75\sqrt{M}$ ($\approx 7.79$ on Adult). The primary contrast uses the full
+attribution vector; a variant with the 10-feature budget shows the effect
+of the budget.
+\item \textbf{Anchors:} precision target 0.95; the attribution vector marks
+the features of the anchor with 1 and the others with 0.
+\item \textbf{DiCE:} one counterfactual of the opposite class (random
+search); the attribution of feature $j$ is $|x_j - x'_j|$.
+\end{itemize}
+Anchors (a rule) and DiCE (a counterfactual) enter as reference explainers
+of other kinds: the research questions remain about SHAP and LIME, and the
+two references show whether a SHAP--LIME difference is specific to the pair
+or shared by explainers in general.
+These settings are the libraries' defaults where defaults exist, so that a
+practitioner's first run is what is measured. KernelSHAP's budget is set
+explicitly because the default ($2M + 2048$ coalitions) made the SVM the
+cost driver of the whole design; Section~\ref{sec:sweep} measures the effect
+of the default against the explicit budget. Anchors and DiCE return
+explanations of different kinds, so their vectors measure which features the
+explanation uses, not signed contributions; the metrics below are
+comparable across the four methods in that sense.
+
+\subsection{Metrics}
+\label{sec:metrics}
+
+Let $f(x)$ be the predicted probability of the positive class and
+$e(x) \in \mathbb{R}^{M}$ the attribution vector; masking feature $j$
+replaces it with its training mean $\bar{x}_j$. The metrics follow common
+definitions~\cite{alvarezmelis2018robustness,bhatt2020evaluating,samek2017evaluating}:
+\begin{enumerate}
+\item \textbf{Stability} $S$: the mean cosine similarity over all pairs of
+$T = 15$ explanations of perturbed copies $x + \varepsilon^{(a)}$,
+$\varepsilon^{(a)} \sim \mathcal{N}(0, \sigma^2 I)$, $\sigma = 0.1$, added to
+every encoded feature (scaled numeric and one-hot columns alike), with $S$
+computed on 3 instances per stratum, Eq.~(\ref{eq:stability}):
+\begin{equation}
+S = \frac{2}{T(T-1)}\sum_{1 \le a<b \le T}\cos\!\left(e^{(a)},e^{(b)}\right).
+\label{eq:stability}
+\end{equation}
+The cosine with an all-zero vector is set to 0; such vectors are counted
+and $S$ is also reported without them. Noise on one-hot columns leaves the
+data manifold; Section~\ref{sec:validity_controls} repeats $S$ with
+category-preserving perturbations and without noise.
+\item \textbf{Fidelity} $F$: the Pearson correlation, across the $M$
+features, between $|e_j(x)|$ and the prediction change
+$|f(x) - f(\tilde{x}^{(j)})|$ when feature $j$ alone is masked,
+Eq.~(\ref{eq:fidelity}):
+\begin{equation}
+F = \rho\!\left(\bigl\{|e_j(x)|\bigr\}_{j=1}^{M},\;
+\bigl\{|f(x) - f(\tilde{x}^{(j)})|\bigr\}_{j=1}^{M}\right).
+\label{eq:fidelity}
+\end{equation}
+Absolute values are used because the masked change is unsigned. When
+either vector is constant, $F$ is undefined and set to 0; these cases are
+counted.
+\item \textbf{Faithfulness gap} $G$: the prediction change when the $k = 5$
+features with the largest $|e_j(x)|$ are masked together.
+\item \textbf{Sparsity} $P$: the share of features with
+$|e_j(x)| > 10^{-4}$ (lower is sparser).
+\item \textbf{Cost} $C$: CPU time per explanation and the number of rows
+the explainer passes to the model (Section~\ref{sec:cost_method}).
+\end{enumerate}
+
+\subsection{Statistical Analysis}
+\label{sec:inference}
+
+Instances are nested in seeds and seeds in models, so instance-level
+differences are not independent. For each endpoint and contrast, the
+instance-level differences $\Delta_{gsi}$ of model $g$, seed $s$ and
+instance $i$ are fitted by a linear mixed model
+$\Delta_{gsi} = \mu + u_g + v_{gs} + \epsilon_{gsi}$, with random intercepts
+for the model and for the seed within the model~\cite{bates2015lme4}; $\mu$
+is the effect, reported with its 95\% confidence interval and two-sided
+Wald $p$-value; if the model cannot be fitted, a $t$-test on the cell means
+is used and the case is reported. Because five models are few clusters, the
+interval is checked by a cluster bootstrap that resamples
+models~\cite{field2007bootstrap}. Only instances valid for both explainers
+of a contrast enter it. On the cell-mean differences, the standardized
+paired difference $d_z$~\cite{lakens2013calculating}, the Hodges--Lehmann
+estimate~\cite{hodges1963estimates} and the matched-pairs rank-biserial
+correlation~\cite{kerby2014simple}, the effect size of the Wilcoxon
+signed-rank test~\cite{wilcoxon1945individual}, are reported. The
+confirmatory family is four endpoints ($S$, $F$, $G$ and CPU time) times
+three contrasts; $p$-values are Holm-corrected over these twelve
+tests~\cite{holm1979simple}. The four explainers are ranked on the cell means
+of $S$, $F$ and $G$ by the Friedman test with the Nemenyi critical
+difference~\cite{demsar2006statistical}. The sweep, the controls and the six
+further datasets are exploratory and are reported without tests.
+
+\subsection{Cost Measurement and Computing Environment}
+\label{sec:cost_method}
+
+All runs used one laptop (AMD Ryzen 5 4600H, 6 cores, 31.4 GB RAM,
+Windows 11), Python 3.11 with scikit-learn 1.7.1, XGBoost 3.1.2, SHAP
+0.50.0, LIME 0.2.0.1, alibi 0.9.6 (Anchors) and dice-ml 0.12. Quality was
+computed in parallel worker processes; quality does not depend on speed.
+Cost was measured in a separate pass on a subset (Table~\ref{tab:design}):
+one process with one thread, pinned to one core, on mains power; the
+explainers interleaved per instance, after one warm-up explanation each;
+three repetitions, of which the median is used; and measurements paused
+while any other process used more than 10\% of a core or the machine was
+in use. A wrapper counts every row the explainer passes to the model.
+Rows evaluated, unlike time, transfer to other hardware: multiplied by the
+cost of one model evaluation they give the explainer's cost on any host.
+For logistic regression and the MLP, whose cost per row is known, this is
+also given in floating-point operations.
+
+% -----------------------------------------------------------------------
+\section{Results}
+\label{sec:results}
+% -----------------------------------------------------------------------
+
+\subsection{Primary Benchmark on Adult}
+\label{sec:main}
+
+Table~\ref{tab:paired_main} reports the effects on the 25 Adult cells.
+[R: per contrast, the direction and size of the stability and faithfulness
+effects, and in how many cells the sign holds.] [R: Friedman ranking of
+the four explainers per endpoint.] [R: share of all-zero vectors and of
+undefined fidelity per explainer, and whether excluding them changes any
+effect.] The distribution of the instance-level differences is shown in
+the supplementary file.
+
+\begin{table}[htb]
+\centering
+\caption{Primary benchmark (Adult, 25 cells). Per-method mean levels and
+paired effects $\Delta_X = $ SHAP $- X$: mixed-model estimate with 95\% CI,
+Holm-adjusted $p$, standardized paired difference $d_z$, Hodges--Lehmann
+estimate (HL) and matched rank-biserial correlation $r_{rb}$. Cost: CPU
+ms per explanation}
+\label{tab:paired_main}
+\begin{tabular}{llrrrrrrr}
+\toprule
+Endpoint & $X$ & SHAP & $X$ & $\Delta_X$ [95\% CI] & $p_{\mathrm{Holm}}$ & $d_z$ & HL & $r_{rb}$ \\
+\midrule
+Stability & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
+Fidelity & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
+Faithf.\ gap & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
+Cost & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
+ & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
+\midrule
+Sparsity & all & [R] & [R] & \multicolumn{5}{l}{descriptive} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Cost}
+\label{sec:cost}
+
+Table~\ref{tab:cost} gives the cost per explanation by model family.
+[R: CPU-time ordering by model family; the share of model time in the
+explainer's time.] [R: rows evaluated per explanation: LIME 1,000; KernelSHAP
+about 25,000 (500 coalitions $\times$ 50 background rows); Anchors and DiCE as
+measured.] Earlier runs suggested that TreeSHAP was faster than LIME on
+XGBoost but slower on the random forest, two ensembles of different size.
+Here both have 100 trees, and the comparison is repeated with matched depth and with cost
+plotted against the total number of leaves [R: whether the reversal holds,
+and whether it follows the size of the forest or the implementation].
+
+\begin{table}[htb]
+\centering
+\caption{Cost per explanation on Adult (one host, one core): median CPU time
+and rows evaluated by the model; theoretical complexity per explanation
+($T$ trees, $L$ leaves, $D$ depth; $n_s$ samples or coalitions; $n_b$
+background rows). FLOPs for logistic regression and the MLP in the text}
+\label{tab:cost}
+\begin{tabular}{lllrr}
+\toprule
+Explainer & Model & Complexity & CPU (ms) & Rows evaluated \\
+\midrule
+SHAP (Tree) & RF, XGB & $O(T L D^2)$, no model calls & [R] & 0 \\
+SHAP (Kernel) & logreg, SVM, MLP & $O(n_s n_b)$ rows & [R] & [R] \\
+LIME & all & $O(n_s)$ rows $+$ fit $O(n_s M^2)$ & [R] & [R] \\
+Anchors & all & adaptive (precision target) & [R] & [R] \\
+DiCE & all & iterative search & [R] & [R] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Configuration Sensitivity}
+\label{sec:sweep}
+
+The sweep varied, on Adult for every model and three seeds, LIME's kernel
+width and number of samples, and KernelSHAP's budget and background size;
+KernelSHAP was also run on the two tree ensembles, to separate the method
+from the TreeSHAP implementation. The grid crosses LIME kernel widths of
+0.75, 1.5, 3, 5, 10 and 15 and the default $0.75\sqrt{M}$ with 250 to 5,000
+samples, KernelSHAP budgets of 100 to 1,000 coalitions and the default with
+10 to 100 background rows, and TreeSHAP with 10 to 100 background rows; each
+cell has one instance per stratum, with stability on each. [R: Figure~1 placeholder: Pareto fronts of
+stability, fidelity and cost per model, one panel per model, computed on the
+instances valid under every configuration.] [R: whether the sign of each
+SHAP--LIME difference holds over the grid; the share of degenerate
+explanations at small kernel widths; the effect of the library default
+against the 500-coalition budget.]
+
+\subsection{Validity of the Measurements}
+\label{sec:validity_controls}
+
+Five controls test whether the stability and fidelity measurements measure
+the explainer: (a) explanations of the unperturbed instance repeated $T$
+times, which isolates each explainer's own sampling variance; (b) noise
+that keeps one-hot features valid (a category is resampled instead of adding
+Gaussian noise to its indicators); (c) rank correlation and top-$k$ overlap
+on the full vectors, besides the cosine; (d) the effect of excluding
+all-zero vectors; and (e) the fidelity ordering under four masking schemes
+(zero, mean, marginal and grouped replacement, where associated features
+such as education and its numeric code are masked together) on every model.
+[R: for each control, whether the SHAP--LIME stability and fidelity
+orderings hold, and how much of LIME's instability is its own sampling
+variance.]
+
+\subsection{Other Datasets}
+\label{sec:cross}
+
+Table~\ref{tab:cross} reports the four explainers on the six further
+datasets, now including SHAP stability. [R: whether the Adult orderings
+hold across the $2 \times 2$ of dimension and feature type; where they
+change.]
+
+\begin{table}[htb]
+\centering
+\caption{Other datasets (exploratory): mean $\pm$ SD over 3 seeds, averaged
+over the five models (per model in the supplementary file)}
+\label{tab:cross}
+\begin{tabular}{lcccccccc}
+\toprule
+ & \multicolumn{4}{c}{Stability} & \multicolumn{4}{c}{Fidelity} \\
+Dataset & SHAP & LIME & Anch. & DiCE & SHAP & LIME & Anch. & DiCE \\
+\midrule
+Breast Cancer & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+German Credit & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+Diabetes & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+Spambase & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+Phishing & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+Connect-4 & [R] & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% -----------------------------------------------------------------------
+\section{Discussion}
+\label{sec:discussion}
+% -----------------------------------------------------------------------
+
+\subsection{What Holds, and Where}
+
+Table~\ref{tab:holds} states each claim with its evidence and its scope.
+Confirmatory claims rest on the primary benchmark and its corrected tests;
+exploratory claims rest on the sweep, the controls and the further
+datasets, and are reported as patterns, not as tested effects. [R: two or
+three sentences on the main pattern, including the conditions under which an
+ordering changes.]
+
+\begin{table}[htb]
+\centering
+\caption{What holds, where, and under which configuration}
+\label{tab:holds}
+\begin{tabularx}{\linewidth}{p{3.0cm} p{2.0cm} X}
+\toprule
+\textbf{Claim} & \textbf{Status} & \textbf{Scope} \\
+\midrule
+SHAP more stable than $X$ & confirmatory & [R] \\
+SHAP more faithful than $X$ & confirmatory & [R] \\
+SHAP more expensive than $X$ & confirmatory & [R] \\
+Orderings over the configuration grid & exploratory & [R] \\
+Orderings on other datasets & exploratory & [R] \\
+TreeSHAP vs LIME cost by ensemble & exploratory & [R] \\
+Usefulness for people & not tested & no participant study \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The recommendations are restricted to what was tested. [R: where SHAP is
+preferable on faithfulness and stability and at what cost; where a cheaper
+explainer suffices; which configuration choices a practitioner should check
+before relying on either rule.]
+
+\subsection{Relation to Earlier Work}
+
+Earlier comparisons of SHAP and LIME, including a multi-metric benchmark on
+Adult~\cite{herrera2026framework}, reported SHAP ahead on fidelity and
+stability and LIME ahead on cost, for one configuration and with timings
+from unrecorded hardware. This study differs in four respects: all four
+explainers are paired on the same instances; every run uses one recorded
+host and cost is also counted in model evaluations; the configuration is
+varied and the measurement is tested; and the results extend to six further
+datasets. [R: which earlier statements are confirmed, qualified or
+reversed.]
+
+\subsection{Limitations}
+\label{sec:validity}
+
+The endpoints compare explainers under a protocol; they do not establish
+that an explanation is correct, which needs ground truth or
+human-centered evaluation~\cite{haufe2026formalization},
+and attribution methods can mark suppressor variables as important when
+features are dependent~\cite{clark2024xaitris}.
+Anchors and DiCE vectors encode which features an explanation uses, not
+signed contributions. Cost was measured on one host; times scale with the
+hardware, rows evaluated do not. The study covers tabular binary
+classification with five model families and seven datasets.
+
+% -----------------------------------------------------------------------
+\section{Conclusions}
+\label{sec:conclusion}
+% -----------------------------------------------------------------------
+
+[R: two to three sentences that restate only results of
+Table~\ref{tab:paired_main} and Table~\ref{tab:holds}: the confirmatory
+orderings with effect sizes, the cost in rows evaluated, and the conditions
+under which an ordering changes.] The choice of explainer depends on the
+model architecture, the configuration and the latency budget, and a ranking
+obtained under one configuration should not be transferred to another
+without measuring it. Whether any of these explainers helps people decide
+is a separate question that needs a study with participants.
+
+% The acknowledgment is on the separate title page (masked review).
+
+\section*{Competing Interests}
+
+No competing financial interests or personal relationships that could have
+appeared to influence the work reported in this paper are declared. No
+external funding was received for this study.
+
+\section*{Data and Code Availability}
+\label{sec:artifacts}
+
+The code, the frozen models with their hashes, every result row and the
+analysis scripts are available in a public repository and a versioned
+archive with a DOI, under the MIT License; their addresses are withheld for
+masked review and are given on the title page. A supplementary file lists
+the design, the hyperparameters, the per-dataset and per-model results and
+the commands that regenerate every table from the result rows.
+
+\begin{thebibliography}{99}
+
+\bibitem{ribeiro2016why}
+Ribeiro MT, Singh S, Guestrin C. ``Why should I trust you?'': Explaining the
+predictions of any classifier. In: Proceedings of the 22nd ACM SIGKDD
+International Conference on Knowledge Discovery and Data Mining; 2016.
+p. 1135--1144. \url{https://doi.org/10.1145/2939672.2939778}
+
+\bibitem{lundberg2017unified}
+Lundberg SM, Lee SI. A unified approach to interpreting model predictions.
+In: Advances in Neural Information Processing Systems 30; 2017. p. 4765--4774.
+
+\bibitem{retzlaff2024posthoc}
+Retzlaff CO, Angerschmid A, Saranti A, Schneeberger D, R\"{o}ttger R,
+M\"{u}ller H, et al. Post-hoc vs ante-hoc explanations: xAI design guidelines
+for data scientists. Cognitive Systems Research. 2024;86:101243.
+\url{https://doi.org/10.1016/j.cogsys.2024.101243}
+
+\bibitem{nauta2023anecdotal}
+Nauta M, Trienes J, Pathak S, Nguyen E, Peters M, Schmitt Y, et al. From
+anecdotal evidence to quantitative evaluation methods: A systematic review on
+evaluating explainability. ACM Computing Surveys. 2023;55(13s):1--42.
+\url{https://doi.org/10.1145/3583558}
+
+\bibitem{canha2025benchmark}
+Canha D, Kubler S, Fr\"{a}mling K, Fagherazzi G. A functionally-grounded
+benchmark framework for XAI methods: Insights and foundations from a
+systematic literature review. ACM Computing Surveys. 2025;57(12):1--40.
+\url{https://doi.org/10.1145/3737445}
+
+\bibitem{longo2024manifesto}
+Longo L, Brcic M, Cabitza F, Choi J, Confalonieri R, Del Ser J, et al.
+Explainable artificial intelligence (XAI) 2.0: A manifesto of open challenges
+and interdisciplinary research directions. Information Fusion.
+2024;106:102301. \url{https://doi.org/10.1016/j.inffus.2024.102301}
+
+\bibitem{pawlicki2024metrics}
+Pawlicki M, Pawlicka A, Uccello F, Szelest S, D'Antonio S, Kozik R, et al.
+Evaluating the necessity of the multiple metrics for assessing explainable
+AI: A critical examination. Neurocomputing. 2024;602:128282.
+\url{https://doi.org/10.1016/j.neucom.2024.128282}
+
+\bibitem{zheng2025ffidelity}
+Zheng X, Shirani F, Chen Z, Lin C, Cheng W, Guo W, et al. F-Fidelity: A
+robust framework for faithfulness evaluation of explainable AI. In: The 13th
+International Conference on Learning Representations (ICLR); 2025.
+\url{https://openreview.net/forum?id=X0r4BN50Dv}
+
+\bibitem{herrera2026framework}
+Herrera-V\'asquez J, Herrero-Uceda M. A framework for rigorous evaluation of
+model-agnostic explainability methods: multi-metric statistical benchmarking,
+operational protocol, and reproducibility. Revista de Investigaci\'on
+Multidisciplinaria Iberoamericana (RIMI). 2026;(3).
+\url{https://doi.org/10.69850/rimi.vi3.307}
+
+\bibitem{bhatt2020evaluating}
+Bhatt U, Weller A, Moura JMF. Evaluating and aggregating feature-based model
+explanations. In: Proceedings of the 29th International Joint Conference on
+Artificial Intelligence (IJCAI); 2020. p. 3016--3022.
+\url{https://doi.org/10.24963/ijcai.2020/417}
+
+\bibitem{samek2017evaluating}
+Samek W, Binder A, Montavon G, Lapuschkin S, M\"{u}ller KR. Evaluating the
+visualization of what a deep neural network has learned. IEEE Transactions on
+Neural Networks and Learning Systems. 2017;28(11):2660--2673.
+\url{https://doi.org/10.1109/TNNLS.2016.2599820}
+
+\bibitem{alvarezmelis2018robustness}
+Alvarez-Melis D, Jaakkola TS. On the robustness of interpretability methods.
+In: ICML Workshop on Human Interpretability in Machine Learning (WHI 2018);
+2018. \url{https://arxiv.org/abs/1806.08049}
+
+\bibitem{hedstrom2023quantus}
+Hedstrom A, Weber L, Bareeva D, Krakowczyk D, Motzkus F, Samek W, et al.
+Quantus: An explainable AI toolkit for responsible evaluation of neural
+network explanations and beyond. Journal of Machine Learning Research.
+2023;24:1--11. \url{https://jmlr.org/papers/v24/22-0142.html}
+
+\bibitem{agarwal2022openxai}
+Agarwal C, Ley D, Krishna S, Saxena E, Pawelczyk M, Johnson N, et al.
+OpenXAI: Towards a transparent evaluation of model explanations. In: 36th
+Conference on Neural Information Processing Systems, Datasets and Benchmarks
+Track; 2022. \url{https://openreview.net/forum?id=MU2495w47rz}
+
+\bibitem{adebayo2018sanity}
+Adebayo J, Gilmer J, Muelly M, Goodfellow I, Hardt M, Kim B. Sanity checks
+for saliency maps. In: Advances in Neural Information Processing Systems 31;
+2018. p. 9525--9536.
+
+\bibitem{kohavi1996scaling}
+Kohavi R. Scaling up the accuracy of Naive-Bayes classifiers: A
+decision-tree hybrid. In: Proceedings of the 2nd International Conference on
+Knowledge Discovery and Data Mining; 1996. p. 202--207.
+
+\bibitem{becker1996adult}
+Becker B, Kohavi R. Adult [dataset]. UCI Machine Learning Repository; 1996.
+\url{https://doi.org/10.24432/C5XW20}
+
+\bibitem{breiman2001random}
+Breiman L. Random forests. Machine Learning. 2001;45(1):5--32.
+\url{https://doi.org/10.1023/A:1010933404324}
+
+\bibitem{chen2016xgboost}
+Chen T, Guestrin C. XGBoost: A scalable tree boosting system. In: Proceedings
+of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and
+Data Mining; 2016. p. 785--794.
+\url{https://doi.org/10.1145/2939672.2939785}
+
+\bibitem{demsar2006statistical}
+Dem\v{s}ar J. Statistical comparisons of classifiers over multiple data
+sets. Journal of Machine Learning Research. 2006;7:1--30.
+\url{https://jmlr.org/papers/v7/demsar06a.html}
+
+\bibitem{wilcoxon1945individual}
+Wilcoxon F. Individual comparisons by ranking methods. Biometrics Bulletin.
+1945;1(6):80--83. \url{https://doi.org/10.2307/3001968}
+
+\bibitem{lakens2013calculating}
+Lakens D. Calculating and reporting effect sizes to facilitate cumulative
+science: A practical primer for t-tests and ANOVAs. Frontiers in Psychology.
+2013;4:863. \url{https://doi.org/10.3389/fpsyg.2013.00863}
+
+\bibitem{holm1979simple}
+Holm S. A simple sequentially rejective multiple test procedure.
+Scandinavian Journal of Statistics. 1979;6(2):65--70.
+
+\bibitem{ribeiro2018anchors}
+Ribeiro MT, Singh S, Guestrin C. Anchors: High-precision model-agnostic
+explanations. In: Proceedings of the 32nd AAAI Conference on Artificial
+Intelligence; 2018. p. 1527--1535.
+\url{https://doi.org/10.1609/aaai.v32i1.11491}
+
+\bibitem{mothilal2020dice}
+Mothilal RK, Sharma A, Tan C. Explaining machine learning classifiers through
+diverse counterfactual explanations. In: Proceedings of the 2020 Conference
+on Fairness, Accountability, and Transparency; 2020. p. 607--617.
+\url{https://doi.org/10.1145/3351095.3372850}
+
+\bibitem{dua2019uci}
+Dua D, Graff C. UCI Machine Learning Repository. Irvine (CA): University of
+California, School of Information and Computer Science; 2019.
+\url{http://archive.ics.uci.edu/ml}
+
+\bibitem{wolberg1993breast}
+Wolberg W, Mangasarian O, Street N, Street W. Breast cancer Wisconsin
+(diagnostic) [dataset]. UCI Machine Learning Repository; 1993.
+\url{https://doi.org/10.24432/C5DW2B}
+
+\bibitem{hofmann1994statlog}
+Hofmann H. Statlog (German credit data) [dataset]. UCI Machine Learning
+Repository; 1994. \url{https://doi.org/10.24432/C5NC77}
+
+\bibitem{haufe2026formalization}
+Haufe S, Wilming R, Clark B, Zhumagambetov R, Boubekki A, Martin J, et al.
+Explainable AI needs formalization. npj Artificial Intelligence. 2026;2:42.
+\url{https://doi.org/10.1038/s44387-026-00095-1}
+
+% --- Added in revision 1 (P-11). WP8 verifies every entry and DOI before submission.
+
+\bibitem{bates2015lme4}
+Bates D, M\"{a}chler M, Bolker B, Walker S. Fitting linear mixed-effects
+models using lme4. Journal of Statistical Software. 2015;67(1):1--48.
+\url{https://doi.org/10.18637/jss.v067.i01}
+
+\bibitem{field2007bootstrap}
+Field CA, Welsh AH. Bootstrapping clustered data. Journal of the Royal
+Statistical Society: Series B. 2007;69(3):369--390.
+\url{https://doi.org/10.1111/j.1467-9868.2007.00593.x}
+
+\bibitem{hodges1963estimates}
+Hodges JL, Lehmann EL. Estimates of location based on rank tests. The Annals
+of Mathematical Statistics. 1963;34(2):598--611.
+\url{https://doi.org/10.1214/aoms/1177704172}
+
+\bibitem{kerby2014simple}
+Kerby DS. The simple difference formula: An approach to teaching
+nonparametric correlation. Comprehensive Psychology. 2014;3:11.IT.3.1.
+\url{https://doi.org/10.2466/11.IT.3.1}
+
+% --- Added in revision 1 (WP8, 2026-11-06). Every entry checked against Crossref or
+% DataCite (title, authors, venue, volume, pages, DOI); PubMed Central for Smith 1988.
+
+\bibitem{hooshyar2024problems}
+Hooshyar D, Yang Y. Problems with SHAP and LIME in interpretable AI for
+education: A comparative study of post-hoc explanations and neural-symbolic
+rule extraction. IEEE Access. 2024;12:137472--137490.
+\url{https://doi.org/10.1109/ACCESS.2024.3463948}
+
+\bibitem{schulte2024studying}
+Schulte L, Ledel B, Herbold S. Studying the explanations for the automated
+prediction of bug and non-bug issues using LIME and SHAP. Empirical Software
+Engineering. 2024;29(4):93. \url{https://doi.org/10.1007/s10664-024-10469-1}
+
+\bibitem{lazar2026beyond}
+Lazar A, Pokhrel P, Das S. Beyond accuracy: A comprehensive comparative study
+of gradient boosting versus tabular deep learning and explainability techniques
+for mixed-type tabular data models using SHAP and LIME. International Journal
+on Artificial Intelligence Tools. 2026;35(2):2640003.
+\url{https://doi.org/10.1142/S0218213026400038}
+
+\bibitem{ababneh2026faithfulness}
+Ababneh M, Aljarrah A. Faithfulness and stability of black box explanations
+for tabular and image classifiers. Big Data and Cognitive Computing.
+2026;10(11):362. \url{https://doi.org/10.3390/bdcc10110362}
+
+\bibitem{salih2025perspective}
+Salih AM, Raisi-Estabragh Z, Galazzo IB, Radeva P, Petersen SE, Lekadir K, et
+al. A perspective on explainable artificial intelligence methods: SHAP and
+LIME. Advanced Intelligent Systems. 2025;7(1):2400304.
+\url{https://doi.org/10.1002/aisy.202400304}
+
+\bibitem{mersha2024survey}
+Mersha M, Lam K, Wood J, AlShami AK, Kalita J. Explainable artificial
+intelligence: A survey of needs, techniques, applications, and future
+direction. Neurocomputing. 2024;599:128111.
+\url{https://doi.org/10.1016/j.neucom.2024.128111}
+
+\bibitem{velmurugan2025guidelines}
+Velmurugan M, Ouyang C, Xu Y, Sindhgatta R, Wickramanayake B, Moreira C.
+Developing guidelines for functionally-grounded evaluation of explainable
+artificial intelligence using tabular data. Engineering Applications of
+Artificial Intelligence. 2025;141:109772.
+\url{https://doi.org/10.1016/j.engappai.2024.109772}
+
+\bibitem{moiseev2025benchmark}
+Moiseev I, Balabaeva K, Kovalchuk S. Open and extensible benchmark for
+explainable artificial intelligence methods. Algorithms. 2025;18(2):85.
+\url{https://doi.org/10.3390/a18020085}
+
+\bibitem{olsen2024comparative}
+Olsen LHB, Glad IK, Jullum M, Aas K. A comparative study of methods for
+estimating model-agnostic Shapley value explanations. Data Mining and
+Knowledge Discovery. 2024;38(4):1782--1829.
+\url{https://doi.org/10.1007/s10618-024-01016-z}
+
+\bibitem{kapoor2024reforms}
+Kapoor S, Cantrell EM, Peng K, et al. REFORMS: Consensus-based
+recommendations for machine-learning-based science. Science Advances.
+2024;10(18):eadk3452.
+\url{https://doi.org/10.1126/sciadv.adk3452}
+
+\bibitem{saadatfar2024uslime}
+Saadatfar H, Kiani-Zadegan Z, Ghahremani-Nezhad B. US-LIME: Increasing
+fidelity in LIME using uncertainty sampling on tabular data. Neurocomputing.
+2024;597:127969. \url{https://doi.org/10.1016/j.neucom.2024.127969}
+
+\bibitem{brughmans2024disagreement}
+Brughmans D, Melis L, Martens D. Disagreement amongst counterfactual
+explanations: How transparency can be misleading. TOP. 2024;32(3):429--462.
+\url{https://doi.org/10.1007/s11750-024-00670-2}
+
+\bibitem{baniecki2024adversarial}
+Baniecki H, Biecek P. Adversarial attacks and defenses in explainable
+artificial intelligence: A survey. Information Fusion. 2024;107:102303.
+\url{https://doi.org/10.1016/j.inffus.2024.102303}
+
+\bibitem{huang2024failings}
+Huang X, Marques-Silva J. On the failings of Shapley values for
+explainability. International Journal of Approximate Reasoning.
+2024;171:109112. \url{https://doi.org/10.1016/j.ijar.2023.109112}
+
+\bibitem{bilodeau2024impossibility}
+Bilodeau B, Jaques N, Koh PW, Kim B. Impossibility theorems for feature
+attribution. Proceedings of the National Academy of Sciences.
+2024;121(2):e2304406120. \url{https://doi.org/10.1073/pnas.2304406120}
+
+\bibitem{clark2024xaitris}
+Clark B, Wilming R, Haufe S. XAI-TRIS: Non-linear image benchmarks to quantify
+false positive post-hoc attribution of feature importance. Machine Learning.
+2024;113(9):6871--6910. \url{https://doi.org/10.1007/s10994-024-06574-3}
+
+\bibitem{smith1988adap}
+Smith JW, Everhart JE, Dickson WC, Knowler WC, Johannes RS. Using the ADAP
+learning algorithm to forecast the onset of diabetes mellitus. In: Proceedings
+of the Annual Symposium on Computer Application in Medical Care; 1988.
+p. 261--265.
+
+\bibitem{hopkins1999spambase}
+Hopkins M, Reeber E. Spambase [dataset]. UCI Machine
+Learning Repository; 1999. \url{https://doi.org/10.24432/C53G6X}
+
+\bibitem{mohammad2012phishing}
+Mohammad R, McCluskey L. Phishing websites [dataset]. UCI Machine Learning
+Repository; 2012. \url{https://doi.org/10.24432/C51W2X}
+
+\bibitem{tromp1995connect4}
+Tromp J. Connect-4 [dataset]. UCI Machine Learning Repository; 1995.
+\url{https://doi.org/10.24432/C59P43}
+
+\end{thebibliography}
+
+\end{document}

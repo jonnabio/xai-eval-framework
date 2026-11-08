@@ -731,10 +731,29 @@ def check_masked(docx: Path) -> None:
         sys.exit(f"{docx.name}: the masked manuscript carries author data: {found}")
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    global SOURCE, OUT, NAME, ABSTRACT, KEYWORDS
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--no-pdf", action="store_true", help="do not open Word")
-    args = ap.parse_args()
+    # Added 2026-11-06 for revision 1; the defaults rebuild the submitted edition unchanged.
+    ap.add_argument("--source", type=Path, help="LaTeX source (default: paper_b_ci.tex)")
+    ap.add_argument("--out", type=Path, help="output directory (default: submission/)")
+    ap.add_argument("--name", help="file name stem (default: paper_b_ci)")
+    ap.add_argument("--abstract", type=Path, help="abstract fragment (default: the submitted one)")
+    ap.add_argument("--keywords", type=Path, help="keywords fragment (default: the submitted one)")
+    ap.add_argument("--manuscript-only", action="store_true",
+                    help="build the manuscript only (no title page, no cover letter)")
+    args = ap.parse_args(argv)
+    if args.source:
+        SOURCE = args.source.resolve()
+    if args.out:
+        OUT = args.out.resolve()
+    if args.name:
+        NAME = args.name
+    if args.abstract:
+        ABSTRACT = args.abstract.resolve()
+    if args.keywords:
+        KEYWORDS = args.keywords.resolve()
     for f in (TEMPLATE, TITLE_TEMPLATE, LETTER_TEMPLATE):
         if not f.exists():
             sys.exit(f"{f.relative_to(ROOT)} is missing; download it from the journal site "
@@ -745,9 +764,11 @@ def main() -> int:
     tex = SOURCE.read_text(encoding="utf-8")
     manuscript = build_manuscript(tex)
     check_masked(manuscript)
-    built = [(manuscript, ""), (build_title_page(tex), AUTHOR), (build_cover_letter(tex), AUTHOR)]
+    built = [(manuscript, "")]
+    if not args.manuscript_only:
+        built += [(build_title_page(tex), AUTHOR), (build_cover_letter(tex), AUTHOR)]
     for docx, creator in built:
-        line = f"docx  {docx.relative_to(ROOT)}"
+        line = f"docx  {docx}"
         if not args.no_pdf:
             line += f" ({word_pass(docx, title_of(tex), creator)})"
         print(line)
