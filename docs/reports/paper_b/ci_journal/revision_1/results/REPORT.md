@@ -9,22 +9,34 @@
 
 | endpoint | contrast | confirmatory | n_cells | mean_shap | mean_x | estimate | ci_lo | ci_hi | boot_lo | boot_hi | p_holm | d_z | hl | r_rb | cells_positive | method |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| stability | shap-lime_full | True | 25 | 0.7367 | 0.5559 | 0.1808 | -0.009963 | 0.3717 | -0.007574 | 0.3392 | 0.1897 | 0.8889 | 0.184 | 0.7723 | 19 | mixedlm |
-| stability | shap-anchors | True | 25 | 0.7366 | 0.634 | 0.1024 | -0.07809 | 0.283 | -0.1077 | 0.2638 | 0.2661 | 0.4475 | 0.1455 | 0.4031 | 19 | mixedlm |
-| stability | shap-dice | True | 25 | 0.7367 | 0.3974 | 0.3393 | 0.136 | 0.5426 | 0.1532 | 0.4977 | 0.005982 | 1.629 | 0.3362 | 0.9754 | 24 | mixedlm |
+| stability | shap-lime_full | True | 25 | 0.7367 | 0.5559 | 0.1808 | -0.009963 | 0.3717 | -0.007574 | 0.3392 | 0.2529 | 0.8889 | 0.184 | 0.7723 | 19 | mixedlm |
+| stability | shap-anchors | True | 25 | 0.7366 | 0.634 | 0.1024 | -0.07809 | 0.283 | -0.1077 | 0.2638 | 0.3123 | 0.4475 | 0.1455 | 0.4031 | 19 | mixedlm |
+| stability | shap-dice | True | 25 | 0.7367 | 0.3974 | 0.3393 | 0.136 | 0.5426 | 0.1532 | 0.4977 | 0.007976 | 1.629 | 0.3362 | 0.9754 | 24 | mixedlm |
 | stability | shap-lime | False | 25 | 0.7367 | 0.3283 | 0.4085 | 0.2467 | 0.5702 | 0.2509 | 0.5368 |  | 2.388 | 0.4206 | 1 | 25 | mixedlm |
-| fidelity | shap-lime_full | True | 25 | 0.8308 | 0.4464 | 0.3843 | 0.2245 | 0.5441 | 0.2781 | 0.4701 | 1.698e-05 | 3.287 | 0.4019 | 1 | 25 | mixedlm |
-| fidelity | shap-anchors | True | 25 | 0.8307 | 0.4116 | 0.4192 | 0.2534 | 0.5849 | 0.395 | 0.439 | 5.709e-06 | 11.79 | 0.4213 | 1 | 25 | mixedlm |
-| fidelity | shap-dice | True | 25 | 0.8308 | 0.182 | 0.6488 | 0.4396 | 0.858 | 0.5437 | 0.7291 | 1.096e-08 | 5.83 | 0.6691 | 1 | 25 | mixedlm |
+| fidelity | shap-lime_full | True | 25 | 0.8308 | 0.4464 | 0.3843 | 0.2245 | 0.5441 | 0.2781 | 0.4701 | 2.184e-05 | 3.287 | 0.4019 | 1 | 25 | mixedlm |
+| fidelity | shap-anchors | True | 25 | 0.8307 | 0.4116 | 0.4192 | 0.2534 | 0.5849 | 0.395 | 0.439 | 7.136e-06 | 11.79 | 0.4213 | 1 | 25 | mixedlm |
+| fidelity | shap-dice | True | 25 | 0.8308 | 0.182 | 0.6488 | 0.4396 | 0.858 | 0.5437 | 0.7291 | 1.461e-08 | 5.83 | 0.6691 | 1 | 25 | mixedlm |
 | fidelity | shap-lime | False | 25 | 0.8308 | 0.5165 | 0.3143 | 0.1528 | 0.4758 | 0.2206 | 0.3986 |  | 2.935 | 0.321 | 1 | 25 | mixedlm |
-| faithfulness_gap | shap-lime_full | True | 25 | 0.3955 | 0.2641 | 0.1315 | 0.05141 | 0.2115 | 0.05685 | 0.2208 | 0.005982 | 1.332 | 0.1169 | 1 | 25 | mixedlm |
-| faithfulness_gap | shap-anchors | True | 25 | 0.3955 | 0.2346 | 0.1609 | -0.0126 | 0.3344 | 0.1015 | 0.2204 | 0.1897 | 2.192 | 0.1598 | 1 | 25 | mixedlm |
-| faithfulness_gap | shap-dice | True | 25 | 0.3955 | 0.08095 | 0.3146 | 0.1273 | 0.5019 | 0.2765 | 0.3809 | 0.005982 | 4.476 | 0.2897 | 1 | 25 | mixedlm |
+| faithfulness_gap | shap-lime_full | True | 25 | 0.3955 | 0.2641 | 0.1315 | 0.05141 | 0.2115 | 0.05685 | 0.2208 | 0.007976 | 1.332 | 0.1169 | 1 | 25 | mixedlm |
+| faithfulness_gap | shap-anchors | True | 25 | 0.3955 | 0.2346 | 0.1609 | -0.0126 | 0.3344 | 0.1015 | 0.2204 | 0.2529 | 2.192 | 0.1598 | 1 | 25 | mixedlm |
+| faithfulness_gap | shap-dice | True | 25 | 0.3955 | 0.08095 | 0.3146 | 0.1273 | 0.5019 | 0.2765 | 0.3809 | 0.007976 | 4.476 | 0.2897 | 1 | 25 | mixedlm |
 | faithfulness_gap | shap-lime | False | 25 | 0.3955 | 0.3043 | 0.09122 | -0.03427 | 0.2167 | 0.04225 | 0.143 |  | 1.455 | 0.09033 | 0.9938 | 24 | mixedlm |
 | sparsity | shap-lime_full | False | 25 | 0.2151 | 0.9814 | -0.7663 | -0.8761 | -0.6566 | -0.8905 | -0.6238 |  | -4.862 | -0.7586 | -1 | 0 | mixedlm |
 | sparsity | shap-anchors | False | 25 | 0.2151 | 0.06383 | 0.1513 | 0.03199 | 0.2705 | 0.01643 | 0.3036 |  | 0.9078 | 0.1721 | 0.8708 | 20 | mixedlm |
 | sparsity | shap-dice | False | 25 | 0.2151 | 0.01677 | 0.1983 | -0.1512 | 0.5478 | 0.07669 | 0.335 |  | 1.289 | 0.2101 | 1 | 25 | mixedlm |
 | sparsity | shap-lime | False | 25 | 0.2151 | 0.09193 | 0.1232 | -0.03062 | 0.2769 | 0.0006148 | 0.2614 |  | 0.7936 | 0.1343 | 1 | 21 | mixedlm |
+| wall_ms | shap-lime_full | True | 25 | 3925 | 169.6 | 3756 | 560.9 | 6950 | -0.3456 | 1.124e+04 | 0.1061 | 0.4916 | 21.83 | 0.7477 | 19 | mixedlm |
+| wall_ms | shap-anchors | True | 25 | 3925 | 9283 | -5357 | -7208 | -3507 | -7854 | -2861 | 1.522e-07 | -1.272 | -4887 | -1 | 0 | mixedlm |
+| wall_ms | shap-dice | True | 25 | 3925 | 1408 | 2517 | -961.5 | 5995 | -1094 | 9702 | 0.3123 | 0.3433 | -1056 | -0.2923 | 5 | mixedlm |
+| wall_ms | shap-lime | False | 25 | 3925 | 167.9 | 3757 | 543.7 | 6971 | 1.42 | 1.125e+04 |  | 0.4918 | 23.55 | 0.7538 | 20 | mixedlm |
+| cpu_ms | shap-lime_full | False | 25 | 3895 | 169.9 | 3726 | -3558 | 1.101e+04 | -2.094 | 1.116e+04 |  | 0.4912 | 19.92 | 0.76 | 18 | mixedlm |
+| cpu_ms | shap-anchors | False | 25 | 3895 | 9209 | -5314 | -8156 | -2471 | -7789 | -2838 |  | -1.27 | -4853 | -1 | 0 | mixedlm |
+| cpu_ms | shap-dice | False | 25 | 3895 | 1399 | 2496 | -414.6 | 5407 | -1088 | 9631 |  | 0.343 | -1051 | -0.2923 | 5 | mixedlm |
+| cpu_ms | shap-lime | False | 25 | 3895 | 167.5 | 4002 | -6.755e+08 | 6.755e+08 | -0.625 | 1.116e+04 |  | 0.4916 | 23.44 | 0.7538 | 20 | mixedlm |
+| rows | shap-lime_full | False | 25 | 1.5e+04 | 1000 | 1.156e+04 | 1.041e+04 | 1.271e+04 | 4000 | 2.4e+04 |  | 1.12 | 1.15e+04 | 0.6615 | 15 | mixedlm |
+| rows | shap-anchors | False | 25 | 1.5e+04 | 3e+04 | -1.5e+04 | -5.527e+04 | 2.526e+04 | -2.977e+04 | -241.9 |  | -0.7407 | -1.334e+04 | -0.781 | 5 | mixedlm |
+| rows | shap-dice | False | 25 | 1.5e+04 | 2043 | 1.296e+04 | 7048 | 1.887e+04 | 2930 | 2.298e+04 |  | 1.034 | 1.05e+04 | 0.6615 | 15 | mixedlm |
+| rows | shap-lime | False | 25 | 1.5e+04 | 1000 | 1.156e+04 | 1.041e+04 | 1.271e+04 | 4000 | 2.4e+04 |  | 1.12 | 1.15e+04 | 0.6615 | 15 | mixedlm |
 
 ## Friedman / Nemenyi (Adult, cell means; rank 1 = highest)
 
@@ -111,4 +123,45 @@
 
 ## Table 3: cost
 
-_(no data yet)_
+| dataset | model | explainer | cpu_ms_median | wall_ms_median | rows_median | calls_median | n |
+|---|---|---|---|---|---|---|---|
+| adult | logreg | anchors | 742.2 | 748.9 | 5501 | 56 | 100 |
+| adult | logreg | dice | 1062 | 1064 | 2004 | 6 | 100 |
+| adult | logreg | lime | 15.62 | 7.806 | 1000 | 1 | 100 |
+| adult | logreg | lime_full | 15.62 | 9.443 | 1000 | 1 | 100 |
+| adult | logreg | shap | 31.25 | 29.62 | 2.5e+04 | 2 | 100 |
+| adult | mlp | anchors | 2750 | 2776 | 2.32e+04 | 233 | 100 |
+| adult | mlp | dice | 1094 | 1094 | 2004 | 6 | 100 |
+| adult | mlp | lime | 15.62 | 9.167 | 1000 | 1 | 100 |
+| adult | mlp | lime_full | 15.62 | 11.03 | 1000 | 1 | 100 |
+| adult | mlp | shap | 46.88 | 52.17 | 2.5e+04 | 2 | 100 |
+| adult | rf | anchors | 1320 | 1323 | 6551 | 66.5 | 100 |
+| adult | rf | dice | 1109 | 1107 | 2004 | 6 | 100 |
+| adult | rf | lime | 15.62 | 20.5 | 1000 | 1 | 100 |
+| adult | rf | lime_full | 15.62 | 22.29 | 1000 | 1 | 100 |
+| adult | rf | shap | 15.62 | 23 | 0 | 0 | 100 |
+| adult | svm | anchors | 5617 | 5640 | 6351 | 64.5 | 100 |
+| adult | svm | dice | 2609 | 2627 | 2004 | 6 | 100 |
+| adult | svm | lime | 781.2 | 788.5 | 1000 | 1 | 100 |
+| adult | svm | lime_full | 781.2 | 786.2 | 1000 | 1 | 100 |
+| adult | svm | shap | 1.936e+04 | 1.949e+04 | 2.5e+04 | 2 | 100 |
+| adult | xgb | anchors | 921.9 | 918.8 | 0 | 0 | 100 |
+| adult | xgb | dice | 1094 | 1107 | 2004 | 6 | 100 |
+| adult | xgb | lime | 15.62 | 11.46 | 1000 | 1 | 100 |
+| adult | xgb | lime_full | 15.62 | 13.33 | 1000 | 1 | 100 |
+| adult | xgb | shap | 0 | 1.429 | 0 | 0 | 100 |
+| breast_cancer | logreg | anchors | 1523 | 1534 | 6.4e+04 | 641 | 36 |
+| breast_cancer | logreg | dice | 234.4 | 228.4 | 2004 | 6 | 36 |
+| breast_cancer | logreg | lime | 0 | 3.815 | 1000 | 1 | 36 |
+| breast_cancer | logreg | lime_full | 0 | 3.756 | 1000 | 1 | 36 |
+| breast_cancer | logreg | shap | 15.62 | 18.04 | 2.5e+04 | 2 | 36 |
+| breast_cancer | rf | anchors | 5328 | 5367 | 8.65e+04 | 866 | 45 |
+| breast_cancer | rf | dice | 296.9 | 294.9 | 2004 | 6 | 45 |
+| breast_cancer | rf | lime | 15.62 | 10.97 | 1000 | 1 | 45 |
+| breast_cancer | rf | lime_full | 15.62 | 11.09 | 1000 | 1 | 45 |
+| breast_cancer | rf | shap | 0 | 2.632 | 0 | 0 | 45 |
+| breast_cancer | xgb | anchors | 2000 | 2021 | 0 | 0 | 33 |
+| breast_cancer | xgb | dice | 250 | 250.2 | 2004 | 6 | 34 |
+| breast_cancer | xgb | lime | 0 | 5.421 | 1000 | 1 | 33 |
+| breast_cancer | xgb | lime_full | 0 | 5.574 | 1000 | 1 | 33 |
+| breast_cancer | xgb | shap | 0 | 0.6831 | 0 | 0 | 34 |
