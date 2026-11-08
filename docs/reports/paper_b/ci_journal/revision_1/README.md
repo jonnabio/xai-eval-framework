@@ -51,6 +51,14 @@ marked (the submitted `.docx` carries invisible zero-width spaces from its own W
 .venv/Scripts/python.exe docs/reports/paper_b/ci_journal/revision_1/scripts/check_revision.py --final   # before upload
 ```
 
+## Mandatory before submission
+
+1. **Length review (author, 2026-11-08).** The manuscript is 13 pages after C-042 (only
+   references spill onto page 13). The author decides on the length once every result is in;
+   do not trim before then, and do not submit before this review is done.
+2. Every [R] marker filled; `check_revision.py --final` passes.
+3. Abstract within 150-200 words after the last fill.
+
 ## Rule for every edit
 
 1. Edit `manuscript/paper_b_ci_rev1.tex` (or the revision's abstract fragment).

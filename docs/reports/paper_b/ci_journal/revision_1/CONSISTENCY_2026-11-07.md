@@ -112,3 +112,7 @@ Sources of the missing values:
 Closed: ED-1, R1-2, R1-4, R1-5, R1-7, R1-8, R1-11, R1-M2, R1-M8, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-4, R2-5, R2-6, R2-7, R2-8 (27 items).
 
 Count of pending items by source: Q 6, T 7, S 14, V 7, M 2, X 1, A 3.
+
+## Mandatory before submission
+
+- Length review by the author once every result is in (13 pages after C-042; only references spill onto page 13). Do not trim before then; do not submit without it (author, 2026-11-08).
