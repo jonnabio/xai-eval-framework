@@ -7,7 +7,7 @@ Checked on 2026-11-08 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (43 of 43) |
+| Every ledger change is in the manuscript at the place it names | yes (44 of 44) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -69,6 +69,7 @@ not answered).
 | C-040 | — | §3.2, §4.1, Table 2, §4.5, Table 4, §6, Abstract | ED-1, R1-6, R1-7, R1-10, R1-M1, R1-M10, R1-M14, R1-m1, R1-m5, R1-m8, R1-m11, R1-m15, R2-3, R2-5, R2-6 | filled from the quality pass |
 | C-041 | — | Table 4 | R1-m11 | done |
 | C-042 | — | §4.2, Table 2, Table 3, Table 5, §6, Abstract | ED-1, R1-5, R1-7, R1-M8, R1-m8, R2-1a, R2-1b, R2-6 | filled from the Adult timing cells; matched tree run [R] |
+| C-043 | — | §4.1, Table 5, §5, §5.1 | R1-6, R1-10, R1-M3, R1-M7, R1-M10, R1-M15 | filled; sweep and control parts of §5 and §5.1 [R] |
 
 ## Items not yet closed
 
@@ -90,7 +91,6 @@ Sources of the missing values:
 | R1-9 | pending | A | the author reads the 15 recent abstracts (REFERENCE_AUDIT.md); text and list are done |
 | R1-10 | pending | Q, S, V, T | Table 5 scope column and §6 |
 | R1-M1 | pending | Q | §5.2 paragraph on earlier work (results available; text to write) |
-| R1-M3 | pending | A | one sentence comparing the conclusions under the hierarchical analysis with the earlier cell-level tests |
 | R1-M4 | pending | S | §4.3: whether the differences hold across LIME budgets and SHAP estimators |
 | R1-M5 | pending | S | §4.3 sweep results |
 | R1-M6 | pending | V | §4.4: stability under valid one-hot perturbations |
@@ -109,9 +109,9 @@ Sources of the missing values:
 | R2-2 | pending | S | §4.3 Pareto fronts, Figure 1 |
 | R2-3 | pending | S | §4.3 kernel-width results |
 
-Closed: ED-1, R1-2, R1-4, R1-5, R1-7, R1-8, R1-11, R1-M2, R1-M8, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-4, R2-5, R2-6, R2-7, R2-8 (27 items).
+Closed: ED-1, R1-2, R1-4, R1-5, R1-7, R1-8, R1-11, R1-M2, R1-M3, R1-M8, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-4, R2-5, R2-6, R2-7, R2-8 (28 items).
 
-Count of pending items by source: Q 6, T 7, S 14, V 7, M 2, X 1, A 3.
+Count of pending items by source: Q 6, T 7, S 14, V 7, M 2, X 1, A 2.
 
 ## Mandatory before submission
 
