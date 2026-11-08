@@ -85,8 +85,8 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > 6. Drawing and Building Upon Relevant Literature: Poor
 
-**Response.** We thank the reviewer for this assessment. As the comment concerns the literature review as a whole, we checked it against recent work and identified the following places where it could be improved: (1) recent empirical comparisons of SHAP and LIME were missing; (2) recent benchmarks and toolkits for explanation evaluation were not discussed; (3) work on the sensitivity of LIME to its hyperparameters and on the validity of perturbation-based stability measures was not used. We revised each of them: §2 adds a paragraph on comparisons and benchmarks published from 2024 on, and positions the study against them. §3.3–3.4 cite the work on hyperparameter sensitivity and perturbation validity that motivates the new controls. Older entries whose point is now made by recent work were replaced. Of the 52 references, the 26 that cite the literature are 85% from 2024 or later; the other 26 are cited for a definition (the explainers, the models and the metrics), a dataset source or a statistical method, at the place where it is used.
-**Changes in the manuscript:** Section 2
+**Response.** We thank the reviewer for this assessment. As the comment concerns the literature review as a whole, we checked it against recent work and identified the following places where it could be improved: (1) recent empirical comparisons of SHAP and LIME were missing; (2) recent benchmarks and toolkits for explanation evaluation were not discussed; (3) work on the sensitivity of LIME to its hyperparameters and on the validity of perturbation-based stability measures was not used. We revised each of them: §2 adds a paragraph on comparisons and benchmarks published from 2024 on, and positions the study against them. §1 and §2 cite the work on hyperparameter sensitivity and on the limits of perturbation-based measures that motivates the configuration sweep and the new controls, and §1 cites a recent reporting checklist for the computing environment behind the cost measurement. Older entries whose point is now made by recent work were replaced. Of the 53 references, the 27 that cite the literature are 85% from 2024 or later; the other 26 are cited for a definition (the explainers, the models and the metrics), a dataset source or a statistical method, at the place where it is used.
+**Changes in the manuscript:** Section 1; Section 2
 
 ### R1-10
 
@@ -110,7 +110,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > The manuscript extends a previously published SHAP–LIME comparison from 45 to 75 matched configurations. The authors should clearly establish the scientific novelty of the present work and distinguish its original contributions from previously reported findings.
 
-**Response.** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work. Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. [R: one sentence on the finding that is new.]
+**Response.** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work, which was replaced because an audit found training-test overlap, an unrecoverable model and timings from mixed hosts (§3.1). Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. [R: one sentence on the finding that is new.]
 **Changes in the manuscript:** Section 1; former Section 4.1; Section 5; Section 3.1
 
 ### R1-M2
@@ -188,7 +188,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 > The kernel-width experiments contain different numbers of valid explanations across configurations. The authors should address the potential influence of this variation on the comparative results and consider evaluating the metrics on a common set of valid instances.
 
 **Response.** We thank the reviewer for spotting this. Every configuration is now compared on the common set of instances for which all configurations gave a valid explanation. The share of degenerate explanations of each configuration is reported as an outcome in its own right (§4.3).
-**Changes in the manuscript:** Section 4.3, Fig. 1
+**Changes in the manuscript:** Section 3.4; Section 4.3, Fig. 1
 
 ### R1-M13
 
@@ -332,7 +332,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 > First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
 **Response.** We agree with the reviewer, and the earlier timings have been replaced. All cost measurements of the revision come from one recorded host, under the controlled protocol described under R1-M8 (§3.6). Every paired comparison ran on that host in the same session.
-**Changes in the manuscript:** Section 3.6; Section 4.2, Table 3
+**Changes in the manuscript:** Section 1; Section 3.6; Section 4.2, Table 3
 
 ### R2-1b
 
@@ -373,7 +373,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > Sixth, the manuscript heavily relies on and reuses pre-computed execution cohorts and findings from reference [10], to the extent that basic summary statistics are omitted from the tables and redirected to the previous paper; the manuscript must become entirely self-contained and independently verifiable.
 
-**Response.** We agree, and the revision is self-contained. All results come from a new cohort run for this study. Every table reports the per-method levels it compares, and no number is taken from or referred to [10], which is now cited only for the definitions of the metrics (§3.4). [Decision D-A: whether to add one sentence on why the earlier cohort was replaced.]
+**Response.** We agree, and the revision is self-contained. All results come from a new cohort run for this study. Every table reports the per-method levels it compares, and no number is taken from or referred to [10], which is now cited only for the definitions of the metrics (§3.4). An earlier analysis of the SHAP–LIME question was replaced in full: an audit found that in most of its cells the evaluation instances overlapped the training partition, that one model could not be recovered and that its timings mixed hosts. §3.1 states this in one sentence, and no number from that analysis is used.
 **Changes in the manuscript:** former Section 4.1; Section 4.1, Table 2; Section 5; Section 3.1
 
 ### R2-7
