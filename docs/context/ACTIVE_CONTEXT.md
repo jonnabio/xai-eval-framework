@@ -178,11 +178,11 @@ requests #79 and #80 merged, and the one carrying this handoff.
     gap against LIME and DiCE; stability against LIME not significant; on the six other
     datasets full LIME is more stable than SHAP. Cost: no data yet.
 - **Current State**:
-  - Manuscript 11 pages (budget 12), letter 15 pages; `check_revision.py`: 51 items, 17
-    closed (16 remediated, 1 explained), 34 pending; 39 changes (C-000 – C-038).
-  - Cohort B2: quality pass complete (575/575). Timing pass running since about 21:00: 2 of 115
-    cells at 21:54, steady since 21:42 (benchmark 16 ms, no waits) with the monitor and screen
-    off; likely more than a day in total. Then the sweep, validity controls, grouped masking and the matched RF–XGBoost run not started.
+  - Manuscript 12 pages (budget 12), letter 15 pages; `check_revision.py`: 51 items, 19
+    closed (18 remediated, 1 explained), 32 pending; 42 changes (C-000 – C-041).
+  - Cohort B2: quality pass complete (575/575). Timing pass: 6 of 115 cells at 22:24 (Adult
+    logreg 7-8 min, RF 10 min per cell; benchmark 16 ms, 0 errors). Estimate about 37 h in
+    total (SVM cells about 1.6 h each), so it ends around 9 November, morning. Then the sweep, validity controls, grouped masking and the matched RF–XGBoost run not started.
   - Tree clean; all branches pushed; lock released.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
