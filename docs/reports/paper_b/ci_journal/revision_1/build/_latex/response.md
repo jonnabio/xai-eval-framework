@@ -287,7 +287,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > Tables 4 and 5 should include measures of variability or uncertainty alongside the reported three-seed averages.
 
-**Response.** The cross-dataset table now reports the mean and standard deviation over seeds (Table 4).
+**Response.** The cross-dataset table reports the mean over seeds, and its caption states the largest standard deviation over seeds (below 0.04 in every cell); the standard deviation of every cell, per model, is in the supplementary file (Table 4).
 **Changes in the manuscript:** Section 4.5, Table 4
 
 ### R1-m12
