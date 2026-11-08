@@ -163,6 +163,9 @@ requests #79 and #80 merged, and the one carrying this handoff.
     the title question, slots [R] (C-035). Abstract and §1: only model calls are
     host-independent, not CPU time (C-032, C-036). RF–XGBoost reversal posed as the tested
     question, credited to the reviewer in the letter (C-037).
+  - Cost (H2) tested in wall-clock time, not CPU time: Windows CPU time moves in 15.6 ms
+    steps, seen in the first timing cells (author's decision, C-038; analysis script updated;
+    the running timing pass is unaffected). PR #84.
   - Response letter: ED-2 and ED-3 removed (no answer, author); every comment quoted in full;
     the editor, Reviewer 1 and Reviewer 2 each start on a new page.
   - Consistency pass: manuscript, ledger, response and proposal agree
@@ -174,9 +177,10 @@ requests #79 and #80 merged, and the one carrying this handoff.
     datasets full LIME is more stable than SHAP. Cost: no data yet.
 - **Current State**:
   - Manuscript 11 pages (budget 12), letter 15 pages; `check_revision.py`: 51 items, 17
-    closed (16 remediated, 1 explained), 34 pending; 38 changes (C-000 – C-037).
-  - Cohort B2: quality pass finishing on the experiment laptop (snapshot 20:53); timing pass,
-    sweep, validity controls, grouped masking and the matched RF–XGBoost run not started.
+    closed (16 remediated, 1 explained), 34 pending; 39 changes (C-000 – C-038).
+  - Cohort B2: quality pass complete (575/575). Timing pass running since about 21:00: 2 of 115
+    cells at 21:54, steady since 21:42 (benchmark 16 ms, no waits) with the monitor and screen
+    off; likely more than a day in total. Then the sweep, validity controls, grouped masking and the matched RF–XGBoost run not started.
   - Tree clean; all branches pushed; lock released.
 - **Next Steps**:
   1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
@@ -193,8 +197,8 @@ requests #79 and #80 merged, and the one carrying this handoff.
     LIME zero-vector figure (0.88, 0.95) is a count out of 15 perturbed explanations, i.e.
     2.7% and 3.0% of vectors; the 0-of-575 job count was read from the wrong folder. Merge
     `paper/b-ci-revision-1` into `main` (it carries that fix) when resuming if not merged.
-  - Decision with the author: extension request by 10 November. The power plan of the
-    experiment laptop ("ASUS Recommended") to be fixed before the timing pass.
+  - Decision with the author: extension request by 10 November. The timing pass runs under
+    the "ASUS Recommended" power plan (recorded per cell; disclose, do not restart).
   - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
     investigated.
 - **Notes**:
