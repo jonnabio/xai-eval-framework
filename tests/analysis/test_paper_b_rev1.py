@@ -582,3 +582,14 @@ def test_a_worker_of_another_governor_is_not_started_twice():
         assert job not in lib.jobs_running_elsewhere(os.getpid())   # our own child: not
     finally:
         child.kill()
+
+def test_analysis_counts_finished_jobs_in_the_analysed_root(tmp_path):
+    """The documentation laptop analyses a synced snapshot (--root): its finished jobs must be
+    counted there, not in the local live folder (status.json said 0 of 575, 2026-11-07)."""
+    for d, m, s, e in [("adult", "rf", 11, "shap"), ("adult", "rf", 11, "lime"),
+                       ("german_credit", "svm", 22, "dice")]:
+        p = tmp_path / "quality" / d / m / f"seed_{s}"
+        p.mkdir(parents=True, exist_ok=True)
+        (p / f"{e}.done").write_text("{}", encoding="utf-8")
+        (p / f"{e}.jsonl").write_text("", encoding="utf-8")
+    assert an.count_finished(tmp_path) == 3

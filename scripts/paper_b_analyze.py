@@ -278,7 +278,11 @@ def quality_checks(q: pd.DataFrame) -> pd.DataFrame:
         "all_zero_share": g["all_zero"].mean(),
         "fidelity_exact_zero_share": g["fidelity"].apply(lambda s: float((s == 0).mean())),
         "stability_rows": g["stability"].apply(lambda s: int(s.notna().sum())),
+        # A count per stability instance, out of stability_T perturbed explanations (15):
+        # 0.88 means about one in 17 vectors, not 88%. The share says it directly.
         "stability_zero_vectors_mean": g["stability_zero_vectors"].mean(),
+        "stability_zero_vector_share": g["stability_zero_vectors"].mean()
+        / lib.config()["metrics"]["stability_T"],
     }).reset_index()
     ov = []
     for (d, m), sub in q[q.explainer == REFERENCE].groupby(["dataset", "model"]):
@@ -349,6 +353,11 @@ def report(out: Path, hashes: list[str], q: pd.DataFrame, prim: pd.DataFrame,
     (out / "REPORT.md").write_text("\n".join(lines), encoding="utf-8")
 
 
+def count_finished(root: Path) -> int:
+    """Finished quality jobs under a results root: one .done marker per job."""
+    return len(list(Path(root).glob("quality/*/*/seed_*/*.done")))
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", type=Path, default=lib.RESULTS)
@@ -385,7 +394,10 @@ def main(argv=None) -> int:
                      ("quality_checks", qc), ("cost", cost)):
         df.to_csv(a.out / f"{name}.csv", index=False)
     total = len(lib.all_quality_jobs(cfg, None, None, None, None))
-    finished = len(list(lib.RESULTS.glob("quality/*/*/seed_*/*.done")))
+    # Counted in the results being analysed (--root), as the orchestrator counts them: on the
+    # documentation laptop lib.RESULTS is an empty live folder, and the 18:21 preview of a
+    # synced snapshot reported 0 of 575 (2026-11-07).
+    finished = count_finished(a.root)
     partial = finished < total
     if partial and not a.allow_partial and a.root == lib.RESULTS:
         print(f"run not finished ({finished}/{total} jobs): use --allow-partial for a preview")
