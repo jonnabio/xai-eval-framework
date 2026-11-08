@@ -414,18 +414,18 @@ ms per explanation}
 \toprule
 Endpoint & $X$ & SHAP & $X$ & $\Delta_X$ [95\% CI] & $p_{\mathrm{Holm}}$ & $d_z$ & HL & $r_{rb}$ \\
 \midrule
-Stability & LIME & 0.74 & 0.56 & 0.18 [$-$0.01, 0.37] & [R] & 0.89 & 0.18 & 0.77 \\
- & Anchors & & 0.63 & 0.10 [$-$0.08, 0.28] & [R] & 0.45 & 0.15 & 0.40 \\
- & DiCE & & 0.40 & 0.34 [0.14, 0.54] & [R] & 1.63 & 0.34 & 0.98 \\
-Fidelity & LIME & 0.83 & 0.45 & 0.38 [0.22, 0.54] & [R] & 3.29 & 0.40 & 1.00 \\
- & Anchors & & 0.41 & 0.42 [0.25, 0.58] & [R] & 11.79 & 0.42 & 1.00 \\
- & DiCE & & 0.18 & 0.65 [0.44, 0.86] & [R] & 5.83 & 0.67 & 1.00 \\
-Faithf.\ gap & LIME & 0.40 & 0.26 & 0.13 [0.05, 0.21] & [R] & 1.33 & 0.12 & 1.00 \\
- & Anchors & & 0.23 & 0.16 [$-$0.01, 0.33] & [R] & 2.19 & 0.16 & 1.00 \\
- & DiCE & & 0.08 & 0.31 [0.13, 0.50] & [R] & 4.48 & 0.29 & 1.00 \\
-Cost & LIME & [R] & [R] & [R] & [R] & [R] & [R] & [R] \\
- & Anchors & & [R] & [R] & [R] & [R] & [R] & [R] \\
- & DiCE & & [R] & [R] & [R] & [R] & [R] & [R] \\
+Stability & LIME & 0.74 & 0.56 & 0.18 [$-$0.01, 0.37] & 0.25 & 0.89 & 0.18 & 0.77 \\
+ & Anchors & & 0.63 & 0.10 [$-$0.08, 0.28] & 0.31 & 0.45 & 0.15 & 0.40 \\
+ & DiCE & & 0.40 & 0.34 [0.14, 0.54] & 0.008 & 1.63 & 0.34 & 0.98 \\
+Fidelity & LIME & 0.83 & 0.45 & 0.38 [0.22, 0.54] & $<$0.001 & 3.29 & 0.40 & 1.00 \\
+ & Anchors & & 0.41 & 0.42 [0.25, 0.58] & $<$0.001 & 11.79 & 0.42 & 1.00 \\
+ & DiCE & & 0.18 & 0.65 [0.44, 0.86] & $<$0.001 & 5.83 & 0.67 & 1.00 \\
+Faithf.\ gap & LIME & 0.40 & 0.26 & 0.13 [0.05, 0.21] & 0.008 & 1.33 & 0.12 & 1.00 \\
+ & Anchors & & 0.23 & 0.16 [$-$0.01, 0.33] & 0.25 & 2.19 & 0.16 & 1.00 \\
+ & DiCE & & 0.08 & 0.31 [0.13, 0.50] & 0.008 & 4.48 & 0.29 & 1.00 \\
+Cost & LIME & 3,925 & 170 & 3,756 [561, 6,950] & 0.11 & 0.49 & 22 & 0.75 \\
+ & Anchors & & 9,283 & $-$5,357 [$-$7,208, $-$3,507] & $<$0.001 & $-$1.27 & $-$4,887 & $-$1.00 \\
+ & DiCE & & 1,408 & 2,517 [$-$961, 5,995] & 0.31 & 0.34 & $-$1,056 & $-$0.29 \\
 \midrule
 Sparsity & all & 0.22 & \multicolumn{6}{l}{LIME 0.98, Anchors 0.06, DiCE 0.02 (descriptive)} \\
 \bottomrule
@@ -436,10 +436,26 @@ Sparsity & all & 0.22 & \multicolumn{6}{l}{LIME 0.98, Anchors 0.06, DiCE 0.02 (d
 \label{sec:cost}
 
 Table~\ref{tab:cost} gives the cost per explanation by model family.
-[R: wall-time ordering by model family; the share of model time in the
-explainer's time.] [R: rows evaluated per explanation: LIME 1,000; KernelSHAP
-about 25,000 (500 coalitions $\times$ 50 background rows); Anchors and DiCE as
-measured.] Whether TreeSHAP's cost relative to LIME reverses between
+Wall time orders the explainers differently by model family. With
+KernelSHAP, SHAP takes 3 to 25 times LIME's time: 29.6 against 9.4~ms on
+logistic regression, 52.2 against 11.0~ms on the MLP, and 19.5 against
+0.79~s on the SVM, whose kernel evaluations make it the slowest model for
+every explainer. With TreeSHAP, SHAP costs about as much as LIME on the
+random forest (23.0 against 22.3~ms) and a ninth of it on XGBoost (1.4
+against 13.3~ms). Anchors (0.75 to 5.6~s) and DiCE (1.1 to 2.6~s) are
+slower than SHAP on every model except the SVM. For H2, the mean difference
+from LIME is driven by the SVM: the mixed-model interval excludes zero (3.8~s,
+95\% CI 0.56 to 6.95~s), but the Holm-adjusted $p$ is 0.11 and the
+Hodges--Lehmann difference is 22~ms, so H2 is not supported against LIME.
+SHAP is faster than Anchors in all 25 cells, the opposite of H2, and its
+difference from DiCE is not significant (Table~\ref{tab:paired_main}). The
+rows evaluated per explanation, which do not depend on the host, are 1,000
+for LIME, 25,001 for KernelSHAP (500 coalitions $\times$ 50 background rows,
+plus the instance), 2,004 for DiCE, 5,501 (logistic regression) to 23,201
+(MLP) for Anchors, and none for TreeSHAP. With the 108 encoded features of
+Adult, a row costs 218 FLOPs for logistic regression and 22,200 for the MLP,
+so a KernelSHAP explanation costs 5.5 and 555 MFLOPs, against 0.22 and 22
+for LIME. Whether TreeSHAP's cost relative to LIME reverses between
 XGBoost and the random forest, and whether such a reversal reflects the
 architecture or only the size of the ensemble, is tested directly: both have
 100 trees, and the comparison is repeated with matched depth and with cost
@@ -451,17 +467,19 @@ and whether it follows the size of the forest or the implementation].
 \caption{Cost per explanation on Adult (one host, one core): median wall time
 and CPU time, and rows evaluated by the model; theoretical complexity per explanation
 ($T$ trees, $L$ leaves, $D$ depth; $n_s$ samples or coalitions; $n_b$
-background rows). FLOPs for logistic regression and the MLP in the text}
+background rows). LIME with the full vector; ranges are over the models,
+the largest always on the SVM; Anchors' rows exclude XGBoost, whose calls
+were not counted. FLOPs for logistic regression and the MLP in the text}
 \label{tab:cost}
 \begin{tabular}{lllrrr}
 \toprule
 Explainer & Model & Complexity & Wall (ms) & CPU (ms) & Rows evaluated \\
 \midrule
-SHAP (Tree) & RF, XGB & $O(T L D^2)$, no model calls & [R] & [R] & 0 \\
-SHAP (Kernel) & logreg, SVM, MLP & $O(n_s n_b)$ rows & [R] & [R] & [R] \\
-LIME & all & $O(n_s)$ rows $+$ fit $O(n_s M^2)$ & [R] & [R] & [R] \\
-Anchors & all & adaptive (precision target) & [R] & [R] & [R] \\
-DiCE & all & iterative search & [R] & [R] & [R] \\
+SHAP (Tree) & RF, XGB & $O(T L D^2)$, no model calls & 23.0, 1.4 & 15.6, 0.0 & 0 \\
+SHAP (Kernel) & logreg, SVM, MLP & $O(n_s n_b)$ rows & 29.6, 19,492, 52.2 & 31.3, 19,359, 46.9 & 25,001 \\
+LIME & all & $O(n_s)$ rows $+$ fit $O(n_s M^2)$ & 9.4--786 & 15.6--781 & 1,000 \\
+Anchors & all & adaptive (precision target) & 749--5,640 & 742--5,617 & 5,501--23,201 \\
+DiCE & all & iterative search & 1,064--2,627 & 1,063--2,609 & 2,004 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -558,7 +576,7 @@ ordering changes.]
 \midrule
 SHAP more stable than $X$ & confirmatory & [R] \\
 SHAP more faithful than $X$ & confirmatory & [R] \\
-SHAP more expensive than $X$ & confirmatory & [R] \\
+SHAP more expensive than $X$ & confirmatory & Not supported: against LIME only with KernelSHAP (3--25 times), not significant after Holm; SHAP faster than Anchors in every cell; DiCE not significant \\
 Orderings over the configuration grid & exploratory & [R] \\
 Orderings on other datasets & exploratory & [R] \\
 TreeSHAP vs LIME cost by ensemble & exploratory & [R] \\
@@ -611,10 +629,14 @@ sample size, or the KernelSHAP budget, at which the ordering changes;
 exploratory, Section~\ref{sec:sweep}] and, for fidelity and the
 faithfulness gap, holds on all six further datasets, where LIME is instead
 the more stable explainer (exploratory, Table~\ref{tab:cross}). It is
-paid for in cost: [R: SHAP's cost relative to LIME in model evaluations and
-wall time, by model family, including whether the ordering differs between
-the random forest and XGBoost], so LIME is the better choice [R: for which models and latency
-budgets]. The faithfulness advantage is not specific to the pair: SHAP holds it
+paid for in cost only with KernelSHAP, which takes 3 to 25 times LIME's
+wall time and 25 times its model evaluations (19.5~s per explanation on the
+SVM), whereas TreeSHAP costs about as much as LIME on the random forest and
+less on XGBoost, and SHAP is faster than Anchors throughout
+(Table~\ref{tab:cost}) [R: whether the tree-ensemble ordering holds at
+matched size]. LIME is therefore the cheaper choice for models that need
+KernelSHAP, such as the SVM, under a tight latency budget, at the price of
+fidelity. The faithfulness advantage is not specific to the pair: SHAP holds it
 against Anchors and DiCE as well, and DiCE ranks last on every quality
 endpoint. The
 answer is therefore conditional: the choice of explainer depends on the

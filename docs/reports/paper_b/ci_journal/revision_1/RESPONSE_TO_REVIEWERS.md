@@ -35,8 +35,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > In addition, as an editorial requirement, please ensure that the main benchmark includes at least one state-of-the-art explainer comparison (e.g., Anchors or DiCE), or provide a clear justification if this is not feasible.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-008, C-012, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-008, C-012, C-040, C-042
 - **Plan:** WP2, WP3
 - **Response:** We thank the editor for this requirement, which strengthened the study. Both Anchors and DiCE are now part of the main benchmark, under the same paired protocol as SHAP and LIME: the same models, the same test instances, the same seeds, the same metrics and the same host. The research questions are stated as paired contrasts of SHAP against each of the other three explainers (§3.1). Anchors and DiCE produce explanations of different kinds (a rule; a counterfactual), so §3.3 explains how each is turned into a feature-attribution vector and which metrics are comparable across the four methods. The four-explainer results are in Table 2 (§4.1) and across the seven datasets in Table 4 (§4.5). SHAP's faithfulness advantage holds against Anchors and DiCE as well as LIME (fidelity higher in all 25 Adult cells against each); Anchors is not distinguishable from SHAP on stability, and DiCE ranks last on every quality endpoint (§4.1).
 - **Where:** Section 3.3; Section 4.1, Table 2
@@ -89,8 +89,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Furthermore, the fairness of the explainer configurations, **reliability of computational cost measurements**, and generalizability of the cross-dataset findings require additional investigation.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014, C-038
+- **Status:** REMEDIATED
+- **Changes:** C-010, C-014, C-038, C-042
 - **Plan:** WP2
 - **Response:** Addressed under R1-M8: every cost measurement was repeated on one recorded host under controlled conditions, and complemented by hardware-independent counts (§3.6, §4.2).
 - **Where:** Section 3.6; Section 4.2, Table 3
@@ -109,8 +109,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The statistical analysis and interpretation of effect sizes should also be strengthened.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-011, C-012, C-029, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-011, C-012, C-029, C-040, C-042
 - **Plan:** WP6
 - **Response:** Addressed under R1-M3 and R1-M14.
 - **Where:** Section 3.5; Section 4.1, Table 2
@@ -236,10 +236,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The computational cost comparisons are potentially confounded by heterogeneous execution environments. The authors should validate the principal latency findings using standardized hardware, software configurations, and repeated timing measurements.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014, C-038, C-039
+- **Status:** REMEDIATED
+- **Changes:** C-010, C-014, C-038, C-039, C-042
 - **Plan:** WP2
-- **Response:** Every cost measurement was repeated on a single recorded host. The host's processor, memory, operating system and software versions are reported. Each explanation was timed in one process, single-threaded and pinned to one core, after a warm-up, three times. The explainers alternated per instance, so slow drift affected all of them equally. Timing paused whenever other activity on the host exceeded a threshold . The cost comparison is tested in wall-clock time, which on one pinned core of a quiet host measures the explainer's work at sub-millisecond resolution; CPU time, which Windows advances only in 15.6 ms steps, is reported alongside (§3.6). The paired cells of the earlier version ran on different hosts; that problem no longer arises.
+- **Response:** Every cost measurement was repeated on a single recorded host. The host's processor, memory, operating system and software versions are reported. Each explanation was timed in one process, single-threaded and pinned to one core, after a warm-up, three times. The explainers alternated per instance, so slow drift affected all of them equally. Timing paused whenever other activity on the host exceeded a threshold. The cost comparison is tested in wall-clock time, which on one pinned core of a quiet host measures the explainer's work at sub-millisecond resolution; CPU time, which Windows advances only in 15.6 ms steps, is reported alongside (§3.6). The paired cells of the earlier version ran on different hosts; that problem no longer arises. On this host, KernelSHAP takes 3 to 25 times LIME's wall time, TreeSHAP about as much as LIME on the random forest and less on XGBoost, and SHAP less than Anchors in every cell; the difference from LIME is not significant after Holm correction (§4.2, Tables 2 and 3).
 - **Where:** Section 3.6; Section 4.2, Table 3
 
 ### R1-M9
@@ -388,8 +388,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Table 1 should present the statistical estimates, confidence intervals, adjusted p-values, and effect sizes using consistent notation and clearly defined column headings.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-012, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-012, C-040, C-042
 - **Plan:** WP7
 - **Response:** The main results table now uses one notation, with each column defined in the caption: estimate, 95% CI, Holm-adjusted p, d_z, Hodges–Lehmann difference, rank-biserial r.
 - **Where:** Section 4.1, Table 2
@@ -472,8 +472,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-010, C-014, C-032, C-038, C-039
+- **Status:** REMEDIATED
+- **Changes:** C-010, C-014, C-032, C-038, C-039, C-042
 - **Plan:** WP2
 - **Response:** We agree with the reviewer, and the earlier timings have been replaced. All cost measurements of the revision come from one recorded host, under the controlled protocol described under R1-M8 (§3.6). Every paired comparison ran on that host in the same session.
 - **Where:** Section 1; Section 3.6; Section 4.2, Table 3
@@ -482,10 +482,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment, and **supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic**.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-014
+- **Status:** REMEDIATED
+- **Changes:** C-014, C-042
 - **Plan:** WP2
-- **Response:** Next to time, the revision reports for each explanation the number of calls to the model and the number of rows the model evaluated. These counts do not depend on the hardware. Table 3 adds the theoretical complexity of each explainer. FLOPs are reported for logistic regression and the MLP, where they are well defined per prediction. For tree ensembles and the RBF-SVM a per-prediction FLOP count is not comparable across model types, so model calls and rows evaluated are the hardware-independent measure there (§4.2).
+- **Response:** Next to time, the revision reports for each explanation the number of calls to the model and the number of rows the model evaluated. These counts do not depend on the hardware. Table 3 adds the theoretical complexity of each explainer. FLOPs are reported for logistic regression and the MLP, where they are well defined per prediction. For tree ensembles and the RBF-SVM a per-prediction FLOP count is not comparable across model types, so model calls and rows evaluated are the hardware-independent measure there (§4.2). On Adult, a KernelSHAP explanation evaluates 25,001 rows against 1,000 for LIME, which is 5.5 against 0.22 MFLOPs for logistic regression and 555 against 22 for the MLP.
 - **Where:** Section 4.2, Table 3
 
 ### R2-2
@@ -532,8 +532,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Sixth, the manuscript heavily relies on and reuses pre-computed execution cohorts and findings from reference [10], to the extent that basic summary statistics are omitted from the tables and redirected to the previous paper; the manuscript must become entirely self-contained and independently verifiable.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-003, C-012, C-020, C-025, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-003, C-012, C-020, C-025, C-040, C-042
 - **Plan:** WP2, WP3, WP7
 - **Response:** We agree, and the revision is self-contained. All results come from a new cohort run for this study. Every table reports the per-method levels it compares, and no number is taken from or referred to [10], which is now cited only for the definitions of the metrics (§3.4). An earlier analysis of the SHAP–LIME question was replaced in full: an audit found that in most of its cells the evaluation instances overlapped the training partition, that one model could not be recovered and that its timings mixed hosts. §3.1 states this in one sentence, and no number from that analysis is used.
 - **Where:** former Section 4.1; Section 4.1, Table 2; Section 5; Section 3.1

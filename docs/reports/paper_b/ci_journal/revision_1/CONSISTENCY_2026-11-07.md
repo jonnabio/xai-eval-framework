@@ -1,13 +1,13 @@
 # Paper B, revision 1: consistency of the manuscript, the ledger, the response and the proposal
 
-Checked on 2026-11-07 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
+Checked on 2026-11-08 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 `RESPONSE_TO_REVIEWERS.md` and `PROPOSAL_2026-11-06.md`. Regenerate before the final build.
 
 ## Result
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (42 of 42) |
+| Every ledger change is in the manuscript at the place it names | yes (43 of 43) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -66,15 +66,16 @@ not answered).
 | C-037 | — | §4.2 | R1-M9 | done |
 | C-038 | — | §1, §3.1, §3.4, §3.5, §3.6, Table 2, §4.2, Table 3, §6, Abstract, `scripts/paper_b_analyze.py` | R1-5, R1-M8, R2-1a | done |
 | C-039 | — | §3.6 | R1-M8, R2-1a | done |
-| C-040 | — | §3.2, §4.1, Table 2, §4.5, Table 4, §6, Abstract | ED-1, R1-6, R1-7, R1-10, R1-M1, R1-M10, R1-M14, R1-m1, R1-m5, R1-m8, R1-m11, R1-m15, R2-3, R2-5, R2-6 | filled from the quality pass; p_Holm [R] |
+| C-040 | — | §3.2, §4.1, Table 2, §4.5, Table 4, §6, Abstract | ED-1, R1-6, R1-7, R1-10, R1-M1, R1-M10, R1-M14, R1-m1, R1-m5, R1-m8, R1-m11, R1-m15, R2-3, R2-5, R2-6 | filled from the quality pass |
 | C-041 | — | Table 4 | R1-m11 | done |
+| C-042 | — | §4.2, Table 2, Table 3, Table 5, §6, Abstract | ED-1, R1-5, R1-7, R1-M8, R1-m8, R2-1a, R2-1b, R2-6 | filled from the Adult timing cells; matched tree run [R] |
 
 ## Items not yet closed
 
 Sources of the missing values:
 
-- **Q**: main quality pass (Adult Table 2; Table 4): finishing on the other laptop
-- **T**: timing pass (Table 3): not started
+- **Q**: main quality pass: complete (575/575) and filled (C-040)
+- **T**: timing pass: Adult complete and filled (C-042); other datasets running, exploratory
 - **S**: configuration sweep (§4.3, Figure 1): not started
 - **V**: validity controls, no-noise and valid one-hot (§4.4): not started
 - **M**: grouped masking (§4.4): not started; grouping fix in 28ad03dc1
@@ -83,39 +84,31 @@ Sources of the missing values:
 
 | Item | Status | Waits for | What is missing |
 |---|---|---|---|
-| ED-1 | pending | T | p_Holm in Table 2 (the family of 12 includes the cost tests) |
 | R1-1 | pending | Q | §5.2: which earlier statements are confirmed, qualified or reversed (author's reading of the filled results) |
 | R1-3 | pending | V | §4.4 results of the stability controls |
-| R1-5 | pending | T | Table 3 values |
 | R1-6 | pending | S, T | Table 5 scope column; §4.5 is filled |
-| R1-7 | pending | T | p_Holm in Table 2 |
 | R1-9 | pending | A | the author reads the 15 recent abstracts (REFERENCE_AUDIT.md); text and list are done |
 | R1-10 | pending | Q, S, V, T | Table 5 scope column and §6 |
 | R1-M1 | pending | Q | §5.2 paragraph on earlier work (results available; text to write) |
-| R1-M3 | pending | T | whether conclusions change under the hierarchical analysis, with the final p_Holm |
+| R1-M3 | pending | A | one sentence comparing the conclusions under the hierarchical analysis with the earlier cell-level tests |
 | R1-M4 | pending | S | §4.3: whether the differences hold across LIME budgets and SHAP estimators |
 | R1-M5 | pending | S | §4.3 sweep results |
 | R1-M6 | pending | V | §4.4: stability under valid one-hot perturbations |
 | R1-M7 | pending | V, S | §4.4 and §4.3: LIME stability against noise and kernel width |
-| R1-M8 | pending | T | Table 3 values on one host |
 | R1-M9 | pending | X, T | §4.2: whether the reversal follows tree size or implementation |
 | R1-M10 | pending | S, T | Table 5 scope column; Table 4 and §4.5 are filled |
 | R1-M11 | pending | S | §4.3 over seeds and models |
 | R1-M12 | pending | S | §4.3 on the common valid instances |
 | R1-M13 | pending | M | §4.4 masking schemes on all models |
-| R1-M14 | pending | T | p_Holm in Table 2; distributions in the supplement |
+| R1-M14 | pending | A | distributions of the paired differences in the supplement (D-B, last) |
 | R1-M15 | pending | Q, S, V, T | Table 5 scope column and the recommendations in §5.1 |
 | R1-m1 | pending | Q, S, V, T | abstract values |
-| R1-m8 | pending | T | p_Holm and the cost rows of Table 2 |
 | R1-m10 | pending | S | Figure 1 is generated from the sweep |
 | R1-m13 | pending | M | §4.4 masking results; rule stated |
 | R1-m15 | pending | Q, S, V, T | labelled findings in §5, §6 and the abstract |
-| R2-1a | pending | T | Table 3 values on one host |
-| R2-1b | pending | T | Table 3 model calls and rows |
 | R2-2 | pending | S | §4.3 Pareto fronts, Figure 1 |
 | R2-3 | pending | S | §4.3 kernel-width results |
-| R2-6 | pending | T | cost levels in Table 2 and Table 3 |
 
-Closed: R1-2, R1-4, R1-8, R1-11, R1-M2, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m9, R1-m11, R1-m12, R1-m14, R2-4, R2-5, R2-7, R2-8 (19 items).
+Closed: ED-1, R1-2, R1-4, R1-5, R1-7, R1-8, R1-11, R1-M2, R1-M8, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-4, R2-5, R2-6, R2-7, R2-8 (27 items).
 
-Count of pending items by source: Q 6, T 17, S 14, V 7, M 2, X 1, A 1.
+Count of pending items by source: Q 6, T 7, S 14, V 7, M 2, X 1, A 3.
