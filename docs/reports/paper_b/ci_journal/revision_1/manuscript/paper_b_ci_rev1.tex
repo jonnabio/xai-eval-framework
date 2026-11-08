@@ -574,10 +574,20 @@ classification with five model families and seven datasets.
 \label{sec:conclusion}
 % -----------------------------------------------------------------------
 
-[R: two to three sentences that restate only results of
-Table~\ref{tab:paired_main} and Table~\ref{tab:holds}: the confirmatory
-orderings with effect sizes, the cost in rows evaluated, and the conditions
-under which an ordering changes.] The choice of explainer depends on the
+The title asks when SHAP outperforms LIME. On the primary benchmark,
+[R: the criteria among stability, fidelity and the faithfulness gap on which
+SHAP is ahead, with $d_z$ and the model families where this holds;
+confirmatory, Table~\ref{tab:paired_main}]. The advantage [R: holds across /
+narrows / reverses] over the configuration grid [R: the LIME kernel width or
+sample size, or the KernelSHAP budget, at which the ordering changes;
+exploratory, Section~\ref{sec:sweep}] and [R: holds / does not hold] on the
+further datasets [R: which ones; exploratory, Table~\ref{tab:holds}]. It is
+paid for in cost: [R: SHAP's cost relative to LIME in model evaluations and
+CPU time, by model family, including whether the ordering differs between
+the random forest and XGBoost], so LIME is the better choice [R: for which models and latency
+budgets]. Against the two reference explainers, [R: whether the SHAP--LIME
+difference is specific to the pair or shared with Anchors and DiCE]. The
+answer is therefore conditional: the choice of explainer depends on the
 model architecture, the configuration and the latency budget, and a ranking
 obtained under one configuration should not be transferred to another
 without measuring it. Whether any of these explainers helps people decide
