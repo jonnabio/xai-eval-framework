@@ -65,3 +65,15 @@ The quality results (575 of 575 jobs) are filled in the manuscript (C-040): Tabl
 p_Holm and the cost rows, Table 4, §4.1, §4.5, §3.2 (overlap), §6 and the abstract. p_Holm waits
 for the cost tests, which complete the family of 12. Still needed from this laptop's runs: the
 timing pass, then the sweep, the validity controls, the grouped masking and the matched run.
+
+## 2026-11-08, from the documentation laptop: cost results filled (C-042)
+
+The 25 Adult timing cells (snapshot 992d20038) are analysed and filled: Table 2 cost rows and the
+Holm-adjusted p of the family of 12, Table 3, §4.2, the Table 5 cost row, §6 and the abstract.
+The timing pass need not stop; the other datasets are exploratory and go to the supplement.
+
+One check for this laptop: Anchors on XGBoost records 0 rows and 0 model calls in every cell.
+`counted_methods` includes `XGBClassifier.predict_proba` but not `XGBClassifier.predict`, which
+Anchors probably calls. Do not restart the run for it; confirm the cause, and say whether a
+short rerun of Anchors on XGBoost with the counter fixed is feasible (rows only, not time).
+Until then Table 3 excludes Anchors' rows on XGBoost and says so.
