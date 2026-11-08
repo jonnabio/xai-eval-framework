@@ -7,7 +7,8 @@ A document independent of the paper that lets a reviewer confirm the results: th
 design, the hyperparameters, the data and model fingerprints, the environment, every
 per-dataset and per-model result and how to regenerate each table. Everything is read from
 the committed sources (cohort.toml, models/MANIFEST.csv, the prepared data, env/HOST.md);
-sections that need the results of cohort B2 are marked [R] until the analysis writes them.
+sections S7-S13 come from the analysis of cohort B2 (supplement_results.py); studies not yet run
+are marked [R].
 Masked: no repository address, no author data (checked).
 
 Writes build/supplement/paper_b_ci_rev1_supplement.docx and .pdf (Word needed for the PDF).
@@ -26,6 +27,8 @@ ROOT = REV.parents[4]
 OUT = REV / "build" / "supplement"
 sys.path.insert(0, str(ROOT / "scripts"))
 import paper_b_lib as lib  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import supplement_results as sr  # noqa: E402
 
 NAMES = {"adult": "Adult", "breast_cancer": "Breast Cancer", "german_credit": "German Credit",
          "diabetes": "Diabetes", "spambase": "Spambase", "phishing": "Phishing",
@@ -49,12 +52,18 @@ def fmt(v) -> str:
     return str(v)
 
 
-def pending(what: str) -> str:
-    return f"\n*[R] {what} Written by the analysis of cohort B2 from the result rows.*\n"
-
-
 def main() -> int:
+    import argparse
     import numpy as np
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--analysis", default=str(REV / "results"),
+                    help="output folder of scripts/paper_b_analyze.py (default: results/)")
+    ap.add_argument("--rows", help="rows.csv of that analysis: derive the per-instance tables "
+                    "and Figure S1 into --analysis first")
+    ap.add_argument("--timing-root", help="results folder of the runs (with timing/): count the "
+                    "finished timing cells into --analysis first")
+    ap.add_argument("--no-word", action="store_true", help="do not open Word for the PDF")
+    args = ap.parse_args()
     cfg = lib.config()
     manifest = list(csv.DictReader(open(lib.MANIFEST, encoding="utf-8")))
     md = ["# Supplementary material",
@@ -146,50 +155,28 @@ def main() -> int:
                   f"| `{r['sha256'][:16]}` | `{r['data_sha256'][:16]}` |")
     md.append("")
 
-    # S7-S12 results
-    md += ["## S7. Realized instances", pending(
-               "Instances per stratum for each dataset, model and seed; overlap of instances "
-               "between seeds; all-zero vectors and undefined fidelity per explainer."),
-           "## S8. Primary benchmark: per model and seed", pending(
-               "Per cell (model, seed): mean stability, fidelity, faithfulness gap and sparsity "
-               "for the five explainer variants; distribution of the instance-level paired "
-               "differences; mixed-model variance components; cluster-bootstrap intervals."),
-           "## S9. Cost", pending(
-               "Per dataset and model: median CPU time, rows evaluated, repetitions, and the "
-               "quiet-host record; FLOPs for logistic regression and the MLP; the random forest "
-               "against XGBoost at matched size."),
-           "## S10. Configuration sweep", pending(
-               "Grids of LIME kernel width and samples and of KernelSHAP budget and background; "
-               "per-model Pareto fronts; share of degenerate explanations."),
-           "## S11. Measurement controls", pending(
-               "No-noise repeats; valid one-hot perturbation; rank and top-k stability; "
-               "exclusion of all-zero vectors; four masking schemes on every model."),
-           "## S12. Further datasets: per model", pending(
-               "Stability, fidelity, faithfulness gap, sparsity and cost for every dataset, "
-               "model and explainer, mean and SD over seeds."),
-           "## S13. How to regenerate every table", "",
-           "1. Install the frozen environment; check the model hashes of S6 "
-           "(`paper_b_run.py preflight`).",
-           "2. Quality pass: `paper_b_run.py launch` (resumable; one row per instance).",
-           "3. Cost pass: `paper_b_run.py launch-timing` on an idle host.",
-           "4. Analysis: the scripts named under each table read the result rows and print "
-           "the tables of the paper and of this file. [R] names of the analysis scripts.",
-           ""]
+    # S7-S13 results, from the analysis of cohort B2 (supplement_results.py)
+    res = Path(args.analysis)
+    if args.rows:
+        sr.derive(Path(args.rows), res)
+    if args.timing_root:
+        sr.timing_cells(Path(args.timing_root), res)
+    md += sr.sections(res, cfg, {})
 
     OUT.mkdir(parents=True, exist_ok=True)
     src = OUT / "_supplement.md"
     widen = load(REV / "scripts" / "build_drafts.py", "build_drafts").widen
     src.write_text(widen("\n".join(md)), encoding="utf-8")
     docx = OUT / "paper_b_ci_rev1_supplement.docx"
-    r = subprocess.run(["quarto", "pandoc", str(src), "-f", "markdown", "-t", "docx", "-o",
-                        str(docx)], capture_output=True, text=True)
+    r = subprocess.run(["quarto", "pandoc", str(src), "-f", "markdown", "-t", "docx",
+                        f"--resource-path={res}", "-o", str(docx)], capture_output=True, text=True)
     if r.returncode:
         sys.exit(f"pandoc failed: {r.stderr[-800:]}")
     (OUT / "paper_b_ci_rev1_supplement.md").write_text("\n".join(md), encoding="utf-8")
     src.unlink(missing_ok=True)
     builder = load(CI / "scripts" / "build_paper_b_ci_docx.py", "build_paper_b_ci_docx")
     builder.OUT = OUT
-    if "--no-word" not in sys.argv:
+    if not args.no_word:
         print("supplement:", builder.word_pass(docx, "Supplementary material", ""))
     builder.check_masked(docx)
     return 0
