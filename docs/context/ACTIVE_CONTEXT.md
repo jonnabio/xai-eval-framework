@@ -177,6 +177,19 @@ requests #79 and #80 merged, and the one carrying this handoff.
     on Adult SHAP leads on fidelity against all three (p_Holm < 1e-4) and on the faithfulness
     gap against LIME and DiCE; stability against LIME not significant; on the six other
     datasets full LIME is more stable than SHAP. Cost: no data yet.
+- **Update 2026-11-08 (documentation laptop, PRs #91, #92)**:
+  - Cost results filled from the 25 Adult timing cells (C-042): Table 2 cost rows and p_Holm
+    (family of 12), Table 3, §4.2, Table 5 cost row, §6, abstract. H2 not supported: KernelSHAP
+    3-25x LIME's wall time (19.5 s on SVM) but p_Holm 0.11; SHAP faster than Anchors in all
+    cells; TreeSHAP ~LIME on RF, 1/9 of LIME on XGBoost. `revision_1/results/` regenerated
+    (snapshot 992d20038, with cost.csv).
+  - `check_revision.py`: 51 items, 27 closed (26 remediated, 1 explained), 24 pending; 43
+    changes (C-000 – C-042). Manuscript 13 pages (references spill).
+  - **Mandatory before submission: the author's length review**, once every result is in; do
+    not trim before then (author, 2026-11-08; listed in `revision_1/README.md`).
+  - Asked the experiment laptop (HANDOFF.md): Anchors on XGBoost records 0 model calls
+    (`XGBClassifier.predict` not counted).
+  - Timing pass: 33 of 115 cells at 07:14 on 2026-11-08 (Adult done), 0 errors.
 - **Current State**:
   - Manuscript 12 pages (budget 12), letter 15 pages; `check_revision.py`: 51 items, 19
     closed (18 remediated, 1 explained), 32 pending; 42 changes (C-000 – C-041).
