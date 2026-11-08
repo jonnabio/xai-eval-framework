@@ -420,9 +420,10 @@ Table~\ref{tab:cost} gives the cost per explanation by model family.
 [R: CPU-time ordering by model family; the share of model time in the
 explainer's time.] [R: rows evaluated per explanation: LIME 1,000; KernelSHAP
 about 25,000 (500 coalitions $\times$ 50 background rows); Anchors and DiCE as
-measured.] Earlier runs suggested that TreeSHAP was faster than LIME on
-XGBoost but slower on the random forest, two ensembles of different size.
-Here both have 100 trees, and the comparison is repeated with matched depth and with cost
+measured.] Whether TreeSHAP's cost relative to LIME reverses between
+XGBoost and the random forest, and whether such a reversal reflects the
+architecture or only the size of the ensemble, is tested directly: both have
+100 trees, and the comparison is repeated with matched depth and with cost
 plotted against the total number of leaves [R: whether the reversal holds,
 and whether it follows the size of the forest or the implementation].
 

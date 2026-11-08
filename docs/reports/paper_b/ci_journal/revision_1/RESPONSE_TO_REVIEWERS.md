@@ -247,9 +247,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The reported reversal in runtime performance between XGBoost and random forests represents an important finding. However, additional controlled experiments are necessary to determine whether this behavior consistently reflects model architecture rather than implementation-specific or hardware-dependent effects.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-015
+- **Changes:** C-015, C-037
 - **Plan:** WP2b
-- **Response:** We agree this needed a controlled test. Random forests and gradient-boosted trees were trained on the same data at matched numbers of trees and depths. The cost of TreeSHAP and of LIME was measured on one host against the total number of leaves (§4.2). [R: whether the reversal follows tree size, i.e. architecture, or persists at matched size, i.e. implementation.]
+- **Response:** We agree this needed a controlled test, and §4.2 now poses the reversal the reviewer identified as the question the controlled run answers. Random forests and gradient-boosted trees were trained on the same data at matched numbers of trees and depths. The cost of TreeSHAP and of LIME was measured on one host against the total number of leaves (§4.2). [R: whether the reversal follows tree size, i.e. architecture, or persists at matched size, i.e. implementation.]
 - **Where:** Section 4.2
 
 ### R1-M10
