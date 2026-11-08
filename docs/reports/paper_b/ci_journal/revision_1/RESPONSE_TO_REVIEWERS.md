@@ -100,7 +100,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Furthermore, the fairness of the explainer configurations, reliability of computational cost measurements, and **generalizability of the cross-dataset findings** require additional investigation.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017, C-040
+- **Changes:** C-017, C-040, C-043
 - **Plan:** WP3
 - **Response:** Addressed under R1-M10: the cross-dataset study now covers six further datasets with all models and all four explainers, SHAP stability included. The datasets were chosen to separate dimensionality from categorical encoding (§3.2, §4.5).
 - **Where:** Section 4.5, Table 4
@@ -145,7 +145,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 - **Type:** GENERAL
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-021, C-035, C-040
+- **Changes:** C-019, C-021, C-035, C-040, C-043
 - **Plan:** WP7
 - **Response:** We thank the reviewer for this assessment. We re-examined each conclusion against the evidence and identified the following places where it was not sufficiently supported: (1) the stability conclusion rested on one kernel width and a perturbation scheme whose validity was not tested; (2) the sparsity conclusion was a consequence of LIME's feature budget; (3) the recommendations generalized beyond the models and datasets tested. We revised each of them: the stability conclusion now rests on the sensitivity analysis and the validity controls (§4.3–4.4); sparsity is reported descriptively (§3.1); every claim in §5 is labelled confirmatory or exploratory and bounded by what was tested (Table 5); and the conclusions (§6) restate only those results.
 - **Where:** Section 5, Table 5; Section 6
@@ -186,10 +186,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The authors should demonstrate the robustness of the reported statistical significance and confidence intervals using an analytical approach that accounts for the hierarchical structure of the experimental design.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-011, C-029
+- **Status:** REMEDIATED
+- **Changes:** C-011, C-029, C-043
 - **Plan:** WP6
-- **Response:** As suggested, the inference now accounts for the structure of the design. For each endpoint and contrast we fit a linear mixed model with random intercepts for model and for seed within model. A cluster bootstrap over models gives confidence intervals, and the number of models in which each difference has the same sign is reported. The exact sign test at the model level is also given; with five models it cannot go below p = 0.0625, and the text says so. The cell-level Wilcoxon test is kept as a description (§3.5, Table 2). [R: whether conclusions change under the hierarchical analysis.]
+- **Response:** As suggested, the inference now accounts for the structure of the design. For each endpoint and contrast we fit a linear mixed model with random intercepts for model and for seed within model. A cluster bootstrap over models gives confidence intervals, and the number of models in which each difference has the same sign is reported. The exact sign test at the model level is also given; with five models it cannot go below p = 0.0625, and the text says so. The cell-level Wilcoxon test is kept as a description (§3.5, Table 2). The hierarchical analysis makes two conclusions more cautious. A cell-level Wilcoxon test, as in the earlier version, would declare SHAP more stable than LIME and its faithfulness gap larger than that of Anchors (p < 0.001 for both); the mixed model, which accounts for the variation between models, does not (Holm-adjusted p = 0.25 for both). The cluster bootstrap agrees with the mixed model except for the faithfulness gap against Anchors, where its interval excludes zero. Every other conclusion is the same under all three analyses, and the model-level signs agree in direction for all nine quality contrasts (five of five models for seven, four of five for stability against LIME and Anchors).
 - **Where:** Section 3.5
 
 ### R1-M4
@@ -227,7 +227,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The exceptionally low LIME stability observed on the Adult dataset may be influenced by the perturbation protocol and kernel-width configuration. The authors should investigate these effects more systematically before attributing the observed differences primarily to the explanation methods.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-018
+- **Changes:** C-018, C-043
 - **Plan:** WP4, WP5
 - **Response:** We investigated both factors systematically and found a third. The analysis now varies the kernel width (R1-M5) and the perturbation scheme (R1-M6), and adds a control without input noise. That control measures how much of LIME's instability comes from its own random sampling rather than from the input change. On examining the code we also found that an all-zero explanation entered the cosine similarity as 0. It is now counted, and stability is reported with and without such vectors (§3.4, §4.4). [R: which factor explains how much.]
 - **Where:** Section 4.4
@@ -257,7 +257,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The cross-dataset analysis does not include SHAP stability measurements. The authors should extend the evaluation to both explainers on the additional datasets or explicitly restrict their generalizability claims to the outcomes directly supported by the experiments.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017, C-040
+- **Changes:** C-017, C-040, C-043
 - **Plan:** WP3
 - **Response:** SHAP stability is now measured on every dataset, with all models and all four explainers, so the cross-dataset comparison is symmetric (§4.5, Table 4).
 - **Where:** Section 4.5, Table 4
@@ -307,7 +307,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The practical recommendations regarding explainer selection appear broader than the experimental evidence supports. The authors should strengthen the empirical justification for these recommendations or explicitly restrict them to the evaluated models, datasets, configurations, and computational settings.
 
 - **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-034
+- **Changes:** C-019, C-034, C-043
 - **Plan:** WP7
 - **Response:** The recommendations are now restricted to the models, datasets, configurations and host tested. §5 opens with a table that states, for each claim, the evidence, the condition and whether it is confirmatory or exploratory (Table 5).
 - **Where:** Section 5, Table 5
