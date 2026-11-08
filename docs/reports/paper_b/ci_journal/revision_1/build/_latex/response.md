@@ -13,7 +13,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > In addition, as an editorial requirement, please ensure that the main benchmark includes at least one state-of-the-art explainer comparison (e.g., Anchors or DiCE), or provide a clear justification if this is not feasible.
 
-**Response.** We thank the editor for this requirement, which strengthened the study. Both Anchors and DiCE are now part of the main benchmark, under the same paired protocol as SHAP and LIME: the same models, the same test instances, the same seeds, the same metrics and the same host. The research questions are stated as paired contrasts of SHAP against each of the other three explainers (§3.1). Anchors and DiCE produce explanations of different kinds (a rule; a counterfactual), so §3.3 explains how each is turned into a feature-attribution vector and which metrics are comparable across the four methods. The four-explainer results are in Table 2 (§4.1) and across the seven datasets in Table 4 (§4.5). [R: one sentence on the main finding for Anchors and DiCE.]
+**Response.** We thank the editor for this requirement, which strengthened the study. Both Anchors and DiCE are now part of the main benchmark, under the same paired protocol as SHAP and LIME: the same models, the same test instances, the same seeds, the same metrics and the same host. The research questions are stated as paired contrasts of SHAP against each of the other three explainers (§3.1). Anchors and DiCE produce explanations of different kinds (a rule; a counterfactual), so §3.3 explains how each is turned into a feature-attribution vector and which metrics are comparable across the four methods. The four-explainer results are in Table 2 (§4.1) and across the seven datasets in Table 4 (§4.5). SHAP's faithfulness advantage holds against Anchors and DiCE as well as LIME (fidelity higher in all 25 Adult cells against each); Anchors is not distinguishable from SHAP on stability, and DiCE ranks last on every quality endpoint (§4.1).
 **Changes in the manuscript:** Section 3.3; Section 4.1, Table 2
 
 
@@ -110,7 +110,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > The manuscript extends a previously published SHAP–LIME comparison from 45 to 75 matched configurations. The authors should clearly establish the scientific novelty of the present work and distinguish its original contributions from previously reported findings.
 
-**Response.** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work, which was replaced because an audit found training-test overlap, an unrecoverable model and timings from mixed hosts (§3.1). Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. [R: one sentence on the finding that is new.]
+**Response.** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work, which was replaced because an audit found training-test overlap, an unrecoverable model and timings from mixed hosts (§3.1). Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. The new finding is that SHAP's advantage lies in faithfulness, not in stability: on Adult its stability advantage over LIME is not significant, and on all six further datasets LIME with the full vector is the more stable explainer while SHAP keeps the highest fidelity (§4.1, §4.5).
 **Changes in the manuscript:** Section 1; former Section 4.1; Section 5; Section 3.1
 
 ### R1-M2
@@ -287,7 +287,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > Tables 4 and 5 should include measures of variability or uncertainty alongside the reported three-seed averages.
 
-**Response.** The cross-dataset table now reports mean ± standard deviation over seeds.
+**Response.** The cross-dataset table now reports the mean and standard deviation over seeds (Table 4).
 **Changes in the manuscript:** Section 4.5, Table 4
 
 ### R1-m12
@@ -352,7 +352,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > Third, the claim regarding LIME's near-zero stability on the Adult dataset is confounded by an improper hyperparameter choice, as the reference kernel width of 3.0 is severely restricted for a 103-dimensional one-hot-encoded feature space, leading to an artificial collapse of local neighborhood weights.
 
-**Response.** We agree. The reference LIME configuration is now the library's default kernel width, 0.75√M. We also correct a figure the reviewer quotes: the Adult feature space has 108 transformed features, not 103 as the earlier text stated, so the default width is about 7.79. The value 3.0 remains one point of the sensitivity analysis, where its effect is shown (§4.3). [R: stability at the default width.]
+**Response.** We agree. The reference LIME configuration is now the library's default kernel width, 0.75√M. We also correct a figure the reviewer quotes: the Adult feature space has 108 transformed features, not 103 as the earlier text stated, so the default width is about 7.79. The value 3.0 remains one point of the sensitivity analysis, where its effect is shown (§4.3). At the default width, LIME's stability on Adult is 0.56 with the full vector and 0.33 with the 10-feature budget, against 0.74 for SHAP; the difference between SHAP and LIME with the full vector is not significant (§4.1).
 **Changes in the manuscript:** Section 3.3; Section 4.3, Fig. 1
 
 ### R2-4

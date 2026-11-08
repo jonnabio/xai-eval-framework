@@ -1,17 +1,17 @@
 % Revision 1 abstract (P-22): DRAFT prepared by the assistant for the author (D-D).
 % Plain text only (the Word builder accepts $d_z{=}x$ and \texttt{} and nothing else).
 % [R: ...] marks values filled from cohort B2. Journal range: 150-200 words.
-Choosing between post-hoc explainers for a tabular model is a decision about faithfulness,
-stability and computational cost, yet controlled comparisons under matched conditions remain
-scarce. This paper reports a paired benchmark of SHAP, LIME, Anchors and DiCE in which every
-explainer sees the same model, the same test instances and the same seed, on one recorded
-host. The primary benchmark covers five model families on the Adult census-income dataset;
-six further datasets, chosen to cross feature dimension with feature type, and a
-configuration sweep are reported as exploratory evidence. Cost is reported as time on that
-host and as the number of model evaluations; the latter does not depend on the hardware. [R: main result
-for fidelity and stability, with effect sizes.] [R: result for Anchors and DiCE.] [R: cost
-result, including whether the TreeExplainer ordering between XGBoost and random forests
-holds when both ensembles are matched in size.] [R: whether the stability ordering holds
-over the LIME kernel width and the KernelSHAP budget.] The results support choosing the
-explainer by model architecture, configuration and latency budget, and they state which
-claims hold beyond the configurations tested.
+Choosing a post-hoc explainer for a tabular model trades faithfulness, stability and
+computational cost, yet comparisons under matched conditions are scarce. This paper reports
+a paired benchmark of SHAP, LIME, Anchors and DiCE in which every explainer sees the same
+model, test instances and seed on one recorded host: five model families on the Adult
+dataset (confirmatory), six further datasets and a configuration sweep (exploratory). Cost
+is measured in time and in model evaluations, which do not depend on the hardware. On Adult,
+SHAP's fidelity exceeds that of each alternative in all 25 model-seed cells ($d_z{=}3.3$ or
+more), but its stability advantage over LIME and Anchors is not significant; DiCE ranks last
+on every quality endpoint. On the six further datasets SHAP keeps the highest fidelity,
+while LIME is the more stable explainer. [R: cost result, including whether the
+TreeExplainer ordering between XGBoost and random forests holds when both ensembles are
+matched in size.] [R: whether the stability ordering holds over the LIME kernel width and
+the KernelSHAP budget.] The choice of explainer therefore depends on the model, the
+configuration and the latency budget.
