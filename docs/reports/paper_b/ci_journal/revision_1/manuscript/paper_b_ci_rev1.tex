@@ -503,12 +503,48 @@ from the TreeSHAP implementation. The grid crosses LIME kernel widths of
 0.75, 1.5, 3, 5, 10 and 15 and the default $0.75\sqrt{M}$ with 250 to 5,000
 samples, KernelSHAP budgets of 100 to 1,000 coalitions and the default with
 10 to 100 background rows, and TreeSHAP with 10 to 100 background rows; each
-cell has one instance per stratum, with stability on each. [R: Figure~1 placeholder: Pareto fronts of
-stability, fidelity and cost per model, one panel per model, computed on the
-instances valid under every configuration.] [R: whether the sign of each
-SHAP--LIME difference holds over the grid; the share of degenerate
-explanations at small kernel widths; the effect of the library default
-against the 500-coalition budget.]
+cell has one instance per stratum, with stability on each.
+
+On Adult, LIME's kernel width decides whether its explanations are usable at
+all. With widths of 0.75 and 1.5 every explanation is all-zero; with 3 and 5
+every perturbed copy (15 of 15, and 8.7 of 15 on average) gives an all-zero
+vector, so stability is not defined. These widths are left out below. With
+the default width ($0.75\sqrt{M} \approx 7.8$) about one perturbed vector in
+15 is all-zero, and with 10 and 15 none. On the remaining configurations all
+12 instances of every model are valid, and the comparison uses them
+(Figure~\ref{fig:sweep}).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=1.0\linewidth]{revision_1/figures/fig1_sweep_pareto.pdf}
+\caption{Stability against fidelity over the configuration sweep on Adult, one
+panel per model: means over the 12 instances valid under every configuration;
+LIME with the full vector, kernel widths 0.75 to 5 omitted as degenerate.
+Filled markers: main protocol; dashed line: Pareto front}
+\label{fig:sweep}
+\end{figure}
+
+SHAP's fidelity exceeds LIME's in every pair of configurations on all five
+models, and its faithfulness gap on four; on XGBoost some LIME
+configurations with a width of 10 or 15 match it (SHAP ahead in 126 of 180
+pairs). The stability ordering, in contrast, depends on LIME's
+configuration. LIME's stability rises with the kernel width and the number
+of samples, from 0.34 (default width, 250 samples) to 0.98 (width 15, 5,000
+samples), while its fidelity changes little (0.36 to 0.44, mostly with the
+samples). With a width of 15 and 5,000 samples, LIME is more stable than
+every SHAP configuration on four models; on the random forest TreeSHAP stays
+as stable (0.98 to 0.99) and dominates every LIME configuration. On the other
+models the Pareto front joins SHAP at the fidelity end with wide-kernel LIME
+at the stability end, so neither explainer dominates.
+
+For KernelSHAP, the library default budget ($2M + 2048 = 2{,}264$ coalitions)
+and the 500 coalitions of the main protocol give fidelity and stability within
+0.01 of each other, except on the MLP (0.81 against 0.77 and 0.49 against
+0.43). A budget of 100 coalitions lowers stability by 0.07 to 0.24, and 10
+background rows lower fidelity by 0.04 to 0.07. KernelSHAP on the two tree
+ensembles is within 0.02 of TreeSHAP on both endpoints, so the quality
+differences between the model families do not come from the TreeSHAP
+implementation. [R: the cost of each configuration, from the sweep timing.]
 
 \subsection{Validity of the Measurements}
 \label{sec:validity_controls}
@@ -538,8 +574,7 @@ SHAP on all five models and in all 15 cells, and LIME with ten features in
 ahead: on Adult, the stability ordering of SHAP and LIME depends on whether
 the perturbed rows can occur. SHAP stays more stable than Anchors and DiCE
 in all 15 cells under both controls. Rank correlation and top-5 overlap (c)
-keep SHAP ahead of LIME on four of five models, the MLP being the exception
-on rank correlation. Excluding all-zero vectors (d) raises LIME's cosine
+keep SHAP ahead of LIME on four of five models, the MLP being the exception. Excluding all-zero vectors (d) raises LIME's cosine
 stability by 0.01 to 0.08 and changes no ordering. Under all four masking
 schemes (e), SHAP's faithfulness gap exceeds that of every other explainer on
 every Adult model, except against LIME on XGBoost, where the difference is
@@ -603,8 +638,10 @@ noise keeps categories valid. Cost depends on the SHAP algorithm more than on
 the explainer: KernelSHAP is the most expensive explainer on the SVM, and
 TreeSHAP the cheapest on XGBoost. Of the validity controls, only the noise
 scheme changes an ordering; rank-based stability, the exclusion of all-zero
-vectors and the masking scheme do not. [R: the conditions under which an
-ordering changes over the configuration grid.]
+vectors and the masking scheme do not. Over the configuration grid, the fidelity ordering never changes,
+whereas the stability ordering changes with LIME's kernel width and number of
+samples: with a width of 15 and 5,000 samples, LIME is the more stable
+explainer on every model except the random forest.
 
 \begin{table}[htb]
 \centering
@@ -617,7 +654,7 @@ ordering changes over the configuration grid.]
 SHAP more stable than $X$ & confirmatory & Against DiCE only, in all five model families of Adult; against LIME and Anchors not significant \\
 SHAP more faithful than $X$ & confirmatory & Fidelity against all three in every Adult cell; faithfulness gap against LIME and DiCE, not Anchors \\
 SHAP more expensive than $X$ & confirmatory & Not supported: against LIME only with KernelSHAP (3--25 times), not significant after Holm; SHAP faster than Anchors in every cell; DiCE not significant \\
-Orderings over the configuration grid & exploratory & [R] \\
+Orderings over the configuration grid & exploratory & Fidelity: SHAP ahead in every pair of configurations on all five models; faithfulness gap on four (not XGBoost). Stability: depends on LIME's width and samples; LIME (width 15, 5,000 samples) ahead except on the random forest. Widths 0.75 to 5 degenerate \\
 Orderings under the validity controls & exploratory & Stability: LIME ahead of SHAP on Adult with valid one-hot noise; other controls change no ordering. Faithfulness gap: same ordering under all four masking schemes \\
 Orderings on other datasets & exploratory & SHAP highest on fidelity on all six and on faithfulness gap on five (Anchors equal on Connect-4); LIME (full vector) more stable on all six, Anchors on Phishing and Connect-4 \\
 TreeSHAP vs LIME cost by ensemble & exploratory & XGBoost: TreeSHAP faster on all seven datasets. Random forest: faster on three, equal on two, slower on two [R: at matched size] \\
@@ -636,8 +673,11 @@ As feature attributions, Anchors and DiCE are less faithful than SHAP and,
 except on the SVM, slower. Before relying on a stability comparison, a
 practitioner should check that the perturbations keep categorical features
 valid, since Gaussian noise on one-hot indicators reverses the ordering on
-Adult. [R: which LIME and KernelSHAP settings to check, from the
-configuration grid.]
+Adult. LIME's kernel width should be checked next: on Adult, widths up to 5
+give all-zero explanations, and the default width gives a stability well below
+that of a width of 10 or 15 with 2,000 or more samples, at almost the same
+fidelity. KernelSHAP loses stability below 250 coalitions and fidelity with
+10 background rows. [R: the cost of these settings, from the sweep timing.]
 
 \subsection{Relation to Earlier Work}
 
@@ -653,7 +693,9 @@ advantage is qualified: on Adult it is not significant under the original
 noise and reverses when the noise keeps categories valid, and LIME is the
 more stable explainer on the six further datasets. The cost statement is
 qualified as well: LIME is cheaper than KernelSHAP, but not than TreeSHAP on
-XGBoost. [R: whether the configuration grid changes any of these.]
+XGBoost. Over the configuration grid, the fidelity statement holds, and
+the stability statement depends on LIME's kernel width and number of samples
+as well.
 
 \subsection{Limitations}
 \label{sec:validity}
@@ -678,11 +720,13 @@ On the primary benchmark,
 SHAP is ahead on faithfulness: its fidelity exceeds that of LIME, Anchors
 and DiCE in every cell of all five model families ($d_z \ge 3.3$), and its
 faithfulness gap exceeds that of LIME and DiCE; on stability it is ahead
-only of DiCE (Table~\ref{tab:paired_main}). The advantage [R: holds across /
-narrows / reverses] over the configuration grid [R: the LIME kernel width or
-sample size, or the KernelSHAP budget, at which the ordering changes;
-exploratory, Section~\ref{sec:sweep}] and, for fidelity and the
-faithfulness gap, holds on all six further datasets, where LIME is instead
+only of DiCE (Table~\ref{tab:paired_main}). The fidelity advantage holds over the whole configuration grid, and the
+faithfulness-gap advantage on four of five models, whereas the stability
+ordering depends on LIME's configuration: with a kernel width of 15 and 5,000
+samples, LIME is more stable than every SHAP configuration on every model
+except the random forest (exploratory, Section~\ref{sec:sweep}). The fidelity
+advantage also holds on all six further datasets, and the faithfulness-gap
+advantage on five (Anchors matches SHAP on Connect-4), where LIME is instead
 the more stable explainer (exploratory, Table~\ref{tab:cross}), as it is
 on Adult when the stability noise keeps categories valid
 (Section~\ref{sec:validity_controls}). It is
