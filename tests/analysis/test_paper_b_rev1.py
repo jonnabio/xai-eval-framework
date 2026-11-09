@@ -655,3 +655,12 @@ def test_commit_log_reports_progress_failures_and_events():
     text = dash.commit_log()
     assert text.startswith("study: ") and "design: " in text
     assert "quality " in text and ("failed rows" in text)
+
+def test_commit_log_carries_monitor_notes(tmp_path, monkeypatch):
+    import paper_b_dashboard as dash
+    notes = tmp_path / "monitor.log"
+    notes.write_text("2026-11-09 15:20  sweep timing: gate held by VS Code tab; server stopped\n",
+                     encoding="utf-8")
+    monkeypatch.setattr(dash, "MONITOR_LOG", notes)
+    text = dash.commit_log()
+    assert "monitor notes" in text and "gate held by VS Code tab" in text
