@@ -86,6 +86,10 @@ def gather() -> dict:
             t["done"] += done
             t["rows"] += rows
             t["failed"] += failed
+            if failed:
+                out.setdefault("failed_jobs", []).append(
+                    {"pass": name, "job": [d, m, s, e], "failed": failed,
+                     "file": str(stem.with_suffix(".jsonl"))})
             tot["done"] += done
             tot["rows"] += rows
             tot["failed"] += failed
@@ -324,6 +328,45 @@ def heartbeat() -> dict:
                  "alive": _alive(sy.get("loop_pid")),
                  "label": f"last push {_ago(sy.get('last_push_time'))}"},
     }
+
+
+CHAIN_LOG = lib.ROOT / "outputs" / "paper_b_rev1_chain.log"
+
+
+def _tail(path: Path, n: int) -> list[str]:
+    try:
+        with open(path, encoding="utf-8", errors="replace") as fh:
+            return [ln.rstrip("\n") for ln in fh.readlines()[-n:]]
+    except OSError:
+        return []
+
+
+def commit_log(s: dict | None = None, events: int = 12, max_failed: int = 15) -> str:
+    """A plain-text log block for the body of each snapshot commit, so progress, state and
+    problems can be read from `git log` on another machine. No metric values: counts,
+    states, reasons and events only."""
+    s = s or gather()
+    L = [f"study: {lib.VARIANT or 'main'}   design: {lib.config_hash()[:12]}", ""]
+    L += render_text(s).splitlines()[1:]                      # without its timestamp line
+    fj = s.get("failed_jobs", [])
+    L += ["", f"failed rows by job ({len(fj)} jobs):" if fj else "failed rows: none"]
+    for f in fj[:max_failed]:
+        reasons: dict[str, list] = {}
+        for r in lib.read_jsonl(Path(f["file"])):
+            if r.get("failed"):
+                reasons.setdefault(str(r.get("fail_reason", "?"))[:60], []).append(
+                    r.get("instance_id"))
+        why = "; ".join(f"{k} (instances {', '.join(map(str, v))})" for k, v in reasons.items())
+        L.append(f"  {f['pass']} {'/'.join(map(str, f['job']))}: {f['failed']}: {why}")
+    if len(fj) > max_failed:
+        L.append(f"  ... and {len(fj) - max_failed} more jobs")
+    ev = _tail(lib.LOGS / "governor.log", events)
+    if ev:
+        L += ["", f"governor events (last {len(ev)}):"] + [f"  {e}" for e in ev]
+    ch = _tail(CHAIN_LOG, 4)
+    if ch:
+        L += ["", "study chain (last steps):"] + [f"  {c}" for c in ch]
+    return "\n".join(L) + "\n"
 
 
 def write_status_md() -> None:
