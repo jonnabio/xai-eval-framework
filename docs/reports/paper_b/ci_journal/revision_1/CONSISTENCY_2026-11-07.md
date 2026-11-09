@@ -72,6 +72,7 @@ not answered).
 | C-043 | — | §4.1, Table 5, §5, §5.1 | R1-6, R1-10, R1-M3, R1-M7, R1-M10, R1-M15 | filled; sweep and control parts of §5 and §5.1 [R] |
 | C-044 | — | §6 | none | done |
 | C-045 | — | Supplement (S7–S13) | R1-M14 | built; S9 matched run, S10 and part of S11 [R] |
+| C-046 | — | Supplement S9, results/ | R1-M14 | done |
 
 ## Items not yet closed
 

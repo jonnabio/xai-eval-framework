@@ -551,8 +551,6 @@ Distribution of the instance-level paired differences SHAP − X (quantiles over
 
 Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used), 1 warm-up explanation per explainer, explainers interleaved per instance, one process and one thread pinned to logical CPU 2, measurements paused while any other process used more than 10% of a core. Wall time from the high-resolution performance counter; CPU time from the process clock (15.6 ms steps on Windows). FLOPs per explanation for logistic regression (2p + 2 per row) and the MLP (one hidden layer of 100 units), with p the number of encoded features.
 
-*Timing pass at this build: 73 of 115 cells finished. Not complete: Spambase, Phishing, Connect-4. Rows marked * rest on fewer seeds than planned; rows of models not started are absent.*
-
 | Dataset | Model | Explainer | n | Wall (ms) | CPU (ms) | Rows | Model calls | MFLOPs |
 |---|---|---|---:|---:|---:|---:|---:|---:|
 | Adult | Logistic regression | SHAP | 100 | 29.6 | 31.2 | 25,001 | 2 | 5.45 |
@@ -660,11 +658,76 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Spambase | Logistic regression | LIME (full) | 60 | 5.6 | 0.0 | 1,000 | 1 | 0.12 |
 | Spambase | Logistic regression | Anchors | 60 | 1,086 | 1,086 | 29,751 | 298 | 3.45 |
 | Spambase | Logistic regression | DiCE | 60 | 398.5 | 406.2 | 2,004 | 6 | 0.23 |
-| Spambase | Random forest | SHAP | 16* | 15.1 | 15.6 | 0 | 0 | — |
-| Spambase | Random forest | LIME (10) | 17* | 14.4 | 15.6 | 1,000 | 1 | — |
-| Spambase | Random forest | LIME (full) | 17* | 15.1 | 15.6 | 1,000 | 1 | — |
-| Spambase | Random forest | Anchors | 16* | 4,114 | 4,070 | 54,051 | 542 | — |
-| Spambase | Random forest | DiCE | 16* | 441.3 | 437.5 | 2,004 | 6 | — |
+| Spambase | Random forest | SHAP | 60 | 14.3 | 15.6 | 0 | 0 | — |
+| Spambase | Random forest | LIME (10) | 60 | 14.5 | 15.6 | 1,000 | 1 | — |
+| Spambase | Random forest | LIME (full) | 60 | 15.0 | 15.6 | 1,000 | 1 | — |
+| Spambase | Random forest | Anchors | 60 | 4,238 | 4,219 | 56,701 | 568 | — |
+| Spambase | Random forest | DiCE | 60 | 432.2 | 437.5 | 2,004 | 6 | — |
+| Spambase | XGBoost | SHAP | 60 | 1.3 | 0.0 | 0 | 0 | — |
+| Spambase | XGBoost | LIME (10) | 60 | 8.0 | 15.6 | 1,000 | 1 | — |
+| Spambase | XGBoost | LIME (full) | 60 | 8.5 | 15.6 | 1,000 | 1 | — |
+| Spambase | XGBoost | Anchors | 60 | 1,683 | 1,664 | not counted | not counted | — |
+| Spambase | XGBoost | DiCE | 60 | 414.2 | 421.9 | 2,004 | 6 | — |
+| Spambase | SVM (RBF) | SHAP | 60 | 2,310 | 2,297 | 25,001 | 2 | — |
+| Spambase | SVM (RBF) | LIME (10) | 60 | 97.5 | 93.8 | 1,000 | 1 | — |
+| Spambase | SVM (RBF) | LIME (full) | 60 | 98.0 | 93.8 | 1,000 | 1 | — |
+| Spambase | SVM (RBF) | Anchors | 60 | 4,432 | 4,422 | 34,151 | 342 | — |
+| Spambase | SVM (RBF) | DiCE | 60 | 590.1 | 593.8 | 2,004 | 6 | — |
+| Spambase | MLP | SHAP | 60 | 40.3 | 46.9 | 25,001 | 2 | 300.01 |
+| Spambase | MLP | LIME (10) | 60 | 5.7 | 0.0 | 1,000 | 1 | 12.00 |
+| Spambase | MLP | LIME (full) | 60 | 6.1 | 0.0 | 1,000 | 1 | 12.00 |
+| Spambase | MLP | Anchors | 60 | 1,305 | 1,281 | 36,751 | 368 | 441.01 |
+| Spambase | MLP | DiCE | 60 | 401.5 | 406.2 | 2,004 | 6 | 24.05 |
+| Phishing | Logistic regression | SHAP | 60 | 26.7 | 31.2 | 25,001 | 2 | 3.45 |
+| Phishing | Logistic regression | LIME (10) | 60 | 5.9 | 0.0 | 1,000 | 1 | 0.14 |
+| Phishing | Logistic regression | LIME (full) | 60 | 6.6 | 0.0 | 1,000 | 1 | 0.14 |
+| Phishing | Logistic regression | Anchors | 60 | 1,746 | 1,742 | 29,151 | 292 | 4.02 |
+| Phishing | Logistic regression | DiCE | 60 | 504.2 | 500.0 | 2,006 | 8 | 0.28 |
+| Phishing | Random forest | SHAP | 60 | 23.3 | 15.6 | 0 | 0 | — |
+| Phishing | Random forest | LIME (10) | 60 | 17.6 | 15.6 | 1,000 | 1 | — |
+| Phishing | Random forest | LIME (full) | 60 | 18.3 | 15.6 | 1,000 | 1 | — |
+| Phishing | Random forest | Anchors | 60 | 5,027 | 5,008 | 54,301 | 544 | — |
+| Phishing | Random forest | DiCE | 60 | 531.1 | 531.2 | 2,005 | 7 | — |
+| Phishing | XGBoost | SHAP | 60 | 1.7 | 0.0 | 0 | 0 | — |
+| Phishing | XGBoost | LIME (10) | 60 | 8.9 | 15.6 | 1,000 | 1 | — |
+| Phishing | XGBoost | LIME (full) | 60 | 9.6 | 15.6 | 1,000 | 1 | — |
+| Phishing | XGBoost | Anchors | 60 | 2,070 | 2,023 | not counted | not counted | — |
+| Phishing | XGBoost | DiCE | 60 | 524.2 | 531.2 | 2,006 | 8 | — |
+| Phishing | SVM (RBF) | SHAP | 60 | 3,548 | 3,531 | 25,001 | 2 | — |
+| Phishing | SVM (RBF) | LIME (10) | 60 | 146.9 | 140.6 | 1,000 | 1 | — |
+| Phishing | SVM (RBF) | LIME (full) | 60 | 149.7 | 156.2 | 1,000 | 1 | — |
+| Phishing | SVM (RBF) | Anchors | 60 | 8,099 | 8,070 | 39,951 | 400 | — |
+| Phishing | SVM (RBF) | DiCE | 60 | 798.1 | 781.2 | 2,006 | 8 | — |
+| Phishing | MLP | SHAP | 60 | 44.7 | 46.9 | 25,001 | 2 | 355.01 |
+| Phishing | MLP | LIME (10) | 60 | 6.2 | 0.0 | 1,000 | 1 | 14.20 |
+| Phishing | MLP | LIME (full) | 60 | 7.1 | 0.0 | 1,000 | 1 | 14.20 |
+| Phishing | MLP | Anchors | 60 | 2,250 | 2,227 | 46,201 | 463 | 656.05 |
+| Phishing | MLP | DiCE | 60 | 501.2 | 500.0 | 2,006 | 8 | 28.49 |
+| Connect-4 | Logistic regression | SHAP | 60 | 36.4 | 31.2 | 25,001 | 2 | 6.35 |
+| Connect-4 | Logistic regression | LIME (10) | 60 | 8.6 | 15.6 | 1,000 | 1 | 0.25 |
+| Connect-4 | Logistic regression | LIME (full) | 60 | 10.9 | 15.6 | 1,000 | 1 | 0.25 |
+| Connect-4 | Logistic regression | Anchors | 60 | 1,223 | 1,203 | 8,401 | 85 | 2.13 |
+| Connect-4 | Logistic regression | DiCE | 60 | 1,418 | 1,406 | 2,004 | 6 | 0.51 |
+| Connect-4 | Random forest | SHAP | 60 | 49.5 | 46.9 | 0 | 0 | — |
+| Connect-4 | Random forest | LIME (10) | 60 | 25.7 | 31.2 | 1,000 | 1 | — |
+| Connect-4 | Random forest | LIME (full) | 60 | 28.7 | 31.2 | 1,000 | 1 | — |
+| Connect-4 | Random forest | Anchors | 60 | 7,198 | 7,164 | 36,151 | 362 | — |
+| Connect-4 | Random forest | DiCE | 60 | 1,482 | 1,469 | 2,004 | 6 | — |
+| Connect-4 | XGBoost | SHAP | 60 | 1.8 | 0.0 | 0 | 0 | — |
+| Connect-4 | XGBoost | LIME (10) | 60 | 12.9 | 15.6 | 1,000 | 1 | — |
+| Connect-4 | XGBoost | LIME (full) | 60 | 15.3 | 15.6 | 1,000 | 1 | — |
+| Connect-4 | XGBoost | Anchors | 60 | 3,643 | 3,617 | not counted | not counted | — |
+| Connect-4 | XGBoost | DiCE | 60 | 1,469 | 1,469 | 2,005 | 7 | — |
+| Connect-4 | SVM (RBF) | SHAP | 60 | 29,507 | 29,297 | 25,001 | 2 | — |
+| Connect-4 | SVM (RBF) | LIME (10) | 60 | 1,193 | 1,188 | 1,000 | 1 | — |
+| Connect-4 | SVM (RBF) | LIME (full) | 60 | 1,192 | 1,188 | 1,000 | 1 | — |
+| Connect-4 | SVM (RBF) | Anchors | 60 | 27,862 | 27,453 | 21,351 | 214 | — |
+| Connect-4 | SVM (RBF) | DiCE | 60 | 3,788 | 3,766 | 2,004 | 6 | — |
+| Connect-4 | MLP | SHAP | 60 | 59.8 | 62.5 | 25,001 | 2 | 645.03 |
+| Connect-4 | MLP | LIME (10) | 60 | 9.8 | 15.6 | 1,000 | 1 | 25.80 |
+| Connect-4 | MLP | LIME (full) | 60 | 12.1 | 15.6 | 1,000 | 1 | 25.80 |
+| Connect-4 | MLP | Anchors | 60 | 3,978 | 3,953 | 33,351 | 334 | 860.46 |
+| Connect-4 | MLP | DiCE | 60 | 1,424 | 1,422 | 2,004 | 6 | 51.70 |
 
 Anchors calls XGBoost through a prediction method the counter did not wrap, so its rows and calls on XGBoost were not counted; its time is measured as for every other explainer.
 
