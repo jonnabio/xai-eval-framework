@@ -145,14 +145,14 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > The application of Gaussian perturbations to one-hot-encoded categorical features may generate unrealistic observations. The authors should evaluate whether the reported stability results remain valid under perturbation strategies that preserve categorical constraints and relevant feature dependencies.
 
-**Response.** We agree that Gaussian noise on one-hot columns creates observations that cannot occur. The stability analysis now compares the original scheme with one that preserves the constraints. Noise is added to numeric features only, and each categorical feature is resampled with a small probability from its training distribution, so every perturbed observation is a valid row (§3.4, §4.4). [R]
+**Response.** We agree that Gaussian noise on one-hot columns creates observations that cannot occur. The stability analysis now compares the original scheme with one that preserves the constraints. Noise is added to numeric features only, and each categorical feature is resampled with a small probability from its training distribution, so every perturbed observation is a valid row (§3.4, §4.4). With valid perturbations, LIME with the full vector is more stable than SHAP on all five models and in all 15 model-seed cells, whereas under the original Gaussian noise SHAP was ahead. The stability ordering of SHAP and LIME on Adult therefore depends on whether the perturbed rows can occur, and the text now says so (§4.4, §5, Conclusions, Abstract). SHAP stays more stable than Anchors and DiCE under both schemes.
 **Changes in the manuscript:** Section 4.4
 
 ### R1-M7
 
 > The exceptionally low LIME stability observed on the Adult dataset may be influenced by the perturbation protocol and kernel-width configuration. The authors should investigate these effects more systematically before attributing the observed differences primarily to the explanation methods.
 
-**Response.** We investigated both factors systematically and found a third. The analysis now varies the kernel width (R1-M5) and the perturbation scheme (R1-M6), and adds a control without input noise. That control measures how much of LIME's instability comes from its own random sampling rather than from the input change. On examining the code we also found that an all-zero explanation entered the cosine similarity as 0. It is now counted, and stability is reported with and without such vectors (§3.4, §4.4). [R: which factor explains how much.]
+**Response.** We investigated both factors systematically and found a third. The analysis now varies the kernel width (R1-M5) and the perturbation scheme (R1-M6), and adds a control without input noise. That control measures how much of LIME's instability comes from its own random sampling rather than from the input change. On examining the code we also found that an all-zero explanation entered the cosine similarity as 0. It is now counted, and stability is reported with and without such vectors (§3.4, §4.4). Without input noise, LIME's repeated explanations are almost identical (stability 0.98 to 0.99 with ten features): its own sampling accounts for 8% of its instability under the original protocol (22% with all features), so most of it is its response to the perturbation, and in particular to perturbations that create impossible one-hot rows (R1-M6). Excluding all-zero vectors raises LIME's stability by 0.01 to 0.08 and changes no ordering (§4.1, §4.4). [R: the share due to the kernel width, from the sensitivity analysis.]
 **Changes in the manuscript:** Section 4.4
 
 ### R1-M8
@@ -194,7 +194,7 @@ Each comment is quoted in full, followed by the answer. Where one sentence of a 
 
 > The masking sensitivity analysis is limited to a small subset of random-forest experiments. The authors should investigate whether the reported SHAP advantages in fidelity and faithfulness persist across alternative masking strategies and additional model families.
 
-**Response.** The four masking schemes are now applied to all models and datasets of the main benchmark, not only to random forests (§4.4). [R]
+**Response.** The four masking schemes are now applied to all models and datasets of the main benchmark, not only to random forests (§4.4). Under all four schemes, SHAP's faithfulness gap exceeds that of every other explainer on every Adult model, except against LIME on XGBoost, where the difference is close to zero. On the six further datasets SHAP is ahead in 460 of 480 combinations of model, explainer and scheme; most exceptions are Anchors on Connect-4, which is ahead of SHAP on three of five models under every scheme, as under the main protocol (§4.4).
 **Changes in the manuscript:** Section 4.4
 
 ### R1-M14
