@@ -637,3 +637,21 @@ def test_study_configs_carry_the_main_resource_limits():
     for p in sorted((ROOT / "experiments/exp_b_rev1/studies").glob("*.toml")):
         with open(p, "rb") as fh:
             assert tomllib.load(fh)["resources"] == main, p.name
+
+def test_snapshot_commit_carries_the_status_log(repo, tmp_path):
+    """The other laptop follows the run through `git log`: the snapshot commit body holds the
+    status log (2026-11-09, author request)."""
+    work, _origin = repo
+    live = tmp_path / "live"
+    (live / "results").mkdir(parents=True)
+    (live / "results" / "r.jsonl").write_text("{}\n")
+    c = sync.snapshot("runs", "p", live, 50, "HEAD", cwd=work, body="study: main\nqueue 3\n")
+    msg = _git(work, "log", "-1", "--format=%B", c)
+    assert "results snapshot" in msg and "study: main" in msg and "queue 3" in msg
+
+
+def test_commit_log_reports_progress_failures_and_events():
+    import paper_b_dashboard as dash
+    text = dash.commit_log()
+    assert text.startswith("study: ") and "design: " in text
+    assert "quality " in text and ("failed rows" in text)

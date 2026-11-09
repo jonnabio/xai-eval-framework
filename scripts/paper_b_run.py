@@ -41,8 +41,24 @@ import paper_b_lib as lib  # noqa: E402
 EXIT_FATAL = 2      # do not retry (model hash mismatch, bad arguments)
 
 
+_EVENT_LOG: Path | None = None     # set by the governors: their events also go to a file
+
+
 def log(msg: str) -> None:
-    print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} {msg}", flush=True)
+    line = f"{time.strftime('%Y-%m-%d %H:%M:%S')} {msg}"
+    print(line, flush=True)
+    if _EVENT_LOG is not None:        # the governors run hidden: keep their events on disk,
+        try:                          # where the save loop ships them (_logs/governor.log.gz)
+            with open(_EVENT_LOG, "a", encoding="utf-8") as fh:
+                fh.write(line + "\n")
+        except OSError:
+            pass
+
+
+def start_event_log() -> None:
+    global _EVENT_LOG
+    lib.LOGS.mkdir(parents=True, exist_ok=True)
+    _EVENT_LOG = lib.LOGS / "governor.log"
 
 
 def root_of(args) -> Path:
@@ -452,6 +468,7 @@ class Governor:
         import psutil
         self.psutil = psutil
         self.args, self.root, self.extra = args, root, extra
+        start_event_log()
         self.cfg = lib.config()
         self.res = self.cfg["resources"]
         # Read once: re-reading it every step crashed the governor when the config was
@@ -703,6 +720,7 @@ def cmd_launch(args, pilot: bool = False) -> int:
 
 
 def cmd_launch_timing(args, pilot: bool = False) -> int:
+    start_event_log()
     cfg = lib.config()
     if count_quality_workers():
         log("quality workers are running: the timing pass needs the host to itself")

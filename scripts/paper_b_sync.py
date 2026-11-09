@@ -107,7 +107,7 @@ def collect(live: Path, max_mb: float) -> tuple[list[tuple[Path, str]], list[str
 
 
 def snapshot(branch: str, prefix: str, live: Path, max_mb: float, base_ref: str,
-             cwd: Path | None = None) -> str | None:
+             cwd: Path | None = None, body: str = "") -> str | None:
     """Commit the live files on `branch`; return the new commit, or None if unchanged."""
     ref = f"refs/heads/{branch}"
     parent = git("rev-parse", ref, cwd=cwd) if ref_exists(ref, cwd) else git("rev-parse", base_ref, cwd=cwd)
@@ -132,8 +132,10 @@ def snapshot(branch: str, prefix: str, live: Path, max_mb: float, base_ref: str,
         tree = git("write-tree", env=env, cwd=cwd)
     if tree == git("rev-parse", f"{parent}^{{tree}}", cwd=cwd):
         return None
-    msg = (f"data(paper-b): B2 results snapshot {time.strftime('%Y-%m-%d %H:%M')}\n\n"
-           f"{len(files)} files from outputs/paper_b_rev1_live/ (automatic, paper_b_sync.py).\n")
+    msg = (f"data(paper-b): {lib.VARIANT or 'B2'} results snapshot "
+           f"{time.strftime('%Y-%m-%d %H:%M')}\n\n"
+           f"{len(files)} files from {live.relative_to(lib.ROOT).as_posix() if live.is_relative_to(lib.ROOT) else live}/"
+           f" (automatic, paper_b_sync.py).\n" + (f"\n{body}" if body else ""))
     commit = git("commit-tree", tree, "-p", parent, "-m", msg, cwd=cwd)
     # Compare-and-swap: refuses if the branch moved since `parent` was read.
     if ref_exists(ref, cwd):
@@ -157,14 +159,17 @@ def write_state(**kw) -> None:
 
 def once(cfg: dict, do_push: bool) -> int:
     sc = cfg["sync"]
+    body = ""
     try:
         import paper_b_dashboard as dash
         dash.write_status_md()
+        body = dash.commit_log()          # progress, state and events in the commit body
     except Exception as exc:      # the dashboard must never block a save
         print(f"status page not written: {exc}", flush=True)
     try:
         base = git("rev-parse", "HEAD")
-        commit = snapshot(sc["branch"], sc["results_prefix"], lib.LIVE, sc["max_file_mb"], base)
+        commit = snapshot(sc["branch"], sc["results_prefix"], lib.LIVE, sc["max_file_mb"], base,
+                          body=body)
     except Exception as exc:
         write_state(last_error=str(exc)[-400:], last_error_time=time.time())
         print(f"snapshot FAILED: {exc}", flush=True)
