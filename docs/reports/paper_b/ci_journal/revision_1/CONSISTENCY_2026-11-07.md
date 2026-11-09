@@ -7,7 +7,7 @@ Checked on 2026-11-08 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (49 of 49) |
+| Every ledger change is in the manuscript at the place it names | yes (50 of 50) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -75,6 +75,7 @@ not answered).
 | C-046 | — | Supplement S9, results/ | R1-M14 | timing complete (115/115); supplement S9 final |
 | C-047 | — | §4.2, §6, Abstract | R1-M8 | TreeSHAP vs LIME narrowed; matched run [R] |
 | C-048 | — | §4.4, §5, Table 5, §5.1, §5.2, §6, Abstract | R1-3, R1-M6, R1-M7, R1-M13 | validity controls filled; grid parts [R] |
+| C-049 | — | §4.3, Figure 1, §5, Table 5, §5.1, §5.2, §6, Abstract | R1-10, R1-M4, R1-M5, R1-M7, R1-M11, R1-M12, R2-2 | sweep quality filled, Figure 1; configuration cost [R] |
 
 ## Items not yet closed
 
@@ -93,27 +94,21 @@ Sources of the missing values:
 | R1-1 | pending | Q | §5.2: which earlier statements are confirmed, qualified or reversed (author's reading of the filled results) |
 | R1-6 | pending | S, T | Table 5 scope column; §4.5 is filled |
 | R1-9 | pending | A | the author reads the 15 recent abstracts (REFERENCE_AUDIT.md); text and list are done |
-| R1-10 | pending | Q, S, V, T | Table 5 scope column and §6 |
 | R1-M1 | pending | Q | §5.2 paragraph on earlier work (results available; text to write) |
 | R1-M4 | pending | S | §4.3: whether the differences hold across LIME budgets and SHAP estimators |
-| R1-M5 | pending | S | §4.3 sweep results |
-| R1-M7 | pending | V, S | §4.4 and §4.3: LIME stability against noise and kernel width |
 | R1-M9 | pending | X, T | §4.2: whether the reversal follows tree size or implementation |
 | R1-M10 | pending | S, T | Table 5 scope column; Table 4 and §4.5 are filled |
-| R1-M11 | pending | S | §4.3 over seeds and models |
-| R1-M12 | pending | S | §4.3 on the common valid instances |
 | R1-M15 | pending | Q, S, V, T | Table 5 scope column and the recommendations in §5.1 |
 | R1-m1 | pending | Q, S, V, T | abstract values |
 | R1-m10 | pending | S | Figure 1 is generated from the sweep |
 | R1-m13 | pending | M | §4.4 masking results; rule stated |
 | R1-m15 | pending | Q, S, V, T | labelled findings in §5, §6 and the abstract |
-| R2-2 | pending | S | §4.3 Pareto fronts, Figure 1 |
 | R2-3 | pending | S | §4.3 kernel-width results |
 
-Closed: ED-1, R1-2, R1-3, R1-4, R1-5, R1-7, R1-8, R1-11, R1-M2, R1-M3, R1-M6, R1-M8, R1-M13, R1-M14, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-4, R2-5, R2-6, R2-7, R2-8 (32 items).
+Closed: ED-1, R1-2, R1-3, R1-4, R1-5, R1-7, R1-8, R1-10, R1-11, R1-M2, R1-M3, R1-M5, R1-M6, R1-M7, R1-M8, R1-M11, R1-M12, R1-M13, R1-M14, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m11, R1-m12, R1-m14, R2-1a, R2-1b, R2-2, R2-4, R2-5, R2-6, R2-7, R2-8 (38 items).
 
-Count of pending items by source: Q 6, T 7, S 14, V 5, M 1, X 1, A 1.
+Count of pending items by source: Q 5, T 6, S 8, V 3, M 1, X 1, A 1.
 
 ## Mandatory before submission
 
-- Length review by the author once every result is in (14 pages after C-048, up from 13). Do not trim before then; do not submit without it (author, 2026-11-08).
+- Length review by the author once every result is in (14 pages after C-049, up from 13). Do not trim before then; do not submit without it (author, 2026-11-08).

@@ -10,10 +10,9 @@ is measured in time and in model evaluations, which do not depend on the hardwar
 SHAP's fidelity exceeds that of each alternative in all 25 model-seed cells ($d_z{=}3.3$ or
 more), but its stability advantage over LIME and Anchors is not significant; DiCE ranks last
 on every quality endpoint. On the six further datasets SHAP keeps the highest fidelity,
-while LIME is the more stable explainer, as it is on Adult when the stability
-noise keeps categories valid. KernelSHAP takes 3 to 25 times LIME's wall time,
+while LIME is the more stable explainer, as it is on Adult with category-preserving
+noise or a wider kernel; SHAP's fidelity lead holds over every configuration tested. KernelSHAP takes 3 to 25 times LIME's wall time,
 whereas TreeSHAP is faster than LIME on XGBoost and, on the random forest, faster or
 slower depending on the dataset [R: whether this follows tree size when both ensembles are
-matched]. [R: whether the stability ordering holds over the LIME kernel width and
-the KernelSHAP budget.] The choice of explainer therefore depends on the model, the
+matched]. The choice of explainer therefore depends on the model, the
 configuration and the latency budget.
