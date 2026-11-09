@@ -175,6 +175,31 @@
 | breast_cancer | xgb | lime | 0 | 5.509 | 1000 | 1 | 48 |  |
 | breast_cancer | xgb | lime_full | 0 | 5.643 | 1000 | 1 | 48 |  |
 | breast_cancer | xgb | shap | 0 | 0.6831 | 0 | 0 | 48 |  |
+| connect4 | logreg | anchors | 1203 | 1223 | 8401 | 85 | 60 | 2.134e+06 |
+| connect4 | logreg | dice | 1406 | 1418 | 2004 | 6 | 60 | 5.09e+05 |
+| connect4 | logreg | lime | 15.62 | 8.598 | 1000 | 1 | 60 | 2.54e+05 |
+| connect4 | logreg | lime_full | 15.62 | 10.86 | 1000 | 1 | 60 | 2.54e+05 |
+| connect4 | logreg | shap | 31.25 | 36.42 | 2.5e+04 | 2 | 60 | 6.35e+06 |
+| connect4 | mlp | anchors | 3953 | 3978 | 3.335e+04 | 334.5 | 60 | 8.605e+08 |
+| connect4 | mlp | dice | 1422 | 1424 | 2004 | 6 | 60 | 5.17e+07 |
+| connect4 | mlp | lime | 15.62 | 9.831 | 1000 | 1 | 60 | 2.58e+07 |
+| connect4 | mlp | lime_full | 15.62 | 12.09 | 1000 | 1 | 60 | 2.58e+07 |
+| connect4 | mlp | shap | 62.5 | 59.83 | 2.5e+04 | 2 | 60 | 6.45e+08 |
+| connect4 | rf | anchors | 7164 | 7198 | 3.615e+04 | 362.5 | 60 |  |
+| connect4 | rf | dice | 1469 | 1482 | 2004 | 6 | 60 |  |
+| connect4 | rf | lime | 31.25 | 25.72 | 1000 | 1 | 60 |  |
+| connect4 | rf | lime_full | 31.25 | 28.69 | 1000 | 1 | 60 |  |
+| connect4 | rf | shap | 46.88 | 49.49 | 0 | 0 | 60 |  |
+| connect4 | svm | anchors | 2.745e+04 | 2.786e+04 | 2.135e+04 | 214.5 | 60 |  |
+| connect4 | svm | dice | 3766 | 3788 | 2004 | 6.5 | 60 |  |
+| connect4 | svm | lime | 1188 | 1193 | 1000 | 1 | 60 |  |
+| connect4 | svm | lime_full | 1188 | 1192 | 1000 | 1 | 60 |  |
+| connect4 | svm | shap | 2.93e+04 | 2.951e+04 | 2.5e+04 | 2 | 60 |  |
+| connect4 | xgb | anchors | 3617 | 3643 | 0 | 0 | 60 |  |
+| connect4 | xgb | dice | 1469 | 1469 | 2005 | 7 | 60 |  |
+| connect4 | xgb | lime | 15.62 | 12.94 | 1000 | 1 | 60 |  |
+| connect4 | xgb | lime_full | 15.62 | 15.34 | 1000 | 1 | 60 |  |
+| connect4 | xgb | shap | 0 | 1.796 | 0 | 0 | 60 |  |
 | diabetes | logreg | anchors | 46.88 | 55.8 | 1401 | 15 | 60 | 2.522e+04 |
 | diabetes | logreg | dice | 93.75 | 99.09 | 2004 | 6 | 60 | 3.607e+04 |
 | diabetes | logreg | lime | 0 | 2.677 | 1000 | 1 | 60 | 1.8e+04 |
@@ -225,13 +250,53 @@
 | german_credit | xgb | lime | 15.62 | 8.258 | 1000 | 1 | 60 |  |
 | german_credit | xgb | lime_full | 15.62 | 8.928 | 1000 | 1 | 60 |  |
 | german_credit | xgb | shap | 0 | 1.71 | 0 | 0 | 60 |  |
+| phishing | logreg | anchors | 1742 | 1746 | 2.915e+04 | 292.5 | 60 | 4.023e+06 |
+| phishing | logreg | dice | 500 | 504.2 | 2006 | 8 | 60 | 2.768e+05 |
+| phishing | logreg | lime | 0 | 5.895 | 1000 | 1 | 60 | 1.38e+05 |
+| phishing | logreg | lime_full | 0 | 6.636 | 1000 | 1 | 60 | 1.38e+05 |
+| phishing | logreg | shap | 31.25 | 26.67 | 2.5e+04 | 2 | 60 | 3.45e+06 |
+| phishing | mlp | anchors | 2227 | 2250 | 4.62e+04 | 463 | 60 | 6.561e+08 |
+| phishing | mlp | dice | 500 | 501.2 | 2006 | 8 | 60 | 2.849e+07 |
+| phishing | mlp | lime | 0 | 6.243 | 1000 | 1 | 60 | 1.42e+07 |
+| phishing | mlp | lime_full | 0 | 7.131 | 1000 | 1 | 60 | 1.42e+07 |
+| phishing | mlp | shap | 46.88 | 44.74 | 2.5e+04 | 2 | 60 | 3.55e+08 |
+| phishing | rf | anchors | 5008 | 5027 | 5.43e+04 | 544 | 60 |  |
+| phishing | rf | dice | 531.2 | 531.1 | 2005 | 7 | 60 |  |
+| phishing | rf | lime | 15.62 | 17.55 | 1000 | 1 | 60 |  |
+| phishing | rf | lime_full | 15.62 | 18.35 | 1000 | 1 | 60 |  |
+| phishing | rf | shap | 15.62 | 23.26 | 0 | 0 | 60 |  |
+| phishing | svm | anchors | 8070 | 8099 | 3.995e+04 | 400.5 | 60 |  |
+| phishing | svm | dice | 781.2 | 798.1 | 2006 | 8 | 60 |  |
+| phishing | svm | lime | 140.6 | 146.9 | 1000 | 1 | 60 |  |
+| phishing | svm | lime_full | 156.2 | 149.7 | 1000 | 1 | 60 |  |
+| phishing | svm | shap | 3531 | 3548 | 2.5e+04 | 2 | 60 |  |
+| phishing | xgb | anchors | 2023 | 2070 | 0 | 0 | 60 |  |
+| phishing | xgb | dice | 531.2 | 524.2 | 2006 | 8 | 60 |  |
+| phishing | xgb | lime | 15.62 | 8.866 | 1000 | 1 | 60 |  |
+| phishing | xgb | lime_full | 15.62 | 9.638 | 1000 | 1 | 60 |  |
+| phishing | xgb | shap | 0 | 1.725 | 0 | 0 | 60 |  |
 | spambase | logreg | anchors | 1086 | 1086 | 2.975e+04 | 298.5 | 60 | 3.451e+06 |
 | spambase | logreg | dice | 406.2 | 398.5 | 2004 | 6 | 60 | 2.325e+05 |
 | spambase | logreg | lime | 0 | 5.167 | 1000 | 1 | 60 | 1.16e+05 |
 | spambase | logreg | lime_full | 0 | 5.619 | 1000 | 1 | 60 | 1.16e+05 |
 | spambase | logreg | shap | 15.62 | 23.19 | 2.5e+04 | 2 | 60 | 2.9e+06 |
-| spambase | rf | anchors | 4070 | 4114 | 5.405e+04 | 541.5 | 16 |  |
-| spambase | rf | dice | 437.5 | 441.3 | 2004 | 6 | 16 |  |
-| spambase | rf | lime | 15.62 | 14.41 | 1000 | 1 | 17 |  |
-| spambase | rf | lime_full | 15.62 | 15.06 | 1000 | 1 | 17 |  |
-| spambase | rf | shap | 15.62 | 15.08 | 0 | 0 | 16 |  |
+| spambase | mlp | anchors | 1281 | 1305 | 3.675e+04 | 368.5 | 60 | 4.41e+08 |
+| spambase | mlp | dice | 406.2 | 401.5 | 2004 | 6 | 60 | 2.405e+07 |
+| spambase | mlp | lime | 0 | 5.656 | 1000 | 1 | 60 | 1.2e+07 |
+| spambase | mlp | lime_full | 0 | 6.15 | 1000 | 1 | 60 | 1.2e+07 |
+| spambase | mlp | shap | 46.88 | 40.28 | 2.5e+04 | 2 | 60 | 3e+08 |
+| spambase | rf | anchors | 4219 | 4238 | 5.67e+04 | 568 | 60 |  |
+| spambase | rf | dice | 437.5 | 432.2 | 2004 | 6 | 60 |  |
+| spambase | rf | lime | 15.62 | 14.49 | 1000 | 1 | 60 |  |
+| spambase | rf | lime_full | 15.62 | 15.04 | 1000 | 1 | 60 |  |
+| spambase | rf | shap | 15.62 | 14.28 | 0 | 0 | 60 |  |
+| spambase | svm | anchors | 4422 | 4432 | 3.415e+04 | 342.5 | 60 |  |
+| spambase | svm | dice | 593.8 | 590.1 | 2004 | 6 | 60 |  |
+| spambase | svm | lime | 93.75 | 97.5 | 1000 | 1 | 60 |  |
+| spambase | svm | lime_full | 93.75 | 98.04 | 1000 | 1 | 60 |  |
+| spambase | svm | shap | 2297 | 2310 | 2.5e+04 | 2 | 60 |  |
+| spambase | xgb | anchors | 1664 | 1683 | 0 | 0 | 60 |  |
+| spambase | xgb | dice | 421.9 | 414.2 | 2004 | 6 | 60 |  |
+| spambase | xgb | lime | 15.62 | 7.967 | 1000 | 1 | 60 |  |
+| spambase | xgb | lime_full | 15.62 | 8.517 | 1000 | 1 | 60 |  |
+| spambase | xgb | shap | 0 | 1.319 | 0 | 0 | 60 |  |
