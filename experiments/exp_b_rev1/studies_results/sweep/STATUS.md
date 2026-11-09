@@ -1,13 +1,13 @@
 # Cohort B2 run status
 
-Generated 2026-11-09 14:22:54 Central America Standard Time by `scripts/paper_b_dashboard.py` (no metric values are shown).
+Generated 2026-11-09 14:38:02 Central America Standard Time by `scripts/paper_b_dashboard.py` (no metric values are shown).
 
 ```
-Paper B rev. 1, cohort B2 - 2026-11-09 14:22:54
+Paper B rev. 1, cohort B2 - 2026-11-09 14:38:02
 Orchestrator: not running (mode quality, workers 0/6, queue 0, admission: ok)
 Host: CPU 11%  RAM free 13.5/31.4 GB  disk free 358 GB  AC  3000.0 MHz
 pilot   : jobs 0/235  rows 0/940  failed rows 0
 quality : jobs 669/669  rows 2676/2676  failed rows 0
-timing  : cells 0/15
-Sync: last push 1 s ago (739df01c66), last commit 7 s ago
+timing  : cells 0/15  gate: WAITING — other CPU load 21% > 10%
+Sync: last push 15 min ago (0d2e8d553a), last commit 15 min ago
 ```
