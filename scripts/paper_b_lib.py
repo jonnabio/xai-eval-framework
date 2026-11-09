@@ -105,6 +105,13 @@ def seeds_for(cfg: dict, dataset: str) -> list[int]:
     return list(cfg["seeds"]["adult" if role == "main" else "other"])
 
 
+def explainer_applies(cfg: dict, explainer: str, model: str) -> bool:
+    """An explainer spec may be restricted to some models (`models = [...]`, e.g. the TreeSHAP
+    settings of the sweep to rf and xgb)."""
+    only = cfg["explainers"].get(explainer, {}).get("models")
+    return not only or model in only
+
+
 def all_quality_jobs(cfg: dict, datasets=None, models=None, explainers=None,
                      seeds=None) -> list[tuple[str, str, int, str]]:
     jobs = []
@@ -112,10 +119,8 @@ def all_quality_jobs(cfg: dict, datasets=None, models=None, explainers=None,
         for m in models or cfg["models"]:
             for s in seeds or seeds_for(cfg, d):
                 for e in explainers or cfg["explainers"]:
-                    only = cfg["explainers"].get(e, {}).get("models")   # optional restriction
-                    if only and m not in only:
-                        continue
-                    jobs.append((d, m, int(s), e))
+                    if explainer_applies(cfg, e, m):
+                        jobs.append((d, m, int(s), e))
     return jobs
 
 
