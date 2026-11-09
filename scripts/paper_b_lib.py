@@ -508,13 +508,18 @@ class CallCounter:
 
         wrapped.__wrapped__ = fn
         wrapped.__name__ = getattr(fn, "__name__", "wrapped")
+        wrapped._paper_b_counted = True
         return wrapped
 
 
 def install_counter(counter: CallCounter, classes: Iterable[type]) -> list[str]:
     """Wrap predict/predict_proba as resolved through each class's MRO (inherited plain
     functions are set on the concrete class; sklearn `available_if` descriptors are
-    wrapped in their `.fn`)."""
+    wrapped in their `.fn`).
+
+    "Already counted" is our own marker, not `__wrapped__`: XGBoost decorates
+    XGBClassifier.predict with functools.wraps, which sets `__wrapped__`, so the old test
+    skipped it and Anchors on XGBoost (which calls predict) recorded 0 calls (2026-11-08)."""
     import inspect
     done = []
     for cls in classes:
@@ -523,11 +528,11 @@ def install_counter(counter: CallCounter, classes: Iterable[type]) -> list[str]:
             if raw is None:
                 continue
             if inspect.isfunction(raw):
-                if getattr(raw, "__wrapped__", None) is None:
+                if not getattr(raw, "_paper_b_counted", False):
                     setattr(cls, name, counter.wrap(raw))
                     done.append(f"{cls.__name__}.{name}")
             elif inspect.isfunction(getattr(raw, "fn", None)):
-                if getattr(raw.fn, "__wrapped__", None) is None:
+                if not getattr(raw.fn, "_paper_b_counted", False):
                     raw.fn = counter.wrap(raw.fn)
                     done.append(f"{cls.__name__}.{name} (available_if)")
     return done

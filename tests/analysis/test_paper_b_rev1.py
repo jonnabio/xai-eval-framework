@@ -593,3 +593,37 @@ def test_analysis_counts_finished_jobs_in_the_analysed_root(tmp_path):
         (p / f"{e}.done").write_text("{}", encoding="utf-8")
         (p / f"{e}.jsonl").write_text("", encoding="utf-8")
     assert an.count_finished(tmp_path) == 3
+
+def test_counter_wraps_methods_decorated_with_functools_wraps():
+    """XGBClassifier.predict carries __wrapped__ from XGBoost's own decorator; it must still be
+    counted (Anchors on XGBoost recorded 0 calls, 2026-11-08)."""
+    import functools
+
+    def deco(f):
+        @functools.wraps(f)
+        def inner(*a, **k):
+            return f(*a, **k)
+        return inner
+
+    class M:
+        @deco
+        def predict(self, X):
+            return np.zeros(len(X))
+
+        def predict_proba(self, X):
+            return np.zeros((len(X), 2))
+
+    c = lib.CallCounter()
+    done = lib.install_counter(c, [M])
+    assert "M.predict" in done and "M.predict_proba" in done
+    M().predict(np.zeros((7, 3)))
+    assert (c.calls, c.rows) == (1, 7)
+    assert lib.install_counter(c, [M]) == []                      # not wrapped twice
+
+
+def test_counter_covers_xgboost_predict():
+    xgb = pytest.importorskip("xgboost")
+    c = lib.CallCounter()
+    done = lib.install_counter(c, [xgb.XGBClassifier])
+    assert "XGBClassifier.predict" in done or any(
+        getattr(xgb.XGBClassifier.__dict__["predict"], "_paper_b_counted", False) for _ in [0])
