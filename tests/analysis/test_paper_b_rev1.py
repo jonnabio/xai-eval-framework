@@ -627,3 +627,13 @@ def test_counter_covers_xgboost_predict():
     done = lib.install_counter(c, [xgb.XGBClassifier])
     assert "XGBClassifier.predict" in done or any(
         getattr(xgb.XGBClassifier.__dict__["predict"], "_paper_b_counted", False) for _ in [0])
+
+def test_study_configs_carry_the_main_resource_limits():
+    """The study configs are generated from cohort.toml; a limit changed there must reach them
+    (the RAM reserve stayed at 6 GB in the studies and stalled controls_nonoise, 2026-11-09).
+    Regenerate with `py scripts/paper_b_studies.py` after changing [resources]."""
+    import tomllib
+    main = lib.config(lib.MAIN_CONFIG)["resources"]
+    for p in sorted((ROOT / "experiments/exp_b_rev1/studies").glob("*.toml")):
+        with open(p, "rb") as fh:
+            assert tomllib.load(fh)["resources"] == main, p.name
