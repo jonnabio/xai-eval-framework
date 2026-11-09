@@ -446,7 +446,12 @@ logistic regression, 52.2 against 11.0~ms on the MLP, and 19.5 against
 0.79~s on the SVM, whose kernel evaluations make it the slowest model for
 every explainer. With TreeSHAP, SHAP costs about as much as LIME on the
 random forest (23.0 against 22.3~ms) and a ninth of it on XGBoost (1.4
-against 13.3~ms). Anchors (0.75 to 5.6~s) and DiCE (1.1 to 2.6~s) are
+against 13.3~ms). On the six further datasets, which were timed in the
+same way (exploratory; supplementary file, S9), TreeSHAP stays 5 to 9
+times faster than LIME on XGBoost, but on the random forest its cost
+depends on the dataset: lower than LIME's on Breast Cancer, Diabetes and
+German Credit, about equal on Spambase, and higher on Phishing and
+Connect-4 (23.3 against 18.3 and 49.5 against 28.7~ms). Anchors (0.75 to 5.6~s) and DiCE (1.1 to 2.6~s) are
 slower than SHAP on every model except the SVM. For H2, the mean difference
 from LIME is driven by the SVM: the mixed-model interval excludes zero (3.8~s,
 95\% CI 0.56 to 6.95~s), but the Holm-adjusted $p$ is 0.11 and the
@@ -646,8 +651,8 @@ faithfulness gap, holds on all six further datasets, where LIME is instead
 the more stable explainer (exploratory, Table~\ref{tab:cross}). It is
 paid for in cost only with KernelSHAP, which takes 3 to 25 times LIME's
 wall time and 25 times its model evaluations (19.5~s per explanation on the
-SVM), whereas TreeSHAP costs about as much as LIME on the random forest and
-less on XGBoost, and SHAP is faster than Anchors throughout
+SVM), whereas TreeSHAP is faster than LIME on XGBoost and, on the random
+forest, faster or slower depending on the dataset, and SHAP is faster than Anchors throughout
 (Table~\ref{tab:cost}) [R: whether the tree-ensemble ordering holds at
 matched size]. LIME is therefore the cheaper choice for models that need
 KernelSHAP, such as the SVM, under a tight latency budget, at the price of

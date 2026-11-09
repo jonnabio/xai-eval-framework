@@ -73,6 +73,7 @@ not answered).
 | C-044 | — | §6 | none | done |
 | C-045 | — | Supplement (S7–S13) | R1-M14 | built; S9 matched run, S10 and part of S11 [R] |
 | C-046 | — | Supplement S9, results/ | R1-M14 | done |
+| C-047 | — | §4.2, §6, Abstract | R1-M8 | done |
 
 ## Items not yet closed
 
