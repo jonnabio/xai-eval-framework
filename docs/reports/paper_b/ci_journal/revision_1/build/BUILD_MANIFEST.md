@@ -1,6 +1,6 @@
-# Build of revision 1 — 2026-11-10 11:29:35
+# Build of revision 1 — 2026-11-10 11:58:54
 
-- Commit: `b8348e294` (with uncommitted changes in the revision folder)
+- Commit: `67e658d8f` (with uncommitted changes in the revision folder)
 - Revised source: `docs/reports/paper_b/ci_journal/revision_1/manuscript/paper_b_ci_rev1.tex` (sha256 e8dcc5f29c0b5a54)
 
 - Comparison baseline: the submitted source rebuilt today; its text is identical to `../submission/paper_b_ci_manuscript.docx` (checked, zero-width spaces ignored)
@@ -17,12 +17,12 @@ items 51: 50 remediated, 1 explained, 0 pending; changes recorded: 55; submitted
 
 | File | Pages | SHA-256 |
 |---|---:|---|
-| `paper_b_ci_rev1_preview.pdf` | 21 | `5b0fa566a4a3b2b2` |
-| `paper_b_ci_rev1_manuscript.docx` |  | `04d05167eeb990a9` |
-| `paper_b_ci_rev1_manuscript.pdf` | 15 | `6987e996d5e0be71` |
-| `paper_b_ci_rev1_changes_marked.docx` |  | `c74514e2728f4637` |
-| `paper_b_ci_rev1_changes_marked.pdf` | 27 | `ca55b94713eb6c17` |
-| `paper_b_ci_rev1_response.docx` |  | `c0bd4e4cf9a719fc` |
-| `paper_b_ci_rev1_response.pdf` | 17 | `31e4e86cde2ae48f` |
+| `paper_b_ci_rev1_preview.pdf` | 21 | `992c6509d4a04605` |
+| `paper_b_ci_rev1_manuscript.docx` |  | `ac447bbd671bdbfe` |
+| `paper_b_ci_rev1_manuscript.pdf` | 15 | `111c9c132d7677c0` |
+| `paper_b_ci_rev1_changes_marked.docx` |  | `d5a53c78f8404daa` |
+| `paper_b_ci_rev1_changes_marked.pdf` | 27 | `3484e316f44e06f7` |
+| `paper_b_ci_rev1_response.docx` |  | `549115f01088cfdf` |
+| `paper_b_ci_rev1_response.pdf` | 17 | `8ce23b515df60d9d` |
 
 The submitted files (`../submission/`, `../paper_b_ci.tex`) were checked against `SUBMITTED_SNAPSHOT.sha256` before the build and are unchanged.
