@@ -27,7 +27,7 @@ Vol. 6 No. 1 (2026), read to settle what the template leaves open.
 | Template | The journal's Word template | Built in it: its styles, header, footer and title block |
 | Language | English, one spelling throughout, CSE style, SI units, abbreviations defined at first use | American spelling, as the CLEIEJ edition |
 | Length | No limit stated (published articles: 7 to 17 pages) | 14 pages in Word |
-| Abstract | 150 to 200 words | 199 words, from `pub/fragments/paper_b_abstract_en.tex` |
+| Abstract | 150 to 200 words (manuscript template; the writing-rules page states none) | 195 words in revision 1 (C-056); 199, from `pub/fragments/paper_b_abstract_en.tex` |
 | Keywords | 3 to 5, in alphabetical order, first letter capital | Benchmarking, Explainable artificial intelligence, Explanation evaluation, LIME, SHAP |
 | Sections | Numbered "1. INTRODUCTION", subsections "1.1. Title"; Acknowledgements and References unnumbered | As required |
 | Figures | Arabic numbers, caption below, "Figure 1." | As required |

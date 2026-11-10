@@ -6,12 +6,12 @@ computational cost, yet comparisons under matched conditions are scarce. This pa
 a paired benchmark of SHAP, LIME, Anchors and DiCE in which every explainer sees the same
 model, test instances and seed on one recorded host: five model families on the Adult
 dataset (confirmatory), six further datasets and a configuration sweep (exploratory). Cost
-is measured in time and in model evaluations, which do not depend on the hardware. On Adult,
+is measured in time and in hardware-independent model evaluations. On Adult,
 SHAP's fidelity exceeds that of each alternative in all 25 model-seed cells ($d_z{=}3.3$ or
 more), but its stability advantage over LIME and Anchors is not significant; DiCE ranks last
 on every quality endpoint. On the six further datasets SHAP keeps the highest fidelity,
 while LIME is the more stable explainer, as it is on Adult with category-preserving
 noise or a wider kernel; SHAP's fidelity lead holds over every configuration tested. KernelSHAP's median wall time is 3 to 25 times LIME's,
 whereas TreeSHAP's cost follows tree depth: faster than LIME on XGBoost, and on the deeper
-random forest faster or slower by dataset. The choice of explainer therefore depends on the model, the
-configuration and the latency budget.
+random forest faster or slower by dataset. The choice of explainer depends on the model, configuration and
+latency budget.
