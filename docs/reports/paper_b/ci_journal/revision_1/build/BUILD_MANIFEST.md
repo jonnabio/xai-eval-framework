@@ -1,7 +1,7 @@
-# Build of revision 1 — 2026-11-09 22:01:36
+# Build of revision 1 — 2026-11-10 09:46:55
 
-- Commit: `60fb78828` (with uncommitted changes in the revision folder)
-- Revised source: `docs/reports/paper_b/ci_journal/revision_1/manuscript/paper_b_ci_rev1.tex` (sha256 79ab193991e75fb1)
+- Commit: `f7a64a764`
+- Revised source: `docs/reports/paper_b/ci_journal/revision_1/manuscript/paper_b_ci_rev1.tex` (sha256 8fa7aceedf8e3b9d)
 
 - Comparison baseline: the submitted source rebuilt today; its text is identical to `../submission/paper_b_ci_manuscript.docx` (checked, zero-width spaces ignored)
 - Changes marked against the submitted manuscript: 1059 insertions, 1194 deletions (Word revisions)
@@ -10,19 +10,19 @@
 ## Tracking
 
 ```
-items 51: 49 remediated, 1 explained, 1 pending; changes recorded: 53; submitted files: unchanged
+items 51: 49 remediated, 1 explained, 1 pending; changes recorded: 54; submitted files: unchanged
 ```
 
 ## Files
 
 | File | Pages | SHA-256 |
 |---|---:|---|
-| `paper_b_ci_rev1_preview.pdf` | 21 | `5ba489dbf6cb5ec2` |
-| `paper_b_ci_rev1_manuscript.docx` |  | `6982a2335f893317` |
-| `paper_b_ci_rev1_manuscript.pdf` | 15 | `fd4c4563dfa1461c` |
-| `paper_b_ci_rev1_changes_marked.docx` |  | `ead2d92a7fd312c9` |
-| `paper_b_ci_rev1_changes_marked.pdf` | 27 | `17ec894508f2d51b` |
-| `paper_b_ci_rev1_response.docx` |  | `59b102d789c77c5e` |
-| `paper_b_ci_rev1_response.pdf` | 17 | `1c84636064873f01` |
+| `paper_b_ci_rev1_preview.pdf` | 21 | `81cacb5b356ec69b` |
+| `paper_b_ci_rev1_manuscript.docx` |  | `8b2c3dd21feb1ed4` |
+| `paper_b_ci_rev1_manuscript.pdf` | 15 | `204ce8faebb2da22` |
+| `paper_b_ci_rev1_changes_marked.docx` |  | `f8e558fe8b6fb8e9` |
+| `paper_b_ci_rev1_changes_marked.pdf` | 27 | `461c3afba8c942d2` |
+| `paper_b_ci_rev1_response.docx` |  | `7bf135348c5b227f` |
+| `paper_b_ci_rev1_response.pdf` | 17 | `823727f43631bfab` |
 
 The submitted files (`../submission/`, `../paper_b_ci.tex`) were checked against `SUBMITTED_SNAPSHOT.sha256` before the build and are unchanged.

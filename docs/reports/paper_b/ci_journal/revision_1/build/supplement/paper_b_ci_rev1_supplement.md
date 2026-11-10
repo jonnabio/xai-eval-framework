@@ -566,7 +566,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Adult | XGBoost | SHAP | 100 | 1.4 | 0.0 | 0 | 0 | — |
 | Adult | XGBoost | LIME (10) | 100 | 11.5 | 15.6 | 1,000 | 1 | — |
 | Adult | XGBoost | LIME (full) | 100 | 13.3 | 15.6 | 1,000 | 1 | — |
-| Adult | XGBoost | Anchors | 100 | 918.8 | 921.9 | not counted | not counted | — |
+| Adult | XGBoost | Anchors | 100 | 918.8 | 921.9 | 6,901 | 70 | — |
 | Adult | XGBoost | DiCE | 100 | 1,107 | 1,094 | 2,004 | 6 | — |
 | Adult | SVM (RBF) | SHAP | 100 | 19,492 | 19,359 | 25,001 | 2 | — |
 | Adult | SVM (RBF) | LIME (10) | 100 | 788.5 | 781.2 | 1,000 | 1 | — |
@@ -591,7 +591,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Breast Cancer | XGBoost | SHAP | 48 | 0.7 | 0.0 | 0 | 0 | — |
 | Breast Cancer | XGBoost | LIME (10) | 48 | 5.5 | 0.0 | 1,000 | 1 | — |
 | Breast Cancer | XGBoost | LIME (full) | 48 | 5.6 | 0.0 | 1,000 | 1 | — |
-| Breast Cancer | XGBoost | Anchors | 48 | 2,071 | 2,047 | not counted | not counted | — |
+| Breast Cancer | XGBoost | Anchors | 48 | 2,071 | 2,047 | 70,401 | 705 | — |
 | Breast Cancer | XGBoost | DiCE | 48 | 250.2 | 250.0 | 2,004 | 6 | — |
 | Breast Cancer | SVM (RBF) | SHAP | 36 | 230.2 | 234.4 | 25,001 | 2 | — |
 | Breast Cancer | SVM (RBF) | LIME (10) | 36 | 12.6 | 15.6 | 1,000 | 1 | — |
@@ -616,7 +616,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | German Credit | XGBoost | SHAP | 60 | 1.7 | 0.0 | 0 | 0 | — |
 | German Credit | XGBoost | LIME (10) | 60 | 8.3 | 15.6 | 1,000 | 1 | — |
 | German Credit | XGBoost | LIME (full) | 60 | 8.9 | 15.6 | 1,000 | 1 | — |
-| German Credit | XGBoost | Anchors | 60 | 1,663 | 1,625 | not counted | not counted | — |
+| German Credit | XGBoost | Anchors | 60 | 1,663 | 1,625 | 32,301 | 324 | — |
 | German Credit | XGBoost | DiCE | 60 | 422.0 | 421.9 | 2,004 | 6 | — |
 | German Credit | SVM (RBF) | SHAP | 60 | 1,165 | 1,156 | 25,001 | 2 | — |
 | German Credit | SVM (RBF) | LIME (10) | 60 | 52.4 | 46.9 | 1,000 | 1 | — |
@@ -641,7 +641,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Diabetes | XGBoost | SHAP | 60 | 1.6 | 0.0 | 0 | 0 | — |
 | Diabetes | XGBoost | LIME (10) | 60 | 4.9 | 0.0 | 1,000 | 1 | — |
 | Diabetes | XGBoost | LIME (full) | 60 | 4.9 | 0.0 | 1,000 | 1 | — |
-| Diabetes | XGBoost | Anchors | 60 | 147.1 | 140.6 | not counted | not counted | — |
+| Diabetes | XGBoost | Anchors | 60 | 147.1 | 140.6 | 4,751 | 48.5 | — |
 | Diabetes | XGBoost | DiCE | 60 | 105.1 | 109.4 | 2,004 | 6 | — |
 | Diabetes | SVM (RBF) | SHAP | 60 | 316.9 | 312.5 | 12,701 | 2 | — |
 | Diabetes | SVM (RBF) | LIME (10) | 60 | 27.6 | 31.2 | 1,000 | 1 | — |
@@ -666,7 +666,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Spambase | XGBoost | SHAP | 60 | 1.3 | 0.0 | 0 | 0 | — |
 | Spambase | XGBoost | LIME (10) | 60 | 8.0 | 15.6 | 1,000 | 1 | — |
 | Spambase | XGBoost | LIME (full) | 60 | 8.5 | 15.6 | 1,000 | 1 | — |
-| Spambase | XGBoost | Anchors | 60 | 1,683 | 1,664 | not counted | not counted | — |
+| Spambase | XGBoost | Anchors | 60 | 1,683 | 1,664 | 43,251 | 433.5 | — |
 | Spambase | XGBoost | DiCE | 60 | 414.2 | 421.9 | 2,004 | 6 | — |
 | Spambase | SVM (RBF) | SHAP | 60 | 2,310 | 2,297 | 25,001 | 2 | — |
 | Spambase | SVM (RBF) | LIME (10) | 60 | 97.5 | 93.8 | 1,000 | 1 | — |
@@ -691,7 +691,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Phishing | XGBoost | SHAP | 60 | 1.7 | 0.0 | 0 | 0 | — |
 | Phishing | XGBoost | LIME (10) | 60 | 8.9 | 15.6 | 1,000 | 1 | — |
 | Phishing | XGBoost | LIME (full) | 60 | 9.6 | 15.6 | 1,000 | 1 | — |
-| Phishing | XGBoost | Anchors | 60 | 2,070 | 2,023 | not counted | not counted | — |
+| Phishing | XGBoost | Anchors | 60 | 2,070 | 2,023 | 29,151 | 292.5 | — |
 | Phishing | XGBoost | DiCE | 60 | 524.2 | 531.2 | 2,006 | 8 | — |
 | Phishing | SVM (RBF) | SHAP | 60 | 3,548 | 3,531 | 25,001 | 2 | — |
 | Phishing | SVM (RBF) | LIME (10) | 60 | 146.9 | 140.6 | 1,000 | 1 | — |
@@ -716,7 +716,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Connect-4 | XGBoost | SHAP | 60 | 1.8 | 0.0 | 0 | 0 | — |
 | Connect-4 | XGBoost | LIME (10) | 60 | 12.9 | 15.6 | 1,000 | 1 | — |
 | Connect-4 | XGBoost | LIME (full) | 60 | 15.3 | 15.6 | 1,000 | 1 | — |
-| Connect-4 | XGBoost | Anchors | 60 | 3,643 | 3,617 | not counted | not counted | — |
+| Connect-4 | XGBoost | Anchors | 60 | 3,643 | 3,617 | 33,701 | 338 | — |
 | Connect-4 | XGBoost | DiCE | 60 | 1,469 | 1,469 | 2,005 | 7 | — |
 | Connect-4 | SVM (RBF) | SHAP | 60 | 29,507 | 29,297 | 25,001 | 2 | — |
 | Connect-4 | SVM (RBF) | LIME (10) | 60 | 1,193 | 1,188 | 1,000 | 1 | — |
@@ -729,7 +729,7 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 | Connect-4 | MLP | Anchors | 60 | 3,978 | 3,953 | 33,351 | 334 | 860.46 |
 | Connect-4 | MLP | DiCE | 60 | 1,424 | 1,422 | 2,004 | 6 | 51.70 |
 
-Anchors calls XGBoost through a prediction method the counter did not wrap, so its rows and calls on XGBoost were not counted; its time is measured as for every other explainer.
+Anchors calls XGBoost through a prediction method the main timing pass did not count; its rows and calls on XGBoost come from a recount with the fixed counter (23 cells, same seeds; scripts/paper_b_xgb_anchors_rows.ps1), and its time from the main pass.
 
 Matched tree ensembles (Adult, 100 trees each, three seeds, 20 instances per cell, same timing protocol): each ensemble at its own depth and at the other's. Median wall time per explanation:
 
