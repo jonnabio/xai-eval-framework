@@ -439,10 +439,11 @@ Sparsity & all & 0.22 & \multicolumn{6}{l}{LIME 0.98, Anchors 0.06, DiCE 0.02 (d
 
 Table~\ref{tab:cost} gives the cost per explanation by model family.
 Wall time orders the explainers differently by model family. With
-KernelSHAP, SHAP takes 3 to 25 times LIME's time: 29.6 against 9.4~ms on
+KernelSHAP, SHAP's median time is 3 to 25 times LIME's: 29.6 against 9.4~ms on
 logistic regression, 52.2 against 11.0~ms on the MLP, and 19.5 against
 0.79~s on the SVM, whose kernel evaluations make it the slowest model for
-every explainer. With TreeSHAP, SHAP costs about as much as LIME on the
+every explainer. These ratios describe medians and are not a test; the test of H2 below
+pools the five models. With TreeSHAP, SHAP costs about as much as LIME on the
 random forest (23.0 against 22.3~ms) and a ninth of it on XGBoost (1.4
 against 13.3~ms). On the six further datasets, which were timed in the
 same way (exploratory; supplementary file, S9), TreeSHAP stays 5 to 9
@@ -681,8 +682,8 @@ TreeSHAP vs LIME cost by ensemble & exploratory & XGBoost: TreeSHAP faster on al
 The recommendations are restricted to what was tested. Where
 faithfulness matters, SHAP is preferable on every model tested: with
 XGBoost it costs less than LIME and with the random forest about as much
-(TreeSHAP), and with the other models it costs 3 to 25 times LIME's time
-(KernelSHAP). Where stability matters more than faithfulness, LIME with the
+(TreeSHAP), and with the other models its median time is 3 to 25 times
+LIME's (KernelSHAP). Where stability matters more than faithfulness, LIME with the
 full vector suffices: it is more stable than SHAP on the six further
 datasets, and on Adult when the noise keeps categories valid.
 As feature attributions, Anchors and DiCE are less faithful than SHAP and,
@@ -746,8 +747,8 @@ advantage on five (Anchors matches SHAP on Connect-4), where LIME is instead
 the more stable explainer (exploratory, Table~\ref{tab:cross}), as it is
 on Adult when the stability noise keeps categories valid
 (Section~\ref{sec:validity_controls}). It is
-paid for in cost only with KernelSHAP, which takes 3 to 25 times LIME's
-wall time and 25 times its model evaluations (19.5~s per explanation on the
+paid for in cost only with KernelSHAP, whose median wall time is 3 to 25
+times LIME's and 25 times its model evaluations (19.5~s per explanation on the
 SVM), whereas TreeSHAP is faster than LIME on XGBoost and, on the random
 forest, faster or slower depending on the dataset, and SHAP is faster than Anchors throughout
 (Table~\ref{tab:cost}). The difference between the ensembles follows tree
