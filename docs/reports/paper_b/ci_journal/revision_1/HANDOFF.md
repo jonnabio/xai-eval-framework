@@ -89,4 +89,4 @@ to shorten are in `LENGTH_OPTIONS_2026-11-09.md`. The Anchors-on-XGBoost counter
 answered by the counter fix (f64db3236); the main runs keep "not counted" for those rows.
 The run laptop has no further runs queued.
 
-2026-11-10: R1-9 closed (C-054); `check_revision.py --final` passes (50 remediated, 1 explained, 0 pending). Manuscript ready to upload.
+2026-11-10: R1-9 closed (C-054; letter: 52 references, literature 22 of 26 recent, 85%); `check_revision.py --final` passes (50 remediated, 1 explained, 0 pending). Manuscript ready to upload.
