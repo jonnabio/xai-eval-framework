@@ -6,18 +6,18 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-07, by `claude-2026-11-07-paper-b-docs`.
+**Last updated:** 2026-11-10, by `claude-2026-11-10-paper-b-runs` (experiment laptop).
 
 ## Current objective
 
 **Paper B, revision 1** (C&I 2067810, major revision of 2026-11-06, due
-**2026-11-30**): every cohort B2 result is in the manuscript and the supplement (C-040 to
-C-052, 2026-11-09); no [R] marker is left. The author decided to submit at 15 pages and let the
-editor decide (options to shorten: `LENGTH_OPTIONS_2026-11-09.md`). Only R1-9 remains: the
-author's reading of the 15 recent abstracts (`REFERENCE_AUDIT.md`), then
-`check_revision.py --final` and submission. Work folder
-`docs/reports/paper_b/ci_journal/revision_1/` (start with `HANDOFF.md`,
-`CONSISTENCY_2026-11-07.md`). The thesis objective below is unchanged.
+**2026-11-30**): every cohort B2 run is finished and analysed, every result is in the
+manuscript and the supplement (C-040 to C-055), R1-9 is closed (C-054) and
+`check_revision.py --final` passes (manuscript 15 pp, response 17 pp, supplement 52 pp). The
+author decided to submit at 15 pages and let the editor decide (`LENGTH_OPTIONS_2026-11-09.md`).
+What remains is the author's submission. Work folder
+`docs/reports/paper_b/ci_journal/revision_1/` (start with `HANDOFF.md`). The thesis objective
+below is unchanged.
 
 **Close the thesis.** The tutor's note of 2026-10-12 asks for no change. On the author's
 instruction of the same day, every paper is now reflected in the thesis (ADR-0023): a
@@ -59,7 +59,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | Paper | Title | Venue | Status | Record |
 |---|---|---|---|---|
 | **A** | *A framework for rigorous evaluation of model-agnostic explainability methods: multi-metric statistical benchmarking, operational protocol, and reproducibility* | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
-| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Major revision** (2067810, 2026-11-06; due 2026-11-30) | Revision text done and consistent (C-000 – C-037, `ci_journal/revision_1/CONSISTENCY_2026-11-07.md`); only the cohort B2 results are pending (`revision_1/HANDOFF.md`). Runs on the experiment laptop (`paper/b-rev1-runs`), documents on `paper/b-ci-revision-1`. Submitted 2026-10-21 |
+| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Major revision** (2067810, 2026-11-06; due 2026-11-30) | Revision complete: C-000 to C-055, all cohort B2 results in, `check_revision.py --final` passes; awaiting the author's submission (`ci_journal/revision_1/HANDOFF.md`). Runs finished 2026-11-09 on the experiment laptop (`paper/b-rev1-runs`, not merged); documents on `paper/b-ci-revision-1`. Submitted 2026-10-21 |
 | **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
@@ -80,13 +80,15 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Two laptops (author, 2026-11-06). **This one** (`C:\Users\jonna\Github`) edits documents
   on `paper/b-ci-revision-1`; **the experiment laptop** (`D:\Github\xai-eval-framework`, Ryzen 5
   4600H, the one recorded host) runs cohort B2 and pushes only `paper/b-rev1-runs`.
-- `main` holds everything up to pull request #80 and this handoff. `paper/b-ci-revision-1` is
-  level with `main` and stays open for the revision. `paper/b-rev1-runs` (snapshots of the
-  running cohort, not merged) is ahead of `main`; merge it once the results are final.
-  `thesis/rca-001-phase-2` is behind `main` and takes it when the thesis lane resumes.
-  `pubs/paper-b-rev1-lane` exists on GitHub only (not examined this session).
-- Lane lock of the main folder released at session end. Nothing runs on this laptop; the
-  cohort B2 quality pass runs on the experiment laptop (6 workers, sync loop every 15 min).
+- `main` holds everything up to pull request #110 and this handoff. `paper/b-ci-revision-1` is
+  level with `main` and stays open for the revision. `paper/b-rev1-runs` (raw cohort B2 rows and
+  logs, 6,716 files, about 169 MB; merges cleanly) is ahead of `main` and **not merged**: the
+  author decides whether it goes to `main` (see Open with the author). `thesis/rca-001-phase-2`
+  is behind `main` and takes it when the thesis lane resumes. `pubs/paper-b-rev1-lane` exists on
+  GitHub only (not examined).
+- No lane lock is held. Nothing runs on either laptop: the experiment laptop's save loop,
+  study chain and 30-minute monitor are stopped (2026-11-09 23:32); only the read-only
+  dashboards may still be open there.
 - Lanes and the paths they own: `scripts/pubs/lanes.toml`.
 - The thesis renders to Word with seven chapters and no unresolved reference
   (`thesis/render.ps1`; `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is tracked).
@@ -109,6 +111,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
    review (B at C&I, C, D, E, F), since the thesis now carries their results. Paper F's
    comments to the editor state that the thesis is not deposited.
 7. The table of contents is refreshed by the author in Word after every render.
+8. **Paper B runs branch:** whether `paper/b-rev1-runs` (169 MB of raw rows) is merged into
+   `main`, kept as a branch, or deposited elsewhere (e.g. Zenodo). The analyses it feeds are
+   already on `main` (`outputs/analysis/paper_b_rev1/`, `revision_1/results/`).
 
 ## Active constraints
 
@@ -149,85 +154,63 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-07, SESSION END (Paper B revision 1: text complete, awaiting cohort B2 results)
+## Latest handoff - 2026-11-10, SESSION END (Paper B revision 1: cohort B2 runs finished and analysed)
 
-Session of 2026-11-06/07, owner `claude-2026-11-07-paper-b-docs` (documentation laptop).
-Lane `paper-b` (`paper/b-ci-revision-1`); shared files on `pubs/context-2026-11-07`. Pull
-requests #79 and #80 merged, and the one carrying this handoff.
+Session of 2026-11-08/10, owner `claude-2026-11-10-paper-b-runs` (experiment laptop,
+`D:\Github\xai-eval-framework`). Lane `paper-b`: run code on `paper/b-ci-revision-1`, results
+pushed to `paper/b-rev1-runs`; this handoff on `pubs/context-2026-11-10`. The documentation
+laptop worked in parallel (C-053 to C-055, PRs #106 to #110); it is not described here.
 
 - **Completed**:
-  - MiKTeX installed (user install); `build_revision.py` runs on this laptop.
-  - References, option A (C-028): 53 references, literature 23 of 27 from 2024 on (85%).
-    Introduction cites verified sources for each claim (C-031); REFORMS added, DOI checked and
-    full text read, cited for item 2c only (C-032).
-  - Methods aligned with the code (C-029); role of Anchors and DiCE stated (C-030).
-  - Introduction: two gaps (control, configuration) mapped to the three contributions (C-033).
-  - Table 5: row "usefulness for people" removed (C-034). Conclusions open with the answer to
-    the title question, slots [R] (C-035). Abstract and §1: only model calls are
-    host-independent, not CPU time (C-032, C-036). RF–XGBoost reversal posed as the tested
-    question, credited to the reviewer in the letter (C-037).
-  - Quality results filled (C-040, PR after #85): Tables 2 (no p_Holm yet) and 4, §4.1, §4.5,
-    §6, abstract; analysis in `revision_1/results/`. Manuscript now 12 of 12 pages in Word.
-  - Cost (H2) tested in wall-clock time, not CPU time: Windows CPU time moves in 15.6 ms
-    steps, seen in the first timing cells (author's decision, C-038; analysis script updated;
-    the running timing pass is unaffected). PR #84.
-  - Response letter: ED-2 and ED-3 removed (no answer, author); every comment quoted in full;
-    the editor, Reviewer 1 and Reviewer 2 each start on a new page.
-  - Consistency pass: manuscript, ledger, response and proposal agree
-    (`CONSISTENCY_2026-11-07.md`; proposal Part E). Handoff note to the experiment laptop
-    (`revision_1/HANDOFF.md`).
-  - Partial analysis of the 18:21 snapshot (scratchpad, pinned packages, not committed):
-    on Adult SHAP leads on fidelity against all three (p_Holm < 1e-4) and on the faithfulness
-    gap against LIME and DiCE; stability against LIME not significant; on the six other
-    datasets full LIME is more stable than SHAP. Cost: no data yet.
-- **Update 2026-11-08 (documentation laptop, PRs #91, #92)**:
-  - Cost results filled from the 25 Adult timing cells (C-042): Table 2 cost rows and p_Holm
-    (family of 12), Table 3, §4.2, Table 5 cost row, §6, abstract. H2 not supported: KernelSHAP
-    3-25x LIME's wall time (19.5 s on SVM) but p_Holm 0.11; SHAP faster than Anchors in all
-    cells; TreeSHAP ~LIME on RF, 1/9 of LIME on XGBoost. `revision_1/results/` regenerated
-    (snapshot 992d20038, with cost.csv).
-  - `check_revision.py`: 51 items, 29 closed (28 remediated, 1 explained), 22 pending; 46
-    changes (C-000 – C-045; C-044 conclusions opening (PR #96); C-045 supplementary file built,
-    S7–S13 from `revision_1/results/`, sweep/matched run/controls [R] (PR #97); C-043, PR #94: §4.1 zero-vector exclusion, Table 5 rows, §5/§5.1
-    partial, R1-M3). Manuscript 13 pages (references spill).
-  - **Mandatory before submission: the author's length review**, once every result is in; do
-    not trim before then (author, 2026-11-08; listed in `revision_1/README.md`).
-  - Asked the experiment laptop (HANDOFF.md): Anchors on XGBoost records 0 model calls
-    (`XGBClassifier.predict` not counted).
-  - Timing pass: 33 of 115 cells at 07:14 on 2026-11-08 (Adult done), 0 errors.
+  - Cohort B2 (design hash `4ab8673a4a20`), all on the recorded host:
+    main quality 575/575 jobs (52,740 valid rows; 5 Anchors-on-SVM instances timed out, disclosed
+    as timeouts, not rerun: adult/svm/33 5480 and 5853, connect4/svm/22 10845, connect4/svm/33
+    5786 and 674); main timing 115/115 cells.
+  - Auxiliary studies through `PAPER_B_CONFIG`: `controls_nonoise` 75/75 (1 timeout, 5480),
+    `controls_onehot` 75/75, `sweep` 669/669 quality + 15/15 timing, `matched` 12/12 timing;
+    Anchors-on-XGBoost rows rerun 23/23 cells (not 25, as first stated). Analyses in
+    `outputs/analysis/paper_b_rev1/` (main, `posthoc_<dataset>/` for the six other datasets,
+    `study_*`, `xgb_anchors_rows/`), commit `1e8359d93`. Main primary effects unchanged after
+    the analysis fixes.
+  - Run-code fixes, each with a test (`tests/analysis/test_paper_b_rev1.py`, 54 pass):
+    stale-heartbeat kill loop; admission with backfill (`plan_admissions`); RAM reserve
+    6.0 -> 3.5 GB with live reload; design hash cached at launch and twin-worker guard
+    (`jobs_running_elsewhere`) after a BOM in a config crashed the governor; `onehot_groups`
+    verified on the data; `CallCounter` now counts `XGBClassifier.predict`
+    (`_paper_b_counted`); timing runs only explainers that apply to the model
+    (`explainer_applies`; 53 mislabelled tshap sweep rows dropped by `applicable_timing`, none
+    deleted); analysis counts jobs in the analysed root, keeps sweep cells, has a timing-only path,
+    and reports `stability_zero_vector_share`; throttling alarm uses medians.
+  - Remote progress log: every runs-branch snapshot commit carries `commit_log()` (status,
+    failed rows, governor events, study chain, monitor notes), read from the other laptop.
+    New scripts: `scripts/paper_b_chain.ps1`, `scripts/paper_b_xgb_anchors_rows.ps1`.
 - **Current State**:
-  - Manuscript 12 pages (budget 12), letter 15 pages; `check_revision.py`: 51 items, 19
-    closed (18 remediated, 1 explained), 32 pending; 42 changes (C-000 – C-041).
-  - Cohort B2: quality pass complete (575/575). Timing pass: 6 of 115 cells at 22:24 (Adult
-    logreg 7-8 min, RF 10 min per cell; benchmark 16 ms, 0 errors). Estimate about 37 h in
-    total (SVM cells about 1.6 h each), so it ends around 9 November, morning. Then the sweep, validity controls, grouped masking and the matched RF–XGBoost run not started.
-  - Tree clean; all branches pushed; lock released.
+  - Every run finished 2026-11-09 23:00; save loop, chain and monitor stopped; last runs-branch
+    snapshot `52988d3b7`. Tree clean; `paper/b-ci-revision-1` level with `main` (#110).
+  - Paper B documents: final check passes, awaiting the author's submission (see Current
+    objective).
 - **Next Steps**:
-  1. `python scripts/pubs/check_lane.py claim --owner <session name>` on
-     `paper/b-ci-revision-1`; `git pull --no-rebase`.
-  2. Read `revision_1/HANDOFF.md`; check whether the experiment laptop answered it.
-  3. When results arrive on `paper/b-rev1-runs`: run `scripts/paper_b_analyze.py` on them,
-     fill every [R] marker (Tables 2–5, §4, §5, §6, abstract, response), regenerate
-     `CONSISTENCY_*.md`, then `check_revision.py --final` and `build_revision.py`.
-  4. The supplement (D-B), last, as the author asked.
+  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; `git pull --no-rebase`.
+  2. Paper B: the author submits the revision on DergiPark by 2026-11-30; record the date and
+     decision in the publication table and the paper's README.
+  3. Decide the fate of `paper/b-rev1-runs` (Open with the author) and act on it.
+  4. No rerun is planned. If one is ever needed: `scripts\paper_b_chain.ps1 -From <study>` and
+     `py scripts\paper_b_sync.py --loop` on the experiment laptop.
 - **Blockers/Issues**:
-  - Cohort B2 results (33 of the 34 open items). R1-9 waits for the author's reading of the
-    15 recent abstracts (`REFERENCE_AUDIT.md`).
-  - Closed by the experiment laptop (2fd1cb7f9, after the session's last merge): the Adult
-    LIME zero-vector figure (0.88, 0.95) is a count out of 15 perturbed explanations, i.e.
-    5.8% and 6.3% of vectors (the commit message's 2.7%/3.0% was wrong); the 0-of-575 job count was read from the wrong folder. Merge
-    `paper/b-ci-revision-1` into `main` (it carries that fix) when resuming if not merged.
-  - Decision with the author: extension request by 10 November. The timing pass runs under
-    the "ASUS Recommended" power plan (recorded per cell; disclose, do not restart).
-  - `tests/analysis/test_stats.py` and `test_visualization.py` fail at collection; not
+  - None for the runs. Disclosed limits: the 6 Anchors timeouts above; the timing pass ran
+    under the "ASUS Recommended" power plan (recorded per cell); the `cpu_ms` SHAP-LIME mixed
+    model is degenerate (CPU time is descriptive only; H2 is tested in wall time, C-038).
+  - Zero vectors: 5.8% (LIME) and 6.3% (full LIME) of Adult vectors are near zero (all |w| <
+    1e-4); 2.7% are exactly zero. Do not quote 2.7% as the near-zero share.
+  - `tests/analysis/test_stats.py` and `test_visualization.py` still fail at collection; not
     investigated.
 - **Notes**:
-  - Builds on this laptop: prepend `%LOCALAPPDATA%\Programs\MiKTeX\miktex\bin\x64` to PATH in
-    Git Bash; `.venv\Scripts\python.exe docs/reports/paper_b/ci_journal/revision_1/scripts/build_revision.py`.
-  - The build's citation check does not read `\cite[...]{...}`: name a locator in the prose.
-  - The analysis needs statsmodels and the pinned pandas/SciPy (`revision_1/env/
-    requirements-rev1-frozen.txt`); the project `.venv` has neither: use a throwaway venv.
-  - Internal notes in `RESPONSE_TO_REVIEWERS.md` must be HTML comments; every change gets a
-    C-row in `CHANGELOG.md` in the same commit and its C-id under each item it answers.
-  - After `main` is merged into the lane, pull with `--no-rebase`: a rebase drops the merge
-    commit and the lane guard refuses commits until `main` is merged again.
+  - Experiment laptop: use `.venv\Scripts\python.exe` (system Python lacks psutil). The
+    timing gate needs other CPU <= 10%, the user idle 5 min (unless `--no-require-idle`) and AC
+    power; an open dashboard tab can hold it.
+  - PowerShell `Set-Content -Encoding utf8` writes a BOM that breaks `config_hash`: write
+    configs with Python or `-Encoding ascii`.
+  - Study configs are generated by `scripts/paper_b_studies.py`; a drift test keeps their
+    `resources` table equal to the cohort's. `resources`/`sync` are outside the design hash;
+    `[timing]` is inside it.
+  - `gh` is not on PATH on the experiment laptop; pull requests are opened from the web.
