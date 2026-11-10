@@ -11,8 +11,11 @@
 ## Current objective
 
 **Paper B, revision 1** (C&I 2067810, major revision of 2026-11-06, due
-**2026-11-30**; extension decision by 10 November, the author's): the text is done; the
-results of cohort B2 are the only input pending. Work folder
+**2026-11-30**): every cohort B2 result is in the manuscript and the supplement (C-040 to
+C-052, 2026-11-09); no [R] marker is left. The author decided to submit at 15 pages and let the
+editor decide (options to shorten: `LENGTH_OPTIONS_2026-11-09.md`). Only R1-9 remains: the
+author's reading of the 15 recent abstracts (`REFERENCE_AUDIT.md`), then
+`check_revision.py --final` and submission. Work folder
 `docs/reports/paper_b/ci_journal/revision_1/` (start with `HANDOFF.md`,
 `CONSISTENCY_2026-11-07.md`). The thesis objective below is unchanged.
 
