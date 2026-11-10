@@ -7,7 +7,7 @@ Checked on 2026-11-08 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (53 of 53) |
+| Every ledger change is in the manuscript at the place it names | yes (55 of 55) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -80,6 +80,7 @@ not answered).
 | C-051 | — | Response letter | R1-1, R1-M1, R1-6, R1-M10, R1-M15, R1-m1, R1-m10, R1-m13, R1-m15, R2-3 | status review: answered items closed |
 | C-052 | — | Response letter, README, build | R1-m1, R1-m11, R2-2 | letter synced with the final manuscript; length decision recorded |
 | C-053 | — | Table 3 caption, Supplement S9 | R1-5, R2-1a | Anchors rows on XGBoost recounted; caption and S9 updated |
+| C-054 | — | §2, §5.3, References | R1-9 | R1-9 closed: 15 abstracts approved; clark2024xaitris removed |
 
 ## Items not yet closed
 
@@ -95,11 +96,10 @@ Sources of the missing values:
 
 | Item | Status | Waits for | What is missing |
 |---|---|---|---|
-| R1-9 | pending | A | the author reads the 15 recent abstracts (REFERENCE_AUDIT.md); text and list are done |
 
-Closed: ED-1, R1-1, R1-2, R1-3, R1-4, R1-5, R1-6, R1-7, R1-8, R1-10, R1-11, R1-M1, R1-M2, R1-M3, R1-M4, R1-M5, R1-M6, R1-M7, R1-M8, R1-M9, R1-M10, R1-M11, R1-M12, R1-M13, R1-M14, R1-M15, R1-m1, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m10, R1-m11, R1-m12, R1-m13, R1-m14, R1-m15, R2-1a, R2-1b, R2-2, R2-3, R2-4, R2-5, R2-6, R2-7, R2-8 (50 items).
+Closed: ED-1, R1-1, R1-2, R1-3, R1-4, R1-5, R1-6, R1-7, R1-8, R1-9, R1-10, R1-11, R1-M1, R1-M2, R1-M3, R1-M4, R1-M5, R1-M6, R1-M7, R1-M8, R1-M9, R1-M10, R1-M11, R1-M12, R1-M13, R1-M14, R1-M15, R1-m1, R1-m2, R1-m3, R1-m4, R1-m5, R1-m6, R1-m7, R1-m8, R1-m9, R1-m10, R1-m11, R1-m12, R1-m13, R1-m14, R1-m15, R2-1a, R2-1b, R2-2, R2-3, R2-4, R2-5, R2-6, R2-7, R2-8 (51 items).
 
-Count of pending items by source: Q 0, T 0, S 0, V 0, M 0, X 0, A 1.
+Count of pending items by source: Q 0, T 0, S 0, V 0, M 0, X 0, A 0.
 
 ## Mandatory before submission
 

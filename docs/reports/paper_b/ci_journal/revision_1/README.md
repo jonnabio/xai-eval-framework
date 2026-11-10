@@ -70,8 +70,8 @@ python docs/reports/paper_b/ci_journal/revision_1/scripts/build_supplement.py   
 1. **Length review: DONE (author, 2026-11-09).** Submit at 15 pages as is; the journal sets no
    length limit and the editor decides. Options to shorten, if asked, are in
    `LENGTH_OPTIONS_2026-11-09.md`.
-2. Every [R] marker filled: DONE (C-050, 2026-11-09). `check_revision.py --final` passes once
-   R1-9 is closed (the author's reading of the 15 recent abstracts, REFERENCE_AUDIT.md).
+2. Every [R] marker filled: DONE (C-050, 2026-11-09). R1-9 closed (C-054, 2026-11-10: 15 abstracts approved,
+   clark2024xaitris removed); `check_revision.py --final` passes. Ready to upload.
 3. Abstract within 150-200 words: DONE (199 words after C-050).
 
 ## Rule for every edit
