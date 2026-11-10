@@ -9,6 +9,6 @@ the snapshot `992d20038` used for C-042.
 
 Derived for the supplement by `scripts/supplement_results.py` (from `rows.csv`, not committed):
 `instances.csv`, `overlap.csv`, `paired_differences.csv`, `zero_vector_exclusion.csv`,
-`timing_cells.csv` and `fig_s1_paired_differences.png`. Anchors' rows on XGBoost are 0 because
-its calls were not counted (see `../HANDOFF.md`). Regenerate from the final snapshot before the
+`timing_cells.csv` and `fig_s1_paired_differences.png`. Anchors' rows on XGBoost are 0 in
+`timing_cells.csv`; the supplement replaces them with the recount (commit 1e8359d93). Regenerate from the final snapshot before the
 final build.

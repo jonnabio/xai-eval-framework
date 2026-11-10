@@ -188,12 +188,24 @@ def load_timing(root: Path) -> pd.DataFrame:
     return pd.DataFrame(recs)
 
 
+def applicable_timing(t: pd.DataFrame, cfg: dict) -> pd.DataFrame:
+    """Drop timing rows of an explainer that does not apply to the model. Before b2598680b the
+    sweep's timing pass ran its TreeSHAP settings on logreg and svm too, where they silently
+    became KernelSHAP: 53 mislabelled rows (logreg seeds 11/22/33, svm seed 11)."""
+    if t.empty:
+        return t
+    keep = [lib.explainer_applies(cfg, e, m) for e, m in zip(t["explainer"], t["model"])]
+    return t[keep]
+
+
 def complete_cells(q: pd.DataFrame, cfg: dict) -> pd.DataFrame:
-    """Keep only cells (dataset, model, seed) whose every explainer job is finished."""
-    need = set(cfg["explainers"])
+    """Keep only cells (dataset, model, seed) whose every applicable explainer job is finished
+    (an explainer restricted to other models, e.g. the sweep's TreeSHAP settings on SVM, is not
+    expected; requiring it dropped every logreg/svm/mlp cell of the sweep, 2026-11-09)."""
     done = set()
     for d, m, s in q[["dataset", "model", "seed"]].drop_duplicates().itertuples(index=False):
         stem = lib.RESULTS / "quality" / d / m / f"seed_{s}"
+        need = [e for e in cfg["explainers"] if lib.explainer_applies(cfg, e, m)]
         if all((stem / f"{e}.done").exists() for e in need):
             done.add((d, m, s))
     key = list(zip(q["dataset"], q["model"], q["seed"]))
@@ -375,15 +387,29 @@ def main(argv=None) -> int:
     cfg = lib.config()
     q = load_quality(a.root)
     if q.empty:
-        print("no quality rows")
-        return 1
+        # Timing-only studies (matched; the Anchors-on-XGBoost rows rerun): the cost table only.
+        t = applicable_timing(load_timing(a.root), cfg)
+        if t.empty:
+            print("no quality rows and no timing rows")
+            return 1
+        a.out.mkdir(parents=True, exist_ok=True)
+        t.to_csv(a.out / "timing_rows.csv", index=False)
+        cost = cost_table(t)
+        cost.to_csv(a.out / "cost.csv", index=False)
+        (a.out / "REPORT.md").write_text(
+            f"# Timing-only analysis\n\n- Root: `{a.root}`\n- Timing rows: {len(t):,}; cells: "
+            f"{t[['dataset', 'model', 'seed']].drop_duplicates().shape[0]}\n- Per-row value: median "
+            f"over repeats; cost.csv: median over instances per dataset, model and explainer\n",
+            encoding="utf-8")
+        print(f"timing-only analysis written to {a.out} ({len(t):,} timing rows)")
+        return 0
     hashes = sorted(q["cohort_sha256"].dropna().unique())
     if len(hashes) != 1:
         print(f"refusing: rows of {len(hashes)} different designs: {hashes}")
         return 1
     if a.root == lib.RESULTS and not a.include_incomplete:
         q = complete_cells(q, cfg)
-    t = load_timing(a.root)
+    t = applicable_timing(load_timing(a.root), cfg)
     a.out.mkdir(parents=True, exist_ok=True)
     q.to_csv(a.out / "rows.csv", index=False)
     q.groupby(["dataset", "model", "seed", "explainer"])[ENDPOINTS + DESCRIPTIVE].mean() \
