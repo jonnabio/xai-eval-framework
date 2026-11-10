@@ -341,7 +341,11 @@ def cmd_timing(args) -> int:
     inst = lib.select_instances(model, data, s, per)
     timed_ids = lib.first_per_stratum(inst, args.timing_per_stratum or tc["per_stratum"])
     inst = inst[inst["original_index"].astype(int).isin(timed_ids)]
-    variants = args.explainers or list(cfg["explainers"])
+    # Only the explainers that apply to this model, as in the quality pass: the timing pass ran
+    # the sweep's TreeSHAP settings on logreg, svm and mlp too, where build_explainer falls back
+    # to KernelSHAP at its default size (mislabelled rows; ~2 h per SVM cell; 2026-11-09).
+    variants = [e for e in (args.explainers or list(cfg["explainers"]))
+                if lib.explainer_applies(cfg, e, m)]
     explainers, infos = {}, {}
     for e in variants:
         explainers[e], infos[e] = lib.build_explainer(e, cfg, m, model, data, s)
