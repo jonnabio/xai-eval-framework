@@ -291,7 +291,7 @@ The journal's writing rules (https://dergipark.org.tr/en/pub/ci/writing-rules, l
 maximum; font and spacing come from the Word template. Its published articles run 7 to 17
 pages (`../CI_SUBMISSION.md` §1). The submitted manuscript has 14 pages.
 
-**Page budget: 12 pages** (author decision D-C, 2026-11-06; was 17, then 14 proposed) in the journal template, checked by `scripts/build_revision.py`
+**Page budget: 12 pages** (author decision D-C, 2026-11-06; was 17, then 14 proposed; superseded 2026-11-09: submit at 15 pages and let the editor decide, options in `LENGTH_OPTIONS_2026-11-09.md`) in the journal template, checked by `scripts/build_revision.py`
 (it warns above the budget and records the length in `build/BUILD_MANIFEST.md`). The
 revision adds Anchors and DiCE, five datasets, the configuration sweep and the stability
 controls. To stay within budget:

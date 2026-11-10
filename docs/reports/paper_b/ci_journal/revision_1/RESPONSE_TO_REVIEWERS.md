@@ -319,9 +319,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The abstract should clearly distinguish findings obtained from the primary Adult benchmark from those derived from the supplementary cross-dataset and sensitivity experiments.
 
 - **Status:** REMEDIATED
-- **Changes:** C-022, C-036, C-040, C-051
+- **Changes:** C-022, C-036, C-040, C-051, C-052
 - **Plan:** WP7
-- **Response:** The abstract now reports the primary benchmark first and then, marked as supplementary, the configuration, validity and cross-dataset results.
+- **Response:** The abstract now reports the primary benchmark first and then, marked as exploratory, the configuration, validity and cross-dataset results.
 - **Where:** Abstract
 
 ### R1-m2
@@ -419,9 +419,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Tables 4 and 5 should include measures of variability or uncertainty alongside the reported three-seed averages.
 
 - **Status:** REMEDIATED
-- **Changes:** C-017, C-040, C-041
+- **Changes:** C-017, C-040, C-041, C-052
 - **Plan:** WP3
-- **Response:** The cross-dataset table reports the mean over seeds, and its caption states the largest standard deviation over seeds (below 0.04 in every cell); the standard deviation of every cell, per model, is in the supplementary file (Table 4).
+- **Response:** The cross-dataset table reports the mean over seeds, and its caption states the largest standard deviation over seeds (below 0.04 in every cell); the standard deviation of every cell, per model, is in the supplementary file (S12).
 - **Where:** Section 4.5, Table 4
 
 ### R1-m12
@@ -493,9 +493,9 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Second, evaluating both explainers at a single static hyperparameter configuration fails to capture the inherent trade-offs between stability, fidelity, and computational cost; therefore, the revision must include multi-objective Pareto optimal frontiers across varying sampling budgets and kernel widths.
 
 - **Status:** REMEDIATED
-- **Changes:** C-016, C-029, C-049
+- **Changes:** C-016, C-029, C-049, C-052
 - **Plan:** WP5
-- **Response:** As requested, the revision evaluates both explainers over a grid of sampling budgets and kernel widths (LIME), and sampling budgets and background sizes (KernelSHAP). For each model it reports the Pareto-optimal configurations for stability, fidelity and cost (§4.3, Fig. 1). On the random forest, TreeSHAP dominates every LIME configuration. On the other four models neither method dominates: the front joins SHAP at the fidelity end with LIME at a wide kernel width at the stability end (Fig. 1).
+- **Response:** As requested, the revision evaluates both explainers over a grid of sampling budgets and kernel widths (LIME), and sampling budgets and background sizes (KernelSHAP). For each model it reports the Pareto-optimal configurations for stability and fidelity (§4.3, Fig. 1), and the cost of every configuration on the same host (§4.3; supplementary file, S10). On the random forest, TreeSHAP dominates every LIME configuration. On the other four models neither method dominates: the front joins SHAP at the fidelity end with LIME at a wide kernel width at the stability end (Fig. 1).
 - **Where:** Section 4.3, Fig. 1
 
 ### R2-3

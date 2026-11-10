@@ -7,7 +7,7 @@ Checked on 2026-11-08 against `manuscript/paper_b_ci_rev1.tex`, `CHANGELOG.md`,
 
 | Check | Result |
 |---|---|
-| Every ledger change is in the manuscript at the place it names | yes (52 of 52) |
+| Every ledger change is in the manuscript at the place it names | yes (53 of 53) |
 | Every ledger change appears in the response of each item it names | yes |
 | Every change listed in a response names that item in the ledger | yes |
 | Every answered item exists in the review analysis (ED-2, ED-3: no answer, by decision) | yes (51) |
@@ -78,6 +78,7 @@ not answered).
 | C-049 | — | §4.3, Figure 1, §5, Table 5, §5.1, §5.2, §6, Abstract | R1-10, R1-M4, R1-M5, R1-M7, R1-M11, R1-M12, R2-2 | sweep quality filled, Figure 1; configuration cost [R] |
 | C-050 | — | §4.2, §4.3, Table 5, §5.1, §6, Abstract, Supplement S9-S11 | R1-M4, R1-M9, R1-M14 | sweep timing and matched run filled; supplement complete |
 | C-051 | — | Response letter | R1-1, R1-M1, R1-6, R1-M10, R1-M15, R1-m1, R1-m10, R1-m13, R1-m15, R2-3 | status review: answered items closed |
+| C-052 | — | Response letter, README, build | R1-m1, R1-m11, R2-2 | letter synced with the final manuscript; length decision recorded |
 
 ## Items not yet closed
 
@@ -101,4 +102,5 @@ Count of pending items by source: Q 0, T 0, S 0, V 0, M 0, X 0, A 1.
 
 ## Mandatory before submission
 
-- Length review by the author once every result is in (14 pages after C-051, up from 13). Do not trim before then; do not submit without it (author, 2026-11-08).
+- Length review: done (author, 2026-11-09). Submit at 15 pages; the editor decides. Options to shorten in LENGTH_OPTIONS_2026-11-09.md.
+- R1-9: the author's reading of the 15 recent abstracts (REFERENCE_AUDIT.md); then check_revision.py --final.
