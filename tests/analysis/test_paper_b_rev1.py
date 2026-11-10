@@ -679,3 +679,23 @@ def test_timing_runs_only_the_explainers_that_apply_to_the_model():
     assert all(lib.explainer_applies(main, e, "svm") for e in main["explainers"])
     src = (ROOT / "scripts/paper_b_run.py").read_text(encoding="utf-8")
     assert "lib.explainer_applies(cfg, e, m)" in src            # the timing command filters
+
+def test_analysis_handles_model_restricted_explainers_and_timing_only(tmp_path):
+    """Sweep: TreeSHAP settings apply to rf/xgb only; a cell of another model is complete without
+    them, and timing rows of an explainer that does not apply are dropped (2026-11-09)."""
+    import pandas as pd
+    cfg = lib.config(ROOT / "experiments/exp_b_rev1/studies/sweep.toml")
+    tree = next(e for e, s in cfg["explainers"].items() if s.get("models"))
+    t = pd.DataFrame({"explainer": [tree, tree, "lime_kwdef_ns5000"],
+                      "model": ["logreg", "rf", "logreg"], "wall_ms": [1.0, 2.0, 3.0]})
+    kept = an.applicable_timing(t, cfg)
+    assert list(kept["model"]) == ["rf", "logreg"] and tree in set(kept["explainer"])
+    # Timing-only root: the cost table is written instead of failing.
+    p = tmp_path / "timing" / "adult" / "rf" / "seed_11"
+    p.mkdir(parents=True)
+    (p / "timing.jsonl").write_text(json.dumps({"instance_id": 1, "explainer": "shap", "reps": [
+        {"wall_ms": 5.0, "cpu_ms": 0.0, "model_calls": 3, "rows": 30, "error": None}]}) + "\n",
+        encoding="utf-8")
+    out = tmp_path / "out"
+    assert an.main(["--root", str(tmp_path), "--out", str(out)]) == 0
+    assert (out / "cost.csv").exists() and (out / "REPORT.md").exists()
