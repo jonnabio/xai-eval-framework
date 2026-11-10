@@ -6,18 +6,17 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-10, by `claude-2026-11-10-paper-b-runs` (experiment laptop).
+**Last updated:** 2026-11-10, by `claude-2026-11-10-paper-b-docs` (after the experiment laptop's handoff, archived).
 
 ## Current objective
 
 **Paper B, revision 1** (C&I 2067810, major revision of 2026-11-06, due
-**2026-11-30**): every cohort B2 run is finished and analysed, every result is in the
-manuscript and the supplement (C-040 to C-055), R1-9 is closed (C-054) and
-`check_revision.py --final` passes (manuscript 15 pp, response 17 pp, supplement 52 pp). The
-author decided to submit at 15 pages and let the editor decide (`LENGTH_OPTIONS_2026-11-09.md`).
-What remains is the author's submission. Work folder
-`docs/reports/paper_b/ci_journal/revision_1/` (start with `HANDOFF.md`). The thesis objective
-below is unchanged.
+**2026-11-30**): **complete and ready to upload** (C-000 to C-056; `check_revision.py --final`
+passes: 50 remediated, 1 explained, 0 pending). On 2026-11-10 the author pressed "Submit
+revision" in DergiPark **without uploading the files**; an email asking the editor to reopen
+the revision step was drafted for the author to send. Upload the files in
+`docs/reports/paper_b/ci_journal/revision_1/build/` once the editor reopens it. The thesis
+objective below is unchanged.
 
 **Close the thesis.** The tutor's note of 2026-10-12 asks for no change. On the author's
 instruction of the same day, every paper is now reflected in the thesis (ADR-0023): a
@@ -59,7 +58,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | Paper | Title | Venue | Status | Record |
 |---|---|---|---|---|
 | **A** | *A framework for rigorous evaluation of model-agnostic explainability methods: multi-metric statistical benchmarking, operational protocol, and reproducibility* | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
-| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Major revision** (2067810, 2026-11-06; due 2026-11-30) | Revision complete: C-000 to C-055, all cohort B2 results in, `check_revision.py --final` passes; awaiting the author's submission (`ci_journal/revision_1/HANDOFF.md`). Runs finished 2026-11-09 on the experiment laptop (`paper/b-rev1-runs`, not merged); documents on `paper/b-ci-revision-1`. Submitted 2026-10-21 |
+| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Major revision** (2067810, 2026-11-06; due 2026-11-30) | Revision complete (C-000 – C-056, final check passes; 15 pp, supplement 52 pp). Revision submitted by mistake without files on 2026-11-10; reopening requested from the editor. Files in `ci_journal/revision_1/build/`. Submitted 2026-10-21 |
 | **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
@@ -154,63 +153,49 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-10, SESSION END (Paper B revision 1: cohort B2 runs finished and analysed)
+## Latest handoff - 2026-11-10, SESSION END (Paper B revision 1 complete; awaiting the editor to reopen the upload)
 
-Session of 2026-11-08/10, owner `claude-2026-11-10-paper-b-runs` (experiment laptop,
-`D:\Github\xai-eval-framework`). Lane `paper-b`: run code on `paper/b-ci-revision-1`, results
-pushed to `paper/b-rev1-runs`; this handoff on `pubs/context-2026-11-10`. The documentation
-laptop worked in parallel (C-053 to C-055, PRs #106 to #110); it is not described here.
+Session of 2026-11-08/10, owner `claude-2026-11-10-paper-b-docs` (documentation laptop).
+Lane `paper-b` (`paper/b-ci-revision-1`); pull requests #104 to #111 merged, and the one
+carrying this handoff (`pubs/context-2026-11-10`). The experiment laptop's handoff of the same day: archive `2026-11-10.md`.
 
 - **Completed**:
-  - Cohort B2 (design hash `4ab8673a4a20`), all on the recorded host:
-    main quality 575/575 jobs (52,740 valid rows; 5 Anchors-on-SVM instances timed out, disclosed
-    as timeouts, not rerun: adult/svm/33 5480 and 5853, connect4/svm/22 10845, connect4/svm/33
-    5786 and 674); main timing 115/115 cells.
-  - Auxiliary studies through `PAPER_B_CONFIG`: `controls_nonoise` 75/75 (1 timeout, 5480),
-    `controls_onehot` 75/75, `sweep` 669/669 quality + 15/15 timing, `matched` 12/12 timing;
-    Anchors-on-XGBoost rows rerun 23/23 cells (not 25, as first stated). Analyses in
-    `outputs/analysis/paper_b_rev1/` (main, `posthoc_<dataset>/` for the six other datasets,
-    `study_*`, `xgb_anchors_rows/`), commit `1e8359d93`. Main primary effects unchanged after
-    the analysis fixes.
-  - Run-code fixes, each with a test (`tests/analysis/test_paper_b_rev1.py`, 54 pass):
-    stale-heartbeat kill loop; admission with backfill (`plan_admissions`); RAM reserve
-    6.0 -> 3.5 GB with live reload; design hash cached at launch and twin-worker guard
-    (`jobs_running_elsewhere`) after a BOM in a config crashed the governor; `onehot_groups`
-    verified on the data; `CallCounter` now counts `XGBClassifier.predict`
-    (`_paper_b_counted`); timing runs only explainers that apply to the model
-    (`explainer_applies`; 53 mislabelled tshap sweep rows dropped by `applicable_timing`, none
-    deleted); analysis counts jobs in the analysed root, keeps sweep cells, has a timing-only path,
-    and reports `stability_zero_vector_share`; throttling alarm uses medians.
-  - Remote progress log: every runs-branch snapshot commit carries `commit_log()` (status,
-    failed rows, governor events, study chain, monitor notes), read from the other laptop.
-    New scripts: `scripts/paper_b_chain.ps1`, `scripts/paper_b_xgb_anchors_rows.ps1`.
+  - Cohort B2 results filled into the manuscript and supplement: TreeSHAP claim narrowed
+    (C-047), validity controls (C-048), configuration sweep and Figure 1 (C-049), sweep
+    timing and matched RF/XGBoost run (C-050), status review (C-051), letter synced (C-052).
+  - Other laptop's final analyses merged; Anchors rows on XGBoost recounted (C-053).
+  - R1-9 closed: author read the 15 recent abstracts (`R1-9_READING_SHEET.md`);
+    `clark2024xaitris` removed, 52 references (C-054).
+  - "KernelSHAP 3 to 25 times LIME" stated as a ratio of medians; §4.2 points to the
+    pooled H2 test, p_Holm 0.11 (C-055).
+  - Abstract cut from 202 to 193-195 words: the manuscript template sets 150-200 (C-056).
+  - Length decision: submit at 15 pages, editor decides; options in
+    `LENGTH_OPTIONS_2026-11-09.md`.
+  - Editor emails drafted: cover email `revision_1/EDITOR_EMAIL.md`; request to reopen the
+    revision (in chat, sent by the author).
+  - MiKTeX repaired: old per-user install (blocked by Smart App Control) removed; system
+    install in `C:\Program Files\MiKTeX`; package auto-install on.
 - **Current State**:
-  - Every run finished 2026-11-09 23:00; save loop, chain and monitor stopped; last runs-branch
-    snapshot `52988d3b7`. Tree clean; `paper/b-ci-revision-1` level with `main` (#110).
-  - Paper B documents: final check passes, awaiting the author's submission (see Current
-    objective).
+  - Manuscript 15 pp, changes-marked 27 pp, response 17 pp, supplement 52 pp, all rebuilt
+    and on `main`; submitted snapshot unchanged.
+  - DergiPark: revision 1 submitted empty on 2026-11-10; waiting for the editor.
+  - Other laptop: all B2 runs finished 2026-11-09 23:00; free to use.
 - **Next Steps**:
-  1. `python scripts/pubs/check_lane.py claim --owner <session name>`; `git pull --no-rebase`.
-  2. Paper B: the author submits the revision on DergiPark by 2026-11-30; record the date and
-     decision in the publication table and the paper's README.
-  3. Decide the fate of `paper/b-rev1-runs` (Open with the author) and act on it.
-  4. No rerun is planned. If one is ever needed: `scripts\paper_b_chain.ps1 -From <study>` and
-     `py scripts\paper_b_sync.py --loop` on the experiment laptop.
+  1. Ask the author whether the editor reopened the revision step.
+  2. Once reopened: author uploads from `revision_1/build/` the manuscript (.docx), the
+     changes-marked file, the response letter and the supplement, with `EDITOR_EMAIL.md`
+     as cover text (add affiliation; check the offer to shorten).
+  3. Record the submission date in `CI_SUBMISSION.md`, `revision_1/README.md`, this file
+     and memory; release the lane and delete `paper/b-ci-revision-1` and
+     `paper/b-rev1-runs` once the editor confirms receipt.
 - **Blockers/Issues**:
-  - None for the runs. Disclosed limits: the 6 Anchors timeouts above; the timing pass ran
-    under the "ASUS Recommended" power plan (recorded per cell); the `cpu_ms` SHAP-LIME mixed
-    model is degenerate (CPU time is descriptive only; H2 is tested in wall time, C-038).
-  - Zero vectors: 5.8% (LIME) and 6.3% (full LIME) of Adult vectors are near zero (all |w| <
-    1e-4); 2.7% are exactly zero. Do not quote 2.7% as the near-zero share.
-  - `tests/analysis/test_stats.py` and `test_visualization.py` still fail at collection; not
-    investigated.
+  - The empty revision in DergiPark: only the editorial office can reopen it.
+  - Abstract is near the 200-word limit; count again in the submission form.
 - **Notes**:
-  - Experiment laptop: use `.venv\Scripts\python.exe` (system Python lacks psutil). The
-    timing gate needs other CPU <= 10%, the user idle 5 min (unless `--no-require-idle`) and AC
-    power; an open dashboard tab can hold it.
-  - PowerShell `Set-Content -Encoding utf8` writes a BOM that breaks `config_hash`: write
-    configs with Python or `-Encoding ascii`.
-  - Study configs are generated by `scripts/paper_b_studies.py`; a drift test keeps their
-    `resources` table equal to the cohort's. `resources`/`sync` are outside the design hash;
-    `[timing]` is inside it.
-  - `gh` is not on PATH on the experiment laptop; pull requests are opened from the web.
+  - Build (Git Bash, from `docs/reports/paper_b/ci_journal`):
+    `export PATH="/c/Program Files/MiKTeX/miktex/bin/x64:$PATH"`, then
+    `.venv/Scripts/python.exe revision_1/scripts/build_revision.py` and `build_supplement.py`;
+    `check_revision.py --final` before upload.
+  - Lane: `python scripts/pubs/check_lane.py claim --owner paper-b` fails until
+    `git merge origin/main`; pull with `--no-rebase`.
+  - The abstract limit is in `journal_files/manuscript_template.docx`, not the writing-rules page.
