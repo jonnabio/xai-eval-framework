@@ -42,7 +42,7 @@ REVISED = REV / "manuscript" / "paper_b_ci_rev1.tex"
 NAME = "paper_b_ci_rev1"
 # Page budget of the manuscript in the journal's Word template. The journal sets no length
 # limit (writing rules, last updated 2025-02-22); its published articles run 7 to 17 pages.
-PAGE_BUDGET = 12                     # author decision D-C, 2026-11-06: aim 12 pages
+PAGE_BUDGET = 15                     # D-C (12 pages, 2026-11-06) superseded 2026-11-09: submit at 15, editor decides
 SUBMITTED_DOCX = CI / "submission" / "paper_b_ci_manuscript.docx"   # frozen; text-check only
 # Kept in the lane's own folder (pub/ is a shared path).
 REV_ABSTRACT = REV / "manuscript" / "abstract_rev1.tex"

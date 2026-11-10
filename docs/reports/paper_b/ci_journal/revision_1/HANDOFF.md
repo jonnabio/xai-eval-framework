@@ -77,3 +77,14 @@ One check for this laptop: Anchors on XGBoost records 0 rows and 0 model calls i
 Anchors probably calls. Do not restart the run for it; confirm the cause, and say whether a
 short rerun of Anchors on XGBoost with the counter fixed is feasible (rows only, not time).
 Until then Table 3 excludes Anchors' rows on XGBoost and says so.
+
+## 2026-11-09, from the documentation laptop: every result filled
+
+All cohort B2 runs are complete and in the manuscript: validity controls (C-048), sweep quality
+and Figure 1 (C-049), sweep timing and the matched tree-ensemble run (C-050). No [R] marker is
+left in the manuscript, the abstract or the supplement (52 pages, S9-S11 complete). Response
+letter: 49 remediated, 1 explained, 1 pending (R1-9, the author's reading of the recent
+abstracts). Length: the author decided to submit at 15 pages and let the editor decide; options
+to shorten are in `LENGTH_OPTIONS_2026-11-09.md`. The Anchors-on-XGBoost counter question is
+answered by the counter fix (f64db3236); the main runs keep "not counted" for those rows.
+The run laptop has no further runs queued.
