@@ -252,6 +252,10 @@ def sections(res: Path, cfg: dict, n_features: dict) -> list[str]:
            "units), with p the number of encoded features.", ""]
     tc = pd.read_csv(res / "timing_cells.csv")
     done = tc.groupby(["dataset", "model"]).seed.nunique().to_dict()
+    # Anchors on XGBoost, recount with the fixed counter (median calls, rows per explanation)
+    XGB_ANCHORS = {"adult": (70, 6901), "breast_cancer": (705, 70401), "connect4": (338, 33701),
+                   "diabetes": (48.5, 4751), "german_credit": (324, 32301),
+                   "phishing": (292.5, 29151), "spambase": (433.5, 43251)}
     total = sum(5 * seeds[d] for d in NAMES)
     if len(tc) < total:
         todo = [NAMES[d] for d in DORDER
@@ -264,14 +268,17 @@ def sections(res: Path, cfg: dict, n_features: dict) -> list[str]:
     for r in order(cost, [("dataset", DORDER), ("model", MORDER), ("explainer", EORDER)]).itertuples():
         star = "*" if done.get((r.dataset, r.model), 0) < seeds[r.dataset] else ""
         fl = f(r.flops_per_explanation / 1e6) if r.flops_per_explanation == r.flops_per_explanation else "—"
-        rows_ = "not counted" if (r.model == "xgb" and r.explainer == "anchors") else f"{r.rows_median:,.0f}"
-        calls = "not counted" if (r.model == "xgb" and r.explainer == "anchors") else f"{r.calls_median:,.0f}"
+        if r.model == "xgb" and r.explainer == "anchors":
+            rows_, calls = (f"{v:,.0f}" if v == int(v) else f"{v:,.1f}" for v in XGB_ANCHORS[r.dataset][::-1])
+        else:
+            rows_, calls = f"{r.rows_median:,.0f}", f"{r.calls_median:,.0f}"
         md.append(f"| {NAMES[r.dataset]} | {MODELS[r.model]} | {EXPL[r.explainer]} | "
                   f"{r.n}{star} | {f(r.wall_ms_median, 1)} | {f(r.cpu_ms_median, 1)} | {rows_} | "
                   f"{calls} | {fl} |")
-    md += ["", "Anchors calls XGBoost through a prediction method the counter did not wrap, so its "
-           "rows and calls on XGBoost were not counted; its time is measured as for every other "
-           "explainer.", ""]
+    md += ["", "Anchors calls XGBoost through a prediction method the main timing pass did not "
+           "count; its rows and calls on XGBoost come from a recount with the fixed counter (23 "
+           "cells, same seeds; scripts/paper_b_xgb_anchors_rows.ps1), and its time from the main "
+           "pass.", ""]
     mt = pd.read_csv(res / "studies_timing" / "matched_timing.csv")
     MM = {"rf": "Random forest, depth 15", "rf_d6": "Random forest, depth 6",
           "xgb": "XGBoost, depth 6", "xgb_d15": "XGBoost, depth 15"}

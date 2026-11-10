@@ -90,7 +90,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > Furthermore, the fairness of the explainer configurations, **reliability of computational cost measurements**, and generalizability of the cross-dataset findings require additional investigation.
 
 - **Status:** REMEDIATED
-- **Changes:** C-010, C-014, C-038, C-042
+- **Changes:** C-010, C-014, C-038, C-042, C-053
 - **Plan:** WP2
 - **Response:** Addressed under R1-M8: every cost measurement was repeated on one recorded host under controlled conditions, and complemented by hardware-independent counts (§3.6, §4.2).
 - **Where:** Section 3.6; Section 4.2, Table 3
@@ -473,7 +473,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > First, the runtime comparisons measured in milliseconds are methodologically invalid because the experiments were distributed across commodity workstations running different operating systems without recording hardware specifications, and paired cells were not executed on identical hardware hosts. **To resolve this, runtime evaluations must be conducted on a single, isolated hardware environment**, and supplementary complexity metrics—such as theoretical time complexity, black-box model prediction calls, and FLOPs—should be reported to make the efficiency claims hardware-agnostic.
 
 - **Status:** REMEDIATED
-- **Changes:** C-010, C-014, C-032, C-038, C-039, C-042
+- **Changes:** C-010, C-014, C-032, C-038, C-039, C-042, C-053
 - **Plan:** WP2
 - **Response:** We agree with the reviewer, and the earlier timings have been replaced. All cost measurements of the revision come from one recorded host, under the controlled protocol described under R1-M8 (§3.6). Every paired comparison ran on that host in the same session.
 - **Where:** Section 1; Section 3.6; Section 4.2, Table 3

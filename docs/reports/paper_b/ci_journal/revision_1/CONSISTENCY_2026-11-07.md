@@ -79,6 +79,7 @@ not answered).
 | C-050 | — | §4.2, §4.3, Table 5, §5.1, §6, Abstract, Supplement S9-S11 | R1-M4, R1-M9, R1-M14 | sweep timing and matched run filled; supplement complete |
 | C-051 | — | Response letter | R1-1, R1-M1, R1-6, R1-M10, R1-M15, R1-m1, R1-m10, R1-m13, R1-m15, R2-3 | status review: answered items closed |
 | C-052 | — | Response letter, README, build | R1-m1, R1-m11, R2-2 | letter synced with the final manuscript; length decision recorded |
+| C-053 | — | Table 3 caption, Supplement S9 | R1-5, R2-1a | Anchors rows on XGBoost recounted; caption and S9 updated |
 
 ## Items not yet closed
 
