@@ -131,8 +131,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > 6. Drawing and Building Upon Relevant Literature: Poor
 
 - **Type:** GENERAL
-- **Status:** PENDING (text and list done; waits for the author's reading of the 15 recent abstracts, REFERENCE_AUDIT.md)
-- **Changes:** C-002, C-027, C-028, C-031, C-032
+- **Status:** REMEDIATED
+- **Changes:** C-002, C-027, C-028, C-031, C-032, C-054
 - **Plan:** WP8, D-6 (option A)
 - **Response:** We thank the reviewer for this assessment. As the comment concerns the literature review as a whole, we checked it against recent work and identified the following places where it could be improved: (1) recent empirical comparisons of SHAP and LIME were missing; (2) recent benchmarks and toolkits for explanation evaluation were not discussed; (3) work on the sensitivity of LIME to its hyperparameters and on the validity of perturbation-based stability measures was not used. We revised each of them: §2 adds a paragraph on comparisons and benchmarks published from 2024 on, and positions the study against them. §1 and §2 cite the work on hyperparameter sensitivity and on the limits of perturbation-based measures that motivates the configuration sweep and the new controls, and §1 cites a recent reporting checklist for the computing environment behind the cost measurement. Older entries whose point is now made by recent work were replaced. Of the 53 references, the 27 that cite the literature are 85% from 2024 or later; the other 26 are cited for a definition (the explainers, the models and the metrics), a dataset source or a statistical method, at the place where it is used.
 - **Where:** Section 1; Section 2

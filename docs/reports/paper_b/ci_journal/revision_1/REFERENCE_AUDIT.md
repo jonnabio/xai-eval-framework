@@ -17,6 +17,10 @@ establish (topic and setting), not for findings, because the papers were not rea
 **The author should read the abstracts of the 15 papers before submission** and adjust any
 characterization.
 
+**Done 2026-11-10 (C-054):** the author read the abstracts of the 15 recent papers and approved
+every characterization (R1-9_READING_SHEET.md). clark2024xaitris (image benchmark, not read) was
+removed from §2 and §5.3 and from the references.
+
 ## Added (19 entries, all verified)
 
 | Key | Year | Venue | Used for |
@@ -36,7 +40,6 @@ characterization.
 | baniecki2024adversarial | 2024 | Information Fusion | manipulation of explanations |
 | huang2024failings | 2024 | Int. J. Approx. Reasoning | limits of Shapley values |
 | bilodeau2024impossibility | 2024 | PNAS | limits of feature attribution |
-| clark2024xaitris | 2024 | Machine Learning | false-positive attributions |
 | smith1988adap | 1988 | Proc. SCAMC | Diabetes (Pima) dataset |
 | hopkins1999spambase | 1999 | UCI (DataCite DOI) | Spambase dataset |
 | mohammad2012phishing | 2012 | UCI (DataCite DOI) | Phishing dataset |

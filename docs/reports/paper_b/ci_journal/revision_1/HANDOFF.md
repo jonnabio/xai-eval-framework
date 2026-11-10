@@ -88,3 +88,5 @@ abstracts). Length: the author decided to submit at 15 pages and let the editor 
 to shorten are in `LENGTH_OPTIONS_2026-11-09.md`. The Anchors-on-XGBoost counter question is
 answered by the counter fix (f64db3236); the main runs keep "not counted" for those rows.
 The run laptop has no further runs queued.
+
+2026-11-10: R1-9 closed (C-054); `check_revision.py --final` passes (50 remediated, 1 explained, 0 pending). Manuscript ready to upload.
