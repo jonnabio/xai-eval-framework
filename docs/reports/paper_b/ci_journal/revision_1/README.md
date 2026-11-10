@@ -68,7 +68,7 @@ python docs/reports/paper_b/ci_journal/revision_1/scripts/build_supplement.py   
 ## Mandatory before submission
 
 1. **Length review (author, 2026-11-08).** The manuscript is 13 pages after C-042 and
-   14 after C-048 and C-049 (controls, sweep and Figure 1). The author decides on the length once every result is in;
+   14 after C-049 and 15 after C-050 (every result in; all [R] filled). The author decides on the length once every result is in;
    do not trim before then, and do not submit before this review is done.
 2. Every [R] marker filled; `check_revision.py --final` passes.
 3. Abstract within 150-200 words after the last fill.

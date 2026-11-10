@@ -49,8 +49,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 >
 > 4. Contribution to the Field: Fair (Provides marginal original contributions to the literature)
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-001, C-020, C-033
+- **Status:** REMEDIATED
+- **Changes:** C-001, C-020, C-033, C-051
 - **Plan:** WP1, WP2, WP7
 - **Response:** We thank the reviewer for raising this point, which the revision takes seriously. The previous version presented the study as an extension of an earlier comparison; the revised manuscript stands on its own evidence. All results come from a new experimental cohort run for this study (§3), with four explainers instead of two, seven datasets instead of one main dataset, configuration sensitivity instead of a single setting, controls that test the validity of the stability measure, and cost measured on one host with hardware-independent counts. The contributions are restated in §1 accordingly, and §5 states in one paragraph what was known before and what this study adds. Details under R1-M1.
 - **Where:** Section 1; Section 5
@@ -99,8 +99,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Furthermore, the fairness of the explainer configurations, reliability of computational cost measurements, and **generalizability of the cross-dataset findings** require additional investigation.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017, C-040, C-043
+- **Status:** REMEDIATED
+- **Changes:** C-017, C-040, C-043, C-051
 - **Plan:** WP3
 - **Response:** Addressed under R1-M10: the cross-dataset study now covers six further datasets with all models and all four explainers, SHAP stability included. The datasets were chosen to separate dimensionality from categorical encoding (§3.2, §4.5).
 - **Where:** Section 4.5, Table 4
@@ -166,8 +166,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The manuscript extends a previously published SHAP–LIME comparison from 45 to 75 matched configurations. The authors should clearly establish the scientific novelty of the present work and distinguish its original contributions from previously reported findings.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-001, C-003, C-020, C-025, C-033, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-001, C-003, C-020, C-025, C-033, C-040, C-051
 - **Plan:** WP1, WP7
 - **Response:** We agree that the previous version relied too much on the earlier study. The revision answers this in three ways. First, every result now comes from a new cohort designed and run for this study, on one host, with four explainers and seven datasets; no number is taken from the earlier work, which was replaced because an audit found training-test overlap, an unrecoverable model and timings from mixed hosts (§3.1). Second, the analysis asks a different question: not whether SHAP is better on average, but when the ordering of the methods depends on the model, the configuration and the measurement protocol. That calls for configuration sensitivity (§4.3) and validity controls (§4.4) that the earlier study did not have. Third, cost is reported in hardware-independent terms (model calls, complexity) next to time on one host. §1 states these contributions; §5 positions them against earlier work. The new finding is that SHAP's advantage lies in faithfulness, not in stability: on Adult its stability advantage over LIME is not significant, and on all six further datasets LIME with the full vector is the more stable explainer while SHAP keeps the highest fidelity (§4.1, §4.5).
 - **Where:** Section 1; former Section 4.1; Section 5; Section 3.1
@@ -196,10 +196,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The fairness of the SHAP–LIME comparison requires further investigation. In particular, the fixed feature budget imposed on LIME and the use of different SHAP implementations may influence the reported differences in sparsity, fidelity, and computational efficiency.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-008, C-016, C-049
+- **Status:** REMEDIATED
+- **Changes:** C-008, C-016, C-049, C-050
 - **Plan:** WP5
-- **Response:** We agree that both choices could shape the differences. (1) LIME is now run both with its 10-feature budget and without it (all features). The comparison of sparsity, fidelity and cost is reported for both (§3.3, Table 2). (2) To separate the SHAP implementation from the model family, KernelSHAP is also run on the two tree models, next to TreeSHAP (§4.3). Without the budget, LIME's vector covers every feature and its fidelity and stability change as reported in Table 2. KernelSHAP on the tree ensembles is within 0.02 of TreeSHAP on fidelity and stability, so the quality differences between model families do not come from the TreeSHAP implementation (§4.3). [R: the cost difference, from the sweep timing.]
+- **Response:** We agree that both choices could shape the differences. (1) LIME is now run both with its 10-feature budget and without it (all features). The comparison of sparsity, fidelity and cost is reported for both (§3.3, Table 2). (2) To separate the SHAP implementation from the model family, KernelSHAP is also run on the two tree models, next to TreeSHAP (§4.3). Without the budget, LIME's vector covers every feature and its fidelity and stability change as reported in Table 2. KernelSHAP on the tree ensembles is within 0.02 of TreeSHAP on fidelity and stability, so the quality differences between model families do not come from the TreeSHAP implementation (§4.3). In cost, however, the implementation matters: KernelSHAP on the tree ensembles takes 7 (random forest) and 73 (XGBoost) times TreeSHAP's time (§4.3).
 - **Where:** Section 3.3; Section 4.3, Fig. 1
 
 ### R1-M5
@@ -246,18 +246,18 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The reported reversal in runtime performance between XGBoost and random forests represents an important finding. However, additional controlled experiments are necessary to determine whether this behavior consistently reflects model architecture rather than implementation-specific or hardware-dependent effects.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-015, C-037
+- **Status:** REMEDIATED
+- **Changes:** C-015, C-037, C-050
 - **Plan:** WP2b
-- **Response:** We agree this needed a controlled test, and §4.2 now poses the reversal the reviewer identified as the question the controlled run answers. Random forests and gradient-boosted trees were trained on the same data at matched numbers of trees and depths. The cost of TreeSHAP and of LIME was measured on one host against the total number of leaves (§4.2). [R: whether the reversal follows tree size, i.e. architecture, or persists at matched size, i.e. implementation.]
+- **Response:** We agree this needed a controlled test, and §4.2 now poses the reversal the reviewer identified as the question the controlled run answers. Random forests and gradient-boosted trees were trained on the same data at matched numbers of trees and depths. The cost of TreeSHAP and of LIME was measured on one host with each ensemble at its own depth and at the other's (§4.2; supplementary file, S9). The reversal follows tree size more than the implementation: lowering the random forest from depth 15 to 6 cuts TreeSHAP's time from 21.7 to 3.2 ms, and raising XGBoost from depth 6 to 15 raises it from 1.4 to 7.4 ms, against 12.5 to 21.6 ms for LIME. At matched depth XGBoost remains 2.3 to 2.9 times cheaper, a smaller effect of the implementation. The total number of leaves, which the plan named, was not recorded; depth is the controlled variable.
 - **Where:** Section 4.2
 
 ### R1-M10
 
 > The cross-dataset analysis does not include SHAP stability measurements. The authors should extend the evaluation to both explainers on the additional datasets or explicitly restrict their generalizability claims to the outcomes directly supported by the experiments.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-017, C-040, C-043
+- **Status:** REMEDIATED
+- **Changes:** C-017, C-040, C-043, C-051
 - **Plan:** WP3
 - **Response:** SHAP stability is now measured on every dataset, with all models and all four explainers, so the cross-dataset comparison is symmetric (§4.5, Table 4).
 - **Where:** Section 4.5, Table 4
@@ -297,7 +297,7 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 > The reported effect sizes, particularly the exceptionally large values for fidelity and stability, require further statistical justification. The authors should clarify their computation, examine the distributions of paired differences, and assess their robustness to potential dependence among configurations.
 
 - **Status:** REMEDIATED
-- **Changes:** C-011, C-012, C-040, C-045
+- **Changes:** C-011, C-012, C-040, C-045, C-046, C-050
 - **Plan:** WP6
 - **Response:** We agree that the very large d_z values needed explanation. §3.5 now defines d_z (mean paired difference over the standard deviation of the differences) and explains why it grows when paired differences vary little, as here. Robust effect sizes are reported next to it: the Hodges–Lehmann difference and the matched rank-biserial correlation. Effect sizes are also given at the model level, which is robust to the dependence between cells. The supplement shows the distribution of the paired differences per endpoint and model, as quantiles and as Figure S1, with the variance components of each mixed model (§4.1; Supplement S8).
 - **Where:** Section 3.5; Section 4.1, Table 2
@@ -306,8 +306,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The practical recommendations regarding explainer selection appear broader than the experimental evidence supports. The authors should strengthen the empirical justification for these recommendations or explicitly restrict them to the evaluated models, datasets, configurations, and computational settings.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-034, C-043
+- **Status:** REMEDIATED
+- **Changes:** C-019, C-034, C-043, C-051
 - **Plan:** WP7
 - **Response:** The recommendations are now restricted to the models, datasets, configurations and host tested. §5 opens with a table that states, for each claim, the evidence, the condition and whether it is confirmatory or exploratory (Table 5).
 - **Where:** Section 5, Table 5
@@ -318,8 +318,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The abstract should clearly distinguish findings obtained from the primary Adult benchmark from those derived from the supplementary cross-dataset and sensitivity experiments.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-022, C-036, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-022, C-036, C-040, C-051
 - **Plan:** WP7
 - **Response:** The abstract now reports the primary benchmark first and then, marked as supplementary, the configuration, validity and cross-dataset results.
 - **Where:** Abstract
@@ -408,8 +408,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Figures 1 and 2 should be improved in terms of axis labeling, statistical notation, scale descriptions, and overall readability.
 
-- **Status:** PENDING (old figures removed; the new figure is generated from the results of cohort B2)
-- **Changes:** C-023
+- **Status:** REMEDIATED
+- **Changes:** C-023, C-051
 - **Plan:** WP7
 - **Response:** Every figure was regenerated, with labelled axes and units, the scale stated, intervals defined in the caption, and a size readable in print.
 - **Where:** Figures
@@ -438,8 +438,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The grouped masking procedure should be described in greater detail, particularly regarding the identification and treatment of correlated or related features.
 
-- **Status:** PENDING (rule stated; the grouping fix is in the code; waits for the grouped-masking results of cohort B2)
-- **Changes:** C-018
+- **Status:** REMEDIATED
+- **Changes:** C-018, C-051
 - **Plan:** WP4b, WP7
 - **Response:** §4.4 now describes how related features were identified and how a group is masked. A group is (1) all one-hot columns of one categorical input variable, and (2) on Adult, the categorical education and its numeric code education-num, merged into one group because they encode the same information. When any feature of a group is among the top-k features, the whole group is replaced by its training means.
 <!-- Internal note, 2026-11-06: `paper_b_lib.onehot_groups` infers the groups from the text before the first underscore of each encoded name. Checked on the real names: right for Adult, Connect-4, Breast Cancer and Diabetes, wrong for Spambase (57 numeric features taken as 3 groups, e.g. 48 `word_freq_*`), Phishing (e.g. `having_IP_Address` merged with `having_At_Symbol`) and German Credit (`credit_amount` merged with `credit_history_*`). It feeds the grouped masking (WP4b) and the valid one-hot noise control (`controls_onehot`); the main quality pass does not use it. To be fixed (groups taken from the encoder's input columns) and tested before either study runs. 2026-11-07: fixed on the other laptop in 28ad03dc1 ("one-hot groups checked against the training data"); the preview masking output computed before the fix is not used. -->
@@ -460,8 +460,8 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > The discussion and conclusion should more clearly distinguish findings supported by the complete paired benchmark from exploratory observations derived from restricted experimental settings.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-019, C-021, C-022, C-035, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-019, C-021, C-022, C-035, C-040, C-051
 - **Plan:** WP7
 - **Response:** Each result is labelled confirmatory (the main paired benchmark) or exploratory (sensitivity, validity controls, other datasets) in §4, in Table 5 and in the conclusions.
 - **Where:** Section 5, Table 5; Section 6; Abstract
@@ -502,10 +502,10 @@ A REMEDIATED item needs Changes and Where; an EXPLAINED item needs a Response. -
 
 > Third, the claim regarding LIME's near-zero stability on the Adult dataset is confounded by an improper hyperparameter choice, as the reference kernel width of 3.0 is severely restricted for a 103-dimensional one-hot-encoded feature space, leading to an artificial collapse of local neighborhood weights.
 
-- **Status:** PENDING (text drafted; waits for the results of cohort B2)
-- **Changes:** C-008, C-016, C-040
+- **Status:** REMEDIATED
+- **Changes:** C-008, C-016, C-040, C-051
 - **Plan:** WP2 (reference width), WP4, WP5
-- **Response:** We agree. The reference LIME configuration is now the library's default kernel width, 0.75√M. We also correct a figure the reviewer quotes: the Adult feature space has 108 transformed features, not 103 as the earlier text stated, so the default width is about 7.79. The value 3.0 remains one point of the sensitivity analysis, where its effect is shown (§4.3). At the default width, LIME's stability on Adult is 0.56 with the full vector and 0.33 with the 10-feature budget, against 0.74 for SHAP; the difference between SHAP and LIME with the full vector is not significant (§4.1).
+- **Response:** We agree. The reference LIME configuration is now the library's default kernel width, 0.75√M. We also correct a figure the reviewer quotes: the Adult feature space has 108 transformed features, not 103 as the earlier text stated, so the default width is about 7.79. The value 3.0 remains one point of the sensitivity analysis, where its effect is shown (§4.3): at a width of 3.0, every perturbed explanation on Adult is all-zero, which confirms the collapse the reviewer describes, and widths of 0.75 to 5 are reported as degenerate. Widths of 10 and 15 are valid and raise LIME's stability up to 0.98 (§4.3, Fig. 1). At the default width, LIME's stability on Adult is 0.56 with the full vector and 0.33 with the 10-feature budget, against 0.74 for SHAP; the difference between SHAP and LIME with the full vector is not significant (§4.1).
 - **Where:** Section 3.3; Section 4.3, Fig. 1
 
 ### R2-4

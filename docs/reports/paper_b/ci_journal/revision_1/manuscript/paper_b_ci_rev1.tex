@@ -467,9 +467,16 @@ so a KernelSHAP explanation costs 5.5 and 555 MFLOPs, against 0.22 and 22
 for LIME. Whether TreeSHAP's cost relative to LIME reverses between
 XGBoost and the random forest, and whether such a reversal reflects the
 architecture or only the size of the ensemble, is tested directly: both have
-100 trees, and the comparison is repeated with matched depth and with cost
-plotted against the total number of leaves [R: whether the reversal holds,
-and whether it follows the size of the forest or the implementation].
+100 trees, and the comparison is repeated with each ensemble at the other's
+depth (three seeds, 20 instances each; supplementary file, S9). The cost
+follows the depth of the trees more than the ensemble: lowering the random
+forest from depth 15 to 6 cuts TreeSHAP's time from 21.7 to 3.2~ms, and
+raising XGBoost from depth 6 to 15 raises it from 1.4 to 7.4~ms, against
+12.5 to 21.6~ms for LIME. At matched depth XGBoost remains 2.3 to 2.9 times
+cheaper, so the implementation adds a smaller effect. TreeSHAP is thus
+faster than LIME on both ensembles at depth 6 and on XGBoost at depth 15,
+and as fast as LIME only on the random forest at depth 15, the setting of the
+main protocol.
 
 \begin{table}[htb]
 \centering
@@ -544,7 +551,18 @@ and the 500 coalitions of the main protocol give fidelity and stability within
 background rows lower fidelity by 0.04 to 0.07. KernelSHAP on the two tree
 ensembles is within 0.02 of TreeSHAP on both endpoints, so the quality
 differences between the model families do not come from the TreeSHAP
-implementation. [R: the cost of each configuration, from the sweep timing.]
+implementation. Cost, timed with the same protocol (supplementary file,
+S10), depends on LIME's number of samples and not on its kernel width, and on
+KernelSHAP's coalitions times background rows. LIME's most stable
+configuration (width 15, 5,000 samples) takes 4.3 to 5.2 times the default
+1,000 samples: 47 against 9.3~ms on logistic regression and 3.9 against
+0.77~s on the SVM. It then costs more than SHAP on logistic regression
+(29~ms) and the tree ensembles (TreeSHAP 1.4 and 25.5~ms), about as much on
+the MLP, and a fifth as much on the SVM (19.2~s). KernelSHAP's library
+default costs 3.6 to 4.3 times the 500-coalition budget for almost the same
+quality, and KernelSHAP on the tree ensembles takes 7 (random forest) and 73
+(XGBoost) times TreeSHAP's time: the cost difference, unlike the quality
+difference, does come from the implementation.
 
 \subsection{Validity of the Measurements}
 \label{sec:validity_controls}
@@ -657,7 +675,7 @@ SHAP more expensive than $X$ & confirmatory & Not supported: against LIME only w
 Orderings over the configuration grid & exploratory & Fidelity: SHAP ahead in every pair of configurations on all five models; faithfulness gap on four (not XGBoost). Stability: depends on LIME's width and samples; LIME (width 15, 5,000 samples) ahead except on the random forest. Widths 0.75 to 5 degenerate \\
 Orderings under the validity controls & exploratory & Stability: LIME ahead of SHAP on Adult with valid one-hot noise; other controls change no ordering. Faithfulness gap: same ordering under all four masking schemes \\
 Orderings on other datasets & exploratory & SHAP highest on fidelity on all six and on faithfulness gap on five (Anchors equal on Connect-4); LIME (full vector) more stable on all six, Anchors on Phishing and Connect-4 \\
-TreeSHAP vs LIME cost by ensemble & exploratory & XGBoost: TreeSHAP faster on all seven datasets. Random forest: faster on three, equal on two, slower on two [R: at matched size] \\
+TreeSHAP vs LIME cost by ensemble & exploratory & XGBoost: TreeSHAP faster on all seven datasets. Random forest: faster on three, equal on two, slower on two. Cost follows tree depth: at matched depth XGBoost 2.3--2.9 times cheaper \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -677,7 +695,9 @@ Adult. LIME's kernel width should be checked next: on Adult, widths up to 5
 give all-zero explanations, and the default width gives a stability well below
 that of a width of 10 or 15 with 2,000 or more samples, at almost the same
 fidelity. KernelSHAP loses stability below 250 coalitions and fidelity with
-10 background rows. [R: the cost of these settings, from the sweep timing.]
+10 background rows. The stable LIME setting costs about five times the
+default, which still leaves it cheaper than KernelSHAP on the SVM but not
+than TreeSHAP on the tree ensembles.
 
 \subsection{Relation to Earlier Work}
 
@@ -734,8 +754,9 @@ paid for in cost only with KernelSHAP, which takes 3 to 25 times LIME's
 wall time and 25 times its model evaluations (19.5~s per explanation on the
 SVM), whereas TreeSHAP is faster than LIME on XGBoost and, on the random
 forest, faster or slower depending on the dataset, and SHAP is faster than Anchors throughout
-(Table~\ref{tab:cost}) [R: whether the tree-ensemble ordering holds at
-matched size]. LIME is therefore the cheaper choice for models that need
+(Table~\ref{tab:cost}). The difference between the ensembles follows tree
+depth more than the implementation: at matched depth both ensembles cost
+less with TreeSHAP than with LIME, except the random forest at depth 15. LIME is therefore the cheaper choice for models that need
 KernelSHAP, such as the SVM, under a tight latency budget, at the price of
 fidelity. The faithfulness advantage is not specific to the pair: SHAP holds it
 against Anchors and DiCE as well, and DiCE ranks last on every quality

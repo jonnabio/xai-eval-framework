@@ -272,13 +272,49 @@ def sections(res: Path, cfg: dict, n_features: dict) -> list[str]:
     md += ["", "Anchors calls XGBoost through a prediction method the counter did not wrap, so its "
            "rows and calls on XGBoost were not counted; its time is measured as for every other "
            "explainer.", ""]
-    md += pending("The random forest against XGBoost at matched number of trees and depth, "
-                  "with TreeSHAP and LIME cost against the total number of leaves.")
+    mt = pd.read_csv(res / "studies_timing" / "matched_timing.csv")
+    MM = {"rf": "Random forest, depth 15", "rf_d6": "Random forest, depth 6",
+          "xgb": "XGBoost, depth 6", "xgb_d15": "XGBoost, depth 15"}
+    md += ["Matched tree ensembles (Adult, 100 trees each, three seeds, 20 instances per cell, "
+           "same timing protocol): each ensemble at its own depth and at the other's. Median wall "
+           "time per explanation:", "",
+           "| Model | TreeSHAP (ms) | LIME, full (ms) | TreeSHAP / LIME |", "|---|---:|---:|---:|"]
+    for m in ("rf", "rf_d6", "xgb_d15", "xgb"):
+        a = mt[(mt.model == m) & (mt.config == "shap")].wall_ms.iloc[0]
+        l = mt[(mt.model == m) & (mt.config == "lime_full")].wall_ms.iloc[0]
+        md.append(f"| {MM[m]} | {f(a, 1)} | {f(l, 1)} | {f(a / l)} |")
+    md.append("")
 
     # S10 --------------------------------------------------------------------------------
-    md += ["## S10. Configuration sweep"]
-    md += pending("Grids of LIME kernel width and samples and of KernelSHAP budget and "
-                  "background; per-model Pareto fronts; share of degenerate explanations.")
+    md += ["## S10. Configuration sweep", "",
+           "Adult, five models, three seeds, one instance per stratum (12 per model), stability on "
+           "each. LIME with the full vector. Degenerate explanations per configuration (pooled "
+           "over models): share of all-zero explanations and mean number of all-zero vectors among "
+           "the 15 perturbed explanations:", "",
+           "| Configuration | All-zero | Zero among 15 perturbed |", "|---|---:|---:|"]
+    dg = pd.read_csv(res / "sweep" / "sweep_degenerate.csv")
+    for r in dg.itertuples():
+        md.append(f"| `{r.config}` | {100 * r.all_zero:.0f}% | {f(r.zero_vectors_of_15, 1)} |")
+    sq = pd.read_csv(res / "sweep" / "sweep_summary_long.csv")
+    stt = pd.read_csv(res / "studies_timing" / "sweep_timing.csv")
+    sq = sq.drop(columns=["wall"], errors="ignore").merge(stt[["model", "config", "wall_ms"]],
+                                                         on=["model", "config"], how="left")
+    pf = pd.read_csv(res / "sweep" / "sweep_pareto.csv")
+    front = set(zip(pf.model, pf.config))
+    md += ["", "Mean stability, fidelity and faithfulness gap on the 12 instances valid under every "
+           "remaining configuration (LIME widths 0.75 to 5 left out), median wall time per "
+           "explanation from the sweep's timing pass (same protocol as S9), and membership of the "
+           "stability-fidelity Pareto front (P):", "",
+           "| Model | Configuration | Stability | Fidelity | Faithfulness gap | Wall (ms) | Front |",
+           "|---|---|---:|---:|---:|---:|---|"]
+    for r in order(sq, [("model", MORDER)]).sort_values(["_model", "config"]).itertuples():
+        md.append(f"| {MODELS[r.model]} | `{r.config}` | {f(r.stability)} | {f(r.fidelity)} | "
+                  f"{f(r.gap)} | {f(r.wall_ms, 1)} | {'P' if (r.model, r.config) in front else ''} |")
+    md += ["", "Configuration names: `lime_kw<width>_ns<samples>` (`kwdef` = 0.75 times the square "
+           "root of the number of features), `kshap_ns<coalitions>_bg<background rows>` (`nsauto` "
+           "= the library default, 2M + 2048), `tshap_bg<background rows>`. Wall time of every "
+           "configuration, the degenerate LIME widths included, is in "
+           "`results/studies_timing/sweep_timing.csv`.", ""]
 
     # S11 --------------------------------------------------------------------------------
     md += ["## S11. Measurement controls", "",
@@ -290,8 +326,36 @@ def sections(res: Path, cfg: dict, n_features: dict) -> list[str]:
         md.append(f"| {EXPL[r.contrast]} | {ENDP[r.endpoint]} | "
                   f"{'all' if r.set == 'all' else 'without all-zero'} | {r.n:,} | "
                   f"{f(r.estimate, 3)} [{f(r.ci_lo, 3)}, {f(r.ci_hi, 3)}] | {p(r.p)} |")
-    md += pending("No-noise repeats; valid one-hot perturbation; rank and top-k stability; the "
-                  "four masking schemes on every model.")
+    cs = pd.read_csv(res / "controls" / "controls_stability.csv")
+    md += ["", "Stability under the main protocol (Gaussian noise, sigma 0.1), without noise, and "
+           "with noise that keeps one-hot features valid (a category resampled with probability "
+           "0.1), on the same Adult instances (three seeds, 12 stability instances per cell):", "",
+           "| Model | Explainer | Main | No noise | Valid one-hot |", "|---|---|---:|---:|---:|"]
+    for r in order(cs, [("model", MORDER), ("explainer", EORDER)]).itertuples():
+        md.append(f"| {MODELS[r.model]} | {EXPL[r.explainer]} | {f(r.main)} | "
+                  f"{f(r.controls_nonoise)} | {f(r.controls_onehot)} |")
+    ps = pd.read_csv(res / "controls" / "posthoc_stability.csv")
+    md += ["", "Stability of the main runs on Adult by measure: cosine (as in the paper), cosine "
+           "without all-zero vectors, mean pairwise Spearman correlation of absolute "
+           "attributions, and mean top-5 Jaccard overlap:", "",
+           "| Model | Explainer | Cosine | Cosine, no zero vectors | Spearman | Top-5 Jaccard |",
+           "|---|---|---:|---:|---:|---:|"]
+    for r in order(ps, [("model", MORDER), ("explainer", EORDER)]).itertuples():
+        md.append(f"| {MODELS[r.model]} | {EXPL[r.explainer]} | {f(r.stab_cosine)} | "
+                  f"{f(r.stab_cosine_nonzero)} | {f(r.stab_spearman)} | {f(r.stab_top5_jaccard)} |")
+    mg = pd.read_csv(res / "controls" / "posthoc_masking_gaps.csv")
+    md += ["", "Faithfulness gap SHAP − X on Adult under four masking schemes of the top-5 "
+           "features (zero, training mean, draw from the training marginal, group mean with "
+           "one-hot groups and education / education-num masked together): mean of cell means, "
+           "and cells with SHAP ahead:", "",
+           "| Model | X | Zero | Mean | Marginal | Grouped |", "|---|---|---:|---:|---:|---:|"]
+    mg["x"] = mg.contrast.str.split("-", n=1).str[1]
+    for (m, x), g in order(mg, [("model", MORDER)]).groupby(["_model", "x"], sort=True):
+        g = g.set_index("scheme")
+        cell = lambda k: f"{f(g.loc[k, 'gap_mean'], 3)} ({g.loc[k, 'cells_shap_ahead']}/{g.loc[k, 'cells']})"
+        md.append(f"| {MODELS[g.model.iloc[0]]} | {EXPL[x]} | {cell('zero')} | {cell('mean')} | "
+                  f"{cell('marginal')} | {cell('grouped_mean')} |")
+    md.append("")
 
     # S12 --------------------------------------------------------------------------------
     md += ["## S12. Further datasets: per model", "",

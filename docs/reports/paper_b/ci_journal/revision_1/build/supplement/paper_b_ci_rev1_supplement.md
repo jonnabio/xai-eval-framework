@@ -731,12 +731,198 @@ Timing pass: 5 instances per stratum (20 per cell), 3 repetitions (median used),
 
 Anchors calls XGBoost through a prediction method the counter did not wrap, so its rows and calls on XGBoost were not counted; its time is measured as for every other explainer.
 
+Matched tree ensembles (Adult, 100 trees each, three seeds, 20 instances per cell, same timing protocol): each ensemble at its own depth and at the other's. Median wall time per explanation:
 
-*[R] The random forest against XGBoost at matched number of trees and depth, with TreeSHAP and LIME cost against the total number of leaves. Written from the result rows when that study is complete.*
+| Model | TreeSHAP (ms) | LIME, full (ms) | TreeSHAP / LIME |
+|---|---:|---:|---:|
+| Random forest, depth 15 | 21.7 | 21.6 | 1.01 |
+| Random forest, depth 6 | 3.2 | 16.7 | 0.19 |
+| XGBoost, depth 15 | 7.4 | 15.9 | 0.46 |
+| XGBoost, depth 6 | 1.4 | 12.5 | 0.11 |
 
 ## S10. Configuration sweep
 
-*[R] Grids of LIME kernel width and samples and of KernelSHAP budget and background; per-model Pareto fronts; share of degenerate explanations. Written from the result rows when that study is complete.*
+Adult, five models, three seeds, one instance per stratum (12 per model), stability on each. LIME with the full vector. Degenerate explanations per configuration (pooled over models): share of all-zero explanations and mean number of all-zero vectors among the 15 perturbed explanations:
+
+| Configuration | All-zero | Zero among 15 perturbed |
+|---|---:|---:|
+| `kshap_ns1000_bg50` | 0% | 0.0 |
+| `kshap_ns100_bg50` | 0% | 0.0 |
+| `kshap_ns250_bg50` | 0% | 0.0 |
+| `kshap_ns500_bg10` | 0% | 0.0 |
+| `kshap_ns500_bg100` | 0% | 0.0 |
+| `kshap_ns500_bg25` | 0% | 0.0 |
+| `kshap_ns500_bg50` | 0% | 0.0 |
+| `kshap_nsauto_bg50` | 0% | 0.0 |
+| `lime_kw0p75_ns1000` | 100% | 15.0 |
+| `lime_kw0p75_ns2000` | 100% | 15.0 |
+| `lime_kw0p75_ns250` | 100% | 15.0 |
+| `lime_kw0p75_ns500` | 100% | 15.0 |
+| `lime_kw0p75_ns5000` | 100% | 15.0 |
+| `lime_kw10p0_ns1000` | 0% | 0.1 |
+| `lime_kw10p0_ns2000` | 0% | 0.1 |
+| `lime_kw10p0_ns250` | 0% | 0.1 |
+| `lime_kw10p0_ns500` | 0% | 0.1 |
+| `lime_kw10p0_ns5000` | 0% | 0.1 |
+| `lime_kw15p0_ns1000` | 0% | 0.0 |
+| `lime_kw15p0_ns2000` | 0% | 0.0 |
+| `lime_kw15p0_ns250` | 0% | 0.0 |
+| `lime_kw15p0_ns500` | 0% | 0.0 |
+| `lime_kw15p0_ns5000` | 0% | 0.0 |
+| `lime_kw1p5_ns1000` | 100% | 15.0 |
+| `lime_kw1p5_ns2000` | 100% | 15.0 |
+| `lime_kw1p5_ns250` | 100% | 15.0 |
+| `lime_kw1p5_ns500` | 100% | 15.0 |
+| `lime_kw1p5_ns5000` | 100% | 15.0 |
+| `lime_kw3p0_ns1000` | 13% | 15.0 |
+| `lime_kw3p0_ns2000` | 13% | 15.0 |
+| `lime_kw3p0_ns250` | 13% | 15.0 |
+| `lime_kw3p0_ns500` | 13% | 15.0 |
+| `lime_kw3p0_ns5000` | 12% | 15.0 |
+| `lime_kw5p0_ns1000` | 3% | 8.5 |
+| `lime_kw5p0_ns2000` | 3% | 8.0 |
+| `lime_kw5p0_ns250` | 3% | 10.1 |
+| `lime_kw5p0_ns500` | 3% | 9.7 |
+| `lime_kw5p0_ns5000` | 0% | 7.4 |
+| `lime_kwdef_ns1000` | 0% | 1.1 |
+| `lime_kwdef_ns2000` | 0% | 0.8 |
+| `lime_kwdef_ns250` | 0% | 1.3 |
+| `lime_kwdef_ns500` | 0% | 0.9 |
+| `lime_kwdef_ns5000` | 0% | 0.6 |
+| `tshap_bg10` | 0% | 0.0 |
+| `tshap_bg100` | 0% | 0.0 |
+| `tshap_bg25` | 0% | 0.0 |
+| `tshap_bg50` | 0% | 0.0 |
+
+Mean stability, fidelity and faithfulness gap on the 12 instances valid under every remaining configuration (LIME widths 0.75 to 5 left out), median wall time per explanation from the sweep's timing pass (same protocol as S9), and membership of the stability-fidelity Pareto front (P):
+
+| Model | Configuration | Stability | Fidelity | Faithfulness gap | Wall (ms) | Front |
+|---|---|---:|---:|---:|---:|---|
+| Logistic regression | `kshap_ns1000_bg50` | 0.90 | 0.96 | 0.31 | 50.9 | P |
+| Logistic regression | `kshap_ns100_bg50` | 0.64 | 0.91 | 0.30 | 12.5 |  |
+| Logistic regression | `kshap_ns250_bg50` | 0.84 | 0.95 | 0.30 | 19.0 |  |
+| Logistic regression | `kshap_ns500_bg10` | 0.84 | 0.89 | 0.30 | 18.4 |  |
+| Logistic regression | `kshap_ns500_bg100` | 0.89 | 0.97 | 0.31 | 43.3 | P |
+| Logistic regression | `kshap_ns500_bg25` | 0.88 | 0.95 | 0.30 | 22.5 |  |
+| Logistic regression | `kshap_ns500_bg50` | 0.89 | 0.97 | 0.30 | 29.1 |  |
+| Logistic regression | `kshap_nsauto_bg50` | 0.89 | 0.97 | 0.30 | 103.4 |  |
+| Logistic regression | `lime_kw10p0_ns1000` | 0.87 | 0.55 | 0.23 | 9.3 |  |
+| Logistic regression | `lime_kw10p0_ns2000` | 0.90 | 0.55 | 0.23 | 19.6 |  |
+| Logistic regression | `lime_kw10p0_ns250` | 0.69 | 0.51 | 0.24 | 4.2 |  |
+| Logistic regression | `lime_kw10p0_ns500` | 0.81 | 0.54 | 0.23 | 5.6 |  |
+| Logistic regression | `lime_kw10p0_ns5000` | 0.96 | 0.55 | 0.24 | 47.3 |  |
+| Logistic regression | `lime_kw15p0_ns1000` | 0.97 | 0.55 | 0.23 | 9.3 |  |
+| Logistic regression | `lime_kw15p0_ns2000` | 0.99 | 0.55 | 0.24 | 19.6 |  |
+| Logistic regression | `lime_kw15p0_ns250` | 0.84 | 0.51 | 0.24 | 4.1 |  |
+| Logistic regression | `lime_kw15p0_ns500` | 0.93 | 0.54 | 0.23 | 5.6 |  |
+| Logistic regression | `lime_kw15p0_ns5000` | 0.99 | 0.55 | 0.24 | 47.3 | P |
+| Logistic regression | `lime_kwdef_ns1000` | 0.59 | 0.55 | 0.25 | 9.3 |  |
+| Logistic regression | `lime_kwdef_ns2000` | 0.73 | 0.55 | 0.22 | 19.6 |  |
+| Logistic regression | `lime_kwdef_ns250` | 0.43 | 0.51 | 0.24 | 4.3 |  |
+| Logistic regression | `lime_kwdef_ns500` | 0.55 | 0.54 | 0.23 | 5.5 |  |
+| Logistic regression | `lime_kwdef_ns5000` | 0.79 | 0.55 | 0.24 | 47.8 |  |
+| Random forest | `kshap_ns1000_bg50` | 0.98 | 0.89 | 0.37 | 360.3 |  |
+| Random forest | `kshap_ns100_bg50` | 0.79 | 0.88 | 0.37 | 51.4 |  |
+| Random forest | `kshap_ns250_bg50` | 0.96 | 0.90 | 0.37 | 109.7 |  |
+| Random forest | `kshap_ns500_bg10` | 0.97 | 0.82 | 0.37 | 56.1 |  |
+| Random forest | `kshap_ns500_bg100` | 0.98 | 0.89 | 0.38 | 352.3 |  |
+| Random forest | `kshap_ns500_bg25` | 0.97 | 0.88 | 0.37 | 112.7 |  |
+| Random forest | `kshap_ns500_bg50` | 0.97 | 0.89 | 0.37 | 189.2 |  |
+| Random forest | `kshap_nsauto_bg50` | 0.98 | 0.90 | 0.37 | 790.5 |  |
+| Random forest | `lime_kw10p0_ns1000` | 0.88 | 0.38 | 0.27 | 21.4 |  |
+| Random forest | `lime_kw10p0_ns2000` | 0.88 | 0.38 | 0.25 | 40.2 |  |
+| Random forest | `lime_kw10p0_ns250` | 0.60 | 0.31 | 0.24 | 11.0 |  |
+| Random forest | `lime_kw10p0_ns500` | 0.75 | 0.36 | 0.24 | 14.4 |  |
+| Random forest | `lime_kw10p0_ns5000` | 0.91 | 0.39 | 0.22 | 91.4 |  |
+| Random forest | `lime_kw15p0_ns1000` | 0.92 | 0.38 | 0.27 | 21.4 |  |
+| Random forest | `lime_kw15p0_ns2000` | 0.96 | 0.38 | 0.25 | 39.7 |  |
+| Random forest | `lime_kw15p0_ns250` | 0.68 | 0.31 | 0.24 | 11.2 |  |
+| Random forest | `lime_kw15p0_ns500` | 0.84 | 0.36 | 0.24 | 14.5 |  |
+| Random forest | `lime_kw15p0_ns5000` | 0.98 | 0.39 | 0.22 | 91.3 |  |
+| Random forest | `lime_kwdef_ns1000` | 0.52 | 0.38 | 0.25 | 21.3 |  |
+| Random forest | `lime_kwdef_ns2000` | 0.68 | 0.38 | 0.25 | 39.6 |  |
+| Random forest | `lime_kwdef_ns250` | 0.35 | 0.31 | 0.24 | 11.0 |  |
+| Random forest | `lime_kwdef_ns500` | 0.46 | 0.36 | 0.23 | 14.7 |  |
+| Random forest | `lime_kwdef_ns5000` | 0.72 | 0.39 | 0.22 | 92.2 |  |
+| Random forest | `tshap_bg10` | 0.97 | 0.82 | 0.36 | 8.7 |  |
+| Random forest | `tshap_bg100` | 0.99 | 0.90 | 0.38 | 47.3 | P |
+| Random forest | `tshap_bg25` | 0.98 | 0.89 | 0.37 | 14.8 |  |
+| Random forest | `tshap_bg50` | 0.99 | 0.90 | 0.37 | 25.5 | P |
+| XGBoost | `kshap_ns1000_bg50` | 0.62 | 0.72 | 0.44 | 198.1 |  |
+| XGBoost | `kshap_ns100_bg50` | 0.55 | 0.69 | 0.44 | 28.4 |  |
+| XGBoost | `kshap_ns250_bg50` | 0.61 | 0.71 | 0.44 | 57.1 |  |
+| XGBoost | `kshap_ns500_bg10` | 0.58 | 0.66 | 0.47 | 34.5 |  |
+| XGBoost | `kshap_ns500_bg100` | 0.63 | 0.74 | 0.45 | 189.5 | P |
+| XGBoost | `kshap_ns500_bg25` | 0.62 | 0.70 | 0.44 | 61.1 |  |
+| XGBoost | `kshap_ns500_bg50` | 0.62 | 0.72 | 0.44 | 102.6 |  |
+| XGBoost | `kshap_nsauto_bg50` | 0.62 | 0.72 | 0.44 | 413.1 |  |
+| XGBoost | `lime_kw10p0_ns1000` | 0.84 | 0.58 | 0.43 | 12.7 |  |
+| XGBoost | `lime_kw10p0_ns2000` | 0.85 | 0.59 | 0.46 | 26.3 |  |
+| XGBoost | `lime_kw10p0_ns250` | 0.48 | 0.49 | 0.34 | 5.7 |  |
+| XGBoost | `lime_kw10p0_ns500` | 0.69 | 0.55 | 0.44 | 7.8 |  |
+| XGBoost | `lime_kw10p0_ns5000` | 0.95 | 0.60 | 0.46 | 63.4 | P |
+| XGBoost | `lime_kw15p0_ns1000` | 0.89 | 0.58 | 0.43 | 12.7 |  |
+| XGBoost | `lime_kw15p0_ns2000` | 0.94 | 0.59 | 0.46 | 26.5 |  |
+| XGBoost | `lime_kw15p0_ns250` | 0.58 | 0.48 | 0.34 | 5.7 |  |
+| XGBoost | `lime_kw15p0_ns500` | 0.78 | 0.55 | 0.44 | 7.9 |  |
+| XGBoost | `lime_kw15p0_ns5000` | 0.98 | 0.60 | 0.46 | 62.6 | P |
+| XGBoost | `lime_kwdef_ns1000` | 0.50 | 0.58 | 0.43 | 12.9 |  |
+| XGBoost | `lime_kwdef_ns2000` | 0.68 | 0.59 | 0.46 | 26.7 |  |
+| XGBoost | `lime_kwdef_ns250` | 0.32 | 0.50 | 0.35 | 5.7 |  |
+| XGBoost | `lime_kwdef_ns500` | 0.41 | 0.56 | 0.44 | 7.9 |  |
+| XGBoost | `lime_kwdef_ns5000` | 0.74 | 0.60 | 0.46 | 63.3 | P |
+| XGBoost | `tshap_bg10` | 0.61 | 0.65 | 0.47 | 0.4 |  |
+| XGBoost | `tshap_bg100` | 0.62 | 0.76 | 0.45 | 2.7 | P |
+| XGBoost | `tshap_bg25` | 0.62 | 0.70 | 0.46 | 0.8 |  |
+| XGBoost | `tshap_bg50` | 0.62 | 0.73 | 0.46 | 1.4 |  |
+| SVM (RBF) | `kshap_ns1000_bg50` | 0.94 | 0.86 | 0.36 | 38,250 | P |
+| SVM (RBF) | `kshap_ns100_bg50` | 0.77 | 0.81 | 0.33 | 3,838 |  |
+| SVM (RBF) | `kshap_ns250_bg50` | 0.91 | 0.85 | 0.34 | 9,572 |  |
+| SVM (RBF) | `kshap_ns500_bg10` | 0.93 | 0.82 | 0.36 | 3,826 |  |
+| SVM (RBF) | `kshap_ns500_bg100` | 0.94 | 0.86 | 0.36 | 38,257 |  |
+| SVM (RBF) | `kshap_ns500_bg25` | 0.93 | 0.84 | 0.36 | 9,571 |  |
+| SVM (RBF) | `kshap_ns500_bg50` | 0.93 | 0.86 | 0.35 | 19,231 |  |
+| SVM (RBF) | `kshap_nsauto_bg50` | 0.94 | 0.86 | 0.35 | 82,525 | P |
+| SVM (RBF) | `lime_kw10p0_ns1000` | 0.80 | 0.41 | 0.20 | 769.7 |  |
+| SVM (RBF) | `lime_kw10p0_ns2000` | 0.91 | 0.43 | 0.23 | 1,551 |  |
+| SVM (RBF) | `lime_kw10p0_ns250` | 0.61 | 0.38 | 0.23 | 195.8 |  |
+| SVM (RBF) | `lime_kw10p0_ns500` | 0.74 | 0.41 | 0.21 | 388.0 |  |
+| SVM (RBF) | `lime_kw10p0_ns5000` | 0.90 | 0.43 | 0.21 | 3,862 |  |
+| SVM (RBF) | `lime_kw15p0_ns1000` | 0.96 | 0.41 | 0.20 | 774.5 |  |
+| SVM (RBF) | `lime_kw15p0_ns2000` | 0.97 | 0.43 | 0.23 | 1,553 |  |
+| SVM (RBF) | `lime_kw15p0_ns250` | 0.80 | 0.37 | 0.23 | 194.9 |  |
+| SVM (RBF) | `lime_kw15p0_ns500` | 0.90 | 0.41 | 0.20 | 389.0 |  |
+| SVM (RBF) | `lime_kw15p0_ns5000` | 0.99 | 0.43 | 0.22 | 3,887 | P |
+| SVM (RBF) | `lime_kwdef_ns1000` | 0.53 | 0.41 | 0.20 | 771.4 |  |
+| SVM (RBF) | `lime_kwdef_ns2000` | 0.66 | 0.43 | 0.23 | 1,551 |  |
+| SVM (RBF) | `lime_kwdef_ns250` | 0.39 | 0.38 | 0.20 | 196.7 |  |
+| SVM (RBF) | `lime_kwdef_ns500` | 0.50 | 0.41 | 0.21 | 385.5 |  |
+| SVM (RBF) | `lime_kwdef_ns5000` | 0.73 | 0.43 | 0.21 | 3,869 |  |
+| MLP | `kshap_ns1000_bg50` | 0.44 | 0.80 | 0.58 | 89.3 |  |
+| MLP | `kshap_ns100_bg50` | 0.25 | 0.68 | 0.43 | 16.7 |  |
+| MLP | `kshap_ns250_bg50` | 0.38 | 0.75 | 0.50 | 30.2 |  |
+| MLP | `kshap_ns500_bg10` | 0.43 | 0.73 | 0.41 | 22.5 |  |
+| MLP | `kshap_ns500_bg100` | 0.42 | 0.77 | 0.45 | 82.9 |  |
+| MLP | `kshap_ns500_bg25` | 0.43 | 0.78 | 0.51 | 33.8 |  |
+| MLP | `kshap_ns500_bg50` | 0.43 | 0.77 | 0.46 | 50.9 |  |
+| MLP | `kshap_nsauto_bg50` | 0.49 | 0.81 | 0.58 | 185.0 | P |
+| MLP | `lime_kw10p0_ns1000` | 0.66 | 0.19 | 0.16 | 9.9 |  |
+| MLP | `lime_kw10p0_ns2000` | 0.75 | 0.22 | 0.16 | 21.1 |  |
+| MLP | `lime_kw10p0_ns250` | 0.36 | 0.11 | 0.08 | 4.5 |  |
+| MLP | `lime_kw10p0_ns500` | 0.51 | 0.13 | 0.11 | 5.9 |  |
+| MLP | `lime_kw10p0_ns5000` | 0.86 | 0.22 | 0.23 | 52.2 |  |
+| MLP | `lime_kw15p0_ns1000` | 0.78 | 0.19 | 0.17 | 9.9 |  |
+| MLP | `lime_kw15p0_ns2000` | 0.88 | 0.23 | 0.16 | 21.0 | P |
+| MLP | `lime_kw15p0_ns250` | 0.39 | 0.11 | 0.08 | 4.4 |  |
+| MLP | `lime_kw15p0_ns500` | 0.61 | 0.13 | 0.11 | 5.8 |  |
+| MLP | `lime_kw15p0_ns5000` | 0.95 | 0.22 | 0.23 | 52.1 | P |
+| MLP | `lime_kwdef_ns1000` | 0.51 | 0.22 | 0.25 | 9.8 |  |
+| MLP | `lime_kwdef_ns2000` | 0.59 | 0.24 | 0.16 | 21.0 | P |
+| MLP | `lime_kwdef_ns250` | 0.21 | 0.18 | 0.09 | 4.2 |  |
+| MLP | `lime_kwdef_ns500` | 0.36 | 0.19 | 0.11 | 6.0 |  |
+| MLP | `lime_kwdef_ns5000` | 0.65 | 0.24 | 0.23 | 51.3 | P |
+
+Configuration names: `lime_kw<width>_ns<samples>` (`kwdef` = 0.75 times the square root of the number of features), `kshap_ns<coalitions>_bg<background rows>` (`nsauto` = the library default, 2M + 2048), `tshap_bg<background rows>`. Wall time of every configuration, the degenerate LIME widths included, is in `results/studies_timing/sweep_timing.csv`.
 
 ## S11. Measurement controls
 
@@ -757,7 +943,90 @@ Exclusion of instances with an all-zero LIME vector (any of the explanation and 
 | LIME (10) | Faithfulness gap | all | 2,500 | 0.091 [−0.034, 0.217] | 0.154 |
 | LIME (10) | Faithfulness gap | without all-zero | 2,347 | 0.090 [0.033, 0.148] | 0.002 |
 
-*[R] No-noise repeats; valid one-hot perturbation; rank and top-k stability; the four masking schemes on every model. Written from the result rows when that study is complete.*
+Stability under the main protocol (Gaussian noise, sigma 0.1), without noise, and with noise that keeps one-hot features valid (a category resampled with probability 0.1), on the same Adult instances (three seeds, 12 stability instances per cell):
+
+| Model | Explainer | Main | No noise | Valid one-hot |
+|---|---|---:|---:|---:|
+| Logistic regression | SHAP | 0.87 | 0.98 | 0.82 |
+| Logistic regression | LIME (10) | 0.40 | 0.99 | 0.87 |
+| Logistic regression | LIME (full) | 0.60 | 0.97 | 0.95 |
+| Logistic regression | Anchors | 0.64 | 0.77 | 0.55 |
+| Logistic regression | DiCE | 0.38 | 0.37 | 0.37 |
+| Random forest | SHAP | 0.97 | 1.00 | 0.86 |
+| Random forest | LIME (10) | 0.40 | 0.98 | 0.86 |
+| Random forest | LIME (full) | 0.59 | 0.93 | 0.92 |
+| Random forest | Anchors | 0.64 | 0.77 | 0.57 |
+| Random forest | DiCE | 0.49 | 0.51 | 0.41 |
+| XGBoost | SHAP | 0.62 | 1.00 | 0.77 |
+| XGBoost | LIME (10) | 0.23 | 0.98 | 0.85 |
+| XGBoost | LIME (full) | 0.56 | 0.89 | 0.89 |
+| XGBoost | Anchors | 0.56 | 0.73 | 0.49 |
+| XGBoost | DiCE | 0.60 | 0.42 | 0.46 |
+| SVM (RBF) | SHAP | 0.91 | 0.98 | 0.87 |
+| SVM (RBF) | LIME (10) | 0.39 | 0.99 | 0.90 |
+| SVM (RBF) | LIME (full) | 0.58 | 0.96 | 0.95 |
+| SVM (RBF) | Anchors | 0.69 | 0.79 | 0.60 |
+| SVM (RBF) | DiCE | 0.43 | 0.44 | 0.44 |
+| MLP | SHAP | 0.34 | 0.92 | 0.67 |
+| MLP | LIME (10) | 0.20 | 0.77 | 0.75 |
+| MLP | LIME (full) | 0.46 | 0.78 | 0.78 |
+| MLP | Anchors | 0.63 | 0.74 | 0.51 |
+| MLP | DiCE | 0.16 | 0.15 | 0.15 |
+
+Stability of the main runs on Adult by measure: cosine (as in the paper), cosine without all-zero vectors, mean pairwise Spearman correlation of absolute attributions, and mean top-5 Jaccard overlap:
+
+| Model | Explainer | Cosine | Cosine, no zero vectors | Spearman | Top-5 Jaccard |
+|---|---|---:|---:|---:|---:|
+| Logistic regression | SHAP | 0.86 | 0.86 | 0.56 | 0.63 |
+| Logistic regression | LIME (10) | 0.41 | 0.48 | 0.42 | 0.32 |
+| Logistic regression | LIME (full) | 0.59 | 0.66 | 0.25 | 0.46 |
+| Logistic regression | Anchors | 0.63 | 0.63 | 0.62 | 0.50 |
+| Logistic regression | DiCE | 0.35 | 0.35 | 0.23 | 0.17 |
+| Random forest | SHAP | 0.98 | 0.98 | 1.00 | 0.92 |
+| Random forest | LIME (10) | 0.37 | 0.42 | 0.35 | 0.26 |
+| Random forest | LIME (full) | 0.56 | 0.64 | 0.19 | 0.42 |
+| Random forest | Anchors | 0.66 | 0.66 | 0.64 | 0.54 |
+| Random forest | DiCE | 0.50 | 0.50 | 0.33 | 0.25 |
+| XGBoost | SHAP | 0.61 | 0.61 | 0.98 | 0.74 |
+| XGBoost | LIME (10) | 0.24 | 0.26 | 0.26 | 0.16 |
+| XGBoost | LIME (full) | 0.55 | 0.61 | 0.12 | 0.37 |
+| XGBoost | Anchors | 0.57 | 0.57 | 0.54 | 0.45 |
+| XGBoost | DiCE | 0.58 | 0.58 | 0.38 | 0.28 |
+| SVM (RBF) | SHAP | 0.90 | 0.90 | 0.64 | 0.68 |
+| SVM (RBF) | LIME (10) | 0.40 | 0.44 | 0.38 | 0.27 |
+| SVM (RBF) | LIME (full) | 0.59 | 0.66 | 0.20 | 0.43 |
+| SVM (RBF) | Anchors | 0.69 | 0.69 | 0.68 | 0.57 |
+| SVM (RBF) | DiCE | 0.41 | 0.41 | 0.27 | 0.21 |
+| MLP | SHAP | 0.32 | 0.32 | 0.21 | 0.18 |
+| MLP | LIME (10) | 0.19 | 0.20 | 0.25 | 0.14 |
+| MLP | LIME (full) | 0.45 | 0.51 | 0.28 | 0.19 |
+| MLP | Anchors | 0.63 | 0.63 | 0.58 | 0.53 |
+| MLP | DiCE | 0.15 | 0.15 | 0.08 | 0.07 |
+
+Faithfulness gap SHAP − X on Adult under four masking schemes of the top-5 features (zero, training mean, draw from the training marginal, group mean with one-hot groups and education / education-num masked together): mean of cell means, and cells with SHAP ahead:
+
+| Model | X | Zero | Mean | Marginal | Grouped |
+|---|---|---:|---:|---:|---:|
+| Logistic regression | Anchors | 0.137 (5/5) | 0.111 (5/5) | 0.101 (5/5) | 0.108 (5/5) |
+| Logistic regression | DiCE | 0.233 (5/5) | 0.206 (5/5) | 0.177 (5/5) | 0.187 (5/5) |
+| Logistic regression | LIME (10) | 0.080 (5/5) | 0.066 (5/5) | 0.061 (5/5) | 0.077 (5/5) |
+| Logistic regression | LIME (full) | 0.088 (5/5) | 0.077 (5/5) | 0.056 (5/5) | 0.087 (5/5) |
+| Random forest | Anchors | 0.149 (5/5) | 0.149 (5/5) | 0.078 (5/5) | 0.127 (5/5) |
+| Random forest | DiCE | 0.243 (5/5) | 0.243 (5/5) | 0.150 (5/5) | 0.195 (5/5) |
+| Random forest | LIME (10) | 0.086 (5/5) | 0.086 (5/5) | 0.061 (5/5) | 0.053 (5/5) |
+| Random forest | LIME (full) | 0.114 (5/5) | 0.114 (5/5) | 0.064 (5/5) | 0.084 (5/5) |
+| XGBoost | Anchors | 0.161 (5/5) | 0.161 (5/5) | 0.082 (5/5) | 0.157 (5/5) |
+| XGBoost | DiCE | 0.175 (5/5) | 0.175 (5/5) | 0.120 (5/5) | 0.156 (5/5) |
+| XGBoost | LIME (10) | 0.005 (4/5) | 0.005 (4/5) | 0.039 (5/5) | 0.003 (3/5) |
+| XGBoost | LIME (full) | 0.017 (5/5) | 0.017 (5/5) | 0.048 (5/5) | 0.014 (5/5) |
+| SVM (RBF) | Anchors | 0.066 (5/5) | 0.058 (5/5) | 0.027 (5/5) | 0.048 (5/5) |
+| SVM (RBF) | DiCE | 0.222 (5/5) | 0.198 (5/5) | 0.129 (5/5) | 0.170 (5/5) |
+| SVM (RBF) | LIME (10) | 0.085 (5/5) | 0.110 (5/5) | 0.060 (5/5) | 0.082 (5/5) |
+| SVM (RBF) | LIME (full) | 0.117 (5/5) | 0.142 (5/5) | 0.089 (5/5) | 0.114 (5/5) |
+| MLP | Anchors | 0.193 (5/5) | 0.204 (5/5) | 0.140 (5/5) | 0.149 (5/5) |
+| MLP | DiCE | 0.314 (5/5) | 0.323 (5/5) | 0.259 (5/5) | 0.211 (5/5) |
+| MLP | LIME (10) | 0.189 (5/5) | 0.190 (5/5) | 0.161 (5/5) | 0.108 (5/5) |
+| MLP | LIME (full) | 0.300 (5/5) | 0.308 (5/5) | 0.259 (5/5) | 0.145 (5/5) |
 
 ## S12. Further datasets: per model
 
