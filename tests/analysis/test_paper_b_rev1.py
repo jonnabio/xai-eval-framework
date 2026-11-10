@@ -655,3 +655,27 @@ def test_commit_log_reports_progress_failures_and_events():
     text = dash.commit_log()
     assert text.startswith("study: ") and "design: " in text
     assert "quality " in text and ("failed rows" in text)
+
+def test_commit_log_carries_monitor_notes(tmp_path, monkeypatch):
+    import paper_b_dashboard as dash
+    notes = tmp_path / "monitor.log"
+    notes.write_text("2026-11-09 15:20  sweep timing: gate held by VS Code tab; server stopped\n",
+                     encoding="utf-8")
+    monkeypatch.setattr(dash, "MONITOR_LOG", notes)
+    text = dash.commit_log()
+    assert "monitor notes" in text and "gate held by VS Code tab" in text
+
+def test_timing_runs_only_the_explainers_that_apply_to_the_model():
+    """The sweep's TreeSHAP settings are restricted to rf and xgb; the timing pass ran them on
+    every model, where they silently became KernelSHAP (2026-11-09)."""
+    cfg = lib.config(ROOT / "experiments/exp_b_rev1/studies/sweep.toml")
+    tree = [e for e, s in cfg["explainers"].items() if s.get("models")]
+    assert tree, "the sweep has model-restricted explainers"
+    for e in tree:
+        assert lib.explainer_applies(cfg, e, "rf") and lib.explainer_applies(cfg, e, "xgb")
+        assert not lib.explainer_applies(cfg, e, "svm")
+        assert not lib.explainer_applies(cfg, e, "logreg")
+    main = lib.config(lib.MAIN_CONFIG)
+    assert all(lib.explainer_applies(main, e, "svm") for e in main["explainers"])
+    src = (ROOT / "scripts/paper_b_run.py").read_text(encoding="utf-8")
+    assert "lib.explainer_applies(cfg, e, m)" in src            # the timing command filters

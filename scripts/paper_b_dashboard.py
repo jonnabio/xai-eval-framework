@@ -331,6 +331,9 @@ def heartbeat() -> dict:
 
 
 CHAIN_LOG = lib.ROOT / "outputs" / "paper_b_rev1_chain.log"
+# One line per check of the runs, written by whoever monitors them on this laptop (findings,
+# actions, estimates). Shown in every snapshot commit so the other laptop can read it.
+MONITOR_LOG = lib.ROOT / "outputs" / "paper_b_rev1_monitor.log"
 
 
 def _tail(path: Path, n: int) -> list[str]:
@@ -366,6 +369,9 @@ def commit_log(s: dict | None = None, events: int = 12, max_failed: int = 15) ->
     ch = _tail(CHAIN_LOG, 4)
     if ch:
         L += ["", "study chain (last steps):"] + [f"  {c}" for c in ch]
+    notes = _tail(MONITOR_LOG, 8)
+    if notes:
+        L += ["", "monitor notes (experiment laptop, latest last):"] + [f"  {n}" for n in notes]
     return "\n".join(L) + "\n"
 
 
