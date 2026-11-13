@@ -4,8 +4,8 @@
 > result: every number to come from the run is written `[R: …]`. It contains no reference:
 > every citation is `[REF-n]`, described in the list at the end, to be filled only with
 > sources found and checked with their DOI (reference rule: DOI URL for each, at least 80%
-> from 2024 or later). The journal limits AI-generated content to 30%, so the prose must be
-> substantially rewritten by the author before submission. Impersonal voice throughout.
+> from 2024 or later). The assistant writes the full text; the author decides what is in or
+> out and owns the journal's AI-content limit (decision of 2026-11-13). Impersonal voice throughout.
 > Target: *Informática y Sistemas*, 10 to 12 pages, APA 7.
 
 **Title options**

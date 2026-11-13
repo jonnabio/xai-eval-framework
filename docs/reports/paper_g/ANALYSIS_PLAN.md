@@ -186,7 +186,7 @@ Holm correction over H1 and H2 (and over metric pairs in 4.2 when tested).
 | 6 | Full run on the experiment laptop, resumable shards by seed | `outputs/analysis/paper_g/raw/` | 4–8 days machine time |
 | 7 | Analysis script; figures by committed generators; registry entries | `scripts/paper_g_analyze.py`, `RESULTS_REPORT.md` | 3–4 days |
 | 8 | References: search, DOI verification, ≥ 80% from 2024 or later | `reference_records.json` | 3–4 days, parallel to 6 |
-| 9 | Fill the draft with results; transfer to the journal .docx template | `paper_g.docx` | author + 1 week |
+| 9 | Assistant writes results and discussion into the draft; author decides content; journal .docx template | `paper_g.docx` | 3–5 days + author review |
 | 10 | Scientific-rigor review and reference audit (Scientific Advisor) | `docs/review/…paper_g…` | 2 days |
 | 11 | Anonymise; declarations; similarity and AI-content check; Zenodo release | submission package | 2 days |
 
@@ -202,7 +202,7 @@ Earliest submission: mid to late December 2026.
 | Masking baseline drives the result | second baseline as a secondary factor |
 | ROAR-lite too slow | optional; dropped if the pilot exceeds the budget |
 | Overlap with Papers B, E, F | own run; the paper cites them as prior work and prints none of their values |
-| Journal limit of 30% AI-generated text | the author rewrites the draft; the draft is a scaffold |
+| Journal limit of 30% AI-generated text | owned and managed by the author (decision 2026-11-13) |
 
 ## 8. Possible extension (not in version 1)
 

@@ -23,7 +23,8 @@ No run made.
 - References: DOI URL for each, verified; at least 80% from 2024 or later.
 - Equations, figures and tables numbered and cited by generated reference.
 - Single author: impersonal voice.
-- Journal limit of 30% AI-generated text: the author rewrites the draft.
+- Writing: the assistant writes the full manuscript; the author decides what is in or out and
+  owns the journal's AI-content limit and declaration (author decision, 2026-11-13).
 
 ## Next step
 

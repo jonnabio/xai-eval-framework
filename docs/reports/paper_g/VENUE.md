@@ -24,7 +24,8 @@ note dated 2026-11-12). URL: https://revistas.utm.edu.ec/index.php/Informaticays
 
 ## Consequences for Paper G
 
-- The 30% AI-content limit means the author must rewrite the prose of the draft.
+- The 30% AI-content limit is owned and managed by the author (decision of 2026-11-13). The
+  assistant writes the full manuscript; the author decides content and handles compliance.
 - Double-blind: own prior papers (A to F) are cited in the third person, and the Zenodo
   record is anonymised or cited after acceptance.
 - The Declaration of Generative AI Use must state honestly how the assistant was used
