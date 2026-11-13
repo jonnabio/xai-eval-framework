@@ -26,11 +26,14 @@ the documentation laptop **through GitHub only**. No file is copied by hand betw
 ## 3. Set-up of the run host (once)
 
 1. Clone into a folder named `xai-eval-framework` (the lane registry checks the folder name).
-2. `python3 -m venv .venv && .venv/bin/pip install -r requirements-frozen.txt`
-   (check the frozen file installs on Linux; any Linux-only difference is recorded in
-   `experiments/exp_g/ENVIRONMENT.md`, not patched silently).
-3. GitHub access: `gh auth login` with the author's account, or a deploy key with write access
-   to this repository only. No token is written into any file of the repository.
+2. Python **3.13**, the version of the project environment (3.13.15 on the documentation
+   laptop), installed with `uv` so that it does not depend on the system Python of Ubuntu:
+   `uv python install 3.13 && uv venv --python 3.13 .venv && uv pip install -r requirements-frozen.txt`.
+   The pinned packages (numpy 2.2.6, scikit-learn 1.7.1, shap 0.50.0, xgboost 3.1.2) may not
+   have wheels for a newer Python. Any Linux-only difference is recorded in
+   `experiments/exp_g/ENVIRONMENT.md`, not patched silently.
+3. GitHub access: `gh auth login` with the author's account (author, 2026-11-13). No token is
+   written into any file of the repository.
 4. `git config user.name` and `user.email` set to the author's commit identity.
 5. Power: no sleep, no suspend on lid close, automatic updates paused for the run.
 6. `python scripts/paper_g_host_check.py` writes `experiments/exp_g/host.json` (OS, kernel, CPU
@@ -101,9 +104,24 @@ same issue and `STATUS.md` with `git fetch` or `gh issue view`.
 systemd unit and timer files under `experiments/exp_g/systemd/`, and tests in
 `tests/analysis/test_paper_g_*.py` (resume, manifest, status page, guard refusal).
 
-## 9. To know from the author
+## 9. The run host (author, 2026-11-13)
 
-1. Distribution and version of the Linux laptop (e.g. Ubuntu 24.04), CPU cores, RAM, free disk.
-2. Python 3 version installed (3.11 or later needed).
-3. Whether `gh` can be installed and logged in with the author's account there, or a deploy key
-   is preferred.
+| Item | Value |
+|---|---|
+| OS | Ubuntu 26.04 LTS |
+| CPU | 13th Gen Intel Core i5-1335U: 10 cores (2 performance, 8 efficiency), 12 threads, 15 W class |
+| RAM | 14 GiB total, about 9 GiB available |
+| GitHub | `gh` logged in with the author's account |
+| Free disk | to record in `host.json` (at least 5 GB wanted) |
+
+Consequences:
+
+- **Jobs: 6 by default**, not 8. A 15 W laptop CPU slows down when hot, and its two performance
+  cores are shared. The pilot measures 4, 6 and 8 jobs and the fastest stable setting is used.
+- **Memory:** each job is limited to one thread per library (`OMP_NUM_THREADS=1` and the same for
+  MKL/OpenBLAS), so that six jobs use six threads and stay under about 6 GiB. The pilot records
+  peak memory per job; the runner stops starting new jobs below 1.5 GiB of free memory.
+- **Heat:** the laptop stands on a hard surface with its vents clear; `host.json` and the status page
+  record CPU temperature where the sensors allow it.
+- The machine-time estimate (about 1 to 2 days) was made for the Ryzen of Paper F; it is replaced by
+  the pilot's measured figure.
