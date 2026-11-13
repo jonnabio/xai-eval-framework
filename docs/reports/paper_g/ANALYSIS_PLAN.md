@@ -204,7 +204,7 @@ Holm correction over H1 and H2 (and over metric pairs in 4.2 when tested).
 | 3 | Metric code M1–M7 and synthetic generators with exact Shapley values, with unit tests on toy models where the answer is known | `scripts/paper_g_metrics.py`, `scripts/paper_g_synthetic.py`, `tests/analysis/test_paper_g_*.py` | 9–11 days |
 | 4 | Dataset gate and `datasets.csv` committed | `outputs/analysis/paper_g/datasets.csv` | 1 day |
 | 5 | Pilot: 1 dataset, 3 models, 1 seed, 20 instances; time and failure check; outputs deleted | timing note | 1–2 days |
-| 6 | Full run on the experiment laptop, resumable shards by seed | `outputs/analysis/paper_g/raw/` | 4–8 days machine time |
+| 6 | Full run on the **Linux run host**, resumable shards, progress and logs pushed to `paper/g-runs` (`RUN_PROTOCOL.md`) | `outputs/analysis/paper_g/raw/`, `STATUS.md` | about 1–2 days machine time (re-estimated without Anchors and DiCE; pilot to confirm) |
 | 7 | Analysis script; figures by committed generators; registry entries | `scripts/paper_g_analyze.py`, `RESULTS_REPORT.md` | 3–4 days |
 | 8 | References: search, DOI verification, ≥ 80% from 2024 or later | `reference_records.json` | 3–4 days, parallel to 6 |
 | 9 | Assistant writes results and discussion into the draft; author decides content; journal .docx template | `paper_g.docx` | 3–5 days + author review |

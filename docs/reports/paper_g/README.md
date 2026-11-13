@@ -16,6 +16,7 @@ No run made.
 | `ANALYSIS_PLAN.md` | Design, metrics, hypotheses, decision rule, execution plan, risks, decisions needed |
 | `paper_g_draft.md` | First full draft (scaffold; no results, no references yet) |
 | `VENUE.md` | Journal requirements and their consequences |
+| `RUN_PROTOCOL.md` | Run on the Linux laptop; logs, status and notifications through GitHub |
 
 ## Rules
 
