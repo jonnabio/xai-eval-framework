@@ -6,17 +6,12 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-10, by `claude-2026-11-10-paper-b-docs` (after the experiment laptop's handoff, archived).
+**Last updated:** 2026-11-12, by `claude-2026-11-12-paper-b-submit` (documentation laptop).
 
 ## Current objective
 
-**Paper B, revision 1** (C&I 2067810, major revision of 2026-11-06, due
-**2026-11-30**): **complete and ready to upload** (C-000 to C-056; `check_revision.py --final`
-passes: 50 remediated, 1 explained, 0 pending). On 2026-11-10 the author pressed "Submit
-revision" in DergiPark **without uploading the files**; an email asking the editor to reopen
-the revision step was drafted for the author to send. Upload the files in
-`docs/reports/paper_b/ci_journal/revision_1/build/` once the editor reopens it. The thesis
-objective below is unchanged.
+**Paper B, revision 1** (C&I 2067810): **SUBMITTED 2026-11-12** after the editor reopened the
+step left empty on 2026-11-10. Wait for the decision. The thesis objective below is unchanged.
 
 **Close the thesis.** The tutor's note of 2026-10-12 asks for no change. On the author's
 instruction of the same day, every paper is now reflected in the thesis (ADR-0023): a
@@ -58,7 +53,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | Paper | Title | Venue | Status | Record |
 |---|---|---|---|---|
 | **A** | *A framework for rigorous evaluation of model-agnostic explainability methods: multi-metric statistical benchmarking, operational protocol, and reproducibility* | *Revista de Investigación Multidisciplinaria Iberoamericana* (RIMI) | Published | 2026; DOI [10.69850/rimi.vi3.307](https://doi.org/10.69850/rimi.vi3.307) |
-| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Major revision** (2067810, 2026-11-06; due 2026-11-30) | Revision complete (C-000 – C-056, final check passes; 15 pp, supplement 52 pp). Revision submitted by mistake without files on 2026-11-10; reopening requested from the editor. Files in `ci_journal/revision_1/build/`. Submitted 2026-10-21 |
+| **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Revision 1 submitted 2026-11-12** (2067810; major revision of 2026-11-06) | Revision C-000 – C-056, final check passes; 15 pp, supplement 52 pp; files from `ci_journal/revision_1/build/`. Record: `revision_1/README.md`, "Submission". Submitted 2026-10-21 |
 | **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
@@ -79,15 +74,13 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 - Two laptops (author, 2026-11-06). **This one** (`C:\Users\jonna\Github`) edits documents
   on `paper/b-ci-revision-1`; **the experiment laptop** (`D:\Github\xai-eval-framework`, Ryzen 5
   4600H, the one recorded host) runs cohort B2 and pushes only `paper/b-rev1-runs`.
-- `main` holds everything up to pull request #110 and this handoff. `paper/b-ci-revision-1` is
-  level with `main` and stays open for the revision. `paper/b-rev1-runs` (raw cohort B2 rows and
+- `main` holds everything up to pull request #114 and this handoff. `paper/b-ci-revision-1` is
+  level with `main`; kept until the editor confirms receipt, then deleted. `paper/b-rev1-runs` (raw cohort B2 rows and
   logs, 6,716 files, about 169 MB; merges cleanly) is ahead of `main` and **not merged**: the
   author decides whether it goes to `main` (see Open with the author). `thesis/rca-001-phase-2`
   is behind `main` and takes it when the thesis lane resumes. `pubs/paper-b-rev1-lane` exists on
   GitHub only (not examined).
-- No lane lock is held. Nothing runs on either laptop: the experiment laptop's save loop,
-  study chain and 30-minute monitor are stopped (2026-11-09 23:32); only the read-only
-  dashboards may still be open there.
+- No lane lock is held (released 2026-11-12). Nothing runs on either laptop.
 - Lanes and the paths they own: `scripts/pubs/lanes.toml`.
 - The thesis renders to Word with seven chapters and no unresolved reference
   (`thesis/render.ps1`; `thesis/_output/JHerrera_XAI_Tesis_Doctorado.docx` is tracked).
@@ -153,49 +146,29 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-10, SESSION END (Paper B revision 1 complete; awaiting the editor to reopen the upload)
+## Latest handoff - 2026-11-12, SESSION END (Paper B revision 1 submitted)
 
-Session of 2026-11-08/10, owner `claude-2026-11-10-paper-b-docs` (documentation laptop).
-Lane `paper-b` (`paper/b-ci-revision-1`); pull requests #104 to #111 merged, and the one
-carrying this handoff (`pubs/context-2026-11-10`). The experiment laptop's handoff of the same day: archive `2026-11-10.md`.
+Session of 2026-11-12, owner `claude-2026-11-12-paper-b-submit` (documentation laptop). Lane
+`paper-b` (`paper/b-ci-revision-1`, PR #114 merged); this handoff on `pubs/context-2026-11-12`.
 
 - **Completed**:
-  - Cohort B2 results filled into the manuscript and supplement: TreeSHAP claim narrowed
-    (C-047), validity controls (C-048), configuration sweep and Figure 1 (C-049), sweep
-    timing and matched RF/XGBoost run (C-050), status review (C-051), letter synced (C-052).
-  - Other laptop's final analyses merged; Anchors rows on XGBoost recounted (C-053).
-  - R1-9 closed: author read the 15 recent abstracts (`R1-9_READING_SHEET.md`);
-    `clark2024xaitris` removed, 52 references (C-054).
-  - "KernelSHAP 3 to 25 times LIME" stated as a ratio of medians; §4.2 points to the
-    pooled H2 test, p_Holm 0.11 (C-055).
-  - Abstract cut from 202 to 193-195 words: the manuscript template sets 150-200 (C-056).
-  - Length decision: submit at 15 pages, editor decides; options in
-    `LENGTH_OPTIONS_2026-11-09.md`.
-  - Editor emails drafted: cover email `revision_1/EDITOR_EMAIL.md`; request to reopen the
-    revision (in chat, sent by the author).
-  - MiKTeX repaired: old per-user install (blocked by Smart App Control) removed; system
-    install in `C:\Program Files\MiKTeX`; package auto-install on.
+  - Editor reopened the revision step (DergiPark email, 2026-11-12).
+  - `check_revision.py --final` had started failing: C-055 and C-056 were cited by no answer.
+    Added to R1-5, R2-1a (C-055) and R1-m1 (C-056); files rebuilt; check passes (`7b702a08c`).
+  - Upload descriptions drafted (all files as "Supporting File"; no "Full Text" type offered).
+  - Author uploaded manuscript, changes-marked file, response and supplement with
+    `EDITOR_EMAIL.md` as cover text; **resubmission completed 2026-11-12**.
+  - Recorded in `CI_SUBMISSION.md` and `revision_1/README.md` (PR #114).
 - **Current State**:
-  - Manuscript 15 pp, changes-marked 27 pp, response 17 pp, supplement 52 pp, all rebuilt
-    and on `main`; submitted snapshot unchanged.
-  - DergiPark: revision 1 submitted empty on 2026-11-10; waiting for the editor.
-  - Other laptop: all B2 runs finished 2026-11-09 23:00; free to use.
+  - Paper B revision 1 under review at C&I; no work pending on it.
+  - `paper/b-ci-revision-1` level with `main`; lane lock released.
 - **Next Steps**:
-  1. Ask the author whether the editor reopened the revision step.
-  2. Once reopened: author uploads from `revision_1/build/` the manuscript (.docx), the
-     changes-marked file, the response letter and the supplement, with `EDITOR_EMAIL.md`
-     as cover text (add affiliation; check the offer to shorten).
-  3. Record the submission date in `CI_SUBMISSION.md`, `revision_1/README.md`, this file
-     and memory; release the lane and delete `paper/b-ci-revision-1` and
-     `paper/b-rev1-runs` once the editor confirms receipt.
+  1. Ask the author whether C&I confirmed receipt; then delete `paper/b-ci-revision-1`.
+  2. Author decision on `paper/b-rev1-runs` (Open with the author, item 8).
+  3. Resume the thesis lane (RCA-001 Phase 2 step 2) or the CIFIE dispatch, as the author says.
 - **Blockers/Issues**:
-  - The empty revision in DergiPark: only the editorial office can reopen it.
-  - Abstract is near the 200-word limit; count again in the submission form.
+  - None on Paper B. Open decisions are those listed under Open with the author.
 - **Notes**:
-  - Build (Git Bash, from `docs/reports/paper_b/ci_journal`):
-    `export PATH="/c/Program Files/MiKTeX/miktex/bin/x64:$PATH"`, then
-    `.venv/Scripts/python.exe revision_1/scripts/build_revision.py` and `build_supplement.py`;
-    `check_revision.py --final` before upload.
-  - Lane: `python scripts/pubs/check_lane.py claim --owner paper-b` fails until
-    `git merge origin/main`; pull with `--no-rebase`.
-  - The abstract limit is in `journal_files/manuscript_template.docx`, not the writing-rules page.
+  - Rebuild only if C&I asks for another revision; build commands in archive `2026-11-10.md`.
+  - The untracked `docs/reports/paper_a/paper_a_rimi.pdf` on this laptop belongs to the author;
+    not committed.
