@@ -5,7 +5,7 @@
 No. 1 of 30 June 2026 has three articles). Guidelines: https://dergipark.org.tr/en/pub/ci/writing-rules.
 Submit at https://dergipark.org.tr/en/journal/3364/submission/step/manuscript/new.
 
-**Status: MAJOR REVISION requested 2026-11-06** (submission **2067810**, submitted 2026-10-21). Decision, item analysis and plan: `revision_1/` (`DECISION_LETTER.md`, `REVIEW_ANALYSIS.md`, `REVISION_PLAN.md`).
+**Status: REVISION 1 SUBMITTED 2026-11-12** (submission **2067810**, submitted 2026-10-21; major revision requested 2026-11-06, due 2026-11-30). On 2026-11-10 "Submit revision" was pressed without files; the editor reopened the step and the files were uploaded and the resubmission completed on 2026-11-12 (`revision_1/README.md`, "Submission"). Decision, item analysis and plan: `revision_1/` (`DECISION_LETTER.md`, `REVIEW_ANALYSIS.md`, `REVISION_PLAN.md`).
 
 Prepared 2026-10-21. The author decided on 2026-10-21 to withdraw
 Paper B from the *CLEI Electronic Journal* (submission 1196) because of the length of its queue,

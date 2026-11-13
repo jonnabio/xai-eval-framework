@@ -1,6 +1,14 @@
 # Paper B, revision 1 (Computers and Informatics, submission 2067810)
 
-Major revision requested 2026-11-06, due 2026-11-30. Everything about the revision lives in
+Major revision requested 2026-11-06, due 2026-11-30. **Submitted 2026-11-12.**
+
+## Submission
+
+- 2026-11-10: "Submit revision" pressed in DergiPark without files; the author asked the editor to reopen the step.
+- 2026-11-12: the editor reopened it. Before upload, `check_revision.py --final` failed (C-055, C-056 cited by no answer); both added to the answers to R1-5, R2-1a and R1-m1, files rebuilt, check passes (commit `7b702a08c`).
+- 2026-11-12: uploaded from `build/`, all as "Supporting File" with descriptions: manuscript (`.docx`), changes-marked file, response to reviewers, supplement (`supplement/`); cover text `EDITOR_EMAIL.md`. "Complete Resubmission" pressed; completed successfully (author).
+- Next: wait for the decision on revision 1.
+ Everything about the revision lives in
 this folder. The submitted edition (`../paper_b_ci.tex`, `../submission/`) is **frozen**:
 its hashes are in `SUBMITTED_SNAPSHOT.sha256`, and every build and check refuses to run if one
 of them changed.
