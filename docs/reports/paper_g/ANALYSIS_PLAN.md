@@ -1,8 +1,11 @@
-# Paper G — Analysis and Execution Plan (version 1)
+# Paper G — Analysis and Execution Plan (version 2)
 
 **Question:** Do faithfulness metrics agree on which explanation method is more faithful?
-**Status:** Version 1, 2026-11-13. Draft for the author's review. No dataset loaded, no model
-trained, no explanation computed for Paper G.
+**Title:** *Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations
+on Tabular Data* (author, 2026-11-13).
+**Status:** Version 2, 2026-11-13, written from the author's decisions of that day (section 9).
+Version 1 is in the history of this file. No dataset loaded, no model trained, no explanation
+computed for Paper G.
 **Lane:** `paper-g` (branch `paper/g-*`, main folder), owning `docs/reports/paper_g/**`,
 `experiments/exp_g/**`, `outputs/analysis/paper_g/**`, `docs/planning/paper_g_*`,
 `scripts/paper_g_*`, `tests/analysis/test_paper_g_*` (`scripts/pubs/lanes.toml`, PR #116).
@@ -29,13 +32,14 @@ agreement analysis, and is reported only to make the agreement readable.
 
 ## 2. Design
 
-**8 datasets × 3 models × 4 explainers × 6 metrics, 5 seeds, 200 instances.**
+**8 datasets × 4 models × 4 explainers × 7 metrics (M7 system level only), 5 seeds, 200 instances;
+plus a synthetic ground-truth check (section 2.5).**
 
 ### 2.1 Datasets
 
 Eight public binary tabular datasets from OpenML, two per stratum of feature composition,
 loaded with the existing Paper F loader (code reused; no Paper F result is reused or printed).
-Proposed, to be confirmed by the author before the run:
+Confirmed by the author on 2026-11-13:
 
 | Stratum | Datasets |
 |---|---|
@@ -51,16 +55,16 @@ candidate pool, and the replacement is recorded.
 
 ### 2.2 Models
 
-Logistic regression (L2), random forest, XGBoost. One configuration per model for all datasets,
-committed before training. Preprocessing: standard scaling, one-hot encoding, median or mode
-imputation. Split 80/20, stratified, by seed. The MLP is left out to hold compute for the
-retraining-based metric; this is stated as a limit.
+Logistic regression (L2), random forest, XGBoost, multilayer perceptron. One configuration per
+model for all datasets, committed before training. Preprocessing: standard scaling, one-hot
+encoding, median or mode imputation. Split 80/20, stratified, by seed. The MLP was kept (author,
+2026-11-13): it adds about 2 to 4 hours of machine time, estimated from Paper F timings.
 
 ### 2.3 Explainers (the four items that are ranked)
 
 | Explainer | Role |
 |---|---|
-| SHAP (TreeSHAP for trees, KernelSHAP for logistic regression) | studied |
+| SHAP (TreeSHAP for trees, KernelSHAP for logistic regression and MLP) | studied |
 | LIME | studied |
 | Occlusion (leave-one-feature-out with baseline replacement) | studied; also a known circularity check (section 3.2) |
 | Random attribution (seeded Gaussian scores) | negative control: every metric must rank it last |
@@ -73,6 +77,21 @@ sanity check that each metric works at all.
 Seeds 42, 123, 456, 789, 101112. A seed fixes the split, the model, explainer sampling and
 the random control. 200 test instances per dataset, model and seed, stratified by predicted
 class. All explainers explain the same instances; all metrics score the same explanations.
+
+### 2.5 Synthetic ground-truth check (light version, author 2026-11-13)
+
+Known functions are used directly as the model, so the true attribution is exact and no
+trained model stands between the data and the truth.
+
+- Generators: (a) additive logistic model; (b) additive model with two pairwise interactions.
+- Features: 8 standard normal features, (i) independent and (ii) correlated (pairwise 0.5).
+- Four generator conditions × 5 seeds × 200 instances; the same four explainers and M1 to M6.
+- Ground truth: exact interventional Shapley values with the same baseline the metrics use
+  (closed form for the additive case; exact enumeration over 8 features otherwise).
+- Outcome: the error of each explainer against the truth (Spearman correlation of attribution
+  ranks); the order of explainers by true error is the reference. Each metric is scored by its
+  rank agreement with that reference.
+- Cost: about 3 working days of code; minutes of compute.
 
 ## 3. Metrics (the "raters")
 
@@ -90,9 +109,11 @@ numeric features, mode for categorical; one-hot groups masked together as one ra
 
 Comprehensiveness is the same quantity as M3 and is not counted twice.
 
-**Optional M7 — ROAR-lite** (retrain without the globally top-ranked features; accuracy drop).
-It is global, costly, and only defined at system level. It is run only if the pilot shows it fits
-the time budget; otherwise it is left out and the paper says so.
+**M7 — ROAR-lite** (included, author 2026-11-13). Global ranking of each explainer = mean
+|attribution| over its 200 instances. The model is retrained without the top 10, 20, 30 and 50%
+of features of that ranking (at least one), and the drop in test AUC is averaged over the four
+levels; a larger drop is better. 2,560 retrainings, about 4 to 6 hours wall time with 8 jobs.
+System level only: it enters H1, not H2.
 
 ### 3.1 Baseline sensitivity
 
@@ -108,13 +129,13 @@ Occlusion. The analysis is reported with and without the Occlusion–M4 combinat
 ## 4. Analysis
 
 **Level.** For the system level, one mean per dataset, model, explainer, seed and metric:
-8 × 3 × 4 × 5 = 480 means per metric. Instances never count as independent evidence about
+8 × 4 × 4 × 5 = 640 means per metric. Instances never count as independent evidence about
 datasets.
 
 ### 4.1 Primary analysis: system-level agreement (H1)
 
 For each dataset × model × seed block: rank the four explainers under each of the six metrics.
-Treat metrics as raters and explainers as items.
+Treat metrics (M1 to M7) as raters and explainers as items.
 
 1. **Estimate:** Kendall's W across the six metrics, per block; reported as the mean over
    blocks and as the mean pairwise Spearman correlation between metrics, (mW − 1)/(m − 1).
@@ -171,8 +192,8 @@ Holm correction over H1 and H2 (and over metric pairs in 4.2 when tested).
 - No claim about which metric is "correct". Disagreement is reported as a property of the
   measurement, not resolved by choosing a winner.
 - No result of Papers A to F is printed. The SHAP and LIME values of Paper G come from its own run.
-- No ground-truth faithfulness (synthetic models with known attributions) in the main study;
-  it is a possible extension (section 8).
+- Ground truth exists only in the synthetic check (section 2.5); on real data the study
+  measures agreement, not correctness.
 
 ## 6. Order of work (BMAD)
 
@@ -180,7 +201,7 @@ Holm correction over H1 and H2 (and over metric pairs in 4.2 when tested).
 |---|---|---|---|
 | 1 | Author reviews this plan and the draft; decisions of section 9 | approved plan | author |
 | 2 | Configuration file; power simulation | `experiments/exp_g/config.toml`, `scripts/paper_g_power_simulation.py` | 1–2 days |
-| 3 | Metric code M1–M6 (+M7) with unit tests on toy models where the answer is known | `scripts/paper_g_metrics.py`, `tests/analysis/test_paper_g_metrics.py` | 4–6 days |
+| 3 | Metric code M1–M7 and synthetic generators with exact Shapley values, with unit tests on toy models where the answer is known | `scripts/paper_g_metrics.py`, `scripts/paper_g_synthetic.py`, `tests/analysis/test_paper_g_*.py` | 9–11 days |
 | 4 | Dataset gate and `datasets.csv` committed | `outputs/analysis/paper_g/datasets.csv` | 1 day |
 | 5 | Pilot: 1 dataset, 3 models, 1 seed, 20 instances; time and failure check; outputs deleted | timing note | 1–2 days |
 | 6 | Full run on the experiment laptop, resumable shards by seed | `outputs/analysis/paper_g/raw/` | 4–8 days machine time |
@@ -190,7 +211,7 @@ Holm correction over H1 and H2 (and over metric pairs in 4.2 when tested).
 | 10 | Scientific-rigor review and reference audit (Scientific Advisor) | `docs/review/…paper_g…` | 2 days |
 | 11 | Anonymise; declarations; similarity and AI-content check; Zenodo release | submission package | 2 days |
 
-Earliest submission: mid to late December 2026.
+Earliest submission: late December 2026 or early January 2027.
 
 ## 7. Risks
 
@@ -200,19 +221,20 @@ Earliest submission: mid to late December 2026.
 | Random control inflates agreement | primary estimate uses the three studied explainers only |
 | Occlusion–M4 circularity | reported with and without that combination |
 | Masking baseline drives the result | second baseline as a secondary factor |
-| ROAR-lite too slow | optional; dropped if the pilot exceeds the budget |
+| ROAR-lite too slow | timed in the pilot; levels reduced from four to two if needed |
 | Overlap with Papers B, E, F | own run; the paper cites them as prior work and prints none of their values |
 | Journal limit of 30% AI-generated text | owned and managed by the author (decision 2026-11-13) |
 
-## 8. Possible extension (not in version 1)
+## 8. Possible extension (not in version 2)
 
-Synthetic data with a known generating model, where the true attribution is known, to say which
-metrics track it. Adds a strong anchor; costs about one week.
+Full synthetic study: more generator families, higher dimension, sensitivity to the correlation
+level. About one more week. Only if reviewers ask.
 
-## 9. Decisions needed from the author
+## 9. Decisions of the author (2026-11-13)
 
-1. The eight datasets (section 2.1).
-2. Whether the MLP is left out (section 2.2).
-3. Whether ROAR-lite (M7) is attempted.
-4. Whether the synthetic ground-truth extension (section 8) is in version 1.
-5. Title (proposals in `paper_g_draft.md`).
+1. The eight datasets of section 2.1: confirmed.
+2. MLP: kept (cost about 2 to 4 hours of machine time).
+3. ROAR-lite (M7): included (about 3 days added).
+4. Synthetic ground-truth check: light version (section 2.5; about 3 days).
+5. Title: *Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations
+   on Tabular Data*.
