@@ -144,6 +144,7 @@ uv pip install -r requirements-frozen.txt
 mkdir -p ~/.config/systemd/user && cp experiments/exp_g/systemd/* ~/.config/systemd/user/
 systemctl --user daemon-reload
 loginctl enable-linger "$USER"               # services keep running after logout
+.venv/bin/python scripts/pubs/check_lane.py claim --owner paper-g-run-host   # before the first publish
 systemctl --user enable --now paper-g-publish.timer
 
 # stages, one after the other

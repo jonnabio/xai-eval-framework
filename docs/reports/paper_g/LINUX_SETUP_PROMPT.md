@@ -85,6 +85,7 @@ mkdir -p ~/.config/systemd/user
 cp experiments/exp_g/systemd/* ~/.config/systemd/user/
 systemctl --user daemon-reload
 loginctl enable-linger "$USER"
+.venv/bin/python scripts/pubs/check_lane.py claim --owner paper-g-run-host   # lane lock, needed by the publisher
 systemctl --user enable --now paper-g-publish.timer
 systemctl --user list-timers | grep paper-g
 ```
