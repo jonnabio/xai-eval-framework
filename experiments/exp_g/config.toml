@@ -1,0 +1,120 @@
+# Paper G configuration. Read by the paper_g scripts. Fixed before any model is trained
+# (docs/reports/paper_g/ANALYSIS_PLAN.md, version 2, sections 2 and 3). A change after that
+# point is a deviation and is logged in the plan with its date and reason.
+#
+# Model and explainer settings are those of Paper F (docs/reports/paper_f/paper_f_config.toml),
+# so that the two studies use the same configurations; no Paper F result is read.
+
+seeds = [42, 123, 456, 789, 101112]
+test_size = 0.2
+n_instances = 200
+
+[rule]                      # plan section 2.1: dataset gate
+auc_low = 0.65
+auc_high = 0.98
+min_models_in_range = 2
+cv_folds = 5
+gate_seed = 42
+
+[preprocessing]
+max_categories = 20         # as Paper F: rarer categories grouped into one level
+
+# Datasets confirmed by the author on 2026-11-13. `id` is the OpenML data identifier; the
+# version and target are read from the OpenML record at download and stored with the data.
+[[dataset]]
+key = "phoneme"
+id = 1489
+stratum = "numeric-small"
+
+[[dataset]]
+key = "qsar_biodeg"
+id = 1494
+stratum = "numeric-small"
+
+[[dataset]]
+key = "magic_telescope"
+id = 1120
+stratum = "numeric-large"
+
+[[dataset]]
+key = "electricity"
+id = 151
+stratum = "numeric-large"
+
+[[dataset]]
+key = "german_credit"
+id = 31
+stratum = "mixed"
+
+[[dataset]]
+key = "adult"
+id = 1590
+stratum = "mixed"
+
+[[dataset]]
+key = "bank_marketing"
+id = 1461
+stratum = "mixed-categorical"
+
+[[dataset]]
+key = "compas"
+id = 42192
+stratum = "mixed-categorical"
+
+[models.logreg]
+C = 1.0
+max_iter = 1000
+
+[models.rf]
+n_estimators = 100
+
+[models.xgb]
+n_estimators = 100
+max_depth = 4
+learning_rate = 0.1
+
+[models.mlp]
+hidden_layer_sizes = [100]
+max_iter = 500
+
+[explainers.lime]
+kernel_width = 3.0
+num_samples = 1000
+num_features = "all"        # G needs a full attribution vector for the curve metrics
+
+[explainers.shap]           # TreeSHAP for rf and xgb, KernelSHAP for logreg and mlp
+n_background = 50
+l1_reg = false              # KernelSHAP: no feature selection, so every feature gets a value
+                            # (the default "auto" left 12 of 20 at zero in the smoke test, 2026-11-14)
+
+[explainers.occlusion]      # single-feature replacement by the baseline
+baseline = "mean_mode"
+
+[explainers.random]         # negative control: N(0, 1) scores, seeded per instance
+distribution = "normal"
+
+[metrics]
+baseline = "mean_mode"              # numeric mean, categorical mode; one-hot groups masked together
+baseline_secondary = "train_row"    # section 3.1: a random training row, seeded
+mask_fraction = 0.2                 # M3 and M6: share of features, at least one
+infidelity_draws = 100              # M5: random feature subsets masked per instance
+infidelity_keep_prob = 0.5          # M5: each raw feature masked with this probability
+# M5 is scale-free: 1 - R^2 of the no-intercept fit of the output change on the summed
+# attributions of the masked subset (plan 3, change of 2026-11-14), so that explainers whose
+# attributions differ only in scale score the same.
+order = "signed"                    # M1-M3, M6: features ordered by attribution toward the
+                                    # predicted class, largest first; ties by feature index
+roar_levels = [0.1, 0.2, 0.3, 0.5]  # M7: share of features removed, at least one
+
+[synthetic]                         # plan section 2.5
+n_features = 8
+correlation = [0.0, 0.5]
+generators = ["additive", "interaction"]
+n_instances = 200
+
+[run]
+work_dir = "experiments/exp_g/work"   # git-ignored; finished shards are copied by the publisher
+jobs = 6                            # RUN_PROTOCOL.md section 9; the pilot may change it
+threads_per_job = 1
+min_free_memory_gib = 1.5
+publish_every_min = 15
