@@ -72,6 +72,8 @@ and once at the end of each stage. Each time it:
 4. runs the lane guard on the staged files, commits as
    `data(paper-g): <stage> snapshot <date time> (<done>/<total>)`, and pushes.
    If the push fails (network), it retries at the next cycle; nothing is lost.
+   If git would skip any copied log (an ignore rule, RCA-004), it commits nothing, reports it on
+   the issue and exits 3; it never reports a snapshot without its logs.
 
 ## 6. Notifications
 
