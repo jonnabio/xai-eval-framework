@@ -139,9 +139,13 @@ Treat metrics (M1 to M7) as raters and explainers as items.
 
 1. **Estimate:** Kendall's W across the six metrics, per block; reported as the mean over
    blocks and as the mean pairwise Spearman correlation between metrics, (mW − 1)/(m − 1).
-2. **Interval:** 95% percentile bootstrap over datasets (resampling datasets, 10,000 draws).
-3. **Test:** permutation test of "metrics order explainers independently": ranks permuted
-   independently within each metric and block, 100,000 permutations, one-sided.
+2. **Interval:** 95% t-interval on the eight dataset means (each dataset mean is the mean of
+   its 20 blocks), 7 degrees of freedom. The percentile bootstrap over datasets is reported as
+   a sensitivity analysis only (section 4.5).
+3. **Test:** permutation test of "metrics order explainers independently", **with the dataset
+   as the unit**: for each dataset and metric, one permutation of the explainer labels is
+   applied to all 20 blocks of that dataset; 100,000 permutations, one-sided. The one-sided
+   t-test on the dataset means is reported as a sensitivity analysis.
 4. **Ceiling:** agreement of *one metric with itself* across the five seeds. Agreement between
    metrics is read against this ceiling.
 5. **Without the random control:** repeated with the three studied explainers, because the
@@ -184,7 +188,35 @@ simulation (`scripts/paper_g_power_simulation.py`) is run before the full run to
 eight datasets give useful precision; if not, the author decides between more datasets and a
 weaker claim.
 
-Holm correction over H1 and H2 (and over metric pairs in 4.2 when tested).
+Holm correction over H1 and H2 (and over metric pairs in 4.2 when tested). The interval of
+the decision rule is the t-interval of section 4.1.
+
+### 4.5 Power and precision (`scripts/paper_g_power_simulation.py`, run 2026-11-13)
+
+Simulation of the H1 design (7 metrics, 3 studied explainers, 20 blocks per dataset), 1,000
+studies per condition, with dataset-level disagreement making up 20%, 50% or 80% of the
+noise (h). Output: `outputs/analysis/paper_g/power_simulation.csv`. With eight datasets:
+
+| h | Width of the 95% t-interval (true agreement 0.2 / 0.5 / 0.8) | Coverage of the t-interval | Size of the t-test (true 0) | Power at a true 0.2 |
+|---|---|---|---|---|
+| 0.2 | 0.15 / 0.14 / 0.08 | 0.94 to 0.95 | 0.03 | 1.00 |
+| 0.5 | 0.22 / 0.22 / 0.12 | 0.91 to 0.95 | 0.02 | 1.00 |
+| 0.8 | 0.29 / 0.30 / 0.18 | 0.91 to 0.95 | 0.02 | 0.92 |
+
+**Conclusion: eight datasets are enough.** Any non-trivial agreement is detected, and an
+interval of about ±0.07 to ±0.15 separates the outcomes of the decision rule unless the true
+value is near 0.5. Twelve datasets would narrow the interval by about a quarter; not needed.
+
+**Two changes made before the run because of the simulation** (they replace the version 2
+wording of section 4.1):
+
+1. A permutation test that permutes ranks independently **in each block** is invalid here:
+   with true agreement 0 and strong dataset-level disagreement (h = 0.8) it rejected in 13%
+   of studies at a nominal 5%, because the 20 blocks of a dataset are not independent. The
+   permutation unit is therefore the dataset.
+2. The percentile bootstrap over eight datasets covered the true value in only 86% to 90% of
+   studies. The t-interval on dataset means covered it in 91% to 95%, and is the primary
+   interval. The bootstrap stays as a sensitivity analysis.
 
 ## 5. What is not done
 

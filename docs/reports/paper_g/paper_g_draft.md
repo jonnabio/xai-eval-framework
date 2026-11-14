@@ -194,10 +194,16 @@ then scored by how well its order matches the reference.
 **System level (H1).** In each dataset × model × seed block, the explainers were ranked under
 each metric by their mean score over the 200 instances. With metrics as raters and explainers
 as items, agreement was measured by Kendall's *W* and by the mean pairwise Spearman correlation
-between metrics, *(mW − 1)/(m − 1)* [REF-23]. The 95% interval was obtained by percentile
-bootstrap over datasets (10,000 draws). The null hypothesis that metrics rank the explainers
-independently was tested by permuting ranks within each metric and block (100,000
-permutations, one-sided). The primary estimate uses the three studied explainers; the random
+between metrics, *(mW − 1)/(m − 1)* [REF-23]. Because the 20 blocks of a dataset (four models
+× five seeds) are not independent, the dataset was the unit of inference: the estimate was
+averaged within each dataset, and the 95% interval is a t-interval over the eight dataset
+means. The null hypothesis that metrics rank the explainers independently was tested by a
+permutation test in which, for each dataset and metric, one permutation of the explainer
+labels was applied to all blocks of that dataset (100,000 permutations, one-sided). A
+simulation made before the run showed that permuting within single blocks inflates the false
+positive rate when blocks of a dataset are correlated, and that a percentile bootstrap over
+eight datasets undercovers; the t-interval kept its nominal coverage within a few points
+(Section 3.7, supplementary material). The primary estimate uses the three studied explainers; the random
 control is reported separately as a check.
 
 **Ceiling.** The agreement of each metric with itself across the five seeds, averaged over
