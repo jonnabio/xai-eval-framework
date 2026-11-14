@@ -1,0 +1,16 @@
+# Paper G: one stage of the run as a user service (RUN_PROTOCOL.md, section 4).
+# Install: cp experiments/exp_g/systemd/* ~/.config/systemd/user/ && systemctl --user daemon-reload
+# Start:   systemctl --user start paper-g-run@full      (pilot | full | roar | synthetic)
+# Keep running after logout: loginctl enable-linger $USER
+[Unit]
+Description=Paper G run, stage %i
+
+[Service]
+Type=simple
+WorkingDirectory=%h/xai-eval-framework
+ExecStart=/bin/sh -c 'mkdir -p experiments/exp_g/work/logs && exec .venv/bin/python scripts/paper_g_run.py --stage %i >> experiments/exp_g/work/logs/%i_main.log 2>&1'
+Restart=no
+Nice=5
+
+[Install]
+WantedBy=default.target

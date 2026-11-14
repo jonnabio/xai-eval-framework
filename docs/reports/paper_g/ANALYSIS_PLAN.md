@@ -104,7 +104,7 @@ numeric features, mode for categorical; one-hot groups masked together as one ra
 | M2 | Insertion AUC | higher is better | area under probability as features are added to the baseline in attribution order |
 | M3 | Top-k prediction gap | higher is better | drop in probability when the top 20% of features (at least one) are masked |
 | M4 | Faithfulness correlation | higher is better | Pearson correlation between attribution and single-feature masking drop |
-| M5 | Infidelity | lower is better | expected squared error between attribution·perturbation and output change, Gaussian perturbations |
+| M5 | Infidelity | lower is better | over 100 random subsets S of features (each masked with probability 0.5): 1 − R² of the no-intercept fit of f(x) − f(x masked on S) on the summed attributions of S (scale-free; section 10) |
 | M6 | Sufficiency | lower is better | probability change when only the top 20% of features are kept |
 
 Comprehensiveness is the same quantity as M3 and is not counted twice.
@@ -270,3 +270,16 @@ level. About one more week. Only if reviewers ask.
 4. Synthetic ground-truth check: light version (section 2.5; about 3 days).
 5. Title: *Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations
    on Tabular Data*.
+
+## 10. Changes made before the run
+
+Logged here with date and reason. None was made after any result was seen.
+
+| Date | Change | Reason |
+|---|---|---|
+| 2026-11-13 | Primary interval: t-interval on dataset means; permutation unit: dataset (section 4.5) | power simulation: block-level permutation anti-conservative, bootstrap undercovers |
+| 2026-11-14 | M5 infidelity: random subset masking instead of Gaussian noise, scored as 1 − R² of the optimally scaled fit | Gaussian noise is undefined for categorical features; raw infidelity depends on the scale of the attributions, which differs between LIME and SHAP, so it would partly rank scale |
+| 2026-11-14 | Removal metrics (M1–M3, M6) order features by their attribution toward the predicted class, largest first, ties by index; attributions are summed per raw feature and oriented to the predicted class | fixes the definition of "top" for signed attributions; one-hot columns of a feature are masked together |
+| 2026-11-14 | KernelSHAP with `l1_reg = false` | the default feature selection left 12 of 20 features at zero in the smoke test, which would truncate SHAP's ranking for logistic regression and the MLP only |
+| 2026-11-14 | Synthetic ground truth: exact interventional Shapley values with the expectation over 500 background rows of the same distribution | standard definition of SHAP values; independent of the metrics' single-point baseline |
+| 2026-11-14 | Machine-time estimate: smoke test on the documentation laptop gave 0.01–0.2 s per instance and explainer, metrics included; MLP training up to about 40 s (Adult). The full stage is a few CPU hours; ROAR-lite is dominated by MLP refits. Expected well under one day with 6 jobs; the pilot on the run host gives the figure | |

@@ -125,3 +125,35 @@ Consequences:
   record CPU temperature where the sensors allow it.
 - The machine-time estimate (about 1 to 2 days) was made for the Ryzen of Paper F; it is replaced by
   the pilot's measured figure.
+
+## 10. Commands on the run host, in order
+
+```sh
+# once
+sudo apt install -y git curl tmux gh
+curl -LsSf https://astral.sh/uv/install.sh | sh
+gh auth login                               # the author's account
+git clone https://github.com/jonnabio/xai-eval-framework.git ~/xai-eval-framework
+cd ~/xai-eval-framework
+git switch paper/g-runs                      # created from main once the code is merged
+uv python install 3.13
+uv venv --python 3.13 .venv
+uv pip install -r requirements-frozen.txt
+.venv/bin/python scripts/paper_g_host_check.py   # must end without "HOST CHECK FAILED"
+.venv/bin/python -m pytest tests/analysis/test_paper_g_metrics.py tests/analysis/test_paper_g_run.py -q
+mkdir -p ~/.config/systemd/user && cp experiments/exp_g/systemd/* ~/.config/systemd/user/
+systemctl --user daemon-reload
+loginctl enable-linger "$USER"               # services keep running after logout
+systemctl --user enable --now paper-g-publish.timer
+
+# stages, one after the other
+systemctl --user start paper-g-run@pilot
+systemctl --user start paper-g-run@full      # after the pilot is reviewed
+systemctl --user start paper-g-run@roar      # after full
+systemctl --user start paper-g-run@synthetic
+
+# watching
+systemctl --user status paper-g-run@full
+tail -f experiments/exp_g/work/logs/full_main.log
+.venv/bin/python scripts/paper_g_run.py --stage full --list
+```

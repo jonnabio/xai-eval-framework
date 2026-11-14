@@ -84,6 +84,8 @@ num_features = "all"        # G needs a full attribution vector for the curve me
 
 [explainers.shap]           # TreeSHAP for rf and xgb, KernelSHAP for logreg and mlp
 n_background = 50
+l1_reg = false              # KernelSHAP: no feature selection, so every feature gets a value
+                            # (the default "auto" left 12 of 20 at zero in the smoke test, 2026-11-14)
 
 [explainers.occlusion]      # single-feature replacement by the baseline
 baseline = "mean_mode"
@@ -95,8 +97,13 @@ distribution = "normal"
 baseline = "mean_mode"              # numeric mean, categorical mode; one-hot groups masked together
 baseline_secondary = "train_row"    # section 3.1: a random training row, seeded
 mask_fraction = 0.2                 # M3 and M6: share of features, at least one
-infidelity_draws = 100              # M5: Gaussian perturbations per instance
-infidelity_sd = 0.1                 # M5: in standard deviations of each numeric feature
+infidelity_draws = 100              # M5: random feature subsets masked per instance
+infidelity_keep_prob = 0.5          # M5: each raw feature masked with this probability
+# M5 is scale-free: 1 - R^2 of the no-intercept fit of the output change on the summed
+# attributions of the masked subset (plan 3, change of 2026-11-14), so that explainers whose
+# attributions differ only in scale score the same.
+order = "signed"                    # M1-M3, M6: features ordered by attribution toward the
+                                    # predicted class, largest first; ties by feature index
 roar_levels = [0.1, 0.2, 0.3, 0.5]  # M7: share of features removed, at least one
 
 [synthetic]                         # plan section 2.5
@@ -106,6 +113,7 @@ generators = ["additive", "interaction"]
 n_instances = 200
 
 [run]
+work_dir = "experiments/exp_g/work"   # git-ignored; finished shards are copied by the publisher
 jobs = 6                            # RUN_PROTOCOL.md section 9; the pilot may change it
 threads_per_job = 1
 min_free_memory_gib = 1.5

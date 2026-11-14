@@ -1,0 +1,11 @@
+# Paper G: publish every 15 minutes. Enable: systemctl --user enable --now paper-g-publish.timer
+[Unit]
+Description=Paper G publisher every 15 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

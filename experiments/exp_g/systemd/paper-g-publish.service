@@ -1,0 +1,8 @@
+# Paper G: one publishing cycle (RUN_PROTOCOL.md, section 5). Triggered by paper-g-publish.timer.
+[Unit]
+Description=Paper G publisher
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/xai-eval-framework
+ExecStart=/bin/sh -c 'mkdir -p experiments/exp_g/work/logs && exec .venv/bin/python scripts/paper_g_publish.py >> experiments/exp_g/work/logs/publish.log 2>&1'
