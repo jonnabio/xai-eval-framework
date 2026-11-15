@@ -1,17 +1,17 @@
 # Paper G — run status
 
-Generated 2026-11-15 23:35 UTC by `scripts/paper_g_status.py`. Progress only: no metric value is shown before the run ends.
+Generated 2026-11-15 23:37 UTC by `scripts/paper_g_status.py`. Progress only: no metric value is shown before the run ends.
 
 | Item | Value |
 |---|---|
 | State | idle |
-| Active stage | roar |
-| Last heartbeat | 2026-11-15T16:48:38Z (406 min ago) |
+| Active stage | synthetic |
+| Last heartbeat | 2026-11-15T23:36:14Z (1 min ago) |
 | Jobs | 6 |
 | Running shards | — |
-| Free memory | 6.9 GiB |
+| Free memory | 6.8 GiB |
 | Host | jonnabio-Latitude-5450 (13th Gen Intel(R) Core(TM) i5-1335U, 14.8 GiB RAM) |
-| Commit of the run | d20cf2038c95 |
+| Commit of the run | c0a46d79e8f8 |
 | Free disk | 360.6 GiB at set-up |
 
 ## Stages
@@ -21,7 +21,7 @@ Generated 2026-11-15 23:35 UTC by `scripts/paper_g_status.py`. Progress only: no
 | pilot | 4 | 0 | 0 | 4 | 0.0 h |
 | full | 160 | 0 | 0 | 160 | 0.0 h |
 | roar | 160 | 0 | 0 | 160 | 0.0 h |
-| synthetic | 0 | 0 | 20 | 20 | — |
+| synthetic | 20 | 0 | 0 | 20 | 0.0 h |
 
 ### full: shards done per seed
 
@@ -42,6 +42,16 @@ Generated 2026-11-15 23:35 UTC by `scripts/paper_g_status.py`. Progress only: no
 | 456 | 32 | 0 | 32 |
 | 789 | 32 | 0 | 32 |
 | 101112 | 32 | 0 | 32 |
+
+### synthetic: shards done per seed
+
+| Seed | Done | Failed | Total |
+|---|---|---|---|
+| 42 | 4 | 0 | 4 |
+| 123 | 4 | 0 | 4 |
+| 456 | 4 | 0 | 4 |
+| 789 | 4 | 0 | 4 |
+| 101112 | 4 | 0 | 4 |
 
 ## Failures
 
