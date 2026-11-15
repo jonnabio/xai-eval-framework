@@ -1,12 +1,12 @@
 # Paper G — run status
 
-Generated 2026-11-15 17:49 UTC by `scripts/paper_g_status.py`. Progress only: no metric value is shown before the run ends.
+Generated 2026-11-15 18:04 UTC by `scripts/paper_g_status.py`. Progress only: no metric value is shown before the run ends.
 
 | Item | Value |
 |---|---|
 | State | idle |
 | Active stage | roar |
-| Last heartbeat | 2026-11-15T16:48:38Z (61 min ago) |
+| Last heartbeat | 2026-11-15T16:48:38Z (76 min ago) |
 | Jobs | 6 |
 | Running shards | — |
 | Free memory | 6.9 GiB |
