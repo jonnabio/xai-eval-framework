@@ -119,7 +119,8 @@ systemd unit and timer files under `experiments/exp_g/systemd/`, and tests in
 Consequences:
 
 - **Jobs: 6 by default**, not 8. A 15 W laptop CPU slows down when hot, and its two performance
-  cores are shared. The pilot measures 4, 6 and 8 jobs and the fastest stable setting is used.
+  cores are shared. The pilot was to measure 4, 6 and 8 jobs; it could not (section 9.1), and 6
+  is kept as a safe setting, not as a measured optimum.
 - **Memory:** each job is limited to one thread per library (`OMP_NUM_THREADS=1` and the same for
   MKL/OpenBLAS), so that six jobs use six threads and stay under about 6 GiB. The pilot records
   peak memory per job; the runner stops starting new jobs below 1.5 GiB of free memory.
@@ -127,6 +128,28 @@ Consequences:
   record CPU temperature where the sensors allow it.
 - The machine-time estimate (about 1 to 2 days) was made for the Ryzen of Paper F; it is replaced by
   the pilot's measured figure.
+
+### 9.1 Concurrency: accepted pre-run deviation (author, 2026-11-14)
+
+**Decision:** the run uses **6 concurrent jobs, one thread per job**, as configured
+(`experiments/exp_g/config.toml`, `run.jobs = 6`, `run.threads_per_job = 1`). No further
+benchmark is run.
+
+- **Why the comparison was not made:** the pilot has 4 shards (1 dataset × 4 models × 1 seed).
+  With 4, 6 or 8 jobs all four run at once, so the pilot cannot tell the three settings apart;
+  its wall time is set by the slowest shard (MLP, 27.9 s). Repeating it would also measure
+  nothing, since the runner skips finished shards.
+- **Evidence for safety:** pilot of 2026-11-14 on the run host: 4 of 4 shards done, 0 failed rows,
+  highest peak memory per job 620 MiB (about 3.7 GiB for 6 jobs, inside the 6 GiB budget above).
+- **Limitation:** throughput and thermal stability under sustained concurrency are **not
+  measured**. Six jobs is a safe setting for starting the run; it is not shown to be the fastest.
+- **Safeguard:** during the full run, `STATUS.md` (shard times, free memory, heartbeat) and the
+  CPU temperature are watched over the first seed. The runner already stops starting jobs below
+  1.5 GiB free memory. If the job count is changed, it is changed between shards (the run is
+  resumable) and the change is recorded here.
+- **Scientific effect:** none. The job count changes only scheduling; every shard is computed
+  with the same seed, configuration and single-threaded libraries. `ANALYSIS_PLAN.md` is not
+  changed.
 
 ## 10. Commands on the run host, in order
 
