@@ -1,17 +1,17 @@
 # Paper G — run status
 
-Generated 2026-11-15 14:18 UTC by `scripts/paper_g_status.py`. Progress only: no metric value is shown before the run ends.
+Generated 2026-11-15 14:34 UTC by `scripts/paper_g_status.py`. Progress only: no metric value is shown before the run ends.
 
 | Item | Value |
 |---|---|
 | State | running |
 | Active stage | full |
-| Last heartbeat | 2026-11-15T14:18:54Z (0 min ago) |
+| Last heartbeat | 2026-11-15T14:34:01Z (0 min ago) |
 | Jobs | 6 |
-| Running shards | adult/rf/seed_42, adult/mlp/seed_42, bank_marketing/mlp/seed_42, compas/rf/seed_42, compas/mlp/seed_42 |
-| Free memory | 6.2 GiB |
+| Running shards | adult/rf/seed_101112, adult/mlp/seed_101112, bank_marketing/rf/seed_101112, bank_marketing/mlp/seed_101112, compas/rf/seed_101112 |
+| Free memory | 5.1 GiB |
 | Host | jonnabio-Latitude-5450 (13th Gen Intel(R) Core(TM) i5-1335U, 14.8 GiB RAM) |
-| Commit of the run | c2b4eb202653 |
+| Commit of the run | 99e43d40fed7 |
 | Free disk | 360.6 GiB at set-up |
 
 ## Stages
@@ -19,7 +19,7 @@ Generated 2026-11-15 14:18 UTC by `scripts/paper_g_status.py`. Progress only: no
 | Stage | Done | Failed | To do | Total | Estimated time left |
 |---|---|---|---|---|---|
 | pilot | 4 | 0 | 0 | 4 | 0.0 h |
-| full | 27 | 0 | 133 | 160 | 0.1 h |
+| full | 154 | 0 | 6 | 160 | 0.0 h |
 | roar | 0 | 0 | 160 | 160 | — |
 | synthetic | 0 | 0 | 20 | 20 | — |
 
@@ -27,11 +27,11 @@ Generated 2026-11-15 14:18 UTC by `scripts/paper_g_status.py`. Progress only: no
 
 | Seed | Done | Failed | Total |
 |---|---|---|---|
-| 42 | 27 | 0 | 32 |
-| 123 | 0 | 0 | 32 |
-| 456 | 0 | 0 | 32 |
-| 789 | 0 | 0 | 32 |
-| 101112 | 0 | 0 | 32 |
+| 42 | 32 | 0 | 32 |
+| 123 | 32 | 0 | 32 |
+| 456 | 32 | 0 | 32 |
+| 789 | 32 | 0 | 32 |
+| 101112 | 26 | 0 | 32 |
 
 ## Failures
 
