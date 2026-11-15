@@ -126,8 +126,8 @@ Consequences:
   peak memory per job; the runner stops starting new jobs below 1.5 GiB of free memory.
 - **Heat:** the laptop stands on a hard surface with its vents clear; `host.json` and the status page
   record CPU temperature where the sensors allow it.
-- The machine-time estimate (about 1 to 2 days) was made for the Ryzen of Paper F; it is replaced by
-  the pilot's measured figure.
+- The machine-time estimate (about 1 to 2 days) was made for the Ryzen of Paper F. It is replaced
+  by the measured run in section 9.2.
 
 ### 9.1 Concurrency: accepted pre-run deviation (author, 2026-11-14)
 
@@ -150,6 +150,38 @@ benchmark is run.
 - **Scientific effect:** none. The job count changes only scheduling; every shard is computed
   with the same seed, configuration and single-threaded libraries. `ANALYSIS_PLAN.md` is not
   changed.
+
+### 9.2 Measured run (run host, 2026-11-14/15)
+
+Measured on `jonnabio-Latitude-5450` with 6 jobs and 1 thread each. Wall time runs from the start
+of the service to the last shard's finish. Operational figures only: no result is shown here.
+
+| Stage | Shards | Wall time | Slowest shard | Peak memory per job | Generating revision |
+|---|---:|---|---|---|---|
+| pilot | 4 | about 29 s | 27.9 s (adult/mlp) | 620 MiB | `a1677fe26d78` |
+| full | 160 | 18.5 min | 229 s | 628 MiB | `c2b4eb202653` |
+| roar | 160 | 81.4 min | 55.5 min (adult/mlp, seed 42) | 1,095 MiB | `b3c6893b7248` |
+| synthetic | 20 | about 25 s | 12.3 s | 276 MiB | `c0a46d79e8f8` |
+
+Total about 1 h 41 min of machine time, 0 failed shards and 0 failed rows. Run frozen at
+`04c6dfd84` (`paper/g-runs`).
+
+- **Heat.** Each stage starts with a turbo burst of about 1 minute: the package reaches 98-99 °C
+  and the kernel records short thermal throttling. The firmware's power limit then holds the
+  clocks at about 1.9 GHz and the package at about 67 °C. During ROAR-lite the package's
+  throttled time grew by 30.0 s, all of it in the first 90 s, and not at all over the following
+  80 minutes. Throttling affects speed only: every shard is single-threaded with fixed seeds.
+  - The thermal record was kept outside the repository by a read-only sampler (every 30 s;
+    stop criteria: 98 °C or more for about 60 s, a critical alarm, throttled time over +60 s,
+    memory below 1.5 GiB, a failed shard). None triggered.
+- **Shard times** grew from the first seed to the later ones (full: median per shard ×1.5 to ×2.1),
+  which fits sustained power limiting after the first minutes.
+- **ROAR-lite** is the costly stage: 17 model fits per shard and no explanation. MLP on the two
+  largest mixed datasets dominates (shards of 26 to 55 minutes), so the stage ends with a long
+  tail of single shards.
+- **Estimates elsewhere** that this replaces: `ANALYSIS_PLAN.md` section 2 (about 2 to 4 h for
+  the MLP; about 4 to 6 h for ROAR with 8 jobs) and step 6 of its execution plan (about 1 to 2
+  days). The plan itself is not changed.
 
 ## 10. Commands on the run host, in order
 
