@@ -195,3 +195,24 @@ guards:
     review_triggers:
       - "Any edit to prose in pub/claims.toml: re-read the rendered abstract in the PDF, not only the source"
       - "Any change to the OpenReview upload set: confirm every cited supplementary item is inside the one uploaded file"
+
+  - id: RCA-004
+    title: "Paper G publisher silently omits the run logs"
+    severity: medium
+    created: 2026-11-14
+    rca_file: docs/rca/RCA-004-paper-g-logs-not-published.md
+
+    guarded_files:
+      - .gitignore
+      - scripts/paper_g_publish.py
+
+    invariants:
+      - "Nothing in .gitignore ignores outputs/analysis/paper_g/logs/; the exception stays after the broad logs/ and *.log rules"
+      - "The publisher never reports a snapshot as published while git would skip a copied log: it exits 3 and commits nothing"
+      - "The publisher stages only STAGE_PATHS, all owned by the paper-g lane"
+
+    tests:
+      - python -m pytest tests/analysis/test_paper_g_run.py
+
+    review_triggers:
+      - "Any new publication path: check it with git check-ignore before relying on git add"

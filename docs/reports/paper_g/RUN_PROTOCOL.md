@@ -72,6 +72,8 @@ and once at the end of each stage. Each time it:
 4. runs the lane guard on the staged files, commits as
    `data(paper-g): <stage> snapshot <date time> (<done>/<total>)`, and pushes.
    If the push fails (network), it retries at the next cycle; nothing is lost.
+   If git would skip any copied log (an ignore rule, RCA-004), it commits nothing, reports it on
+   the issue and exits 3; it never reports a snapshot without its logs.
 
 ## 6. Notifications
 
@@ -117,7 +119,8 @@ systemd unit and timer files under `experiments/exp_g/systemd/`, and tests in
 Consequences:
 
 - **Jobs: 6 by default**, not 8. A 15 W laptop CPU slows down when hot, and its two performance
-  cores are shared. The pilot measures 4, 6 and 8 jobs and the fastest stable setting is used.
+  cores are shared. The pilot was to measure 4, 6 and 8 jobs; it could not (section 9.1), and 6
+  is kept as a safe setting, not as a measured optimum.
 - **Memory:** each job is limited to one thread per library (`OMP_NUM_THREADS=1` and the same for
   MKL/OpenBLAS), so that six jobs use six threads and stay under about 6 GiB. The pilot records
   peak memory per job; the runner stops starting new jobs below 1.5 GiB of free memory.
@@ -125,6 +128,28 @@ Consequences:
   record CPU temperature where the sensors allow it.
 - The machine-time estimate (about 1 to 2 days) was made for the Ryzen of Paper F; it is replaced by
   the pilot's measured figure.
+
+### 9.1 Concurrency: accepted pre-run deviation (author, 2026-11-14)
+
+**Decision:** the run uses **6 concurrent jobs, one thread per job**, as configured
+(`experiments/exp_g/config.toml`, `run.jobs = 6`, `run.threads_per_job = 1`). No further
+benchmark is run.
+
+- **Why the comparison was not made:** the pilot has 4 shards (1 dataset × 4 models × 1 seed).
+  With 4, 6 or 8 jobs all four run at once, so the pilot cannot tell the three settings apart;
+  its wall time is set by the slowest shard (MLP, 27.9 s). Repeating it would also measure
+  nothing, since the runner skips finished shards.
+- **Evidence for safety:** pilot of 2026-11-14 on the run host: 4 of 4 shards done, 0 failed rows,
+  highest peak memory per job 620 MiB (about 3.7 GiB for 6 jobs, inside the 6 GiB budget above).
+- **Limitation:** throughput and thermal stability under sustained concurrency are **not
+  measured**. Six jobs is a safe setting for starting the run; it is not shown to be the fastest.
+- **Safeguard:** during the full run, `STATUS.md` (shard times, free memory, heartbeat) and the
+  CPU temperature are watched over the first seed. The runner already stops starting jobs below
+  1.5 GiB free memory. If the job count is changed, it is changed between shards (the run is
+  resumable) and the change is recorded here.
+- **Scientific effect:** none. The job count changes only scheduling; every shard is computed
+  with the same seed, configuration and single-threaded libraries. `ANALYSIS_PLAN.md` is not
+  changed.
 
 ## 10. Commands on the run host, in order
 
@@ -140,10 +165,11 @@ uv python install 3.13
 uv venv --python 3.13 .venv
 uv pip install -r requirements-frozen.txt
 .venv/bin/python scripts/paper_g_host_check.py   # must end without "HOST CHECK FAILED"
-.venv/bin/python -m pytest tests/analysis/test_paper_g_metrics.py tests/analysis/test_paper_g_run.py -q
+.venv/bin/python -m pytest tests/analysis/test_paper_g_metrics.py tests/analysis/test_paper_g_run.py tests/analysis/test_paper_g_dashboard.py -q
 mkdir -p ~/.config/systemd/user && cp experiments/exp_g/systemd/* ~/.config/systemd/user/
 systemctl --user daemon-reload
 loginctl enable-linger "$USER"               # services keep running after logout
+.venv/bin/python scripts/pubs/check_lane.py claim --owner paper-g-run-host   # before the first publish
 systemctl --user enable --now paper-g-publish.timer
 
 # stages, one after the other
@@ -156,4 +182,87 @@ systemctl --user start paper-g-run@synthetic
 systemctl --user status paper-g-run@full
 tail -f experiments/exp_g/work/logs/full_main.log
 .venv/bin/python scripts/paper_g_run.py --stage full --list
+.venv/bin/python scripts/paper_g_dashboard.py          # http://127.0.0.1:8766 (section 11)
 ```
+
+## 11. Monitoring dashboard (run host, read-only)
+
+Added 2026-11-14 (author request), on the pattern of `scripts/paper_b_dashboard.py`. It is an
+operational monitor, not an analysis tool: it shows progress and health, never a metric value.
+
+| Command (run host, in `~/xai-eval-framework`) | Does |
+|---|---|
+| `.venv/bin/python scripts/paper_g_dashboard.py` | web page at http://127.0.0.1:8766 (`--port N` to change) |
+| `.venv/bin/python scripts/paper_g_dashboard.py --text` | terminal view, refreshed every 10 s (`--every S`) |
+| `.venv/bin/python scripts/paper_g_dashboard.py --once` | print the state once and exit |
+
+**Close it** with Ctrl+C. Opening or closing it never affects the run, the publisher or any file.
+
+**Architecture.** One standard-library process (`http.server`): the page polls `/api/heartbeat`
+every 2 s (heartbeat file and the last publisher line only) and reloads in full every 30 s;
+`/api/state` returns the same data as JSON. It binds to `127.0.0.1` only. Progress and timing
+reuse `paper_g_status.collect` and `eta_hours`, so the dashboard and `STATUS.md` cannot disagree.
+
+**Data sources, all read-only:**
+
+- shard markers `<work>/<stage>/<shard>.done` / `.failed`, read through a whitelist (rows, failed
+  rows, seconds, finished, peak memory, host, commit, error). The `.done` files also hold the
+  model's test AUC; it is never read out;
+- `<work>/heartbeat.json` (stage, jobs, running shards, pid) and `/proc/<pid>` (is it alive);
+- `<work>/logs/<stage>_main.log` and `publish.log`, **only** lines matching the runner's and the
+  publisher's own status formats. Shard logs are never shown (they print the test AUC);
+- `raw/MANIFEST.csv`, `events.json`, `experiments/exp_g/host.json`;
+- `git` on local refs only (`HEAD`, `origin/paper/g-runs`, `ls-files`), cached 15 s: no GitHub API;
+- `systemctl --user show` for the run and publisher units, cached 15 s;
+- `/proc/stat`, `/proc/meminfo`, `/sys/class/thermal`, `/sys/class/power_supply`, the kernel's
+  package throttle counter, disk usage. No privileges needed.
+
+**Sections:** overview (runner state; active stage; all four stages; elapsed; time left),
+progress by stage, progress by dataset and model, active workers, host, GitHub publishing,
+finished and failed shards, execution history.
+
+**States of the runner:**
+
+| State | Meaning |
+|---|---|
+| idle | no runner alive and nothing queued (e.g. the pilot is finished; it is not stalled) |
+| running | runner alive, heartbeat at most 2 min old (it is written every 30 s) |
+| late | runner alive, heartbeat 2 to 60 min old |
+| stalled | runner alive, heartbeat over 60 min old (the issue gets the same alert) |
+| stopped | shards queued, runner gone, its service ended cleanly (`systemctl stop`) |
+| interrupted | shards queued, runner gone without a clean stop: restart the stage |
+| failed | the last stage ended with failed shards |
+| completed | all four stages finished (a finished stage alone is never "complete") |
+
+**Warnings and what to do:**
+
+| Warning | Do |
+|---|---|
+| STALLED / heartbeat late | `systemctl --user status paper-g-run@<stage>`; check the main log |
+| Runner gone, unexpected termination | `systemctl --user start paper-g-run@<stage>`: finished shards are kept |
+| Failed shards | read the shard log; the shard is retried on the next start of the stage |
+| Low memory / low disk | close other programs; free disk. The runner pauses admission below 1.5 GiB |
+| CPU package at 95 °C or more | check the vents and the surface. Temperature alone is not taken as throttling; the kernel's throttle counter is shown beside it |
+| On battery | connect the charger |
+| Last publisher cycle did not publish / push failing | read `experiments/exp_g/work/logs/publish.log`; never force-push |
+| No successful publish for over 40 min | `systemctl --user status paper-g-publish.timer` |
+| Local commits not on origin | the next cycle pushes them; a local commit is not a push |
+| Published shards with no log in git | RCA-004: the run host lacks the `.gitignore` fix; merge `main` |
+| Folder not on `paper/g-runs` / Python not 3.13 | the dashboard is reading the wrong folder or environment |
+
+**GitHub monitoring is unchanged.** Remote progress is read from `outputs/analysis/paper_g/STATUS.md`
+on `paper/g-runs` and from issue #118. The dashboard publishes nothing; `paper_g_publish.py`
+remains the only process that commits and pushes.
+
+**Known limitations:**
+
+- Memory per running shard is not available: the process pool does not map processes to shards.
+  The page shows the number of worker processes and their total resident memory instead.
+- "Time left" uses only the finished shards of the same stage (the pilot's 20 instances do not
+  predict the full run's 200); the total is shown only when every unfinished stage has evidence.
+  The per-cell figure is serial compute left, not wall time.
+- "Local commits not pushed" compares with `origin/paper/g-runs` as of the last push or fetch.
+- The dashboard process uses about 190 MiB of memory (it reuses the run's modules, which load
+  the scientific libraries) and about 20 to 30 ms of CPU per refresh (measured on the run host
+  with the pilot, 2026-11-14).
+- Linux only for host readings; elsewhere they show "not available".

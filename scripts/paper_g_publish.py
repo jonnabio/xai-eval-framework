@@ -90,10 +90,12 @@ def copy_shards(cfg: dict) -> list[str]:
     return added
 
 
-def copy_logs(cfg: dict) -> None:
+def copy_logs(cfg: dict) -> list[Path]:
+    """Copy every log to logs/. Returns the published paths (all of them, every cycle)."""
     src_root = run.work_dir(cfg) / "logs"
+    published: list[Path] = []
     if not src_root.exists():
-        return
+        return published
     for src in src_root.rglob("*.log"):
         rel = src.relative_to(src_root)
         if src.stat().st_size > LOG_GZIP_BYTES:
@@ -105,6 +107,17 @@ def copy_logs(cfg: dict) -> None:
             dst = LOGS / rel
             dst.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(src, dst)
+        published.append(dst)
+    return published
+
+
+def ignored(paths: list[Path]) -> list[str]:
+    """Published files git would silently skip on `git add` (RCA-004: `logs/` and `*.log` in .gitignore)."""
+    if not paths:
+        return []
+    rel = [p.resolve().relative_to(lib.ROOT.resolve()).as_posix() for p in paths]
+    out = git("check-ignore", "--", *rel, check=False)
+    return [line for line in out.stdout.splitlines() if line.strip()]
 
 
 # --- events -------------------------------------------------------------------------
@@ -179,14 +192,21 @@ def cycle(push: bool = True, now: datetime | None = None) -> int:
     seen_path = run.work_dir(cfg) / "events.json"
     seen = status._read(seen_path) or {}
     added = copy_shards(cfg)
-    copy_logs(cfg)
+    logs = copy_logs(cfg)
     lib.OUT.mkdir(parents=True, exist_ok=True)
     (lib.OUT / "STATUS.md").write_text(status.build(cfg, now), encoding="utf-8")
     git("add", "--", *[p for p in STAGE_PATHS if (lib.ROOT / p).exists()])
-    guard = subprocess.run([sys.executable, "scripts/pubs/check_lane.py", "--staged"],
-                           cwd=lib.ROOT, capture_output=True, text=True)
-    msgs = []
-    if guard.returncode != 0:
+    msgs, rc = [], 0
+    skipped = ignored(logs)
+    if skipped:
+        # Never report a snapshot as published while git silently leaves its logs out (RCA-004).
+        git("reset", "-q", check=False)
+        rc = 3
+        msgs.append(f"Publisher refused a commit: {len(skipped)} log file(s) are ignored by .gitignore and "
+                    f"would not be published (RCA-004), e.g. `{skipped[0]}`.")
+        print(f"refused: {len(skipped)} log file(s) ignored by git, e.g. {skipped[0]}", file=sys.stderr)
+    elif (guard := subprocess.run([sys.executable, "scripts/pubs/check_lane.py", "--staged"],
+                                  cwd=lib.ROOT, capture_output=True, text=True)).returncode != 0:
         git("reset", "-q", check=False)
         msgs.append(f"Publisher refused a commit: the lane guard failed.\n```\n{guard.stdout[-800:]}{guard.stderr[-800:]}\n```")
     elif git("diff", "--cached", "--quiet", check=False).returncode != 0:
@@ -211,7 +231,10 @@ def cycle(push: bool = True, now: datetime | None = None) -> int:
         if notify(msgs):
             seen_path.parent.mkdir(parents=True, exist_ok=True)
             seen_path.write_text(json.dumps(seen, indent=1), encoding="utf-8")
-    print(f"{now.isoformat()} published: {len(added)} new shard(s); {len(msgs)} event(s)")
+    if rc:
+        print(f"{now.isoformat()} NOT published: logs would be omitted; {len(msgs)} event(s)")
+        return rc
+    print(f"{now.isoformat()} published: {len(added)} new shard(s), {len(logs)} log(s); {len(msgs)} event(s)")
     return 0
 
 
