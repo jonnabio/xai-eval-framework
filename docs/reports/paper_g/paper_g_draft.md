@@ -22,14 +22,16 @@ four classifiers (logistic regression, random forest, XGBoost, and a multilayer 
 trained on eight public binary tabular datasets, with five seeds and 200 test instances per
 condition. Each explanation was scored by seven faithfulness metrics: deletion and insertion
 curves, top-k prediction gap, faithfulness correlation, infidelity, sufficiency, and a
-retraining-based measure. A synthetic check with exact Shapley values tested which metrics
-recover the true order of the explainers. Agreement was assessed at two levels:
+retraining-based measure. A synthetic check with exact Shapley values compared each metric's
+order of the explainers with the order implied by the true attributions. Agreement was assessed at
+two levels:
 the order of the explainers within each dataset and model, and the scores of individual
-explanations across instances. All metrics placed the random control last in [R: share] of
-conditions. Among the three studied explainers, the mean rank correlation between metrics was
+explanations across instances. [R: share of blocks in which every metric placed the random
+control last (exploratory; retain unfilled until the author decides whether to report it)]. Among the three studied explainers, the mean rank correlation between metrics was
 [R: value] (95% CI [R: interval]), against a within-metric stability benchmark across seeds of [R: value].
-The explainer ranked first changed with the metric in [R: share] of conditions, and the order
-of SHAP and LIME reversed under a change of metric in [R: share]. At the instance level, metric
+The explainer ranked first changed with the metric in [R: share] of conditions. LIME was used in
+a configuration whose output is a local slope rather than a contribution, so comparisons involving
+LIME are reported only as properties of that configuration. At the instance level, metric
 pairs correlated [R: range]. [R: one-sentence conclusion following the decision rule]. Reports
 of explainer faithfulness should therefore state the metric, the masking baseline, and, where
 possible, results under more than one metric.
@@ -76,10 +78,11 @@ The study contributes:
    explanations, at the level of explainer rankings and at the level of individual instances.
 2. A within-metric stability benchmark (agreement of a metric with itself across seeds) against
    which between-metric agreement is interpreted; it is a reference level, not an upper bound.
-3. An estimate of how often the explainer judged most faithful, and the order of SHAP and LIME,
-   changes with the choice of metric and of masking baseline.
-4. A synthetic check with exact ground truth showing which metrics recover the true order of
-   the explainers.
+3. An estimate of how often the explainer judged most faithful changes with the choice of metric
+   and of masking baseline.
+4. A synthetic check with exact ground truth on how well each metric's order of the explainers
+   matches the order implied by the true attributions, with a supplementary analysis of how LIME's
+   output representation affects that comparison.
 5. Reporting recommendations for faithfulness claims, with code and data released.
 
 Section 2 reviews related work. Section 3 describes the materials and methods. Section 4
@@ -141,7 +144,13 @@ seed fixed a stratified 80/20 split, the model, explainer sampling and the rando
 ### 3.4 Explainers
 
 - **SHAP** [REF-21]: TreeSHAP for the tree models, KernelSHAP for logistic regression and the MLP.
-- **LIME** [REF-22] for tabular data, with its default kernel.
+- **LIME** [REF-22] for tabular data (package version 0.2.0.1) with `discretize_continuous=False`,
+  kernel width 3.0 (the package default would be 0.75·√p), 1,000 perturbation samples drawn around
+  the training mean, and all features. In this configuration LIME returns the coefficients of a
+  locally weighted linear surrogate fitted on standardised features: a slope per training standard
+  deviation, whose sign is the direction of change, not whether the feature's current value raises
+  the prediction. It is not a per-feature contribution. One-hot columns are perturbed as continuous
+  values, and coefficients are summed per raw feature like the other explainers' attributions.
 - **Occlusion:** the attribution of a feature is the drop in predicted-class probability when
   that feature alone is replaced by its baseline value.
 - **Random control:** attributions drawn from a standard normal distribution with a fixed seed.
@@ -175,13 +184,20 @@ features). Masking a feature sets it to its baseline value.
 - **M7, ROAR-lite** [REF-16]. The global ranking of an explainer is the mean |*a*| over its
   instances; the model is retrained without the top 10, 20, 30 and 50% of features, and the mean
   drop in test AUC is the score. Higher is better. M7 has one value per dataset, model, explainer
-  and seed, so it enters the system-level analysis only.
+  and seed, so it enters the system-level analysis only. With few features the removal sets are
+  small (one to three features for the dataset with five), different explainers often remove the
+  same set, and their M7 scores then tie; M7 is also the least stable metric across seeds.
 
 *[Equations (1)–(7), numbered and cited in the text by generated reference (author rule).]*
 
-Metrics were oriented so that a higher score always means more faithful before ranking. As a
-sensitivity check, M1, M2, M3 and M6 were recomputed with a second baseline: a random training
-row instead of the mean.
+Metrics were oriented so that a higher score always means more faithful before ranking. M1 to
+M6 use the attribution vector as signed contributions relative to the masking baseline (M1, M2, M3
+and M6 order features by their signed attribution toward the predicted class; M4 correlates it with
+single-feature masking effects; M5 sums it over masked subsets); M7 uses only magnitudes. This
+assumption holds for SHAP and occlusion but not for LIME as configured (Section 3.4). The masking
+baseline is a substantive choice rather than a detail: M1, M2, M3 and M6 were recomputed with a
+second baseline (a random training row instead of the mean), and this sensitivity analysis is
+reported with the primary results.
 
 M4 and occlusion are built on the same single-feature masking, so M4 is expected to favour
 occlusion. As a sensitivity analysis, the system-level analysis was repeated without M4, that is
@@ -194,13 +210,17 @@ M4; it does not isolate the effect of the occlusion–M4 overlap.
 Four synthetic conditions were built from known functions used directly as the model: an
 additive logistic function and one with two pairwise interactions, each with eight standard
 normal features that were either independent or correlated (pairwise correlation 0.5). Because
-the model is known, the exact interventional Shapley values with the metrics' baseline serve as
-true attributions. For each instance, the agreement of an explainer with the truth is the
+the model is known, the exact interventional Shapley values of the predicted-class probability,
+with the expectation over a background sample of the same distribution (not the metrics' single
+baseline), serve as true attributions. For each instance, the agreement of an explainer with the truth is the
 Spearman correlation between its attributions and the true ones; averaged over the 200 instances
 of a condition and seed, it orders the explainers into a reference order. Under each metric M1
 to M6 the explainers were ordered by their mean score, and the metric was scored by the Spearman
 correlation between its order and the reference order (four explainers; the three studied
-explainers as a sensitivity analysis). This check is descriptive.
+explainers as a sensitivity analysis). This check is descriptive. Because LIME's output is a slope
+and the truth is a contribution, LIME's position in the reference order reflects that mismatch, not
+a lower faithfulness of the method; the check is informative mainly about SHAP and occlusion. A
+supplementary analysis (Section 3.9) compares LIME output representations with the truth.
 
 ### 3.7 Agreement analysis
 
@@ -241,7 +261,9 @@ analysis only. The 15 metric pairs were analysed in the same way, with Holm corr
 
 **Secondary measures.** The share of blocks in which the top-ranked explainer changes between
 two metrics (a tie at the top is counted separately, not as a change); the share in which the
-order of SHAP and LIME reverses, separating strict reversals from ties; the analysis with the
+order of SHAP and LIME reverses, separating strict reversals from ties (reported only for M7, which
+uses magnitudes; under M1 to M6 the comparison would set SHAP's contributions against LIME's slopes);
+the analysis with the
 random control as a fourth explainer; the analysis with the second baseline; and per-model
 summaries. A planned decomposition of rank variance into shares (linear mixed model; aligned rank
 transform as a sensitivity analysis) was omitted because its operational specification was not
@@ -250,7 +272,10 @@ sufficiently defined; this is a deviation from the analysis plan.
 **Decision rule.** The classification of Table 2, fixed before the run, uses the raw
 permutation p of H1 and its t-interval. Holm correction over the two primary tests (H1 and H2) is
 reported beside it as the multiplicity-adjusted conclusion; where the two differ, both are
-reported.
+reported. With three ranked explainers the threshold of 0.5 has a limited reach: if one explainer
+holds the same first or last rank under every metric in a block, each pairwise Spearman correlation
+is 0.5 or 1, so the block's agreement cannot fall below 0.5. The classification is therefore read
+together with the distribution of explainer positions (Section 3.9).
 
 **Specification after the run.** Some details of the analysis were fixed after the experiment
 had run but before any result was examined: the H2 test and interval, the definition of the
@@ -266,6 +291,23 @@ undefined is reported as exploratory.
 
 Code, configuration and per-instance scores are released under an open licence [Zenodo DOI,
 anonymised for review]. Runs were made on a single laptop CPU [R: hardware, total time].
+
+### 3.9 Analyses added after the main analysis
+
+After the main analysis, a review found the LIME representation issue described in Section 3.4
+(supplementary material: analysis plan, section 12; the same behaviour had been documented in an
+earlier study of the programme [REF-OWN-E]). The following analyses were specified after that
+review, are labelled supplementary or exploratory, and do not change H1, H2 or their decision:
+
+- a synthetic validation of LIME output representations: the frozen slopes, the contributions of
+  LIME's linear surrogate relative to the training mean, *w_j (x_j − μ_j)/s_j*, and LIME with
+  discretisation, each at kernel width 3.0 and at the package default, compared with the true
+  attributions;
+- the frequency with which each explainer holds each rank under each metric;
+- the instance-level correlations adjusted for the predicted-class probability (a rank-based
+  partial correlation), since several metrics scale with that probability;
+- the size of M7's removal sets and the frequency of identical sets and ties;
+- the share of blocks in which every metric places the random control last.
 
 ## 4. Results
 
@@ -283,7 +325,7 @@ explainers only. Figure 3: per-dataset agreement against the stability benchmark
 
 ### 4.3 How often the conclusion changes
 
-*[Winner flips between metric pairs (Table 3). SHAP–LIME order reversal: [R] of blocks. Which
+*[Winner flips between metric pairs (Table 3). SHAP–LIME order reversal under M7 only: [R] of blocks. Which
 metric pairs disagree most.]*
 
 ### 4.4 Instance-level agreement (H2)
@@ -322,6 +364,19 @@ outcome:]*
 
 - Eight datasets, all binary and tabular; four model families.
 - Four explainers, which makes rank orders coarse; the instance-level analysis compensates in part.
+- LIME was run in a configuration whose output is a slope, while the metrics and the synthetic truth
+  assume contributions; results involving LIME describe that configuration only, and the
+  system-level agreement may be raised by an explainer that every contribution-based metric places
+  last.
+- The H1 decision threshold of 0.5 cannot separate "the metrics agree on every position" from "the
+  metrics agree only on which explainer is last" when three explainers are ranked.
+- Instance-level agreement is affected by the instance's predicted probability, on which several
+  metrics depend; the adjusted correlations are exploratory.
+- The masking baseline changes system-level agreement markedly; the metrics share masking
+  machinery, and M4 shares its construction with occlusion.
+- M7 is unstable across seeds and ties often on datasets with few features.
+- Several analysis details, the eligibility check and the supplementary analyses were fixed or run
+  after the experiment (Sections 3.2, 3.7, 3.9); the planned variance decomposition was omitted.
 - Ground truth exists only in a small synthetic setting (eight features, two function
   families); on real data the study measures agreement, not correctness.
 - One configuration per explainer and per model; one masking fraction (20%) for M3 and M6.
