@@ -1,31 +1,41 @@
 #!/usr/bin/env python3
-"""Paper G S1: supplementary LIME contributions (plan section 12.3). Pilot only in this version.
+"""Paper G S1: supplementary LIME contributions (plan section 12.3).
 
     python scripts/paper_g_s1_lime.py --pilot --authorized "<who, date>"
+    python scripts/paper_g_s1_lime.py --full --authorized "<who, date>" [--jobs 6]
 
 Supplementary and exploratory. For each block it rebuilds the frozen model and LIME exactly
 (reconstruction gate, 12.3.2), converts LIME's encoded-column coefficients into contributions to its
 fitted linear surrogate relative to a reference (S1-B: the metrics' masking baseline; S1-M: LIME's
 training mean), groups and orients them as the frozen run did, and recomputes M1-M7 with the frozen
-metric code. Uses paper_g_lib read-only; never writes to the frozen outputs. The full run needs a
-separate authorization and is refused here.
+metric code. Uses paper_g_lib read-only; never writes to the frozen outputs. The full run is
+block-parallel, resumable and atomic (one shard per dataset x model x seed under supplementary/s1/).
 """
 from __future__ import annotations
 
-import argparse
-import csv
-import gzip
-import hashlib
-import json
-import math
-import platform
-import subprocess
-import sys
-import time
-from pathlib import Path
+import os
 
-import numpy as np
-import pandas as pd
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS",
+           "VECLIB_MAXIMUM_THREADS"):
+    os.environ.setdefault(_v, "1")          # one scientific thread per worker (as the frozen runner)
+
+import argparse  # noqa: E402
+import csv  # noqa: E402
+import gzip  # noqa: E402
+import hashlib  # noqa: E402
+import io  # noqa: E402
+import json  # noqa: E402
+import math  # noqa: E402
+import platform  # noqa: E402
+import subprocess  # noqa: E402
+import sys  # noqa: E402
+import time  # noqa: E402
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait  # noqa: E402
+from datetime import datetime, timezone  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+import numpy as np  # noqa: E402
+import pandas as pd  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import paper_g_lib as lib  # noqa: E402
@@ -37,6 +47,10 @@ PILOT_REPORT = lib.ROOT / "docs" / "reports" / "paper_g" / "S1_PILOT_REPORT.md"
 PILOT_DATASETS = ("phoneme", "german_credit")      # 12.3.6, chosen by rule
 PILOT_SEED = 42
 PILOT_INSTANCES = 20
+FULL_OUT = lib.OUT / "supplementary" / "s1"
+FULL_INSTANCES = 200
+AUDIT_N = 5                     # per block: inputs kept so the conversion can be re-done independently
+MIN_FREE_GIB = 1.5              # the frozen runner's admission threshold
 TOL_FX, TOL_ATTR, TOL_METRIC, TOL_REF = 1e-12, 1e-8, 1e-9, 1e-12
 REPRESENTATIONS = {"S1-B": "lime_s1_baseline", "S1-M": "lime_s1_mean"}
 SIGNED = ("m1_deletion", "m2_insertion", "m3_gap", "m4_corr", "m5_infidelity", "m6_sufficiency")
@@ -103,7 +117,7 @@ def stored_rows(dataset: str, model: str, seed: int, raw: Path = RAW) -> dict[in
 
 
 def run_block(dataset: str, model: str, seed: int, cfg: dict, n: int, stored: dict,
-              data: dict | None = None) -> dict:
+              data: dict | None = None, audit_n: int = 0) -> dict:
     """Reconstruction gate, conversion and metric recomputation for one block (first n instances)."""
     data = data or lib.prepare(dataset, model, seed, cfg)
     lime = lib.make_explainer("lime", data["model"], data, seed, cfg)
@@ -116,8 +130,8 @@ def run_block(dataset: str, model: str, seed: int, cfg: dict, n: int, stored: di
     instances = [int(p) for p in data["instances"][:n]]
     if any(p not in stored for p in instances):
         raise GateFailure(f"{dataset}/{model}: reconstructed instance ids not in the stored rows")
-    recon, rows, vecs = [], [], {rid: [] for rid in REPRESENTATIONS}
-    for pos in instances:
+    recon, rows, vecs, audit = [], [], {rid: [] for rid in REPRESENTATIONS}, []
+    for k_inst, pos in enumerate(instances):
         rec, x, c = stored[pos], data["X_test"][pos], int(data["pred"][pos])
         s = instance_seed(seed, pos)
         w = lime.explain(x, s)
@@ -137,6 +151,9 @@ def run_block(dataset: str, model: str, seed: int, cfg: dict, n: int, stored: di
         recon.append(r)
         if not r["passed"]:
             raise GateFailure(f"{dataset}/{model}/seed_{seed} instance {pos}: reconstruction gate failed: {r}")
+        if k_inst < audit_n:
+            audit.append({"instance": pos, "pred_class": c, "w": [repr(float(v)) for v in w],
+                          "x": [repr(float(v)) for v in x]})
         for rid, a in s1_vectors(w, x, c, data, scaler).items():
             vecs[rid].append(a)
             met = frozen_metrics(a, pos, x, c, data, seed, cfg)
@@ -151,9 +168,16 @@ def run_block(dataset: str, model: str, seed: int, cfg: dict, n: int, stored: di
         m7.append({"dataset": dataset, "model": model, "seed": seed, "representation": rid,
                    "instances": len(vs), **lib.roar_score(rank, data, model, seed, cfg, data["auc"]),
                    "global_rank": json.dumps([int(i) for i in rank])})
-    return {"reconstruction": recon, "rows": rows, "m7": m7, "contract": contract,
-            "checks": [{"dataset": dataset, "model": model, "numeric_baseline_minus_lime_mean": ref_gap,
-                        "categorical_groups": int(has_categorical_groups(data)), **checks}]}
+    out = {"reconstruction": recon, "rows": rows, "m7": m7, "contract": contract,
+           "checks": [{"dataset": dataset, "model": model, "numeric_baseline_minus_lime_mean": ref_gap,
+                       "categorical_groups": int(has_categorical_groups(data)), **checks}]}
+    if audit_n:
+        out["audit"] = {"instances": audit, "lime_mean": [repr(float(v)) for v in scaler.mean_],
+                        "lime_scale": [repr(float(v)) for v in scaler.scale_],
+                        "baseline": [repr(float(v)) for v in data["base"]],
+                        "groups": [[int(j) for j in g] for g in data["groups"]],
+                        "is_numeric": [bool(v) for v in data["is_numeric"]]}
+    return out
 
 
 def mode_zero_checks(data: dict, instances: list[int], vecs: dict) -> dict:
@@ -212,7 +236,7 @@ def write_report(path: Path, res: dict, prov: dict) -> None:
          f"| max \\|f_x − stored\\| | {max(r['fx_diff'] for r in rec):.2e} | {TOL_FX} |",
          f"| max \\|regrouped LIME − stored attr\\| | {max(r['attr_max_diff'] for r in rec):.2e} | {TOL_ATTR} |",
          f"| repeated explanation identical | {sum(r['deterministic'] for r in rec)} of {len(rec)} | all |",
-         f"| max \\|recomputed M1–M6, _b2 on stored attr − stored\\| | {max(r['metric_max_diff'] for r in rec):.2e} | {TOL_METRIC} |",
+         f"| max \\|M1–M6, _b2 recomputed on the reconstructed unrounded vector − stored\\| | {max(r['metric_max_diff'] for r in rec):.2e} | {TOL_METRIC} |",
          "", "**Table P2. Construct checks per block.**", "",
          "| dataset | model | categorical groups | max \\|numeric baseline − LIME mean\\| | categorical values at the mode | S1-B non-zero at the mode |",
          "|---|---|---|---|---|---|"]
@@ -270,15 +294,183 @@ def pilot(authorized: str, out: Path = PILOT_OUT, report: Path = PILOT_REPORT) -
     return 0 if accepted else 4
 
 
+# --- full run: block-parallel, resumable, atomic (plan 12.3; Task 19) ---------------------------------
+
+def det_gzip_json(obj) -> bytes:
+    """Deterministic gzip of canonical JSON (sorted keys; no time or name in the header)."""
+    raw = io.BytesIO()
+    with gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=0) as gz:
+        gz.write(json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8"))
+    return raw.getvalue()
+
+
+def block_paths(out: Path, dataset: str, model: str, seed: int) -> dict[str, Path]:
+    stem = out / "shards" / dataset / model / f"seed_{seed}"
+    return {"shard": stem.with_suffix(".json.gz"), "done": stem.with_suffix(".done.json"),
+            "failed": stem.with_suffix(".failed.json"), "log": out / "block_logs" / dataset / model / f"seed_{seed}.txt"}
+
+
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def block_state(out: Path, dataset: str, model: str, seed: int) -> str:
+    """'done' (shard verified by its recorded hash), 'todo'; a mismatch is an error, never overwritten."""
+    p = block_paths(out, dataset, model, seed)
+    if not p["done"].exists():
+        return "todo"
+    rec = json.loads(p["done"].read_text(encoding="utf-8"))
+    if not p["shard"].exists() or sha256(p["shard"]) != rec["sha256"]:
+        raise GateFailure(f"{dataset}/{model}/seed_{seed}: published shard does not match its .done hash")
+    return "done"
+
+
+def _peak_rss_mib() -> float:
+    import resource
+    return round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024, 1)
+
+
+def compute_block(dataset: str, model: str, seed: int, out: str, n: int = FULL_INSTANCES,
+                  commit: str = "") -> dict:
+    """One block in a worker: gate, conversion, metrics, M7; atomic publication; never raises."""
+    out = Path(out)
+    paths = block_paths(out, dataset, model, seed)
+    for k in ("shard", "log"):
+        paths[k].parent.mkdir(parents=True, exist_ok=True)
+    t0 = time.perf_counter()
+    log = [f"{datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} start {dataset}/{model}/seed_{seed} "
+           f"on {platform.node()} commit {commit}"]
+    try:
+        cfg = lib.config()
+        res = run_block(dataset, model, seed, cfg, n, stored_rows(dataset, model, seed), audit_n=AUDIT_N)
+        nonfinite = sum(1 for r in res["rows"] for k in (*SIGNED, *B2) if not math.isfinite(r[k]))
+        nonfinite += sum(1 for r in res["m7"] if not math.isfinite(r["m7_roar"]))
+        if len(res["rows"]) != 2 * n or len(res["m7"]) != 2 or nonfinite:
+            raise GateFailure(f"incomplete or non-finite block: rows {len(res['rows'])}, m7 {len(res['m7'])}, "
+                              f"non-finite {nonfinite}")
+        if res["checks"][0]["s1b_nonzero_at_mode"]:
+            raise GateFailure("S1-B non-zero at a categorical mode")
+        res["meta"] = {"dataset": dataset, "model": model, "seed": seed, "instances": n, "host": platform.node(),
+                       "commit": commit, "python": platform.python_version(), "numpy": np.__version__}
+        data = det_gzip_json(res)
+        tmp = paths["shard"].with_name(paths["shard"].name + ".part")
+        tmp.write_bytes(data)
+        os.replace(tmp, paths["shard"])                                    # atomic publication
+        done = {"dataset": dataset, "model": model, "seed": seed, "sha256": hashlib.sha256(data).hexdigest(),
+                "rows": len(res["rows"]), "m7_rows": len(res["m7"]), "reconstruction_rows": len(res["reconstruction"]),
+                "seconds": round(time.perf_counter() - t0, 1), "peak_rss_mib": _peak_rss_mib(),
+                "finished": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "host": platform.node(),
+                "commit": commit}
+        rec = res["reconstruction"]
+        log.append(f"gate passed {sum(r['passed'] for r in rec)}/{len(rec)}; max fx {max(r['fx_diff'] for r in rec):.1e}; "
+                   f"max attr {max(r['attr_max_diff'] for r in rec):.1e}; max metric {max(r['metric_max_diff'] for r in rec):.1e}")
+        log.append(f"done in {done['seconds']} s, peak {done['peak_rss_mib']} MiB, sha256 {done['sha256']}")
+        paths["log"].write_text("\n".join(log) + "\n", encoding="utf-8")
+        tmpd = paths["done"].with_name(paths["done"].name + ".part")
+        tmpd.write_text(json.dumps(done, indent=1, sort_keys=True), encoding="utf-8")
+        os.replace(tmpd, paths["done"])
+        paths["failed"].unlink(missing_ok=True)
+        return {"status": "done", **done}
+    except Exception as exc:                                   # recorded, reported, never silently skipped
+        err = f"{type(exc).__name__}: {exc}"[:2000]
+        log.append(f"FAILED: {err}")
+        paths["log"].write_text("\n".join(log) + "\n", encoding="utf-8")
+        paths["failed"].write_text(json.dumps({"dataset": dataset, "model": model, "seed": seed, "error": err,
+                                               "at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")},
+                                              indent=1), encoding="utf-8")
+        return {"status": "failed", "dataset": dataset, "model": model, "seed": seed, "error": err}
+
+
+def free_memory_gib() -> float | None:
+    try:
+        for line in Path("/proc/meminfo").read_text().splitlines():
+            if line.startswith("MemAvailable:"):
+                return int(line.split()[1]) / 1024**2
+    except OSError:
+        return None
+    return None
+
+
+def package_temp_c() -> float | None:
+    for z in Path("/sys/class/thermal").glob("thermal_zone*"):
+        try:
+            if (z / "type").read_text().strip() == "x86_pkg_temp":
+                return int((z / "temp").read_text()) / 1000
+        except (OSError, ValueError):
+            continue
+    return None
+
+
+def full_blocks(cfg: dict) -> list[tuple[str, str, int]]:
+    return [(d["key"], m, s) for s in cfg["seeds"] for d in cfg["dataset"] for m in lib.MODELS]
+
+
+def run_full(authorized: str, out: Path = FULL_OUT, jobs: int = 6, blocks=None, block_fn=compute_block,
+             n: int = FULL_INSTANCES, min_free: float = MIN_FREE_GIB) -> int:
+    """All blocks with at most `jobs` workers; stops admitting on the first failure; resumable."""
+    cfg = lib.config()
+    blocks = list(blocks if blocks is not None else full_blocks(cfg))
+    commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=lib.ROOT, capture_output=True, text=True).stdout.strip()
+    out.mkdir(parents=True, exist_ok=True)
+    main_log = out / "run_log.txt"
+
+    def note(msg: str) -> None:
+        line = f"{datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')} {msg}"
+        with open(main_log, "a", encoding="utf-8") as fh:
+            fh.write(line + "\n")
+        print(line, flush=True)
+
+    pending = [b for b in blocks if block_state(out, *b) == "todo"]
+    note(f"start: {len(blocks) - len(pending)} of {len(blocks)} blocks done; {len(pending)} to run with {jobs} jobs; "
+         f"commit {commit}; authorized {authorized!r}")
+    failed, running = [], {}
+    with ProcessPoolExecutor(max_workers=jobs) as pool:
+        while (pending and not failed) or running:
+            free = free_memory_gib()
+            while pending and not failed and len(running) < jobs and (free is None or free >= min_free or not running):
+                b = pending.pop(0)
+                running[pool.submit(block_fn, *b, str(out), n, commit)] = b
+            finished, _ = wait(list(running), timeout=30, return_when=FIRST_COMPLETED)
+            for fut in finished:
+                b = running.pop(fut)
+                r = fut.result()
+                ndone = sum(block_state(out, *x) == "done" for x in blocks)
+                if r["status"] == "done":
+                    note(f"done {'/'.join(map(str, b))} ({ndone}/{len(blocks)}, {r['seconds']} s, "
+                         f"{r['peak_rss_mib']} MiB; free {free_memory_gib() or 0:.1f} GiB; cpu {package_temp_c()} C)")
+                else:
+                    failed.append(r)
+                    note(f"FAILED {'/'.join(map(str, b))}: {r['error'][:300]}")
+            (out / "heartbeat.json").write_text(json.dumps({"at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                                                          "running": ["/".join(map(str, x)) for x in running.values()],
+                                                          "pending": len(pending), "failed": len(failed)}), encoding="utf-8")
+    if failed:
+        note(f"STOP: {len(failed)} block(s) failed; no manifest written")
+        return 3
+    rows = []
+    for b in sorted(blocks):
+        p = block_paths(out, *b)
+        d = json.loads(p["done"].read_text(encoding="utf-8"))
+        rows.append({"path": str(p["shard"].relative_to(out)), "sha256": d["sha256"], "rows": d["rows"],
+                     "m7_rows": d["m7_rows"], "seconds": d["seconds"], "peak_rss_mib": d["peak_rss_mib"],
+                     "host": d["host"], "commit": d["commit"]})
+    write_csv(out / "MANIFEST.csv", rows)
+    note(f"finished: {len(rows)} blocks; manifest written")
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--pilot", action="store_true")
     ap.add_argument("--full", action="store_true")
     ap.add_argument("--authorized", default="")
+    ap.add_argument("--jobs", type=int, default=6)
     a = ap.parse_args(argv)
     if a.full:
-        print("refused: the full S1 run needs a separate authorization (plan 12.3)", file=sys.stderr)
-        return 2
+        if not a.authorized.strip():
+            print("refused: the full S1 run needs an --authorized statement (plan 12.3; Task 19)", file=sys.stderr)
+            return 2
+        return run_full(a.authorized, jobs=max(1, min(a.jobs, 6)))
     if not a.pilot or not a.authorized.strip():
         print("refused: the S1 pilot runs only with --pilot and an --authorized statement (plan 12.3.6)", file=sys.stderr)
         return 2
