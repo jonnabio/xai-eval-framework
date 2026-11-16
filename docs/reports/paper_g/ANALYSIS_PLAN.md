@@ -708,8 +708,9 @@ With the frozen `lib.prepare` (dataset version, split, preprocessing, model, see
 3. the reconstructed encoded-column vector `w`, grouped with `group_attr`, oriented and rounded to
    8 decimals, equals the stored `attr` within **1e-8** in every group;
 4. explaining the same instance twice gives the identical encoded vector;
-5. recomputing M1–M6 (and their `_b2` forms) with the frozen `instance_metrics` on the **stored**
-   LIME `attr`, the frozen per-instance generators, equals the stored metric values within **1e-9**.
+5. recomputing M1–M6 (and their `_b2` forms) with the frozen `instance_metrics` on the reconstructed,
+   unrounded LIME group vector (the vector the run scored; check 3 ties it to the stored, rounded
+   `attr`), with the frozen per-instance generators, equals the stored metric values within **1e-9**.
 
 Any failure stops the block and the run; outputs written so far are kept.
 
