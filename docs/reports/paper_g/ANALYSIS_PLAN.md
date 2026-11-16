@@ -556,7 +556,10 @@ or changed). All 8 features are numeric; no categorical column exists.
 LIME (`paper_g_lib.make_explainer("lime", model, data, seed, cfg)`, the same per-instance seed
 `(seed · 100003 + pos) mod 2^31`, oriented by `orient` and rounded to 8 decimals) must reproduce the
 stored `attr` to within 1e-8 in every component. If any instance fails, S3 stops and is reported; no
-representation is computed on a block that does not reproduce.
+representation is computed on a block that does not reproduce. In the same gate, the exact
+Shapley values of the first instance of every block are recomputed with the frozen
+`true_attribution` and must equal the stored `true_attr` to within 1e-6 (a check of the rebuilt
+condition only; the stored truth remains the reference).
 
 **LIME configurations (a 2 × 2 design, so that each change is isolated).** All other settings as in
 `paper_g_lib.Lime` (1,000 samples, all features, `labels=(1,)`, explainer `random_state` = shard seed,
@@ -635,7 +638,7 @@ No original table is changed.
   undefined if a residual is constant (counted, never 0). The 15 pairs and their block mean are
   aggregated exactly as H2 (block → dataset → eight dataset values, mean and 95% t-interval). The
   unadjusted values are recomputed by the same code and must equal the frozen H2 outputs to within
-  1e-9 (a validation of the code path). No test; no replacement of H2; no causal reading.
+  5e-7, the precision of the frozen CSV files (six decimals) (a validation of the code path). No test; no replacement of H2; no causal reading.
 - **R7, M7 structure.** Groups per dataset (the length of a ROAR-lite `global_rank`); the removal-set
   size `n_top(G, level)` per dataset and level; per block and level, whether two or three studied
   explainers remove identical sets (sets compared as sets); M7 ties (equal `m7_roar` between studied
