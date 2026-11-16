@@ -7,7 +7,7 @@ manuscript text, and not reviewed yet (the post-analysis quality review has not 
 **Run:** one authorized execution, 2026-11-16 01:17 UTC, code `26ef7106f` (analysis code
 `c56efa642`), data frozen at `04c6dfd84`, exit 0. Record: `verification/analysis_run_provenance.txt`.
 **Verification:** independent re-computation (own loader, scipy/statsmodels), 0 failed checks
-(`verification/verify_results_independent.log`).
+(`verification/verify_results_independent_output.txt`).
 
 ## A. H1 — system-level agreement (three studied explainers, seven metrics, n = 8 datasets)
 
