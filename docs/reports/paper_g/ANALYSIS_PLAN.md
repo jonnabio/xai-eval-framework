@@ -283,3 +283,194 @@ Logged here with date and reason. None was made after any result was seen.
 | 2026-11-14 | KernelSHAP with `l1_reg = false` | the default feature selection left 12 of 20 features at zero in the smoke test, which would truncate SHAP's ranking for logistic regression and the MLP only |
 | 2026-11-14 | Synthetic ground truth: exact interventional Shapley values with the expectation over 500 background rows of the same distribution | standard definition of SHAP values; independent of the metrics' single-point baseline |
 | 2026-11-14 | Machine-time estimate: smoke test on the documentation laptop gave 0.01–0.2 s per instance and explainer, metrics included; MLP training up to about 40 s (Adult). The full stage is a few CPU hours; ROAR-lite is dominated by MLP refits. Expected well under one day with 6 jobs; the pilot on the run host gives the figure | |
+
+## 11. Post-execution, pre-unblinding analysis clarifications and deviations
+
+Recorded **2026-11-16 00:40 UTC**, after all four stages finished (run frozen at `04c6dfd84`,
+merged into `main` by PR #123) and **before any scientific result was seen**. Decisions A to G
+were accepted by the author on 2026-11-16 (Task 13). Sections 1 to 10 above are kept unchanged:
+where they are ambiguous or contradict each other, the original wording is quoted here and
+the resolution is stated. Nothing in this section is preregistered in the sense of section 10.
+
+**What had been seen before these decisions:** shard, row and failure counts; timings, memory
+and temperatures; hashes; field names; whether a field was present, null, non-finite or flagged
+(147 rows flagged `m4_degenerate`); and the consistency of `true_attr` across explainers. No
+faithfulness metric value, attribution value, model score, agreement statistic or explainer
+order was displayed, computed or summarised.
+
+Classes used below: **C** clarification of preregistered intent; **M** post-execution
+methodological amendment; **S** exploratory or sensitivity analysis; **D** protocol deviation.
+
+### 11.1 Decision A: dataset eligibility gate (class D, with a diagnostic)
+
+- **Original (section 2.1, step 4 of section 6):** "the list is fixed and committed
+  (`outputs/analysis/paper_g/datasets.csv`) before any explanation is computed. Gate:
+  cross-validated AUC between 0.65 and 0.98 for at least two of the three models".
+- **What happened:** the gate was never implemented or run; no `datasets.csv` exists; the run
+  used the eight datasets confirmed by the author on 2026-11-13. The wording "three models" is
+  out of date (four models since version 2; `config.toml` `[rule] min_models_in_range = 2`).
+- **Resolution:** the gate is run now as a **retrospective diagnostic**. Procedure, inherited
+  unchanged from the Paper F gate (`scripts/paper_f_datasets.py`, `cv_auc`, whose loader the
+  plan says Paper G reuses), with the values of `config.toml` `[rule]`:
+  1. the stratified 80/20 split of `gate_seed` = 42 with the frozen preprocessing (`lib.split`);
+  2. on its training part, `StratifiedKFold(5, shuffle=True, random_state=42)`;
+  3. each of the four models built by `lib.make_model(model, 42, cfg)` and fitted on each fold;
+  4. the AUC on the held-out fold; the mean over the five folds;
+  5. a model is in range if 0.65 <= mean AUC <= 0.98 (inclusive, as in Paper F); a dataset
+     passes if at least 2 of the 4 models are in range.
+  Known property of the inherited procedure: the preprocessing is fitted on the whole training
+  part before the folds, so each validation fold has seen the scaler and encoder (the same as
+  Paper F). It is kept, so as not to choose a variant that could change eligibility.
+- **All eight datasets stay in the study whatever the outcome.** A failing dataset is recorded,
+  kept, and reported with its implications; any analysis without it is exploratory.
+- **Outputs:** `outputs/analysis/paper_g/diagnostics/dataset_gate.csv` (kept apart from the
+  confirmatory outputs). The diagnostic computes model AUCs only; it reads no run output.
+- **Changes estimand, test or population:** no.
+- **Justification:** the gate guards against datasets on which the models are trivial or near
+  chance; running it late shows whether that risk occurred, without letting the result alter the
+  study.
+
+### 11.2 Decision B: seven metrics in H1 (class C)
+
+- **Original:** section 4.1 says "rank the four explainers under each of the six metrics" and
+  "Kendall's W across the six metrics", but also "Treat metrics (M1 to M7) as raters"; section
+  3 says M7 "enters H1"; the power simulation (section 4.5) used seven metrics; the draft speaks
+  of a "6 × 6" heat map for H1.
+- **Resolution:** H1 uses **seven raters, M1 to M7**. M1 to M6 enter as the mean over the 200
+  instances of the block; M7 is the block's single ROAR-lite value (`m7_roar`), never treated as
+  an instance-level metric. The **primary H1 population is the three studied explainers** (SHAP,
+  LIME, Occlusion), as section 4.4 states for the decision rule; the four-explainer analysis
+  (with the random control) is the planned sensitivity of section 4.1 item 5.
+- **Changes estimand:** no; it fixes which of two conflicting texts holds, choosing the one the
+  power simulation and section 3 use.
+
+### 11.3 Decision C: within-metric stability benchmark and ties (class C for ties, M for the benchmark)
+
+- **Original:** section 4.1 item 4, "Ceiling: agreement of one metric with itself across the
+  five seeds", without an operational definition; ties not specified (section 7: "ranks reported
+  with ties").
+- **Ties:** explainers are ranked with **average ranks**; Kendall's W uses the tie-corrected
+  form W = 12 S / (m²(n³ − n) − m Σ_j T_j), T_j = Σ (t³ − t) over the tie groups of rater j.
+- **Mean pairwise Spearman** is computed directly as the mean of the Spearman correlations of
+  all rater pairs, not derived from W.
+- **Undefined values:** a Spearman correlation is undefined when either rank vector is constant
+  (all items tied); W is undefined when its denominator is 0. **An undefined value is never
+  replaced by 0**: it is left out of the mean it would enter (the mean over the defined values),
+  and the number of undefined values is reported with every summary. A block whose statistic is
+  undefined for all pairs is reported and left out of its dataset mean.
+- **Benchmark:** for each dataset × model × metric, the three studied explainers are ranked in
+  each of the five seeds; the Spearman correlation of every unordered pair of seeds (10 pairs) is
+  computed; these are averaged within dataset × model × metric, then over the four models, then
+  over the seven metrics, giving one value per dataset; the eight dataset values give the overall
+  mean and a t-interval. Dataset-level and metric-specific values are reported.
+- It is called a **within-metric stability benchmark**, not a ceiling: different seeds change
+  the split, the fitted model and the explainers' sampling, so cross-seed variation is not
+  measurement error alone, and between-metric agreement is not bounded by it mathematically.
+- **Changes estimand:** the benchmark is newly operationalised (M); the tie and undefined-value
+  rules fix behaviour the plan left open (C).
+
+### 11.4 Decision D: degenerate M4 observations (primary class C; sensitivity class S)
+
+- **Evidence:** 147 of the 128,000 full-stage rows have `m4_degenerate = true`; for them the
+  metric code (`correlation_metric`) stores M4 = 0.0 (when the attribution or the single-feature
+  drops are constant). The plan does not mention the case.
+- **Primary:** M4 is used **exactly as generated** (0.0 retained).
+- **Exploratory sensitivity:** flagged rows are left out of every computation involving M4 and
+  of nothing else. H1: the M4 block mean is recomputed over the valid rows; if a block has no
+  valid row for an explainer, the M4 aggregate is **missing** (not 0) and the M4 rater is left
+  out of that block (pairs with M4 undefined, W over the remaining raters). H2: correlations for
+  pairs with M4 are pairwise-complete (flagged instances dropped from those pairs only). Counts by
+  dataset, model and explainer, the rows remaining per affected correlation and any undefined
+  correlation are reported. Class S, because the exclusion rule was set after the run.
+
+### 11.5 Decision E: H2 inference (class M)
+
+- **Original:** section 4.2 gives the estimate (15 metric-pair Spearman correlations per dataset ×
+  model × explainer × seed, mean over datasets, a 6 × 6 matrix) and "a bootstrap interval over
+  datasets", but no test, although section 4.4 asks for a Holm correction over H1 and H2; and
+  section 4.5 found the bootstrap over eight datasets undercovers.
+- **Orientation (class C):** before correlating, every metric is oriented so that higher means
+  more faithful (M1, M5, M6 multiplied by −1; section 3 directions). H2 asks whether metrics agree
+  on *which explanations are good*; on raw values M1 and M2 correlate negatively when they agree.
+- **Population:** all four explainers (the plan's instance-level design); the three studied
+  explainers as a sensitivity.
+- **Omnibus statistic:** the mean of the 15 correlations in each block; the mean of the blocks of
+  each dataset (80 blocks: 4 models × 4 explainers × 5 seeds); eight dataset values; their mean.
+  Instances are never units of inference.
+- **Test (primary for the Holm family of section 4.4):** one-sided one-sample t-test on the eight
+  dataset values, H0: mean ≤ 0, H1: mean > 0; 95% t-interval with 7 degrees of freedom.
+- **Supplementary:** exact sign-flip test over the 2^8 = 256 sign assignments of the dataset
+  values, p = share of assignments whose mean is at least the observed mean. It assumes that,
+  under H0, each dataset value is symmetric about 0; it is not distribution-free under arbitrary
+  heterogeneity between datasets.
+- **Pairs:** for each of the 15 pairs, the same dataset-level estimate, t-interval and one-sided
+  t-test; **Holm over the 15 pair tests** (a family separate from the H1/H2 family).
+- **Sensitivity:** the planned percentile bootstrap over datasets (10,000 resamples, fixed seed),
+  for the omnibus and the pairs. It never replaces the t-interval.
+
+### 11.6 Decision F: synthetic ground-truth agreement (class M for the statistic)
+
+- **Original:** section 2.5, "the order of explainers by true error is the reference. Each metric
+  is scored by its rank agreement with that reference", without the statistic.
+- **Resolution:** in each condition × seed block (4 × 5 = 20): the reference score of an explainer
+  is the mean of `spearman_truth` over the 200 instances (higher is better); each metric M1 to M6 is
+  averaged over the same instances and oriented; explainers are ranked (average ranks) under the
+  reference and under each metric; the agreement is the Spearman correlation of the two rank
+  vectors (undefined values handled as in 11.3). Primary population: all four explainers;
+  sensitivity: the three studied explainers. Reported per metric, per condition, per seed, with
+  the reference order of every block. Descriptive only: no test was planned and none is added.
+  All four conditions are reported; none is selected.
+
+### 11.7 Decision G: aligned rank transform and the variance shares (class D)
+
+- **Original:** section 4.3 item 3, "Variance shares of the explainer ranks: metric, dataset,
+  model, metric × explainer. Linear mixed model with dataset random; aligned rank transform as
+  sensitivity."
+- **Finding:** as specified, the decomposition is **not identifiable**. In every block and metric
+  the ranks of the three explainers are a permutation of {1, 2, 3} (or average ranks with the same
+  sum), so their mean is 2 by construction: the main effects of metric, dataset and model on the
+  ranks are identically zero, and their "shares" are zero by design, not by data. Only terms that
+  involve the explainer factor (explainer; explainer × metric; explainer × dataset; explainer ×
+  model) can carry variance, and the plan does not say which response, terms or variance-share
+  definition (marginal R², variance components, ICC) are meant.
+- **Resolution:** the variance-share component is **stopped, not implemented**, and reported as a
+  deviation; it needs an author-approved specification before it can be added. The aligned rank
+  transform is **omitted**: no ART package is installed, adding one needs approval, and an
+  unvalidated implementation would not be ART. No other method is substituted.
+
+### 11.8 Open items that need the author's approval before the real-data run
+
+The analysis script refuses to run while these are unset (`experiments/exp_g/analysis.toml`).
+
+1. **H1 decision table and Holm (O1).** Section 4.4 writes the decision table on "the permutation
+   p" and, separately, "Holm correction over H1 and H2". The plan does not say whether the table's
+   "p < 0.05" is the raw permutation p or the Holm-adjusted p. Both are computed and reported; the
+   author chooses which one the table uses (`h1_decision_p = "raw"` or `"holm"`).
+2. **Occlusion–M4 circularity estimand (O2).** Section 3.2: "reported with and without the
+   Occlusion–M4 combination". Removing one rater × item cell leaves an incomplete rank matrix, for
+   which ordinary Kendall's W is undefined. Two valid estimands are implemented; the author
+   chooses (`circularity_variant`):
+   - `drop_m4_rater`: H1 with the six raters M1 to M3 and M5 to M7 over the three studied explainers
+     (complete matrix; W and the mean pairwise Spearman are well defined; removes more than the one
+     cell);
+   - `pairwise_available`: the mean pairwise Spearman over all 21 rater pairs, where pairs with M4
+     use only SHAP and LIME (two items: +1 or −1, undefined if tied); W is not reported for it.
+3. **Variance shares (O3):** stopped (11.7) until a specification is approved.
+
+### 11.9 Rules common to all analyses (class C)
+
+- Direction (section 3): higher is better for M2, M3, M4, M7; lower for M1, M5, M6. Rank 1 is the
+  most faithful explainer under a metric.
+- The pilot is excluded from every analysis.
+- Fixed seeds: permutation test 20261116; bootstrap 20261117. 100,000 permutations; Monte Carlo
+  p = (1 + number of permuted statistics ≥ observed) / (1 + 100,000), never 0.
+- The H1 permutation statistic is the decision measure: the mean over datasets of the dataset
+  mean of the block mean pairwise Spearman (three studied explainers, seven raters).
+- Winner flips: a block's winner under a metric is the explainer of rank 1; if the top is tied the
+  block is counted as a tie for every pair with that metric, not as a flip. SHAP–LIME: in a block,
+  the sign of (oriented SHAP − oriented LIME) under each metric; a pair of metrics is a strict
+  reversal if the signs are opposite and non-zero, tie-involved if either is zero.
+- Per-model summaries are descriptive (estimate and t-interval over the eight datasets, no test).
+- Outputs: `outputs/analysis/paper_g/analysis/` with `confirmatory/`, `sensitivity/`,
+  `exploratory/`, `synthetic/`, `figures/`; the report is `docs/reports/paper_g/RESULTS_REPORT.md`,
+  generated, never hand-edited.
