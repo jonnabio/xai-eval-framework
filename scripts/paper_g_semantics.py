@@ -56,7 +56,13 @@ EXPLAINERS = {
     "lime": Output(Kind.LOCAL_SURROGATE_COEFFICIENT, "encoded columns standardised by LIME's own scaler",
                    None, "sum over the group's columns"),
     "random": Output(Kind.RANDOM_CONTROL, "feature groups", None, "one value per group"),
+    # S1 (plan 12.3): contributions to LIME's fitted linear surrogate, w_j (x_j - r_j) / s_j, grouped.
+    "lime_s1_baseline": Output(Kind.SIGNED_CONTRIBUTION, "encoded columns, from LIME's surrogate",
+                               "metric baseline (training mean / mode)", "sum over the group's columns"),
+    "lime_s1_mean": Output(Kind.SIGNED_CONTRIBUTION, "encoded columns, from LIME's surrogate",
+                           "training mean (dummy columns at their category shares)", "sum over the group's columns"),
 }
+MEAN_REFERENCE = "training mean (dummy columns at their category shares)"
 
 _CONTRIB = frozenset({Kind.SIGNED_CONTRIBUTION, Kind.RANDOM_CONTROL})
 METRICS = {
@@ -80,6 +86,12 @@ CONVERSIONS = {
 
 # The frozen Paper G run fed LIME slopes to M1-M6. It is admissible only as an explicitly named
 # alternative estimand ("LIME as configured"), never as the intended contribution comparison.
+# S1-M (sensitivity): its reference is the training mean; for a categorical group that is not the
+# masking baseline (the mode), so on mixed datasets it is admitted for M1-M6 only as declared.
+S1_DECLARATIONS = {("lime_s1_mean", m): "S1-M sensitivity: mean reference differs from the masking "
+                   "baseline for categorical groups (ANALYSIS_PLAN.md 12.3.1)" for m in
+                   ("m1_deletion", "m2_insertion", "m3_gap", "m4_corr", "m5_infidelity", "m6_sufficiency")}
+
 PAPER_G_FROZEN_DECLARATIONS = {("lime", m): "LIME as configured: slopes scored as if contributions "
                                "(ANALYSIS_PLAN.md 12; post-analysis review section 2)" for m in
                                ("m1_deletion", "m2_insertion", "m3_gap", "m4_corr", "m5_infidelity", "m6_sufficiency")}
@@ -97,6 +109,8 @@ def check(explainer: str, metric: str, *, multi_column_groups: bool, conversion:
     ok = kind in req.accepts
     if ok and kind is Kind.LOCAL_SURROGATE_COEFFICIENT and multi_column_groups:
         ok, note = False, "summed coefficients of a multi-column group are not an importance"
+    if ok and req.uses_sign and out.reference == MEAN_REFERENCE and multi_column_groups:
+        ok, note = False, "a categorical group's mean reference is not the masking baseline (its mode)"
     if ok:
         return Verdict("converted" if conversion else "compatible", note)
     reason = (declared or {}).get((explainer, metric))
