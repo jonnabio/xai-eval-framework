@@ -1,0 +1,13 @@
+Paper G S1 full run — provenance
+specification: docs/reports/paper_g/ANALYSIS_PLAN.md section 12.3, frozen at 664b71f22
+S1 code: scripts/paper_g_s1_lime.py at b24461a07 (merged be0626a65, PR #137); analysis scripts/paper_g_s1_analyze.py at 7934c9d6b
+original data: frozen run 04c6dfd84 (outputs/analysis/paper_g/raw, unchanged; 344 files verified)
+host: jonnabio-Latitude-5450; "Ubuntu 26.04.1 LTS"; Python 3.13.12 (run-host venv), numpy 2.2.6, scipy 1.16.3, pandas 2.3.3, scikit-learn 1.7.1, lime 0.2.0.1
+command: .venv/bin/python scripts/paper_g_s1_lime.py --full --jobs 4 --authorized "Author approval, 2026-11-16, Paper G Task 19 (full S1)"
+start 2026-11-16T14:39:15Z
+exit=0
+end 2026-11-16T15:25:16Z
+wall 2761 s (46 min) with 4 workers; 2.91 h serial; max block 1361 s; max block peak RSS 649 MiB; 0 failed blocks
+per-block SHA-256: outputs/analysis/paper_g/supplementary/s1/MANIFEST.csv (and each shards/*/*/seed_*.done.json)
+analysis: .venv/bin/python scripts/paper_g_s1_analyze.py --run --authorized "Author approval, 2026-11-16, Paper G Task 19 (S1 analysis)"; 2026-11-16T15:25:31Z; 36 s; original-condition check 4.5e-07
+independent verification: docs/reports/paper_g/verification/verify_s1_independent.py -> verify_s1_independent_output.txt (37 checks, 0 failed)
