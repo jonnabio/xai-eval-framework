@@ -55,10 +55,10 @@ conceptual) checked: no overlap with the empirical contribution.
 
 ## 6. Pull requests
 
-See the consolidated report in the pull request descriptions: one lane PR (manuscript, scripts,
-figures, reports, built files) and one shared PR (`paper_g` resolver, registration script, registry
-block, coverage and exclusivity entries, CI step, section-number rule of the claim scanner, active
-context), stacked on the lane PR. Merge order: lane PR first, then the shared PR.
+| PR | Branch | Content | Merge |
+|---|---|---|---|
+| #139 | `paper/g-manuscript-completion` → `main` | Lane: manuscript, scripts, figures, references, reports, built files | first |
+| #140 | `pubs/paper-g-claims` → stacked on #139 | Shared: `paper_g` resolver, `register_paper_g.py`, registry block (185 claims), coverage and exclusivity entries, CI step, section-number rule of the claim scanner, active context | second |
 
 ## Status
 
