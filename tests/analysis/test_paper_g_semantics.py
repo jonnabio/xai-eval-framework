@@ -78,5 +78,17 @@ def test_declaration_is_bound_to_the_live_lime_configuration():
 
 
 def test_every_paper_g_explainer_and_metric_is_declared():
-    assert set(sem.EXPLAINERS) == set(lib.EXPLAINERS)
+    assert set(lib.EXPLAINERS) <= set(sem.EXPLAINERS)
+    assert set(sem.EXPLAINERS) - set(lib.EXPLAINERS) == {"lime_s1_baseline", "lime_s1_mean"}
     assert set(sem.METRICS) == set(lib.HIGHER_IS_BETTER)
+
+
+def test_s1_representations():
+    for m in [*SIGNED, "m7_roar"]:
+        assert sem.check("lime_s1_baseline", m, multi_column_groups=True).status == "compatible"
+        assert sem.check("lime_s1_mean", m, multi_column_groups=False).status == "compatible"
+    with pytest.raises(sem.IncompatibleSemantics, match="mean reference"):
+        sem.check("lime_s1_mean", "m1_deletion", multi_column_groups=True)
+    v = sem.check("lime_s1_mean", "m5_infidelity", multi_column_groups=True, declared=sem.S1_DECLARATIONS)
+    assert v.status == "declared alternative estimand" and "S1-M" in v.note
+    assert sem.check("lime_s1_mean", "m7_roar", multi_column_groups=True).status == "compatible"   # magnitudes only

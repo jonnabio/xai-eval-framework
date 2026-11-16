@@ -648,3 +648,115 @@ No original table is changed.
   among the four explainers (average ranks). Reported: the share of blocks in which it is untied last
   under all seven metrics, the share in which it is last or tied last under all seven, and the share
   per metric. Denominator: 160 blocks.
+
+### 12.3 S1: supplementary LIME contributions — specification and pilot
+
+Written **2026-11-16**, after S3 (PR #133, merged `00bdca57d`) and before any S1 code or output
+existed, on the author's authorization of the same day (Task 18). **Supplementary and exploratory;
+not preregistered.** It cannot replace or reclassify the original H1/H2 or their decision; the
+original 0.5 decision table stays attached to the original analysis only. Authorized now: this
+specification, the implementation, its tests and the pilot of 12.3.6. The full S1 run needs a
+separate authorization.
+
+**Motivation (S3, `S3_REPORT.md`).** On the synthetic conditions, LIME's frozen slopes agree with the
+exact Shapley values at 0.00–0.02; the surrogate contributions `w_j (x_j − μ_j)/s_j` at 0.96
+(additive) and 0.64–0.75 (interaction). S3's features are all numeric, so it did not test
+categorical groups.
+
+**Question.** Does the agreement among faithfulness metrics observed in the original analysis persist
+when LIME's surrogate coefficients are converted into signed contributions relative to a defined
+reference?
+
+#### 12.3.1 Representations and estimands
+
+For an explained instance `x` (encoded, as given to LIME), LIME's coefficients `w` in its own
+standardised coordinates, its fitted `μ = scaler.mean_` and `s = scaler.scale_`, and a reference
+point `r`, the contribution of encoded column `j` to **LIME's fitted linear surrogate** is
+`c_j(r) = w_j (x_j − r_j) / s_j`; the group contribution of a raw feature `G` is `Σ_{j∈G} c_j(r)`,
+oriented to the predicted class with the frozen `orient`. This is the exact additive decomposition of
+the surrogate's change from `r` to `x`; it is a contribution to the model only as far as the
+surrogate approximates the model.
+
+| Id | Reference `r` | Estimand | Status |
+|---|---|---|---|
+| **S1-B** | the metrics' masking baseline `b` (`lib.baseline`: training mean for numeric columns; one-hot of the training mode for categorical groups) | surrogate change from the masked point to `x`: the reference that M1–M6 use when they mask a group | primary supplementary representation |
+| **S1-M** | LIME's training mean `μ` (dummy columns at their category shares, an infeasible point for a categorical group) | the representation validated by S3 | predefined sensitivity |
+
+For numeric columns `b_j = μ_j` up to floating point (verified in the pilot), so S1-B and S1-M
+differ only on categorical groups. For a categorical group whose instance value is the mode, S1-B is
+exactly 0 (masking it changes nothing); S1-M is not. For category `a ≠ mode m`, S1-B equals
+`w_a/s_a − w_m/s_m`. The choice of S1-B as primary is made here, before any S1 output, because it
+matches the semantics of M1–M6 (Section 3 and the RCA-005 contract).
+
+**M7.** The S1 global ranking of LIME is the mean |group contribution| over the explained
+instances (as for SHAP), separately for S1-B and S1-M. The frozen slope-based M7 for LIME is not
+reused: summed one-hot slopes are not an importance (RCA-005 contract).
+
+**Semantic contract.** Both representations are declared in `scripts/paper_g_semantics.py` as signed
+contributions with their references; S1-M on a dataset with categorical groups is admitted for M1–M6
+only as the declared sensitivity estimand "mean reference differs from the masking baseline". The
+S1 code calls the contract before computing any metric.
+
+#### 12.3.2 Reconstruction gate (per block, before any conversion)
+
+With the frozen `lib.prepare` (dataset version, split, preprocessing, model, seed), the frozen LIME
+(`lib.make_explainer`, explainer seed = block seed, per-instance seed `(seed·100003 + pos) mod 2^31`):
+
+1. the instance identifiers equal the stored ones;
+2. for every instance, the reconstructed predicted class equals the stored `pred_class` and the
+   reconstructed `f_x` equals the stored LIME row's `f_x` within **1e-12**;
+3. the reconstructed encoded-column vector `w`, grouped with `group_attr`, oriented and rounded to
+   8 decimals, equals the stored `attr` within **1e-8** in every group;
+4. explaining the same instance twice gives the identical encoded vector;
+5. recomputing M1–M6 (and their `_b2` forms) with the frozen `instance_metrics` on the reconstructed,
+   unrounded LIME group vector (the vector the run scored; check 3 ties it to the stored, rounded
+   `attr`), with the frozen per-instance generators, equals the stored metric values within **1e-9**.
+
+Any failure stops the block and the run; outputs written so far are kept.
+
+#### 12.3.3 Metrics
+
+M1–M6 and their second-baseline forms: the frozen `lib.instance_metrics` with the frozen per-instance
+generators (`default_rng([seed, pos, 2])` for the second baseline, `default_rng([seed, pos, 5])` for
+M4/M5), applied to the S1-B and S1-M group vectors. M7: the frozen `lib.roar_score` with the S1
+global rankings. Directions as in section 3. `m4_degenerate` is recorded as in the frozen run.
+
+#### 12.3.4 Full-run analysis (if authorized later; not computed now)
+
+The frozen SHAP, occlusion and random rows are reused unchanged; only LIME's rows are replaced by S1-B
+(and, as sensitivity, S1-M). With the frozen functions of `scripts/paper_g_analyze.py`, unchanged:
+system-level agreement (mean pairwise Spearman, Kendall's W, dataset-level t-intervals), explainer
+positions (R3 form), winner flips, SHAP–LIME order under M1–M7 (now comparable for M1–M6),
+instance-level agreement (H2 form, and the R6 adjustment), second-baseline and six-metric
+sensitivities, M7. **Comparison with the original:** estimates are reported beside the original ones,
+with the same aggregation; differences are descriptive. No new decision classification, no 0.5 rule,
+no test of "S1 versus original". Synthetic: S3 already compares the representations with the truth;
+no further synthetic run is planned.
+
+#### 12.3.5 Ties and undefined values
+
+As in 11.3 and 11.9: average ranks; undefined correlations left out and counted, never 0; a group
+contribution that is exactly 0 is a valid value (it ties with other zeros under `order_of`, broken
+by index, as in the frozen metric code).
+
+#### 12.3.6 Pilot (authorized now)
+
+Purpose: implementation and construct validation, **not** an estimate of agreement. Scope, chosen by
+rule before any S1 output:
+
+- **numerical dataset:** the numeric-small dataset with the fewest feature groups: **phoneme** (5);
+- **mixed dataset:** the dataset with categorical groups and the fewest rows: **german_credit**
+  (1,000 rows);
+- all four models; seed **42**; the first **20** instances of the frozen `data["instances"]` order
+  (the frozen pilot size); M7 with the global ranking over those 20 instances.
+
+Records: 2 datasets × 4 models × 20 instances × 2 representations = **320** instance rows; 16 M7
+rows; 160 reconstruction rows. No agreement statistic (H1/H2 form) is computed on the pilot.
+**Acceptance:** every gate of 12.3.2 passes; `b_j = μ_j` for numeric columns within 1e-12; every
+categorical instance at the mode has S1-B group contribution exactly 0; no failed metric row; the
+contract admits every computed pair; outputs and provenance complete. **Stop criteria:** any gate
+failure, a contract refusal, or a failed row.
+
+**Outputs.** `outputs/analysis/paper_g/supplementary/s1_pilot/` and the generated
+`docs/reports/paper_g/S1_PILOT_REPORT.md`; full run (later) `supplementary/s1/` with stage name
+`lime_supp`. Code: `scripts/paper_g_s1_lime.py`; tests: `tests/analysis/test_paper_g_s1.py`.
