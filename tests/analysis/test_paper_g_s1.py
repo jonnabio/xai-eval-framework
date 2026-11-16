@@ -260,7 +260,7 @@ def test_substitute_lime_replaces_only_lime_rows():
 
 def test_refusals_and_output_paths(capsys):
     assert s1.main([]) == 2 and s1.main(["--pilot"]) == 2
-    assert s1.main(["--full", "--authorized", "x"]) == 2
+    assert s1.main(["--full"]) == 2 and s1.main(["--full", "--authorized", "  "]) == 2
     assert "refused" in capsys.readouterr().err
     frozen = [lib.OUT / "raw", lib.OUT / "analysis", lib.OUT / "supplementary" / "s3"]
     assert not any(s1.PILOT_OUT.is_relative_to(f) for f in frozen)
@@ -273,3 +273,61 @@ def test_csv_output_is_deterministic(tmp_path):
     s1.write_csv(tmp_path / "y.csv", rows)
     assert (tmp_path / "x.csv").read_bytes() == (tmp_path / "y.csv").read_bytes()
     assert "0.30000000000000004" in (tmp_path / "x.csv").read_text()     # full precision kept
+
+
+# --- full driver (Task 19) ------------------------------------------------------------------------
+
+def _fake_block(dataset, model, seed, cfg, n, stored, data=None, audit_n=0):
+    if dataset == "bad":
+        raise s1.GateFailure("constructed failure")
+    rows = [{"dataset": dataset, "model": model, "seed": seed, "instance": i, "pred_class": 1, "representation": r,
+             **{k: 0.5 + 0.01 * i for k in (*s1.SIGNED, *s1.B2, "f_x")}, "m4_degenerate": 0, "failed": 0,
+             "group_vector": "[0.1]"} for i in range(n) for r in ("S1-B", "S1-M")]
+    rec = [{"instance": i, "passed": 1, "fx_diff": 0.0, "attr_max_diff": 0.0, "metric_max_diff": 0.0} for i in range(n)]
+    return {"reconstruction": rec, "rows": rows, "contract": [],
+            "m7": [{"representation": r, "m7_roar": 0.1} for r in ("S1-B", "S1-M")],
+            "checks": [{"s1b_nonzero_at_mode": 0}], "audit": {"instances": []}}
+
+
+@pytest.fixture
+def fake(monkeypatch):
+    monkeypatch.setattr(s1, "run_block", _fake_block)
+    monkeypatch.setattr(s1, "stored_rows", lambda *a, **k: {})
+
+
+def test_full_driver_publishes_atomically_and_resumes(tmp_path, fake, monkeypatch):
+    blocks = [("d0", "rf", 1), ("d0", "rf", 2), ("d1", "mlp", 1)]
+    assert s1.run_full("test", out=tmp_path, jobs=2, blocks=blocks, n=3) == 0
+    man = pd.read_csv(tmp_path / "MANIFEST.csv")
+    assert len(man) == 3 and not list(tmp_path.rglob("*.part"))
+    for b in blocks:
+        p = s1.block_paths(tmp_path, *b)
+        assert s1.sha256(p["shard"]) == json.loads(p["done"].read_text())["sha256"] and p["log"].exists()
+    before = {q: q.read_bytes() for q in tmp_path.rglob("*.json.gz")}
+    monkeypatch.setattr(s1, "run_block", lambda *a, **k: pytest.fail("a finished block was recomputed"))
+    assert s1.run_full("test", out=tmp_path, jobs=2, blocks=blocks, n=3) == 0
+    assert {q: q.read_bytes() for q in tmp_path.rglob("*.json.gz")} == before
+
+
+def test_full_driver_stops_on_failure_and_writes_no_manifest(tmp_path, fake):
+    rc = s1.run_full("test", out=tmp_path, jobs=1, blocks=[("bad", "rf", 1), ("d0", "rf", 1)], n=2)
+    assert rc == 3 and not (tmp_path / "MANIFEST.csv").exists()
+    assert "constructed failure" in s1.block_paths(tmp_path, "bad", "rf", 1)["failed"].read_text()
+    assert not s1.block_paths(tmp_path, "d0", "rf", 1)["done"].exists()       # not admitted after the failure
+
+
+def test_tampered_shard_is_refused_not_overwritten(tmp_path, fake):
+    assert s1.run_full("test", out=tmp_path, jobs=1, blocks=[("d0", "rf", 1)], n=2) == 0
+    p = s1.block_paths(tmp_path, "d0", "rf", 1)["shard"]
+    p.write_bytes(p.read_bytes() + b"x")
+    with pytest.raises(s1.GateFailure, match="does not match"):
+        s1.run_full("test", out=tmp_path, jobs=1, blocks=[("d0", "rf", 1)], n=2)
+
+
+def test_deterministic_serialisation_and_block_list():
+    a = s1.det_gzip_json({"b": [1.5, "x"], "a": {"z": 1, "y": 2}})
+    b = s1.det_gzip_json({"a": {"y": 2, "z": 1}, "b": [1.5, "x"]})
+    assert a == b
+    blocks = s1.full_blocks(CFG)
+    assert len(blocks) == 160 == len(set(blocks))
+    assert {m for _, m, _ in blocks} == set(lib.MODELS) and {s for *_, s in blocks} == set(CFG["seeds"])
