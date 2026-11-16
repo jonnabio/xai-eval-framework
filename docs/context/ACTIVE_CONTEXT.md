@@ -10,10 +10,14 @@
 
 ## Current objective
 
-**Paper G** (*Do Faithfulness Metrics Agree?*, lane `paper-g`): **execution complete 2026-11-15**,
-344/344 shards, 0 failed; run frozen at `04c6dfd84`. Run merged (#123); analysis specified and implemented (#126). **The analysis has not been run**: it
-runs once, under the author's separate authorization (`ANALYSIS_PLAN.md`,
-unchanged). Run record: `docs/reports/paper_g/RUN_PROTOCOL.md`.
+**Paper G** (*Do Faithfulness Metrics Agree?*, lane `paper-g`, *Informática y Sistemas*):
+analysis run and frozen (#129-#133); S3, diagnostics and the supplementary S1 run merged (#138,
+`bb6ea3c7c`). **Manuscript completed 2026-11-16 for author review** (Task 20, direction C):
+source `docs/reports/paper_g/paper_g_draft.md`, rendered `paper_g.md` and
+`submission/paper_g_blind.docx` (12 pages, journal template) by
+`docs/reports/paper_g/scripts/build_paper_g.py`; 185 claims registered by
+`scripts/pubs/register_paper_g.py`; 50 verified references. Status and author actions:
+`docs/reports/paper_g/SUBMISSION_READINESS.md`. **Not submitted.**
 
 **Paper B, revision 1** (C&I 2067810): **SUBMITTED 2026-11-12** after the editor reopened the
 step left empty on 2026-11-10. Wait for the decision. The thesis objective below is unchanged.
@@ -118,7 +122,9 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 8. **Paper B runs branch:** whether `paper/b-rev1-runs` (169 MB of raw rows) is merged into
    `main`, kept as a branch, or deposited elsewhere (e.g. Zenodo). The analyses it feeds are
    already on `main` (`outputs/analysis/paper_b_rev1/`, `revision_1/results/`).
-9. **Paper G:** answer ANALYSIS_PLAN section 11.8 and authorize the analysis (runs once).
+9. **Paper G:** review the manuscript; confirm the declarations; decide on the AI-content
+   limit and on the public repository during review (`SUBMISSION_READINESS.md`); submission
+   is the author's.
 10. **Linux run host:** automatic updates were paused for the run (`unattended-upgrades`,
     `apt-daily*.timer` disabled 2026-11-14). Re-enable when no further Paper G run is planned:
     `sudo systemctl enable --now unattended-upgrades apt-daily-upgrade.timer apt-daily.timer`.

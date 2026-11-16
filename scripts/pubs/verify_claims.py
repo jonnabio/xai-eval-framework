@@ -60,6 +60,13 @@ _CITEKEY = re.compile(r"@[A-Za-z][A-Za-z0-9_-]*\d{4}[a-z]?")
 # paragraph: no result is ever printed as a dotted triple, whereas declaring
 # "1.7" or "2.2" structural would mask real unregistered results everywhere.
 _VERSION = re.compile(r"(?<![\w.])\d+(?:\.\d+){2,}(?![\w.])")
+# Section references and numbered headings ("Section 3.4", "Sections 3.3 and 3.4",
+# "## 1.1. Related work"). Added 2026-11-16 for Paper G, whose Markdown manuscript numbers
+# its sections in the text: a section number is never a result.
+_SECTION = re.compile(
+    r"(?:\bSections?|\bSecci(?:ó|o)n(?:es)?|§)\s+\d+(?:\.\d+)+"
+    r"(?:\s*(?:,|and|y|to|–)\s*\d+(?:\.\d+)+)*"
+    r"|^#{1,6}\s+\d+(?:\.\d+)*\.?", re.MULTILINE)
 _LATEX_CITE = re.compile(
     r"\\(?:cite[a-z]*|ref|label|includegraphics)\s*\{[^}]*\}"
 )
@@ -71,7 +78,7 @@ def _literals(text: str) -> set[str]:
 
 def _scannable(text: str) -> str:
     for pattern in (_MD_COMMENT, _FENCED, _TEX_COMMENT, _INLINE_CODE,
-                    _LATEX_CITE, _URL, _CITEKEY, _VERSION):
+                    _LATEX_CITE, _URL, _CITEKEY, _VERSION, _SECTION):
         text = pattern.sub(" ", text)
     return text
 

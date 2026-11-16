@@ -759,7 +759,35 @@ def resolve(expr: str) -> float:
             raise MissingArtifact(f"paper_f {alias}[{key}].{column}: {exc!r}") from exc
         return value * (100.0 if scale == ["x100"] else 1.0)
 
+    if kind == "paper_g":
+        # Paper G (agreement among faithfulness metrics): one value of the tables that
+        # docs/reports/paper_g/scripts/build_paper_g.py reads from outputs/analysis/paper_g/,
+        # addressed as the placeholders of paper_g_draft.md address it.
+        #   paper_g:<alias>:<key>:<column>[:x100]
+        alias, key, column, *scale = args
+        try:
+            value = float(_paper_g_tables()[alias][key][column])
+        except (KeyError, ValueError) as exc:
+            raise MissingArtifact(f"paper_g {alias}[{key}].{column}: {exc!r}") from exc
+        return value * (100.0 if scale == ["x100"] else 1.0)
+
     raise MissingArtifact(f"unknown source expression: {expr}")
+
+
+_PAPER_G_TABLES: dict | None = None
+
+
+def _paper_g_tables() -> dict:
+    """The tables of the Paper G build, read once. The build uses the standard library only."""
+    global _PAPER_G_TABLES
+    if _PAPER_G_TABLES is None:
+        import importlib.util
+        path = ROOT / "docs" / "reports" / "paper_g" / "scripts" / "build_paper_g.py"
+        spec = importlib.util.spec_from_file_location("build_paper_g", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        _PAPER_G_TABLES = module.tables()
+    return _PAPER_G_TABLES
 
 
 _PAPER_F_TABLES: dict | None = None
