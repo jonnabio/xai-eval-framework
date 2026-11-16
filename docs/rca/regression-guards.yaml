@@ -216,3 +216,27 @@ guards:
 
     review_triggers:
       - "Any new publication path: check it with git check-ignore before relying on git add"
+
+  - id: RCA-005
+    title: "Paper G scored LIME slopes as if they were contributions"
+    severity: high
+    created: 2026-11-16
+    rca_file: docs/rca/RCA-005-paper-g-lime-output-semantics.md
+
+    guarded_files:
+      - scripts/paper_g_lib.py
+      - scripts/paper_g_semantics.py
+      - scripts/paper_g_analyze.py
+
+    invariants:
+      - "Every explainer declares its output kind, coordinates, reference and grouping in scripts/paper_g_semantics.py"
+      - "Every metric declares the kinds it accepts; an incompatible pair is refused unless a conversion or an alternative estimand is declared"
+      - "The LIME declaration matches the live LimeTabularExplainer configuration (lime_kind_of)"
+
+    tests:
+      - python -m pytest tests/analysis/test_paper_g_semantics.py
+
+    review_triggers:
+      - "Any change to an explainer's construction or a metric's use of the attribution vector"
+      - "Any new paper that reuses explainer code: state what each explainer returns before defining metrics on it"
+      - "src/xai/lime_tabular.py with discretize_continuous=False feeding a signed metric"
