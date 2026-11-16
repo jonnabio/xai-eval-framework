@@ -1,0 +1,131 @@
+# Paper G: planned evidence claims (RCA-001). NOT registered, NOT verified.
+#
+# pub/claim_registry.toml admits a claim only with a value re-derived from a committed artifact,
+# so no Paper G claim can enter it before the authorized analysis writes its outputs. This file
+# fixes in advance which number each planned claim will be and where it will come from. After the
+# single authorized run, the claims are registered as Paper F's were (a register script reading
+# these selectors), and each manuscript site is listed under `appears_in` then.
+#
+# A selector reads one cell: `artifact` (under outputs/analysis/paper_g/), the row where column
+# `key` equals `value`, and column `column`. tests/analysis/test_paper_g_analyze.py checks that
+# every selector resolves to exactly one number on a constructed analysis.
+
+[meta]
+status = "planned; not verified; no value exists"
+frozen_plan = "74a7fdf4e"                  # ANALYSIS_PLAN.md sections 1-10, before the run
+amendments = "b993f434d"                   # section 11, after the run, before unblinding
+implementation = "scripts/paper_g_analyze.py"
+tests = "tests/analysis/test_paper_g_analyze.py"
+
+[[planned]]
+id = "paper_g.h1.spearman.mean"
+artifact = "analysis/confirmatory/h1_summary.csv"
+key = "analysis"
+value = "mean pairwise Spearman"
+column = "mean"
+plan = ["4.1", "4.4", "11.2", "11.3"]
+
+[[planned]]
+id = "paper_g.h1.spearman.lo"
+artifact = "analysis/confirmatory/h1_summary.csv"
+key = "analysis"
+value = "mean pairwise Spearman"
+column = "lo"
+plan = ["4.1", "4.4"]
+
+[[planned]]
+id = "paper_g.h1.spearman.hi"
+artifact = "analysis/confirmatory/h1_summary.csv"
+key = "analysis"
+value = "mean pairwise Spearman"
+column = "hi"
+plan = ["4.1", "4.4"]
+
+[[planned]]
+id = "paper_g.h1.w.mean"
+artifact = "analysis/confirmatory/h1_summary.csv"
+key = "analysis"
+value = "Kendall W"
+column = "mean"
+plan = ["4.1", "11.3"]
+
+[[planned]]
+id = "paper_g.h1.permutation.p"
+artifact = "analysis/confirmatory/h1_permutation.csv"
+key = "analysis"
+value = "H1 permutation"
+column = "p"
+plan = ["4.1", "4.5", "11.9"]
+
+[[planned]]
+id = "paper_g.h1.holm.p"
+artifact = "analysis/confirmatory/multiplicity_h1_h2.csv"
+key = "hypothesis"
+value = "H1"
+column = "p_holm"
+plan = ["4.4", "11.8"]
+
+[[planned]]
+id = "paper_g.stability.mean"
+artifact = "analysis/confirmatory/stability_summary.csv"
+key = "analysis"
+value = "within-metric stability"
+column = "mean"
+plan = ["4.1", "11.3"]
+
+[[planned]]
+id = "paper_g.h2.omnibus.mean"
+artifact = "analysis/confirmatory/h2_omnibus.csv"
+key = "analysis"
+value = "H2 omnibus"
+column = "mean"
+plan = ["4.2", "11.5"]
+
+[[planned]]
+id = "paper_g.h2.omnibus.lo"
+artifact = "analysis/confirmatory/h2_omnibus.csv"
+key = "analysis"
+value = "H2 omnibus"
+column = "lo"
+plan = ["4.2", "11.5"]
+
+[[planned]]
+id = "paper_g.h2.omnibus.hi"
+artifact = "analysis/confirmatory/h2_omnibus.csv"
+key = "analysis"
+value = "H2 omnibus"
+column = "hi"
+plan = ["4.2", "11.5"]
+
+[[planned]]
+id = "paper_g.h2.omnibus.p_t"
+artifact = "analysis/confirmatory/h2_omnibus.csv"
+key = "analysis"
+value = "H2 omnibus"
+column = "p_t"
+plan = ["11.5"]
+
+[[planned]]
+id = "paper_g.h2.holm.p"
+artifact = "analysis/confirmatory/multiplicity_h1_h2.csv"
+key = "hypothesis"
+value = "H2"
+column = "p_holm"
+plan = ["4.4", "11.5"]
+
+[[planned]]
+id = "paper_g.shap_lime.any_reversal.share"
+artifact = "analysis/sensitivity/shap_lime_any_reversal.csv"
+key = "blocks"
+value = "*"
+column = "share"
+plan = ["4.3", "11.9"]
+
+[[planned]]
+id = "paper_g.gate.compas.models_in_range"
+artifact = "diagnostics/dataset_gate.csv"
+key = "dataset"
+value = "compas"
+column = "models_in_range"
+plan = ["2.1", "11.1"]
+note = "diagnostic of the retrospective gate; the per-dataset AUCs are registered with the manuscript table that prints them"
