@@ -495,3 +495,32 @@ The analysis script refuses to run while these are unset (`experiments/exp_g/ana
   statistic computed, no analysis output written.
 - **The real-data analysis has not been run.** It needs the author's choices on O1 and O2 in
   `experiments/exp_g/analysis.toml` and an explicit authorization (`--authorized`).
+
+### 11.11 Final decisions on the open items (author, 2026-11-16; Task 14)
+
+Recorded before any scientific result was seen; no analysis had been run on the frozen data.
+
+- **O1, H1 decision table (class C).** The four-outcome classification of section 4.4 uses the
+  **raw permutation p** and the 95% t-interval of the dataset means, as written before the run.
+  Holm-adjusted p-values over the family {H1, H2} are reported beside it. The manuscript keeps
+  the two apart: the preregistered classification, and the multiplicity-adjusted inferential
+  conclusion. If they differ, both are reported. (`analysis.toml` `h1_decision_p = "raw"`.)
+- **O2, Occlusion–M4 sensitivity (class S).** The primary H1 keeps all seven metrics. The
+  circularity sensitivity **removes M4 for every explainer**, leaving six complete rankings
+  (M1 to M3, M5 to M7) of the three studied explainers; Kendall's W, the mean pairwise Spearman,
+  the t-interval and the dataset-unit permutation test (same scheme, seed and number of
+  permutations as the primary) are recomputed on that six-metric matrix. Because it removes more
+  than the occlusion–M4 cell, a change against the primary **does not isolate** the effect of
+  the occlusion–M4 overlap; it shows only whether the H1 conclusion depends on M4.
+  (`circularity_variant = "drop_m4_rater"`.)
+- **O3, variance shares (class D).** The variance-share decomposition and the aligned rank
+  transform of section 4.3 item 3 are **omitted**. The planned decomposition lacks a sufficiently
+  defensible operational specification: its main-effect terms of metric, dataset and model on
+  the ranks are zero by construction (11.7), and the plan does not fix the response, the terms
+  involving the explainer factor, or the definition of a share. This does not mean that every
+  rank-based interaction analysis is impossible; any replacement would be proposed separately
+  and reported as exploratory. No variance-share output is produced. (`[variance] status =
+  "OMITTED"`.)
+
+The specification is frozen with these decisions. The analysis still runs only with an explicit
+authorization (`--authorized`).
