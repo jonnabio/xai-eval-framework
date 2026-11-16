@@ -11,9 +11,8 @@
 ## Current objective
 
 **Paper G** (*Do Faithfulness Metrics Agree?*, lane `paper-g`): **execution complete 2026-11-15**,
-344/344 shards, 0 failed; run frozen at `04c6dfd84`. Integration pull request **#123**
-(`paper/g-runs` → `main`) is open for the author's approval. **The analysis has not started**: it
-runs once, after #123 is merged, under the author's separate authorization (`ANALYSIS_PLAN.md`,
+344/344 shards, 0 failed; run frozen at `04c6dfd84`. Run merged (#123); analysis specified and implemented (#126). **The analysis has not been run**: it
+runs once, under the author's separate authorization (`ANALYSIS_PLAN.md`,
 unchanged). Run record: `docs/reports/paper_g/RUN_PROTOCOL.md`.
 
 **Paper B, revision 1** (C&I 2067810): **SUBMITTED 2026-11-12** after the editor reopened the
@@ -63,7 +62,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
-| **G** | *Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations on Tabular Data* | *Informática y Sistemas* (UTM) | In preparation: run complete, **analysis not started** | `docs/reports/paper_g/` (README, ANALYSIS_PLAN, RUN_PROTOCOL, draft scaffold). Run artifacts: PR #123 |
+| **G** | *Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations on Tabular Data* | *Informática y Sistemas* (UTM) | In preparation: run complete (frozen), analysis implemented, **not run** (waits for the author, ANALYSIS_PLAN 11.8) | `docs/reports/paper_g/` (README, ANALYSIS_PLAN, RUN_PROTOCOL, draft scaffold). Run artifacts: PR #123; analysis code: PR #126 |
 | **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Accepted by the reviewer; final version submitted 2026-10-25** (editor's request of the same day); awaiting publication | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Final files: `herrera-vasquez-final.pdf` (no. 47982) and `.docx` (no. 47981), in `submission/final_2026-10-25/`. Review and what was done: `docs/reports/paper_f/README.md`, sections 9 and 10 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
@@ -84,8 +83,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
   is Paper G's only recorded host. On it, `~/xai-eval-framework` is the run clone (branch
   `paper/g-runs`, lock `paper-g-run-host`, never edited by hand) and
   `~/Documents/GitHub/xai-eval-framework` is a documentation clone.
-- **Paper G branches:** `paper/g-runs` frozen at `04c6dfd84` (publisher timer stopped; PR #123
-  open); `paper/g-metric-agreement` holds code and documents, level with `main` after #122.
+- **Paper G branches:** `paper/g-runs` frozen at `04c6dfd84` (merged, PR #123; publisher timer stopped); `paper/g-metric-agreement` level with `main` after #126.
 - `main` holds everything up to pull request #114 and this handoff. `paper/b-ci-revision-1` is
   level with `main`; kept until the editor confirms receipt, then deleted. `paper/b-rev1-runs` (raw cohort B2 rows and
   logs, 6,716 files, about 169 MB; merges cleanly) is ahead of `main` and **not merged**: the
@@ -120,8 +118,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 8. **Paper B runs branch:** whether `paper/b-rev1-runs` (169 MB of raw rows) is merged into
    `main`, kept as a branch, or deposited elsewhere (e.g. Zenodo). The analyses it feeds are
    already on `main` (`outputs/analysis/paper_b_rev1/`, `revision_1/results/`).
-9. **Paper G:** approve and merge PR #123 (merge commit, not squash: the shards' generating
-   revisions are commits of `paper/g-runs`); then authorize the analysis (`ANALYSIS_PLAN.md`).
+9. **Paper G:** answer ANALYSIS_PLAN section 11.8 and authorize the analysis (runs once).
 10. **Linux run host:** automatic updates were paused for the run (`unattended-upgrades`,
     `apt-daily*.timer` disabled 2026-11-14). Re-enable when no further Paper G run is planned:
     `sudo systemctl enable --now unattended-upgrades apt-daily-upgrade.timer apt-daily.timer`.
@@ -165,45 +162,36 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-15, SESSION END (Paper G run complete and frozen; integration PR open)
+## Latest handoff - 2026-11-15, SESSION END (Paper G: analysis implemented, not run)
 
-Session of 2026-11-14/15, owner `claude-2026-11-15-context` (Linux run host). Lane `paper-g`
-(PRs #119 to #122 merged; #123 open, not merged); this handoff on `pubs/context-2026-11-15`.
-Previous handoff: archive `2026-11-12.md`.
+Session of 2026-11-13 to 2026-11-15, owner `claude-2026-11-13-paper-g` (documentation laptop).
+Lane `paper-g`; this handoff on `pubs/context-2026-11-15b`. Previous handoff (run host, same
+day): archive `2026-11-15.md`.
 
 - **Completed**:
-  - Run host set up per `RUN_PROTOCOL.md` §3 and §10 (uv Python 3.13.12, pinned packages, systemd
-    user units, linger, lane lock `paper-g-run-host`, issue #118 as the event log).
-  - **RCA-004** (publisher silently omitted the run logs; `.gitignore` `logs/` and `*.log`):
-    fixed by #119 (narrow `.gitignore` exception, RCA, guard) and #120 (publisher refuses to
-    publish while git would skip a log); all logs now published.
-  - Concurrency recorded as an accepted pre-run deviation (#121, `RUN_PROTOCOL.md` §9.1): 6 jobs,
-    1 thread each; the 4-shard pilot could not compare 4, 6 and 8 jobs.
-  - Read-only dashboard `scripts/paper_g_dashboard.py` (#122, §11; 18 tests), deployed on the run host.
-  - Stages run (wall time; shards; generating revision): pilot about 29 s, 4, `a1677fe26d78`;
-    full 18.5 min, 160, `c2b4eb202653`; ROAR-lite 81.4 min, 160, `b3c6893b7248`; synthetic about
-    25 s, 20, `c0a46d79e8f8`. 0 failed shards, 0 failed rows.
-  - Freeze and audit (structural only, no value inspected) on a checkout of `04c6dfd84`: 344
-    unique manifest rows, coverage equals the configured shards, 0 SHA-256 mismatches, every
-    shard logged, record stamps match, one schema per stage, run code, `config.toml` and
-    `requirements-frozen.txt` identical at all generating revisions, raw files never modified,
-    manifest append-only. `check_lane.py --range`: OK.
-- **Current State**:
-  - PR #123 open (696 files, 28.3 MB, lane outputs and `host.json` only), awaiting the author.
-  - Thermal record outside the repository: `~/paper-g-monitor/` (ROAR-lite and synthetic CSVs).
-    The CPU reaches 98-99 °C in the first minute of each stage, then the firmware's power limit
-    holds about 1.9 GHz and about 67 °C. ROAR-lite added 30.0 s of package throttled time, all of
-    it in its first 90 s.
+  - Paper G chosen (idea G1); G2-G6 recorded in `docs/planning/paper_ideas_g2_g6_2026-11-13.md`.
+    Lane `paper-g` registered (PR #116).
+  - `docs/reports/paper_g/`: README, VENUE, ANALYSIS_PLAN (v2, power simulation, author
+    decisions), first draft `paper_g_draft.md` (`[R: ...]` and `[REF-n]` placeholders),
+    RUN_PROTOCOL, `CHATGPT_ADVISOR_PROMPT.md`, `LINUX_SETUP_PROMPT.md`.
+  - Config, power simulation, library, runner, publisher, status page, host check, systemd units
+    and 23 tests (PR #117). Lane-lock claim added to the set-up instructions (cb4e37fc6).
+  - Run executed and frozen by the run-host session (PRs #119-#125; archive `2026-11-15.md`).
+  - PR #126 merged: ANALYSIS_PLAN section 11 (post-execution, pre-unblinding decisions A-G),
+    dataset gate diagnostic, analysis implementation and tests; **not run on the data**.
+- **Current State**: `main` holds the plan, code, frozen raw data (344/344 shards) and the
+  analysis code. `paper/g-metric-agreement` is level with `main`. No result has been seen.
+  Draft has no results and no references yet.
 - **Next Steps**:
-  1. Author merges #123 (merge commit).
-  2. Author authorizes the analysis; it runs once, on `main` data.
-  3. Merge the `RUN_PROTOCOL.md` runtime correction (measured times replace the 1-2 day
-     estimate, §9), on `paper/g-metric-agreement`.
-- **Blockers/Issues**: none. Non-blocking monitoring limits, not fixed:
-  - the heartbeat's `commit` is HEAD at write time, not the run's revision (the shards hold the
-    right one);
-  - the heartbeat lists one running shard fewer than are running;
-  - a manual publisher cycle is not written to `publish.log`;
-  - the dashboard history lists runner events before publisher events.
-- **Notes**: no faithfulness value, ranking, correlation or model score was read, computed or
-  reported in this session.
+  1. Author answers the choices in ANALYSIS_PLAN section 11.8 and explicitly authorizes the analysis.
+  2. Run the analysis once on `main` data; fill the `[R: ...]` markers.
+  3. Reference search (verified DOIs, at least 80% from 2024 or later) for Introduction and
+     Related Work; then the Word edition in the journal template.
+- **Blockers/Issues**: analysis waits for the author (11.8 and authorization). Monitoring limits
+  listed in archive `2026-11-15.md` remain unfixed (non-blocking).
+- **Notes**: the author writes nothing by hand but owns every content decision and the
+  journal's AI-content limit and declaration. ChatGPT is used as advisor through
+  `CHATGPT_ADVISOR_PROMPT.md`. On the run host, re-claim the lock
+  (`check_lane.py claim --owner paper-g-run-host`) before any new publish; re-enable updates
+  (Open item 10) when no further run is planned. `docs/reports/paper_a/paper_a_rimi.pdf` is
+  the author's untracked file: never commit it.
