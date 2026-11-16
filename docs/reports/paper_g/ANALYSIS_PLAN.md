@@ -454,7 +454,9 @@ The analysis script refuses to run while these are unset (`experiments/exp_g/ana
      (complete matrix; W and the mean pairwise Spearman are well defined; removes more than the one
      cell);
    - `pairwise_available`: the mean pairwise Spearman over all 21 rater pairs, where pairs with M4
-     use only SHAP and LIME (two items: +1 or −1, undefined if tied); W is not reported for it.
+     use only SHAP and LIME (two items: +1 or −1, undefined if tied); W is not reported for it,
+     and no permutation test is computed for it (the relabelling scheme of 4.5 assumes a complete
+     matrix); its estimate and t-interval are reported.
 3. **Variance shares (O3):** stopped (11.7) until a specification is approved.
 
 ### 11.9 Rules common to all analyses (class C)
@@ -474,3 +476,22 @@ The analysis script refuses to run while these are unset (`experiments/exp_g/ana
 - Outputs: `outputs/analysis/paper_g/analysis/` with `confirmatory/`, `sensitivity/`,
   `exploratory/`, `synthetic/`, `figures/`; the report is `docs/reports/paper_g/RESULTS_REPORT.md`,
   generated, never hand-edited.
+
+### 11.10 Record after the decisions (2026-11-16)
+
+- **Dataset gate (11.1), run 2026-11-16 at commit `b993f434d` + script
+  `scripts/paper_g_dataset_gate.py`:** all eight datasets pass; in every dataset all four models
+  have a mean five-fold AUC inside [0.65, 0.98] (lowest: compas, random forest; highest:
+  electricity, random forest). The OpenML files used are byte-identical to those of the run.
+  Output: `outputs/analysis/paper_g/diagnostics/dataset_gate.csv`. The deviation (gate run after
+  the experiment, not before) stands; the eligibility condition itself is met, so no dataset
+  carries an eligibility caveat.
+- **Implementation:** `scripts/paper_g_analyze.py` with `tests/analysis/test_paper_g_analyze.py`
+  (constructed data only). Planned claims: `docs/reports/paper_g/CLAIMS_PLAN.toml` (RCA-001;
+  not registered until the authorized run).
+- **Structural validation of the frozen data** (`paper_g_analyze.py --validate-only`): manifest
+  hashes and coverage, row counts, keys, instance alignment across explainers, ROAR-lite block
+  alignment. Counts only (344 shards; 128,000, 640 and 16,000 rows; 147 degenerate-M4 flags); no
+  statistic computed, no analysis output written.
+- **The real-data analysis has not been run.** It needs the author's choices on O1 and O2 in
+  `experiments/exp_g/analysis.toml` and an explicit authorization (`--authorized`).
