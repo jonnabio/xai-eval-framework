@@ -499,7 +499,7 @@ def winner_flips(sys_tab: pd.DataFrame, explainers: list[str], metrics: list[str
                 tie += 1
             elif tops[0] != tops[1]:
                 flip += 1
-        rows.append({"metric_a": a, "metric_b": b, "blocks": len(blocks), "flips": flip, "ties": tie,
+        rows.append({"pair_key": f"{a}|{b}", "metric_a": a, "metric_b": b, "blocks": len(blocks), "flips": flip, "ties": tie,
                      "flip_share": flip / len(blocks), "tie_share": tie / len(blocks)})
     return pd.DataFrame(rows)
 
@@ -518,7 +518,7 @@ def shap_lime_reversals(sys_tab: pd.DataFrame, metrics: list[str]) -> tuple[pd.D
     for a, b in itertools.combinations(metrics, 2):
         strict = sum(1 for s in signs.values() if s[a] * s[b] == -1)
         ties = sum(1 for s in signs.values() if s[a] == 0 or s[b] == 0)
-        rows.append({"metric_a": a, "metric_b": b, "blocks": n, "strict_reversals": strict,
+        rows.append({"pair_key": f"{a}|{b}", "metric_a": a, "metric_b": b, "blocks": n, "strict_reversals": strict,
                      "tie_involved": ties, "reversal_share": strict / n, "tie_share": ties / n})
     return pd.DataFrame(rows), {"blocks": n, "blocks_with_any_strict_reversal": any_rev,
                                 "share": any_rev / n}
@@ -575,7 +575,20 @@ def check_spec_decided(spec: dict) -> list[str]:
         open_items.append("h1_decision_p must be raw or holm")
     if spec["h1"].get("circularity_variant") not in (UNDECIDED, "drop_m4_rater", "pairwise_available"):
         open_items.append("circularity_variant must be drop_m4_rater or pairwise_available")
+    if spec.get("variance", {}).get("status") != "OMITTED":
+        open_items.append("variance.status must be OMITTED (11.11)")
     return open_items
+
+
+CIRCULARITY_LABEL = {"drop_m4_rater": "H1 circularity: M4 removed for all explainers (six metrics)",
+                     "pairwise_available": "H1 circularity: pairwise-available (no W, no test)"}
+
+
+def h1_conclusions(p_raw: float, p_holm: float, lo: float, hi: float, alpha: float, threshold: float) -> dict:
+    """11.11 (O1): the frozen table on the raw permutation p, and the Holm-adjusted conclusion beside it."""
+    raw = decision(p_raw, lo, hi, alpha, threshold)
+    adj = decision(p_holm, lo, hi, alpha, threshold)
+    return {"classification_raw_p": raw, "conclusion_holm_p": adj, "differ": raw != adj}
 
 
 def run_analysis(full: pd.DataFrame, roar: pd.DataFrame, synth: pd.DataFrame, spec: dict,
@@ -596,6 +609,7 @@ def run_analysis(full: pd.DataFrame, roar: pd.DataFrame, synth: pd.DataFrame, sp
                          {"hypothesis": "H2", "test": "one-sided t on dataset means", "p_raw": raw_p[1], "p_holm": adj[1]}])
     p_for_table = raw_p[0] if h1s["h1_decision_p"] == "raw" else adj[0]
     dec = decision(p_for_table, h1["spearman"]["lo"], h1["spearman"]["hi"], h1s["alpha"], h1s["threshold"])
+    both = h1_conclusions(raw_p[0], adj[0], h1["spearman"]["lo"], h1["spearman"]["hi"], h1s["alpha"], h1s["threshold"])
     stab = stability_benchmark(sys_tab, studied, m7)
     c = out / "confirmatory"
     _csv(h1["blocks"], c / "h1_blocks.csv")
@@ -614,9 +628,13 @@ def run_analysis(full: pd.DataFrame, roar: pd.DataFrame, synth: pd.DataFrame, sp
     _csv(h2["pairs"], c / "h2_pairs.csv")
     _csv(matrix_from_pairs(h2["pairs"], m6).reset_index(names="metric"), c / "h2_matrix.csv")
     _csv(mult, c / "multiplicity_h1_h2.csv")
-    _csv(pd.DataFrame([{"h1_decision_p": h1s["h1_decision_p"], "p_used": p_for_table,
-                        "interval_lo": h1["spearman"]["lo"], "interval_hi": h1["spearman"]["hi"],
-                        "threshold": h1s["threshold"], "decision": dec}]), c / "h1_decision.csv")
+    _csv(pd.DataFrame([
+        {"basis": "decision table (section 4.4), raw permutation p", "p": raw_p[0],
+         "interval_lo": h1["spearman"]["lo"], "interval_hi": h1["spearman"]["hi"],
+         "threshold": h1s["threshold"], "wording": both["classification_raw_p"]},
+        {"basis": "multiplicity-adjusted (Holm over H1 and H2)", "p": adj[0],
+         "interval_lo": h1["spearman"]["lo"], "interval_hi": h1["spearman"]["hi"],
+         "threshold": h1s["threshold"], "wording": both["conclusion_holm_p"]}]), c / "h1_decision.csv")
 
     # Planned sensitivity and secondary analyses.
     s = out / "sensitivity"
@@ -632,10 +650,14 @@ def run_analysis(full: pd.DataFrame, roar: pd.DataFrame, synth: pd.DataFrame, sp
                               pair_items=circularity_pair_items(m7, studied))
     h2_3 = h2_analysis(full, studied, m6, spec)
     sens = []
-    for label, r in (("H1 four explainers", h1_4), ("H1 second baseline", h1_b2), (f"H1 circularity ({var})", h1_circ)):
-        sens.append({"analysis": label, **{f"spearman_{k}": v for k, v in r["spearman"].items()},
+    circ_metrics = [m for m in m7 if m != "m4_corr"] if var == "drop_m4_rater" else m7
+    for fname, label, r, mets, expl in (("h1_four_explainers", "H1 four explainers", h1_4, m7, allx),
+                                        ("h1_second_baseline", "H1 second baseline", h1_b2, m7, studied),
+                                        ("h1_circularity", CIRCULARITY_LABEL[var], h1_circ, circ_metrics, studied)):
+        sens.append({"analysis": label, "metrics": len(mets), "explainers": len(expl),
+                     **{f"spearman_{k}": v for k, v in r["spearman"].items()},
                      **{f"w_{k}": v for k, v in r["w"].items()}, "p_permutation": r.get("permutation", {}).get("p", math.nan)})
-        _csv(r["datasets_spearman"], s / f"{label.lower().replace(' ', '_').replace('(', '').replace(')', '')}_datasets.csv")
+        _csv(r["datasets_spearman"], s / f"{fname}_datasets.csv")
     _csv(pd.DataFrame(sens), s / "h1_sensitivity.csv")
     _csv(pd.concat([_summary_frame({k: v for k, v in h2_3["omnibus"].items()}, "H2 three studied explainers"),
                     _summary_frame({"mean": h2["omnibus"]["mean"], "lo": h2["omnibus"]["boot_lo"],
@@ -676,7 +698,7 @@ def run_analysis(full: pd.DataFrame, roar: pd.DataFrame, synth: pd.DataFrame, sp
         for k in ("blocks", "reference", "by_metric", "by_condition"):
             _csv(r[k], y / f"{name}_{k}.csv")
 
-    res.update(h1=h1, h2=h2, mult=mult, decision=dec, p_for_table=p_for_table, stability=stab,
+    res.update(h1=h1, h2=h2, mult=mult, decision=dec, both=both, p_for_table=p_for_table, stability=stab,
                h1_4=h1_4, h1_b2=h1_b2, h1_circ=h1_circ, h2_3=h2_3, flips=wf, shap_lime=sl, sl_any=sl_any,
                per_model=pd.DataFrame(per_model), h1_x=h1_x, h2_x=h2_x, syn4=syn4, syn3=syn3, spec=spec)
     write_figures(res, out / "figures")
@@ -754,8 +776,11 @@ def write_report(res: dict, path: Path) -> None:
           f"Permutation test (dataset unit, {sp['h1']['permutations']:,} permutations, seed {sp['h1']['permutation_seed']}): "
           f"p = {_f(h1['permutation']['p'], 5)}.", "",
           "**Table R2. Holm correction over H1 and H2.**", "", _md(res["mult"], 5), "",
-          f"Decision table (section 4.4) applied with the {sp['h1']['h1_decision_p']} p "
-          f"({_f(res['p_for_table'], 5)}) and the t-interval: **{res['decision']}**.", "",
+          f"Decision table (section 4.4; raw permutation p, as decided in 11.11): "
+          f"**{res['both']['classification_raw_p']}**.", "",
+          f"Multiplicity-adjusted conclusion (Holm over H1 and H2, p = {_f(res['mult']['p_holm'].iloc[0], 5)}): "
+          f"**{res['both']['conclusion_holm_p']}**."
+          + (" The two differ; both are reported." if res["both"]["differ"] else " The two agree."), "",
           "**Table R3. Within-metric stability benchmark (section 11.3), dataset level.**", "",
           _md(pd.DataFrame([{k: res["stability"]["summary"][k] for k in ("mean", "lo", "hi", "n")}])), "",
           "**Table R4. H2: instance-level agreement, omnibus (four explainers, dataset level).**", "",
@@ -782,7 +807,8 @@ def write_report(res: dict, path: Path) -> None:
           "(four explainers; 20 condition × seed blocks).**", "", _md(res["syn4"]["by_metric"]), "",
           "Figure R3: `analysis/figures/fig_g3_synthetic.svg`.", "",
           "## 5. Not computed", "",
-          "- Variance shares and the aligned rank transform (section 11.7): stopped pending a specification.", ""]
+          "- Variance-share decomposition and aligned rank transform: omitted, a protocol deviation "
+          "(ANALYSIS_PLAN.md 11.7 and 11.11). No variance-share result exists.", ""]
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(L), encoding="utf-8")
 
@@ -790,7 +816,7 @@ def write_report(res: dict, path: Path) -> None:
 def _sens_table(res: dict) -> pd.DataFrame:
     rows = []
     for label, r in (("four explainers", res["h1_4"]), ("second baseline", res["h1_b2"]),
-                     (f"circularity ({res['spec']['h1']['circularity_variant']})", res["h1_circ"])):
+                     (CIRCULARITY_LABEL[res["spec"]["h1"]["circularity_variant"]], res["h1_circ"])):
         rows.append({"analysis": label, "mean": r["spearman"]["mean"], "lo": r["spearman"]["lo"],
                      "hi": r["spearman"]["hi"], "p_permutation": r.get("permutation", {}).get("p", math.nan)})
     rows.append({"analysis": "H2 three studied explainers", "mean": res["h2_3"]["omnibus"]["mean"],

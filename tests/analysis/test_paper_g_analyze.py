@@ -437,14 +437,19 @@ def test_report_and_outputs_are_deterministic(tmp_path):
 
 def test_no_premature_analysis(monkeypatch, capsys):
     repo_spec = an.load_spec()
-    assert set(an.check_spec_decided(repo_spec)) == {"h1_decision_p", "circularity_variant"}
+    assert an.check_spec_decided(repo_spec) == []                                    # O1-O3 decided (11.11)
+    assert (repo_spec["h1"]["h1_decision_p"], repo_spec["h1"]["circularity_variant"],
+            repo_spec["variance"]["status"]) == ("raw", "drop_m4_rater", "OMITTED")
     monkeypatch.setattr(an, "read_manifest", lambda *a, **k: pytest.fail("frozen data read"))
-    assert an.main(["--run"]) == 2
-    assert an.main(["--run", "--authorized", "someone"]) == 2                     # spec still UNDECIDED
+    assert an.main(["--run"]) == 2                                                   # no authorization
+    assert an.main(["--run", "--authorized", "   "]) == 2                            # blank authorization
     assert "refused" in capsys.readouterr().err
-    spec = decided_spec()
-    monkeypatch.setattr(an, "load_spec", lambda: spec)
-    assert an.main(["--run"]) == 2                                                  # no authorization text
+    undecided = copy.deepcopy(repo_spec)
+    undecided["h1"]["h1_decision_p"] = an.UNDECIDED
+    undecided["variance"]["status"] = "STOPPED"
+    monkeypatch.setattr(an, "load_spec", lambda: undecided)
+    assert an.main(["--run", "--authorized", "someone"]) == 2                        # spec not decided
+    assert set(an.check_spec_decided(undecided)) == {"h1_decision_p", "variance.status must be OMITTED (11.11)"}
 
 
 def test_dataset_gate_rule():
@@ -474,3 +479,66 @@ def test_planned_claims_resolve_to_one_number(tmp_path):
         rows = df if c["value"] == "*" else df[df[c["key"]].astype(str) == c["value"]]
         assert len(rows) == 1, c["id"]
         assert math.isfinite(float(rows.iloc[0][c["column"]])), c["id"]
+
+
+# --- O1-O3 (ANALYSIS_PLAN.md 11.11) ----------------------------------------------------------------
+
+def test_o1_raw_classification_and_holm_conclusion_can_differ():
+    # H1 raw p 0.03 and H2 p 0.04: Holm gives 0.06 for H1, so the adjusted conclusion is "no evidence"
+    adj = an.holm([0.03, 0.04])
+    assert adj == pytest.approx([0.06, 0.06])
+    both = an.h1_conclusions(0.03, adj[0], 0.6, 0.9, 0.05, 0.5)
+    assert both == {"classification_raw_p": "the metrics broadly agree",
+                    "conclusion_holm_p": "no evidence that the metrics share an order", "differ": True}
+    same = an.h1_conclusions(0.001, 0.002, 0.1, 0.4, 0.05, 0.5)
+    assert same["differ"] is False and same["classification_raw_p"] == "the metrics agree only weakly"
+
+
+def test_o1_outputs_keep_raw_and_adjusted(tmp_path):
+    res = an.run_analysis(make_full(noise=0.4, seed=5), make_roar(), make_synth(), decided_spec(perms=500),
+                          tmp_path / "a", tmp_path / "R.md", {})
+    dec = pd.read_csv(tmp_path / "a/confirmatory/h1_decision.csv")
+    assert list(dec["basis"]) == ["decision table (section 4.4), raw permutation p",
+                                  "multiplicity-adjusted (Holm over H1 and H2)"]
+    mult = pd.read_csv(tmp_path / "a/confirmatory/multiplicity_h1_h2.csv")
+    assert dec["p"].iloc[0] == pytest.approx(mult["p_raw"].iloc[0], rel=1e-5)
+    assert dec["p"].iloc[1] == pytest.approx(mult["p_holm"].iloc[0], rel=1e-5)
+    assert mult["p_raw"].notna().all()
+    assert mult["p_holm"].tolist() == pytest.approx(an.holm(mult["p_raw"].tolist()), rel=1e-5)
+    h1 = res["h1"]["spearman"]
+    assert res["both"]["classification_raw_p"] == an.decision(res["mult"]["p_raw"].iloc[0], h1["lo"], h1["hi"], 0.05, 0.5)
+    assert res["both"]["conclusion_holm_p"] == an.decision(res["mult"]["p_holm"].iloc[0], h1["lo"], h1["hi"], 0.05, 0.5)
+    assert list(dec["wording"]) == [res["both"]["classification_raw_p"], res["both"]["conclusion_holm_p"]]
+    report = (tmp_path / "R.md").read_text()
+    assert "raw permutation p" in report and "Multiplicity-adjusted conclusion" in report
+
+
+def test_o2_six_metric_circularity_with_its_own_permutation_test(tmp_path):
+    spec = decided_spec(perms=800)
+    full, roar = make_full(noise=0.4, seed=9), make_roar()
+    res = an.run_analysis(full, roar, make_synth(), spec, tmp_path / "a", tmp_path / "R.md", {})
+    six = [m for m in spec["h1"]["metrics"] if m != "m4_corr"]
+    assert len(six) == 6 and "m4_corr" not in six
+    sys_tab = an.system_table(an.block_means(full, M6), roar)
+    blocks, R_by = an.h1_blocks(sys_tab, spec["h1"]["studied"], six)
+    assert (blocks["pairs_defined"] + blocks["pairs_undefined"] == 15).all()             # 6 raters, complete
+    direct = an.h1_permutation_test(R_by, spec["h1"]["permutations"], spec["h1"]["permutation_seed"])
+    assert res["h1_circ"]["permutation"] == direct                                        # same dataset-unit test
+    assert res["h1_circ"]["spearman"]["mean"] == pytest.approx(an.t_interval(an.dataset_means(blocks, "mean_pairwise_spearman")["mean"])["mean"])
+    sens = pd.read_csv(tmp_path / "a/sensitivity/h1_sensitivity.csv").set_index("analysis")
+    row = sens.loc["H1 circularity: M4 removed for all explainers (six metrics)"]
+    assert (row["metrics"], row["explainers"]) == (6, 3) and not math.isnan(row["p_permutation"])
+    assert sens.loc["H1 four explainers", "explainers"] == 4 and sens.loc["H1 second baseline", "metrics"] == 7
+    assert (tmp_path / "a/sensitivity/h1_circularity_datasets.csv").exists()
+    # the primary H1 keeps all seven metrics
+    assert res["h1"]["blocks"]["pairs_defined"].add(res["h1"]["blocks"]["pairs_undefined"]).eq(21).all()
+
+
+def test_o3_no_variance_share_output(tmp_path):
+    an.run_analysis(make_full(), make_roar(), make_synth(), decided_spec(perms=300),
+                    tmp_path / "a", tmp_path / "R.md", {})
+    files = [str(p.relative_to(tmp_path)) for p in tmp_path.rglob("*") if p.is_file()]
+    assert not any("variance" in f or "art" in Path(f).stem.split("_") for f in files)
+    report = (tmp_path / "R.md").read_text()
+    assert "omitted, a protocol deviation" in report and "No variance-share result exists" in report
+    assert "stopped pending" not in report
