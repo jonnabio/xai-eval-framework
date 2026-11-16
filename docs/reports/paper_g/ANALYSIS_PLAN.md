@@ -524,3 +524,124 @@ Recorded before any scientific result was seen; no analysis had been run on the 
 
 The specification is frozen with these decisions. The analysis still runs only with an explicit
 authorization (`--authorized`).
+
+## 12. Post-analysis supplementary LIME validation and exploratory diagnostics
+
+Written **2026-11-16**, after the single authorized analysis (PR #129, merged as `ae8fccf04`) and
+after the post-analysis quality review (PR #130, `e466c2a4e`), on the author's authorization of the
+same day (Task 17, Scenario C). Sections 1 to 11 are unchanged.
+
+- The original analysis was completed before this investigation; its outputs
+  (`outputs/analysis/paper_g/analysis/`, `RESULTS_REPORT.md`) are frozen historical evidence.
+- The LIME representation mismatch was found by the post-analysis review
+  (`PAPER_G_POST_ANALYSIS_QUALITY_REVIEW.md`, section 2): with `discretize_continuous=False`, LIME
+  stores surrogate slopes, while M1 to M6 and the synthetic truth assume signed contributions.
+- Everything in this section is **supplementary and exploratory**. It does not replace the
+  confirmatory experiment, cannot change H1 or H2 retroactively, and is written to separate output
+  paths with its own provenance. It is written after the results of sections 4 and 11 were seen.
+
+### 12.1 S3: focused synthetic validation of LIME representations
+
+**Question.** Under the existing synthetic conditions, do alternative LIME output representations
+recover the known contributions (the stored exact interventional Shapley values) more faithfully than
+the frozen slopes?
+
+**Conditions, data and truth (unchanged).** The four conditions of section 2.5 (additive and
+interaction generators × correlation 0 and 0.5), seeds 42, 123, 456, 789, 101112, rebuilt with the
+frozen `paper_g_synthetic.make_condition(generator, rho, seed, cfg)`; the same 200 instances
+(`data["instances"]`); the truth is the stored `true_attr` of the synthetic shards (never recomputed
+or changed). All 8 features are numeric; no categorical column exists.
+
+**Reproduction gate (before any new representation is computed).** For every instance, the frozen
+LIME (`paper_g_lib.make_explainer("lime", model, data, seed, cfg)`, the same per-instance seed
+`(seed · 100003 + pos) mod 2^31`, oriented by `orient` and rounded to 8 decimals) must reproduce the
+stored `attr` to within 1e-8 in every component. If any instance fails, S3 stops and is reported; no
+representation is computed on a block that does not reproduce.
+
+**LIME configurations (a 2 × 2 design, so that each change is isolated).** All other settings as in
+`paper_g_lib.Lime` (1,000 samples, all features, `labels=(1,)`, explainer `random_state` = shard seed,
+per-instance seed as above, quartile discretizer where discretisation is on):
+
+| Config | `discretize_continuous` | kernel width |
+|---|---|---|
+| F3 (frozen) | False | 3.0 |
+| FD | False | package default, 0.75·sqrt(8) ≈ 2.121 |
+| T3 | True | 3.0 |
+| TD | True | package default |
+
+**Representations (all oriented to the predicted class with `orient`, as in the frozen pipeline).**
+
+| Id | Representation | Definition |
+|---|---|---|
+| S3-A | slopes, frozen | the stored `attr` (F3) |
+| S3-A-kd | slopes, default width | weights of FD |
+| S3-B | reference-relative contributions | `c_j = w_j · (x_j − μ_j) / s_j` with `w` the F3 weights and `μ`, `s` the explainer's own fitted `scaler.mean_` and `scaler.scale_` |
+| S3-B-kd | same, default width | from FD |
+| S3-C | discretised weights | weights of T3 (indicator of the instance's quartile bin) |
+| S3-C-kd | discretised, default width | weights of TD |
+
+Isolated comparisons: kernel width within each family (A vs A-kd, B vs B-kd, C vs C-kd);
+discretisation at fixed width (A vs C, A-kd vs C-kd); the transformation at fixed fit (A vs B,
+A-kd vs B-kd). No conclusion attributes a difference to one factor when two changed.
+
+**Assumptions and limits of S3-B.** `c_j` is the exact additive decomposition, relative to the
+training mean `μ`, of LIME's own linear surrogate; it equals the model's contributions only where the
+surrogate equals the model (exactly for a linear model). LIME fits the surrogate on samples drawn
+around `μ`, weighted toward the instance, so `w` is a smoothed slope. The truth uses a different
+reference: the expectation over a 500-row background of the same distribution, not the single point
+`μ`, and it is computed for the probability, which is nonlinear in the features. S3-C's weights are
+effects of the instance's quartile indicators; they are not claimed to be Shapley-equivalent.
+
+**Reference check.** For each condition × seed: `max_j |μ_j − mean of truth_background_j|` and
+`max_j |μ_j − base_j|` (the metrics' baseline), to show how far the references differ.
+
+**Primary supplementary diagnostic.** For each condition × seed × representation and each of the 200
+instances: Spearman correlation (`scipy.stats.spearmanr`) between the 8-vector representation and the
+stored `true_attr`; undefined (either vector constant) is left out and counted, never set to 0. The
+instance values are averaged per condition × seed × representation (120 values); reported per
+condition and seed, per condition (mean over seeds, with minimum and maximum), and split by predicted
+class. No global mean across conditions is reported on its own.
+
+**Expected records.** 4,000 reproduction rows; 24,000 instance rows (4,000 × 6 representations).
+
+**Rules.** Descriptive only; no test; no representation is selected as a new primary LIME output;
+all values are reported, including unfavourable ones. S3 may inform the design of S1 or S2; that
+would be a separate, adaptive, post-analysis decision.
+
+**Outputs.** `outputs/analysis/paper_g/supplementary/s3/` (`s3_reproduction.csv`,
+`s3_instances.csv.gz`, `s3_condition_seed.csv`, `s3_condition.csv`, `s3_by_class.csv`,
+`s3_reference.csv`, `s3_provenance.json`) and the generated `docs/reports/paper_g/S3_REPORT.md`.
+Code: `scripts/paper_g_s3_lime.py`; tests: `tests/analysis/test_paper_g_s3.py`.
+
+### 12.2 Exploratory diagnostics on the frozen data (R3, R6, R7, R11)
+
+Computed from the frozen raw shards with the frozen orientation and average-rank conventions of
+section 11.9; outputs in `outputs/analysis/paper_g/exploratory_post/`; generated report
+`docs/reports/paper_g/DIAGNOSTICS_REPORT.md`; code `scripts/paper_g_diagnostics.py`. All exploratory.
+No original table is changed.
+
+- **R3, explainer rank positions (three studied explainers, seven metrics, 160 blocks).** Per metric
+  and dataset: how often each explainer has rank 1, 2 or 3 (untied), and how often it is tied. Per
+  block: whether one explainer has the same untied extreme rank (all 1 or all 3) under all seven
+  metrics; whether one explainer is untied last under all seven. SHAP versus occlusion without LIME:
+  per block and metric the sign of (oriented SHAP − oriented occlusion); the share of the 21 metric
+  pairs with the same non-zero sign, and the share of blocks in which all seven metrics give the same
+  order. Descriptive; the 0.5 decision rule is not applied.
+- **R6, prediction-level adjustment of H2.** Within each H2 block (dataset × model × explainer ×
+  seed, all four explainers, 200 instances), every oriented metric and `f_x` (the predicted-class
+  probability at the instance, stored by the run) are converted to average ranks; the adjusted value
+  of a metric pair is the Pearson correlation of the residuals of the two ranks after an ordinary
+  least-squares fit (with intercept) on the rank of `f_x` (a rank-based partial correlation);
+  undefined if a residual is constant (counted, never 0). The 15 pairs and their block mean are
+  aggregated exactly as H2 (block → dataset → eight dataset values, mean and 95% t-interval). The
+  unadjusted values are recomputed by the same code and must equal the frozen H2 outputs to within
+  1e-9 (a validation of the code path). No test; no replacement of H2; no causal reading.
+- **R7, M7 structure.** Groups per dataset (the length of a ROAR-lite `global_rank`); the removal-set
+  size `n_top(G, level)` per dataset and level; per block and level, whether two or three studied
+  explainers remove identical sets (sets compared as sets); M7 ties (equal `m7_roar` between studied
+  explainers, and a tied top) by dataset and by model. Untested explanations (retraining variance)
+  are named as such.
+- **R11, random control last.** Per block (160) and metric (M1 to M7), the rank of the random control
+  among the four explainers (average ranks). Reported: the share of blocks in which it is untied last
+  under all seven metrics, the share in which it is last or tied last under all seven, and the share
+  per metric. Denominator: 160 blocks.
