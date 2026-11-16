@@ -2,8 +2,8 @@
 # scripts/paper_g_analyze.py. Written 2026-11-16, after the run and before any result was seen.
 # The experiment configuration (config.toml) is not changed by this file.
 #
-# Items marked UNDECIDED need the author's approval (ANALYSIS_PLAN.md section 11.8). The
-# analysis refuses to run on the frozen data while any of them is UNDECIDED.
+# The open items of ANALYSIS_PLAN.md 11.8 were decided by the author on 2026-11-16 (11.11).
+# The analysis still refuses to run on the frozen data without an explicit --authorized statement.
 
 [h1]
 studied = ["shap", "lime", "occlusion"]          # primary population (11.2)
@@ -14,8 +14,8 @@ threshold = 0.5                                  # decision table, section 4.4
 alpha = 0.05
 permutations = 100000
 permutation_seed = 20261116
-h1_decision_p = "UNDECIDED"                      # "raw" or "holm" (11.8, O1)
-circularity_variant = "UNDECIDED"                # "drop_m4_rater" or "pairwise_available" (O2)
+h1_decision_p = "raw"                            # O1, author 2026-11-16 (11.11): table on the raw permutation p
+circularity_variant = "drop_m4_rater"            # O2, author 2026-11-16 (11.11): M4 removed for all explainers
 
 [h2]
 metrics = ["m1_deletion", "m2_insertion", "m3_gap", "m4_corr", "m5_infidelity",
@@ -31,4 +31,4 @@ m3_gap = "m3_gap_b2"
 m6_sufficiency = "m6_sufficiency_b2"
 
 [variance]
-status = "STOPPED"                               # 11.7: not identifiable as specified (O3)
+status = "OMITTED"                               # O3, author 2026-11-16 (11.11): protocol deviation; no output
