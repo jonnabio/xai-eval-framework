@@ -1,0 +1,34 @@
+# Paper G analysis specification (ANALYSIS_PLAN.md sections 4 and 11). Read by
+# scripts/paper_g_analyze.py. Written 2026-11-16, after the run and before any result was seen.
+# The experiment configuration (config.toml) is not changed by this file.
+#
+# Items marked UNDECIDED need the author's approval (ANALYSIS_PLAN.md section 11.8). The
+# analysis refuses to run on the frozen data while any of them is UNDECIDED.
+
+[h1]
+studied = ["shap", "lime", "occlusion"]          # primary population (11.2)
+control = "random"                               # four-explainer sensitivity (4.1 item 5)
+metrics = ["m1_deletion", "m2_insertion", "m3_gap", "m4_corr", "m5_infidelity",
+           "m6_sufficiency", "m7_roar"]          # seven raters (11.2)
+threshold = 0.5                                  # decision table, section 4.4
+alpha = 0.05
+permutations = 100000
+permutation_seed = 20261116
+h1_decision_p = "UNDECIDED"                      # "raw" or "holm" (11.8, O1)
+circularity_variant = "UNDECIDED"                # "drop_m4_rater" or "pairwise_available" (O2)
+
+[h2]
+metrics = ["m1_deletion", "m2_insertion", "m3_gap", "m4_corr", "m5_infidelity",
+           "m6_sufficiency"]
+explainers = ["shap", "lime", "occlusion", "random"]   # primary (11.5); studied three as sensitivity
+bootstrap = 10000
+bootstrap_seed = 20261117
+
+[baseline2.substitute]                           # section 3.1: only these are recomputed
+m1_deletion = "m1_deletion_b2"
+m2_insertion = "m2_insertion_b2"
+m3_gap = "m3_gap_b2"
+m6_sufficiency = "m6_sufficiency_b2"
+
+[variance]
+status = "STOPPED"                               # 11.7: not identifiable as specified (O3)
