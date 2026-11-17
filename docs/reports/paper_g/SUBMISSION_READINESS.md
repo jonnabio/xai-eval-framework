@@ -1,4 +1,10 @@
-# Paper G — submission readiness (Task 20)
+# Paper G — submission readiness (Task 20, revised in Task 21)
+
+> **Task 21 (2026-11-16):** the corrections of the independent review are applied (Equation (1)
+> and Equation (4) made exact, evidence classes aligned with the plan's chronology, explainer
+> reference points separated, causal statements replaced); see `RIGOR_REVIEW.md` section T21,
+> `JOURNAL_COMPLIANCE.md` and `AUTHOR_REVIEW_CHECKLIST.md`. Status lines at the end are those of
+> Task 21.
 
 **Date:** 2026-11-16. **Direction (author, Task 20):** C — faithfulness-metric agreement depends on
 the level of evaluation, attribution semantics and the evaluation protocol. **Submission:** not
@@ -11,9 +17,9 @@ authorized; the author submits.
 | Source | `paper_g_draft.md` v0.2 (revised from the v0.1 scaffold; methods of #134 kept, results, discussion, conclusions and declarations written) |
 | Rendered | `paper_g.md`; `submission/paper_g_blind.docx` (journal template styles) and `.pdf`; `submission/Figure_1` … `Figure_5` (.png 600 dpi, .svg) |
 | Build | `python docs/reports/paper_g/scripts/build_paper_g.py --evidence-map`; figures `~/xai-eval-framework/.venv/bin/python docs/reports/paper_g/scripts/paper_g_figures.py`; references `python docs/reports/paper_g/scripts/verify_references.py` |
-| Structure | Abstract; 1 Introduction (1.1 Related work); 2 Materials and methods (2.1 design and the five evidence classes, 2.2 data and models, 2.3 explainers and attribution semantics, 2.4 metrics, Equations (1) to (3), 2.5 agreement analysis, Equation (4), decision rule, 2.6 S3, S1, Equation (5), diagnostics, 2.7 reproducibility); 3 Results and discussion (3.1 confirmatory, 3.2 pre-specified sensitivity, 3.3 S3, 3.4 S1, 3.5 positions, 3.6 *f(x)*-adjusted H2, 3.7 M7 and random control, 3.8 discussion with the three contributions, recommendations and limitations); 4 Conclusions; declarations |
-| Reporting hierarchy | A confirmatory (3.1, reported exactly: 0.723 [0.645, 0.802], *W* 0.762, permutation *p* 0.00001, Holm 0.00002, "the metrics broadly agree", LIME slope semantics explained); B supplementary (3.3 S3, 3.4 S1 with S1-B primary and S1-M sensitivity, no decision); C exploratory (3.5 R3, 3.6 R6, 3.7 R7 and R11 last) |
-| Length | 12 pages (8 to 16); abstract 203 words; 5 keywords; 4 tables, 5 figures, 5 equations |
+| Structure | Abstract; 1 Introduction (1.1 Related work); 2 Materials and methods (2.1 design and the five evidence classes (pre-specified; pre-unblinding clarifications; original analysis; supplementary; exploratory), 2.2 data and models, 2.3 explainers and their reference points, 2.4 metrics, Equations (1) to (3), 2.5 agreement analysis, Equation (4), decision rule, 2.6 S3, S1, Equation (5), diagnostics, 2.7 reproducibility); 3 Results and discussion (3.1 original analysis, 3.2 pre-specified sensitivity, 3.3 S3, 3.4 S1, 3.5 positions, 3.6 *f(x)*-adjusted H2, 3.7 M7 and random control, 3.8 discussion with the three contributions, recommendations and limitations); 4 Conclusions; declarations |
+| Reporting hierarchy | A original analysis (3.1, reported exactly: 0.723 [0.645, 0.802], *W* 0.762, permutation *p* 0.00001, Holm 0.00002, "the metrics broadly agree", LIME slope semantics explained); B supplementary (3.3 S3, 3.4 S1 with S1-B primary and S1-M sensitivity, no decision); C exploratory (3.5 R3, 3.6 R6, 3.7 R7 and R11 last) |
+| Length | 13 pages (8 to 16); abstract 220 words; 5 keywords; 4 tables, 5 figures, 5 equations |
 | Voice, anonymity | Impersonal; no names; own work in the third person, anonymised |
 
 ## 2. Claims
@@ -60,13 +66,14 @@ conceptual) checked: no overlap with the empirical contribution.
 | #139 | `paper/g-manuscript-completion` → `main` | Lane: manuscript, scripts, figures, references, reports, built files | first |
 | #140 | `pubs/paper-g-claims` → stacked on #139 | Shared: `paper_g` resolver, `register_paper_g.py`, registry block (185 claims), coverage and exclusivity entries, CI step, section-number rule of the claim scanner, active context | second |
 
-## Status
+## Status (Task 21)
 
-- ORIGINAL SCIENTIFIC RESULTS: PRESERVED
-- SUPPLEMENTARY EVIDENCE: INTEGRATED
-- CLAIM TRACEABILITY: PASS
-- REFERENCE AUDIT: PASS
-- SCIENTIFIC RIGOR REVIEW: PASS
-- JOURNAL COMPLIANCE: PASS
-- MANUSCRIPT: READY FOR AUTHOR REVIEW
+- SCIENTIFIC RESULTS: PRESERVED
+- METHODS ACCURACY: PASS
+- EVIDENCE CLASSIFICATION: PASS
+- CLAIM VERIFICATION: PASS
+- REFERENCE AUDIT: EXCEPTIONS (listed in `REFERENCE_VERIFICATION.md` for the author's decision)
+- DOUBLE-BLIND RISK: UNRESOLVED
+- AUTHOR DECLARATIONS: PENDING
+- MANUSCRIPT: READY FOR AUTHOR EDITORIAL REVIEW
 - SUBMISSION: NOT AUTHORIZED

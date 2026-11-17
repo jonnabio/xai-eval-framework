@@ -180,6 +180,12 @@ def csl_entry(ref: dict, rec: dict, book: dict | None = None) -> dict:
     return out
 
 
+def _issued(rec: dict) -> str:
+    """Year and month of the record's issue, as YYYY-MM (month 01 when absent)."""
+    parts = ((rec.get("issued") or {}).get("date-parts") or [[0]])[0]
+    return f"{parts[0]:04d}-{(parts[1] if len(parts) > 1 else 1):02d}"
+
+
 def report(refs: list[dict], csl: list[dict], saved: dict, bad: int) -> str:
     """REFERENCE_VERIFICATION.md from the records (no value typed by hand)."""
     by_id = {c["id"]: c for c in csl}
@@ -243,6 +249,28 @@ def report(refs: list[dict], csl: list[dict], saved: dict, bad: int) -> str:
         "in the third person as anonymised entries; the author replaces them with the published",
         "records at acceptance. Foundational (pre-2024) sources are kept only where they define a",
         "method the study uses (LIME, SHAP, XGBoost and the origins of M1 to M7).",
+        "",
+        "## Exceptions to the DOI requirement (for the author's decision)",
+        "",
+        "| Category | References | Note |",
+        "|---|---|---|",
+        "| Peer-reviewed, no DOI exists | " + ", ".join(
+            r["key"] for r in refs if r.get("url") or r.get("openreview"))
+        + " | NeurIPS 2017 and 2019 proceedings (no DOIs were assigned), TMLR, ICLR 2025; cited by "
+        "the publisher's or OpenReview URL, verified against the page or record |",
+        "| Preprint (DOI from arXiv/DataCite) | " + ", ".join(
+            c["id"] for c in csl if c.get("genre") == "Preprint")
+        + " | not peer-reviewed; kept as the closest conceptual work (novelty positioning) |",
+        "| Earlier manuscripts of the programme, anonymised | " + ", ".join(
+            r["key"] for r in refs if r.get("own"))
+        + " | under review, no DOI; replaced by the published records at acceptance |",
+        "| Assigned to an issue dated after today | " + (", ".join(
+            f"{r['key']} (issue {'-'.join(str(v) for v in saved[r['doi']]['issued']['date-parts'][0])}, "
+            f"DOI registered {'-'.join(str(v) for v in saved[r['doi']].get('created', {}).get('date-parts', [['?']])[0][:3])})"
+            for r in refs if r.get("doi") and r["doi"] in saved
+            and _issued(saved[r["doi"]]) > dt.date.today().strftime("%Y-%m")) or "none")
+        + " | cited with the year of its volume, as APA 7 does for an article assigned to an issue; "
+        "the record gives no online-publication date, so none is stated |",
         "",
         "| Key | Authors | Year | Title | Venue | Identifier | Verification | Supports | Era | Cited |",
         "|---|---|---|---|---|---|---|---|---|---|",

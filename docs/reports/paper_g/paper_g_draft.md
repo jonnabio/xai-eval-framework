@@ -27,23 +27,23 @@ Claims that one post-hoc explanation method is more faithful than another rest o
 metric, and the available metrics operationalise faithfulness differently. This study measured
 whether seven common metrics agree, using a paired design: SHAP, LIME, occlusion and a random
 control explained four classifiers on eight public tabular datasets (five seeds, 200 instances
-per condition), and every explanation was scored by every metric. In the pre-specified analysis,
-the metrics broadly agreed on the order of the explainers (mean pairwise Spearman correlation
-<<h1:mean_pairwise_spearman:mean:f3>>, 95% CI [<<h1:mean_pairwise_spearman:lo:f3>>,
-<<h1:mean_pairwise_spearman:hi:f3>>]) but agreed weakly on individual explanations
-(<<h2:h2_omnibus:mean:f3>>). A post-analysis review found that LIME had been stored as
-local slopes rather than contributions, so contribution-based metrics placed it last almost
-uniformly. A synthetic validation against exact Shapley values and a supplementary re-analysis
-with LIME's surrogate contributions showed that this representation inflated system-level
-agreement: with contributions, agreement fell to
+per condition), and every explanation was scored by every metric. In the original analysis, with
+its hypotheses and decision rule fixed before the run, the metrics broadly agreed on the order of
+the explainers (mean pairwise Spearman correlation <<h1:mean_pairwise_spearman:mean:f3>>, 95% CI
+[<<h1:mean_pairwise_spearman:lo:f3>>, <<h1:mean_pairwise_spearman:hi:f3>>]) but agreed weakly on
+individual explanations (<<h2:h2_omnibus:mean:f3>>). A review of the results found that LIME had
+been stored as local slopes rather than contributions, and contribution-based metrics ranked it
+last in every block. In supplementary analyses, the slopes were unrelated to exact Shapley values
+in synthetic data while LIME's surrogate contributions tracked them, and with LIME represented as
+contributions on the real data, system-level agreement was
 <<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>>
 ([<<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:lo:f3>>,
-<<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:hi:f3>>]), and to
+<<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:hi:f3>>]), and
 <<cmp:h1_second_baseline_spearman__s1_b:mean:f3>> under a second masking baseline, while
-instance-level agreement was unchanged. Faithfulness-metric agreement therefore depends on the
-level of evaluation, on the semantics of the attributions compared, and on the evaluation
-protocol. Comparisons of explainers should declare what their attributions represent, report
-more than one metric and masking baseline, and include a random control.
+instance-level agreement was unchanged. In this study, faithfulness-metric agreement varied with
+the level of evaluation, the representation of the attributions and the evaluation protocol.
+Comparisons of explainers should declare what their attributions represent, report more than one
+metric and masking baseline, and include a random control.
 :::
 
 ::: {custom-style="Keywords"}
@@ -86,9 +86,10 @@ consistent answer. It contributes a paired, multi-dataset measurement of agreeme
 faithfulness metrics, at the level of explainer rankings and of individual explanations, with a
 within-metric stability benchmark and a synthetic check against exact attributions. In the course
 of the study, a construct mismatch was found in one explainer's output; supplementary experiments
-specified after that finding show how much the observed agreement depended on it. The main
-finding is that faithfulness-metric agreement depends on the level at which it is evaluated, on
-the semantics of the attributions being compared, and on the evaluation protocol.
+specified after that finding describe how the observed agreement changed when it was removed. The
+main finding is that, in this study, faithfulness-metric agreement varied with the level at which
+it was evaluated, with the representation of the attributions being compared, and with the
+evaluation protocol.
 
 ## 1.1. Related work
 
@@ -126,18 +127,22 @@ benchmark for their own stability and with the role of attribution semantics mad
 The design is fully paired: the same instances are explained by every explainer, and the same
 explanations are scored by every metric. The factors are 8 datasets × 4 models × 4 explainers ×
 7 metrics, with 5 seeds and 200 test instances per dataset, model and seed; a *block* is one
-dataset, model and seed (160 blocks). The analysis plan, including hypotheses, statistics and the
-decision rule, was fixed before the run. Because the study changed after a review of its first
-results, the evidence is reported in five classes ({{tbl:evidence_classes}}); results of
-different classes are never pooled, and only the first carries a decision.
+dataset, model and seed (160 blocks). The research questions, the metrics, the H1 statistic,
+interval, permutation test and decision rule, and the planned secondary and sensitivity analyses
+were fixed in the analysis plan before the run. Other operational details were fixed after the
+run had finished but before any metric value, attribution or agreement statistic was examined;
+the analysis was then run once, and its outputs were frozen. A review of those outputs led to two
+supplementary experiments and four exploratory diagnostics. The evidence is therefore reported in
+five classes ({{tbl:evidence_classes}}); results of different classes are never pooled, and only
+the H1 classification carries a decision.
 
-| Class | Content | Specified |
+| Class | Content | When specified |
 |---|---|---|
-| Confirmatory | H1 and H2, their intervals, tests, Holm correction and decision rule | Before the run |
-| Pre-specified sensitivity | Second masking baseline, six metrics, four explainers, per model, winner flips, synthetic check | Before the run |
-| Post-run specification | H2 test and interval, stability benchmark, synthetic statistic, ties, M4-undefined exclusion | After the run, before results were examined |
-| Supplementary experiments | S3 (synthetic LIME representations) and S1 (LIME as contributions; S1-B primary, S1-M sensitivity) | After the review of the results |
-| Exploratory diagnostics | Explainer positions, *f(x)*-adjusted H2, M7 removal sets and ties, random control last | After the review of the results |
+| Pre-specified | Research questions H1 and H2; metrics and their directions; H1 statistic, dataset-level *t*-interval, dataset-unit permutation test and decision rule; Holm correction over H1 and H2; the H2 estimate; winner flips, SHAP–LIME order, second masking baseline, random control, per-model summaries; synthetic-check design | Before the run |
+| Pre-unblinding clarifications | Seven metrics and the three studied explainers as the primary H1 population; ties and undefined correlations; degenerate M4 values kept as stored; the within-metric stability benchmark; H2 orientation, *t*-interval, one-sided *t*-test, sign-flip test and Holm over its 15 pairs; the synthetic statistic; raw permutation *p* for the decision table; the six-metric sensitivity; the M4-exclusion sensitivity; the retrospective dataset check; omission of the variance shares | After the run, before any result was examined |
+| Original analysis | The two classes above, run once on the frozen data; outputs frozen | After the pre-unblinding clarifications |
+| Supplementary experiments | S3 (synthetic LIME representations) and S1 (LIME as surrogate contributions; S1-B primary, S1-M sensitivity) | After the original results were reviewed |
+| Exploratory diagnostics | Explainer positions; *f(x)*-adjusted instance-level correlations; M7 removal sets and ties; random control last | After the original results were reviewed |
 
 Table: Classes of evidence and when each was specified. {#tbl:evidence_classes}
 
@@ -167,94 +172,123 @@ Logistic regression with L2 penalty, random forest, XGBoost [@chen2016] and a mu
 perceptron were trained with one configuration for all datasets, recorded before training.
 Numeric features were standardised, categorical features one-hot encoded and missing values
 imputed. Each seed fixed a stratified 80/20 split, the model, the explainers' sampling and the
-random control.
+random control. All datasets are public, de-identified benchmark tables; the study involved no
+human participants.
 
-## 2.3. Explainers and attribution semantics
+## 2.3. Explainers and their reference points
 
-- **SHAP** [@lundberg2017; @li2024]: TreeSHAP for the tree models and KernelSHAP for logistic
-  regression and the multilayer perceptron; an additive contribution relative to a background
-  expectation.
-- **LIME** [@ribeiro2016] for tabular data (package 0.2.0.1) with continuous features not discretised (*discretize_continuous* false),
-  kernel width 3.0 (the package default is 0.75·√*p*), 1,000 samples drawn around the training
-  mean, and all features. In this configuration LIME returns the coefficients of a locally
-  weighted linear surrogate fitted on standardised features: a slope per training standard
-  deviation, whose sign is the direction of change and not whether the feature's current value
-  raises the prediction. It is not a per-feature contribution. One-hot columns are sampled as
-  continuous values [@ademi2025; @knab2025].
-- **Occlusion:** the drop in predicted-class probability when one feature is set to its baseline.
+The explainers differ in what their output represents and, for those that output contributions,
+in the reference point the contribution is measured from.
+
+- **SHAP** [@lundberg2017; @li2024]: interventional TreeSHAP on the predicted probability for the
+  tree models and KernelSHAP (no feature selection) for logistic regression and the multilayer
+  perceptron, both with a background sample of 50 training rows. The output is an additive
+  contribution relative to the model's expected output over that background sample.
+- **Occlusion:** the change in predicted-class probability when one feature alone is set to the
+  metrics' masking baseline *b* (Section 2.4); a contribution relative to *b* for that feature
+  only, without interactions.
+- **LIME** [@ribeiro2016] for tabular data (package 0.2.0.1) with continuous features not
+  discretised (*discretize_continuous* false), kernel width 3.0 (the package default is
+  0.75·√*p*), 1,000 samples drawn around the training mean, and all features. In this
+  configuration LIME returns the coefficients of a locally weighted linear surrogate fitted on
+  standardised features: a slope per training standard deviation, whose sign is the direction of
+  change and not whether the feature's current value raises the prediction. It has no reference
+  point and is not a per-feature contribution. One-hot columns are sampled as continuous values,
+  so the surrogate is fitted partly on points off the one-hot manifold [@ademi2025; @knab2025].
 - **Random control:** attributions drawn from a standard normal distribution with a fixed seed.
 
-Attributions of one-hot columns were summed per raw feature, and every explainer explained the
-predicted class. The LIME output representation was decided in the original configuration and is
-reported as run; it is examined by the supplementary experiments (Section 2.6).
+Attributions of one-hot columns were summed per raw feature, and every attribution was oriented
+to the predicted class. The LIME output representation was decided in the original configuration
+and is reported as run; it is examined by the supplementary experiments (Section 2.6).
 
 ## 2.4. Faithfulness metrics
 
-Let *f(x)* be the predicted-class probability, *a* the attribution vector over *d* raw features,
-*b* the masking baseline (training mean for numeric features, mode for categorical ones), and
-*x*~*S*←*b*~ the instance with the features in *S* set to *b*. Let *π* order the features by
-decreasing attribution toward the predicted class (ties by index) and *T* be the top
-⌈0.2*d*⌉ features. Deletion (M1) and insertion (M2), in {{eq:deletion}}, are the areas under the probability
-curve as features are masked from *x*, or restored from *b*, in the order *π*:
+Let *f(x)* be the predicted-class probability, *a* the oriented attribution vector over the *G*
+raw features, *b* the masking baseline (training mean for numeric features, the one-hot of the
+training mode for categorical ones), and *x*~*S*←*b*~ the instance with the features in *S* set to
+*b* (all columns of a one-hot feature together). Let *π* order the features by decreasing *a*
+(ties by index) and *T* = {*π*~1~, …, *π*~*k*~} be the top *k* = max(1, ⌈0.2*G*⌉) features.
+Deletion (M1) and insertion (M2) are the trapezoidal areas over *G* + 1 equally spaced points
+(step 1/*G*) of the curves *p*~*t*~ = *f*(*x*~{*π*1..*πt*}←*b*~), which masks the first *t* features,
+and *q*~*t*~ = *f*(*x*~{*πt+1..πG*}←*b*~), which restores the first *t* features to a fully masked
+instance, for *t* = 0, …, *G* ({{eq:deletion}}). The endpoints are *p*~0~ = *q*~*G*~ = *f(x)* and
+*p*~*G*~ = *q*~0~ = *f(b)*:
 
-$$M_1 = \frac{1}{d}\sum_{k=1}^{d} f\big(x_{\pi_{1..k}\leftarrow b}\big), \qquad M_2 = \frac{1}{d}\sum_{k=1}^{d} f\big(b_{\pi_{1..k}\leftarrow x}\big)$$ {#eq:deletion}
+$$M_1 = \frac{1}{G}\Big[\frac{p_0 + p_G}{2} + \sum_{t=1}^{G-1} p_t\Big], \qquad M_2 = \frac{1}{G}\Big[\frac{q_0 + q_G}{2} + \sum_{t=1}^{G-1} q_t\Big]$$ {#eq:deletion}
 
-The top-*k* prediction gap (M3) and sufficiency (M6) mask the top features or all others
+The top-*k* prediction gap (M3) masks the top features and sufficiency (M6) masks all others
 ({{eq:gap}}):
 
 $$M_3 = f(x) - f\big(x_{T\leftarrow b}\big), \qquad M_6 = f(x) - f\big(x_{\bar{T}\leftarrow b}\big)$$ {#eq:gap}
 
 Faithfulness correlation (M4) [@bhatt2020] is the Pearson correlation between *a*~*i*~ and the
-single-feature effect *Δ*~*i*~ = *f(x)* − *f(x*~{*i*}←*b*~*)*. Infidelity (M5) [@yeh2019] is used in
-a scale-free form ({{eq:infidelity}}): over 100 random subsets *S*~*r*~ (each feature masked with probability 0.5),
+single-feature effect *Δ*~*i*~ = *f(x)* − *f*(*x*~{*i*}←*b*~); when *a* or *Δ* is constant the
+correlation is undefined, and the frozen code stores 0 and flags the score
+(<<sum:m4deg:degenerate:d>> of <<sum:m4deg:rows:int>> scores). Infidelity (M5) [@yeh2019] is used
+in a scale-free form ({{eq:infidelity}}): over *R* = 100 random subsets *S*~*r*~ (each feature masked
+independently with probability 0.5; a subset that masks nothing is given one randomly chosen
+feature; the subsets are shared by all explainers of an instance), with
+*Δ*~*r*~ = *f(x)* − *f*(*x*~*Sr*←*b*~) and *s*~*r*~ = Σ~*i*∈*Sr*~ *a*~*i*~,
 
-$$M_5 = 1 - R^2\Big(f(x) - f\big(x_{S_r\leftarrow b}\big) \sim \textstyle\sum_{i\in S_r} a_i\Big)$$ {#eq:infidelity}
+$$M_5 = \frac{\sum_{r=1}^{R}\big(\Delta_r - \hat\beta s_r\big)^2}{\sum_{r=1}^{R}\Delta_r^2}, \qquad \hat\beta = \frac{\sum_{r} s_r\Delta_r}{\sum_{r} s_r^2}$$ {#eq:infidelity}
 
-where the fit has no intercept; subset masking replaces Gaussian noise, which is undefined for
-categorical features. M7, ROAR-lite [@hooker2019], ranks features by the mean |*a*| over an
-explainer's instances, retrains the model without the top 10, 20, 30 and 50% of features and
-scores the mean drop in test AUC; it has one value per block and explainer. Lower is better for
-M1, M5 and M6, and higher for M2, M3, M4 and M7; all metrics were oriented so that higher means
-more faithful before ranking. M1 to M6 treat attributions as signed contributions relative to the
-masking baseline, which holds for SHAP and occlusion but not for LIME as configured; M7 uses only
-magnitudes. M4 and occlusion share their construction (single-feature masking), so M4 is expected
-to favour occlusion.
+that is, one minus the uncentred *R*² of the least-squares fit of *Δ* on *s* without intercept
+(*M*~5~ = 0 if all *Δ*~*r*~ are 0 and 1 if all *s*~*r*~ are 0); subset masking replaces Gaussian
+noise, which is undefined for categorical features. M7, ROAR-lite [@hooker2019], ranks features by
+the mean |*a*| over an explainer's 200 instances; for each share ℓ ∈ {0.1, 0.2, 0.3, 0.5} the top
+max(1, ⌈ℓ*G*⌉) features are set to *b* in the training and test data, the model is retrained, and
+M7 is the mean over ℓ of the drop in test AUC; it has one value per block and explainer. Lower is
+better for M1, M5 and M6, and higher for M2, M3, M4 and M7; all metrics were oriented so that
+higher means more faithful before ranking. M1 to M6 read attributions as signed contributions
+relative to *b*: occlusion's output is of that kind, SHAP's is a contribution relative to a
+different reference (the background expectation), and LIME's slopes are not contributions; M7
+uses only magnitudes. M4 and occlusion share their construction (single-feature masking), so M4
+is expected to favour occlusion. The second masking baseline replaces *b* by one training row
+drawn at random for each instance (the same row for every explainer).
 
 ## 2.5. Agreement analysis
 
-**System level (H1).** In each block, the three studied explainers (SHAP, LIME, occlusion) were
-ranked under each metric: by their mean score over the 200 instances for M1 to M6 and by the
-block's value for M7, with average ranks for ties. Agreement was the mean pairwise Spearman
-correlation over the 21 metric pairs ({{eq:agreement}}),
+**System level (H1).** In each block *b*, the three studied explainers (SHAP, LIME, occlusion)
+were ranked under each metric: by their mean score over the 200 instances for M1 to M6 and by
+the block's value for M7, with average ranks for ties. The block's agreement is the mean Spearman
+correlation over the set *D*~*b*~ of metric pairs whose correlation is defined
+({{eq:agreement}}):
 
-$$\bar\rho = \frac{1}{21}\sum_{m<m'} \rho_s\big(r_m, r_{m'}\big)$$ {#eq:agreement}
+$$\bar\rho_b = \frac{1}{|D_b|}\sum_{(m,m')\in D_b} \rho_s\big(r_m, r_{m'}\big)$$ {#eq:agreement}
 
-where *r*~*m*~ is the explainers' rank vector under metric *m*, together with Kendall's *W* with tie
-correction; an undefined correlation (all explainers tied) was left out and counted. Because the
-20 blocks of a dataset are not independent, the dataset was the unit of inference: estimates were
-averaged within each dataset, and the 95% interval is a *t*-interval over the eight dataset means.
-The null hypothesis that the metrics rank the explainers independently was tested by a
-permutation test that applied one permutation of the explainer labels per dataset and metric to
-all blocks of that dataset (one-sided). A simulation run before the experiment showed that
-permuting within blocks inflates false positives when blocks are correlated, and that a
-percentile bootstrap over eight datasets undercovers.
+where *r*~*m*~ is the explainers' rank vector under metric *m* and *ρ*~*s*~ the Pearson correlation of
+the two rank vectors. A pair is undefined when either rank vector is constant (all explainers
+tied); it is left out, never set to 0. Without ties |*D*~*b*~| = 21; in the original analysis
+<<sum:undef:pairs:d>> pairs were undefined, in <<sum:undef:blocks:d>> of the 160 blocks. Kendall's
+*W* with tie correction is reported beside it. Because the 20 blocks of a dataset are not
+independent, the dataset was the unit of inference: the block values were averaged within each
+dataset, and the estimate is the mean of the eight dataset means with a 95% *t*-interval. The null
+hypothesis that the metrics rank the explainers independently was tested by a permutation test
+that applied one permutation of the explainer labels per dataset and metric to all blocks of that
+dataset (100,000 permutations, one-sided). A simulation run before the experiment showed that
+permuting within blocks inflates false positives when blocks are correlated, and that a percentile
+bootstrap over eight datasets undercovers.
 
-**Within-metric stability benchmark.** For each dataset, model and metric, the order of the
-studied explainers in each seed was compared with every other seed (ten seed pairs, Spearman).
-Seeds change the split, the model and the explainers' sampling, so the benchmark is a reference
-level for between-metric agreement, not an upper bound.
+**Within-metric stability benchmark (pre-unblinding).** For each dataset, model and metric, the
+order of the studied explainers in each seed was compared with every other seed (ten seed pairs,
+Spearman; undefined pairs left out), and the values were averaged over models and metrics within
+each dataset. Seeds change the split, the model and the explainers' sampling, so the benchmark is
+a reference level for between-metric agreement, not an upper bound.
 
-**Instance level (H2).** For each block and explainer (all four), the Spearman correlation across
-the 200 instances was computed for each of the 15 pairs of M1 to M6, averaged within the block and
-then within the dataset; the interval is the *t*-interval over the eight dataset values, with a
-one-sided *t*-test of a positive mean and an exact sign-flip test as a supplement. The 15 pairs
-were tested with Holm correction.
+**Instance level (H2).** The plan fixed the question (whether pairs of metrics correlate
+positively across instances) and the estimate: for each block and explainer (all four), the
+Spearman correlation across the 200 instances for each of the 15 pairs of M1 to M6, with metrics
+oriented, averaged within the block and then within the dataset. Its inference was fixed after
+the run and before unblinding: the *t*-interval over the eight dataset values, a one-sided
+*t*-test of a positive mean (the test entering the Holm correction with H1), an exact sign-flip
+test as a supplement, and Holm correction over the 15 pair tests.
 
-**Decision rule.** The classification of {{tbl:decision}}, fixed before the run, uses the raw
-permutation *p* of H1 and its interval; Holm correction over H1 and H2 is reported beside it. With
-three ranked explainers, if one explainer holds the same first or last rank under every metric in
-a block, each pairwise correlation is 0.5 or 1, so the block's agreement cannot fall below 0.5;
-the classification is therefore read with the distribution of explainer positions.
+**Decision rule.** The classification of {{tbl:decision}} was fixed before the run; that it uses
+the raw permutation *p* of H1, with the Holm-adjusted *p* over H1 and H2 reported beside it, was
+fixed before unblinding. With three ranked explainers, if one explainer holds the same first or
+last rank under every metric in a block, each pairwise correlation is 0.5 or 1, so the block's
+agreement cannot fall below 0.5; the classification is therefore read with the distribution of
+explainer positions.
 
 Table: Decision rule for H1, fixed before the run. {#tbl:decision}
 
@@ -264,56 +298,61 @@ Table: Decision rule for H1, fixed before the run. {#tbl:decision}
 Source: Authors.
 :::
 
-**Secondary and sensitivity analyses (pre-specified).** The share of blocks in which the
+**Secondary and sensitivity analyses.** Pre-specified: the share of blocks in which the
 top-ranked explainer changes between two metrics (winner flips; ties at the top counted
 separately); strict SHAP–LIME order reversals; the analysis with the random control as a fourth
-explainer; M1, M2, M3 and M6 recomputed with a second baseline (a random training row); the
-analysis without M4 (six metrics); and per-model summaries. A planned variance decomposition was
-omitted because its specification was incomplete, a deviation from the plan. Details fixed after
-the run but before results were examined ({{tbl:evidence_classes}}) include an analysis
-excluding the <<sum:m4deg:degenerate:d>> of <<sum:m4deg:rows:int>> instance-level M4 scores that
-were undefined.
+explainer; M1, M2, M3 and M6 recomputed with the second baseline; and per-model summaries. Fixed
+before unblinding: the analysis without M4 (six metrics), and an exploratory analysis that leaves
+out the flagged M4 scores, which the primary analysis keeps as stored. A planned variance
+decomposition was omitted because its specification was incomplete, a deviation from the plan.
 
 **Synthetic check.** Four synthetic conditions used known functions directly as the model: an
 additive logistic function and one with two pairwise interactions, each with eight standard normal
 features, independent or correlated (pairwise correlation 0.5). Exact interventional Shapley
-values of the predicted-class probability served as true attributions [@rahnama2024;
-@islam2025]. For each condition and seed, the explainers were ordered by their mean Spearman
-correlation with the truth (the reference order), and each of M1 to M6 was scored by the Spearman
-correlation between its order of the explainers and the reference order.
+values of the predicted-class probability, with the expectation over 500 background rows of the
+same distribution, served as true attributions [@rahnama2024; @islam2025]. For each condition and
+seed, the explainers were ordered by their mean Spearman correlation with the truth (the reference
+order), and each of M1 to M6 was scored by the Spearman correlation between its order of the
+explainers and the reference order (statistic fixed before unblinding).
 
 ## 2.6. Supplementary experiments and exploratory diagnostics
 
-A post-analysis review found the LIME representation issue of Section 2.3 (the same behaviour had
-been documented in an earlier study of the programme [@ownE]). The following analyses were
-specified after that review, with their outputs written separately from the original results,
-which were not modified; they carry no test decision.
+A review of the original outputs found the LIME representation issue of Section 2.3 (the same
+behaviour had been documented in an earlier study of the programme [@ownE]). The following
+analyses were specified after that review, with their outputs written separately from the
+original results, which were not modified; they carry no test decision.
 
-**S3, synthetic validation of LIME representations.** In the synthetic conditions, three
-representations of LIME were compared with the exact Shapley values (instance-level Spearman
-correlation): the stored slopes; the contributions of LIME's fitted surrogate relative to its
-training mean, *w*~*j*~(*x*~*j*~ − *μ*~*j*~)/*s*~*j*~; and LIME with quartile discretisation; each at
-kernel width 3.0 and at the package default.
+**S3, synthetic validation of LIME representations.** In the synthetic conditions (numeric
+features only), three representations of LIME were compared with the exact Shapley values
+(instance-level Spearman correlation): the stored slopes; the contributions of LIME's fitted
+surrogate relative to its training mean, *w*~*j*~(*x*~*j*~ − *μ*~*j*~)/*s*~*j*~; and LIME with
+quartile discretisation; each at kernel width 3.0 and at the package default.
 
 **S1, LIME as surrogate contributions on the real data.** LIME was re-explained with the frozen
 configuration on the same instances, and its fitted surrogate was represented as the contribution
-of each raw feature relative to a reference *r* ({{eq:contribution}}):
+of each raw feature relative to a reference *r* ({{eq:contribution}}), oriented to the predicted
+class:
 
 $$c_j(r) = \sum_{k \in G_j} w_k\,\frac{x_k - r_k}{s_k}$$ {#eq:contribution}
 
 where *G*~*j*~ is the set of encoded columns of feature *j*, *w*~*k*~ the surrogate's coefficient on
-standardised column *k* and *s*~*k*~ its scale. In S1-B, the primary variant, *r* is the metrics'
-masking baseline; in S1-M, the sensitivity variant, *r* is LIME's training mean. The two coincide
-for numeric features. Every instance was reconstructed and checked against the stored run before
-use, and the metrics were recomputed on the S1 attributions; the analyses of Section 2.5 were then
-repeated with the S1 LIME rows substituted for the original ones and every other row unchanged.
-For categorical features, S1 rests on a surrogate fitted to off-manifold one-hot samples.
+standardised column *k*, and *s*~*k*~ the scale LIME fitted to that column. The two variants differ
+only in *r*. In S1-B, the primary variant, *r* is the metrics' masking baseline *b*, so S1-B
+contributions are relative to the same point as occlusion and the metrics (but not as SHAP); a
+categorical feature at its training mode contributes 0. In S1-M, the sensitivity variant, *r* is
+LIME's training mean *μ*, whose categorical coordinates are the dummy shares, a point off the
+one-hot manifold. For numeric features *b* = *μ*, so the variants coincide. Both are contributions
+of the surrogate, not of the model; for categorical features the surrogate was fitted to
+off-manifold one-hot samples. Every instance was reconstructed and checked against the stored run
+before use, and the metrics were recomputed on the S1 attributions; the analyses of Section 2.5
+were then repeated with the S1 LIME rows substituted for the original ones and every other row
+unchanged.
 
 **Exploratory diagnostics.** The frequency with which each explainer holds each rank under each
-metric (positions); the H2 correlations adjusted for the predicted-class probability by a
-rank-based partial correlation, since several metrics scale with *f(x)*; the size of M7's removal
-sets and the frequency of identical sets and tied scores; and the share of blocks in which every
-metric places the random control last.
+metric (positions); the instance-level correlations adjusted for the predicted-class probability
+by a rank-based partial correlation, because M1, M2, M3 and M6 contain *f(x)* by construction
+({{eq:deletion}}, {{eq:gap}}); the size of M7's removal sets and the frequency of identical sets
+and tied scores; and the share of blocks in which every metric places the random control last.
 
 ## 2.7. Reproducibility
 
@@ -324,7 +363,7 @@ runs used one laptop (Intel Core i5-1335U CPU) with a fixed software environment
 
 # 3. Results and discussion
 
-## 3.1. Broad agreement under the original attribution representations (confirmatory)
+## 3.1. Broad agreement under the original attribution representations (original analysis)
 
 At system level, the mean pairwise Spearman correlation between metrics was
 <<h1:mean_pairwise_spearman:mean:f3>> (95% CI [<<h1:mean_pairwise_spearman:lo:f3>>,
@@ -336,22 +375,24 @@ Holm correction over H1 and H2. With the interval above 0.5, the frozen decision
 the result as "the metrics broadly agree", both before and after correction. The within-metric
 stability benchmark was <<stab:within_metric_stability:mean:f3>>
 ([<<stab:within_metric_stability:lo:f3>>, <<stab:within_metric_stability:hi:f3>>]), so the
-metrics agreed with each other less than each agreed with itself across seeds. Agreement was
+between-metric estimate was lower than the within-metric benchmark (no test compares them). Agreement was
 lowest for random forests (<<pm:rf:h1_mean:f3>>) and highest for logistic regression
-(<<pm:logreg:h1_mean:f3>>). Excluding the undefined M4 scores left the estimate unchanged
+(<<pm:logreg:h1_mean:f3>>). Leaving out the flagged M4 scores (exploratory) gave the same estimate
 (<<m4x:h1_m4_degenerate_excluded:mean:f3>>).
 
 At instance level, agreement was weak: the mean correlation between metric pairs across instances
 was <<h2:h2_omnibus:mean:f3>> ([<<h2:h2_omnibus:lo:f3>>, <<h2:h2_omnibus:hi:f3>>];
 one-sided *t*-test *p* = <<h2:h2_omnibus:p_t:f5>>, sign-flip *p* = <<h2:h2_omnibus:p_sign_flip:f4>>, the smallest attainable with eight
 datasets).
-H2 is supported as a positive mean, but its size is small, and the pairs differed in sign:
+With the inference fixed before unblinding (Section 2.5), H2 is supported as a positive mean,
+but its size is small, and the pairs differed in sign:
 deletion and insertion correlated negatively (<<h2p:m1_deletion_m2_insertion:mean:f3>>), as did
 infidelity and sufficiency (<<h2p:m5_infidelity_m6_sufficiency:mean:f3>>), whereas deletion and
 the top-*k* gap correlated most strongly (<<h2p:m1_deletion_m3_gap:mean:f3>>; {{fig:h2_matrix}}).
 
-These confirmatory results are reported exactly as specified. They describe agreement among the
-metrics for the explainer outputs *as stored*; as Section 2.3 explains, LIME's stored output was a
+These results are reported exactly as the frozen analysis produced them; the H1 classification
+is the study's only decision. They describe agreement among the metrics for the explainer outputs
+*as stored*; as Section 2.3 explains, LIME's stored output was a
 slope, while M1 to M6 read attributions as contributions. Sections 3.3 and 3.4 show what this
 means for the result.
 
@@ -385,8 +426,8 @@ contributions of the same fitted LIME model agreed closely in the additive condi
 <<s3:interaction_rho00__s3_b:mean_over_seeds:f2>>). Discretised LIME lay between them
 (<<s3:interaction_rho50__s3_c:mean_over_seeds:f2>> to
 <<s3:additive_rho50__s3_c:mean_over_seeds:f2>>), and the kernel width changed little
-({{fig:s3}}). The construct mismatch is therefore one of representation, not of LIME's fit: the
-same surrogate, read as a contribution, tracks the true attributions.
+({{fig:s3}}). In these synthetic conditions, then, the same fitted surrogate tracked the true
+attributions when read as a contribution and did not when read as slopes.
 
 ![Agreement of LIME representations with exact Shapley values in the synthetic conditions (mean over five seeds; bars at kernel width 3.0 with the range over seeds, diamonds at the package default width).](figures/fig_s3.png){#fig:s3}
 
@@ -409,11 +450,11 @@ mean over the numeric datasets fell from <<sum:type_numeric:original:f3>> to
 Instance-level agreement was unchanged (<<cmp:h2_omnibus_4_explainers__s1_b:mean:f3>>), and so
 was its pattern: deletion and insertion still correlated negatively
 (<<h2a_s1b:m1_deletion_m2_insertion:unadjusted_mean:f3>>). The two S1 variants differed by at
-most <<sum:s1diff:max:f3>> in any summary quantity, so the choice of reference does not change
-these conclusions. No decision rule is applied to S1; the confirmatory classification of
+most <<sum:s1diff:max:f3>> in any summary quantity, so the choice between the two references
+did not change these descriptions. No decision rule is applied to S1; the H1 classification of
 Section 3.1 stands for the representation it was made on.
 
-Table: System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). Class A is confirmatory; other rows are pre-specified sensitivity analyses, supplementary (S1) or exploratory (C). {#tbl:evidence}
+Table: System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). In the original column, the first, second, sixth and seventh rows are the original analysis; the second baseline, six-metric and random-control rows are sensitivity analyses; the S1 columns are supplementary; rows marked (C) are exploratory. {#tbl:evidence}
 
 <<table:evidence>>
 
@@ -430,8 +471,9 @@ Source: Authors.
 Under the original representation, LIME was ranked last by each of M1, M2, M3, M4 and M6 in all
 <<r3:blocks:value:d>> blocks (and by M5 in <<sum:lastm16:m5_infidelity:d>>), and was the untied
 last explainer under all seven metrics in <<r3:of_which_lime_last:value:d>> blocks
-({{fig:positions}}). In such blocks the system-level correlation cannot fall below 0.5, so much
-of the original agreement was agreement on which explainer was last. With S1-B, LIME was last
+({{fig:positions}}). In each of those blocks every pairwise correlation is 0.5 or 1 by
+construction (Section 2.5), so their contribution to the original estimate reflects agreement on
+the last position at least. With S1-B, LIME was last
 under all seven metrics in <<pos_s1b:of_which_lime_last:value:d>> blocks, and was last under M1
 in <<posm_s1b:m1_deletion__lime:r3:d>> blocks; the order of the three explainers then varied
 between metrics, and strict SHAP–LIME reversals between two of M1 to M6 occurred in
@@ -450,9 +492,12 @@ Adjusting the instance-level correlations for the predicted-class probability ra
 from <<r6:omnibus:unadjusted_mean:f3>> to <<r6:omnibus:adjusted_mean:f3>>
 ([<<r6:omnibus:adjusted_lo:f3>>, <<r6:omnibus:adjusted_hi:f3>>]). The negative correlation
 between deletion and insertion largely disappeared (<<r6:m1_deletion_m2_insertion:adjusted_mean:f3>>),
-which indicates that it arose because both metrics scale with *f(x)* in opposite directions;
-insertion and sufficiency became strongly related (<<r6:m2_insertion_m6_sufficiency:adjusted_mean:f3>>;
-{{fig:h2_matrix}}). Even adjusted, instance-level agreement remained far below system-level
+and insertion and sufficiency became strongly related (<<r6:m2_insertion_m6_sufficiency:adjusted_mean:f3>>;
+{{fig:h2_matrix}}). By construction ({{eq:deletion}}, {{eq:gap}}), after orientation *f(x)* enters
+M2 and M3 with a positive coefficient and M1 and M6 with a negative one; the pairs whose
+correlation rose after adjustment include those with opposite coefficients. This is consistent
+with a shared dependence on *f(x)* acting on these pairs, but the adjustment is a partial
+correlation on the observed data and does not isolate that mechanism. Even adjusted, instance-level agreement remained far below system-level
 agreement, under every representation (<<cmp:h2_omnibus_adjusted_for_f_x_exploratory__s1_b:mean:f3>>
 with S1-B).
 
@@ -473,37 +518,50 @@ comparable LIME attributions did it behave as a negative control should.
 
 ## 3.8. Discussion
 
-The results support three conclusions about faithfulness-metric agreement.
+The results bear on three conditions of faithfulness-metric agreement. Each statement below is
+marked as a property of the computation, an observed association, or a possible mechanism that
+the study did not isolate.
 
-**It depends on the level of evaluation.** Metrics that agree on the order of explainers can
-disagree on which individual explanations are faithful: system-level agreement was
-<<h1:mean_pairwise_spearman:mean:f3>> (original) or
-<<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>> (S1-B), whereas
-instance-level agreement was <<h2:h2_omnibus:mean:f3>> under every representation, and some metric
-pairs correlated negatively. Part of the instance-level disagreement is a shared dependence on the
-predicted probability rather than on the explanation. A metric that is adequate to rank
-explainers on average is therefore not thereby adequate to validate a single explanation, which is
-the use made of explanations in practice [@rawal2025; @bilodeau2024].
+**Level of evaluation.** *Observed:* system-level agreement was
+<<h1:mean_pairwise_spearman:mean:f3>> in the original analysis and
+<<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>> with S1-B, whereas the
+mean instance-level correlation was <<h2:h2_omnibus:mean:f3>> originally and
+<<cmp:h2_omnibus_4_explainers__s1_b:mean:f3>> with S1-B, and some metric pairs correlated
+negatively. *Property of the computation:* after orientation *f(x)* enters M2 and M3 with a positive
+coefficient and M1 and M6 with a negative one, so their instance-level correlations depend
+partly on how *f(x)* varies across instances; *observed:* adjusting for *f(x)* raised the mean to
+<<r6:omnibus:adjusted_mean:f3>>, still well below the system-level values. Agreement on how explainers rank on average therefore
+did not carry over to agreement on individual explanations, the use made of explanations in
+practice [@rawal2025; @bilodeau2024].
 
-**It depends on attribution semantics.** The confirmatory "broad agreement" was obtained with an
-explainer whose output was a slope scored by metrics that read contributions. Every
-contribution-based metric placed that explainer last, which produced agreement by construction of
-the comparison rather than by consensus on faithfulness. Represented as contributions of the same
-fitted surrogate, LIME competed with SHAP and occlusion, and agreement became moderate and
-uncertain. The finding generalises beyond LIME: an evaluation compares attributions only if they
-answer the same question, relative to the same reference [@li2024; @sokol2025; @knab2025]. It
-complements the conceptual account of why faithfulness criteria disagree [@shanklin2026] with an
-empirical case in which the disagreement was hidden by a representation mismatch.
+**Attribution semantics.** *Observed:* the original "broad agreement" was obtained with an
+explainer whose output was a slope, scored by metrics that read contributions, and that
+explainer was ranked last by each of M1, M2, M3, M4 and M6 in every block. *Property of the
+computation:* in any block where one explainer is last under every metric, each pairwise
+correlation is 0.5 or 1. *Observed:* with LIME represented as contributions of the same fitted
+surrogate, LIME was no longer last in most blocks and agreement was
+<<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>>, with an interval
+containing 0.5. *Possible mechanism, not isolated:* reading slopes as contributions lowered
+LIME's scores under the contribution-based metrics, which is consistent with S3, where the slopes
+were unrelated to exact Shapley values while the contributions tracked them; on the real data S1
+changes the representation only, but no ground truth exists there. The study shows one case; it
+does not establish how often representation mismatches arise for other explainers. It
+complements the conceptual account of why faithfulness criteria disagree [@shanklin2026], and it
+suggests that the reference point of each attribution deserves explicit reporting, since SHAP,
+occlusion, S1-B and S1-M measure contributions from different points [@li2024; @sokol2025;
+@knab2025].
 
-**It depends on the evaluation protocol.** Once LIME was comparable, the masking baseline became
-the dominant source of variation (S1-B <<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>>
-against <<cmp:h1_second_baseline_spearman__s1_b:mean:f3>> under the second baseline), in line with
-evidence that perturbation choices drive validation outcomes [@simic2025; @zheng2025;
-@ababneh2026]. The retraining metric was unstable and tie-prone, metric pairs flipped the winner
-in up to <<sum:flips_s1b_m16:max:pct1>>% of blocks even among M1 to M6 with S1-B, and M4 favoured
-the explainer that shares its construction. With three explainers, a single consistently last
-explainer is enough to satisfy a 0.5 threshold, so aggregate agreement statistics must be read
-with the explainers' positions [@duan2024; @edin2025].
+**Evaluation protocol.** *Observed:* with S1-B, agreement was
+<<cmp:h1_second_baseline_spearman__s1_b:mean:f3>> under the second masking baseline, against
+<<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>> under the primary one,
+consistent with reports that perturbation choices change validation outcomes [@simic2025;
+@zheng2025; @ababneh2026]; the study did not compare the size of this change with that of other
+protocol choices by a test. The retraining metric had the lowest within-metric stability and
+tied often on datasets with few features; metric pairs flipped the winner in up to
+<<sum:flips_s1b_m16:max:pct1>>% of blocks even among M1 to M6 with S1-B; and M4 ranked first the
+explainer that shares its construction. *Property of the computation:* with three explainers, one
+consistently last explainer is enough to satisfy a 0.5 threshold, so aggregate agreement
+statistics need the explainers' positions beside them [@duan2024; @edin2025].
 
 **Recommendations.** Comparisons of explainers on tabular data should (1) declare what each
 explainer's output represents and its reference point, and check it against what each metric
@@ -514,32 +572,34 @@ agreement statistic; and (5) separate claims about rankings from claims about in
 explanations.
 
 **Limitations.** The study has eight binary tabular datasets and four model families, and three
-studied explainers make rank statistics coarse. LIME was run in one configuration whose output is a
-slope; S1 addresses its representation but not its fitting choices (kernel, sampling around the
-training mean), which also affect its stability [@tzionis2026], and for categorical features S1 rests on a surrogate fitted to off-manifold samples
-[@ademi2025]. SHAP's reference (a background expectation) differs from the masking baseline used by
-S1-B and the metrics. The supplementary experiments and diagnostics were specified after the
-first results had been reviewed; they are reported as such and carry no decision, and S1 was not
-tested against the original analysis. Several analysis details were fixed after the run, the
-dataset check was run retrospectively, and the planned variance decomposition was omitted. The
-decision threshold of 0.5 cannot separate agreement on every position from agreement on the last
-position. Ground truth exists only in a small synthetic setting; on real data the study measures
-agreement, not correctness. The metrics share masking machinery, M4 shares its construction with
-occlusion, M3 and M6 use one masking fraction, M5 is a Monte Carlo estimate, and M7 uses four
-removal levels with one retraining each. Instance-level correlations depend on the predicted
-probability, and the adjusted correlations are exploratory.
+studied explainers make rank statistics coarse. LIME was run in one configuration whose output is
+a slope; S1 addresses its representation but not its fitting choices (kernel, sampling around the
+training mean), which also affect its stability [@tzionis2026], and for categorical features S1
+rests on a surrogate fitted to off-manifold samples [@ademi2025], with S1-M measured from an
+off-manifold reference. The explainers' reference points differ: SHAP's is a background
+expectation, occlusion's and S1-B's the masking baseline, S1-M's LIME's training mean. The H2
+inference, the stability benchmark and other details were fixed after the run, before unblinding;
+the supplementary experiments and diagnostics were specified after the original results had been
+reviewed, carry no decision, and S1 was not tested against the original analysis. The dataset
+check was run retrospectively and the planned variance decomposition was omitted. The decision
+threshold of 0.5 cannot separate agreement on every position from agreement on the last position.
+Ground truth exists only in a small synthetic setting; on real data the study measures agreement,
+not correctness. The metrics share masking machinery, M4 shares its construction with occlusion,
+M3 and M6 use one masking fraction, M5 is a Monte Carlo estimate, M4 is stored as 0 when
+undefined, and M7 uses four removal levels with one retraining each. The *f(x)* adjustment is
+exploratory and does not separate the explanation from the prediction.
 
 # 4. Conclusions
 
-Faithfulness metrics agreed broadly on the order of explainers in the pre-specified analysis, and
-weakly on individual explanations. The broad system-level agreement depended on an explainer
-whose output did not match what the metrics assume; with comparable attributions, agreement was
-moderate, uncertain and strongly dependent on the masking baseline, while instance-level agreement
-stayed weak. Whether faithfulness metrics agree is therefore not a property of the metrics alone
-but of the level of evaluation, the semantics of the attributions and the evaluation protocol.
-Claims that one explainer is more faithful than another should state all three. Future work should
-extend the comparison to explainers with declared reference semantics, to more masking schemes and
-to regression and multiclass tasks.
+Faithfulness metrics agreed broadly on the order of explainers in the original analysis, and
+weakly on individual explanations. That system-level agreement was obtained with an explainer
+whose output did not match what the metrics assume; with LIME represented as surrogate
+contributions, agreement was moderate, its interval contained 0.5, and it was lower under a second
+masking baseline, while instance-level agreement stayed weak. In this study, then, whether the
+metrics agreed depended on the level of evaluation, on how the attributions were represented and
+on the evaluation protocol. Claims that one explainer is more faithful than another should state
+all three. Future work should extend the comparison to explainers with declared reference
+semantics, to more masking schemes and to regression and multiclass tasks.
 
 # Funding
 
@@ -563,9 +623,14 @@ persistent identifier is withheld for double-blind review and will be added at a
 
 # Declaration of generative AI use
 
-During the preparation of this work, the author used Claude (Anthropic; model identifier claude-opus-5-5), through the Claude
-Code tool, to write and test the experiment, analysis and figure code, to draft the text of all
-sections from the author's analysis plan and results, and to search for and check references
-against their bibliographic records. All numbers are rendered by script from the result files. The
-author reviewed and edited the content and takes full responsibility for it. [Author to confirm
-the wording and the sections concerned.]
+During the preparation of this work, the author used Claude (Anthropic; model identifier
+claude-opus-5-5), through the Claude Code tool, for the following purposes: writing and testing
+the code of the experiment, the statistical analysis, the supplementary experiments and the
+figures; searching bibliographic databases and checking each reference against its DOI or
+publisher record; drafting the text of all sections from the author's analysis plan and from the
+results; and formatting the manuscript in the journal template. The analyses were specified and
+authorised by the author, and every number is inserted by script from the result files and
+checked automatically. [Author to confirm: the extent of the author's own review and rewriting,
+and any other generative AI tool used (for example, a general-purpose assistant used as a
+methodological advisor), with its name, version, provider, purpose and sections.] The author
+takes full responsibility for the content.
