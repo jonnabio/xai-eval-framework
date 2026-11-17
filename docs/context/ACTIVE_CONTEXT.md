@@ -17,7 +17,9 @@ source `docs/reports/paper_g/paper_g_draft.md`, rendered `paper_g.md` and
 `submission/paper_g_blind.docx` (12 pages, journal template) by
 `docs/reports/paper_g/scripts/build_paper_g.py`; 185 claims registered by
 `scripts/pubs/register_paper_g.py`; 50 verified references. Status and author actions:
-`docs/reports/paper_g/SUBMISSION_READINESS.md`. **Not submitted.**
+`docs/reports/paper_g/SUBMISSION_READINESS.md`; Task 21 corrections of the independent review
+applied (equations match the frozen code; evidence classes; reference points; no causal
+overreach); author actions in `AUTHOR_REVIEW_CHECKLIST.md`. **Not submitted.**
 
 **Paper B, revision 1** (C&I 2067810): **SUBMITTED 2026-11-12** after the editor reopened the
 step left empty on 2026-11-10. Wait for the decision. The thesis objective below is unchanged.
