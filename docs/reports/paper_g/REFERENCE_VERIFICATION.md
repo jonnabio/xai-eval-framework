@@ -22,6 +22,15 @@ in the third person as anonymised entries; the author replaces them with the pub
 records at acceptance. Foundational (pre-2024) sources are kept only where they define a
 method the study uses (LIME, SHAP, XGBoost and the origins of M1 to M7).
 
+## Exceptions to the DOI requirement (for the author's decision)
+
+| Category | References | Note |
+|---|---|---|
+| Peer-reviewed, no DOI exists | lundberg2017, yeh2019, hooker2019, krishna2024, zheng2025 | NeurIPS 2017 and 2019 proceedings (no DOIs were assigned), TMLR, ICLR 2025; cited by the publisher's or OpenReview URL, verified against the page or record |
+| Preprint (DOI from arXiv/DataCite) | shanklin2026 | not peer-reviewed; kept as the closest conceptual work (novelty positioning) |
+| Earlier manuscripts of the programme, anonymised | ownB, ownE, ownF | under review, no DOI; replaced by the published records at acceptance |
+| Assigned to an issue dated after today | kares2027 (issue 2027-2, DOI registered 2026-9-2) | cited with the year of its volume, as APA 7 does for an article assigned to an issue; the record gives no online-publication date, so none is stated |
+
 | Key | Authors | Year | Title | Venue | Identifier | Verification | Supports | Era | Cited |
 |---|---|---|---|---|---|---|---|---|---|
 | ribeiro2016 | Ribeiro et al. | 2016 | "Why should I trust you?": Explaining the predictions of any classifier | Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining | https://doi.org/10.1145/2939672.2939778 | doi.org content negotiation (CSL JSON): resolves, record agrees | LIME: the explainer and its local weighted linear surrogate (Methods, Explainers) | foundational | yes |
