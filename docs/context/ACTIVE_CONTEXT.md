@@ -6,20 +6,17 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-15, by `claude-2026-11-15-context` (Linux run host, documentation clone).
+**Last updated:** 2026-11-16, by `paper-g-task21` (Linux run host, documentation clone).
 
 ## Current objective
 
 **Paper G** (*Do Faithfulness Metrics Agree?*, lane `paper-g`, *Informática y Sistemas*):
-analysis run and frozen (#129-#133); S3, diagnostics and the supplementary S1 run merged (#138,
-`bb6ea3c7c`). **Manuscript completed 2026-11-16 for author review** (Task 20, direction C):
-source `docs/reports/paper_g/paper_g_draft.md`, rendered `paper_g.md` and
-`submission/paper_g_blind.docx` (12 pages, journal template) by
-`docs/reports/paper_g/scripts/build_paper_g.py`; 185 claims registered by
-`scripts/pubs/register_paper_g.py`; 50 verified references. Status and author actions:
-`docs/reports/paper_g/SUBMISSION_READINESS.md`; Task 21 corrections of the independent review
-applied (equations match the frozen code; evidence classes; reference points; no causal
-overreach); author actions in `AUTHOR_REVIEW_CHECKLIST.md`. **Not submitted.**
+**experimental phase complete**: original analysis complete and verified (#129-#133), S3 and
+exploratory diagnostics complete, S1 complete and verified (#138). **Manuscript preparation
+active**: manuscript, figures, references and reports merged (#139, `aa5524d70`); claim
+registration (185 claims) merged (#140, `b34f61227`). Next: **Task 21, final manuscript review,
+author corrections and submission readiness**, on the Windows documentation laptop (latest
+handoff below). **Submission not authorized.**
 
 **Paper B, revision 1** (C&I 2067810): **SUBMITTED 2026-11-12** after the editor reopened the
 step left empty on 2026-11-10. Wait for the decision. The thesis objective below is unchanged.
@@ -89,7 +86,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
   is Paper G's only recorded host. On it, `~/xai-eval-framework` is the run clone (branch
   `paper/g-runs`, lock `paper-g-run-host`, never edited by hand) and
   `~/Documents/GitHub/xai-eval-framework` is a documentation clone.
-- **Paper G branches:** `paper/g-runs` frozen at `04c6dfd84` (merged, PR #123; publisher timer stopped); `paper/g-metric-agreement` level with `main` after #126.
+- **Paper G branches:** `paper/g-runs` frozen at `04c6dfd84` (merged, PR #123; publisher timer stopped); `paper/g-manuscript-completion` and `pubs/paper-g-claims` merged (#139, #140); no Paper G work is unmerged.
 - `main` holds everything up to pull request #114 and this handoff. `paper/b-ci-revision-1` is
   level with `main`; kept until the editor confirms receipt, then deleted. `paper/b-rev1-runs` (raw cohort B2 rows and
   logs, 6,716 files, about 169 MB; merges cleanly) is ahead of `main` and **not merged**: the
@@ -124,11 +121,12 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 8. **Paper B runs branch:** whether `paper/b-rev1-runs` (169 MB of raw rows) is merged into
    `main`, kept as a branch, or deposited elsewhere (e.g. Zenodo). The analyses it feeds are
    already on `main` (`outputs/analysis/paper_b_rev1/`, `revision_1/results/`).
-9. **Paper G:** review the manuscript; confirm the declarations; decide on the AI-content
-   limit and on the public repository during review (`SUBMISSION_READINESS.md`); submission
-   is the author's.
+9. **Paper G:** the author actions of the latest handoff (review, declarations, AI-content
+   limit, double-blind risk of the public repository, Word check, OJS submission components);
+   `docs/reports/paper_g/AUTHOR_REVIEW_CHECKLIST.md`. Submission is the author's.
 10. **Linux run host:** automatic updates were paused for the run (`unattended-upgrades`,
-    `apt-daily*.timer` disabled 2026-11-14). Re-enable when no further Paper G run is planned:
+    `apt-daily*.timer` disabled 2026-11-14). No further Paper G run is planned (experimental
+    phase complete), so they can be re-enabled (author, sudo):
     `sudo systemctl enable --now unattended-upgrades apt-daily-upgrade.timer apt-daily.timer`.
 
 ## Active constraints
@@ -170,36 +168,51 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-15, SESSION END (Paper G: analysis implemented, not run)
+## Latest handoff - 2026-11-16, SESSION END (Paper G: manuscript merged; handoff to the Windows laptop)
 
-Session of 2026-11-13 to 2026-11-15, owner `claude-2026-11-13-paper-g` (documentation laptop).
-Lane `paper-g`; this handoff on `pubs/context-2026-11-15b`. Previous handoff (run host, same
-day): archive `2026-11-15.md`.
+Session owner `paper-g-task21` (Linux run host, documentation clone
+`~/Documents/GitHub/xai-eval-framework`); Tasks 20 and 21 and this consolidation. Lane `paper-g`
+(lock released); this handoff on `pubs/context-2026-11-16-paper-g-handoff`.
 
-- **Completed**:
-  - Paper G chosen (idea G1); G2-G6 recorded in `docs/planning/paper_ideas_g2_g6_2026-11-13.md`.
-    Lane `paper-g` registered (PR #116).
-  - `docs/reports/paper_g/`: README, VENUE, ANALYSIS_PLAN (v2, power simulation, author
-    decisions), first draft `paper_g_draft.md` (`[R: ...]` and `[REF-n]` placeholders),
-    RUN_PROTOCOL, `CHATGPT_ADVISOR_PROMPT.md`, `LINUX_SETUP_PROMPT.md`.
-  - Config, power simulation, library, runner, publisher, status page, host check, systemd units
-    and 23 tests (PR #117). Lane-lock claim added to the set-up instructions (cb4e37fc6).
-  - Run executed and frozen by the run-host session (PRs #119-#125; archive `2026-11-15.md`).
-  - PR #126 merged: ANALYSIS_PLAN section 11 (post-execution, pre-unblinding decisions A-G),
-    dataset gate diagnostic, analysis implementation and tests; **not run on the data**.
-- **Current State**: `main` holds the plan, code, frozen raw data (344/344 shards) and the
-  analysis code. `paper/g-metric-agreement` is level with `main`. No result has been seen.
-  Draft has no results and no references yet.
-- **Next Steps**:
-  1. Author answers the choices in ANALYSIS_PLAN section 11.8 and explicitly authorizes the analysis.
-  2. Run the analysis once on `main` data; fill the `[R: ...]` markers.
-  3. Reference search (verified DOIs, at least 80% from 2024 or later) for Introduction and
-     Related Work; then the Word edition in the journal template.
-- **Blockers/Issues**: analysis waits for the author (11.8 and authorization). Monitoring limits
-  listed in archive `2026-11-15.md` remain unfixed (non-blocking).
-- **Notes**: the author writes nothing by hand but owns every content decision and the
-  journal's AI-content limit and declaration. ChatGPT is used as advisor through
-  `CHATGPT_ADVISOR_PROMPT.md`. On the run host, re-claim the lock
-  (`check_lane.py claim --owner paper-g-run-host`) before any new publish; re-enable updates
-  (Open item 10) when no further run is planned. `docs/reports/paper_a/paper_a_rimi.pdf` is
-  the author's untracked file: never commit it.
+- **Project state:** Paper G experimental phase COMPLETE; original analysis COMPLETE AND VERIFIED;
+  S3 COMPLETE; S1 COMPLETE AND VERIFIED; exploratory diagnostics COMPLETE; manuscript preparation
+  ACTIVE; submission NOT AUTHORIZED.
+- **Revisions:** PR #139 merge `aa5524d70` (manuscript, figures, references, build scripts,
+  reports); PR #140 merge `b34f61227` (resolver `paper_g`, `scripts/pubs/register_paper_g.py`,
+  185 claims, coverage and exclusivity guards, CI step). Manuscript source: last change
+  `58d6b9b68` (`docs/reports/paper_g/paper_g_draft.md`). Claim registry: `b34f61227`. `main`
+  after this handoff is its merge commit, which descends from `b34f61227`.
+- **Integrity (checked at `b34f61227`):** no change since `bb6ea3c7c` to
+  `outputs/analysis/paper_g/` (1,294 files; raw and S1 manifests identical), frozen code,
+  `experiments/exp_g/`, `RESULTS_REPORT.md`, `ANALYSIS_PLAN.md`; original analysis identical to
+  `3b0063f41`; `paper_g_analyze.py --validate-only` passes; `verify_claims` 2,083 claims, 2,500
+  sites; `register_paper_g.py --check` OK; 134 Paper G tests pass; equations of the manuscript
+  match the frozen functions (`docs/reports/paper_g/verification/verify_equations.py`, 480 checks).
+- **Manuscript artifacts** (`docs/reports/paper_g/`): `paper_g_draft.md` (source; numbers are
+  placeholders), `paper_g.md` (rendered), `submission/paper_g_blind.docx` and `.pdf` (13 pages,
+  journal template), `submission/Figure_1..5`, `EVIDENCE_MAP.md`, `RIGOR_REVIEW.md`,
+  `JOURNAL_COMPLIANCE.md`, `SUBMISSION_READINESS.md`, `REFERENCE_VERIFICATION.md`,
+  `AUTHOR_REVIEW_CHECKLIST.md`. Rebuild after any edit of the source:
+  `python docs/reports/paper_g/scripts/build_paper_g.py --evidence-map`, then
+  `python scripts/pubs/register_paper_g.py` and `python scripts/pubs/verify_claims.py` (the
+  .docx build needs pandoc and LibreOffice; on Windows, open the .docx in Word instead).
+- **Remaining author actions** (never completed by the assistant):
+  1. Substantive review of the manuscript; the journal's AI-content limit (30%, Compilatio).
+  2. Funding declaration (and the OJS Supporting Agencies field).
+  3. Conflicts-of-interest declaration.
+  4. Generative-AI-use declaration: extent of own review; any other assistant used (ChatGPT was
+     set up as advisor, `CHATGPT_ADVISOR_PROMPT.md`).
+  5. Double-blind risk: the manuscript and its history are public on GitHub under the author's
+     name since 2026-11-13; decide (tell the editor, make private, or accept). Not changed.
+  6. Word check of pagination, equations and repeated table headers.
+  7. Submission components in OJS (anonymised .docx, figure files, checklist and copyright
+     notice accepted online, author metadata and ORCID; no separate signed agreement).
+- **Next task (Windows documentation laptop):** Task 21 — final manuscript review, author
+  corrections and submission readiness. No experiment is to be restarted.
+- **Windows sync:** in `C:\Users\jonna\Github\xai-eval-framework`: `git status` (preserve any
+  local changes first: commit them on a branch or `git stash push -u`), then `git fetch origin`,
+  `git switch main`, `git pull --ff-only origin main`, `git status`, `git log -1 --oneline`;
+  check `git merge-base --is-ancestor b34f61227 HEAD` returns 0.
+- **Notes:** `pub/fragments/build_meta.env` changes when `generate_fragments.py` runs on another
+  machine (path and time); do not commit that change. Merged branches `paper/g-manuscript-completion`
+  and `pubs/paper-g-claims` are kept on GitHub (not deleted).
