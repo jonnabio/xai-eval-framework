@@ -235,7 +235,7 @@ $$M_5 = \frac{\sum_{r=1}^{R}\big(\Delta_r - \hat\beta s_r\big)^2}{\sum_{r=1}^{R}
 that is, one minus the uncentred *R*² of the least-squares fit of *Δ* on *s* without intercept
 (*M*~5~ = 0 if all *Δ*~*r*~ are 0 and 1 if all *s*~*r*~ are 0); subset masking replaces Gaussian
 noise, which is undefined for categorical features. M7, ROAR-lite [@hooker2019], ranks features by
-the mean |*a*| over an explainer's 200 instances; for each share ℓ ∈ {0.1, 0.2, 0.3, 0.5} the top
+the mean |*a*| over an explainer's 200 instances; for each share ℓ ∈ {10%, 20%, 30%, 50%} the top
 max(1, ⌈ℓ*G*⌉) features are set to *b* in the training and test data, the model is retrained, and
 M7 is the mean over ℓ of the drop in test AUC; it has one value per block and explainer. Lower is
 better for M1, M5 and M6, and higher for M2, M3, M4 and M7; all metrics were oriented so that
