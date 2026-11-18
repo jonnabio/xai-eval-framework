@@ -56,7 +56,7 @@ The repository's `venue/template/IyS_article_template.docx` is byte-identical to
 | Relevance | 4 | Practical recommendations; the reason for this journal's readership is implicit |
 | Technical soundness | 3 | Strong pre-specification, but the headline now rests on post-hoc S1, and one alternative explanation is not addressed (M1 below) |
 | Related work | 4 | Current and verified; benchmark-library tradition missing |
-| Likely recommendation | **Major revision** as it stands; **minor revision** if M1–M4 are done before submission |
+| Likely recommendation | — | **Major revision** as it stands; **minor revision** if M1–M4 are done before submission |
 
 ### Major concerns a reviewer is likely to raise (fix before submission)
 
