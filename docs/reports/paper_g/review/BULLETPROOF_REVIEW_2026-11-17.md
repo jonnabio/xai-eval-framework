@@ -80,6 +80,16 @@ The repository's `venue/template/IyS_article_template.docx` is byte-identical to
 
 Pre-specification with a dated evidence-class table (Table 1); dataset as the unit of inference with a permutation test justified by a simulation; within-metric stability benchmark; random control; the synthetic ground-truth check (S3); transparent reporting of the deviation (omitted variance shares) and of the post-hoc status of S1.
 
+## Applied on 2026-11-17 (author's instruction)
+
+Title in sentence case; M1 (stability benchmark as an alternative explanation, Sections 3.4 and 3.8);
+M2 (abstract describes LIME's slope output as a configuration property and states that S1 is
+supplementary with no test decision); M3 (block index renamed *u*; ρ~*s*~ defined as Spearman);
+M4 (Appendix A, parameter table from `experiments/exp_g/config.toml` and `host.json`, cited in 2.7);
+the AI-use declaration replaced with the author's text. `paper_g.md` rebuilt; claims and
+`verify_claims` pass; abstract 229 words. The `.docx` and `.pdf` were **not** rebuilt (no pandoc or
+LibreOffice on this laptop). Minor items and items 2–4 below remain open.
+
 ## D. Remaining author actions before submission
 
 1. Decide M1–M4 and the minor items (the assistant can draft each change).
