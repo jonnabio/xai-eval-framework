@@ -6,17 +6,14 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-16, by `paper-g-task21` (Linux run host, documentation clone).
+**Last updated:** 2026-11-17, by `claude-2026-11-17` (Windows documentation laptop): Paper G submitted.
 
 ## Current objective
 
-**Paper G** (*Do Faithfulness Metrics Agree?*, lane `paper-g`, *Informática y Sistemas*):
-**experimental phase complete**: original analysis complete and verified (#129-#133), S3 and
-exploratory diagnostics complete, S1 complete and verified (#138). **Manuscript preparation
-active**: manuscript, figures, references and reports merged (#139, `aa5524d70`); claim
-registration (185 claims) merged (#140, `b34f61227`). Next: **Task 21, final manuscript review,
-author corrections and submission readiness**, on the Windows documentation laptop (latest
-handoff below). **Submission not authorized.**
+**Paper G** (*Do faithfulness metrics agree?*, lane `paper-g`, *Informática y Sistemas*):
+**SUBMITTED 2026-11-17**, submission 8895 (acknowledged the same day). Pre-submission review,
+reviewer fixes, declarations and template compliance: PRs #143 and #144. Wait for the decision;
+do not rebuild unless the journal asks for a revision.
 
 **Paper B, revision 1** (C&I 2067810): **SUBMITTED 2026-11-12** after the editor reopened the
 step left empty on 2026-11-10. Wait for the decision. The thesis objective below is unchanged.
@@ -65,7 +62,7 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
 | **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
-| **G** | *Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations on Tabular Data* | *Informática y Sistemas* (UTM) | In preparation: run complete (frozen), analysis implemented, **not run** (waits for the author, ANALYSIS_PLAN 11.8) | `docs/reports/paper_g/` (README, ANALYSIS_PLAN, RUN_PROTOCOL, draft scaffold). Run artifacts: PR #123; analysis code: PR #126 |
+| **G** | *Do faithfulness metrics agree? Metric-dependent rankings of post-hoc explanations on tabular data* | *Informática y Sistemas* (UTM) | **Submitted 2026-11-17** (submission 8895; acknowledged the same day) | `docs/reports/paper_g/` (README, `review/BULLETPROOF_REVIEW_2026-11-17.md`); submitted files `submission/paper_g_blind.docx` (16 pp) and `Figure_1..5.png`, from PR #144 (`db0be47da`). Run: PR #123; analysis: #126-#140 |
 | **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Accepted by the reviewer; final version submitted 2026-10-25** (editor's request of the same day); awaiting publication | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Final files: `herrera-vasquez-final.pdf` (no. 47982) and `.docx` (no. 47981), in `submission/final_2026-10-25/`. Review and what was done: `docs/reports/paper_f/README.md`, sections 9 and 10 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
