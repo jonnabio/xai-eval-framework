@@ -363,7 +363,10 @@ class:
 $$c_j(r) = \sum_{k \in G_j} w_k\,\frac{x_k - r_k}{s_k}$$ {#eq:contribution}
 
 where *G*~*j*~ is the set of encoded columns of feature *j*, *w*~*k*~ the surrogate's coefficient on
-standardised column *k*, and *s*~*k*~ the scale LIME fitted to that column. The two variants differ
+standardised column *k*, and *s*~*k*~ the scale LIME fitted to that column. This is the standard
+contribution of a linear model, coefficient times the distance from a reference, which for an
+expected-value reference and independent features equals its SHAP values [@lundberg2017]; here
+it is applied to LIME's surrogate. The two variants differ
 only in *r*. In S1-B, the primary variant, *r* is the metrics' masking baseline *b*, so S1-B
 contributions are relative to the same point as occlusion and the metrics (but not as SHAP); a
 categorical feature at its training mode contributes 0. In S1-M, the sensitivity variant, *r* is
