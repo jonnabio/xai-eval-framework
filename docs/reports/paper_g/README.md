@@ -1,10 +1,13 @@
 # Paper G — Agreement between faithfulness metrics
 
-**Working title:** *Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc
-Explanations on Tabular Data*
-**Status (2026-11-16):** run, analysis (frozen), S3, diagnostics and the supplementary S1 run
-complete and on `main` (#123 to #138). **Manuscript ready for author review** (Task 20,
-direction C); not submitted. Status and author actions: `SUBMISSION_READINESS.md`.
+**Title:** *Do faithfulness metrics agree? Metric-dependent rankings of post-hoc explanations on
+tabular data*
+**Status (2026-11-17): SUBMITTED** to *Informática y Sistemas*, submission **8895**
+(acknowledged by the editorial committee, Jorge Párraga-Álava, 2026-11-17). Submitted files:
+`submission/paper_g_blind.docx` (16 pages in Word) and `submission/Figure_1..5.png`, built from
+the manuscript at PR #144 (`db0be47da`). Pre-submission review:
+`review/BULLETPROOF_REVIEW_2026-11-17.md`. Do not rebuild or edit unless the journal asks for a
+revision.
 **Venue:** *Informática y Sistemas* (UTM, Ecuador), English, 8–16 pages (`VENUE.md`).
 **Lane:** `paper-g`, branch `paper/g-metric-agreement`, main folder (registered in PR #116).
 **Origin:** Idea G1 of the 2026-11-13 session. The other candidates (G2–G6) are in
