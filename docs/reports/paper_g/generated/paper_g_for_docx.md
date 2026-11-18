@@ -237,12 +237,16 @@ and *q*~*t*~ = *f*(*x*~{*πt+1..πG*}←*b*~), which restores the first *t* feat
 instance, for *t* = 0, …, *G* (Equation (1)). The endpoints are *p*~0~ = *q*~*G*~ = *f(x)* and
 *p*~*G*~ = *q*~0~ = *f(b)*:
 
-$$M_1 = \frac{1}{G}\Big[\frac{p_0 + p_G}{2} + \sum_{t=1}^{G-1} p_t\Big], \qquad M_2 = \frac{1}{G}\Big[\frac{q_0 + q_G}{2} + \sum_{t=1}^{G-1} q_t\Big] \qquad (1)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle M_1 = \frac{1}{G}\Big[\frac{p_0 + p_G}{2} + \sum_{t=1}^{G-1} p_t\Big], \qquad M_2 = \frac{1}{G}\Big[\frac{q_0 + q_G}{2} + \sum_{t=1}^{G-1} q_t\Big]$`<w:r><w:tab/></w:r>`{=openxml}(1)
+:::
 
 The top-*k* prediction gap (M3) masks the top features and sufficiency (M6) masks all others
 (Equation (2)):
 
-$$M_3 = f(x) - f\big(x_{T\leftarrow b}\big), \qquad M_6 = f(x) - f\big(x_{\bar{T}\leftarrow b}\big) \qquad (2)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle M_3 = f(x) - f\big(x_{T\leftarrow b}\big), \qquad M_6 = f(x) - f\big(x_{\bar{T}\leftarrow b}\big)$`<w:r><w:tab/></w:r>`{=openxml}(2)
+:::
 
 Faithfulness correlation (M4) [@bhatt2020] is the Pearson correlation between *a*~*i*~ and the
 single-feature effect *Δ*~*i*~ = *f(x)* − *f*(*x*~{*i*}←*b*~); when *a* or *Δ* is constant the
@@ -253,7 +257,9 @@ independently with probability 0.5; a subset that masks nothing is given one ran
 feature; the subsets are shared by all explainers of an instance), with
 *Δ*~*r*~ = *f(x)* − *f*(*x*~*Sr*←*b*~) and *s*~*r*~ = Σ~*i*∈*Sr*~ *a*~*i*~,
 
-$$M_5 = \frac{\sum_{r=1}^{R}\big(\Delta_r - \hat\beta s_r\big)^2}{\sum_{r=1}^{R}\Delta_r^2}, \qquad \hat\beta = \frac{\sum_{r} s_r\Delta_r}{\sum_{r} s_r^2} \qquad (3)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle M_5 = \frac{\sum_{r=1}^{R}\big(\Delta_r - \hat\beta s_r\big)^2}{\sum_{r=1}^{R}\Delta_r^2}, \qquad \hat\beta = \frac{\sum_{r} s_r\Delta_r}{\sum_{r} s_r^2}$`<w:r><w:tab/></w:r>`{=openxml}(3)
+:::
 
 that is, one minus the uncentred *R*² of the least-squares fit of *Δ* on *s* without intercept
 (*M*~5~ = 0 if all *Δ*~*r*~ are 0 and 1 if all *s*~*r*~ are 0); subset masking replaces Gaussian
@@ -277,7 +283,9 @@ the block's value for M7, with average ranks for ties. The block's agreement is 
 correlation over the set *D*~*u*~ of metric pairs whose correlation is defined
 (Equation (4)):
 
-$$\bar\rho_u = \frac{1}{|D_u|}\sum_{(m,m')\in D_u} \rho_s\big(r_m, r_{m'}\big) \qquad (4)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle \bar\rho_u = \frac{1}{|D_u|}\sum_{(m,m')\in D_u} \rho_s\big(r_m, r_{m'}\big)$`<w:r><w:tab/></w:r>`{=openxml}(4)
+:::
 
 where *r*~*m*~ is the explainers' rank vector under metric *m* and *ρ*~*s*~ the Spearman
 correlation, computed as the Pearson correlation of the two rank vectors. A pair is undefined when
@@ -362,7 +370,9 @@ configuration on the same instances, and its fitted surrogate was represented as
 of each raw feature relative to a reference *r* (Equation (5)), oriented to the predicted
 class:
 
-$$c_j(r) = \sum_{k \in G_j} w_k\,\frac{x_k - r_k}{s_k} \qquad (5)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle c_j(r) = \sum_{k \in G_j} w_k\,\frac{x_k - r_k}{s_k}$`<w:r><w:tab/></w:r>`{=openxml}(5)
+:::
 
 where *G*~*j*~ is the set of encoded columns of feature *j*, *w*~*k*~ the surrogate's coefficient on
 standardised column *k*, and *s*~*k*~ the scale LIME fitted to that column. The two variants differ
