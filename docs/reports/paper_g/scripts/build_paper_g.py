@@ -99,7 +99,7 @@ for _a, _d in CONDITIONS.items():
 # Printed width of a figure as a share of the text width (default 100%); square or tall figures
 # are narrower so the article stays within the journal's 16 pages. The submitted figure files
 # (submission/Figure_n) are unaffected.
-FIG_WIDTH = {"h2_matrix": "65%", "positions": "80%", "s3": "85%"}
+FIG_WIDTH = {"h2_matrix": "65%", "positions": "80%", "s3": "85%", "sensitivity": "90%"}
 
 _TABLES: dict | None = None
 
@@ -406,7 +406,7 @@ def build(text: str) -> None:
     SUB.mkdir(exist_ok=True)
     body = G / "generated" / "paper_g_for_docx.md"
     # The manuscript's front matter (status note) is not part of the submitted file.
-    body.write_text(text, encoding="utf-8", newline="\n")
+    body.write_text(equations_for_word(text), encoding="utf-8", newline="\n")
     docx = SUB / "paper_g_blind.docx"
     cmd = ["pandoc", str(body), "-o", str(docx), "--citeproc", "--csl", str(CSL),
            "--bibliography", str(BIB), "--resource-path", str(G), "-M",
@@ -441,7 +441,26 @@ EXTRA_STYLES = (
     '<w:style w:type="paragraph" w:customStyle="1" w:styleId="CaptionedFigure">'
     '<w:name w:val="Captioned Figure"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/>'
     '<w:spacing w:before="120" w:after="0" w:line="240" w:lineRule="auto"/>'
-    '<w:jc w:val="center"/></w:pPr></w:style>')
+    '<w:jc w:val="center"/></w:pPr></w:style>'
+    # Text width 17.59 cm = 9972 twips: centre tab at the middle, right tab at the margin.
+    '<w:style w:type="paragraph" w:customStyle="1" w:styleId="Equation">'
+    '<w:name w:val="Equation"/><w:basedOn w:val="Normal"/><w:qFormat/><w:pPr>'
+    '<w:keepLines/><w:tabs><w:tab w:val="center" w:pos="4986"/><w:tab w:val="right" '
+    'w:pos="9972"/></w:tabs><w:spacing w:before="120" w:after="120"/><w:ind w:left="0" '
+    'w:firstLine="0"/><w:jc w:val="left"/></w:pPr></w:style>')
+
+
+TAB = "`<w:r><w:tab/></w:r>`{=openxml}"
+
+
+def equations_for_word(text: str) -> str:
+    """Template: an equation is centred, its number in parentheses at the right margin, and it is
+    separated from the text by a blank line. Each numbered display equation becomes an
+    "Equation" paragraph (centre and right tab stops, see EXTRA_STYLES): tab, formula, tab, (n)."""
+    return re.sub(r"\$\$(.+?) \\qquad \((\d+)\)\$\$",
+                  lambda m: (f'::: {{custom-style="Equation"}}\n{TAB}$\\displaystyle '
+                             f'{m.group(1).strip()}${TAB}({m.group(2)})\n:::'),
+                  text, flags=re.S)
 
 
 def fix_docx(path: Path) -> None:

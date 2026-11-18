@@ -12,14 +12,16 @@ Abstract
 
 ::: {custom-style="Abstract"}
 Claims that one post-hoc explanation method is more faithful than another rest on a faithfulness
-metric, and the available metrics operationalise faithfulness differently. This study measured
-whether seven common metrics agree, using a paired design: SHAP, LIME, occlusion and a random
-control explained four classifiers on eight public tabular datasets (five seeds, 200 instances
-per condition), and every explanation was scored by every metric. In the original analysis, with
-its hypotheses and decision rule fixed before the run, the metrics broadly agreed on the order of
-the explainers (mean pairwise Spearman correlation 0.723, 95% CI
-[0.645, 0.802]) but agreed weakly on
-individual explanations (0.154). In the configuration used, LIME's
+metric, and the available metrics operationalise faithfulness differently. This study asked
+whether seven common metrics agree, and tested two hypotheses fixed before the run: that the
+metrics rank explainers in the same order (H1) and that they correlate positively across
+individual explanations (H2). SHAP, LIME, occlusion and a random control explained four
+classifiers on eight public tabular datasets (five seeds, 200 instances per condition), and every
+explanation was scored by every metric. Both hypotheses were supported: the metrics broadly agreed
+on the order of the explainers (mean pairwise Spearman correlation
+0.723, 95% CI [0.645,
+0.802]) but only weakly on individual explanations
+(0.154). In the configuration used, LIME's
 output was a local slope, not the contribution that the metrics assume, and contribution-based
 metrics ranked it last in every block. In supplementary analyses specified after this finding and
 carrying no test decision, the slopes were unrelated to exact Shapley values
@@ -29,9 +31,8 @@ contributions on the real data, system-level agreement was
 ([0.389,
 0.669]), and
 0.309 under a second masking baseline, while
-instance-level agreement was unchanged. In this study, faithfulness-metric agreement varied with
-the level of evaluation, the representation of the attributions and the evaluation protocol.
-Comparisons of explainers should declare what their attributions represent, report more than one
+instance-level agreement was unchanged. The metrics therefore agreed on rankings only under the
+original setup, and weakly on individual explanations. Comparisons of explainers should declare what their attributions represent, report more than one
 metric and masking baseline, and include a random control.
 :::
 
@@ -70,15 +71,21 @@ occurs, the evaluation of explanations is less studied [@velmurugan2025].
 Earlier studies of the same research programme found that the advantage of one explainer over
 another depends on the model and its configuration [@ownB], that SHAP and LIME often disagree on
 which features matter for an instance [@ownE], and that explainer rankings vary across datasets
-[@ownF]. The present study asks a prior question: whether the measuring instrument itself gives a
-consistent answer. It contributes a paired, multi-dataset measurement of agreement between seven
-faithfulness metrics, at the level of explainer rankings and of individual explanations, with a
-within-metric stability benchmark and a synthetic check against exact attributions. In the course
-of the study, a construct mismatch was found in one explainer's output; supplementary experiments
-specified after that finding describe how the observed agreement changed when it was removed. The
-main finding is that, in this study, faithfulness-metric agreement varied with the level at which
-it was evaluated, with the representation of the attributions being compared, and with the
-evaluation protocol.
+[@ownF]. The present study asks a prior question, about the measuring instrument itself: **do
+common faithfulness metrics agree on which explanations are more faithful?** Agreement is examined
+at two levels, each with a hypothesis fixed before the experiment:
+
+- **H1 (system level):** within each dataset, model and seed, the metrics rank the explainers in
+  the same order more often than chance would produce. The null hypothesis is that the metrics
+  rank the explainers independently.
+- **H2 (instance level):** across the individual explanations of one explainer, pairs of metrics
+  are positively correlated. The null hypothesis is that the mean correlation is not positive.
+
+The study contributes a paired, multi-dataset test of both hypotheses for seven faithfulness
+metrics on tabular data, with a within-metric stability benchmark and a synthetic check against
+exact attributions. During the study, one explainer's output was found not to be of the kind the
+metrics assume; supplementary experiments specified after that finding show how the answer
+changes when the mismatch is removed.
 
 ## 1.1. Related work
 
@@ -133,18 +140,19 @@ Source: Authors.
 The design is fully paired: the same instances are explained by every explainer, and the same
 explanations are scored by every metric. The factors are 8 datasets × 4 models × 4 explainers ×
 7 metrics, with 5 seeds and 200 test instances per dataset, model and seed; a *block* is one
-dataset, model and seed (160 blocks). The research questions, the metrics, the H1 statistic,
+dataset, model and seed (160 blocks). The research question, the hypotheses, the metrics, the H1 statistic,
 interval, permutation test and decision rule, and the planned secondary and sensitivity analyses
 were fixed in the analysis plan before the run. Other operational details were fixed after the
 run had finished but before any metric value, attribution or agreement statistic was examined;
 the analysis was then run once, and its outputs were frozen. A review of those outputs led to two
 supplementary experiments and four exploratory diagnostics. The evidence is therefore reported in
-five classes (Table 2); results of different classes are never pooled, and only
-the H1 classification carries a decision.
+five classes (Table 2); results of different classes are never pooled. H1 and H2
+are tested only in the original analysis, and only H1 has a rule, fixed before the run, that
+classifies the strength of agreement.
 
 | Class | Content | When specified |
 |---|---|---|
-| Pre-specified | Research questions H1 and H2; metrics and their directions; H1 statistic, dataset-level *t*-interval, dataset-unit permutation test and decision rule; Holm correction over H1 and H2; the H2 estimate; winner flips, SHAP–LIME order, second masking baseline, random control, per-model summaries; synthetic-check design | Before the run |
+| Pre-specified | Hypotheses H1 and H2; metrics and their directions; H1 statistic, dataset-level *t*-interval, dataset-unit permutation test and decision rule; Holm correction over H1 and H2; the H2 estimate; winner flips, SHAP–LIME order, second masking baseline, random control, per-model summaries; synthetic-check design | Before the run |
 | Pre-unblinding clarifications | Seven metrics and the three studied explainers as the primary H1 population; ties and undefined correlations; degenerate M4 values kept as stored; the within-metric stability benchmark; H2 orientation, *t*-interval, one-sided *t*-test, sign-flip test and Holm over its 15 pairs; the synthetic statistic; raw permutation *p* for the decision table; the six-metric sensitivity; the M4-exclusion sensitivity; the retrospective dataset check; omission of the variance shares | After the run, before any result was examined |
 | Original analysis | The two classes above, run once on the frozen data; outputs frozen | After the pre-unblinding clarifications |
 | Supplementary experiments | S3 (synthetic LIME representations) and S1 (LIME as surrogate contributions; S1-B primary, S1-M sensitivity) | After the original results were reviewed |
@@ -229,12 +237,16 @@ and *q*~*t*~ = *f*(*x*~{*πt+1..πG*}←*b*~), which restores the first *t* feat
 instance, for *t* = 0, …, *G* (Equation (1)). The endpoints are *p*~0~ = *q*~*G*~ = *f(x)* and
 *p*~*G*~ = *q*~0~ = *f(b)*:
 
-$$M_1 = \frac{1}{G}\Big[\frac{p_0 + p_G}{2} + \sum_{t=1}^{G-1} p_t\Big], \qquad M_2 = \frac{1}{G}\Big[\frac{q_0 + q_G}{2} + \sum_{t=1}^{G-1} q_t\Big] \qquad (1)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle M_1 = \frac{1}{G}\Big[\frac{p_0 + p_G}{2} + \sum_{t=1}^{G-1} p_t\Big], \qquad M_2 = \frac{1}{G}\Big[\frac{q_0 + q_G}{2} + \sum_{t=1}^{G-1} q_t\Big]$`<w:r><w:tab/></w:r>`{=openxml}(1)
+:::
 
 The top-*k* prediction gap (M3) masks the top features and sufficiency (M6) masks all others
 (Equation (2)):
 
-$$M_3 = f(x) - f\big(x_{T\leftarrow b}\big), \qquad M_6 = f(x) - f\big(x_{\bar{T}\leftarrow b}\big) \qquad (2)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle M_3 = f(x) - f\big(x_{T\leftarrow b}\big), \qquad M_6 = f(x) - f\big(x_{\bar{T}\leftarrow b}\big)$`<w:r><w:tab/></w:r>`{=openxml}(2)
+:::
 
 Faithfulness correlation (M4) [@bhatt2020] is the Pearson correlation between *a*~*i*~ and the
 single-feature effect *Δ*~*i*~ = *f(x)* − *f*(*x*~{*i*}←*b*~); when *a* or *Δ* is constant the
@@ -245,7 +257,9 @@ independently with probability 0.5; a subset that masks nothing is given one ran
 feature; the subsets are shared by all explainers of an instance), with
 *Δ*~*r*~ = *f(x)* − *f*(*x*~*Sr*←*b*~) and *s*~*r*~ = Σ~*i*∈*Sr*~ *a*~*i*~,
 
-$$M_5 = \frac{\sum_{r=1}^{R}\big(\Delta_r - \hat\beta s_r\big)^2}{\sum_{r=1}^{R}\Delta_r^2}, \qquad \hat\beta = \frac{\sum_{r} s_r\Delta_r}{\sum_{r} s_r^2} \qquad (3)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle M_5 = \frac{\sum_{r=1}^{R}\big(\Delta_r - \hat\beta s_r\big)^2}{\sum_{r=1}^{R}\Delta_r^2}, \qquad \hat\beta = \frac{\sum_{r} s_r\Delta_r}{\sum_{r} s_r^2}$`<w:r><w:tab/></w:r>`{=openxml}(3)
+:::
 
 that is, one minus the uncentred *R*² of the least-squares fit of *Δ* on *s* without intercept
 (*M*~5~ = 0 if all *Δ*~*r*~ are 0 and 1 if all *s*~*r*~ are 0); subset masking replaces Gaussian
@@ -269,7 +283,9 @@ the block's value for M7, with average ranks for ties. The block's agreement is 
 correlation over the set *D*~*u*~ of metric pairs whose correlation is defined
 (Equation (4)):
 
-$$\bar\rho_u = \frac{1}{|D_u|}\sum_{(m,m')\in D_u} \rho_s\big(r_m, r_{m'}\big) \qquad (4)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle \bar\rho_u = \frac{1}{|D_u|}\sum_{(m,m')\in D_u} \rho_s\big(r_m, r_{m'}\big)$`<w:r><w:tab/></w:r>`{=openxml}(4)
+:::
 
 where *r*~*m*~ is the explainers' rank vector under metric *m* and *ρ*~*s*~ the Spearman
 correlation, computed as the Pearson correlation of the two rank vectors. A pair is undefined when
@@ -291,7 +307,7 @@ Spearman; undefined pairs left out), and the values were averaged over models an
 each dataset. Seeds change the split, the model and the explainers' sampling, so the benchmark is
 a reference level for between-metric agreement, not an upper bound.
 
-**Instance level (H2).** The plan fixed the question (whether pairs of metrics correlate
+**Instance level (H2).** The plan fixed the hypothesis (pairs of metrics correlate
 positively across instances) and the estimate: for each block and explainer (all four), the
 Spearman correlation across the 200 instances for each of the 15 pairs of M1 to M6, with metrics
 oriented, averaged within the block and then within the dataset. Its inference was fixed after
@@ -354,10 +370,15 @@ configuration on the same instances, and its fitted surrogate was represented as
 of each raw feature relative to a reference *r* (Equation (5)), oriented to the predicted
 class:
 
-$$c_j(r) = \sum_{k \in G_j} w_k\,\frac{x_k - r_k}{s_k} \qquad (5)$$
+::: {custom-style="Equation"}
+`<w:r><w:tab/></w:r>`{=openxml}$\displaystyle c_j(r) = \sum_{k \in G_j} w_k\,\frac{x_k - r_k}{s_k}$`<w:r><w:tab/></w:r>`{=openxml}(5)
+:::
 
 where *G*~*j*~ is the set of encoded columns of feature *j*, *w*~*k*~ the surrogate's coefficient on
-standardised column *k*, and *s*~*k*~ the scale LIME fitted to that column. The two variants differ
+standardised column *k*, and *s*~*k*~ the scale LIME fitted to that column. This is the standard
+contribution of a linear model, coefficient times the distance from a reference, which for an
+expected-value reference and independent features equals its SHAP values [@lundberg2017]; here
+it is applied to LIME's surrogate. The two variants differ
 only in *r*. In S1-B, the primary variant, *r* is the metrics' masking baseline *b*, so S1-B
 contributions are relative to the same point as occlusion and the metrics (but not as SHAP); a
 categorical feature at its training mode contributes 0. In S1-M, the sensitivity variant, *r* is
@@ -394,7 +415,8 @@ At system level, the mean pairwise Spearman correlation between metrics was
 *p* = .00001 (the smallest value attainable with
 100,000 permutations), and *p* = .00002 after
 Holm correction over H1 and H2. With the interval above 0.5, the frozen decision rule classifies
-the result as "the metrics broadly agree", both before and after correction. The within-metric
+the result as "the metrics broadly agree", both before and after correction. **H1 is supported:**
+the null hypothesis of independent rankings is rejected, and the agreement is broad. The within-metric
 stability benchmark was 0.873
 ([0.826, 0.920]), so the
 between-metric estimate was lower than the within-metric benchmark (no test compares them). Agreement was
@@ -406,14 +428,13 @@ At instance level, agreement was weak: the mean correlation between metric pairs
 was 0.154 ([0.099, 0.209];
 one-sided *t*-test *p* = .00016, sign-flip *p* = .0039, the smallest attainable with eight
 datasets).
-With the inference fixed before unblinding (Section 2.5), H2 is supported as a positive mean,
-but its size is small, and the pairs differed in sign:
+**H2 is supported, with a small effect:** the null hypothesis is rejected (inference fixed before
+unblinding, Section 2.5), but the mean correlation is small, and the pairs differed in sign:
 deletion and insertion correlated negatively (−0.351), as did
 infidelity and sufficiency (−0.181), whereas deletion and
 the top-*k* gap correlated most strongly (0.507; Figure 1).
 
-These results are reported exactly as the frozen analysis produced them; the H1 classification
-is the study's only decision. They describe agreement among the metrics for the explainer outputs
+These results are reported exactly as the frozen analysis produced them. They describe agreement among the metrics for the explainer outputs
 *as stored*; as Section 2.3 explains, LIME's stored output was a
 slope, while M1 to M6 read attributions as contributions. Sections 3.3 and 3.4 show what this
 means for the result.
@@ -519,7 +540,7 @@ Source: Authors.
 Source: Authors.
 :::
 
-![**Figure 4.** System-level agreement under the specified sensitivity analyses for the three LIME representations (mean over eight datasets with 95% *t*-interval).](figures/fig_sensitivity.png){width=100%}
+![**Figure 4.** System-level agreement under the specified sensitivity analyses for the three LIME representations (mean over eight datasets with 95% *t*-interval).](figures/fig_sensitivity.png){width=90%}
 
 ::: {custom-style="Source"}
 Source: Authors.
@@ -635,34 +656,20 @@ within-metric stability benchmark and the explainers' rank positions next to any
 agreement statistic; and (5) separate claims about rankings from claims about individual
 explanations.
 
-**Limitations.** The study has eight binary tabular datasets and four model families, and three
-studied explainers make rank statistics coarse. LIME was run in one configuration whose output is
-a slope; S1 addresses its representation but not its fitting choices (kernel, sampling around the
-training mean), which also affect its stability [@tzionis2026], and for categorical features S1
-rests on a surrogate fitted to off-manifold samples [@ademi2025], with S1-M measured from an
-off-manifold reference. The explainers' reference points differ: SHAP's is a background
-expectation, occlusion's and S1-B's the masking baseline, S1-M's LIME's training mean. The H2
-inference, the stability benchmark and other details were fixed after the run, before unblinding;
-the supplementary experiments and diagnostics were specified after the original results had been
-reviewed, carry no decision, and S1 was not tested against the original analysis. The dataset
-check was run retrospectively and the planned variance decomposition was omitted. The decision
-threshold of 0.5 cannot separate agreement on every position from agreement on the last position.
-Ground truth exists only in a small synthetic setting; on real data the study measures agreement,
-not correctness. The metrics share masking machinery, M4 shares its construction with occlusion,
-M3 and M6 use one masking fraction, M5 is a Monte Carlo estimate, M4 is stored as 0 when
-undefined, and M7 uses four removal levels with one retraining each. The *f(x)* adjustment is
-exploratory and does not separate the explanation from the prediction.
-
 # 4. Conclusions
 
-Faithfulness metrics agreed broadly on the order of explainers in the original analysis, and
-weakly on individual explanations. That system-level agreement was obtained with an explainer
-whose output did not match what the metrics assume; with LIME represented as surrogate
-contributions, agreement was moderate, its interval contained 0.5, and it was lower under a second
-masking baseline, while instance-level agreement stayed weak. In this study, then, whether the
-metrics agreed depended on the level of evaluation, on how the attributions were represented and
-on the evaluation protocol. Claims that one explainer is more faithful than another should state
-all three. Future work should extend the comparison to explainers with declared reference
+The study asked whether common faithfulness metrics agree on which explanations are more
+faithful. For the eight datasets, four models and three explainers studied, the answer has two
+parts. On the ranking of explainers, the metrics agreed broadly (H1 supported); on individual
+explanations, they agreed only weakly (H2 supported, with a small effect). The ranking agreement
+was not robust, however. It was obtained with an explainer whose output did not match what the
+metrics assume. With LIME represented as surrogate contributions, in a supplementary analysis
+that carries no test decision, agreement was moderate, its interval contained 0.5, and it fell
+further under a second masking baseline, while instance-level agreement stayed weak. Whether the
+metrics agree therefore depends on the level of evaluation, on what the attributions represent and
+on the evaluation protocol, and a claim that one explainer is more faithful than another should
+state all three. The study does not show whether the metrics agree for other explainers, tasks or
+data types. Future work should extend the comparison to explainers with declared reference
 semantics, to more masking schemes and to regression and multiclass tasks.
 
 # Funding
