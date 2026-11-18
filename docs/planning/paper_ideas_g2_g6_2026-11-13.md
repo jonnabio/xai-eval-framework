@@ -1,6 +1,6 @@
 # Paper ideas G2 to G6 (backlog)
 
-**Status:** Ideas only, recorded 2026-11-13. None is started, and none has a lane.
+**Status:** Ideas only, recorded 2026-11-13; G7 to G12 added 2026-11-17 from the limitations of Paper G. None is started, and none has a lane.
 **Origin:** Session of 2026-11-13. The author asked for candidates for a seventh paper
 (Paper G). G1, agreement between faithfulness metrics, was chosen and is being developed
 in `docs/reports/paper_g/`. The other five are kept here for later.
@@ -146,6 +146,54 @@ a high chance of reviewer objections about the realism of the attack. Highest no
 the highest risk.
 
 ---
+
+## G7 to G12: research ideas from the limitations of Paper G (added 2026-11-17)
+
+On 2026-11-17 the author removed the Limitations paragraph from Paper G (section 3.8) and asked
+for its items to be kept here as research ideas. Each line names the Paper G limitation it comes
+from. The rules above apply: no result of Papers A to G may be reprinted, and each idea needs its
+own run.
+
+| ID | Working title | From the Paper G limitation | Complexity |
+|---|---|---|---|
+| G7 | Faithfulness-metric agreement beyond binary tabular classification | Eight binary datasets and four model families; three explainers make rank statistics coarse | 3/5 |
+| G8 | LIME's fitting choices and metric agreement on real data | One LIME configuration; kernel and sampling around the training mean not varied; off-manifold one-hot samples | 3/5 |
+| G9 | A common reference point for attributions | SHAP, occlusion and LIME contributions measured from different reference points | 2/5 |
+| G10 | Design sensitivity of the faithfulness metrics themselves | Shared masking machinery; one masking fraction (M3, M6); Monte Carlo M5; M4 undefined stored as 0; M7 with four levels and one retraining each | 2/5 |
+| G11 | A confirmatory test of the attribution-representation effect | S1 and S3 specified after the original results; H2 inference fixed after the run; dataset check retrospective; variance decomposition omitted | 3/5 |
+| G12 | Position-aware agreement and richer ground truth | The 0.5 threshold cannot separate agreement on every position from agreement on the last; ground truth only in a small synthetic setting; the *f(x)* adjustment does not separate explanation from prediction | 4/5 |
+
+**G7.** Repeat the G1 protocol on regression and multiclass tasks and on more datasets, with at
+least five studied explainers (for example adding Integrated Gradients for the MLP, a second
+SHAP estimator and an on-manifold perturbation method), so that rank correlations are less
+coarse than with three. Risk: compute; keep the paired design.
+
+**G8.** On the real datasets, vary LIME's kernel width, sampling (around the instance against
+around the training mean) and categorical handling (on-manifold sampling of one-hot groups, for
+example POMELO-style perturbations), and measure how metric agreement and LIME's rank change.
+Boundary: Paper B already reports a LIME kernel-width sweep, so G8 must be framed as metric
+agreement under fitting choices, not as kernel sensitivity.
+
+**G9.** Align the reference point of every explainer (SHAP background equal to the masking
+baseline, occlusion and LIME contributions from the same point) and compare metric agreement with
+the unaligned setting. Isolates how much disagreement comes from mismatched references rather
+than from the metrics.
+
+**G10.** Vary each metric's free parameters: masking fraction for M3 and M6, number of draws for
+M5 (with its Monte Carlo variance), handling of undefined M4, removal levels and repeated
+retrainings for M7, and add metrics that do not use masking (for example model-parameter
+randomisation checks). Report the within-metric variance that each parameter induces.
+
+**G11.** Pre-register, on new datasets, the hypothesis that metric agreement falls when an
+explainer's output is represented as contributions instead of slopes, with the H1 and H2
+inference, the dataset gate and a fully specified variance decomposition fixed before the run.
+Turns Paper G's supplementary finding into a confirmatory test.
+
+**G12.** Define an agreement statistic that weighs every rank position (for example agreement on
+the full order after removing blocks where one explainer is at the same extreme under every
+metric), and test the metrics against semi-synthetic ground truth on real feature distributions
+(known functions fitted to real data), including a design that separates the explanation's
+contribution from the prediction *f(x)*.
 
 ## Recommended order after G1
 
