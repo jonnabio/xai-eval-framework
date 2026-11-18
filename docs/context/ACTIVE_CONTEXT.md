@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-17, by `claude-2026-11-17` (Windows documentation laptop): Paper G submitted.
+**Last updated:** 2026-11-18, by `claude-2026-11-17` (Windows documentation laptop): session end, Paper G submitted.
 
 ## Current objective
 
@@ -165,51 +165,34 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-16, SESSION END (Paper G: manuscript merged; handoff to the Windows laptop)
+## Latest handoff - 2026-11-18, SESSION END (Paper G submitted)
 
-Session owner `paper-g-task21` (Linux run host, documentation clone
-`~/Documents/GitHub/xai-eval-framework`); Tasks 20 and 21 and this consolidation. Lane `paper-g`
-(lock released); this handoff on `pubs/context-2026-11-16-paper-g-handoff`.
+Session owner `claude-2026-11-17` (Windows documentation laptop). Lane `paper-g`: lock released.
 
-- **Project state:** Paper G experimental phase COMPLETE; original analysis COMPLETE AND VERIFIED;
-  S3 COMPLETE; S1 COMPLETE AND VERIFIED; exploratory diagnostics COMPLETE; manuscript preparation
-  ACTIVE; submission NOT AUTHORIZED.
-- **Revisions:** PR #139 merge `aa5524d70` (manuscript, figures, references, build scripts,
-  reports); PR #140 merge `b34f61227` (resolver `paper_g`, `scripts/pubs/register_paper_g.py`,
-  185 claims, coverage and exclusivity guards, CI step). Manuscript source: last change
-  `58d6b9b68` (`docs/reports/paper_g/paper_g_draft.md`). Claim registry: `b34f61227`. `main`
-  after this handoff is its merge commit, which descends from `b34f61227`.
-- **Integrity (checked at `b34f61227`):** no change since `bb6ea3c7c` to
-  `outputs/analysis/paper_g/` (1,294 files; raw and S1 manifests identical), frozen code,
-  `experiments/exp_g/`, `RESULTS_REPORT.md`, `ANALYSIS_PLAN.md`; original analysis identical to
-  `3b0063f41`; `paper_g_analyze.py --validate-only` passes; `verify_claims` 2,083 claims, 2,500
-  sites; `register_paper_g.py --check` OK; 134 Paper G tests pass; equations of the manuscript
-  match the frozen functions (`docs/reports/paper_g/verification/verify_equations.py`, 480 checks).
-- **Manuscript artifacts** (`docs/reports/paper_g/`): `paper_g_draft.md` (source; numbers are
-  placeholders), `paper_g.md` (rendered), `submission/paper_g_blind.docx` and `.pdf` (13 pages,
-  journal template), `submission/Figure_1..5`, `EVIDENCE_MAP.md`, `RIGOR_REVIEW.md`,
-  `JOURNAL_COMPLIANCE.md`, `SUBMISSION_READINESS.md`, `REFERENCE_VERIFICATION.md`,
-  `AUTHOR_REVIEW_CHECKLIST.md`. Rebuild after any edit of the source:
-  `python docs/reports/paper_g/scripts/build_paper_g.py --evidence-map`, then
-  `python scripts/pubs/register_paper_g.py` and `python scripts/pubs/verify_claims.py` (the
-  .docx build needs pandoc and LibreOffice; on Windows, open the .docx in Word instead).
-- **Remaining author actions** (never completed by the assistant):
-  1. Substantive review of the manuscript; the journal's AI-content limit (30%, Compilatio).
-  2. Funding declaration (and the OJS Supporting Agencies field).
-  3. Conflicts-of-interest declaration.
-  4. Generative-AI-use declaration: extent of own review; any other assistant used (ChatGPT was
-     set up as advisor, `CHATGPT_ADVISOR_PROMPT.md`).
-  5. Double-blind risk: the manuscript and its history are public on GitHub under the author's
-     name since 2026-11-13; decide (tell the editor, make private, or accept). Not changed.
-  6. Word check of pagination, equations and repeated table headers.
-  7. Submission components in OJS (anonymised .docx, figure files, checklist and copyright
-     notice accepted online, author metadata and ORCID; no separate signed agreement).
-- **Next task (Windows documentation laptop):** Task 21 — final manuscript review, author
-  corrections and submission readiness. No experiment is to be restarted.
-- **Windows sync:** in `C:\Users\jonna\Github\xai-eval-framework`: `git status` (preserve any
-  local changes first: commit them on a branch or `git stash push -u`), then `git fetch origin`,
-  `git switch main`, `git pull --ff-only origin main`, `git status`, `git log -1 --oneline`;
-  check `git merge-base --is-ancestor b34f61227 HEAD` returns 0.
-- **Notes:** `pub/fragments/build_meta.env` changes when `generate_fragments.py` runs on another
-  machine (path and time); do not commit that change. Merged branches `paper/g-manuscript-completion`
-  and `pubs/paper-g-claims` are kept on GitHub (not deleted).
+- **Completed:**
+  - Paper G analysis checked: H1 recomputed from the raw shards, 0.723 [0.645, 0.802], as printed.
+  - Bulletproof review, CLEIej rubric review, and template and venue compliance check
+    (`docs/reports/paper_g/review/BULLETPROOF_REVIEW_2026-11-17.md`).
+  - Paper G tests made to pass on Windows: path separators; S1 driver tests skipped under spawn.
+  - Fixes M1–M4, sentence-case title, positioning table, OpenXAI (`agarwal2022`), APA p-values,
+    Table 4 markers, Equation (5) cited to Lundberg 2017, equation numbering laid out for Word.
+  - Declarations completed (author's AI text; no funding; no conflicts). Limitations section
+    removed; its items kept as ideas G7–G12 in `docs/planning/paper_ideas_g2_g6_2026-11-13.md`.
+  - Question, hypotheses, verdicts and conclusions made consistent; appendix of model settings.
+  - pandoc and LibreOffice installed (winget); build runs on Windows. 16 pages in Word.
+  - **SUBMITTED 2026-11-17** to *Informática y Sistemas*, submission 8895. PRs #143–#146 merged;
+    publication table updated and put in order A–G.
+- **Current State:** Paper G is frozen at the submitted version on `main`; 185 Paper G claims,
+  2,083 claims overall, 480 equation checks pass. Papers B, C, D, E, F, G all wait for decisions.
+- **Next Steps:**
+  1. Sync: `git fetch origin`, `git switch main`, `git pull --ff-only`.
+  2. Wait for journal decisions; act only on a revision request (B: C&I 2067810; G: 8895).
+  3. Optionally save the editor note as `docs/reports/paper_g/EDITOR_NOTE.md`.
+  4. Next paper, if wanted: ideas G2–G12 (recommended order G3, G4, G2).
+- **Blockers/Issues:** none. Untracked, left alone by request:
+  `docs/reports/paper_a/paper_a_rimi.pdf`, `docs/reports/paper_g/venue/template/ISRTIC_Plantilla_Articulo-EN.docx`.
+- **Notes:** builds need pandoc (`%LOCALAPPDATA%\Pandoc`) and LibreOffice
+  (`C:\Program Files\LibreOffice\program`) on PATH; check pages in Word, not LibreOffice. After any
+  manuscript edit: `build_paper_g.py`, `scripts/pubs/register_paper_g.py`,
+  `scripts/pubs/verify_claims.py`. Placeholder formats `zf1..zf5` print APA values without the
+  leading zero. Shared paths go in their own commit and branch, never with lane files.
