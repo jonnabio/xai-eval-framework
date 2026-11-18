@@ -1,5 +1,5 @@
 ::: {custom-style="Title"}
-Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations on Tabular Data
+Do faithfulness metrics agree? Metric-dependent rankings of post-hoc explanations on tabular data
 :::
 
 ::: {custom-style="Article Type"}
@@ -19,9 +19,10 @@ per condition), and every explanation was scored by every metric. In the origina
 its hypotheses and decision rule fixed before the run, the metrics broadly agreed on the order of
 the explainers (mean pairwise Spearman correlation 0.723, 95% CI
 [0.645, 0.802]) but agreed weakly on
-individual explanations (0.154). A review of the results found that LIME had
-been stored as local slopes rather than contributions, and contribution-based metrics ranked it
-last in every block. In supplementary analyses, the slopes were unrelated to exact Shapley values
+individual explanations (0.154). In the configuration used, LIME's
+output was a local slope, not the contribution that the metrics assume, and contribution-based
+metrics ranked it last in every block. In supplementary analyses specified after this finding and
+carrying no test decision, the slopes were unrelated to exact Shapley values
 in synthetic data while LIME's surrogate contributions tracked them, and with LIME represented as
 contributions on the real data, system-level agreement was
 0.529
@@ -96,7 +97,9 @@ objective and mathematical evaluation measures need not align either [@kares2027
 such as the model and data type change which method is preferred, and recommend several metrics
 [@klein2024; @bommer2024]. Applied tabular evaluations bundle several metrics, for example in
 intrusion detection or health [@arreche2024; @qureshi2026], but rarely analyse how the metrics
-relate. A recent tabular and image study reports that local explanation rankings depend on the
+relate. Benchmark frameworks also bundle faithfulness metrics for tabular explainers
+[@agarwal2022], but report them side by side rather than measuring how far they agree. A recent
+tabular and image study reports that local explanation rankings depend on the
 classifier, the masking operator and the computational budget [@ababneh2026].
 
 **Disagreement.** The disagreement problem concerns explainers that disagree with each other
@@ -107,6 +110,21 @@ reliable for all end tasks on rich model classes [@bilodeau2024], and evaluation
 truth has its own limits [@rawal2025; @rahnama2024]. The present study is the empirical
 counterpart for tabular data: a paired measurement of how far common metrics agree, with a
 benchmark for their own stability and with the role of attribution semantics made explicit.
+Table 1 sets it against the closest studies.
+
+Table: **Table 1.** Closest studies and how the present study differs.
+
+| Study | What it examines | Difference in the present study |
+|----------------|------------------------------------|------------------------------------|
+| @duan2024 | Consistency of attribution-evaluation results across evaluation settings, on images | Tabular data; paired agreement between seven metrics at ranking and instance level |
+| @edin2025 | Perturbation-curve scores that are not comparable across models, and their normalisation | Agreement between metric families, not the scale of one metric |
+| @mironicolau2025 | Fidelity metrics that lack verification and can disagree on the same explanation | Multi-dataset measurement with a within-metric stability benchmark and the dataset as the unit of inference |
+| @ababneh2026 | Dependence of explainer rankings on classifier, masking operator and budget | Agreement among metrics on the same explanations, with the attribution semantics made explicit |
+| @shanklin2026 | Conceptual account of why faithfulness criteria disagree | Empirical counterpart with a random control and a synthetic ground-truth check |
+
+::: {custom-style="Source"}
+Source: Authors.
+:::
 
 # 2. Materials and methods
 
@@ -121,7 +139,7 @@ were fixed in the analysis plan before the run. Other operational details were f
 run had finished but before any metric value, attribution or agreement statistic was examined;
 the analysis was then run once, and its outputs were frozen. A review of those outputs led to two
 supplementary experiments and four exploratory diagnostics. The evidence is therefore reported in
-five classes (Table 1); results of different classes are never pooled, and only
+five classes (Table 2); results of different classes are never pooled, and only
 the H1 classification carries a decision.
 
 | Class | Content | When specified |
@@ -132,7 +150,7 @@ the H1 classification carries a decision.
 | Supplementary experiments | S3 (synthetic LIME representations) and S1 (LIME as surrogate contributions; S1-B primary, S1-M sensitivity) | After the original results were reviewed |
 | Exploratory diagnostics | Explainer positions; *f(x)*-adjusted instance-level correlations; M7 removal sets and ties; random control last | After the original results were reviewed |
 
-Table: **Table 1.** Classes of evidence and when each was specified.
+Table: **Table 2.** Classes of evidence and when each was specified.
 
 ::: {custom-style="Source"}
 Source: Authors.
@@ -141,14 +159,14 @@ Source: Authors.
 ## 2.2. Datasets and models
 
 Eight public binary classification datasets were taken from OpenML [@bischl2025], two from each of
-four strata of feature composition and size (Table 2). The list was fixed before any
+four strata of feature composition and size (Table 3). The list was fixed before any
 explanation was computed. The eligibility rule required a five-fold cross-validated AUC between
 0.65 and 0.98 for at least two of the four models. The check was specified before the run but
 executed after it, as a retrospective diagnostic; no dataset was to be removed whatever its
 outcome. All eight datasets passed with all four models (AUC from 0.667 to
 0.966).
 
-Table: **Table 2.** Datasets, number of raw features and five-fold cross-validated AUC per model (LR logistic regression, RF random forest, XGB XGBoost, MLP multilayer perceptron).
+Table: **Table 3.** Datasets, number of raw features and five-fold cross-validated AUC per model (LR logistic regression, RF random forest, XGB XGBoost, MLP multilayer perceptron).
 
 | Dataset | OpenML ID | Stratum | Features | LR | RF | XGB | MLP |
 |------------------|------:|------------------|----:|------:|------:|------:|------:|
@@ -245,17 +263,18 @@ drawn at random for each instance (the same row for every explainer).
 
 ## 2.5. Agreement analysis
 
-**System level (H1).** In each block *b*, the three studied explainers (SHAP, LIME, occlusion)
+**System level (H1).** In each block *u*, the three studied explainers (SHAP, LIME, occlusion)
 were ranked under each metric: by their mean score over the 200 instances for M1 to M6 and by
 the block's value for M7, with average ranks for ties. The block's agreement is the mean Spearman
-correlation over the set *D*~*b*~ of metric pairs whose correlation is defined
+correlation over the set *D*~*u*~ of metric pairs whose correlation is defined
 (Equation (4)):
 
-$$\bar\rho_b = \frac{1}{|D_b|}\sum_{(m,m')\in D_b} \rho_s\big(r_m, r_{m'}\big) \qquad (4)$$
+$$\bar\rho_u = \frac{1}{|D_u|}\sum_{(m,m')\in D_u} \rho_s\big(r_m, r_{m'}\big) \qquad (4)$$
 
-where *r*~*m*~ is the explainers' rank vector under metric *m* and *ρ*~*s*~ the Pearson correlation of
-the two rank vectors. A pair is undefined when either rank vector is constant (all explainers
-tied); it is left out, never set to 0. Without ties |*D*~*b*~| = 21; in the original analysis
+where *r*~*m*~ is the explainers' rank vector under metric *m* and *ρ*~*s*~ the Spearman
+correlation, computed as the Pearson correlation of the two rank vectors. A pair is undefined when
+either rank vector is constant (all explainers tied); it is left out, never set to 0. Without
+ties |*D*~*u*~| = 21; in the original analysis
 18 pairs were undefined, in 3 of the 160 blocks. Kendall's
 *W* with tie correction is reported beside it. Because the 20 blocks of a dataset are not
 independent, the dataset was the unit of inference: the block values were averaged within each
@@ -280,14 +299,14 @@ the run and before unblinding: the *t*-interval over the eight dataset values, a
 *t*-test of a positive mean (the test entering the Holm correction with H1), an exact sign-flip
 test as a supplement, and Holm correction over the 15 pair tests.
 
-**Decision rule.** The classification of Table 3 was fixed before the run; that it uses
+**Decision rule.** The classification of Table 4 was fixed before the run; that it uses
 the raw permutation *p* of H1, with the Holm-adjusted *p* over H1 and H2 reported beside it, was
 fixed before unblinding. With three ranked explainers, if one explainer holds the same first or
 last rank under every metric in a block, each pairwise correlation is 0.5 or 1, so the block's
 agreement cannot fall below 0.5; the classification is therefore read with the distribution of
 explainer positions.
 
-Table: **Table 3.** Decision rule for H1, fixed before the run.
+Table: **Table 4.** Decision rule for H1, fixed before the run.
 
 | Outcome of the permutation test and the 95% interval | Wording |
 |------------------------------------|------------------------------------|
@@ -361,7 +380,8 @@ and tied scores; and the share of blocks in which every metric places the random
 Code, configuration, per-instance scores and every analysis output are released under an open
 licence (archive identifier withheld for double-blind review). All numbers in this article are
 rendered by a script from the committed result files and re-derived by an automated check. The
-runs used one laptop (Intel Core i5-1335U CPU) with a fixed software environment.
+remaining parameters, the seeds and the software versions are listed in Appendix A. The runs used one laptop (Intel Core i5-1335U CPU, Linux) with a
+fixed software environment.
 
 # 3. Results and discussion
 
@@ -371,8 +391,8 @@ At system level, the mean pairwise Spearman correlation between metrics was
 0.723 (95% CI [0.645,
 0.802]) and Kendall's *W* 0.762
 ([0.701, 0.824]). The permutation test gave
-*p* = 0.00001 (the smallest value attainable with
-100,000 permutations), and *p* = 0.00002 after
+*p* = .00001 (the smallest value attainable with
+100,000 permutations), and *p* = .00002 after
 Holm correction over H1 and H2. With the interval above 0.5, the frozen decision rule classifies
 the result as "the metrics broadly agree", both before and after correction. The within-metric
 stability benchmark was 0.873
@@ -384,7 +404,7 @@ lowest for random forests (0.637) and highest for logistic regression
 
 At instance level, agreement was weak: the mean correlation between metric pairs across instances
 was 0.154 ([0.099, 0.209];
-one-sided *t*-test *p* = 0.00016, sign-flip *p* = 0.0039, the smallest attainable with eight
+one-sided *t*-test *p* = .00016, sign-flip *p* = .0039, the smallest attainable with eight
 datasets).
 With the inference fixed before unblinding (Section 2.5), H2 is supported as a positive mean,
 but its size is small, and the pairs differed in sign:
@@ -398,7 +418,7 @@ is the study's only decision. They describe agreement among the metrics for the 
 slope, while M1 to M6 read attributions as contributions. Sections 3.3 and 3.4 show what this
 means for the result.
 
-![**Figure 1.** Mean instance-level Spearman correlation between metric pairs over eight datasets (original representation): unadjusted (lower triangle, H2) and adjusted for the predicted-class probability (upper triangle, exploratory).](figures/fig_h2_matrix.png){width=100%}
+![**Figure 1.** Mean instance-level Spearman correlation between metric pairs over eight datasets (original representation): unadjusted (lower triangle, H2) and adjusted for the predicted-class probability (upper triangle, exploratory).](figures/fig_h2_matrix.png){width=65%}
 
 ::: {custom-style="Source"}
 Source: Authors.
@@ -435,7 +455,7 @@ contributions of the same fitted LIME model agreed closely in the additive condi
 (Figure 2). In these synthetic conditions, then, the same fitted surrogate tracked the true
 attributions when read as a contribution and did not when read as slopes.
 
-![**Figure 2.** Agreement of LIME representations with exact Shapley values in the synthetic conditions (mean over five seeds; bars at kernel width 3.0 with the range over seeds, diamonds at the package default width).](figures/fig_s3.png){width=100%}
+![**Figure 2.** Agreement of LIME representations with exact Shapley values in the synthetic conditions (mean over five seeds; bars at kernel width 3.0 with the range over seeds, diamonds at the package default width).](figures/fig_s3.png){width=85%}
 
 ::: {custom-style="Source"}
 Source: Authors.
@@ -448,7 +468,7 @@ to 0.529
 ([0.389,
 0.669]), an interval that contains
 0.5, and Kendall's *W* from 0.762 to
-0.588 (Table 4). Agreement fell in seven of the eight
+0.588 (Table 5). Agreement fell in seven of the eight
 datasets, most for compas (0.639 to 0.271) and qsar biodeg
 (0.676 to 0.336), and rose for electricity
 (0.578 to 0.759; Figure 3). The
@@ -461,27 +481,33 @@ Instance-level agreement was unchanged (0.147), and so
 was its pattern: deletion and insertion still correlated negatively
 (−0.407). The two S1 variants differed by at
 most 0.024 in any summary quantity, so the choice between the two references
-did not change these descriptions. No decision rule is applied to S1; the H1 classification of
+did not change these descriptions. The within-metric stability benchmark also fell with S1-B,
+from 0.873 to
+0.797: rankings with LIME represented as
+contributions were less stable across seeds, which may account for part of the fall in
+between-metric agreement. The fall in between-metric agreement was more than twice as large,
+however, which is consistent with metrics ordering the same explainers differently and not only
+with noisier rankings. No decision rule is applied to S1; the H1 classification of
 Section 3.1 stands for the representation it was made on.
 
-Table: **Table 4.** System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). In the original column, the first, second, sixth and seventh rows are the original analysis; the second baseline, six-metric and random-control rows are sensitivity analyses; the S1 columns are supplementary; rows marked (C) are exploratory.
+Table: **Table 5.** System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). Original column: ^O^ original analysis, ^S^ pre-specified sensitivity analysis, ^C^ exploratory; the S1 columns are supplementary.
 
 | Quantity | Original (LIME slopes) | S1-B | S1-M |
 |--------------------------------|------------------|------------------|------------------|
-| H1-form agreement, mean pairwise Spearman | 0.723 [0.645, 0.802] | 0.529 [0.389, 0.669] | 0.540 [0.389, 0.692] |
-| Kendall's *W* | 0.762 [0.701, 0.824] | 0.588 [0.473, 0.703] | 0.598 [0.471, 0.725] |
-| Second masking baseline | 0.616 [0.546, 0.687] | 0.309 [0.219, 0.398] | 0.285 [0.212, 0.359] |
-| Six metrics (M4 removed) | 0.690 [0.602, 0.777] | 0.483 [0.336, 0.629] | 0.489 [0.329, 0.649] |
-| With the random control (four explainers) | 0.753 [0.700, 0.806] | 0.757 [0.689, 0.824] | 0.762 [0.689, 0.835] |
-| Within-metric stability benchmark | 0.873 [0.826, 0.920] | 0.797 [0.727, 0.867] | 0.798 [0.724, 0.873] |
-| H2-form instance-level agreement | 0.154 [0.099, 0.209] | 0.147 [0.095, 0.199] | 0.154 [0.097, 0.212] |
-| H2-form, adjusted for *f(x)* (C) | 0.233 [0.155, 0.312] | 0.225 [0.143, 0.306] | 0.235 [0.147, 0.323] |
-| Blocks with one explainer at the same extreme rank under all seven metrics (C) | 96 | 44 | 43 |
-| ... LIME untied last under all seven metrics (C) | 87 | 25 | 27 |
-| Random control untied last under all seven metrics (C) | 15 | 126 | 128 |
-| Blocks with any strict SHAP–LIME reversal | 46 | 96 | 92 |
-| Winner flips, pairs of M1–M6 (%) | 6.9–31.3 | 7.5–40.6 | 7.5–39.4 |
-| Winner flips, pairs with M7 (%) | 49.4–63.8 | 49.4–62.5 | 46.3–59.4 |
+| H1-form agreement, mean pairwise Spearman^O^ | 0.723 [0.645, 0.802] | 0.529 [0.389, 0.669] | 0.540 [0.389, 0.692] |
+| Kendall's *W*^O^ | 0.762 [0.701, 0.824] | 0.588 [0.473, 0.703] | 0.598 [0.471, 0.725] |
+| Second masking baseline^S^ | 0.616 [0.546, 0.687] | 0.309 [0.219, 0.398] | 0.285 [0.212, 0.359] |
+| Six metrics (M4 removed)^S^ | 0.690 [0.602, 0.777] | 0.483 [0.336, 0.629] | 0.489 [0.329, 0.649] |
+| With the random control (four explainers)^S^ | 0.753 [0.700, 0.806] | 0.757 [0.689, 0.824] | 0.762 [0.689, 0.835] |
+| Within-metric stability benchmark^O^ | 0.873 [0.826, 0.920] | 0.797 [0.727, 0.867] | 0.798 [0.724, 0.873] |
+| H2-form instance-level agreement^O^ | 0.154 [0.099, 0.209] | 0.147 [0.095, 0.199] | 0.154 [0.097, 0.212] |
+| H2-form, adjusted for *f(x)*^C^ | 0.233 [0.155, 0.312] | 0.225 [0.143, 0.306] | 0.235 [0.147, 0.323] |
+| Blocks with one explainer at the same extreme rank under all seven metrics^C^ | 96 | 44 | 43 |
+| ... LIME untied last under all seven metrics^C^ | 87 | 25 | 27 |
+| Random control untied last under all seven metrics^C^ | 15 | 126 | 128 |
+| Blocks with any strict SHAP–LIME reversal^S^ | 46 | 96 | 92 |
+| Winner flips, pairs of M1–M6 (%)^S^ | 6.9–31.3 | 7.5–40.6 | 7.5–39.4 |
+| Winner flips, pairs with M7 (%)^S^ | 49.4–63.8 | 49.4–62.5 | 46.3–59.4 |
 
 ::: {custom-style="Source"}
 Source: Authors.
@@ -517,7 +543,7 @@ magnitudes, they occurred in 26.9% to 28.8% of blocks originally and
 by M4 in all 160 blocks under both representations, as the
 shared construction of M4 and occlusion predicts.
 
-![**Figure 5.** Rank of each studied explainer under each metric over the 160 blocks, with LIME as stored (slopes, top) and as contributions relative to the masking baseline (S1-B, bottom).](figures/fig_positions.png){width=100%}
+![**Figure 5.** Rank of each studied explainer under each metric over the 160 blocks, with LIME as stored (slopes, top) and as contributions relative to the masking baseline (S1-B, bottom).](figures/fig_positions.png){width=80%}
 
 ::: {custom-style="Source"}
 Source: Authors.
@@ -578,7 +604,8 @@ computation:* in any block where one explainer is last under every metric, each 
 correlation is 0.5 or 1. *Observed:* with LIME represented as contributions of the same fitted
 surrogate, LIME was no longer last in most blocks and agreement was
 0.529, with an interval
-containing 0.5. *Possible mechanism, not isolated:* reading slopes as contributions lowered
+containing 0.5; the within-metric stability benchmark also fell, but by less than half as much
+(Section 3.4), so lower stability alone does not explain the change. *Possible mechanism, not isolated:* reading slopes as contributions lowered
 LIME's scores under the contribution-based metrics, which is consistent with S3, where the slopes
 were unrelated to exact Shapley values while the contributions tracked them; on the real data S1
 changes the representation only, but no ground truth exists there. The study shows one case; it
@@ -640,34 +667,45 @@ semantics, to more masking schemes and to regression and multiclass tasks.
 
 # Funding
 
-[Author to state the funding, or: "This research received no external funding."]
+This research received no external funding.
 
 # Author contributions
 
-[Withheld for double-blind review. At acceptance, in CRediT terms, for example: Conceptualization,
-Methodology, Software, Formal analysis, Investigation, Data curation, Visualization, Writing –
-original draft, Writing – review & editing.]
+Withheld for double-blind review; stated in CRediT terms at acceptance.
 
 # Conflicts of interest
 
-[Author to confirm: "The author declares no conflicts of interest."]
+The author declares no conflicts of interest.
 
 # Data availability statement
 
-The datasets are public on OpenML (identifiers in Table 2). Code, configuration,
+The datasets are public on OpenML (identifiers in Table 3). Code, configuration,
 per-instance scores and all analysis outputs are openly available in an archived repository whose
 persistent identifier is withheld for double-blind review and will be added at acceptance.
 
 # Declaration of generative AI use
 
-During the preparation of this work, the author used Claude (Anthropic; model identifier
-claude-opus-5-5), through the Claude Code tool, for the following purposes: writing and testing
-the code of the experiment, the statistical analysis, the supplementary experiments and the
-figures; searching bibliographic databases and checking each reference against its DOI or
-publisher record; drafting the text of all sections from the author's analysis plan and from the
-results; and formatting the manuscript in the journal template. The analyses were specified and
-authorised by the author, and every number is inserted by script from the result files and
-checked automatically. [Author to confirm: the extent of the author's own review and rewriting,
-and any other generative AI tool used (for example, a general-purpose assistant used as a
-methodological advisor), with its name, version, provider, purpose and sections.] The author
-takes full responsibility for the content.
+The author used the AI tool Claude (Anthropic), under the author's direction, to help write the
+analysis code, edit the English text and format the references. The research question, the plan,
+the design and the interpretation are the author's. The author reviewed all content and takes
+full responsibility for it.
+
+# Appendix A. Model parameters and software
+
+Table 6 lists the settings not given in Section 2, the seeds and the software versions.
+
+Table: **Table 6.** Parameters, seeds and software of the run (frozen configuration and run host record).
+
+| Component | Setting |
+|------------------|----------------------------------------------------------------|
+| Seeds | 42, 123, 456, 789, 101112 |
+| Preprocessing | Numeric features standardised; categorical features one-hot encoded, at most 20 levels (rarer levels grouped); missing values imputed |
+| Logistic regression | L2 penalty, *C* = 1.0, at most 1,000 iterations |
+| Random forest | 100 trees, other settings at the package defaults |
+| XGBoost | 100 trees, maximum depth 4, learning rate 0.1 |
+| Multilayer perceptron | One hidden layer of 100 units, at most 500 iterations |
+| Software | Python 3.13.12; numpy 2.2.6, pandas 2.3.3, scipy 1.16.3, scikit-learn 1.7.1, xgboost 3.1.2, shap 0.50.0, lime 0.2.0.1 |
+
+::: {custom-style="Source"}
+Source: Authors.
+:::

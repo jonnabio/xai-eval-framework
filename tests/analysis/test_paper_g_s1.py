@@ -289,12 +289,20 @@ def _fake_block(dataset, model, seed, cfg, n, stored, data=None, audit_n=0):
             "checks": [{"s1b_nonzero_at_mode": 0}], "audit": {"instances": []}}
 
 
+# The driver runs blocks in a ProcessPoolExecutor. Under "spawn" (the only start method on
+# Windows) workers re-import the module, so the monkeypatched run_block never reaches them and
+# the real computation runs on fixture datasets that do not exist. These tests need "fork".
+needs_fork = pytest.mark.skipif(sys.platform == "win32",
+                                reason="worker processes do not inherit monkeypatch under spawn")
+
+
 @pytest.fixture
 def fake(monkeypatch):
     monkeypatch.setattr(s1, "run_block", _fake_block)
     monkeypatch.setattr(s1, "stored_rows", lambda *a, **k: {})
 
 
+@needs_fork
 def test_full_driver_publishes_atomically_and_resumes(tmp_path, fake, monkeypatch):
     blocks = [("d0", "rf", 1), ("d0", "rf", 2), ("d1", "mlp", 1)]
     assert s1.run_full("test", out=tmp_path, jobs=2, blocks=blocks, n=3) == 0
@@ -309,6 +317,7 @@ def test_full_driver_publishes_atomically_and_resumes(tmp_path, fake, monkeypatc
     assert {q: q.read_bytes() for q in tmp_path.rglob("*.json.gz")} == before
 
 
+@needs_fork
 def test_full_driver_stops_on_failure_and_writes_no_manifest(tmp_path, fake):
     rc = s1.run_full("test", out=tmp_path, jobs=1, blocks=[("bad", "rf", 1), ("d0", "rf", 1)], n=2)
     assert rc == 3 and not (tmp_path / "MANIFEST.csv").exists()
@@ -316,6 +325,7 @@ def test_full_driver_stops_on_failure_and_writes_no_manifest(tmp_path, fake):
     assert not s1.block_paths(tmp_path, "d0", "rf", 1)["done"].exists()       # not admitted after the failure
 
 
+@needs_fork
 def test_tampered_shard_is_refused_not_overwritten(tmp_path, fake):
     assert s1.run_full("test", out=tmp_path, jobs=1, blocks=[("d0", "rf", 1)], n=2) == 0
     p = s1.block_paths(tmp_path, "d0", "rf", 1)["shard"]

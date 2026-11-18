@@ -9,7 +9,7 @@
    listed in TABLES; `sum` holds the few values derived here (ranges, means, sums), each from
    the files named in its docstring.
 
-   Formats: f1..f5 a decimal with that many places (a negative value printed with "−");
+   Formats: f1..f5 a decimal with that many places (a negative value printed with "−"); zf1..zf5 the same without the leading zero (APA p-values);
    pct0, pct1 a share printed as a percentage; d an integer; int an integer with thousands
    separator; p a p-value (f5 below 0.001, f3 otherwise).
 
@@ -95,6 +95,11 @@ for _a, _d in CONDITIONS.items():
         f"stm_{_a}": (f"{S1}/{_d}/stability_by_metric.csv", ["metric"]),
         f"h2a_{_a}": (f"{S1}/{_d}/h2_adjusted.csv", ["pair"]),
     })
+
+# Printed width of a figure as a share of the text width (default 100%); square or tall figures
+# are narrower so the article stays within the journal's 16 pages. The submitted figure files
+# (submission/Figure_n) are unaffected.
+FIG_WIDTH = {"h2_matrix": "65%", "positions": "80%", "s3": "85%"}
 
 _TABLES: dict | None = None
 
@@ -203,6 +208,8 @@ def fmt(v, f: str) -> str:
         return _half_up(100 * v, int(f[3]))
     if f == "p":
         f = "f5" if v < 0.001 else "f3"
+    if re.fullmatch(r"zf[1-5]", f):                    # APA 7 p-value: no leading zero
+        return fmt(v, f[1:]).replace("0.", ".", 1)
     if re.fullmatch(r"f[0-5]", f):
         s = _half_up(v, int(f[1]))
         return s.replace("-", "−") if s.strip("-0.") else s.lstrip("-")
@@ -242,15 +249,15 @@ def gen_tables() -> dict[str, str]:
             raise KeyError(f"cmp {k}")
         return f"<<cmp:{k}:mean:f3>> [<<cmp:{k}:lo:f3>>, <<cmp:{k}:hi:f3>>]"
     quantities = [
-        ("H1-form agreement, mean pairwise Spearman",
+        ("H1-form agreement, mean pairwise Spearman^O^",
          "H1 mean pairwise Spearman (3 explainers, 7 metrics)"),
-        ("Kendall's *W*", "H1 Kendall W"),
-        ("Second masking baseline", "H1 second baseline (Spearman)"),
-        ("Six metrics (M4 removed)", "H1 six metrics, no M4 (Spearman)"),
-        ("With the random control (four explainers)", "H1 four explainers (Spearman)"),
-        ("Within-metric stability benchmark", "within-metric stability benchmark"),
-        ("H2-form instance-level agreement", "H2 omnibus (4 explainers)"),
-        ("H2-form, adjusted for *f(x)* (C)", "H2 omnibus adjusted for f_x (exploratory)"),
+        ("Kendall's *W*^O^", "H1 Kendall W"),
+        ("Second masking baseline^S^", "H1 second baseline (Spearman)"),
+        ("Six metrics (M4 removed)^S^", "H1 six metrics, no M4 (Spearman)"),
+        ("With the random control (four explainers)^S^", "H1 four explainers (Spearman)"),
+        ("Within-metric stability benchmark^O^", "within-metric stability benchmark"),
+        ("H2-form instance-level agreement^O^", "H2 omnibus (4 explainers)"),
+        ("H2-form, adjusted for *f(x)*^C^", "H2 omnibus adjusted for f_x (exploratory)"),
     ]
     lines = ["| Quantity | Original (LIME slopes) | S1-B | S1-M |",
              "|--------------------------------|------------------|------------------|------------------|"]
@@ -260,16 +267,16 @@ def gen_tables() -> dict[str, str]:
     q1 = slug("blocks with one explainer at the same untied extreme rank under all 7 metrics")
     q2 = slug("... of which lime last")
     rows_ = [
-        ("Blocks with one explainer at the same extreme rank under all seven metrics (C)",
+        ("Blocks with one explainer at the same extreme rank under all seven metrics^C^",
          lambda a: f"<<pos_{a}:{q1}:value:d>>"),
-        ("... LIME untied last under all seven metrics (C)", lambda a: f"<<pos_{a}:{q2}:value:d>>"),
-        ("Random control untied last under all seven metrics (C)",
+        ("... LIME untied last under all seven metrics^C^", lambda a: f"<<pos_{a}:{q2}:value:d>>"),
+        ("Random control untied last under all seven metrics^C^",
          lambda a: f"<<rl_{a}:all:untied_last_all7:d>>"),
-        ("Blocks with any strict SHAP–LIME reversal", lambda a: f"<<any_{a}:all:"
+        ("Blocks with any strict SHAP–LIME reversal^S^", lambda a: f"<<any_{a}:all:"
                                                              "blocks_with_any_strict_reversal:d>>"),
-        ("Winner flips, pairs of M1–M6 (%)",
+        ("Winner flips, pairs of M1–M6 (%)^S^",
          lambda a: f"<<sum:flips_{a}_m16:min:pct1>>–<<sum:flips_{a}_m16:max:pct1>>"),
-        ("Winner flips, pairs with M7 (%)",
+        ("Winner flips, pairs with M7 (%)^S^",
          lambda a: f"<<sum:flips_{a}_m7:min:pct1>>–<<sum:flips_{a}_m7:max:pct1>>"),
     ]
     for label, cell in rows_:
@@ -323,7 +330,7 @@ def render(text: str, final: bool = False) -> tuple[str, list[str]]:
     def fig(m: re.Match) -> str:
         n = numbers["fig"][m.group(3)]
         return (f"![**Figure {n}.** {m.group(1)}]({m.group(2)})"
-                "{width=100%}\n\n" + SOURCE_LINE)
+                f"{{width={FIG_WIDTH.get(m.group(3), '100%')}}}\n\n" + SOURCE_LINE)
     text = re.sub(r"!\[(.*?)\]\((.*?)\)\{#fig:([a-z0-9_]+)\}", fig, text, flags=re.S)
     text = re.sub(r"^Table: (.*?) \{#tbl:([a-z0-9_]+)\}$",
                   lambda m: f"Table: **Table {numbers['tbl'][m.group(2)]}.** {m.group(1)}",

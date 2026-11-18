@@ -9,13 +9,13 @@ recorded before it was cited; its relevance was judged from the abstract.
 
 | Item | Value |
 |---|---|
-| References | 50 |
-| Agree with their record (or own work) | 50 of 50 |
-| From 2024 onward | 42 of 50 (84.0%); excluding the three anonymised own manuscripts 39 of 47 (83.0%) |
+| References | 51 |
+| Agree with their record (or own work) | 51 of 51 |
+| From 2024 onward | 42 of 51 (82.4%); excluding the three anonymised own manuscripts 39 of 48 (81.2%) |
 | Requirement (project) | at least 80% from 2024 onward: met |
-| Journal articles, conference papers and chapters | 46 of 50 (92.0%); journal asks at least 90% scientific articles |
+| Journal articles, conference papers and chapters | 47 of 51 (92.2%); journal asks at least 90% scientific articles |
 | Preprints | shanklin2026 |
-| Cited in the manuscript | 50 of 50 |
+| Cited in the manuscript | 51 of 51 |
 
 Own work: the three earlier manuscripts of the programme are under review and are cited
 in the third person as anonymised entries; the author replaces them with the published
@@ -61,6 +61,7 @@ method the study uses (LIME, SHAP, XGBoost and the origins of M1 to M7).
 | bommer2024 | Bommer et al. | 2024 | Finding the right XAI method—A guide for the evaluation and ranking of explainable AI methods in climate science | Artificial Intelligence for the Earth Systems | https://doi.org/10.1175/AIES-D-23-0074.1 | doi.org content negotiation (CSL JSON): resolves, record agrees | Ranking XAI methods by evaluation metrics; choice of method depends on the property measured (Related work) | 2024+ | yes |
 | velmurugan2025 | Velmurugan et al. | 2025 | Developing guidelines for functionally-grounded evaluation of explainable artificial intelligence using tabular data | Engineering Applications of Artificial Intelligence | https://doi.org/10.1016/j.engappai.2024.109772 | doi.org content negotiation (CSL JSON): resolves, record agrees | Evaluation of explanations on tabular data is rare and its criteria unclear (Introduction, Related work) | 2024+ | yes |
 | ababneh2026 | Ababneh & Aljarrah | 2026 | Faithfulness and stability of black box explanations for tabular and image classifiers | Big Data and Cognitive Computing | https://doi.org/10.3390/bdcc10110362 | doi.org content negotiation (CSL JSON): resolves, record agrees | Local explanation rankings on tabular data depend on classifier, masking operator and budget (Related work, Discussion) | 2024+ | yes |
+| agarwal2022 | Agarwal et al. | 2022 | OpenXAI: Towards a transparent evaluation of model explanations | Advances in Neural Information Processing Systems 35 | https://doi.org/10.52202/068431-1148 | doi.org content negotiation (CSL JSON): resolves, record agrees | Benchmark framework that bundles faithfulness metrics for tabular explainers without measuring their agreement (Related work) | foundational | yes |
 | zheng2025 | Zheng et al. | 2025 | F-Fidelity: A robust framework for faithfulness evaluation of explainable AI | International Conference on Learning Representations (ICLR 2025) | https://openreview.net/forum?id=X0r4BN50Dv | OpenReview record of the accepted paper: title, authors, year agree | Removal-based faithfulness evaluation suffers from out-of-distribution inputs (Related work, Limitations) | 2024+ | yes |
 | simic2025 | Šimić et al. | 2025 | A comprehensive analysis of perturbation methods in explainable AI feature attribution validation for neural time series classifiers | Scientific Reports | https://doi.org/10.1038/s41598-025-09538-2 | doi.org content negotiation (CSL JSON): resolves, record agrees | The perturbation (masking) method changes the outcome of attribution validation (Related work, Discussion) | 2024+ | yes |
 | decker2025 | Decker et al. | 2025 | Improving perturbation-based explanations by understanding the role of uncertainty calibration | Advances in Neural Information Processing Systems 38 | https://doi.org/10.52202/085713-0226 | doi.org content negotiation (CSL JSON): resolves, record agrees | Model behaviour under the perturbations used affects perturbation-based explanations (Limitations) | 2024+ | yes |

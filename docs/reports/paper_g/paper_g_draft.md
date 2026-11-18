@@ -11,7 +11,7 @@
 > Target: *Informática y Sistemas* (VENUE.md), 8 to 16 pages, APA 7, double-blind.
 
 ::: {custom-style="Title"}
-Do Faithfulness Metrics Agree? Metric-Dependent Rankings of Post-hoc Explanations on Tabular Data
+Do faithfulness metrics agree? Metric-dependent rankings of post-hoc explanations on tabular data
 :::
 
 ::: {custom-style="Article Type"}
@@ -31,9 +31,10 @@ per condition), and every explanation was scored by every metric. In the origina
 its hypotheses and decision rule fixed before the run, the metrics broadly agreed on the order of
 the explainers (mean pairwise Spearman correlation <<h1:mean_pairwise_spearman:mean:f3>>, 95% CI
 [<<h1:mean_pairwise_spearman:lo:f3>>, <<h1:mean_pairwise_spearman:hi:f3>>]) but agreed weakly on
-individual explanations (<<h2:h2_omnibus:mean:f3>>). A review of the results found that LIME had
-been stored as local slopes rather than contributions, and contribution-based metrics ranked it
-last in every block. In supplementary analyses, the slopes were unrelated to exact Shapley values
+individual explanations (<<h2:h2_omnibus:mean:f3>>). In the configuration used, LIME's
+output was a local slope, not the contribution that the metrics assume, and contribution-based
+metrics ranked it last in every block. In supplementary analyses specified after this finding and
+carrying no test decision, the slopes were unrelated to exact Shapley values
 in synthetic data while LIME's surrogate contributions tracked them, and with LIME represented as
 contributions on the real data, system-level agreement was
 <<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>>
@@ -108,7 +109,9 @@ objective and mathematical evaluation measures need not align either [@kares2027
 such as the model and data type change which method is preferred, and recommend several metrics
 [@klein2024; @bommer2024]. Applied tabular evaluations bundle several metrics, for example in
 intrusion detection or health [@arreche2024; @qureshi2026], but rarely analyse how the metrics
-relate. A recent tabular and image study reports that local explanation rankings depend on the
+relate. Benchmark frameworks also bundle faithfulness metrics for tabular explainers
+[@agarwal2022], but report them side by side rather than measuring how far they agree. A recent
+tabular and image study reports that local explanation rankings depend on the
 classifier, the masking operator and the computational budget [@ababneh2026].
 
 **Disagreement.** The disagreement problem concerns explainers that disagree with each other
@@ -119,6 +122,21 @@ reliable for all end tasks on rich model classes [@bilodeau2024], and evaluation
 truth has its own limits [@rawal2025; @rahnama2024]. The present study is the empirical
 counterpart for tabular data: a paired measurement of how far common metrics agree, with a
 benchmark for their own stability and with the role of attribution semantics made explicit.
+{{tbl:positioning}} sets it against the closest studies.
+
+Table: Closest studies and how the present study differs. {#tbl:positioning}
+
+| Study | What it examines | Difference in the present study |
+|----------------|------------------------------------|------------------------------------|
+| @duan2024 | Consistency of attribution-evaluation results across evaluation settings, on images | Tabular data; paired agreement between seven metrics at ranking and instance level |
+| @edin2025 | Perturbation-curve scores that are not comparable across models, and their normalisation | Agreement between metric families, not the scale of one metric |
+| @mironicolau2025 | Fidelity metrics that lack verification and can disagree on the same explanation | Multi-dataset measurement with a within-metric stability benchmark and the dataset as the unit of inference |
+| @ababneh2026 | Dependence of explainer rankings on classifier, masking operator and budget | Agreement among metrics on the same explanations, with the attribution semantics made explicit |
+| @shanklin2026 | Conceptual account of why faithfulness criteria disagree | Empirical counterpart with a random control and a synthetic ground-truth check |
+
+::: {custom-style="Source"}
+Source: Authors.
+:::
 
 # 2. Materials and methods
 
@@ -248,17 +266,18 @@ drawn at random for each instance (the same row for every explainer).
 
 ## 2.5. Agreement analysis
 
-**System level (H1).** In each block *b*, the three studied explainers (SHAP, LIME, occlusion)
+**System level (H1).** In each block *u*, the three studied explainers (SHAP, LIME, occlusion)
 were ranked under each metric: by their mean score over the 200 instances for M1 to M6 and by
 the block's value for M7, with average ranks for ties. The block's agreement is the mean Spearman
-correlation over the set *D*~*b*~ of metric pairs whose correlation is defined
+correlation over the set *D*~*u*~ of metric pairs whose correlation is defined
 ({{eq:agreement}}):
 
-$$\bar\rho_b = \frac{1}{|D_b|}\sum_{(m,m')\in D_b} \rho_s\big(r_m, r_{m'}\big)$$ {#eq:agreement}
+$$\bar\rho_u = \frac{1}{|D_u|}\sum_{(m,m')\in D_u} \rho_s\big(r_m, r_{m'}\big)$$ {#eq:agreement}
 
-where *r*~*m*~ is the explainers' rank vector under metric *m* and *ρ*~*s*~ the Pearson correlation of
-the two rank vectors. A pair is undefined when either rank vector is constant (all explainers
-tied); it is left out, never set to 0. Without ties |*D*~*b*~| = 21; in the original analysis
+where *r*~*m*~ is the explainers' rank vector under metric *m* and *ρ*~*s*~ the Spearman
+correlation, computed as the Pearson correlation of the two rank vectors. A pair is undefined when
+either rank vector is constant (all explainers tied); it is left out, never set to 0. Without
+ties |*D*~*u*~| = 21; in the original analysis
 <<sum:undef:pairs:d>> pairs were undefined, in <<sum:undef:blocks:d>> of the 160 blocks. Kendall's
 *W* with tie correction is reported beside it. Because the 20 blocks of a dataset are not
 independent, the dataset was the unit of inference: the block values were averaged within each
@@ -359,7 +378,8 @@ and tied scores; and the share of blocks in which every metric places the random
 Code, configuration, per-instance scores and every analysis output are released under an open
 licence (archive identifier withheld for double-blind review). All numbers in this article are
 rendered by a script from the committed result files and re-derived by an automated check. The
-runs used one laptop (Intel Core i5-1335U CPU) with a fixed software environment.
+remaining parameters, the seeds and the software versions are listed in Appendix A. The runs used one laptop (Intel Core i5-1335U CPU, Linux) with a
+fixed software environment.
 
 # 3. Results and discussion
 
@@ -369,8 +389,8 @@ At system level, the mean pairwise Spearman correlation between metrics was
 <<h1:mean_pairwise_spearman:mean:f3>> (95% CI [<<h1:mean_pairwise_spearman:lo:f3>>,
 <<h1:mean_pairwise_spearman:hi:f3>>]) and Kendall's *W* <<h1:kendall_w:mean:f3>>
 ([<<h1:kendall_w:lo:f3>>, <<h1:kendall_w:hi:f3>>]). The permutation test gave
-*p* = <<perm:h1_permutation:p:f5>> (the smallest value attainable with
-<<perm:h1_permutation:permutations:int>> permutations), and *p* = <<mult:h1:p_holm:f5>> after
+*p* = <<perm:h1_permutation:p:zf5>> (the smallest value attainable with
+<<perm:h1_permutation:permutations:int>> permutations), and *p* = <<mult:h1:p_holm:zf5>> after
 Holm correction over H1 and H2. With the interval above 0.5, the frozen decision rule classifies
 the result as "the metrics broadly agree", both before and after correction. The within-metric
 stability benchmark was <<stab:within_metric_stability:mean:f3>>
@@ -382,7 +402,7 @@ lowest for random forests (<<pm:rf:h1_mean:f3>>) and highest for logistic regres
 
 At instance level, agreement was weak: the mean correlation between metric pairs across instances
 was <<h2:h2_omnibus:mean:f3>> ([<<h2:h2_omnibus:lo:f3>>, <<h2:h2_omnibus:hi:f3>>];
-one-sided *t*-test *p* = <<h2:h2_omnibus:p_t:f5>>, sign-flip *p* = <<h2:h2_omnibus:p_sign_flip:f4>>, the smallest attainable with eight
+one-sided *t*-test *p* = <<h2:h2_omnibus:p_t:zf5>>, sign-flip *p* = <<h2:h2_omnibus:p_sign_flip:zf4>>, the smallest attainable with eight
 datasets).
 With the inference fixed before unblinding (Section 2.5), H2 is supported as a positive mean,
 but its size is small, and the pairs differed in sign:
@@ -451,10 +471,16 @@ Instance-level agreement was unchanged (<<cmp:h2_omnibus_4_explainers__s1_b:mean
 was its pattern: deletion and insertion still correlated negatively
 (<<h2a_s1b:m1_deletion_m2_insertion:unadjusted_mean:f3>>). The two S1 variants differed by at
 most <<sum:s1diff:max:f3>> in any summary quantity, so the choice between the two references
-did not change these descriptions. No decision rule is applied to S1; the H1 classification of
+did not change these descriptions. The within-metric stability benchmark also fell with S1-B,
+from <<cmp:within_metric_stability_benchmark__original:mean:f3>> to
+<<cmp:within_metric_stability_benchmark__s1_b:mean:f3>>: rankings with LIME represented as
+contributions were less stable across seeds, which may account for part of the fall in
+between-metric agreement. The fall in between-metric agreement was more than twice as large,
+however, which is consistent with metrics ordering the same explainers differently and not only
+with noisier rankings. No decision rule is applied to S1; the H1 classification of
 Section 3.1 stands for the representation it was made on.
 
-Table: System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). In the original column, the first, second, sixth and seventh rows are the original analysis; the second baseline, six-metric and random-control rows are sensitivity analyses; the S1 columns are supplementary; rows marked (C) are exploratory. {#tbl:evidence}
+Table: System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). Original column: ^O^ original analysis, ^S^ pre-specified sensitivity analysis, ^C^ exploratory; the S1 columns are supplementary. {#tbl:evidence}
 
 <<table:evidence>>
 
@@ -541,7 +567,8 @@ computation:* in any block where one explainer is last under every metric, each 
 correlation is 0.5 or 1. *Observed:* with LIME represented as contributions of the same fitted
 surrogate, LIME was no longer last in most blocks and agreement was
 <<cmp:h1_mean_pairwise_spearman_3_explainers_7_metrics__s1_b:mean:f3>>, with an interval
-containing 0.5. *Possible mechanism, not isolated:* reading slopes as contributions lowered
+containing 0.5; the within-metric stability benchmark also fell, but by less than half as much
+(Section 3.4), so lower stability alone does not explain the change. *Possible mechanism, not isolated:* reading slopes as contributions lowered
 LIME's scores under the contribution-based metrics, which is consistent with S3, where the slopes
 were unrelated to exact Shapley values while the contributions tracked them; on the real data S1
 changes the representation only, but no ground truth exists there. The study shows one case; it
@@ -603,17 +630,15 @@ semantics, to more masking schemes and to regression and multiclass tasks.
 
 # Funding
 
-[Author to state the funding, or: "This research received no external funding."]
+This research received no external funding.
 
 # Author contributions
 
-[Withheld for double-blind review. At acceptance, in CRediT terms, for example: Conceptualization,
-Methodology, Software, Formal analysis, Investigation, Data curation, Visualization, Writing –
-original draft, Writing – review & editing.]
+Withheld for double-blind review; stated in CRediT terms at acceptance.
 
 # Conflicts of interest
 
-[Author to confirm: "The author declares no conflicts of interest."]
+The author declares no conflicts of interest.
 
 # Data availability statement
 
@@ -623,14 +648,27 @@ persistent identifier is withheld for double-blind review and will be added at a
 
 # Declaration of generative AI use
 
-During the preparation of this work, the author used Claude (Anthropic; model identifier
-claude-opus-5-5), through the Claude Code tool, for the following purposes: writing and testing
-the code of the experiment, the statistical analysis, the supplementary experiments and the
-figures; searching bibliographic databases and checking each reference against its DOI or
-publisher record; drafting the text of all sections from the author's analysis plan and from the
-results; and formatting the manuscript in the journal template. The analyses were specified and
-authorised by the author, and every number is inserted by script from the result files and
-checked automatically. [Author to confirm: the extent of the author's own review and rewriting,
-and any other generative AI tool used (for example, a general-purpose assistant used as a
-methodological advisor), with its name, version, provider, purpose and sections.] The author
-takes full responsibility for the content.
+The author used the AI tool Claude (Anthropic), under the author's direction, to help write the
+analysis code, edit the English text and format the references. The research question, the plan,
+the design and the interpretation are the author's. The author reviewed all content and takes
+full responsibility for it.
+
+# Appendix A. Model parameters and software
+
+{{tbl:params}} lists the settings not given in Section 2, the seeds and the software versions.
+
+Table: Parameters, seeds and software of the run (frozen configuration and run host record). {#tbl:params}
+
+| Component | Setting |
+|------------------|----------------------------------------------------------------|
+| Seeds | 42, 123, 456, 789, 101112 |
+| Preprocessing | Numeric features standardised; categorical features one-hot encoded, at most 20 levels (rarer levels grouped); missing values imputed |
+| Logistic regression | L2 penalty, *C* = 1.0, at most 1,000 iterations |
+| Random forest | 100 trees, other settings at the package defaults |
+| XGBoost | 100 trees, maximum depth 4, learning rate 0.1 |
+| Multilayer perceptron | One hidden layer of 100 units, at most 500 iterations |
+| Software | Python 3.13.12; numpy 2.2.6, pandas 2.3.3, scipy 1.16.3, scikit-learn 1.7.1, xgboost 3.1.2, shap 0.50.0, lime 0.2.0.1 |
+
+::: {custom-style="Source"}
+Source: Authors.
+:::
