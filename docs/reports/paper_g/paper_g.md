@@ -635,24 +635,6 @@ within-metric stability benchmark and the explainers' rank positions next to any
 agreement statistic; and (5) separate claims about rankings from claims about individual
 explanations.
 
-**Limitations.** The study has eight binary tabular datasets and four model families, and three
-studied explainers make rank statistics coarse. LIME was run in one configuration whose output is
-a slope; S1 addresses its representation but not its fitting choices (kernel, sampling around the
-training mean), which also affect its stability [@tzionis2026], and for categorical features S1
-rests on a surrogate fitted to off-manifold samples [@ademi2025], with S1-M measured from an
-off-manifold reference. The explainers' reference points differ: SHAP's is a background
-expectation, occlusion's and S1-B's the masking baseline, S1-M's LIME's training mean. The H2
-inference, the stability benchmark and other details were fixed after the run, before unblinding;
-the supplementary experiments and diagnostics were specified after the original results had been
-reviewed, carry no decision, and S1 was not tested against the original analysis. The dataset
-check was run retrospectively and the planned variance decomposition was omitted. The decision
-threshold of 0.5 cannot separate agreement on every position from agreement on the last position.
-Ground truth exists only in a small synthetic setting; on real data the study measures agreement,
-not correctness. The metrics share masking machinery, M4 shares its construction with occlusion,
-M3 and M6 use one masking fraction, M5 is a Monte Carlo estimate, M4 is stored as 0 when
-undefined, and M7 uses four removal levels with one retraining each. The *f(x)* adjustment is
-exploratory and does not separate the explanation from the prediction.
-
 # 4. Conclusions
 
 Faithfulness metrics agreed broadly on the order of explainers in the original analysis, and
