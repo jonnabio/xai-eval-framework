@@ -426,7 +426,7 @@ def test_report_and_outputs_are_deterministic(tmp_path):
         an.run_analysis(full, roar, synth, decided_spec(perms=1000), tmp_path / k, tmp_path / k / "R.md", {"fixture": "yes"})
         outs.append({p.relative_to(tmp_path / k): p.read_bytes() for p in sorted((tmp_path / k).rglob("*")) if p.is_file()})
     assert outs[0] == outs[1]
-    names = {str(p) for p in outs[0]}
+    names = {p.as_posix() for p in outs[0]}
     for want in ("confirmatory/h1_summary.csv", "confirmatory/h2_pairs.csv", "confirmatory/multiplicity_h1_h2.csv",
                  "sensitivity/winner_flips.csv", "exploratory/h1_m4_excluded.csv", "synthetic/four_by_metric.csv",
                  "figures/fig_g1_h1_datasets.svg", "R.md"):
