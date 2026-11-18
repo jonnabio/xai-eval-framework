@@ -90,11 +90,27 @@ the AI-use declaration replaced with the author's text. `paper_g.md` rebuilt; cl
 `verify_claims` pass; abstract 229 words. The `.docx` and `.pdf` were **not** rebuilt (no pandoc or
 LibreOffice on this laptop). Minor items and items 2–4 below remain open.
 
-## D. Remaining author actions before submission
+## Applied on 2026-11-17, second round (author's instruction)
 
-1. Decide M1–M4 and the minor items (the assistant can draft each change).
-2. Fix the title case.
-3. Complete the four declarations; in the AI declaration, state the extent of the author's own review and any other assistant used.
-4. Address the 30% AI-content limit (substantive rewriting by the author) and the double-blind risk.
-5. Rebuild the `.docx` (pandoc and LibreOffice are not installed on this laptop: rebuild on the Linux host, or install them here) and check equations, tables and pagination in Word.
-6. Re-run `register_paper_g.py` and `verify_claims.py` after any edit.
+- Declarations completed: no external funding; no conflicts of interest; author contributions
+  withheld for review and stated in CRediT terms at acceptance.
+- Positioning table (Table 1, Section 1.1) with the five closest studies.
+- OpenXAI (Agarwal et al., 2022, DOI 10.52202/068431-1148) added and verified; Quantus not added
+  (its abstract mentions neither tabular data nor faithfulness). References 51/51 verified, 82.4%
+  from 2024 onward, 92.2% scholarly.
+- *p*-values in APA style (new `zf` format in `build_paper_g.py`, supported by
+  `register_paper_g.py`); Table 5 rows carry ^O^/^S^/^C^ markers explained in the caption.
+- Page limit: the first rebuild gave 17 pages (Word and LibreOffice agree). Appendix A reduced to
+  the settings not stated in Section 2 and cited from the appendix (so it is numbered last,
+  Table 6); Figures 1, 2 and 5 printed at 65%, 85% and 80% of the text width (`FIG_WIDTH`; the
+  submitted figure files are unchanged). Result: **16 pages** in Word and in LibreOffice.
+- `.docx` and `.pdf` rebuilt on this laptop (pandoc 3.14, LibreOffice 26.8.3).
+- Settled by the author, not open: the AI-content limit and the double-blind risk of the public
+  repository (accepted).
+
+## D. Remaining before submission
+
+1. Open `submission/paper_g_blind.docx` in Word: equation numbers (right alignment), table rules,
+   pagination.
+2. OJS: metadata, ORCID, Supporting Agencies "None", keywords one by one, the anonymised `.docx`
+   and `Figure_1..5`.

@@ -109,7 +109,9 @@ objective and mathematical evaluation measures need not align either [@kares2027
 such as the model and data type change which method is preferred, and recommend several metrics
 [@klein2024; @bommer2024]. Applied tabular evaluations bundle several metrics, for example in
 intrusion detection or health [@arreche2024; @qureshi2026], but rarely analyse how the metrics
-relate. A recent tabular and image study reports that local explanation rankings depend on the
+relate. Benchmark frameworks also bundle faithfulness metrics for tabular explainers
+[@agarwal2022], but report them side by side rather than measuring how far they agree. A recent
+tabular and image study reports that local explanation rankings depend on the
 classifier, the masking operator and the computational budget [@ababneh2026].
 
 **Disagreement.** The disagreement problem concerns explainers that disagree with each other
@@ -120,6 +122,21 @@ reliable for all end tasks on rich model classes [@bilodeau2024], and evaluation
 truth has its own limits [@rawal2025; @rahnama2024]. The present study is the empirical
 counterpart for tabular data: a paired measurement of how far common metrics agree, with a
 benchmark for their own stability and with the role of attribution semantics made explicit.
+{{tbl:positioning}} sets it against the closest studies.
+
+Table: Closest studies and how the present study differs. {#tbl:positioning}
+
+| Study | What it examines | Difference in the present study |
+|----------------|------------------------------------|------------------------------------|
+| @duan2024 | Consistency of attribution-evaluation results across evaluation settings, on images | Tabular data; paired agreement between seven metrics at ranking and instance level |
+| @edin2025 | Perturbation-curve scores that are not comparable across models, and their normalisation | Agreement between metric families, not the scale of one metric |
+| @mironicolau2025 | Fidelity metrics that lack verification and can disagree on the same explanation | Multi-dataset measurement with a within-metric stability benchmark and the dataset as the unit of inference |
+| @ababneh2026 | Dependence of explainer rankings on classifier, masking operator and budget | Agreement among metrics on the same explanations, with the attribution semantics made explicit |
+| @shanklin2026 | Conceptual account of why faithfulness criteria disagree | Empirical counterpart with a random control and a synthetic ground-truth check |
+
+::: {custom-style="Source"}
+Source: Authors.
+:::
 
 # 2. Materials and methods
 
@@ -360,9 +377,8 @@ and tied scores; and the share of blocks in which every metric places the random
 
 Code, configuration, per-instance scores and every analysis output are released under an open
 licence (archive identifier withheld for double-blind review). All numbers in this article are
-rendered by a script from the committed result files and re-derived by an automated check. Every
-parameter of the models, explainers and metrics, the seeds and the software versions are listed in
-{{tbl:params}} (Appendix A). The runs used one laptop (Intel Core i5-1335U CPU, Linux) with a
+rendered by a script from the committed result files and re-derived by an automated check. The
+remaining parameters, the seeds and the software versions are listed in Appendix A. The runs used one laptop (Intel Core i5-1335U CPU, Linux) with a
 fixed software environment.
 
 # 3. Results and discussion
@@ -373,8 +389,8 @@ At system level, the mean pairwise Spearman correlation between metrics was
 <<h1:mean_pairwise_spearman:mean:f3>> (95% CI [<<h1:mean_pairwise_spearman:lo:f3>>,
 <<h1:mean_pairwise_spearman:hi:f3>>]) and Kendall's *W* <<h1:kendall_w:mean:f3>>
 ([<<h1:kendall_w:lo:f3>>, <<h1:kendall_w:hi:f3>>]). The permutation test gave
-*p* = <<perm:h1_permutation:p:f5>> (the smallest value attainable with
-<<perm:h1_permutation:permutations:int>> permutations), and *p* = <<mult:h1:p_holm:f5>> after
+*p* = <<perm:h1_permutation:p:zf5>> (the smallest value attainable with
+<<perm:h1_permutation:permutations:int>> permutations), and *p* = <<mult:h1:p_holm:zf5>> after
 Holm correction over H1 and H2. With the interval above 0.5, the frozen decision rule classifies
 the result as "the metrics broadly agree", both before and after correction. The within-metric
 stability benchmark was <<stab:within_metric_stability:mean:f3>>
@@ -386,7 +402,7 @@ lowest for random forests (<<pm:rf:h1_mean:f3>>) and highest for logistic regres
 
 At instance level, agreement was weak: the mean correlation between metric pairs across instances
 was <<h2:h2_omnibus:mean:f3>> ([<<h2:h2_omnibus:lo:f3>>, <<h2:h2_omnibus:hi:f3>>];
-one-sided *t*-test *p* = <<h2:h2_omnibus:p_t:f5>>, sign-flip *p* = <<h2:h2_omnibus:p_sign_flip:f4>>, the smallest attainable with eight
+one-sided *t*-test *p* = <<h2:h2_omnibus:p_t:zf5>>, sign-flip *p* = <<h2:h2_omnibus:p_sign_flip:zf4>>, the smallest attainable with eight
 datasets).
 With the inference fixed before unblinding (Section 2.5), H2 is supported as a positive mean,
 but its size is small, and the pairs differed in sign:
@@ -464,7 +480,7 @@ however, which is consistent with metrics ordering the same explainers different
 with noisier rankings. No decision rule is applied to S1; the H1 classification of
 Section 3.1 stands for the representation it was made on.
 
-Table: System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). In the original column, the first, second, sixth and seventh rows are the original analysis; the second baseline, six-metric and random-control rows are sensitivity analyses; the S1 columns are supplementary; rows marked (C) are exploratory. {#tbl:evidence}
+Table: System-level and instance-level agreement under the three LIME representations (mean over eight datasets with 95% *t*-interval; counts of the 160 blocks). Original column: ^O^ original analysis, ^S^ pre-specified sensitivity analysis, ^C^ exploratory; the S1 columns are supplementary. {#tbl:evidence}
 
 <<table:evidence>>
 
@@ -614,17 +630,15 @@ semantics, to more masking schemes and to regression and multiclass tasks.
 
 # Funding
 
-[Author to state the funding, or: "This research received no external funding."]
+This research received no external funding.
 
 # Author contributions
 
-[Withheld for double-blind review. At acceptance, in CRediT terms, for example: Conceptualization,
-Methodology, Software, Formal analysis, Investigation, Data curation, Visualization, Writing –
-original draft, Writing – review & editing.]
+Withheld for double-blind review; stated in CRediT terms at acceptance.
 
 # Conflicts of interest
 
-[Author to confirm: "The author declares no conflicts of interest."]
+The author declares no conflicts of interest.
 
 # Data availability statement
 
@@ -639,30 +653,20 @@ analysis code, edit the English text and format the references. The research que
 the design and the interpretation are the author's. The author reviewed all content and takes
 full responsibility for it.
 
-# Appendix A. Parameters
+# Appendix A. Model parameters and software
 
-Table: Parameters of the models, explainers and metrics, seeds and software of the run (taken from the frozen configuration and the run host record). {#tbl:params}
+{{tbl:params}} lists the settings not given in Section 2, the seeds and the software versions.
+
+Table: Parameters, seeds and software of the run (frozen configuration and run host record). {#tbl:params}
 
 | Component | Setting |
 |------------------|----------------------------------------------------------------|
-| Data split | Stratified 80/20 train/test per seed; 200 test instances per block |
 | Seeds | 42, 123, 456, 789, 101112 |
 | Preprocessing | Numeric features standardised; categorical features one-hot encoded, at most 20 levels (rarer levels grouped); missing values imputed |
 | Logistic regression | L2 penalty, *C* = 1.0, at most 1,000 iterations |
 | Random forest | 100 trees, other settings at the package defaults |
 | XGBoost | 100 trees, maximum depth 4, learning rate 0.1 |
 | Multilayer perceptron | One hidden layer of 100 units, at most 500 iterations |
-| SHAP | Interventional TreeSHAP (random forest, XGBoost), KernelSHAP without feature selection (logistic regression, MLP); background of 50 training rows |
-| LIME | Tabular, continuous features not discretised, kernel width 3.0, 1,000 samples, all features |
-| Occlusion | One feature at a time set to the masking baseline *b* |
-| Random control | Standard normal scores, seeded per instance |
-| Masking baseline *b* | Training mean (numeric), one-hot of the training mode (categorical); one-hot groups masked together |
-| Second masking baseline | One random training row per instance, shared by all explainers |
-| M3, M6 | Top *k* = max(1, ⌈0.2*G*⌉) features |
-| M5 | *R* = 100 random subsets, each feature masked with probability 0.5 |
-| M7 | Shares of 10%, 20%, 30% and 50% of features removed, one retraining each |
-| Dataset rule | Five-fold cross-validated AUC between 0.65 and 0.98 for at least two of four models |
-| Synthetic check | 8 features, correlation 0 or 0.5, additive or interaction generator, 200 instances |
 | Software | Python 3.13.12; numpy 2.2.6, pandas 2.3.3, scipy 1.16.3, scikit-learn 1.7.1, xgboost 3.1.2, shap 0.50.0, lime 0.2.0.1 |
 
 ::: {custom-style="Source"}
