@@ -61,6 +61,8 @@ def _literal(bpg, v: float, f: str) -> tuple[str | None, int, bool]:
     if f in ("pct0", "pct1"):
         s = bpg.fmt(v, f)
         return (s if "." in s else None), int(f[3]), True
+    if f.startswith("zf"):                              # APA p-value, printed without the leading zero
+        return bpg.fmt(v, f), int(f[2]), False
     s = bpg.fmt(v, f).replace("−", "")
     return (s if "." in s else None), int(f[1]), False
 
@@ -75,6 +77,7 @@ def collect(bpg) -> dict[str, dict]:
         if literal is None:
             continue
         number = literal.replace(",", "")
+        number = "0" + number if number.startswith(".") else number
         negative = v < 0 and float(number) != 0
         cid = "paper_g." + ".".join([alias, key, column.replace(".", "_"), f])
         claims.setdefault(cid, {
