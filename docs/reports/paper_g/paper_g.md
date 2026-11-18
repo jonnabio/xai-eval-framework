@@ -530,7 +530,7 @@ Source: Authors.
 Source: Authors.
 :::
 
-![**Figure 4.** System-level agreement under the specified sensitivity analyses for the three LIME representations (mean over eight datasets with 95% *t*-interval).](figures/fig_sensitivity.png){width=100%}
+![**Figure 4.** System-level agreement under the specified sensitivity analyses for the three LIME representations (mean over eight datasets with 95% *t*-interval).](figures/fig_sensitivity.png){width=90%}
 
 ::: {custom-style="Source"}
 Source: Authors.

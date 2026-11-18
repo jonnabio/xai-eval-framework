@@ -99,7 +99,7 @@ for _a, _d in CONDITIONS.items():
 # Printed width of a figure as a share of the text width (default 100%); square or tall figures
 # are narrower so the article stays within the journal's 16 pages. The submitted figure files
 # (submission/Figure_n) are unaffected.
-FIG_WIDTH = {"h2_matrix": "65%", "positions": "80%", "s3": "85%"}
+FIG_WIDTH = {"h2_matrix": "65%", "positions": "80%", "s3": "85%", "sensitivity": "90%"}
 
 _TABLES: dict | None = None
 
