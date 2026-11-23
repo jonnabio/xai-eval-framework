@@ -52,6 +52,15 @@ blocking as written.
   Expect: verifier green; the only surviving "inestabilidad estructural" at
   `capitulo-6-conclusiones.qmd:292`, where the same sentence qualifies it.
 
+  **Verification note 2026-11-23** (session `claude-2026-11-23-reconcile`, on `main`
+  `f37549772`, not the agent of the 2026-08-28 fixes): `verify_claims.py` green (2,083 claims,
+  66 retired-value guards). The grep returns two lines. The qualified sentence survives at
+  `capitulo-6-conclusiones.qmd:338` (line numbers moved with the chapter); a second hit at line
+  42, the P1 row of `tbl-hipotesis` ("incoherencia estructural, no ruido del protocolo"),
+  attributes the CV to LIME's output rather than to the protocol and makes no universal claim.
+  Box left open for the director's own re-run; detail in
+  `docs/review/thesis-papers-reconciliation-audit_2026-11-23.md` §3.5.
+
 **Amendment note (0.1 / 0.2).** P2 was *not* backdated into the confirmatory set. Ch.1 now
 declares it with its true provenance: formulated after the Ch.5 taxonomy identified Gap 3,
 outside the plan frozen at Gate 1, exploratory and instrument-calibrating rather than
