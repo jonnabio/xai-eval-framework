@@ -240,3 +240,38 @@ guards:
       - "Any change to an explainer's construction or a metric's use of the attribution vector"
       - "Any new paper that reuses explainer code: state what each explainer returns before defining metrics on it"
       - "src/xai/lime_tabular.py with discretize_continuous=False feeding a signed metric"
+
+  - id: RCA-006
+    title: "EXP2 cohort provenance gaps (split seed coupling, unrecorded RF artifact, ResourceGuard timing floor, partial SVM SHAP cells)"
+    severity: high
+    created: 2026-11-24
+    rca_file: docs/rca/RCA-006-exp2-cohort-provenance.md
+
+    guarded_files:
+      - docs/reports/paper_b/ci_journal/revision_1/WP0_FINDINGS.md
+      - thesis/capitulo-3-diseno-experimental.qmd
+      - thesis/capitulo-6-conclusiones.qmd
+      - thesis/apendices.qmd
+
+    invariants:
+      - "No experiment runner explains instances drawn from rows its model was fitted on: the model is
+         fitted on a split independent of the replicate seed (cohort B2), or re-fitted on each
+         replicate's own split (Papers F, G). The EXP2 runner (load_adult(random_state=run seed) with
+         models fitted once) is not reused for a new cohort"
+      - "The thesis states Adult's encoded width as 108 (the output of preprocessor.joblib) and its
+         categorical inputs as eight (ocho variables categoricas); 103 and 13 do not reappear"
+      - "The Chapter 3 EXP2 provenance disclosures stay: F8 in sec-muestreo, F7c in sec-cobertura,
+         F7a and F7b in sec-trazabilidad and the internal-validity row of tbl-validity-threats, F9 in
+         the explainer configuration and Appendix C"
+      - "WP0_FINDINGS.md is a dated record: findings are not edited away, only annotated"
+
+    tests:
+      - python scripts/pubs/verify_claims.py
+      - python scripts/pubs/check_equations.py
+      - 'git grep -n "103 dimensiones\|13 variables categóricas" -- thesis/*.qmd   # expect no match'
+
+    review_triggers:
+      - "Any new experiment runner, or reuse of src/experiment/runner.py, src/xai/dice_wrapper.py,
+         src/xai/anchors_wrapper.py or ResourceGuard for timed results"
+      - "Any edit to the EXP2 design, sampling or traceability sections of Chapter 3"
+      - "Any manuscript that reports EXP2 random-forest, SVM-SHAP or cost results"

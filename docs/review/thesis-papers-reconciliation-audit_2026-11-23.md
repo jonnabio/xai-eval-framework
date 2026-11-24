@@ -1,5 +1,8 @@
 # Thesis reconciliation audit: Papers A–F against the thesis
 
+**Status:** Closed 2026-11-24. Every thesis gap found here is fixed (PRs #149, #150) and the
+EXP2 provenance incident is filed as RCA-006; one external pre-deposit check remains (§4).
+
 **Date:** 2026-11-23. **Role:** Scientific Advisor (audit), Scientific Editor (dispositions).
 **Session:** `claude-2026-11-23-reconcile` (substrate) and `claude-2026-11-23-thesis` (thesis lane).
 **Scope:** Papers A–F against Chapters 1–7, Appendices A–G, `pub/claim_registry.toml` and the
@@ -50,19 +53,20 @@ share the EXP2 cohort.
 
 | Finding | Fact | Thesis today | Disposition |
 |---|---|---|---|
-| **F1** | The fitted `ColumnTransformer` outputs **108** columns; the thesis says **103** (seven occurrences on six lines: App. C; Ch. 7 `sec-limitaciones` twice, `sec-fronteras`, `sec-exp3-nota`, `sec-futuro`, `sec-sintesis`) | 103, as a bare integer outside the coverage scan | **Held at 103** (author decision R1, 2026-11-23) so that no text approved by the tutor changes. Recorded here: 108 is the encoded width actually produced by the frozen preprocessor; 103 is the figure carried since the original drafting. No registered value depends on it. To correct before deposit if the author chooses (§4, item 1) |
+| **F1** | The fitted `ColumnTransformer` outputs **108** columns; the thesis says **103** (seven occurrences on six lines: App. C; Ch. 7 `sec-limitaciones` twice, `sec-fronteras`, `sec-exp3-nota`, `sec-futuro`, `sec-sintesis`) | 103, as a bare integer outside the coverage scan | **Closed 2026-11-24.** First held at 103 (decision R1, 2026-11-23), then corrected to 108 in all seven occurrences on the author's instruction (edit E4, PR #150, `73d44f7c1`). No registered value depended on it. RCA-006 guards it |
 | F2 | Stability noise is added to every transformed feature, one-hot columns included; LIME draws a new neighbourhood on every call | Ch. 3 defines the metric; the mechanism was not stated | Qualitative sentence added to Ch. 7 `sec-limitaciones` (decision R3, thesis edit E2) |
 | F3 | Fidelity uses absolute values; a constant vector scores 0 | Ch. 3 defines the metric | No change |
 | F4 | N levels nested; seeds nearly disjoint; SHAP and LIME see identical instances in a cell | Ch. 4 pairs by cell | No change: the thesis's 75-cell analysis is the planned one; the hierarchical reading is Paper B revision 1's |
-| **F7a** | The RF model of the January–February SHAP/LIME runs was never committed and cannot be rebuilt (F7e) | Not stated | **Open** (§4, item 2) |
-| **F7b** | `ResourceGuard` adds a ~1 s floor to timed explanations after 2026-03-23; 25 of 31 later runs affected (one SHAP/LIME run, `mlp_shap` seed 42, N=200) | Ch. 3 names `ResourceGuard` but not the floor | **Open** (§4, item 2) |
-| **F7c** | In 10 of 15 SVM cells SHAP explained a subset of LIME's instances | Stated only for the agreement study (Ch. 6 `sec-seg-concordancia`, Límites) | **Open** for Ch. 4 (§4, item 2) |
-| **F8** | Models were trained on the seed-42 split; for seeds ≠ 42 the instances are drawn from a split of which ~80% is training data (60 of 75 cells) | Stated and checked for the misclassification study (Ch. 6 `sec-seg-error`: 70,788 instances in training; the stability deficit holds on the held-out ones). Ch. 3 gives the split with `random_state = s` and does not say the models were fitted once on s = 42 | **Partly addressed.** Open for Ch. 3–4 (§4, item 2) |
+| **F7a** | The RF model of the January–February SHAP/LIME runs was never committed and cannot be rebuilt (F7e) | Ch. 3 `sec-trazabilidad` (new anchor) and `tbl-validity-threats`: the forest is not committed and cannot be rebuilt; SHAP–LIME pairing unaffected; RF comparisons with Anchors/DiCE cross two forests in part of the cells | **Closed 2026-11-24** (edit E5, PR #150, `73d44f7c1`; RCA-006) |
+| **F7b** | `ResourceGuard` adds a ~1 s floor to timed explanations after 2026-03-23; 25 of 31 later runs affected (one SHAP/LIME run, `mlp_shap` seed 42, N=200) | Ch. 3 `sec-trazabilidad`: the polling floor in later runs, no effect on quality metrics, raises absolute cost of fast affected runs | **Closed 2026-11-24** (edit E5, PR #150, `73d44f7c1`; RCA-006) |
+| **F7c** | In 10 of 15 SVM cells SHAP explained a subset of LIME's instances | Ch. 3 `sec-cobertura` (pairing integrity): pairing per cell, not per instance, in those cells; Ch. 6 `sec-seg-concordancia` for the agreement study | **Closed 2026-11-24** (edit E5, PR #150, `73d44f7c1`; RCA-006) |
+| **F8** | Models were trained on the seed-42 split; for seeds ≠ 42 the instances are drawn from a split of which ~80% is training data (60 of 75 cells) | Ch. 3 `sec-muestreo`: declared as an internal-validity limit of the primary benchmark, not re-run on held-out instances; the held-out check of Ch. 6 `sec-seg-error` is named as covering only that study; `tbl-validity-threats` | **Closed 2026-11-24** (edit E5, PR #150, `73d44f7c1`; RCA-006) |
 | F9 | DiCE ran with `total_CFs = 1`; Anchors `threshold = 0.95` hard-coded | Already disclosed: Ch. 3 (DiCE and Anchors configuration), App. C configuration table. No "five counterfactuals" anywhere in the thesis or `pub/claims.toml` | Closed |
 
 WP0 F7–F8 state that they need an RCA ("RCA-004"). That number was later used for the
-Paper G publisher (`docs/rca/RCA-004-paper-g-logs-not-published.md`); **no RCA exists for the
-EXP2 provenance incident.** Recorded as open (§4, item 2).
+Paper G publisher (`docs/rca/RCA-004-paper-g-logs-not-published.md`). **Closed 2026-11-24:**
+the incident is filed as `docs/rca/RCA-006-exp2-cohort-provenance.md`, with its guard in
+`docs/rca/regression-guards.yaml`.
 
 ### 3.2 Paper B revision 1 (cohort B2)
 
@@ -105,7 +109,8 @@ al.".
 - **Adult's categorical count.** Ch. 3 (Adult description) gives 6 numeric and 8 categorical
   variables, which matches the frozen preprocessor (WP0 F1). Ch. 7 `sec-exp3-nota` says the
   103-dimension space comes from "codificación one-hot de 13 variables categóricas". The two
-  disagree; Ch. 3 is right. Not in the approved edits: §4, item 3.
+  disagree; Ch. 3 is right. **Closed 2026-11-23:** Ch. 7 now reads "ocho variables
+  categóricas" (edit E2, PR #149, `bbb084506`).
 - **Gate 0.3 grep** (`director-predeposit-checklist_2026-08-29.md`): the qualified sentence
   survives at `capitulo-6-conclusiones.qmd:338` (it was line 292 when the gate was written).
   A second hit, line 42 (P1 row of `tbl-hipotesis`: "incoherencia estructural, no ruido del
@@ -114,22 +119,29 @@ al.".
 
 ## 4. Open with the author
 
-1. **103 vs 108** (F1): keep 103, or correct it in the thesis before deposit (seven
-   occurrences, no registered value; the tutor record would note it).
-2. **EXP2 provenance** (F7a, F7b, F7c, F8 for Ch. 3–4): whether the thesis discloses them
-   as limits of the confirmatory cohort, and an RCA for the incident (none exists; RCA-004
-   is the Paper G publisher). This touches text the tutor approved; not done here.
-3. **"13 variables categóricas"** in Ch. 7 `sec-exp3-nota`: correct to 8 (Ch. 3).
-4. Prior-publication policy of each journal with a paper under review, before deposit
-   (unchanged; ACTIVE_CONTEXT item 6).
+1. ~~**103 vs 108** (F1)~~ **Closed 2026-11-24**: 108 in all seven occurrences (E4, PR #150,
+   `73d44f7c1`).
+2. ~~**EXP2 provenance** (F7a, F7b, F7c, F8)~~ **Closed 2026-11-24**: disclosed in Ch. 3 as
+   limits of the primary cohort (E5, PR #150, `73d44f7c1`); RCA-006 written and guarded.
+3. ~~**"13 variables categóricas"**~~ **Closed 2026-11-23**: "ocho variables categóricas"
+   (E2, PR #149, `bbb084506`).
+4. **Still open (author, before deposit):** the prior-publication policy of each journal with
+   a paper under review (ACTIVE_CONTEXT, open item 6). An external check, not a thesis gap.
+
+The changes of E4 and E5 touch Chapter 3, which the tutor approved; they add disclosures and
+change no result, objective or hypothesis. The tutor record should list them.
 
 ## 5. Thesis edits made under this audit (lane `thesis`, `thesis/rca-001-phase-2`)
 
-| Id | File | Change | New literal |
-|---|---|---|---|
-| E1 | `estudios-de-seguimiento.qmd` `sec-seg-transferencia` | Why five features define stability; post hoc numeric vs mixed note | none |
-| E2 | `capitulo-6-conclusiones.qmd` `sec-limitaciones` | One-hot perturbation and sampling variance in the scope of LIME's instability; "Abdul Kadir et al." twice | none |
-| E3 | `capitulo-2-fundamentos.qmd`, `references.bib` | `kadir2023` → `abdulkadir2023`; duplicate entry removed | none |
+| Id | File | Change | New literal | PR, commit |
+|---|---|---|---|---|
+| E1 | `estudios-de-seguimiento.qmd` `sec-seg-transferencia` | Why five features define stability; post hoc numeric vs mixed note | none | #149, `bbb084506` |
+| E2 | `capitulo-6-conclusiones.qmd` `sec-limitaciones`, `sec-exp3-nota` | One-hot perturbation and sampling variance in the scope of LIME's instability; "Abdul Kadir et al." twice; "ocho variables categóricas" | none | #149, `bbb084506` |
+| E3 | `capitulo-2-fundamentos.qmd`, `references.bib` | `kadir2023` → `abdulkadir2023`; duplicate entry removed | none | #149, `bbb084506` |
+| E4 | `apendices.qmd` (App. C), `capitulo-6-conclusiones.qmd` | 103 → 108 encoded dimensions, seven occurrences | none (bare integer) | #150, `73d44f7c1` |
+| E5 | `capitulo-3-diseno-experimental.qmd` | F8 in `sec-muestreo`; F7c in `sec-cobertura`; F7a, F7b in `sec-trazabilidad` (anchor added); internal-validity residual risk in `tbl-validity-threats` | none | #150, `73d44f7c1` |
 
-Verification after the edits is recorded in the thesis pull request and in
-`docs/context/ACTIVE_CONTEXT.md` (handoff of 2026-11-23).
+After each pull request: `verify_claims.py`, `verify_sync.py`, `verify_exp4_reconstruction.py`,
+`register_thesis_followup.py --check`, `check_equations.py` and `scan_shared_literals.py --strict`
+exited 0; the rendered DOCX had no unresolved reference; after #150 it carries "108 dimensiones"
+seven times and "103 dimensiones" none. Handoff: `docs/context/ACTIVE_CONTEXT.md` (2026-11-24).
