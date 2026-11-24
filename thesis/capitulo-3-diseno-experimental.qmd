@@ -214,6 +214,24 @@ ejecución (mediana: 400). Esta estrategia garantiza que el explicador se evalú
 en los cuatro regímenes de decisión del modelo, no solo en los casos
 correctamente clasificados.
 
+**Procedencia de las instancias muestreadas.** Los clasificadores congelados
+se ajustaron una sola vez, sobre la partición de la semilla canónica
+(@eq-particion). El muestreo de cada ejecución, en cambio, invocó la partición
+con la semilla de esa ejecución ($\text{random\_state} = s$). En las ejecuciones
+con una semilla distinta de la canónica —cuatro de las cinco—, la mayor parte
+del conjunto del que se extraen las instancias pertenece al conjunto de
+entrenamiento de los modelos congelados. En esas ejecuciones, los cuadrantes de
+error se calculan en buena medida sobre puntos de entrenamiento, donde el modelo
+comete menos errores, y parte de las instancias explicadas fue vista durante el
+ajuste; también varían con la semilla las medias de entrenamiento que usa el
+enmascaramiento. Los resultados del Capítulo 4 no se repitieron restringidos a
+instancias fuera de entrenamiento, por lo que esta condición se declara como
+límite de validez interna del benchmark primario (@tbl-validity-threats). La
+restricción sí se aplicó en el Estudio de Fiabilidad ante el Error
+(§-@sec-seg-error), cuyo objeto son precisamente las instancias mal
+clasificadas: allí el déficit de estabilidad se mantiene sobre las instancias
+fuera de entrenamiento.
+
 ### Configuración de los explicadores
 
 Todos los métodos se ejecutan a través de `ExplainerWrapper.explain_instance`,
@@ -494,7 +512,14 @@ cuál de las dos se adopte.
 
 **Integridad del Estudio Pareado LIME–SHAP.** Con cobertura completa de
 SHAP (75/75) y LIME (75/75), su cobertura pareada es del 100%. Los datos
-faltantes de Anchors y DiCE **no afectan** a este estudio.
+faltantes de Anchors y DiCE **no afectan** a este estudio. La cobertura pareada es completa
+a nivel de celda, pero no siempre a nivel de instancia: en diez de las quince
+celdas de SVM, SHAP (`KernelExplainer`) completó solo un subconjunto de las
+instancias que LIME explicó en la misma celda, de ahí el mínimo de instancias
+por ejecución indicado en §-@sec-muestreo. En esas celdas, la media de cada
+método promedia las instancias que completó, de modo que el emparejamiento
+es por celda y no por instancia; la misma limitación se señala para el
+emparejamiento por instancia en §-@sec-seg-concordancia.
 
 **Dirección del sesgo de selección en Anchors.** El análisis anterior cuantifica
 el efecto de la cobertura reducida sobre la *varianza* de los estimadores, pero
@@ -650,7 +675,7 @@ cada familia, el control aplicado y el riesgo residual.
 
 | Familia | Amenaza principal | Control aplicado | Riesgo residual |
 |:--|:--|:--|:--|
-| Validez interna | Diferencias atribuibles al modelo o preprocesamiento, no al explicador | Modelos y preprocesador congelados; misma partición y mismas semillas por celda | Variación no observada por implementación interna de cada librería |
+| Validez interna | Diferencias atribuibles al modelo o preprocesamiento, no al explicador | Modelos y preprocesador congelados; misma partición y mismas semillas por celda | Variación no observada por implementación interna de cada librería; en las semillas distintas de la canónica, instancias evaluadas que pertenecen al entrenamiento de los modelos (§-@sec-muestreo); en bosque aleatorio, un modelo no conservado en las ejecuciones de SHAP y LIME y dos modelos en las de Anchors y DiCE (§-@sec-trazabilidad) |
 | Validez de constructo | Métricas automáticas que no capturan utilidad humana, plausibilidad o causalidad; enmascaramiento independiente potencialmente OOD | Definición previa de las métricas como proxies functionally-grounded; mismo operador de media de entrenamiento para todos los métodos; alcance declarado | No se preserva la distribución conjunta y puede persistir sesgo diferencial entre explicadores; no se infiere utilidad humana directa ni verdad causal |
 | Validez externa | Generalización fuera de Adult Income y clasificación tabular binaria | Framing explícito como benchmark tabular Adult; comparación con literatura XAI tabular; estudio de seguimiento sobre 16 conjuntos de datos tabulares (§-@sec-seg-transferencia) | El seguimiento cubre el orden de los métodos bajo un protocolo propio, no los valores de este benchmark; no cubre imágenes, texto, series temporales ni dominios causales |
 | Conclusión estadística | Pseudorreplicación, multiplicidad y datos faltantes | Unidad inferencial por bloque/celda; Friedman, Nemenyi, Wilcoxon y Holm-Bonferroni; análisis de cobertura | Menor precisión en Anchors para bloques con baja cobertura |
@@ -663,7 +688,7 @@ computacional reproducible sobre artefactos explicativos, no una validación
 psicológica o causal de la explicación. Esta delimitación es consistente con el
 Capítulo 2 y protege la interpretación de los resultados del Capítulo 4.
 
-## Trazabilidad y reproducibilidad
+## Trazabilidad y reproducibilidad {#sec-trazabilidad}
 
 Todos los análisis del Capítulo 4 son reproducibles desde el repositorio
 público `https://github.com/jonnabio/xai-eval-framework`, archivado con DOI
@@ -692,6 +717,29 @@ Los anclajes de reproducibilidad principales son:
 Las especificaciones completas del entorno de ejecución, los parámetros de
 restricción de recursos y las instrucciones de reproducción paso a paso
 figuran en el Apéndice E.
+
+**Procedencia operativa de los modelos y del coste.** Dos hechos de la
+ejecución de EXP2, identificados después del análisis, delimitan lo que estos
+artefactos permiten reproducir. Primero, las ejecuciones de SHAP y LIME sobre
+bosque aleatorio, junto con la primera tanda de Anchors y DiCE sobre ese
+modelo, usaron un bosque aleatorio que no quedó comprometido en el
+repositorio y que no puede reconstruirse: el artefacto conservado
+(`experiments/exp1_adult/models/rf.joblib`) no reproduce los conjuntos de
+instancias de esas ejecuciones, y tampoco los reproduce un reentrenamiento con
+la configuración por defecto. Las ejecuciones de Anchors y DiCE completadas
+después usaron el artefacto conservado. Dentro de cada celda de bosque
+aleatorio, SHAP y LIME explicaron el mismo modelo y las mismas instancias, de
+modo que su comparación pareada no se ve afectada; las comparaciones de SHAP o
+LIME con Anchors o DiCE en ese modelo cruzan, en parte de las celdas, dos
+bosques distintos. Los resultados de los demás modelos se reproducen con sus
+artefactos conservados. Segundo, en las ejecuciones realizadas después de
+incorporar el monitor de recursos `ResourceGuard` —casi todas de Anchors y
+DiCE, más dos de SHAP—, el tiempo registrado por explicación incluye la espera
+del ciclo de sondeo del monitor, de un segundo. Ese suelo no altera ninguna
+métrica de calidad y pesa poco frente a los tiempos de Anchors, de varios
+segundos por instancia, pero eleva el coste absoluto de las ejecuciones
+rápidas afectadas; entre las de SHAP, solo la ejecución sobre el perceptrón
+multicapa tiene un coste mínimo que coincide con ese suelo.
 
 ## Estudios complementarios: EXP3 y EXP4 {#sec-estudios-complementarios}
 
