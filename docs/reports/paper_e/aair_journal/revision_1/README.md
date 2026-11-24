@@ -12,6 +12,19 @@ revision works on copies in this folder, as Paper B revision 1 did.
 | `REVIEW_ANALYSIS.md` | Every item (R1-1 … R3-6), verdict, ambiguity note, work package |
 | `REVISION_PLAN.md` | Work packages, decisions for the author, constraints, order |
 
-Still to create (as for Paper B): `CHANGELOG.md` (C-###), `RESPONSE_TO_REVIEWERS.md`,
-`manuscript/`, `scripts/check_revision.py`, `scripts/build_revision.py`, `build/`,
-`SUBMITTED_SNAPSHOT.sha256`.
+| `CHANGELOG.md` | Every change, C-###, with the items it answers |
+| `RESPONSE_TO_REVIEWERS.md` | The answer to every item (in progress) |
+| `SUBMITTED_SNAPSHOT.sha256` | Hashes of the submitted files, which are frozen |
+| `manuscript/paper_e_aair_rev1_template.tex` | **The revised manuscript** (working copy); `paper_e_aair_rev1.tex` is generated |
+| `build/` | Built manuscript `.docx` / `.pdf` |
+| `scripts/check_signs.py` | RCA-006 guard on the built file |
+
+Build (needs Word for the PDF; numbers checked on every build):
+
+```bash
+.venv/Scripts/python.exe docs/reports/paper_e/aair_journal/scripts/build_paper_e_aair_docx.py
+.venv/Scripts/python.exe docs/reports/paper_e/aair_journal/revision_1/scripts/check_signs.py
+```
+
+Still to create: `scripts/check_revision.py` (frozen files, every item answered), the
+response letter build, the supplement.

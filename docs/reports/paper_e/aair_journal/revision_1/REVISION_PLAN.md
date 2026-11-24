@@ -42,7 +42,7 @@ checked automatically.
 
 | ID | Question | Proposal |
 |---|---|---|
-| D-1 | WP3 runs: scope and machine | Self-agreement subsample (Adult LR/MLP/RF/XGB, 100 each; GC and BC RF/XGB); settings: defaults (width √d·0.75, discretise on), width 3 with 1,000 / 5,000 / 10,000 samples; on the experiment laptop or this one if light enough (to time first) |
+| D-1 | WP3 runs: scope and machine | **Agreed (author, 2026-11-24):** settings: package default (default width, discretise on, 5,000 samples); default width, no discretisation, 5,000; width 3, no discretisation, 1,000 / 5,000 / 10,000; two random states each (LIME self-agreement per setting); stored SHAP reused; this laptop after a timing pilot, experiment laptop if > 6 h. Original proposal: Self-agreement subsample (Adult LR/MLP/RF/XGB, 100 each; GC and BC RF/XGB); settings: defaults (width √d·0.75, discretise on), width 3 with 1,000 / 5,000 / 10,000 samples; on the experiment laptop or this one if light enough (to time first) |
 | D-2 | New results in the paper | **Agreed (author, 2026-11-24).** In text, numbers only; tables in the supplement |
 | D-3 | Deadline | **Journal due date 2026-12-09; internal target 2026-12-06 (T-3), author 2026-11-24** |
 | D-4 | References | **Agreed (author, 2026-11-24)** |

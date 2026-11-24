@@ -128,7 +128,7 @@ def register(build_and_numbers) -> int:
     for (source, kind), claim in sorted(numbers.claims.items()):
         slug = re.sub(r"[^A-Za-z0-9]+", "_", source.split(":", 1)[1]).strip("_")
         sites = ", ".join(f'{{ file = "{f}", text = "{t}" }}' for f, t in sorted(claim["sites"]))
-        lines += ["[[claim]]", f'id = "paper_e_aair.{slug}.{kind}"', f'source = "{source}"',
+        lines += ["[[claim]]", f'id = "{NAME}.{slug}.{kind}"', f'source = "{source}"',
                   f'value = "{claim["value"]}"', f'tolerance = {claim["tolerance"]:.10g}',
                   f"appears_in = [{sites}]", ""]
     # Same rule as the CyS build: chance coincidences, at the printed precision, with a
@@ -303,6 +303,19 @@ def nomenclature(body: str) -> str:
     return re.sub(r"\\nomitem\{([^}]*)\}\{([^\n]*)\}", r"\n\nNOMITEM \1 NOMTAB \2\n\n", body)
 
 
+MINUS = "−"
+
+
+def plain_signs(tex: str) -> str:
+    """Signs and bare numbers as text, never as a Word equation (RCA-00E1, AAIR R2-1).
+
+    pandoc turns `$-$` into a one-character OMML equation. Word and LibreOffice draw it, but
+    viewers that skip equations (reviewer 2's copy of the submitted edition) show 0.059 for
+    -0.059. Every sign is now the character U+2212 in an ordinary run."""
+    tex = tex.replace("$-$", MINUS).replace("$+$", "+")
+    return re.sub(r"\$(\d+(?:\.\d+)?)\$", r"\1", tex)
+
+
 def pandoc_source(tex: str, png: dict[str, Path]) -> tuple[str, list[str], int, list[float], int]:
     """The text from the Introduction on, as a small LaTeX file for pandoc.
 
@@ -310,7 +323,7 @@ def pandoc_source(tex: str, png: dict[str, Path]) -> tuple[str, list[str], int, 
     width of each figure as a share of the text width, and the number of tables.
     """
     tex = strip_comments(tex)
-    body = tex[tex.index("\\section{Introduction}"):]
+    body = plain_signs(tex[tex.index("\\section{Introduction}"):])
     body = re.sub(r"\\begin\{(table|figure)\*?\}(\[[^\]]*\])?", r"\\begin{\1}", body)
     body = re.sub(r"\\end\{(table|figure)\*\}", r"\\end{\1}", body)
     body = re.sub(r"\\renewcommand\{\\arraystretch\}\{[^}]*\}|\\setlength\{\\tabcolsep\}\{[^}]*\}"
@@ -806,6 +819,57 @@ def build_manuscript(tex: str) -> tuple[Path, dict[str, int]]:
     return out, count
 
 
+def tex_cell(cell: str) -> str:
+    cell = plain_signs(cell)
+    cell = re.sub(r"\\(?:textbf|emph|textit)\{([^{}]*)\}", r"\1", cell)
+    cell = cell.replace("\\%", "%").replace("\\,", " ").replace("~", " ").replace("$", "")
+    cell = cell.replace("{", "").replace("}", "")
+    return " ".join(cell.split())
+
+
+def word_cell(xml: str) -> str:
+    """Only ordinary runs: a number must be readable without the equation layer."""
+    return " ".join(unescape(text_of(xml)).replace("\u00a0", " ").split())
+
+
+def verify_numbers(docx: Path, tex: str, build_and_numbers) -> int:
+    """Every generated table row and every negative number reaches the Word text intact.
+
+    Added after AAIR revision 1, R2-1 (RCA-00E1). Fails the build on any difference."""
+    b, numbers = build_and_numbers
+    with zipfile.ZipFile(docx) as z:
+        doc = z.read("word/document.xml").decode("utf-8")
+    problems = []
+    for m in re.finditer(r"<m:oMath>.*?</m:oMath>", doc, flags=re.DOTALL):
+        inner = "".join(re.findall(r"<m:t(?: [^>]*)?>([^<]*)</m:t>", m.group(0)))
+        if re.fullmatch(r"[\s\-\u2212+0-9.,]*", inner):
+            problems.append(f"a sign or number is a Word equation: {inner!r}")
+    word_tables = re.findall(r"<w:tbl>.*?</w:tbl>", doc, flags=re.DOTALL)
+    names = re.findall(r"\\input\{tables/(\w+)\.tex\}", SOURCE.read_text(encoding="utf-8"))
+    if len(names) != len(word_tables):
+        problems.append(f"{len(names)} generated tables, {len(word_tables)} Word tables")
+    checked = 0
+    for name, wt in zip(names, word_tables):
+        word_rows = {" | ".join(word_cell(c) for c in re.findall(r"<w:tc>.*?</w:tc>", tr, flags=re.DOTALL))
+                     for tr in re.findall(r"<w:tr[ >].*?</w:tr>", wt, flags=re.DOTALL)}
+        for line in b.TABLES[name](numbers).splitlines():
+            if "&" not in line or line.lstrip().startswith("%"):
+                continue
+            row = " | ".join(tex_cell(c) for c in line.rstrip().removesuffix("\\\\").split("&"))
+            checked += 1
+            if row not in word_rows:
+                problems.append(f"table {name}: row not in Word as printed: {row}")
+    body = strip_comments(tex)
+    body = plain_signs(body[body.index("\\section{Introduction}"):])
+    want = len(re.findall(MINUS + r"\d", body))
+    got = len(re.findall(MINUS + r"\d", unescape(text_of(doc))))
+    if want != got:
+        problems.append(f"{want} negative numbers in the source, {got} in the Word text")
+    if problems:
+        sys.exit("number check failed:\n  " + "\n  ".join(problems[:40]))
+    return checked
+
+
 PLAIN = "¶"    # a line that starts with this takes the format of the `plain` paragraph
 
 
@@ -967,10 +1031,33 @@ def word_pass(docx: Path, title: str, creator: str, fields: bool = True) -> int:
     return int(m.group(1))
 
 
+REV1 = AAIR / "revision_1"
+
+
+def use_revision_1() -> None:
+    """Point every input and output at revision 1; the submitted files are never written."""
+    global SOURCE, RENDERED, OUT, NAME, SITE, BEGIN, END
+    SOURCE = REV1 / "manuscript" / "paper_e_aair_rev1_template.tex"
+    RENDERED = REV1 / "manuscript" / "paper_e_aair_rev1.tex"
+    OUT = REV1 / "build"
+    NAME = "paper_e_aair_rev1"
+    SITE = "docs/reports/paper_e/aair_journal/revision_1/manuscript/paper_e_aair_rev1.tex"
+    BEGIN = ("# >>> paper_e_aair_rev1 generated by docs/reports/paper_e/aair_journal/scripts/"
+             "build_paper_e_aair_docx.py -- do not edit >>>")
+    END = "# <<< paper_e_aair_rev1 generated <<<"
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--no-pdf", action="store_true", help="do not open Word")
+    ap.add_argument("--edition", choices=["rev1", "submitted"], default="rev1",
+                    help="rev1 (default): revision_1/manuscript -> revision_1/build. "
+                         "submitted: refused, the edition of 2026-10-22 is frozen")
     args = ap.parse_args()
+    if args.edition == "submitted":
+        sys.exit("the submitted edition (submission/, paper_e_aair.tex) is frozen: "
+                 "revision_1/SUBMITTED_SNAPSHOT.sha256")
+    use_revision_1()
     for f in (TEMPLATE, LETTER_TEMPLATE, COPYRIGHT_TEMPLATE):
         if not f.exists():
             sys.exit(f"{f.relative_to(ROOT)} is missing; download it from the journal site "
@@ -981,14 +1068,15 @@ def main() -> int:
     tex, numbers = render()
     print(f"rendered {RENDERED.relative_to(ROOT)}; registered {register(numbers)} claims")
     manuscript, count = build_manuscript(tex)
+    print(f"number check: {verify_numbers(manuscript, tex, numbers)} table rows and every sign match the source")
     floats = count["tables"] + count["figures"]
     print(f"manuscript: {count['tables']} tables + {count['figures']} figures = {floats}, "
           f"{count['equations']} equations, {count['references']} references, "
           f"abstract {count['abstract_words']} words, {count['keywords']} keywords")
     if floats > MAX_FLOATS or count["references"] > MAX_REFS:
         sys.exit("over the journal's limit of figures and tables or of references")
-    built = [(manuscript, RUNNING_HEAD), (build_cover_letter(tex), macro(tex, "title")),
-             (build_copyright_form(tex), macro(tex, "title"))]
+    # Revision 1: the response letter replaces the cover letter; the copyright form is signed.
+    built = [(manuscript, RUNNING_HEAD)]
     for docx, title in built:
         line = f"docx  {docx.relative_to(ROOT)}"
         if not args.no_pdf:
