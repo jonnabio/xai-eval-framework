@@ -6,7 +6,7 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-18, by `claude-2026-11-17` (Windows documentation laptop): session end, Paper G submitted.
+**Last updated:** 2026-11-24, by `claude-2026-11-24-substrate` (experiment laptop): session end, thesis reconciled with Papers A–F, RCA-006 filed.
 
 ## Current objective
 
@@ -25,6 +25,17 @@ new Chapter 6, `thesis/estudios-de-seguimiento.qmd`, reports the three later stu
 as Chapter 7. No objective, hypothesis or proposition changed. Plan:
 `docs/planning/thesis_followup_studies_plan_2026-10-12.md`. Record for the tutor, in
 Spanish: `docs/review/tesis_cambios_para_tutor_2026-10-12.md` and `.docx`.
+
+**Reconciliation with Papers A–F, 2026-11-23/24** (PRs #148, #149, #150; RCA-006). Audit and its
+dispositions: `docs/review/thesis-papers-reconciliation-audit_2026-11-23.md` (closed). In the
+thesis: Paper F's Reviewer A additions in Ch. 6 `sec-seg-transferencia` (in words, the numeric vs
+mixed check marked *post hoc*); the mechanism of LIME's instability in Ch. 7 `sec-limitaciones`
+(no Paper B revision-1 number); Adult's encoded width 108 (was 103) and "ocho variables
+categóricas" (was 13); the EXP2 provenance limits (WP0 F7a–c, F8) disclosed in Ch. 3
+(`sec-muestreo`, `sec-cobertura`, `sec-trazabilidad`, `tbl-validity-threats`). No confirmatory
+statistic, objective or hypothesis changed. Earlier, PR #141 (2026-11-16, tutor's note) corrected
+the DOI of Abdul Kadir et al. (2023) to 10.1109/INES59282.2023.10297629; the duplicate
+`kadir2023` entry is now removed.
 
 Since 2026-10-13 the thesis has **29 figures, 45 tables and 19 equations**, each
 numbered and cited in the text (`scripts/pubs/check_equations.py`, in CI). What was
@@ -84,11 +95,11 @@ Standing task **Task 3 / RCA-001 Phase 2**:
   `paper/g-runs`, lock `paper-g-run-host`, never edited by hand) and
   `~/Documents/GitHub/xai-eval-framework` is a documentation clone.
 - **Paper G branches:** `paper/g-runs` frozen at `04c6dfd84` (merged, PR #123; publisher timer stopped); `paper/g-manuscript-completion` and `pubs/paper-g-claims` merged (#139, #140); no Paper G work is unmerged.
-- `main` holds everything up to pull request #114 and this handoff. `paper/b-ci-revision-1` is
+- `main` holds everything up to pull request #150 and this handoff. `paper/b-ci-revision-1` is
   level with `main`; kept until the editor confirms receipt, then deleted. `paper/b-rev1-runs` (raw cohort B2 rows and
   logs, 6,716 files, about 169 MB; merges cleanly) is ahead of `main` and **not merged**: the
   author decides whether it goes to `main` (see Open with the author). `thesis/rca-001-phase-2`
-  is behind `main` and takes it when the thesis lane resumes. `pubs/paper-b-rev1-lane` exists on
+  was level with `main` after PR #150 and takes `main` when the thesis lane resumes. `pubs/paper-b-rev1-lane` exists on
   GitHub only (not examined).
 - Locks: `paper-g-run-host` in the run clone only (goes stale 12 h after the last publish, by
   design). Nothing runs on any machine; the run host keeps the read-only dashboard
@@ -125,6 +136,11 @@ Standing task **Task 3 / RCA-001 Phase 2**:
     `apt-daily*.timer` disabled 2026-11-14). No further Paper G run is planned (experimental
     phase complete), so they can be re-enabled (author, sudo):
     `sudo systemctl enable --now unattended-upgrades apt-daily-upgrade.timer apt-daily.timer`.
+11. **Tutor record for the 2026-11-23/24 edits:** Ch. 3, which the tutor approved, now carries
+    the EXP2 provenance disclosures (E5) and Ch. 7 the width 108 (E4); the tutor record
+    (`docs/review/tesis_cambios_para_tutor_2026-10-12.md`) does not list them yet. Also flagged:
+    the Resumen and Abstract call the benchmarking conditions "reproducibles"; F7a qualifies that
+    for the random-forest cells (sweep log 2026-11-24). No rewording made.
 
 ## Active constraints
 
@@ -137,7 +153,9 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   `CITATION.cff`, `pubs-sync.yml`). Shared commits go on a `pubs/*` branch and reach
   `main` in the session they are made; lanes then take `main`. Lanes never merge into
   each other.
-- **Guards.** RCA-001, RCA-002 and RCA-003 in `docs/rca/regression-guards.yaml`. Any edit
+- **Guards.** RCA-001 to RCA-006 in `docs/rca/regression-guards.yaml`; RCA-006 (EXP2 cohort
+  provenance) guards Ch. 3, Ch. 7, the appendices and `WP0_FINDINGS.md`: the EXP2 runner is not
+  reused for a new cohort, the width stays 108, the Ch. 3 disclosures stay. Any edit
   to a numeric result: `verify_claims.py`, `verify_sync.py`,
   `verify_exp4_reconstruction.py`. Any rescoped claim in a chapter:
   `docs/review/top-level-statement-sweep.md`.
@@ -165,34 +183,37 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-18, SESSION END (Paper G submitted)
+## Latest handoff - 2026-11-24, SESSION END (Thesis reconciliation for Papers A–F and RCA-006 closed)
 
-Session owner `claude-2026-11-17` (Windows documentation laptop). Lane `paper-g`: lock released.
+Sessions `claude-2026-11-23-reconcile`, `claude-2026-11-23-thesis`, `claude-2026-11-24-substrate`
+(experiment laptop). Lanes `substrate` and `thesis`; this handoff on
+`pubs/rca-006-and-context-2026-11-24` (substrate lock released after merge).
 
 - **Completed:**
-  - Paper G analysis checked: H1 recomputed from the raw shards, 0.723 [0.645, 0.802], as printed.
-  - Bulletproof review, CLEIej rubric review, and template and venue compliance check
-    (`docs/reports/paper_g/review/BULLETPROOF_REVIEW_2026-11-17.md`).
-  - Paper G tests made to pass on Windows: path separators; S1 driver tests skipped under spawn.
-  - Fixes M1–M4, sentence-case title, positioning table, OpenXAI (`agarwal2022`), APA p-values,
-    Table 4 markers, Equation (5) cited to Lundberg 2017, equation numbering laid out for Word.
-  - Declarations completed (author's AI text; no funding; no conflicts). Limitations section
-    removed; its items kept as ideas G7–G12 in `docs/planning/paper_ideas_g2_g6_2026-11-13.md`.
-  - Question, hypotheses, verdicts and conclusions made consistent; appendix of model settings.
-  - pandoc and LibreOffice installed (winget); build runs on Windows. 16 pages in Word.
-  - **SUBMITTED 2026-11-17** to *Informática y Sistemas*, submission 8895. PRs #143–#146 merged;
-    publication table updated and put in order A–G.
-- **Current State:** Paper G is frozen at the submitted version on `main`; 185 Paper G claims,
-  2,083 claims overall, 480 equation checks pass. Papers B, C, D, E, F, G all wait for decisions.
+  - PR #148: reconciliation audit of Papers A–F against Ch. 1–7, App. A–G and the registry
+    (`docs/review/thesis-papers-reconciliation-audit_2026-11-23.md`); sweep log; Gate 0.3 note in
+    `director-predeposit-checklist_2026-08-29.md` (box left for the director).
+  - PR #149 (`bbb084506`): Ch. 6 `sec-seg-transferencia`, Paper F Reviewer A additions in words;
+    Ch. 7 `sec-limitaciones`, one-hot perturbation and LIME sampling variance; "Abdul Kadir et al.";
+    "ocho variables categóricas"; `kadir2023` → `abdulkadir2023`, duplicate bib entry removed.
+  - PR #150 (`73d44f7c1`): 103 → 108 (seven occurrences); EXP2 provenance disclosed in Ch. 3 (F8
+    `sec-muestreo`, F7c `sec-cobertura`, F7a/F7b `sec-trazabilidad`, new anchor;
+    `tbl-validity-threats`). F8 is stated as a limit of the primary benchmark: the held-out check
+    exists only for the misclassification study.
+  - RCA-006 (`docs/rca/RCA-006-exp2-cohort-provenance.md`) and its guard; audit closed; sweep log
+    2026-11-24 (rows 1–16 consistent). PR #141 (2026-11-16) had fixed the Kadir DOI.
+- **Current State:** every check green (`verify_claims` 2,083 claims; follow-up 79 mirrored;
+  19 equations, 29 figures, 45 tables; shared-literal scan clean). The DOCX was rendered after
+  PR #150 with no unresolved reference; the table of contents is still to be refreshed in Word.
+  Papers B, C, D, E, F, G wait for journal decisions.
 - **Next Steps:**
   1. Sync: `git fetch origin`, `git switch main`, `git pull --ff-only`.
-  2. Wait for journal decisions; act only on a revision request (B: C&I 2067810; G: 8895).
-  3. Optionally save the editor note as `docs/reports/paper_g/EDITOR_NOTE.md`.
-  4. Next paper, if wanted: ideas G2–G12 (recommended order G3, G4, G2).
-- **Blockers/Issues:** none. Untracked, left alone by request:
-  `docs/reports/paper_a/paper_a_rimi.pdf`, `docs/reports/paper_g/venue/template/ISRTIC_Plantilla_Articulo-EN.docx`.
-- **Notes:** builds need pandoc (`%LOCALAPPDATA%\Pandoc`) and LibreOffice
-  (`C:\Program Files\LibreOffice\program`) on PATH; check pages in Word, not LibreOffice. After any
-  manuscript edit: `build_paper_g.py`, `scripts/pubs/register_paper_g.py`,
-  `scripts/pubs/verify_claims.py`. Placeholder formats `zf1..zf5` print APA values without the
-  leading zero. Shared paths go in their own commit and branch, never with lane files.
+  2. Author: refresh the table of contents in Word; add E4/E5 to the tutor record (open item 11).
+  3. Before deposit: prior-publication policy of each journal (open item 6).
+  4. Act only on a journal's revision request.
+- **Blockers/Issues:** none. `gh` is not installed on this laptop: pull requests are opened and
+  merged by the author. Untracked and left alone: the five planning files of 2026-11-23
+  (`docs/planning/*thesis-reconciliation*`, `docs/review/thesis-reconciliation_*`); their analysis
+  has stale statements (e.g. that only Ch. 4 is under coverage) and was not used as a source.
+- **Notes:** `verify_claims.py` ignores bare integers, so widths and counts in prose (103/108,
+  8/13) are not checked by it; RCA-006 guards those two by grep.
