@@ -235,7 +235,12 @@ estabilidad, la parsimonia y el coste. Sus definiciones operativas no son las
 del Capítulo 3 —la estabilidad, por ejemplo, es aquí el solapamiento de las
 cinco características principales bajo ruido, y no la similitud coseno de la
 @eq-estabilidad—, de modo que este estudio no
-replica las cifras del Capítulo 4. La unidad de análisis es el conjunto de
+replica las cifras del Capítulo 4. El tamaño de ese subconjunto se fijó en el
+plan, antes de la ejecución: es el número de características codificadas del
+conjunto de datos más pequeño, de modo que la medida está definida en todos, y
+queda entre las pocas características que nombran las reglas de Anchors y los
+contrafactuales de DiCE y el máximo de características fijado para LIME. La
+unidad de análisis es el conjunto de
 datos. La concordancia entre conjuntos de datos es la correlación de rangos
 media entre los órdenes de todos los pares de conjuntos, con intervalo
 *bootstrap* y prueba de permutación corregida por Holm. La regla de decisión se
@@ -276,6 +281,15 @@ Tomando Adult como referencia, de las 24 comparaciones entre pares de métodos,
 menos 12. Las tres débiles son todas entre Anchors y DiCE; en coste, ese par
 mantiene el orden de Adult en 7 de 15 conjuntos. SHAP ocupa la primera posición
 en la brecha de fidelidad en 13 de los 16 conjuntos y en estabilidad en 14.
+
+En una comparación *post hoc*, hecha después de ver los resultados, se
+separaron los conjuntos de datos con características solo numéricas de los
+mixtos. El tipo de características no cambia el orden de los métodos, y la
+concordancia entre un conjunto numérico y uno mixto queda próxima a la global;
+lo que cambia es qué comparaciones varían. En los conjuntos mixtos varían la
+brecha de fidelidad y la estabilidad de LIME, SHAP y Anchors, donde actúan las
+columnas *one-hot* y el ruido aplicado solo a las características numéricas; en
+los numéricos, la parsimonia de Anchors y DiCE.
 
 **Límites.** Tres límites condicionan la lectura, y los tres se establecieron
 tras revisar los resultados.
