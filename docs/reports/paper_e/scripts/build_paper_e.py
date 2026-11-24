@@ -240,6 +240,21 @@ def placeholder(numbers: Numbers, spec: str) -> str:
         return numbers.show(src("posthoc/ceiling_skipped", "sum(skipped)", dataset="exp2_adult", model=a[0]), "int")
     if kind == "chance":     # dataset|5 or 10
         return numbers.show(src("posthoc/chance_overlap", f"expected_top{a[1]}_jaccard", dataset=a[0]))
+    # --- AAIR revision 1 (2026-11-24): paper_e_revision1_analyses.py, paper_e_lime_settings.py
+    if kind == "hout":       # subset (all, heldout, train)|model|metric|field -- Adult held-out sensitivity
+        if a[3] in ("n_instances", "n_runs", "n_seeds"):
+            return numbers.show(src("posthoc/rev1_heldout_summary", a[3], dataset="exp2_adult", model=a[1],
+                                    subset=a[0]), "int")
+        return numbers.show(src("posthoc/rev1_heldout_summary", f"{a[2]}.{FIELD[a[3]]}", dataset="exp2_adult",
+                                model=a[1], subset=a[0]))
+    if kind == "same":       # dataset|model|column|field -- same-predicted-class permutation reference
+        return numbers.show(src("posthoc/rev1_same_class_permutation_summary", f"{a[2]}.{FIELD[a[3]]}",
+                                dataset=a[0], model=a[1]))
+    if kind == "loso":       # dataset|model|metric|all_seeds, loso_min or loso_max -- leave one seed out
+        return numbers.show(src("posthoc/rev1_leave_one_seed_out", f"{a[2]}.{a[3]}", dataset=a[0], model=a[1]))
+    if kind == "lset":       # dataset|model|setting|pair|metric|field -- LIME settings
+        return numbers.show(src("posthoc/lime_settings_summary", FIELD[a[5]], dataset=a[0], model=a[1],
+                                setting=a[2], pair=a[3], metric=a[4]))
     raise SystemExit(f"unknown placeholder <<{spec}>>")
 
 
