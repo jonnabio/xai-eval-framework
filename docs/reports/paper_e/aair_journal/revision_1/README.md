@@ -1,7 +1,7 @@
 # Paper E, revision 1 (AAIR, DergiPark)
 
 Major revision, decision of 2026-11-24 (editor Remzi Gürfidan). Reviewer 1: minor;
-reviewers 2 and 3: major. Deadline: **to record** (from the DergiPark task).
+reviewers 2 and 3: major. Due **2026-12-09**; internal target **2026-12-06** (T-3).
 
 The submitted edition (`../submission/`, `../paper_e_aair_template.tex`) is frozen; the
 revision works on copies in this folder, as Paper B revision 1 did.

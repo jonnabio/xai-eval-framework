@@ -43,7 +43,7 @@ checked automatically.
 | ID | Question | Proposal |
 |---|---|---|
 | D-1 | WP3 runs: scope and machine | Self-agreement subsample (Adult LR/MLP/RF/XGB, 100 each; GC and BC RF/XGB); settings: defaults (width √d·0.75, discretise on), width 3 with 1,000 / 5,000 / 10,000 samples; on the experiment laptop or this one if light enough (to time first) |
-| D-2 | New results in the paper | In text, numbers only; tables in the supplement (paper at the 10-item limit) |
-| D-3 | Deadline | Record from DergiPark |
-| D-4 | References | Add only if a new claim needs one; 80% rule as Paper B option A |
-| D-5 | Zenodo | New version of the Paper E record with the revision (as for B) |
+| D-2 | New results in the paper | **Agreed (author, 2026-11-24).** In text, numbers only; tables in the supplement |
+| D-3 | Deadline | **Journal due date 2026-12-09; internal target 2026-12-06 (T-3), author 2026-11-24** |
+| D-4 | References | **Agreed (author, 2026-11-24)** |
+| D-5 | Zenodo | **Agreed (author, 2026-11-24)** |
