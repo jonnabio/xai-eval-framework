@@ -23,26 +23,26 @@ Post-hoc explainers are often treated as interchangeable, yet two explainers may
 different features for the same prediction. This study measures how much SHAP and LIME
 agree on single instances. Both methods explained the same instances of the same models on
 three tabular datasets (Adult, German Credit and Breast Cancer Wisconsin), giving
-31,411 paired explanations in 86 runs; LIME used a fixed kernel
-width and no discretisation. The analysis plan was committed before any agreement
-statistic was computed; runs, not instances, are the unit of summary. The mean overlap
-of the five most important features (Jaccard index) was
+31,411 paired explanations in 86 runs; LIME used kernel width 3,
+1000 samples and no discretisation. The analysis plan was committed before any agreement
+statistic was computed; runs, not instances, are the unit of summary. The mean overlap of
+the five most important features (Jaccard index) was
 0.393 on Adult,
 0.387 on German Credit and
-0.714 on Breast Cancer. Part of this overlap does not
-depend on the instance: the SHAP list of one instance and the LIME list of another instance
-of the same run overlapped by 0.203,
-0.287 and 0.648 (post hoc). In
-a post hoc experiment, neither method fully reproduced its own list when run again (Adult:
-0.690 for LIME,
-0.782 for SHAP), and agreement between the
-methods was below this self-agreement for every model tested. Agreement varied between
-models and datasets, not visibly with the number of explained instances, and was not
-consistently lower for misclassified instances. Sign agreement followed the predicted class,
-because LIME without discretisation returns local slopes while SHAP returns contributions;
-after conversion to contributions (post hoc), the signs of the shared top features agreed in
-0.945 to 0.990 of the cases, a
-level one fixed direction per feature also reaches.
+0.714 on Breast Cancer (on Adult, the same on held-out
+instances). Part of this overlap does not depend on the instance: the SHAP list of one
+instance and the LIME list of another overlapped by 0.203,
+0.287 and 0.648. These levels
+are conditional on the LIME configuration: in post hoc reference analyses on a subsample,
+the Adult overlap ranged from 0.164
+(package defaults) to 0.473 across
+settings, while in every setting the agreement between the methods stayed below the
+agreement of each method with itself. Agreement varied between models and datasets and was
+not consistently lower for misclassified instances. The pre-specified sign agreement
+compared LIME slopes with SHAP contributions; after a post hoc conversion, the signs of the
+shared top features agreed in 0.945 to
+0.990 of the cases, a level one fixed direction per feature
+also reaches.
 \end{abstract}
 
 \begin{keywords}
@@ -402,9 +402,9 @@ instance-specific part with it (0.186,
 0.063): it is not a ranking common to the
 instances of a class.
 
-Two sensitivity analyses (post hoc) bound these estimates. On Adult, restricted to the
-13,011 held-out instances, which are not rows of the
-training data of the model, the top-5 overlap was 0.394
+Two sensitivity analyses (post hoc) bound these estimates. On Adult, restricted to held-out instances, which are not rows of the training data of the model
+(13,011 of the
+29,667 paired explanations), the top-5 overlap was 0.394
 (0.372 to 0.415), against
 0.385 on training rows; the top-10 overlap was
 0.507 and $\tau_b$ 0.123.
@@ -478,20 +478,35 @@ background sample of 50 instances. Second, self-agreement differs between models
 multilayer perceptron had the lowest self-agreement of LIME and the lowest SHAP--LIME
 overlap, but the other three Adult models show no such relation.
 
-\textbf{Kernel width.} The experiment was repeated for LIME with the default kernel
-width. Its lists changed: on Adult the top-5 overlap between LIME at width 3 and LIME at
-the default width was 0.370, as low as between SHAP and LIME; it was
-0.590 on German Credit and 0.889 on Breast Cancer. The
-overlap of SHAP with default-width LIME was higher on Adult (0.456
-against 0.383), with models moving in both directions (from
-0.353 to 0.533 for the random forest,
-from 0.346 to 0.286 for the
-multilayer perceptron), and about the same on the other two datasets. Default-width LIME
-was also less specific to the instance: on Adult two of its explanations of different
-instances overlapped by 0.589, against 0.195 at
-width 3. The kernel width thus changes the LIME explanation as much as the change of
-explainer does, and the narrow kernel gives the explanations that depend more on the
-instance.
+\textbf{LIME settings.} Under other LIME settings the level of agreement changed, but its
+relation to self-agreement did not. At 1000 samples, the lists of LIME at width 3 and at the
+default width overlapped by only 0.370 on
+Adult. With width 3, more samples raised the self-agreement of LIME on Adult from
+0.690 (1000 samples) to
+0.775 and
+0.836 (5000 and 10000), and the overlap
+with SHAP from 0.383 to
+0.450 and
+0.459; on German Credit the overlap
+stayed at 0.382 and on Breast Cancer
+at 0.731. The default width with
+5000 samples gave an overlap with SHAP of
+0.473 on Adult,
+0.372 on German Credit and
+0.738 on Breast Cancer, with LIME
+lists that overlapped with those of the study by
+0.356 on Adult. With the defaults of the
+package, which discretise continuous features, the overlap with SHAP fell to
+0.164 on Adult and
+0.269 on German Credit
+(0.703 on Breast Cancer), and on
+Adult LIME became much less repeatable (self-agreement
+0.336). Depending on the setting, the
+Adult overlap thus ranged from 0.164
+to 0.473. In every setting, and for
+every model and dataset, it stayed below the self-agreement of both methods. The levels
+reported in this study are specific to its configuration; the finding that the two methods
+agree less with each other than each with itself is not.
 
 
 \begin{table*}[t]
