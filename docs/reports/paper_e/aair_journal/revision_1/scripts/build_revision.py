@@ -125,6 +125,21 @@ def compare(original: Path, revised: Path, out: Path) -> None:
     print(f"changes marked: {m.group(1) if m else '?'} Word revisions")
 
 
+def justify(docx: Path) -> None:
+    """Justify the body text of the letter (author request, 2026-11-25): the paragraph
+    styles pandoc writes for prose and quotes are set to justified (python-docx keeps the
+    schema order of w:pPr, which Word requires)."""
+    from docx import Document
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    doc = Document(str(docx))
+    for name in ("Normal", "Body Text", "First Paragraph", "Block Text", "Compact"):
+        try:
+            doc.styles[name].paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        except KeyError:
+            pass
+    doc.save(str(docx))
+
+
 def letter_markdown() -> str:
     text = (REV / "RESPONSE_TO_REVIEWERS.md").read_text(encoding="utf-8")
     text = re.sub(r"<!--.*?-->", "", text, flags=re.S)
@@ -163,6 +178,7 @@ def main() -> int:
                            capture_output=True, text=True)
         if r.returncode:
             sys.exit(f"pandoc failed on the response letter: {r.stderr[-800:]}")
+        justify(letter)
         builder.OUT = WORK
         pages = builder.word_pass(letter, "Response to the editor and reviewers", builder.AUTHOR)
         print(f"response letter: {pages} pages")
