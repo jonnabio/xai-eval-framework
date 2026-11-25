@@ -5,7 +5,7 @@
 
 Needs Word (COM). Steps:
   1. The submitted frozen files are checked against SUBMITTED_SNAPSHOT.sha256.
-  2. Baseline: the SUBMITTED source rebuilt with today's pipeline (signs as text, RCA-006),
+  2. Baseline: the SUBMITTED source rebuilt with today's pipeline (signs as text, RCA-007),
      in _work/, without touching the registry. Its text must equal the submitted .docx, the
      signs aside (the submitted file holds them as equations): only real edits are marked.
   3. The revised manuscript is built (build_paper_e_aair_docx.py, edition rev1).

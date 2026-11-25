@@ -307,7 +307,7 @@ MINUS = "−"
 
 
 def plain_signs(tex: str) -> str:
-    """Signs and bare numbers as text, never as a Word equation (RCA-00E1, AAIR R2-1).
+    """Signs and bare numbers as text, never as a Word equation (RCA-007, AAIR R2-1).
 
     pandoc turns `$-$` into a one-character OMML equation. Word and LibreOffice draw it, but
     viewers that skip equations (reviewer 2's copy of the submitted edition) show 0.059 for
@@ -835,7 +835,7 @@ def word_cell(xml: str) -> str:
 def verify_numbers(docx: Path, tex: str, build_and_numbers) -> int:
     """Every generated table row and every negative number reaches the Word text intact.
 
-    Added after AAIR revision 1, R2-1 (RCA-00E1). Fails the build on any difference."""
+    Added after AAIR revision 1, R2-1 (RCA-007). Fails the build on any difference."""
     b, numbers = build_and_numbers
     with zipfile.ZipFile(docx) as z:
         doc = z.read("word/document.xml").decode("utf-8")

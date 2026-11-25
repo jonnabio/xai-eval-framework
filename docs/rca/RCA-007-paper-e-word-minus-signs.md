@@ -1,4 +1,4 @@
-# RCA-006: Paper E (AAIR) minus signs written as Word equations, invisible to some readers
+# RCA-007: Paper E (AAIR) minus signs written as Word equations, invisible to some readers
 
 **Status:** Resolved (fix and guard on `paper/e-aair-revision-1`)
 **Severity:** High (a reviewer read wrong signs in three tables of a submitted manuscript)
@@ -84,7 +84,7 @@ None; the rule is in the guard below. Other Word builders converting LaTeX throu
 
 ### Regression Guard
 
-`docs/rca/regression-guards.yaml`, id RCA-006.
+`docs/rca/regression-guards.yaml`, id RCA-007.
 
 ## Verification
 

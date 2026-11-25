@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""RCA-006 guard: every table row and sign of the built revision manuscript is plain text.
+"""RCA-007 guard: every table row and sign of the built revision manuscript is plain text.
 
     .venv/Scripts/python.exe docs/reports/paper_e/aair_journal/revision_1/scripts/check_signs.py
 """

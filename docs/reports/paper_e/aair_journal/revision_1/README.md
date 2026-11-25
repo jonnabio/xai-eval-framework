@@ -17,7 +17,7 @@ revision works on copies in this folder, as Paper B revision 1 did.
 | `SUBMITTED_SNAPSHOT.sha256` | Hashes of the submitted files, which are frozen |
 | `manuscript/paper_e_aair_rev1_template.tex` | **The revised manuscript** (working copy); `paper_e_aair_rev1.tex` is generated |
 | `build/` | Built manuscript `.docx` / `.pdf` |
-| `scripts/check_signs.py` | RCA-006 guard on the built file |
+| `scripts/check_signs.py` | RCA-007 guard on the built file |
 
 Build (needs Word for the PDF; numbers checked on every build):
 
