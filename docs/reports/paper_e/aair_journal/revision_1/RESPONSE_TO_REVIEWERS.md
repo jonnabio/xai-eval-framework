@@ -13,9 +13,11 @@ grateful to the three reviewers for their careful and constructive reports. Ever
 has been addressed; the answers follow, each with the changes made and where they appear.
 A file with all changes marked is included.
 
-> **Editor's decision (ED-1).** Decision: Major Revision (Editor, Remzi Gürfidan, November 24, 2026).
+**ED-1. Decision: major revision.**
 
-**ED-1. Decision: major revision.** The manuscript has been revised as requested; the
+> **Editor's decision.** Decision: Major Revision (Editor, Remzi Gürfidan, November 24, 2026).
+
+**Response.** The manuscript has been revised as requested; the
 answers to every comment follow. The main changes are: (1) the sign error reported by Reviewer 2, caused by the conversion of
 the manuscript into Word, has been corrected, and every number of the Word file is now
 checked automatically against the analysis output; (2) the principal agreement estimates
@@ -33,15 +35,26 @@ Jonathan Herrera-Vásquez
 
 I thank the reviewer for the positive assessment and for the precise suggestions.
 
-> **Reviewer comment (R1-0).** Comments to the editor: The manuscript is methodologically careful and addresses a relevant problem in explainable AI. I consider the use of instance-paired SHAP and LIME explanations, run-level statistical summaries, seed-clustered resampling, pre-specification of the main analysis, transparent post-hoc labeling, and complete release of code and result files to be notable strengths. I do not identify a fundamental methodological problem requiring major revision. The principal remaining issues concern the scope of interpretation. In the Adult cohort, a substantial proportion of explained instances for four seeds belong to the training data of the single fitted model, and the primary LIME configuration uses a kernel width of 3 selected without a technical rationale. The manuscript itself demonstrates that kernel width can materially change LIME's selected feature lists. These limitations are already acknowledged, but I recommend that the authors strengthen the held-out sensitivity assessment and further bound the main conclusions to the exact explainer configurations evaluated. The SVM analysis is also based on incomplete SHAP coverage, which should continue to be treated cautiously. Overall, these issues appear addressable without a redesign of the study or major new experimentation. I therefore recommend **Minor Revision**. Comments to the author (general): The manuscript presents a careful and potentially valuable empirical investigation of instance-level agreement between SHAP and LIME. Important strengths include the use of paired explanations for the same instances and models, run-level rather than instance-level statistical summaries, explicit treatment of the dependence structure, pre-specification of the main analysis, transparent identification of post-hoc analyses, and extensive reproducibility materials. The manuscript is generally well written and the conclusions are appropriately cautious. I have only a few points that should be addressed before publication. Closing: These points do not require a fundamental redesign of the study. The main empirical contribution—the demonstration that agreement between SHAP and LIME is partial, configuration-dependent, and generally lower than within-method self-agreement in the evaluated settings—is supported by the presented analyses. I therefore recommend Minor Revision. Comments and suggestions: The manuscript is generally rigorous, transparent, and reproducible. Before publication, I recommend strengthening the sensitivity analysis or interpretation of the Adult results with respect to training-set membership and further emphasizing that the reported SHAP–LIME agreement values depend on the specific LIME configuration, particularly the fixed kernel width of 3. The self-agreement and sign-conversion analyses should also continue to be clearly identified as post-hoc sensitivity/reference analyses, and the incomplete SVM coverage should remain explicitly qualified. These are limited revisions and do not alter the main contribution of the study. Recommendation: Minor Revision.
-
 **R1-0. Comments to the editor (held-out assessment, conclusions bounded to the
-configuration, SVM coverage).** Addressed in detail under R1-1, R1-2 and R1-5.
+configuration, SVM coverage).**
 
-> **Reviewer comment (R1-1).** 1. The Adult analysis would benefit from a clearer sensitivity assessment restricted to held-out instances for the primary agreement measures. The manuscript states that, for four of the five Adult seeds, approximately 70% of the paired instances are also rows used to train the fitted model. A held-out-only sensitivity analysis is already reported for the correct-versus-misclassified comparison, which is useful. However, the main RQ1/RQ2 agreement estimates are still largely based on the combined training and held-out instances. Please either provide a corresponding held-out-only sensitivity analysis for the principal top-k agreement estimates or more explicitly justify why training-set membership is not expected to materially affect these conclusions.
+> **Reviewer comment.** Comments to the editor: The manuscript is methodologically careful and addresses a relevant problem in explainable AI. I consider the use of instance-paired SHAP and LIME explanations, run-level statistical summaries, seed-clustered resampling, pre-specification of the main analysis, transparent post-hoc labeling, and complete release of code and result files to be notable strengths. I do not identify a fundamental methodological problem requiring major revision. The principal remaining issues concern the scope of interpretation. In the Adult cohort, a substantial proportion of explained instances for four seeds belong to the training data of the single fitted model, and the primary LIME configuration uses a kernel width of 3 selected without a technical rationale. The manuscript itself demonstrates that kernel width can materially change LIME's selected feature lists. These limitations are already acknowledged, but I recommend that the authors strengthen the held-out sensitivity assessment and further bound the main conclusions to the exact explainer configurations evaluated. The SVM analysis is also based on incomplete SHAP coverage, which should continue to be treated cautiously. Overall, these issues appear addressable without a redesign of the study or major new experimentation. I therefore recommend **Minor Revision**. Comments to the author (general): The manuscript presents a careful and potentially valuable empirical investigation of instance-level agreement between SHAP and LIME. Important strengths include the use of paired explanations for the same instances and models, run-level rather than instance-level statistical summaries, explicit treatment of the dependence structure, pre-specification of the main analysis, transparent identification of post-hoc analyses, and extensive reproducibility materials. The manuscript is generally well written and the conclusions are appropriately cautious. I have only a few points that should be addressed before publication. Closing: These points do not require a fundamental redesign of the study. The main empirical contribution—the demonstration that agreement between SHAP and LIME is partial, configuration-dependent, and generally lower than within-method self-agreement in the evaluated settings—is supported by the presented analyses. I therefore recommend Minor Revision. Comments and suggestions: The manuscript is generally rigorous, transparent, and reproducible. Before publication, I recommend strengthening the sensitivity analysis or interpretation of the Adult results with respect to training-set membership and further emphasizing that the reported SHAP–LIME agreement values depend on the specific LIME configuration, particularly the fixed kernel width of 3. The self-agreement and sign-conversion analyses should also continue to be clearly identified as post-hoc sensitivity/reference analyses, and the incomplete SVM coverage should remain explicitly qualified. These are limited revisions and do not alter the main contribution of the study. Recommendation: Minor Revision.
+
+**Response.** The three
+points were addressed as follows. (1) Held-out assessment: the principal top-5, top-10 and
+Kendall estimates were recomputed on held-out Adult instances only and are essentially
+unchanged (Section 4.1; detail under R1-1). (2) Bounded conclusions: the Abstract,
+Introduction and Conclusions now state that the agreement levels are conditional on the
+evaluated LIME configuration, and LIME was run again under the package defaults and larger
+sampling budgets (Sections 3.3 and 4.2; R1-2). (3) SVM coverage: the SVM estimates are
+qualified in Sections 4.3, 4.5 and 4.6, and no model-family ranking is claimed (R1-5). The
+self-agreement and sign-conversion analyses are labelled post hoc throughout (R1-3, R1-4).
 
 **R1-1. Held-out sensitivity for the principal agreement estimates.**
-REMEDIATED. The top-5 and top-10 overlap and Kendall's τ~b~ were recomputed on Adult for
+
+> **Reviewer comment.** 1. The Adult analysis would benefit from a clearer sensitivity assessment restricted to held-out instances for the primary agreement measures. The manuscript states that, for four of the five Adult seeds, approximately 70% of the paired instances are also rows used to train the fitted model. A held-out-only sensitivity analysis is already reported for the correct-versus-misclassified comparison, which is useful. However, the main RQ1/RQ2 agreement estimates are still largely based on the combined training and held-out instances. Please either provide a corresponding held-out-only sensitivity analysis for the principal top-k agreement estimates or more explicitly justify why training-set membership is not expected to materially affect these conclusions.
+
+**Response.** REMEDIATED. The top-5 and top-10 overlap and Kendall's τ~b~ were recomputed on Adult for
 held-out instances only (instances that are not rows of the models' training data). The
 estimates are essentially unchanged: top-5 overlap 0.394 (interval 0.372 to 0.415) on
 held-out instances against 0.393 on all instances and 0.385 on training rows; the largest
@@ -49,36 +62,40 @@ difference by model is that of the random forest, whose held-out instances agree
 (0.402 against 0.389). Training-set membership therefore does not explain the level of
 agreement. Section 4.1, second paragraph; Section 3.1 states the design consequence.
 
-> **Reviewer comment (R1-2).** 2. The dependence of the findings on the LIME configuration should be emphasized more prominently. The primary analyses use a fixed kernel width of 3, which the manuscript acknowledges was selected without a technical justification and is smaller than the package default. The post-hoc experiment shows that changing the kernel width can alter the feature lists substantially; on Adult, the overlap between LIME at width 3 and LIME at the default width is itself only 0.370. This is an important finding. The Abstract and Conclusion should therefore make particularly clear that the reported SHAP–LIME agreement levels are conditional on the evaluated LIME configuration rather than intrinsic properties of the two explainer families.
-
 **R1-2. Agreement conditional on the LIME configuration.**
-REMEDIATED. The Abstract, the contributions, the Discussion ("What the evidence does not
+
+> **Reviewer comment.** 2. The dependence of the findings on the LIME configuration should be emphasized more prominently. The primary analyses use a fixed kernel width of 3, which the manuscript acknowledges was selected without a technical justification and is smaller than the package default. The post-hoc experiment shows that changing the kernel width can alter the feature lists substantially; on Adult, the overlap between LIME at width 3 and LIME at the default width is itself only 0.370. This is an important finding. The Abstract and Conclusion should therefore make particularly clear that the reported SHAP–LIME agreement levels are conditional on the evaluated LIME configuration rather than intrinsic properties of the two explainer families.
+
+**Response.** REMEDIATED. The Abstract, the contributions, the Discussion ("What the evidence does not
 support") and the Conclusions now state that the agreement levels are those of the evaluated
 configuration and not properties of the two families of explainers, and Section 4.2 reports
 how they change under other LIME settings, including the package defaults: on Adult the
 overlap ranged from 0.164 (package defaults) to 0.473 (default width, 5,000 samples) against
 0.383 in the study's configuration. (C-005, C-006)
 
-> **Reviewer comment (R1-3).** 3. Please consider whether the principal self-agreement result should be described even more explicitly as a sensitivity/reference analysis rather than as a general property of SHAP and LIME. The experiment is based on a relatively small subsample and one pair of random states, as appropriately acknowledged in the Limitations section. This does not invalidate the result, but the language used in the Abstract and Conclusion should remain consistent with this limited scope.
-
 **R1-3. Self-agreement as a reference analysis.**
-REMEDIATED. Section 4.2 is now titled "Self-Agreement and LIME Settings (Post Hoc Reference
+
+> **Reviewer comment.** 3. Please consider whether the principal self-agreement result should be described even more explicitly as a sensitivity/reference analysis rather than as a general property of SHAP and LIME. The experiment is based on a relatively small subsample and one pair of random states, as appropriately acknowledged in the Limitations section. This does not invalidate the result, but the language used in the Abstract and Conclusion should remain consistent with this limited scope.
+
+**Response.** REMEDIATED. Section 4.2 is now titled "Self-Agreement and LIME Settings (Post Hoc Reference
 Analysis)" and opens by stating that it gives reference levels on a subsample with one pair
 of random states, not the repeatability of either method in general. The Abstract and the
 Conclusions use the same wording.
 
-> **Reviewer comment (R1-4).** 4. The manuscript appropriately identifies that LIME without discretisation returns local slopes whereas SHAP returns contributions. The post-hoc conversion analysis is informative and substantially strengthens the paper. However, I suggest making the distinction between the pre-specified sign analysis and the post-hoc corrected interpretation especially visible in the Discussion, since the original sign-agreement metric does not compare equivalent quantities.
-
 **R1-4. Pre-specified sign analysis versus post hoc corrected interpretation.**
-REMEDIATED. The Discussion has a dedicated paragraph, "Signs: the pre-specified measure and
+
+> **Reviewer comment.** 4. The manuscript appropriately identifies that LIME without discretisation returns local slopes whereas SHAP returns contributions. The post-hoc conversion analysis is informative and substantially strengthens the paper. However, I suggest making the distinction between the pre-specified sign analysis and the post-hoc corrected interpretation especially visible in the Discussion, since the original sign-agreement metric does not compare equivalent quantities.
+
+**Response.** REMEDIATED. The Discussion has a dedicated paragraph, "Signs: the pre-specified measure and
 the post hoc correction", which states that the pre-specified measure compared slopes with
 contributions and should not be read as disagreement about direction, and that only the
 post hoc conversion compares like with like. Section 4.4 is retitled accordingly.
 
-> **Reviewer comment (R1-5).** 5. The SVM results should remain explicitly qualified wherever model-family comparisons are discussed. The manuscript reports that usable SHAP explanations are available for only 2,064 of 7,000 LIME-explained SVM instances (29.5%) and that this subset is not balanced across predicted classes. The current manuscript acknowledges this limitation, but it would be useful to ensure that no broad model-family ranking is inferred from the SVM estimates.
-
 **R1-5. SVM results qualified wherever model families are compared.**
-REMEDIATED. Section 4.3 now states that the SVM is not ranked against the other models
+
+> **Reviewer comment.** 5. The SVM results should remain explicitly qualified wherever model-family comparisons are discussed. The manuscript reports that usable SHAP explanations are available for only 2,064 of 7,000 LIME-explained SVM instances (29.5%) and that this subset is not balanced across predicted classes. The current manuscript acknowledges this limitation, but it would be useful to ensure that no broad model-family ranking is inferred from the SVM estimates.
+
+**Response.** REMEDIATED. Section 4.3 now states that the SVM is not ranked against the other models
 (29.5% coverage, unbalanced between predicted classes); Sections 4.5 and 4.6 qualify the SVM
 estimate where it appears, and the Discussion draws no family ranking.
 
@@ -86,15 +103,28 @@ estimate where it appears, and the Discussion draws no family ranking.
 
 I thank the reviewer for the careful reading, in particular for detecting the sign error.
 
-> **Reviewer comment (R2-0).** Comments to the editor: The manuscript addresses a relevant research problem in explainable artificial intelligence and provides valuable insights into instance-level agreement between SHAP and LIME. The inclusion of within-method repeatability and instance-level reference comparisons strengthens its scientific contribution. However, several concerns require attention, particularly numerical inconsistencies in Tables 1, 4, and 5, training–test overlap, sensitivity to LIME configuration, and limitations in statistical generalizability. Comments to the author (general): The manuscript investigates an important issue in explainable artificial intelligence by examining instance-level agreement between SHAP and LIME. The experimental design, inclusion of within-method repeatability, and use of instance-level reference comparisons are valuable contributions. However, several issues should be addressed before publication. Comments and suggestions: The manuscript presents an interesting and relevant investigation of agreement between SHAP and LIME explanations. The experimental approach and consideration of explanation repeatability are appreciated. However, substantial revisions are needed to ensure the accuracy and reliability of the findings. The authors should carefully verify the reported numerical results, address the methodological concerns regarding data partitioning and LIME parameter sensitivity, and clarify the limitations of the statistical analysis. Recommendation: Major Revision.
-
 **R2-0. Comments to the editor (numbers in Tables 1, 4 and 5, training–test overlap, LIME
-configuration, generalizability).** Addressed in detail under R2-1 to R2-6.
+configuration, generalizability).**
 
-> **Reviewer comment (R2-1).** 1. Numerical Consistency: Tables 1, 4, and 5 contain inconsistencies in the signs of reported values and confidence interval bounds. For example, Table 4 reports positive differences where the displayed means indicate negative differences. All numerical results should be carefully verified against the original analysis outputs.
+> **Reviewer comment.** Comments to the editor: The manuscript addresses a relevant research problem in explainable artificial intelligence and provides valuable insights into instance-level agreement between SHAP and LIME. The inclusion of within-method repeatability and instance-level reference comparisons strengthens its scientific contribution. However, several concerns require attention, particularly numerical inconsistencies in Tables 1, 4, and 5, training–test overlap, sensitivity to LIME configuration, and limitations in statistical generalizability. Comments to the author (general): The manuscript investigates an important issue in explainable artificial intelligence by examining instance-level agreement between SHAP and LIME. The experimental design, inclusion of within-method repeatability, and use of instance-level reference comparisons are valuable contributions. However, several issues should be addressed before publication. Comments and suggestions: The manuscript presents an interesting and relevant investigation of agreement between SHAP and LIME explanations. The experimental approach and consideration of explanation repeatability are appreciated. However, substantial revisions are needed to ensure the accuracy and reliability of the findings. The authors should carefully verify the reported numerical results, address the methodological concerns regarding data partitioning and LIME parameter sensitivity, and clarify the limitations of the statistical analysis. Recommendation: Major Revision.
+
+**Response.** I thank the reviewer for the careful reading. The points
+were addressed as follows. (1) Numbers: the minus signs lost in the Word conversion were
+restored, and every number of the Word file is now checked automatically against the analysis
+output (R2-1). (2) Training–test overlap: the main agreement results are reported on held-out
+instances only, with unchanged conclusions (Section 4.1; R2-2). (3) LIME configuration: LIME
+was run again with the package defaults and with 5,000 and 10,000 samples; the levels change,
+the ordering against self-agreement does not, and the conclusions are stated as conditional on
+the configuration (Sections 3.3 and 4.2; R2-3). (4) Generalizability: a leave-one-seed-out
+analysis and a same-class permutation reference were added, and the unit of inference is
+stated (Section 4.1, Discussion; R2-4, R2-5). (5) Reproducibility: a supplementary file
+documents every measure and configuration, and the revision is archived on Zenodo (R2-6).
 
 **R2-1. Numerical consistency of Tables 1, 4 and 5.**
-REMEDIATED. The reviewer is right, and I am grateful for this observation. The analysis
+
+> **Reviewer comment.** 1. Numerical Consistency: Tables 1, 4, and 5 contain inconsistencies in the signs of reported values and confidence interval bounds. For example, Table 4 reports positive differences where the displayed means indicate negative differences. All numerical results should be carefully verified against the original analysis outputs.
+
+**Response.** REMEDIATED. The reviewer is right, and I am grateful for this observation. The analysis
 outputs and the source tables were correct (for example, Table 4, multilayer perceptron:
 difference −0.059, interval −0.069 to −0.049), but the conversion of the manuscript into
 Word wrote each minus sign as a separate equation object, which some viewers do not display.
@@ -103,15 +133,17 @@ reviewer. Every sign is now ordinary text, and every build of the manuscript com
 table row and each negative number of the Word file with the analysis output and stops on
 any difference. All values were verified again against the original analysis files. (C-001)
 
-> **Reviewer comment (R2-2).** 2. Training–Test Overlap: A substantial proportion of the Adult instances used in the analysis overlap with the model's training data. The authors should extend the held-out sensitivity analysis to the main agreement results.
-
 **R2-2. Held-out sensitivity extended to the main agreement results.**
-REMEDIATED. See the answer to R1-1 (Section 4.1).
 
-> **Reviewer comment (R2-3).** 3. LIME Configuration: The fixed kernel width and limited perturbation budget substantially influence the reported agreement. Additional sensitivity analyses using standard LIME settings and different sampling budgets are recommended.
+> **Reviewer comment.** 2. Training–Test Overlap: A substantial proportion of the Adult instances used in the analysis overlap with the model's training data. The authors should extend the held-out sensitivity analysis to the main agreement results.
+
+**Response.** REMEDIATED. See the answer to R1-1 (Section 4.1).
 
 **R2-3. Standard LIME settings and different sampling budgets.**
-REMEDIATED. On the self-agreement subsample (760 instances), LIME was run again, twice each,
+
+> **Reviewer comment.** 3. LIME Configuration: The fixed kernel width and limited perturbation budget substantially influence the reported agreement. Additional sensitivity analyses using standard LIME settings and different sampling budgets are recommended.
+
+**Response.** REMEDIATED. On the self-agreement subsample (760 instances), LIME was run again, twice each,
 with the package defaults (default kernel width, quartile discretisation, 5,000 samples),
 with the default width without discretisation (5,000 samples), and with width 3 at 5,000 and
 10,000 samples. The reviewer's concern is confirmed for the level of agreement: on Adult the
@@ -124,19 +156,21 @@ methods. The manuscript therefore presents the levels as specific to the configu
 the comparison with self-agreement as the result that holds across settings. Section 3.3
 (settings), Section 4.2 ("LIME settings"), Abstract, Discussion and Conclusions. (C-005, C-006)
 
-> **Reviewer comment (R2-4).** 4. Instance-Specific Agreement: The permutation reference should also be evaluated using instances from the same predicted class to better distinguish instance-specific agreement from class-dependent feature rankings.
-
 **R2-4. Permutation reference within the same predicted class.**
-REMEDIATED. The reference was recomputed with the other instance drawn from the same
+
+> **Reviewer comment.** 4. Instance-Specific Agreement: The permutation reference should also be evaluated using instances from the same predicted class to better distinguish instance-specific agreement from class-dependent feature rankings.
+
+**Response.** REMEDIATED. The reference was recomputed with the other instance drawn from the same
 predicted class. It changed little (Adult 0.207 against 0.204 unrestricted; German Credit
 0.288 against 0.287; Breast Cancer 0.651 against 0.650), and the instance-specific part with
 it, so the instance-specific agreement is not a class-level ranking. Section 3.3 and
 Section 4.1.
 
-> **Reviewer comment (R2-5).** 5. Statistical Generalizability: The limited number of independent seeds and fitted models restricts the generalizability of the findings. The authors should strengthen the validation where feasible and maintain appropriately cautious interpretations.
-
 **R2-5. Statistical generalizability.**
-REMEDIATED. _Interpretation:_ the comment does not specify which validation is expected; it
+
+> **Reviewer comment.** 5. Statistical Generalizability: The limited number of independent seeds and fitted models restricts the generalizability of the findings. The authors should strengthen the validation where feasible and maintain appropriately cautious interpretations.
+
+**Response.** REMEDIATED. _Interpretation:_ the comment does not specify which validation is expected; it
 was understood as a request to show that the conclusions do not rest on a single seed or
 fit, and to state the limits plainly. If a different analysis was intended, I would be glad
 to provide it. (1) A leave-one-seed-out analysis was added: the Adult top-5 overlap stays
@@ -145,10 +179,11 @@ and 0.735 (Section 4.1). (2) The Discussion and Limitations state that each Adul
 single fitted model, that the intervals describe the spread of seed means, and that RQ2 to
 RQ4 are exploratory. (3) Refitting one model per seed is named as future work.
 
-> **Reviewer comment (R2-6).** 6. Presentation and Reproducibility: The numerical inconsistencies should be corrected, and the agreement measures and experimental configurations should be clearly documented to facilitate independent verification.
-
 **R2-6. Presentation and reproducibility.**
-REMEDIATED. The numerical inconsistencies are corrected and checked automatically (R2-1).
+
+> **Reviewer comment.** 6. Presentation and Reproducibility: The numerical inconsistencies should be corrected, and the agreement measures and experimental configurations should be clearly documented to facilitate independent verification.
+
+**Response.** REMEDIATED. The numerical inconsistencies are corrected and checked automatically (R2-1).
 The agreement measures are defined in Section 3.3 (Eq. 1 and 2), the configuration of every
 explainer is stated in Section 3.2, and a supplementary file lists every setting of every
 model and explainer and the new sensitivity results. The code and outputs of the revision are
@@ -159,15 +194,23 @@ archived in a new version of the Zenodo record cited in the Data Availability se
 I thank the reviewer for the thorough assessment and for recognising the contributions of
 the reference analyses.
 
-> **Reviewer comment (R3-0).** Comments to the editor: The paper should be revised. This manuscript investigates the extent to which SHAP and LIME agree when explaining the same prediction at the instance level. The topic is timely and relevant, addressing the increasingly recognized “disagreement problem” in explainable artificial intelligence. The study is well motivated, the research questions are clearly formulated, and the overall experimental framework is carefully designed. In particular, the use of paired explanations for the same instances, the pre-specified analysis plan, and the emphasis on reproducibility represent important strengths of the work. The manuscript is generally well written, technically rigorous, and transparent regarding both methodological decisions and study limitations. One of the most valuable contributions of the paper is that it moves beyond reporting agreement between SHAP and LIME and introduces meaningful reference points for interpreting the observed overlap. The inclusion of permutation-based baselines and self-agreement analyses provides additional context that is largely absent from previous studies. Furthermore, the discussion regarding the distinction between LIME coefficients and SHAP contributions, together with the sign-agreement analyses, offers an insightful methodological contribution that may benefit future comparative studies of explanation methods. Despite these strengths, several issues merit further consideration before publication.
+**R3-0. Comments to the editor ("The paper should be revised") and general assessment.**
 
-**R3-0. Comments to the editor ("The paper should be revised").** The manuscript has been
-revised; the specific points are answered below.
+> **Reviewer comment.** Comments to the editor: The paper should be revised. This manuscript investigates the extent to which SHAP and LIME agree when explaining the same prediction at the instance level. The topic is timely and relevant, addressing the increasingly recognized “disagreement problem” in explainable artificial intelligence. The study is well motivated, the research questions are clearly formulated, and the overall experimental framework is carefully designed. In particular, the use of paired explanations for the same instances, the pre-specified analysis plan, and the emphasis on reproducibility represent important strengths of the work. The manuscript is generally well written, technically rigorous, and transparent regarding both methodological decisions and study limitations. One of the most valuable contributions of the paper is that it moves beyond reporting agreement between SHAP and LIME and introduces meaningful reference points for interpreting the observed overlap. The inclusion of permutation-based baselines and self-agreement analyses provides additional context that is largely absent from previous studies. Furthermore, the discussion regarding the distinction between LIME coefficients and SHAP contributions, together with the sign-agreement analyses, offers an insightful methodological contribution that may benefit future comparative studies of explanation methods. Despite these strengths, several issues merit further consideration before publication.
 
-> **Reviewer comment (R3-1).** The primary concern relates to the configuration of LIME used throughout the study. The experiments employ a fixed kernel width of 3 and disable discretization of continuous features. The manuscript itself demonstrates that kernel width substantially influences the resulting explanations, with overlaps between explanations generated under different kernel-width settings being comparable to, or even larger than, the overlap observed between SHAP and LIME. Consequently, it remains unclear to what extent the reported disagreement reflects intrinsic differences between SHAP and LIME and to what extent it reflects the behavior of a particular, non-standard LIME configuration. While this limitation is acknowledged, a more extensive sensitivity analysis and a stronger justification for the parameter choice would significantly strengthen the validity of the conclusions.
+**Response.** I thank the reviewer for recognising the reference analyses and the methodological
+contribution. The manuscript was revised on every point raised: the LIME configuration is
+documented and tested under five settings (Sections 3.2, 3.3 and 4.2; R3-1); the limits of
+three datasets are discussed and evidence is separated from implications (Discussion; R3-2);
+the Adult design and per-seed refitting are discussed (Section 3.1; R3-3); pre-specified and
+exploratory analyses are separated (Section 3.6; R3-4); and the Discussion and Limitations
+were condensed (R3-5).
 
 **R3-1. LIME configuration: sensitivity and justification.**
-REMEDIATED. _Interpretation:_ the width of 3 and the absence of discretisation were inherited
+
+> **Reviewer comment.** The primary concern relates to the configuration of LIME used throughout the study. The experiments employ a fixed kernel width of 3 and disable discretization of continuous features. The manuscript itself demonstrates that kernel width substantially influences the resulting explanations, with overlaps between explanations generated under different kernel-width settings being comparable to, or even larger than, the overlap observed between SHAP and LIME. Consequently, it remains unclear to what extent the reported disagreement reflects intrinsic differences between SHAP and LIME and to what extent it reflects the behavior of a particular, non-standard LIME configuration. While this limitation is acknowledged, a more extensive sensitivity analysis and a stronger justification for the parameter choice would significantly strengthen the validity of the conclusions.
+
+**Response.** REMEDIATED. _Interpretation:_ the width of 3 and the absence of discretisation were inherited
 from the configuration of the benchmark cohort and were not tuned; a technical justification
 cannot be supplied after the fact. The manuscript now says so plainly (Section 3.2) and
 replaces the missing justification with evidence: the sensitivity analysis described under
@@ -176,37 +219,50 @@ shows that the level of agreement depends on the kernel width, the sampling budg
 discretisation, while the finding that the two methods agree less with each other than each
 with itself holds in every setting. (C-003, C-005, C-006)
 
-> **Reviewer comment (R3-2).** A second concern relates to the scope of the empirical evaluation. The study is based on three tabular datasets, which is sufficient for an initial investigation but limits the generalizability of the findings. The observed patterns may depend on dataset characteristics, including dimensionality, feature representation, or domain-specific properties. The discussion would benefit from a more explicit treatment of these generalization limits and a clearer distinction between evidence-supported conclusions and broader implications.
-
 **R3-2. Three datasets; evidence versus broader implications.**
-REMEDIATED. The Discussion is now organised into "What the evidence supports", "What the
+
+> **Reviewer comment.** A second concern relates to the scope of the empirical evaluation. The study is based on three tabular datasets, which is sufficient for an initial investigation but limits the generalizability of the findings. The observed patterns may depend on dataset characteristics, including dimensionality, feature representation, or domain-specific properties. The discussion would benefit from a more explicit treatment of these generalization limits and a clearer distinction between evidence-supported conclusions and broader implications.
+
+**Response.** REMEDIATED. The Discussion is now organised into "What the evidence supports", "What the
 evidence does not support" (including the dataset characteristics that three datasets cannot
 separate: kind and number of features, domain and kernel weight) and "Implications". Future
 work names datasets that vary the number and kind of features.
 
-> **Reviewer comment (R3-3).** The experimental design on the Adult dataset also deserves further discussion. Because the models are trained on a single partition while explanations are generated across multiple seeds, a substantial fraction of the explained instances belong to the training data. Although the author acknowledges this issue and performs additional analyses on held-out instances, the design introduces unnecessary complexity into the interpretation of the results. Training separate models for each seed would have provided a cleaner experimental setting and should at least be discussed as an alternative design choice.
-
 **R3-3. Adult design: one model trained on a single partition.**
-REMEDIATED. Section 3.1 now states that training a separate model for each seed is the
+
+> **Reviewer comment.** The experimental design on the Adult dataset also deserves further discussion. Because the models are trained on a single partition while explanations are generated across multiple seeds, a substantial fraction of the explained instances belong to the training data. Although the author acknowledges this issue and performs additional analyses on held-out instances, the design introduces unnecessary complexity into the interpretation of the results. Training separate models for each seed would have provided a cleaner experimental setting and should at least be discussed as an alternative design choice.
+
+**Response.** REMEDIATED. Section 3.1 now states that training a separate model for each seed is the
 cleaner design and why it was not used (the study reuses the stored runs of the cohort), and
 the primary measures are reported on held-out instances (R1-1). Refitting per seed is listed
 as future work.
 
-> **Reviewer comment (R3-4).** Another aspect that should be considered is the prominent role of post hoc analyses in the manuscript. Several of the most interesting findings, including the self-agreement experiments, permutation references, and the contribution-based sign analyses, were developed after inspection of the initial results. These analyses undoubtedly add value to the study; however, readers would benefit from a clearer separation between pre-specified and exploratory findings. The exploratory nature of these results should be emphasized more consistently throughout the manuscript.
-
 **R3-4. Separation of pre-specified and exploratory findings.**
-REMEDIATED. Section 3.6 now lists the pre-specified analyses and the exploratory ones
+
+> **Reviewer comment.** Another aspect that should be considered is the prominent role of post hoc analyses in the manuscript. Several of the most interesting findings, including the self-agreement experiments, permutation references, and the contribution-based sign analyses, were developed after inspection of the initial results. These analyses undoubtedly add value to the study; however, readers would benefit from a clearer separation between pre-specified and exploratory findings. The exploratory nature of these results should be emphasized more consistently throughout the manuscript.
+
+**Response.** REMEDIATED. Section 3.6 now lists the pre-specified analyses and the exploratory ones
 separately; section headings, captions, the Abstract and the Conclusions mark every
 exploratory result as post hoc.
 
-> **Reviewer comment (R3-5).** The quality of the writing is generally high. The presentation is clear, and the methodological details are reported thoroughly. The tables and figures effectively support the discussion. However, some sections, particularly the Discussion and Limitations sections, could be condensed without reducing their scientific value. At several points the manuscript revisits similar caveats, which affects readability and slightly weakens the impact of the main findings.
-
 **R3-5. Condensing the Discussion and Limitations.**
-REMEDIATED. The two sections were rewritten from about 1,100 to about 810 words; each caveat
+
+> **Reviewer comment.** The quality of the writing is generally high. The presentation is clear, and the methodological details are reported thoroughly. The tables and figures effectively support the discussion. However, some sections, particularly the Discussion and Limitations sections, could be condensed without reducing their scientific value. At several points the manuscript revisits similar caveats, which affects readability and slightly weakens the impact of the main findings.
+
+**Response.** REMEDIATED. The two sections were rewritten from about 1,100 to about 810 words; each caveat
 is stated once, in the Limitations, and repeated caveats elsewhere were removed.
 
-> **Reviewer comment (R3-6).** Overall, I find the study scientifically meaningful and potentially publishable. The manuscript addresses an important question in explainable AI, employs a generally sound methodology, and offers several original contributions to the literature on explanation agreement. However, concerns regarding the chosen LIME configuration, the limited scope of the experimental evaluation, and the presentation of exploratory analyses should be addressed before the work can be considered for publication. Therefore, my recommendation is Major Revision. I believe the manuscript has strong publication potential if these issues are adequately addressed. Comments and suggestions: I'd like to thank to author(s) for their valuable study. Recommendation: Major Revision.
-
 **R3-6. Overall assessment (LIME configuration, scope of the evaluation, presentation of
-exploratory analyses).** Addressed under R3-1, R3-2 and R3-4. I also thank the reviewer for
-the kind closing words.
+exploratory analyses).**
+
+> **Reviewer comment.** Overall, I find the study scientifically meaningful and potentially publishable. The manuscript addresses an important question in explainable AI, employs a generally sound methodology, and offers several original contributions to the literature on explanation agreement. However, concerns regarding the chosen LIME configuration, the limited scope of the experimental evaluation, and the presentation of exploratory analyses should be addressed before the work can be considered for publication. Therefore, my recommendation is Major Revision. I believe the manuscript has strong publication potential if these issues are adequately addressed. Comments and suggestions: I'd like to thank to author(s) for their valuable study. Recommendation: Major Revision.
+
+**Response.** The three concerns were addressed as follows. (1) LIME configuration:
+its origin is stated in Section 3.2 and LIME was run again under four further settings; the
+SHAP–LIME agreement stays below both self-agreements in every setting, and the conclusions
+are stated as conditional on the configuration (Section 4.2; R3-1). (2) Scope: the Discussion
+separates what the evidence supports from what it does not, names the dataset characteristics
+that three datasets cannot separate, and future work names datasets that vary them (R3-2).
+(3) Exploratory analyses: Section 3.6 lists pre-specified and exploratory analyses, and every
+post hoc result is marked in headings, captions, Abstract and Conclusions (R3-4). I also thank
+the reviewer for the kind closing words.
