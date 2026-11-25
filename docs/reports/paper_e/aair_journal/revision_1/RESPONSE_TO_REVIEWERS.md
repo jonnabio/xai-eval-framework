@@ -117,7 +117,7 @@ REMEDIATED. The numerical inconsistencies are corrected and checked automaticall
 The agreement measures are defined in Section 3.3 (Eq. 1 and 2), the configuration of every
 explainer is stated in Section 3.2, and a supplementary file lists every setting of every
 model and explainer and the new sensitivity results. The code and outputs of the revision are
-archived in a new version of the Zenodo record. _[supplement, Zenodo DOI]_
+archived in a new version of the Zenodo record cited in the Data Availability section.
 
 ## Reviewer 3
 
