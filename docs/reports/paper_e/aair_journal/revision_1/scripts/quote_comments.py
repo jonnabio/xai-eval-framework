@@ -84,11 +84,11 @@ text = re.sub(r"(?m)^> \*\*Reviewer comment[^\n]*\n(?:>[^\n]*\n)*\n?", "", text)
 text = re.sub(r"(?m)^> \*\*Editor's decision[^\n]*\n(?:>[^\n]*\n)*\n?", "", text)
 for key, quote in Q.items():
     label = "Editor's decision" if key == "ED-1" else "Reviewer comment"
-    block = f"> **{label} ({key}).** {quote}\n\n"
+    block = f"> **{label}.** {quote}\n\n"
     marker = f"**{key}."
     if text.count(marker) != 1:
         sys.exit(f"answer heading for {key} not found once")
-    i = text.index(marker)
+    i = text.index(chr(10) * 2, text.index(marker)) + 2   # after the item heading
     text = text[:i] + block + text[i:]
 path.write_text(text, encoding="utf-8")
 print(f"quoted {len(Q)} comments")
