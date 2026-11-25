@@ -275,3 +275,25 @@ guards:
          src/xai/anchors_wrapper.py or ResourceGuard for timed results"
       - "Any edit to the EXP2 design, sampling or traceability sections of Chapter 3"
       - "Any manuscript that reports EXP2 random-forest, SVM-SHAP or cost results"
+
+  - id: RCA-007
+    title: "Paper E AAIR: minus signs written as Word equations, lost by some readers"
+    severity: high
+    created: 2026-11-24
+    rca_file: docs/rca/RCA-007-paper-e-word-minus-signs.md
+
+    guarded_files:
+      - docs/reports/paper_e/aair_journal/scripts/build_paper_e_aair_docx.py
+
+    invariants:
+      - "No sign or number of a manuscript is a Word equation (OMML); signs are U+2212 in ordinary runs"
+      - "Every generated table row is found, cell by cell, in the plain text of the Word table"
+      - "Source and Word text have the same count of negative numbers"
+      - "The submitted edition (submission/) is never rebuilt by the script"
+
+    tests:
+      - .venv/Scripts/python.exe docs/reports/paper_e/aair_journal/revision_1/scripts/check_signs.py
+
+    review_triggers:
+      - "Any change to plain_signs(), verify_numbers() or the pandoc step"
+      - "Any other LaTeX-to-Word builder (Paper B C&I, Paper G): apply the same check"

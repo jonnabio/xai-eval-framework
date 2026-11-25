@@ -460,3 +460,17 @@ the configuration and is not an agreement statistic.
 0.75 times the square root of the number of features) is stated in the method description;
 the held-out contrast of the SVM is reported with its coverage; captions say that the
 intervals are the spread of seed means.
+
+**2026-11-24, AAIR revision 1 (post hoc, decided after the reviews; no explainer run).**
+`scripts/paper_e_revision1_analyses.py`, outputs `outputs/analysis/paper_e/posthoc/rev1_*.csv`.
+(1) Adult held-out sensitivity of the primary measures (top-5, top-10 Jaccard, Kendall
+tau-b): runs split into instances that are and are not rows of the seed-42 training
+partition; a run enters a cell with at least 10 instances (reviewers 1, 2, 3). (2) Permutation
+reference restricted to instances of the same predicted class, 20 draws per instance, seed
+20261124, beside the unrestricted reference with the same draws (reviewer 2). (3) Leave one
+seed out for the primary measures (reviewer 2). Aggregation as section 5.
+
+**2026-11-24, AAIR revision 1, LIME settings (post hoc; new LIME runs, SHAP reused).** On the
+self-agreement subsample: package default (default width, discretisation on, 5,000 samples);
+default width without discretisation, 5,000; width 3 without discretisation, 1,000, 5,000 and
+10,000 samples; two random states each (reviewers 2, 3; author decision D-1).
