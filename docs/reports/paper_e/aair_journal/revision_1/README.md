@@ -3,6 +3,9 @@
 Major revision, decision of 2026-11-24 (editor Remzi Gürfidan). Reviewer 1: minor;
 reviewers 2 and 3: major. Due **2026-12-09**; internal target **2026-12-06** (T-3).
 
+**Archive of the revision:** Zenodo 0.16.0, `10.5281/zenodo.24518192`, GitHub release
+`paper-e-aair-2026-11-24-r1` (`main` at `b994aa194`, PR #152), published 2026-11-24.
+
 The submitted edition (`../submission/`, `../paper_e_aair_template.tex`) is frozen; the
 revision works on copies in this folder, as Paper B revision 1 did.
 
