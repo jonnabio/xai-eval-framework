@@ -6,20 +6,13 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-25, by `claude-2026-11-24-paper-e-rev1`: Paper E AAIR revision 1 built (PRs #152–#155), RCA-007 filed.
+**Last updated:** 2026-11-25, by `claude-2026-11-24-paper-e`: session end, Paper E AAIR revision 1 submitted.
 
 ## Current objective
 
-**Paper E, AAIR revision 1** (major revision of 2026-11-24, editor Remzi Gürfidan; **due
-2026-12-09, internal target 2026-12-06**). Everything in
-`docs/reports/paper_e/aair_journal/revision_1/` (Paper B revision 1 is the model): 21 items,
-all answered (`RESPONSE_TO_REVIEWERS.md`, each answer preceded by the verbatim comment);
-`scripts/check_revision.py` reports READY. Ambiguous items (R2-3, R2-5, R3-1) state the
-reading taken. RCA-007: Word minus signs (builder now writes text signs and checks every table
-row). Zenodo 0.16.0, `10.5281/zenodo.24518192`. Outputs in `revision_1/build/`: manuscript
-(14 pp), changes-marked `.docx`/`.pdf`, response letter (10 pp), supplement (9 pp).
-**Author actions:** read the letter (above all R2-3, R2-5, R3-1), then upload the four files
-to DergiPark. Do not rebuild unless the author asks.
+**Paper E, AAIR revision 1: SUBMITTED 2026-11-25** (major revision of 2026-11-24, editor Remzi
+Gürfidan). Wait for the decision; do not rebuild unless the journal asks. Record:
+`docs/reports/paper_e/aair_journal/revision_1/`.
 
 **Paper G** (*Do faithfulness metrics agree?*, lane `paper-g`, *Informática y Sistemas*):
 **SUBMITTED 2026-11-17**, submission 8895 (acknowledged the same day). Pre-submission review,
@@ -83,8 +76,8 @@ Standing task **Task 3 / RCA-001 Phase 2**:
 | **B** | *When Does SHAP Outperform LIME? Model- and Configuration-Dependent Results from a Paired Tabular Benchmark* | *Computers and Informatics* (C&I, DergiPark) | **Revision 1 submitted 2026-11-12** (2067810; major revision of 2026-11-06) | Revision C-000 – C-056, final check passes; 15 pp, supplement 52 pp; files from `ci_journal/revision_1/build/`. Record: `revision_1/README.md`, "Submission". Submitted 2026-10-21 |
 | **C** | *Do LLM Judges Agree on the Quality of Explanations? A Two-Panel Reliability Study* | *Tecnología en Marcha*, AI special issue | Submitted | 2026-10-06 (reported by the author); number not recorded. Fourth draft. Zenodo 0.12.0, [10.5281/zenodo.23165763](https://doi.org/10.5281/zenodo.23165763) |
 | **D** | *Are explanations less reliable when the model is wrong? Post-hoc explanation quality on misclassified instances* | *Tecnología en Marcha*, AI special issue | **Submitted 2026-10-03** | Through the author account (date given by the author on 2026-10-22); number not recorded. Zenodo 0.5.0, [10.5281/zenodo.23130014](https://doi.org/10.5281/zenodo.23130014) |
-| **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Submitted 2026-10-22** | Number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
-| **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Accepted by the reviewer; final version submitted 2026-10-25** (editor's request of the same day); awaiting publication | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). Target issue: 30 March 2027. Final files: `herrera-vasquez-final.pdf` (no. 47982) and `.docx` (no. 47981), in `submission/final_2026-10-25/`. Review and what was done: `docs/reports/paper_f/README.md`, sections 9 and 10 |
+| **E** | *Do Explainers Agree on Which Features Matter? Instance-Level Agreement between SHAP and LIME* | *Advances in Artificial Intelligence Research* (AAIR, DergiPark) | **Revision 1 submitted 2026-11-25** (major revision of 2026-11-24; R1 minor, R2 and R3 major) | Revision: 21 items, `aair_journal/revision_1/` (manuscript 14 pp, changes marked, response 12 pp, supplement 9 pp); Zenodo 0.16.0, [10.5281/zenodo.24518192](https://doi.org/10.5281/zenodo.24518192). First submitted 2026-10-22; number not recorded. Word edition `docs/reports/paper_e/aair_journal/` (14 pages; intihal.net similarity 1%). Withdrawn from *Computación y Sistemas* (submission 6783 of 2026-10-04) by the author for its queue; withdrawal confirmed by the editor. Record: `aair_journal/AAIR_SUBMISSION.md`. Zenodo 0.8.0, [10.5281/zenodo.23142429](https://doi.org/10.5281/zenodo.23142429) |
+| **F** | *How Dataset-Dependent Are Tabular Explainability Benchmarks?* | *Journal of Computer Sciences Institute* | **Accepted by the reviewer; final version submitted 2026-10-25** (editor's request of the same day); to be published in Vol. 41 (2026) | Submitted 2026-10-12; submission 10503; 8 pages. Format corrections sent to the editor 2026-10-13. Zenodo 0.15.0, [10.5281/zenodo.23325483](https://doi.org/10.5281/zenodo.23325483). To be published in Vol. 41 (2026) (author, 2026-11-25). Final files: `herrera-vasquez-final.pdf` (no. 47982) and `.docx` (no. 47981), in `submission/final_2026-10-25/`. Review and what was done: `docs/reports/paper_f/README.md`, sections 9 and 10 |
 | **G** | *Do faithfulness metrics agree? Metric-dependent rankings of post-hoc explanations on tabular data* | *Informática y Sistemas* (UTM) | **Submitted 2026-11-17** (submission 8895; acknowledged the same day) | `docs/reports/paper_g/` (README, `review/BULLETPROOF_REVIEW_2026-11-17.md`); submitted files `submission/paper_g_blind.docx` (16 pp) and `Figure_1..5.png`, from PR #144 (`db0be47da`). Run: PR #123; analysis: #126-#140 |
 
 - **No submitted paper is rebuilt, edited or re-analysed unless its journal asks for a
@@ -194,37 +187,37 @@ The full list as it stood, with the reason for each: archive `undated-state-sect
   URL and at least 80% date from 2024 or later (`.aceconfig`).
 - **Permissions.** Pushing or merging `main` may be refused to the assistant: try once; if refused, leave it to the author.
 
-## Latest handoff - 2026-11-24, SESSION END (Thesis reconciliation for Papers A–F and RCA-006 closed)
+## Latest handoff - 2026-11-25, SESSION END (Paper E AAIR revision 1 submitted)
 
-Sessions `claude-2026-11-23-reconcile`, `claude-2026-11-23-thesis`, `claude-2026-11-24-substrate`
-(experiment laptop). Lanes `substrate` and `thesis`; this handoff on
-`pubs/rca-006-and-context-2026-11-24` (substrate lock released after merge).
+Session `claude-2026-11-24-paper-e` (documentation laptop). Lane `paper-e`; lock released at
+the end of this handoff. Previous handoff: archive `2026-11-24.md`.
 
 - **Completed:**
-  - PR #148: reconciliation audit of Papers A–F against Ch. 1–7, App. A–G and the registry
-    (`docs/review/thesis-papers-reconciliation-audit_2026-11-23.md`); sweep log; Gate 0.3 note in
-    `director-predeposit-checklist_2026-08-29.md` (box left for the director).
-  - PR #149 (`bbb084506`): Ch. 6 `sec-seg-transferencia`, Paper F Reviewer A additions in words;
-    Ch. 7 `sec-limitaciones`, one-hot perturbation and LIME sampling variance; "Abdul Kadir et al.";
-    "ocho variables categóricas"; `kadir2023` → `abdulkadir2023`, duplicate bib entry removed.
-  - PR #150 (`73d44f7c1`): 103 → 108 (seven occurrences); EXP2 provenance disclosed in Ch. 3 (F8
-    `sec-muestreo`, F7c `sec-cobertura`, F7a/F7b `sec-trazabilidad`, new anchor;
-    `tbl-validity-threats`). F8 is stated as a limit of the primary benchmark: the held-out check
-    exists only for the misclassification study.
-  - RCA-006 (`docs/rca/RCA-006-exp2-cohort-provenance.md`) and its guard; audit closed; sweep log
-    2026-11-24 (rows 1–16 consistent). PR #141 (2026-11-16) had fixed the Kadir DOI.
-- **Current State:** every check green (`verify_claims` 2,083 claims; follow-up 79 mirrored;
-  19 equations, 29 figures, 45 tables; shared-literal scan clean). The DOCX was rendered after
-  PR #150 with no unresolved reference; the table of contents is still to be refreshed in Word.
-  Papers B, C, D, E, F, G wait for journal decisions.
+  - AAIR decision (major revision, 2026-11-24) analysed: 21 items (`REVIEW_ANALYSIS.md`), plan
+    WP0–WP7 and decisions D-1..D-5 agreed (`REVISION_PLAN.md`), changes C-000..C-010.
+  - RCA-007: pandoc wrote each LaTeX minus as a one-character Word equation; signs are now text
+    and `build_paper_e_aair_docx.py` checks every table row and negative number (`--edition rev1`
+    default; the submitted edition is refused).
+  - New post hoc analyses: Adult held-out, same-class permutation, leave-one-seed-out
+    (`paper_e_revision1_analyses.py`), LIME settings (`paper_e_lime_settings.py`); ANALYSIS_PLAN
+    deviations of 2026-11-24 recorded.
+  - Manuscript, changes-marked file (Word compare), response letter (each item: heading, verbatim
+    comment, "Response."; overview items list the changes; justified), supplement (S1–S8).
+  - Zenodo 0.16.0 (`10.5281/zenodo.24518192`, release `paper-e-aair-2026-11-24-r1`).
+  - PRs #152–#158 merged. **Revision uploaded by the author 2026-11-25.**
+  - Publication table: E revised; F "to be published in Vol. 41 (2026)" (author, 2026-11-25).
+- **Current State:** `check_revision.py` READY (21 items). Papers B, C, D, E, F (in press), G
+  wait for the journals. Thesis state as in archive `2026-11-24.md`.
 - **Next Steps:**
-  1. Sync: `git fetch origin`, `git switch main`, `git pull --ff-only`.
-  2. Author: refresh the table of contents in Word; add E4/E5 to the tutor record (open item 11).
-  3. Before deposit: prior-publication policy of each journal (open item 6).
-  4. Act only on a journal's revision request.
-- **Blockers/Issues:** none. `gh` is not installed on this laptop: pull requests are opened and
-  merged by the author. Untracked and left alone: the five planning files of 2026-11-23
-  (`docs/planning/*thesis-reconciliation*`, `docs/review/thesis-reconciliation_*`); their analysis
-  has stale statements (e.g. that only Ch. 4 is under coverage) and was not used as a source.
-- **Notes:** `verify_claims.py` ignores bare integers, so widths and counts in prose (103/108,
-  8/13) are not checked by it; RCA-006 guards those two by grep.
+  1. Sync: `git fetch origin`, `git switch main`, `git pull --ff-only`; `check_lane.py claim`.
+  2. Act only on a journal's decision; record it in the table above and the paper's README.
+  3. Thesis items still open from 2026-11-24: refresh the table of contents in Word; E4/E5 in the
+     tutor record; prior-publication policy of each journal before deposit.
+- **Blockers/Issues:** none. Untracked and left alone: `docs/reports/paper_a/paper_a_rimi.pdf`,
+  `docs/reports/paper_g/venue/template/ISRTIC_Plantilla_Articulo-EN.docx` (author's files).
+- **Notes:** Paper E revision build: `.venv/Scripts/python.exe
+  docs/reports/paper_e/aair_journal/revision_1/scripts/build_revision.py` then
+  `check_revision.py`; it also rebuilds the manuscript and changes-marked files (restore them
+  with `git checkout` if only the letter changed). German Credit and Breast Cancer analyses need
+  the EXP3 binaries (`scripts/train_exp3_models.py --model-root <dir>`). The lane guard refuses
+  branch names outside `scripts/pubs/lanes.toml` (use `paper/e-*` for Paper E).
