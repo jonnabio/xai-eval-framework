@@ -15,3 +15,5 @@ Recorded in the commit that makes it. Working copy: `manuscript/paper_e_aair_rev
 | C-006 | 2026-11-24 | Abstract, contributions and Conclusions conditional on the configuration; self-agreement described as reference analysis | Abstract, 1, 6 | R1-2, R1-3 |
 | C-007 | 2026-11-24 | SVM qualified in every model comparison; no family ranking | Manuscript 4.3, 4.5, 4.6, 5 | R1-5 |
 | C-008 | 2026-11-24 | Discussion and Limitations rewritten and condensed (~1,100 → ~810 words): evidence supported / not supported / signs / implications / limitations, each caveat once | Manuscript 5 | R3-5, R3-2, R1-4 |
+| C-009 | 2026-11-24 | Zenodo 0.16.0 (`10.5281/zenodo.24518192`, release `paper-e-aair-2026-11-24-r1`) cited in Data Availability | Manuscript, Data Availability | R2-6 |
+| C-010 | 2026-11-24 | Supplementary file S1–S8: model hyperparameters (read from the binaries), explainer settings with sources, measure definitions, held-out, same-class, leave-one-seed-out and LIME-settings tables, reproduction commands | `scripts/build_supplement.py`; `build/supplement/` | R2-6, R2-3 |
