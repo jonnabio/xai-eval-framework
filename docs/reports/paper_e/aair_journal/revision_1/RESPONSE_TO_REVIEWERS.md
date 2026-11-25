@@ -13,7 +13,8 @@ grateful to the three reviewers for their careful and constructive reports. Ever
 has been addressed; the answers follow, each with the changes made and where they appear.
 A file with all changes marked is included.
 
-The main changes are: (1) the sign error reported by Reviewer 2, caused by the conversion of
+**ED-1. Decision: major revision.** The manuscript has been revised as requested; the
+answers to every comment follow. The main changes are: (1) the sign error reported by Reviewer 2, caused by the conversion of
 the manuscript into Word, has been corrected, and every number of the Word file is now
 checked automatically against the analysis output; (2) the principal agreement estimates
 are reported on held-out instances only and with each seed left out; (3) LIME was run again
@@ -29,6 +30,9 @@ Jonathan Herrera-Vásquez
 ## Reviewer 1
 
 I thank the reviewer for the positive assessment and for the precise suggestions.
+
+**R1-0. Comments to the editor (held-out assessment, conclusions bounded to the
+configuration, SVM coverage).** Addressed in detail under R1-1, R1-2 and R1-5.
 
 **R1-1. Held-out sensitivity for the principal agreement estimates.**
 REMEDIATED. The top-5 and top-10 overlap and Kendall's τ~b~ were recomputed on Adult for
@@ -67,6 +71,9 @@ estimate where it appears, and the Discussion draws no family ranking.
 ## Reviewer 2
 
 I thank the reviewer for the careful reading, in particular for detecting the sign error.
+
+**R2-0. Comments to the editor (numbers in Tables 1, 4 and 5, training–test overlap, LIME
+configuration, generalizability).** Addressed in detail under R2-1 to R2-6.
 
 **R2-1. Numerical consistency of Tables 1, 4 and 5.**
 REMEDIATED. The reviewer is right, and I am grateful for this observation. The analysis
@@ -124,6 +131,9 @@ archived in a new version of the Zenodo record cited in the Data Availability se
 I thank the reviewer for the thorough assessment and for recognising the contributions of
 the reference analyses.
 
+**R3-0. Comments to the editor ("The paper should be revised").** The manuscript has been
+revised; the specific points are answered below.
+
 **R3-1. LIME configuration: sensitivity and justification.**
 REMEDIATED. _Interpretation:_ the width of 3 and the absence of discretisation were inherited
 from the configuration of the benchmark cohort and were not tuned; a technical justification
@@ -154,3 +164,7 @@ exploratory result as post hoc.
 **R3-5. Condensing the Discussion and Limitations.**
 REMEDIATED. The two sections were rewritten from about 1,100 to about 810 words; each caveat
 is stated once, in the Limitations, and repeated caveats elsewhere were removed.
+
+**R3-6. Overall assessment (LIME configuration, scope of the evaluation, presentation of
+exploratory analyses).** Addressed under R3-1, R3-2 and R3-4. I also thank the reviewer for
+the kind closing words.
