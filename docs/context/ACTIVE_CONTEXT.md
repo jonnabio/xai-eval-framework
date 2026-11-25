@@ -6,9 +6,20 @@
 > rule CTX-3 of [`.ace/standards/context.md`](../../.ace/standards/context.md).
 > Limit: 300 lines, checked in CI by `scripts/pubs/check_active_context.py`.
 
-**Last updated:** 2026-11-24, by `claude-2026-11-24-substrate` (experiment laptop): session end, thesis reconciled with Papers A–F, RCA-006 filed.
+**Last updated:** 2026-11-25, by `claude-2026-11-24-paper-e-rev1`: Paper E AAIR revision 1 built (PRs #152–#155), RCA-007 filed.
 
 ## Current objective
+
+**Paper E, AAIR revision 1** (major revision of 2026-11-24, editor Remzi Gürfidan; **due
+2026-12-09, internal target 2026-12-06**). Everything in
+`docs/reports/paper_e/aair_journal/revision_1/` (Paper B revision 1 is the model): 21 items,
+all answered (`RESPONSE_TO_REVIEWERS.md`, each answer preceded by the verbatim comment);
+`scripts/check_revision.py` reports READY. Ambiguous items (R2-3, R2-5, R3-1) state the
+reading taken. RCA-007: Word minus signs (builder now writes text signs and checks every table
+row). Zenodo 0.16.0, `10.5281/zenodo.24518192`. Outputs in `revision_1/build/`: manuscript
+(14 pp), changes-marked `.docx`/`.pdf`, response letter (10 pp), supplement (9 pp).
+**Author actions:** read the letter (above all R2-3, R2-5, R3-1), then upload the four files
+to DergiPark. Do not rebuild unless the author asks.
 
 **Paper G** (*Do faithfulness metrics agree?*, lane `paper-g`, *Informática y Sistemas*):
 **SUBMITTED 2026-11-17**, submission 8895 (acknowledged the same day). Pre-submission review,
