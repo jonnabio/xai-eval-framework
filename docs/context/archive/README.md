@@ -7,6 +7,7 @@ Read this index, pick the file by date and title, and read only that file
 
 | File | Sections |
 |---|---|
+| [2026-11-24.md](2026-11-24.md) | Latest handoff - 2026-11-24, SESSION END (Thesis reconciliation for Papers A–F and RCA-006 closed) |
 | [2026-11-18.md](2026-11-18.md) | Latest handoff - 2026-11-18, SESSION END (Paper G submitted) |
 | [2026-11-15.md](2026-11-15.md) | Latest handoff - 2026-11-15, SESSION END (Paper G: analysis implemented, not run)<br>Latest handoff - 2026-11-15, SESSION END (Paper G run complete and frozen; integration PR open) |
 | [2026-11-12.md](2026-11-12.md) | Latest handoff - 2026-11-12, SESSION END (Paper B revision 1 submitted) |
