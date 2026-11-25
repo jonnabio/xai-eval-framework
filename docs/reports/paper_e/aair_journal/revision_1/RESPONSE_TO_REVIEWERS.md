@@ -21,7 +21,7 @@ under the package defaults and with larger sampling budgets, and the conclusions
 as conditional on the evaluated configuration; (4) pre-specified and exploratory analyses
 are separated explicitly; (5) the Discussion and Limitations have been condensed.
 
-Sincerely,
+Sincerely,\
 Jonathan Herrera-Vásquez
 
 ---
@@ -31,7 +31,7 @@ Jonathan Herrera-Vásquez
 I thank the reviewer for the positive assessment and for the precise suggestions.
 
 **R1-1. Held-out sensitivity for the principal agreement estimates.**
-REMEDIATED. The top-5 and top-10 overlap and Kendall's τ_b were recomputed on Adult for
+REMEDIATED. The top-5 and top-10 overlap and Kendall's τ~b~ were recomputed on Adult for
 held-out instances only (instances that are not rows of the models' training data). The
 estimates are essentially unchanged: top-5 overlap 0.394 (interval 0.372 to 0.415) on
 held-out instances against 0.393 on all instances and 0.385 on training rows; the largest
