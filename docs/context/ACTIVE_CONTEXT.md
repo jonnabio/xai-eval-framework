@@ -213,8 +213,9 @@ the end of this handoff. Previous handoff: archive `2026-11-24.md`.
   2. Act only on a journal's decision; record it in the table above and the paper's README.
   3. Thesis items still open from 2026-11-24: refresh the table of contents in Word; E4/E5 in the
      tutor record; prior-publication policy of each journal before deposit.
-- **Blockers/Issues:** none. Untracked and left alone: `docs/reports/paper_a/paper_a_rimi.pdf`,
-  `docs/reports/paper_g/venue/template/ISRTIC_Plantilla_Articulo-EN.docx` (author's files).
+- **Blockers/Issues:** none. Working tree clean: the duplicate Paper G template
+  (`ISRTIC_Plantilla_Articulo-EN.docx`, identical to the tracked `IyS_article_template.docx`)
+  was deleted and `paper_a_rimi.pdf` moved to the author's Downloads folder (2026-11-25).
 - **Notes:** Paper E revision build: `.venv/Scripts/python.exe
   docs/reports/paper_e/aair_journal/revision_1/scripts/build_revision.py` then
   `check_revision.py`; it also rebuilds the manuscript and changes-marked files (restore them
